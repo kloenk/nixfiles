@@ -4,9 +4,7 @@
   nix.registry.kloenk = {
     from.type = "indirect";
     from.id = "kloenk";
-    to.owner = "kloenk";
-    to.repo = "nix";
-    to.type = "github";
+    to.url = "git+https://git.kloenk.dev/kloenk/nix";
   };
 
   users.users.kloenk = {

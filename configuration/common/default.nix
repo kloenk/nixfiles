@@ -21,7 +21,7 @@
     experimental-features = nix-command flakes ca-references recursive-nix progress-bar
   '';
 
-  system.autoUpgrade.flake = "github:kloenk/nix";
+  system.autoUpgrade.flake = "kloenk";
 
   # binary cache
   nix.binaryCachePublicKeys =
