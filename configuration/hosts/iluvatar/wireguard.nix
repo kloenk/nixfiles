@@ -15,8 +15,6 @@
   networking.nftables2.extraConfig = ''
     table ip nat {
       chain postrouting {
-        type nat hook postrouting priority 100
-        ip saddr 192.168.242.0/24 oif wg0 snat 195.39.247.6
         oif enp1s0 masquerade
       }
     }
