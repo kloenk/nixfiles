@@ -8,6 +8,8 @@
 
     ../../default.nix
 
+    ../../desktop
+
     ../../common
     ../../common/pbb.nix
     ../../common/syncthing.nix
@@ -27,6 +29,12 @@
   boot.initrd.luks.devices."cryptIntenso".device =
     "/dev/disk/by-id/usb-Intenso_External_USB_3.0_20150609040398-0:0-part5";
   boot.initrd.luks.reusePassphrases = true;
+
+  home-manager.users.kloenk.wayland.windowManager.sway.enable =
+    lib.mkForce false;
+  users.users.kloenk.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIuyJjJNWSxO8CFBueBstfdWN4EQBkKfz+A5RsAnR2F9 kloenk@barahir"
+  ];
 
   networking.useDHCP = false;
   networking.hostName = "thrain";
@@ -76,10 +84,11 @@
   services.printing.enable = true;
   services.avahi.enable = true;
 
-  environment.systemPackages = with pkgs; [ lm_sensors docker virtmanager ];
+  environment.systemPackages = with pkgs; [ lm_sensors virtmanager ];
 
   # docker
-  virtualisation.docker.enable = true;
+  #virtualisation.docker.enable = true;
+  hardware.steam-hardware.enable = false;
 
   # virtmanager
   virtualisation.libvirtd = {
@@ -113,8 +122,8 @@
   system.autoUpgrade.enable = true;
 
   #services.calibre-server.enable = true;
-  services.calibre-server.libraryDir = "/persist/data/syncthing/data/Library";
-  users.users.calibre-server.extraGroups = [ "syncthing" ];
+  #services.calibre-server.libraryDir = "/persist/data/syncthing/data/Library";
+  #users.users.calibre-server.extraGroups = [ "syncthing" ];
 
   # syncthing
   networking.firewall.allowedTCPPorts = [ 8384 ];

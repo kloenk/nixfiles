@@ -1,4 +1,4 @@
-{ pkgs, lib, config, nixpkgs, ... }:
+{ pkgs, lib, config, ... }:
 
 let
   fwcfg = config.networking.firewall;
@@ -133,15 +133,17 @@ in {
     };
 
     virtualisation.docker = lib.mkIf doDocker {
-      package = (pkgs.callPackage
-        (nixpkgs + "/pkgs/applications/virtualization/docker") {
-          iptables = pkgs.writeScriptBin "iptables" ''
-            #!${pkgs.runtimeShell}
-            echo docker tried to run the following iptables command: $@
-            exit 0
-          '';
-        }).docker_19_03;
-      extraOptions = "--iptables=false";
+      /* package = (pkgs.callPackage
+         (nixpkgs + "/pkgs/applications/virtualization/docker") {
+           iptables = pkgs.writeScriptBin "iptables" ''
+             #!${pkgs.runtimeShell}
+             echo docker tried to run the following iptables command: $@
+             exit 0
+           '';
+         }).docker_19_03;
+         extraOptions = "--iptables=false";
+      */
+      #enable = throw "docker not supported" false;
     };
   };
 }

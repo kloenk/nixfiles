@@ -8,7 +8,11 @@
 
   security.rngd.enable = lib.mkDefault false;
 
-  environment.systemPackages = with pkgs; [ qt5.qtwayland ];
+  environment.systemPackages = with pkgs; [
+    qt5.qtwayland
+    lm_sensors
+    bind.dnsutils # for dig
+  ];
 
   users.users.kloenk.packages = with pkgs; [
     #wl-freeze # TODO: assert if kernel params are set: cgroup_no_v1=all
@@ -37,7 +41,6 @@
     youtubeDL
     calcurse
     #neomutt
-    bind.dnsutils # for dig
     #screen # for usb serial
     pass-otp
     mosh
@@ -134,7 +137,7 @@
   hardware.nitrokey.enable = true;
 
   # steam hardware
-  hardware.steam-hardware.enable = true;
+  hardware.steam-hardware.enable = lib.mkDefault true;
   hardware.opengl.driSupport32Bit = true;
 
   home-manager.users.kloenk.programs.git.signing = {
