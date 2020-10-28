@@ -42,7 +42,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.de.";
       adminEmail = "hostmaster@kloenk.de";
-      serial = 2020092501;
+      serial = 2020102801;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
@@ -121,6 +121,10 @@ let
       gdv02.CNAME = [ "gdv02.eventphone.de." ];
       gdvstats.CNAME = [ "gdvstats.eventphone.de." ];
       gdvalerts.CNAME = [ "gdvalerts.eventphone.de." ];
+
+      danny.subdomains = {
+        karin = hostTTL 1200 "195.39.221.56" null;
+      };
 
       _github-challenge-cli-inc.TXT = [ (txt "a5adaebc78") ];
 
