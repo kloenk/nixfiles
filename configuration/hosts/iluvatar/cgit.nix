@@ -82,5 +82,10 @@ in {
         repo.path=${gitDir}/linux/rust/kloenk.git
         repo.desc=Linux Kernel with rust support
         repo.readme=rust:README
+
+        repo.url=linux/wireless/kloenk
+        repo.path=${gitDir}/linux/wireless/kloenk.git
+        repo.desc=Linux Kernel with wireless patches
+        repo.readme=master:README
       '';
 }

@@ -5,6 +5,7 @@
     from.type = "indirect";
     from.id = "kloenk";
     to.url = "git+https://git.kloenk.dev/kloenk/nix";
+    to.type = "git+https";
   };
 
   users.users.kloenk = {
