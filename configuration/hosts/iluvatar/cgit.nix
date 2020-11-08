@@ -93,8 +93,8 @@ in {
         repo.desc=Legacy LLG companion website
 
         repo.url=llg/rust/backend
-        repo.path=${gitDir}/llg/rust/backend
-        repo.decs=Rust Backend/library for llg companion
+        repo.path=${gitDir}/llg/rust/backend.git
+        repo.desc=Rust Backend/library for llg companion
         repo.readme=main:README.md
       '';
 }
