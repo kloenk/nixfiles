@@ -87,5 +87,14 @@ in {
         repo.path=${gitDir}/linux/wireless/kloenk.git
         repo.desc=Linux Kernel with wireless patches
         repo.readme=master:README
+
+        repo.url=llg/companion
+        repo.path=${gitDir}/llg/companion.git
+        repo.desc=Legacy LLG companion website
+
+        repo.url=llg/rust/backend
+        repo.path=${gitDir}/llg/rust/backend
+        repo.decs=Rust Backend/library for llg companion
+        repo.readme=main:README.md
       '';
 }
