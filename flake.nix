@@ -57,12 +57,6 @@
     ref = "lexbeserious";
   };
 
-  inputs.secrets = {
-    type = "git";
-    url = "git+ssh://git@git.kloenk.de/kloenk/pass.git";
-    flake = false;
-  };
-
   inputs.nixos-org = {
     type = "github";
     owner = "nixos";
@@ -89,7 +83,7 @@
   inputs.mixnix.flake = false;
 
   outputs = inputs@{ self, nixpkgs, nix, hydra, home-manager, mail-server
-    , website, secrets, nixpkgs-mc, nixos-org, dns, grahamc-config, ... }:
+    , website, nixpkgs-mc, nixos-org, dns, grahamc-config, ... }:
     let
 
       overlayCombined = system: [
@@ -235,7 +229,7 @@
       apps = forAllSystems (system: {
         deploy_secrets = let
           app = self.packages.${system}.deploy_secrets.override {
-            passDir = toString (secrets + "/");
+            #passDir = toString (secrets + "/");
           };
         in {
           type = "app";
