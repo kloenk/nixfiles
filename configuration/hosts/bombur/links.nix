@@ -38,14 +38,19 @@ in {
       addresses = [{ addressConfig.Address = "6.0.2.5/24"; }];
     };
 
+    links."20-eno0" = {
+      matchConfig.MACAddress = "8c:16:45:56:76:76";
+      linkConfig.Name = "eno0";
+    };
+
     networks."20-eno0" = {
       name = "eno0";
       DHCP = "yes";
       vlan = lib.singleton "vlan1337";
       dhcpV4Config.RouteMetric = 512;
     };
-    networks."20-wlp2s0" = {
-      name = "wlp2s0";
+    networks."20-wlp4s0" = {
+      name = "wlp4s0";
       DHCP = "yes";
     };
     networks."30-lo" = {

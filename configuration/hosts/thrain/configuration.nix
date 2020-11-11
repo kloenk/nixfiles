@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     ./links.nix
     ./nfs.nix
+    ./timemachine.nix
 
     ../../default.nix
 
