@@ -48,7 +48,7 @@ in {
 
         max-stats=quarter
 
-        clone-url=http://git.kloenk.dev/$CGIT_REPO_URL git://git.kloenk.dev/$CGIT_REPO_URL ssh://git@git.kloenk.dev/$CGIT_REPO_URL
+        clone-url=https://git.kloenk.dev/$CGIT_REPO_URL git://git.kloenk.dev/$CGIT_REPO_URL ssh://git@git.kloenk.dev/$CGIT_REPO_URL
 
     		enable-index-links=1
         enable-commit-graph=1
