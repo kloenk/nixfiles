@@ -59,6 +59,12 @@ in {
         "*.pbb.lc" = {
           port = 62954;
         };
+        "*.kloenk.de" = {
+          port = 62954;
+        };
+        "*.kloenk.dev" = {
+          port = 62954;
+        };
 
         /* # gdv
            gdv01 = {
