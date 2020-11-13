@@ -132,6 +132,15 @@ in {
     server = true;
   };
 
+  # for monitoring only
+  # OSP streaming server
+  knuddel-usee = makeHost {
+    host = "knuddel-usee.kloenk.de";
+    nixos = false;
+    prometheusExporters = [ "node-exporter" ];
+    server = true;
+  };
+
   # for wireguard only
   /* combahton = {
        wireguard.publicKey = "9azKCE2ZgWYo0kWD8ezsWDWD3YMlFrxXia23q5ENLm8=";

@@ -96,5 +96,10 @@ in {
         repo.path=${gitDir}/llg/rust/backend.git
         repo.desc=Rust Backend/library for llg companion
         repo.readme=main:README.md
+
+        repo.url=usee/osp-nix
+        repo.path=${gitDir}/usee/osp-nix.git
+        repo.desc=Nixconfig files for the osp server
+        repo.readme=main::README.md
       '';
 }

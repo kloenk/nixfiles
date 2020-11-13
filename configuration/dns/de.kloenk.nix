@@ -42,7 +42,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.de.";
       adminEmail = "hostmaster@kloenk.de";
-      serial = 2020102801;
+      serial = 2020111301;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
@@ -111,6 +111,7 @@ let
       luna.CNAME = [ "luna.pbb.lc." ];
 
       bbb-wass.CNAME = [ "bbb.wass-er.com." ];
+      knuddel-usee.CNAME = [ "stream.unterbachersee.de." ];
       moodle-usee.CNAME = [ "segelschule.unterbachersee.de." ];
       bbb-usee.CNAME = [ "schulungsraum.unterbachersee.de." ];
       pve-usee = host "5.9.118.73" "2a01:4f8:162:6343::2";
