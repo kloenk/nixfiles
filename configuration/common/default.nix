@@ -84,7 +84,7 @@
   time.timeZone = "Europe/Berlin";
 
   environment.systemPackages = with pkgs; [
-    termite.terminfo
+    #termite.terminfo
     kitty.terminfo
     alacritty.terminfo
     rxvt_unicode.terminfo
