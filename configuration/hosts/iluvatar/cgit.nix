@@ -73,6 +73,11 @@ in {
         repo.desc=NixOS configs
         repo.readme=master:README.md
 
+        repo.url=kloenk/brook
+        repo.path=${gitDir}/kloenk/brook.git
+        repo.desc=A minimal self-hostable streaming setup.
+        repo.readme=master:README.md
+
         repo.url=facharbeit
         repo.path=${gitDir}/facharbeit.nix
         repo.desc=Files for my Facharbeit 
