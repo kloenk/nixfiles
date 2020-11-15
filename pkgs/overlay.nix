@@ -62,6 +62,11 @@ in {
         extraMeta.branch = "5.9";
 
       } // (args.argsOverride or { }));
+
   in callPackage linux_rust_pkg { };
+
+  nginx-rtmp = prev.nginxMainline.override { modules = [ final.nginxModules.rtmp ]; };
+
+  osp = callPackage ./osp { };
 }
 

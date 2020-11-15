@@ -198,6 +198,7 @@
             self.nixosModules.deluge2
             self.nixosModules.firefox
             self.nixosModules.pleroma
+            self.nixosModules.osp
             sourcesModule
             {
               # disable home-manager manpage (breaks hydra see https://github.com/rycee/home-manager/issues/1262)
@@ -223,6 +224,7 @@
         autoUpgrade = import ./modules/upgrade;
         firefox = import ./modules/firefox;
         pleroma = import ./modules/pleroma;
+        osp = import ./modules/osp;
       };
 
       # apps

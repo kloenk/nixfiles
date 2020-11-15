@@ -8,6 +8,8 @@
     ./mysql.nix
     ./dhcpcd.nix
 
+    ./osp.nix
+
     ../../default.nix
     ../../common
     ../../common/pbb.nix
