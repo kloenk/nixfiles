@@ -63,5 +63,7 @@ in {
 
       } // (args.argsOverride or { }));
   in callPackage linux_rust_pkg { };
+
+  emacs-doom = callPackage ./emacs { };
 }
 

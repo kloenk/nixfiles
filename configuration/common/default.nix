@@ -96,6 +96,9 @@
     whois
     qt5.qtwayland
 
+    fd
+    ripgrep
+
     erlang # for escript scripts
     rclone
     wireguard-tools

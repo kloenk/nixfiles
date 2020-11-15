@@ -79,11 +79,17 @@
     flake = false;
   };
 
+  inputs.qyliss = {
+    type = "git";
+    url = "https://git.qyliss.net/nixlib";
+    flake = false;
+  };
+
   inputs.mixnix.url = "git+https://git.petabyte.dev/petabyteboy/mixnix";
   inputs.mixnix.flake = false;
 
   outputs = inputs@{ self, nixpkgs, nix, hydra, home-manager, mail-server
-    , website, nixpkgs-mc, nixos-org, dns, grahamc-config, ... }:
+    , website, nixpkgs-mc, nixos-org, dns, grahamc-config, qyliss, ... }:
     let
 
       overlayCombined = system: [
@@ -116,13 +122,7 @@
       };
 
       overlays = system: final: prev: {
-        hydra = builtins.trace "eval hydra" hydra.packages.${system}.hydra;
-        #nixFlakes =
-        #  (nix.packages.${system}.nix // { version = "2.4pre-Kloenk"; });
-        #nix = (nix.packages.${system}.nix // { version = "2.4pre"; });
-        #nixFlakes = final.nix.overrideAttrs (oldAttrs: rec {
-        #  version = "2.4pre-kloenk";
-        #});
+        #hydra = builtins.trace "eval hydra" hydra.packages.${system}.hydra;
       };
 
       # iso image
@@ -165,7 +165,9 @@
             nixpkgs-maintainer-tools sway-cycle-workspace mutate wl-freeze
             resholve abathur-resholved;
         }
-        #// (import (qyliss + "/overlays/patches/nixpkgs-wayland") final prev)
+        // {
+          inherit (import (qyliss + "/overlays/patches/nixpkgs-wayland") final prev) waylandPkgs;
+        }
           // { });
 
       legacyPackages = forAllSystems

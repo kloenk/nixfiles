@@ -249,6 +249,22 @@
         "type": "github"
       }
     },
+    "qyliss": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1602264090,
+        "narHash": "sha256-rXlK0glABRVswbaApUUenq/PeQ8MrNOqusI5xji8Mlg=",
+        "ref": "master",
+        "rev": "da0d250ffed1adb362c91c42c61887f76db889ad",
+        "revCount": 233342,
+        "type": "git",
+        "url": "https://git.qyliss.net/nixlib"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git.qyliss.net/nixlib"
+      }
+    },
     "root": {
       "inputs": {
         "dns": "dns",
@@ -261,6 +277,7 @@
         "nixos-org": "nixos-org",
         "nixpkgs": "nixpkgs",
         "nixpkgs-mc": "nixpkgs-mc",
+        "qyliss": "qyliss",
         "website": "website"
       }
     },

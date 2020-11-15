@@ -90,6 +90,7 @@
     #atom
     #gvfs
     #gnome3.nautilus # Dependency for atom?
+    emacs-doom
 
     #notable
 
