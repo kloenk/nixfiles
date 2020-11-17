@@ -1,14 +1,13 @@
-From 5f3da6e72d999fd8dd4bd07699ee0b9b824b1d48 Mon Sep 17 00:00:00 2001
+From 03a5d77d8f1e31e2a689d97f62ce967fef524189 Mon Sep 17 00:00:00 2001
 From: Finn Behrens <fin@nyantec.com>
-Date: Thu, 5 Nov 2020 18:21:48 +0100
-Subject: [PATCH] nl80211: reloade regdom when reloading regdb
+Date: Tue, 17 Nov 2020 13:13:01 +0100
+Subject: [PATCH] nl80211: reset regdom when reloading regdb
 
-Signed-off-by: Finn Behrens <fin@nyantec.com>
 Signed-off-by: Finn Behrens <me@kloenk.de>
 ---
  include/net/regulatory.h |  1 +
- net/wireless/reg.c       | 24 +++++++++++++++++++++++-
- 2 files changed, 24 insertions(+), 1 deletion(-)
+ net/wireless/reg.c       | 30 ++++++++++++++++++++++++++++--
+ 2 files changed, 29 insertions(+), 2 deletions(-)
 
 diff --git a/include/net/regulatory.h b/include/net/regulatory.h
 index 47f06f6f5a67..0cf9335431e0 100644
@@ -23,7 +22,7 @@ index 47f06f6f5a67..0cf9335431e0 100644
  	struct list_head list;
  };
 diff --git a/net/wireless/reg.c b/net/wireless/reg.c
-index 3dab859641e1..30a010804a19 100644
+index a04fdfb35f07..e9819a9b1a0c 100644
 --- a/net/wireless/reg.c
 +++ b/net/wireless/reg.c
 @@ -199,6 +199,7 @@ static struct regulatory_request *get_last_request(void)
@@ -34,7 +33,22 @@ index 3dab859641e1..30a010804a19 100644
  
  /* Used to queue up beacon hints for review */
  static LIST_HEAD(reg_pending_beacons);
-@@ -1101,6 +1102,26 @@ int reg_reload_regdb(void)
+@@ -1081,10 +1082,13 @@ int reg_reload_regdb(void)
+ 	int err;
+ 
+ 	err = request_firmware(&fw, "regulatory.db", &reg_pdev->dev);
+-	if (err)
++	if (err) {
++		pr_info("failed to load regulatory.db\n");
+ 		return err;
++	}
+ 
+ 	if (!valid_regdb(fw->data, fw->size)) {
++		pr_info("loaded regulatory.db is malformed or signature is missing/invalid\n");
+ 		err = -ENODATA;
+ 		goto out;
+ 	}
+@@ -1101,6 +1105,27 @@ int reg_reload_regdb(void)
  	regdb = db;
  	rtnl_unlock();
  
@@ -45,8 +59,9 @@ index 3dab859641e1..30a010804a19 100644
 +	struct regulatory_request *request = NULL;
 +	request = kzalloc(sizeof(struct regulatory_request), GFP_KERNEL);
 +	if (!request) {
-+			err =	-ENOMEM;
-+			goto out;
++		pr_info("memdup"); // TODO: remove
++		err = -ENOMEM;
++		goto out;
 +	}
 +
 +	request->wiphy_idx = WIPHY_IDX_INVALID;
@@ -61,7 +76,7 @@ index 3dab859641e1..30a010804a19 100644
   out:
  	release_firmware(fw);
  	return err;
-@@ -2657,7 +2678,8 @@ reg_process_hint_user(struct regulatory_request *user_request)
+@@ -2657,7 +2682,8 @@ reg_process_hint_user(struct regulatory_request *user_request)
  
  	treatment = __reg_process_hint_user(user_request);
  	if (treatment == REG_REQ_IGNORE ||
@@ -72,5 +87,5 @@ index 3dab859641e1..30a010804a19 100644
  
  	user_request->intersect = treatment == REG_REQ_INTERSECT;
 -- 
-2.28.0
+2.29.2
 

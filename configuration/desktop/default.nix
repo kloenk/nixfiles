@@ -92,6 +92,7 @@
     #gnome3.nautilus # Dependency for atom?
     emacs-doom
     rust-analyzer
+    irony-server
 
     #notable
 
