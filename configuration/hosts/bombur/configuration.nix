@@ -17,6 +17,17 @@
     ../../desktop/vscode.nix
   ];
 
+  # nl80211 kernel patch
+  boot.kernelPatches = [
+    {
+      name = "nl80211-reload";
+      patch = ./nl80211.patch;
+      extraConfig = ''
+        CFG80211_REQUIRE_SIGNED_REGDB n
+      '';
+    }
+  ];
+
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   services.logind.lidSwitchDocked = "ignore";
@@ -113,7 +124,7 @@
     spotifyd
     python # includes python2 as dependency for vscode
     platformio # pio command
-    openocd # pio upload for stlink
+    #openocd # pio upload for stlink
     stlink # stlink software
     #teamspeak_client       # team speak
 

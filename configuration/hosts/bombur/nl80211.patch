@@ -1,0 +1,76 @@
+From 5f3da6e72d999fd8dd4bd07699ee0b9b824b1d48 Mon Sep 17 00:00:00 2001
+From: Finn Behrens <fin@nyantec.com>
+Date: Thu, 5 Nov 2020 18:21:48 +0100
+Subject: [PATCH] nl80211: reloade regdom when reloading regdb
+
+Signed-off-by: Finn Behrens <fin@nyantec.com>
+Signed-off-by: Finn Behrens <me@kloenk.de>
+---
+ include/net/regulatory.h |  1 +
+ net/wireless/reg.c       | 24 +++++++++++++++++++++++-
+ 2 files changed, 24 insertions(+), 1 deletion(-)
+
+diff --git a/include/net/regulatory.h b/include/net/regulatory.h
+index 47f06f6f5a67..0cf9335431e0 100644
+--- a/include/net/regulatory.h
++++ b/include/net/regulatory.h
+@@ -83,6 +83,7 @@ struct regulatory_request {
+ 	enum nl80211_dfs_regions dfs_region;
+ 	bool intersect;
+ 	bool processed;
++	bool reload;
+ 	enum environment_cap country_ie_env;
+ 	struct list_head list;
+ };
+diff --git a/net/wireless/reg.c b/net/wireless/reg.c
+index 3dab859641e1..30a010804a19 100644
+--- a/net/wireless/reg.c
++++ b/net/wireless/reg.c
+@@ -199,6 +199,7 @@ static struct regulatory_request *get_last_request(void)
+ /* Used to queue up regulatory hints */
+ static LIST_HEAD(reg_requests_list);
+ static spinlock_t reg_requests_lock;
++static void queue_regulatory_request(struct regulatory_request *request);
+ 
+ /* Used to queue up beacon hints for review */
+ static LIST_HEAD(reg_pending_beacons);
+@@ -1101,6 +1102,26 @@ int reg_reload_regdb(void)
+ 	regdb = db;
+ 	rtnl_unlock();
+ 
++	// reset regulatory
++	const struct ieee80211_regdomain *current_regdomain = NULL;
++	current_regdomain = get_cfg80211_regdom();
++
++	struct regulatory_request *request = NULL;
++	request = kzalloc(sizeof(struct regulatory_request), GFP_KERNEL);
++	if (!request) {
++			err =	-ENOMEM;
++			goto out;
++	}
++
++	request->wiphy_idx = WIPHY_IDX_INVALID;
++	request->alpha2[0] = current_regdomain->alpha2[0];
++	request->alpha2[1] = current_regdomain->alpha2[1];
++	request->initiator = NL80211_USER_REG_HINT_USER;
++	request->user_reg_hint_type = NL80211_USER_REG_HINT_USER;
++	request->reload = true;
++
++	queue_regulatory_request(request);
++
+  out:
+ 	release_firmware(fw);
+ 	return err;
+@@ -2657,7 +2678,8 @@ reg_process_hint_user(struct regulatory_request *user_request)
+ 
+ 	treatment = __reg_process_hint_user(user_request);
+ 	if (treatment == REG_REQ_IGNORE ||
+-	    treatment == REG_REQ_ALREADY_SET)
++	    treatment == REG_REQ_ALREADY_SET &&
++			!user_request->reload)
+ 		return REG_REQ_IGNORE;
+ 
+ 	user_request->intersect = treatment == REG_REQ_INTERSECT;
+-- 
+2.28.0
+
