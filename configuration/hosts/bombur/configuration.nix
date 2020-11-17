@@ -22,9 +22,9 @@
     {
       name = "nl80211-reload";
       patch = ./nl80211.patch;
-      extraConfig = ''
+      /*extraConfig = ''
         CFG80211_REQUIRE_SIGNED_REGDB n
-      '';
+      '';*/
     }
   ];
 
