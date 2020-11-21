@@ -1,13 +1,15 @@
-From 03a5d77d8f1e31e2a689d97f62ce967fef524189 Mon Sep 17 00:00:00 2001
+From bc308d192860dbdcb3a27b9600bd07d7d8fe491a Mon Sep 17 00:00:00 2001
 From: Finn Behrens <fin@nyantec.com>
 Date: Tue, 17 Nov 2020 13:13:01 +0100
 Subject: [PATCH] nl80211: reset regdom when reloading regdb
 
-Signed-off-by: Finn Behrens <me@kloenk.de>
+reset the regdom when NL80211_CMD_RELOAD_REGDB is send
+
+Signed-off-by: Finn Behrens <fin@nyantec.com>
 ---
  include/net/regulatory.h |  1 +
- net/wireless/reg.c       | 30 ++++++++++++++++++++++++++++--
- 2 files changed, 29 insertions(+), 2 deletions(-)
+ net/wireless/reg.c       | 31 +++++++++++++++++++++++++++++--
+ 2 files changed, 30 insertions(+), 2 deletions(-)
 
 diff --git a/include/net/regulatory.h b/include/net/regulatory.h
 index 47f06f6f5a67..0cf9335431e0 100644
@@ -22,7 +24,7 @@ index 47f06f6f5a67..0cf9335431e0 100644
  	struct list_head list;
  };
 diff --git a/net/wireless/reg.c b/net/wireless/reg.c
-index a04fdfb35f07..e9819a9b1a0c 100644
+index a04fdfb35f07..50314916b020 100644
 --- a/net/wireless/reg.c
 +++ b/net/wireless/reg.c
 @@ -199,6 +199,7 @@ static struct regulatory_request *get_last_request(void)
@@ -48,18 +50,19 @@ index a04fdfb35f07..e9819a9b1a0c 100644
  		err = -ENODATA;
  		goto out;
  	}
-@@ -1101,6 +1105,27 @@ int reg_reload_regdb(void)
+@@ -1101,6 +1105,28 @@ int reg_reload_regdb(void)
  	regdb = db;
  	rtnl_unlock();
  
 +	// reset regulatory
 +	const struct ieee80211_regdomain *current_regdomain = NULL;
++
 +	current_regdomain = get_cfg80211_regdom();
 +
 +	struct regulatory_request *request = NULL;
-+	request = kzalloc(sizeof(struct regulatory_request), GFP_KERNEL);
++
++	request = kzalloc(sizeof(*request), GFP_KERNEL);
 +	if (!request) {
-+		pr_info("memdup"); // TODO: remove
 +		err = -ENOMEM;
 +		goto out;
 +	}
@@ -76,7 +79,7 @@ index a04fdfb35f07..e9819a9b1a0c 100644
   out:
  	release_firmware(fw);
  	return err;
-@@ -2657,7 +2682,8 @@ reg_process_hint_user(struct regulatory_request *user_request)
+@@ -2657,7 +2683,8 @@ reg_process_hint_user(struct regulatory_request *user_request)
  
  	treatment = __reg_process_hint_user(user_request);
  	if (treatment == REG_REQ_IGNORE ||

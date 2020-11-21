@@ -73,7 +73,7 @@
   security.sudo.wheelNeedsPassword = false;
 
   networking.nftables2.enable = true;
-  networking.nftables2.forwardPolicy = lib.mkDefault "DROP";
+  networking.nftables2.forwardPolicy = lib.mkDefault "drop";
 
   services.journald.extraConfig = "SystemMaxUse=2G";
 
