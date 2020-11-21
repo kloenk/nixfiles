@@ -22,9 +22,13 @@
     {
       name = "nl80211-reload";
       patch = ./nl80211.patch;
-      /*extraConfig = ''
+      extraConfig = ''
+        EXPERT y
+        CFG80211_CERTIFICATION_ONUS y
         CFG80211_REQUIRE_SIGNED_REGDB n
-      '';*/
+        CFG80211_DEBUGFS y
+      '';
+        #CFG80211_USE_KERNEL_REGDB_KEYS n
     }
   ];
 
@@ -61,7 +65,7 @@
     "cgroup_no_v1=all"
   ];
 
-  boot.initrd.postMountCommands = ''
+  /*boot.initrd.postMountCommands = ''
     cd /mnt-root
     chattr -i var/empty
     rm -rf $(ls -A /mnt-root | grep -v 'nix' | grep -v 'boot' | grep -v 'var' | grep -v 'home' | grep -v 'persist')
@@ -72,7 +76,7 @@
 
     cd /mnt-root/var
     rm -rf $(ls -A /mnt-root/var | grep -v 'src')
-  '';
+  '';*/
 
   systemd.tmpfiles.rules = [
     "Q /persist/data/bluetooth 750 - - - -"
