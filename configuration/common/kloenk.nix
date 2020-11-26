@@ -35,7 +35,6 @@
       #zstd
       unzip
       jq
-      gopass
       neofetch
       onefetch
       sl

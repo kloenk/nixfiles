@@ -78,7 +78,6 @@ in {
       nix-prefetch-git
       pass
       pass-otp
-      gopass
       sl
       neofetch
     ];
