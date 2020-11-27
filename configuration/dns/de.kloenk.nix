@@ -42,7 +42,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.de.";
       adminEmail = "hostmaster@kloenk.de";
-      serial = 2020111301;
+      serial = 2020112701;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
@@ -96,7 +96,6 @@ let
 
       mail = iluvatar;
       bitwarden = iluvatar;
-      git = iluvatar;
 
       grafana = manwe;
       prometheus = manwe;

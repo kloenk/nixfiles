@@ -35,6 +35,8 @@
       #zstd
       unzip
       jq
+      pass
+      pass-otp
       neofetch
       onefetch
       sl
