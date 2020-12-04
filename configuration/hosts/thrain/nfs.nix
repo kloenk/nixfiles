@@ -24,8 +24,8 @@ in {
   services.nfs.server.enable = true;
   services.nfs.server.exports = ''
     /export 6.0.2.0/24(rw,sync,no_subtree_check,crossmnt,fsid=0,insecure) 192.168.178.0/24(ro,no_subtree_check,root_squash,anonuid=1000,anongid=1000,crossmnt,fsid=0,insecure)
-    /export/kloenk 6.0.2.0/24(rw,nohide,no_subtree_check,root_squash,anonuid=1000,anongid=1000) 192.168.178.0/24(ro,hide,all_squash)
-    /export/Filme 6.0.2.0/24(rw,nohide,no_subtree_check,root_squash,anonuid=1000,anongid=1000,insecure) 192.168.178.0/24(ro,nohide,no_subtree_check,root_squash,anonuid=1000,anongid=1000,insecure)
+    /export/kloenk 6.0.2.0/24(rw,nohide,no_subtree_check,root_squash,anonuid=1000,anongid=1000,insecure,crossmnt) 192.168.178.0/24(ro,hide,all_squash)
+    /export/Filme 6.0.2.0/24(rw,nohide,no_subtree_check,root_squash,anonuid=1000,anongid=1000,insecure,crossmnt) 192.168.178.0/24(ro,nohide,no_subtree_check,root_squash,anonuid=1000,anongid=1000,insecure,crossmnt)
     /export/mama 6.0.2.0/24(rw,nohide,no_subtree_check,root_squash,anonuid=1000,anongid=1000,insecure) 192.168.178.0/24(rw,nohide,no_subtree_check,all_squash,anonuid=1000,anongid=1000,insecure)
   '';
 
