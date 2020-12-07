@@ -88,6 +88,13 @@
           PersistentKeepalive = 21;
         };
       }
+      { # mbp
+        wireguardPeerConfig = {
+          AllowedIPs = [ "192.168.242.201/32" ];
+          PublicKey = "5dwOBGEIencNKOu5NzL9R7q+CxPIbJ8c9CzVPma4g3U=";
+          PersistentKeepalive = 21;
+        };
+      }
       { # louwa (luis)
         wireguardPeerConfig = {
           AllowedIPs = [ "192.168.242.204/32" ];
