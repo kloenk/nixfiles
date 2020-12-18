@@ -21,6 +21,12 @@ in {
     options = [ "bind" ];
   };
 
+  /* fileSystems."/export/timemachine" = {
+       device = "/persist/data/timemachine";
+       options = [ "bind" ];
+     };
+  */
+
   services.nfs.server.enable = true;
   services.nfs.server.exports = ''
     /export 6.0.2.0/24(rw,sync,no_subtree_check,crossmnt,fsid=0,insecure) 192.168.178.0/24(ro,no_subtree_check,root_squash,anonuid=1000,anongid=1000,crossmnt,fsid=0,insecure)
