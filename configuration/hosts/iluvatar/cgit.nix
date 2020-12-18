@@ -73,6 +73,11 @@ in {
         repo.desc=NixOS configs
         repo.readme=master:README.md
 
+        repo.url=kloenk/Masui
+        repo.path=${gitDir}/kloenk/Masui.git
+        repo.desc=Masui Swift ui matrix client
+        repo.readme=main:README.md
+
         repo.url=kloenk/brook
         repo.path=${gitDir}/kloenk/brook.git
         repo.desc=A minimal self-hostable streaming setup.
@@ -105,6 +110,6 @@ in {
         repo.url=usee/osp-nix
         repo.path=${gitDir}/usee/osp-nix.git
         repo.desc=Nixconfig files for the osp server
-        repo.readme=main::README.md
+        repo.readme=main:README.md
       '';
 }
