@@ -60,7 +60,7 @@ let
       sauron = hostTTL 1200 "195.39.221.54" "2a0f:4ac4:42:0:f199::1";
       melkor = hostTTL 1200 "195.39.221.51" null;
       bombadil = hostTTL 1200 "195.39.221.52" null;
-      aule = hostTTL 1200 "195.39.221.50" null;
+      aule = hostTTL 1200 "89.163.230.234" null;
 
       ns1 = iluvatar;
 
