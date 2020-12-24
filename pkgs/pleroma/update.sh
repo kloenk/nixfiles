@@ -1,6 +1,6 @@
 #!/usr/bin/env nix-shell
 #!nix-shell -i bash update-shell.nix
-set -ve
+set -xe
 
 cd $(dirname $0)
 
@@ -35,6 +35,6 @@ chmod -R u+rwX "$tmpdir"
 (
   cd "$tmpdir" && \
   sed 's/, "[a-f0-9]\{64\}"},/},/' -i mix.lock && \
-  mixnix > mix.nix
+  mixnix | sed 's/builder/buildTool/' > mix.nix
 )
 cp $tmpdir/mix.nix .

@@ -33,4 +33,7 @@
       routeConfig.Destination = "192.168.56.0/23";
     }];
   };
+
+  users.users.systemd-network.extraGroups = [ "keys" ];
+  krops.secrets.files."usee0.key".owner = "systemd-network";
 }

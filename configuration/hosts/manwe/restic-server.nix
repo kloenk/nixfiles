@@ -6,8 +6,8 @@
 
   services.restic.server = {
     enable = true;
-    dataDir = "/persist/backups";
-    appendOnly;
+    dataDir = "/persist/backups/restic-server";
+    appendOnly = true;
     listenAddress = "192.168.56.1:8080";
   };
 }
