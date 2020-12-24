@@ -12,6 +12,9 @@
     ./mysql.nix
     ./pleroma
 
+    ./wireguard.nix
+    ./restic-server.nix
+
     ../../default.nix
     ../../common
     ../../common/pbb.nix
