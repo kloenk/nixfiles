@@ -25,7 +25,7 @@
     fsType = "xfs";
   };
 
-  fileSystems."/persist/backups" = {
+  fileSystems."/persist/backups/restic-server" = {
     device = "/dev/disk/by-uuid/33ca7942-3d7a-410e-9b58-5c8354aa0b48";
     fsType = "xfs";
   };
