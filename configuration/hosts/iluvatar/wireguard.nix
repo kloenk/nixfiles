@@ -15,7 +15,10 @@
   networking.nftables2.extraConfig = ''
     table ip nat {
       chain postrouting {
-        oif enp1s0 masquerade
+        type nat hook postrouting priority srcnat;
+        ip saddr { 192.168.242.0-192.168.242.255 } oifname { "wg0" } snat to 192.168.242.1
+        ip saddr { 172.16.16.0-172.16.16.255 } oifname "yougen" snat to 172.16.16.1
+        oifname "enp1s0" masquerade
       }
     }
   '';
