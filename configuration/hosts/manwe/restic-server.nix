@@ -8,6 +8,8 @@
     enable = true;
     dataDir = "/persist/backups/restic-server";
     appendOnly = true;
+    extraFlags = [ "--no-auth" ];
+    prometheus = true;
     listenAddress = "192.168.56.1:8080";
   };
 }
