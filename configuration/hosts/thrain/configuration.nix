@@ -8,6 +8,8 @@
     #./timemachine.nix
     ./samba.nix
 
+    ./dns.nix
+
     ../../default.nix
 
     ../../desktop
@@ -94,7 +96,7 @@
 
   # virtmanager
   virtualisation.libvirtd = {
-    enable = true;
+    #enable = true;
     onShutdown = "shutdown";
   };
 

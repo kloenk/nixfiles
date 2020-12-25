@@ -5,6 +5,7 @@
     networks."20-eno1" = {
       name = "eno1";
       DHCP = "no";
+      dns = [ "127.0.0.1" ];
       vlan = lib.singleton "vlan1337";
       addresses = [{ addressConfig.Address = "192.168.178.248/24"; }];
       routes = [
