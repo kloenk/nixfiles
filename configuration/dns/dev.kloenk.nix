@@ -35,7 +35,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.dev.";
       adminEmail = "hostmaster.kloenk.de."; # TODO: change mail
-      serial = 2020122101;
+      serial = 2020122501;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
@@ -54,21 +54,19 @@ let
       iluvatar = hostTTL 1200 "195.39.247.6" "2a0f:4ac0::6";
       manwe = hostTTL 1200 "195.39.221.187" null;
       sauron = hostTTL 1200 "195.39.221.54" "2a0f:4ac4:42:0:f199::1";
-      melkor = hostTTL 1200 "195.39.221.51" null;
-      bombadil = hostTTL 1200 "195.39.221.52" null;
       aule = hostTTL 1200 "89.163.230.234" null;
 
       ns1 = iluvatar;
 
       git = iluvatar;
 
-      lexbeserious = iluvatar;
-
       _dmarc.TXT = dmarc;
 
       bitwarden = iluvatar;
 
       pleroma = manwe;
+
+      text.TXT = "foobar";
     };
   };
 

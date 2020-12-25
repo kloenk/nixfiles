@@ -16,9 +16,10 @@
     ./wordpress.nix
     ./mysql.nix
 
-    ./dns.nix
+    #./dns.nix
+    ./coredns.nix
     ./mail.nix
-    ./quassel.nix
+    #./quassel.nix
 
     ../../default.nix
     ../../common
