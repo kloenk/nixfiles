@@ -31,6 +31,15 @@
       map to guest = bad user
     '';
     shares = {
+      kloenk = {
+        path = "/persist/data/kloenk";
+        "valid users" = "kloenk";
+        public = "no";
+        writable = "yes";
+        "force user" = "kloenk";
+        "fruit:aapl" = "yes";
+        "vfs objects" = "catia fruit streams_xattr";
+      };
       tm_share = {
         path = "/persist/data/timemachine";
         "valid users" = "kloenk";
