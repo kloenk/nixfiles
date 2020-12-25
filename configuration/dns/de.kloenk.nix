@@ -138,4 +138,4 @@ let
       ];
     };
   };
-in dns.writeZone "kloenk.de" zone;
+in dns.writeZone "kloenk.de" zone

@@ -73,4 +73,4 @@ let
   };
 
 in
-  dns.writeZone "kloenk.dev" zone;
+  dns.writeZone "kloenk.dev" zone
