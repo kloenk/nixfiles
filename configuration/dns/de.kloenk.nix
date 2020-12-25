@@ -1,7 +1,3 @@
-{ master, slaves ? [ ] }:
-
-assert master -> slaves != [ ];
-
 { inputs, config, lib, ... }:
 
 let
@@ -142,11 +138,4 @@ let
       ];
     };
   };
-in {
-  _file = ./de.kloenk.nix;
-  services.bind.zones = [{
-    name = "kloenk.de";
-    inherit master slaves;
-    file = dns.writeZone "kloenk.de" zone;
-  }];
-}
+in dns.writeZone "kloenk.de" zone;

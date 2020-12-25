@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, inputs, config, ... }:
 
 let
   #kloenk_zone =
@@ -7,6 +7,9 @@ let
     pkgs.writeText "bbb.zone" (builtins.readFile (toString ./bbb-wass.zone));
   imkerverein_zone = pkgs.writeText "imkerverein.zone"
     (builtins.readFile (toString ./imkerverein.zone));
+
+  dev_kloenk_zone = (import ../../dns/dev.kloenk.nix { inherit lib inputs config; });
+  de_kloenk_zone = (import ../../dns/de.kloenk.nix { inherit lib inputs config; });
 
   slaves = [
     "159.69.179.160"
@@ -18,17 +21,6 @@ let
     "164.132.31.112"
   ];
 in {
-  imports = [
-    (import ../../dns/de.kloenk.nix {
-      master = true;
-      inherit slaves;
-    })
-    (import ../../dns/dev.kloenk.nix {
-      master = true;
-      inherit slaves;
-    })
-  ];
-
   networking.firewall = {
     allowedTCPPorts = [ 53 ];
     allowedUDPPorts = [ 53 ];
@@ -73,6 +65,18 @@ in {
               #allow-transfer { 159.69.179.160; 51.254.249.185; 192.168.42.4; 51.254.249.182; 192.168.42.7; 216.218.133.2; 2001:470:600::2; 5.45.100.14; 164.132.31.112; };
             }
       */
+      {
+        name = "kloenk.dev";
+        master = true;
+        file = dev_kloenk_zone;
+        inherit slaves;
+      }
+      {
+        name = "kloenk.de";
+        master = true;
+        file = de_kloenk_zone;
+        inherit slaves;
+      }
       {
         name = "bbb.wass-er.com";
         master = true;
