@@ -66,7 +66,7 @@ let
 
       pleroma = manwe;
 
-      text.TXT = "foobar";
+      text.TXT = [ "foobar" ];
     };
   };
 
