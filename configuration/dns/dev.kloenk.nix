@@ -67,6 +67,10 @@ let
 
       pleroma = manwe;
 
+      grafana = manwe;
+      prometheus = manwe;
+      alertmanager = manwe;
+
       text.TXT = [ "foobar" ];
     };
   };
