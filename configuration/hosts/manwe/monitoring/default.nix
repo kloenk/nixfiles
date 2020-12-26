@@ -8,6 +8,7 @@ let
     allow 80.187.100.208/32;
     allow 192.168.242.0/24;
     allow 2a0f:4ac4:42:f144::/64;
+    allow 2a0f:4ac4:42:0/48;
 
     ${config.services.nginx.virtualHosts."${config.networking.hostName}.kloenk.dev".locations."/node-exporter/".extraConfig}
   '';
