@@ -105,7 +105,7 @@ let
       #schule = manwe; # TODO
       punkte = manwe;
 
-      hydra = melkor;
+      #hydra = melkor;
       cache = iluvatar; # TODO: somewhere else
 
       luna.CNAME = [ "luna.pbb.lc." ];
