@@ -42,7 +42,7 @@
 
   networking.useDHCP = false;
   networking.hostName = "thrain";
-  networking.domain = "kloenk.de";
+  networking.domain = "kloenk.dev";
   networking.hosts = {
     "192.168.178.1" = lib.singleton "fritz.box";
     # TODO: barahir

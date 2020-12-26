@@ -42,7 +42,7 @@
 
   nixpkgs.config.allowUnfree = true;
   nix.gc.automatic = true;
-  nix.binaryCaches = [ "https://cache.kloenk.de" ];
+  nix.binaryCaches = [ "https://cache.kloenk.dev" ];
 
   boot.kernel.sysctl = {
     "net.ipv4.conf.all.forwarding" = true;

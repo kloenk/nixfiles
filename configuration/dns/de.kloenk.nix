@@ -38,7 +38,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.de.";
       adminEmail = "hostmaster@kloenk.de";
-      serial = 2020112701;
+      serial = 2020122601;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
@@ -71,12 +71,17 @@ let
     ];
 
     subdomains = rec {
-      iluvatar = hostTTL 1200 "195.39.247.6" "2a0f:4ac0::6";
+      /*iluvatar = hostTTL 1200 "195.39.247.6" "2a0f:4ac0::6";
       manwe = hostTTL 1200 "195.39.221.187" null;
       sauron = hostTTL 1200 "195.39.221.54" "2a0f:4ac4:42:0:f199::1";
       melkor = hostTTL 1200 "195.39.221.51" null;
       bombadil = hostTTL 1200 "195.39.221.52" null;
-      aule = hostTTL 1200 "195.39.221.50" null;
+      aule = hostTTL 1200 "195.39.221.50" null;*/
+
+      iluvatar.CNAME = [ "iluvatar.kloenk.dev." ];
+      manwe.CNAME = [ "manwe.kloenk.dev." ];
+      sauron.CNAME = [ "sauron.kloenk.dev." ];
+      aule.CNAME = [ "aule.kloenk.dev." ];
 
       ns1 = iluvatar;
 

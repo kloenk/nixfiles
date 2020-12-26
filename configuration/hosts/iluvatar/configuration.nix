@@ -78,7 +78,7 @@
   '';
 
   networking.hostName = "iluvatar";
-  networking.domain = "kloenk.de";
+  networking.domain = "kloenk.dev";
   networking.nameservers = [
     "2001:470:20::2"
     "2001:4860:4860::8888"
@@ -87,7 +87,7 @@
   ];
   networking.extraHosts = # FIXME: replace with ’networking.hosts‘
     ''
-      127.0.0.1 iluvatar.kloenk.de
+      127.0.0.1 iluvatar.kloenk.dev
     '';
 
   networking.dhcpcd.enable = false;
@@ -119,6 +119,12 @@
   };
 
   services.nginx.virtualHosts."cache.kloenk.de" = {
+    enableACME = true;
+    forceSSL = true;
+    locations."= /".proxyPass = "http://144.76.19.168:9000/nix/index.html";
+    locations."/".proxyPass = "http://144.76.19.168:9000/nix/";
+  };
+  services.nginx.virtualHosts."cache.kloenk.dev" = {
     enableACME = true;
     forceSSL = true;
     locations."= /".proxyPass = "http://144.76.19.168:9000/nix/index.html";

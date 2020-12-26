@@ -50,7 +50,7 @@
       proxy_cookie_path / "/; secure; HttpOnly; SameSite=strict";
     '';
   };
-  services.nginx.virtualHosts."${config.networking.hostName}.kloenk.de" = {
+  services.nginx.virtualHosts."${config.networking.hostName}.kloenk.dev" = {
     #serverAliases = [ "default" ];
     #enableACME = true;
     #forceSSL = true;

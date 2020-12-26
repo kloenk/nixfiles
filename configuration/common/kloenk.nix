@@ -58,5 +58,10 @@
       certAuthority = true;
       publicKeyFile = toString ./server_ca.pub;
     };
+    "kloenk.dev" = {
+      hostNames = [ "*.kloenk.dev" ];
+      certAuthority = true;
+      publicKeyFile = toString ./server_ca.pub;
+    };
   };
 }

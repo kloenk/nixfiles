@@ -6,8 +6,10 @@ let
   nginxExtraConfig = ''
     allow 2a01:598:90a2:3090::/64;
     allow 80.187.100.208/32;
+    allow 192.168.242.0/24;
+    allow 2a0f:4ac4:42:f144::/64;
 
-    ${config.services.nginx.virtualHosts."${config.networking.hostName}.kloenk.de".locations."/node-exporter/".extraConfig}
+    ${config.services.nginx.virtualHosts."${config.networking.hostName}.kloenk.dev".locations."/node-exporter/".extraConfig}
   '';
 in {
 
@@ -20,18 +22,18 @@ in {
     [ "/var/lib/prometheus" ];
   systemd.services.grafana.after = [ "prometheus.service" ];
 
-  services.nginx.virtualHosts."grafana.kloenk.de" = {
+  services.nginx.virtualHosts."grafana.kloenk.dev" = {
     locations."/".proxyPass = "http://127.0.0.1:3001/";
     enableACME = true;
     forceSSL = true;
   };
-  services.nginx.virtualHosts."prometheus.kloenk.de" = {
+  services.nginx.virtualHosts."prometheus.kloenk.dev" = {
     locations."/".proxyPass = "http://127.0.0.1:9090/";
     extraConfig = nginxExtraConfig;
     enableACME = true;
     forceSSL = true;
   };
-  services.nginx.virtualHosts."alertmanager.kloenk.de" = {
+  services.nginx.virtualHosts."alertmanager.kloenk.dev" = {
     locations."/".proxyPass = "http://127.0.0.1:9093/";
     extraConfig = nginxExtraConfig;
     enableACME = true;
@@ -40,7 +42,7 @@ in {
 
   services.prometheus.alertmanager = {
     enable = true;
-    webExternalUrl = "https://alertmanager.kloenk.de/";
+    webExternalUrl = "https://alertmanager.kloenk.dev/";
     listenAddress = "127.0.0.1";
     extraFlags = [ "--cluster.listen-address=" ];
     configuration = {
@@ -101,9 +103,9 @@ in {
   services.grafana = {
     enable = true;
     auth.anonymous.enable = true;
-    domain = "grafana.kloenk.de";
+    domain = "grafana.kloenk.dev";
     port = 3001;
-    rootUrl = "https://grafana.kloenk.de/";
+    rootUrl = "https://grafana.kloenk.dev/";
     provision = {
       enable = true;
       datasources = [{
@@ -119,7 +121,7 @@ in {
   services.prometheus = {
     enable = true;
     globalConfig.scrape_interval = "10s";
-    webExternalUrl = "https://prometheus.kloenk.de/";
+    webExternalUrl = "https://prometheus.kloenk.dev/";
     extraFlags = [
       "--storage.tsdb.retention.size=250GB"
       "--storage.tsdb.retention=1024d"
@@ -131,7 +133,7 @@ in {
         lib.filterAttrs (name: host: host ? prometheusExporters) hosts;
       makeTargets = name: host:
         map (exporter: {
-          targets = [ "${name}.kloenk.de" ];
+          targets = [ host.host.ip ];
           labels = {
             job = name;
             __metrics_path__ = "/${exporter}/metrics";
