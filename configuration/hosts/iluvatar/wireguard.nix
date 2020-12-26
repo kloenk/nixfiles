@@ -68,6 +68,13 @@
           PersistentKeepalive = 21;
         };
       }
+      { # manwe
+        wireguardPeerConfig = {
+          AllowedIPs = [ "192.168.242.103/32" ];
+          PublicKey = "JRI1Z4XOrTAsyMqQ39f3QZ47aUftUnNeIjpxnfTUT3k=";
+          Endpoint = "manwe.kloenk.dev:51820";
+        };
+      }
 
       { # mi 9 t
         wireguardPeerConfig = {
@@ -95,6 +102,13 @@
         wireguardPeerConfig = {
           AllowedIPs = [ "192.168.242.201/32" ];
           PublicKey = "5dwOBGEIencNKOu5NzL9R7q+CxPIbJ8c9CzVPma4g3U=";
+          PersistentKeepalive = 21;
+        };
+      }
+      { # iphone
+        wireguardPeerConfig = {
+          AllowedIPs = [ "192.168.242.210/32" ];
+          PublicKey = "iSYB99dCUvYhHAz5HaPSzhXYPyyntOtiucrDUBFVvBE=";
           PersistentKeepalive = 21;
         };
       }

@@ -3,6 +3,7 @@
 {
   networking.firewall.allowedUDPPorts = [
     51822 # usee0
+    51820 # wg0
   ];
 
   systemd.network.netdevs."30-usee0" = {
@@ -30,10 +31,39 @@
     linkConfig = { RequiredForOnline = "no"; };
     addresses = [{addressConfig.Address = "192.168.56.1/24"; }];
     routes = [{
-      routeConfig.Destination = "192.168.56.0/23";
+      routeConfig.Destination = "192.168.56.0/24";
+    }];
+  };
+
+  systemd.network.netdevs."30-wg0" = {
+    netdevConfig = {
+      Kind = "wireguard";
+      Name = "wg0";
+    };
+    wireguardConfig = {
+      ListenPort = 51820;
+      PrivateKeyFile = config.krops.secrets.files."wg0.key".path;
+    };
+    wireguardPeers = [
+      { # iluvatar
+        wireguardPeerConfig = {
+          AllowedIPs = [ "192.168.242.0/24" ];
+          PublicKey = "UoIRXpG/EHmDNDhzFPxZS18YBlj9vBQRRQZMCFhonDA=";
+          Endpoint = "iluvatar.kloenk.de:51820";
+        };
+      }
+    ];
+  };
+  systemd.network.networks."30-wg0" = {
+    name = "wg0";
+    linkConfig = { RequiredForOnline = "no"; };
+    addresses = [ { addressConfig.Address = "192.168.242.103/24"; } ];
+    routes = [{
+      routeConfig.Destination = "192.168.242.0/24";
     }];
   };
 
   users.users.systemd-network.extraGroups = [ "keys" ];
   krops.secrets.files."usee0.key".owner = "systemd-network";
+  krops.secrets.files."wg0.key".owner = "systemd-network";
 }
