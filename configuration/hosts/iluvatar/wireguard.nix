@@ -124,7 +124,9 @@
   systemd.network.networks."30-wg0" = {
     name = "wg0";
     linkConfig = { RequiredForOnline = "no"; };
-    addresses = [{ addressConfig.Address = "192.168.242.1/24"; }];
+    addresses = [
+      { addressConfig.Address = "192.168.242.1/24"; }
+    ];
     routes = [{
       routeConfig.Destination = "192.168.242.0/24";
     }

@@ -48,37 +48,36 @@ in {
         forward . tls://1.1.1.1 tls://1.0.0.1
       }
       version.bind version.server authors.bind hostname.bind id.server {
-        import acl
         import log
         log
         chaos CoreDNS hostmaster@kloenk.de
       }
 
-      kloenk.dev {
+      kloenk.dev tls://kloenk.dev {
         import log
         file ${dev_kloenk_zone}
         import he_transfer
       }
 
-      kloenk.de {
+      kloenk.de tls://kloenk.dev {
         import log
         file ${de_kloenk_zone}
         import he_transfer
       }
 
-      bbb.wass-er.com {
+      bbb.wass-er.com tls://kloenk.dev {
         import log
         file ${bbb_wass_zone}
         import he_transfer
       }
 
-      burscheider-imkerverein.de {
+      burscheider-imkerverein.de tls://kloenk.dev {
         import log
         file ${imkerverein_zone}
         import he_transfer
       }
 
-      calli0pa.de {
+      calli0pa.de tls://kloenk.dev {
         import log
         secondary {
           transfer from 87.79.92.36

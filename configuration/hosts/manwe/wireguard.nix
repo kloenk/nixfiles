@@ -49,7 +49,7 @@
         wireguardPeerConfig = {
           AllowedIPs = [ "192.168.242.0/24" ];
           PublicKey = "UoIRXpG/EHmDNDhzFPxZS18YBlj9vBQRRQZMCFhonDA=";
-          Endpoint = "iluvatar.kloenk.de:51820";
+          Endpoint = "iluvatar.kloenk.dev:51820";
         };
       }
     ];
