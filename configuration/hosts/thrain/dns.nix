@@ -26,6 +26,10 @@
         import log
         forward fritz.box 192.168.178.1
       }
+      rc3.world {
+        import log
+        forward . 135.181.148.31 78.46.190.44
+      }
     '';
   };
 }
