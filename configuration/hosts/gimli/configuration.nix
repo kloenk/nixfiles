@@ -28,6 +28,9 @@
     enable = true;
     hostKeys = [ "/var/src/secrets/initrd/ed25519_host_key" ];
   };
+  boot.initrd.network.postCommands = ''
+    echo "zfs load-key -a; killall zfs" >> /root/.profile
+  '';
 
   # setup network
   boot.initrd.preLVMCommands = lib.mkBefore (''
