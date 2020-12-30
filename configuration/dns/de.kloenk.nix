@@ -38,7 +38,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.de.";
       adminEmail = "hostmaster@kloenk.de";
-      serial = 2020122601;
+      serial = 2020123001;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
@@ -80,6 +80,7 @@ let
 
       iluvatar.CNAME = [ "iluvatar.kloenk.dev." ];
       manwe.CNAME = [ "manwe.kloenk.dev." ];
+      gimli.CNAME = [ "gimli.kloenk.dev." ];
       sauron.CNAME = [ "sauron.kloenk.dev." ];
       aule.CNAME = [ "aule.kloenk.dev." ];
 

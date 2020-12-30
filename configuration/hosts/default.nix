@@ -37,6 +37,12 @@ in {
     server = true;
   };
 
+  gimli = makeHost {
+    host = "gimli.kloenk.dev";
+    vm = true;
+    server = true;
+  };
+
   thrain = makeHost {
     host = "192.168.178.248";
     # server = true;
