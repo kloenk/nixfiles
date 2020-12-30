@@ -21,7 +21,7 @@
     owner = "nixos";
     repo = "nix";
     #ref = "flakes";
-    inputs.nixpkgs.follows = "/nixpkgs";
+    inputs.nixpkgs.follows = "/nixpkgs"; # broken
   };
 
   inputs.hydra = {
@@ -31,13 +31,6 @@
     #inputs.nixpkgs.follows = "/nixpkgs";
     #inputs.nix.inputs.nixpkgs.follows = "/nixpkgs";
     #inputs.nix.follows = "/nix";
-  };
-
-  inputs.nixpkgs-mc = {
-    type = "github";
-    owner = "kloenk";
-    repo = "nixpkgs";
-    ref = "feature/mc-fifo";
   };
 
   inputs.mail-server = {
@@ -89,7 +82,7 @@
   inputs.mixnix.flake = false;
 
   outputs = inputs@{ self, nixpkgs, nix, hydra, home-manager, mail-server
-    , website, nixpkgs-mc, nixos-org, dns, grahamc-config, qyliss, ... }:
+    , website, nixos-org, dns, grahamc-config, qyliss, ... }:
     let
 
       overlayCombined = system: [
@@ -115,13 +108,13 @@
         disabledModules =
           [ "services/games/minecraft-server.nix" "tasks/auto-upgrade.nix" ];
         imports = [
-          "${nixpkgs-mc}/nixos/modules/services/games/minecraft-server.nix"
           self.nixosModules.autoUpgrade
         ];
         nixpkgs.overlays = [ (overlays system) nix.overlay ];
       };
 
       overlays = system: final: prev: {
+        utillinuxMinimal = final.util-linuxMinimal;
         #hydra = builtins.trace "eval hydra" hydra.packages.${system}.hydra;
       };
 
