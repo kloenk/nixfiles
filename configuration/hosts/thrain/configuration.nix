@@ -68,6 +68,7 @@
   # TODO: use bind
   networking.nameservers = [ "1.1.1.1" "192.168.178.1" "2001:4860:4860::8888" ];
   networking.search = [ "fritz.box" ];
+  networking.hostId = "37507120";
 
   # transient root volume
   boot.initrd.postMountCommands = ''
