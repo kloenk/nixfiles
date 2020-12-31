@@ -53,10 +53,12 @@
   networking.dhcpcd.enable = false;
   networking.useDHCP = false;
 
-  systemd.network.networks."40-ens18" = {
+  /*systemd.network.networks."40-ens18" = {
     name = "enp1s0";
     DHCP = "yes";
-  };
+  };*/
+
+  networking.interfaces.enp1s0.useDHCP = true;
 
   system.autoUpgrade.enable = true;
   nix.gc.automatic = true;
