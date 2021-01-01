@@ -35,7 +35,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.dev.";
       adminEmail = "hostmaster.kloenk.de."; # TODO: change mail
-      serial = 2020123101;
+      serial = 2021010101;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
@@ -73,6 +73,7 @@ let
       alertmanager = manwe;
 
       matrix = gimli;
+      stream = gimli;
 
       text.TXT = [ "foobar" ];
     };
