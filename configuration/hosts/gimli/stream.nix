@@ -47,6 +47,9 @@ nginxCfg = pkgs.writeText "nginx.conf" ''
           add_header 'Access-Control-Max-Age' 1728000;
           add_header 'Content-Type' 'text/plain charset=UTF-8';
           add_header 'Content-Length' 0;
+          add_header X-Content-Type-Options "nosniff";
+          add_header X-Frame-Options "SAMEORIGIN";
+          add_header X-Xss-Protection "1; mode=block";
           return 204;
         }
       }
@@ -70,6 +73,9 @@ nginxCfg = pkgs.writeText "nginx.conf" ''
           add_header 'Access-Control-Max-Age' 1728000;
           add_header 'Content-Type' 'text/plain charset=UTF-8';
           add_header 'Content-Length' 0;
+          add_header X-Content-Type-Options "nosniff";
+          add_header X-Frame-Options "SAMEORIGIN";
+          add_header X-Xss-Protection "1; mode=block";
           return 204;
         }
       }
@@ -159,6 +165,9 @@ in {
           add_header 'Access-Control-Max-Age' 1728000;
           add_header 'Content-Type' 'text/plain charset=UTF-8';
           add_header 'Content-Length' 0;
+          add_header X-Content-Type-Options "nosniff";
+          add_header X-Frame-Options "SAMEORIGIN";
+          add_header X-Xss-Protection "1; mode=block";
           return 204;
         }
 
@@ -168,6 +177,9 @@ in {
           # CORS setup
           add_header 'Access-Control-Allow-Origin' '*' always;
           add_header 'Access-Control-Expose-Headers' 'Content-Length';
+          add_header X-Content-Type-Options "nosniff";
+          add_header X-Frame-Options "SAMEORIGIN";
+          add_header X-Xss-Protection "1; mode=block";
         }
       '';
       locations."/dash".extraConfig = ''
@@ -184,6 +196,9 @@ in {
           add_header 'Access-Control-Max-Age' 1728000;
           add_header 'Content-Type' 'text/plain charset=UTF-8';
           add_header 'Content-Length' 0;
+          add_header X-Content-Type-Options "nosniff";
+          add_header X-Frame-Options "SAMEORIGIN";
+          add_header X-Xss-Protection "1; mode=block";
           return 204;
         }
         if ($request_method != 'OPTIONS') {
@@ -192,6 +207,9 @@ in {
           # CORS setup
           add_header 'Access-Control-Allow-Origin' '*' always;
           add_header 'Access-Control-Expose-Headers' 'Content-Length';
+          add_header X-Content-Type-Options "nosniff";
+          add_header X-Frame-Options "SAMEORIGIN";
+          add_header X-Xss-Protection "1; mode=block";
         }
       '';
       locations."= /dash.all.min.js".extraConfig = ''
