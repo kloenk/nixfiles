@@ -105,7 +105,7 @@ nginxCfg = pkgs.writeText "nginx.conf" ''
               <script src="/dash.all.min.js"></script>
               <script>
                 (function(){
-                  var url = "http://gimli.kloenk.dev:8080/dash/nixos.mpd";
+                  var url = "http://gimli.kloenk.dev:8080/dash/schluempfli.mpd";
                   var player = dashjs.MediaPlayer().create();
                   player.initialize(document.querySelector("#player"), url, true);
                 })();
@@ -236,7 +236,7 @@ in {
               <script src="/dash.all.min.js"></script>
               <script>
                 (function(){
-                  var url = "/dash/nixos.mpd";
+                  var url = "/dash/schluempfli.mpd";
                   var player = dashjs.MediaPlayer().create();
                   player.initialize(document.querySelector("#player"), url, true);
                 })();
