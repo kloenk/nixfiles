@@ -36,7 +36,7 @@
   fileSystems."/var/lib/acme" = {
     device = "/persist/acme";
     fsType = "none";
-    option = [ "bind" ];
+    options = [ "bind" ];
   };
 
   swapDevices =
