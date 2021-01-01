@@ -70,10 +70,5 @@
     config.nix.package.out
   ];
 
-  # acme files
-  systemd.tmpfiles.rules = [
-    "L /var/lib/acme - - - - /persist/acme"
-  ];
-
   system.stateVersion = "21.03";
 }
