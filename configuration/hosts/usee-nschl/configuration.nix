@@ -1,8 +1,6 @@
 { config, pkgs, lib, ... }:
 
-let
-  uplink = "ens18";
-in {
+{
   imports = [
     ./hardware-configuration.nix
 
@@ -31,19 +29,19 @@ in {
   networking.dhcpcd.enable = false;
   networking.useDHCP = false;
 
-  networking.interfaces.${uplink}.ipv4.addresses = [{
+  networking.interfaces.ens18.ipv4.addresses = [{
     address = "5.9.118.93";
   }];
-  networking.interfaces.${uplink}.ipv6.addresses = [{
+  networking.interfaces.ens18.ipv6.addresses = [{
     address = "2a01:4f8:162:6343::3";
   }];
   networking.defaultGateway = {
     address = "5.9.118.73";
-    interface = uplink;
+    interface = "ens18";
   };
   networking.defaultGateway6 = {
     address = "2a01:4f8:162:6343::2";
-    interfaces = uplink;
+    interfaces = "ens18";
   };
 
   system.autoUpgrade.enable = true;
