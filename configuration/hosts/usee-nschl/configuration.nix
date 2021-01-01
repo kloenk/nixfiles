@@ -35,13 +35,21 @@
   networking.interfaces.ens18.ipv6.addresses = [{
     address = "2a01:4f8:162:6343::3";
   }];
-  networking.defaultGateway = {
-    address = "5.9.118.73";
-    interface = "ens18";
-  };
-  networking.defaultGateway6 = {
-    address = "2a01:4f8:162:6343::2";
-    interface = "ens18";
+
+  systemd.network.networks."40-ens18" = {
+    name = "ens18";
+    networkConfig = { IPv6AcceptRA = "no"; };
+    routes = [
+      {
+        routeConfig.Gateway = "22a01:4f8:162:6343::2";
+        routeConfig.GatewayOnLink = "yes";
+        routeConfig.PreferredSource = "2a01:4f8:162:6343::3";
+      }
+      {
+        routeConfig.Gateway = "5.9.118.73";
+        routeConfig.GatewayOnLink = "yes";
+      }
+    ];
   };
 
   system.autoUpgrade.enable = true;
