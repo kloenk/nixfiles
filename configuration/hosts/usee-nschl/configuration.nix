@@ -41,7 +41,7 @@
   };
   networking.defaultGateway6 = {
     address = "2a01:4f8:162:6343::2";
-    interfaces = "ens18";
+    interface = "ens18";
   };
 
   system.autoUpgrade.enable = true;
