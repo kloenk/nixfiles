@@ -61,6 +61,12 @@ in {
 
   samwise = makeHost { host = "6.0.2.4"; };
 
+  usee-nschl = makeHost {
+    host = "usee-nschl.kloenk.dev";
+    vm = true;
+    server = true;
+  };
+
   # for monitoring only
   bbb-wass = makeHost {
     host = "bbb-wass.kloenk.de";
