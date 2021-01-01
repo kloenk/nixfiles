@@ -31,7 +31,7 @@
 
   networking.interfaces.ens18.ipv4.addresses = [{
     address = "5.9.118.93";
-    prefixLenght = 32;
+    prefixLength = 32;
   }];
   networking.interfaces.ens18.ipv6.addresses = [{
     address = "2a01:4f8:162:6343::3";
