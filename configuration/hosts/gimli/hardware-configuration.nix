@@ -33,12 +33,6 @@
       fsType = "xfs";
     };
 
-  fileSystems."/var/lib/acme" = {
-    device = "/persist/acme";
-    fsType = "none";
-    options = [ "bind" ];
-  };
-
   swapDevices =
     [ { device = "/dev/disk/by-uuid/d2d2f5d2-22db-435a-9b5a-872a236f964e"; }
     ];
