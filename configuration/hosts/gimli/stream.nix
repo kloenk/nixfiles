@@ -125,20 +125,44 @@ nginxCfg = pkgs.writeText "nginx.conf" ''
   rtmp {
     server {
       access_log stderr;
+      error_log stderr;
+      worker_connections 1024;
       listen 1935;
       ping 30s;
       notify_method get;
+      allow play all;
 
       application stream {
         live on;
+        allow play all;
 
         hls on;
         hls_path /var/lib/rtmp/tmp/hls;
         hls_fragment 1;
+        hls_nested on;
         hls_playlist_length 10;
 
         dash on;
         dash_path /var/lib/rtmp/tmp/dash;
+
+        record all;
+        record_path /var/lib/rtmp/recordings;
+        record_unique on;
+
+        sized video exec ${pkgs.ffmpeg}/bin/ffmpeg -i rtmp://gimli.kloenk.dev:1935/$app/$name -acodec copy -c:v libx264 -preset veryfast -profile:v baseline -vsync cfr -s 480x360 -b:v 400k maxrate 400k -bufsize 400k -threads 0 -r 30 -f flv rtmp://gimli.kloenk.dev:1935/mobile/$;
+      }
+
+      application mobile {
+        allow play all;
+        live on;
+        hls on;
+        hls_nested on;
+        hls_path /var/lib/rtmp/tmp/hls/mobile;
+        hls_fragment 1;
+        hls_playlist_length 10;
+
+        dash on;
+        dash_path /var/lib/rtmp/tmp/dash/mobile;
       }
     }
   }
@@ -281,10 +305,13 @@ in {
       ExecStartPre = pkgs.writers.writeDash "setup-rtmp" ''
         mkdir -p /var/lib/rtmp/tmp/hls
         mkdir -p /var/lib/rtmp/tmp/dash
+        mkdir -p /var/lib/rtmp/recordings;
         chown rtmp:users /var/lib/rtmp/tmp/hls
         chown rtmp:users /var/lib/rtmp/tmp/dash
+        chown rtmp:users /var/lib/rtmp/recordings;
         chmod 755 /var/lib/rtmp/tmp/hls
         chmod 755 /var/lib/rtmp/tmp/dash
+        chmod 755 /var/lib/rtmp/recordings;
       '';
       User = "rtmp";
     };
