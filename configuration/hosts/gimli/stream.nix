@@ -245,7 +245,7 @@ in {
     #uid = genid_uint31 "rtmp";
     isNormalUser = true;
     createHome = true;
-    openssh = config.users.kloenk.openssh;
+    openssh = config.users.users.kloenk.openssh;
   };
 
   systemd.services.nginx-rtmp = {
