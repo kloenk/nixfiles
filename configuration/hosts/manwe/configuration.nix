@@ -42,11 +42,11 @@
   };
 
   # setup network
-  boot.initrd.preLVMCommands = lib.mkBefore (''
+  /*boot.initrd.preLVMCommands = lib.mkBefore (''
     ip li set ens18 up
     ip addr add 195.39.221.187/32 dev ens18
     ip route add default via 195.39.221.1 onlink dev ens18 && hasNetwork=1
-  '');
+  '');*/
 
   # delete files in /
   boot.initrd.postMountCommands = ''
@@ -61,19 +61,8 @@
   networking.hostName = "manwe";
   networking.dhcpcd.enable = false;
   networking.useDHCP = false;
-  networking.interfaces.ens18.ipv4.addresses = [{
-    address = "195.39.221.187";
-    prefixLength = 32;
-  }];
-  networking.interfaces.ens18.ipv6.addresses = [{
-    address = "2a01:4ac0:42::f144:1";
-    prefixLength = 128;
-  }];
 
-  systemd.network.networks."40-ens18".routes = [{
-    routeConfig.Gateway = "195.39.221.1";
-    routeConfig.GatewayOnLink = true;
-  }];
+  networking.interfaces.ens18.useDHCP = true;
 
   system.autoUpgrade.enable = true;
   nix.gc.automatic = true;
