@@ -113,7 +113,7 @@ in {
   knuddel-usee = makeHost {
     host = "knuddel-usee.kloenk.de";
     nixos = false;
-    prometheusExporters = [ "node-exporter" ];
+    prometheusExporters = [ "node-exporter" "bbb-exporter" ];
     server = true;
   };
 }
