@@ -45,9 +45,9 @@
   '');*/
 
   # delete files in /
-  /*boot.initrd.postDeviceCommands = lib.mkAfter ''
-    zfs rollback -r spool/local/root@blank
-  '';*/
+  boot.initrd.postDeviceCommands = lib.mkAfter ''
+    ${pkgs.xfsprogs}/bin/mkfs.xfs -m reflink=1 /dev/gimli/root
+  '';
 
   networking.hostName = "gimli";
   networking.hostId = "8425e349";

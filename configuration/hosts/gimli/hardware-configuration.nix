@@ -14,7 +14,7 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/0a556e8a-e849-4d3e-b701-ecee617c92a9";
+    { device = "/dev/gimli/root";
       fsType = "xfs";
     };
 
