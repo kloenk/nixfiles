@@ -4,16 +4,19 @@ export PATH=@path@:/run/wrappers/bin/
 
 export PASSWORD_STORE_DIR=${PASSWORD_STORE_DIR:=@secrets@}
 
-read -r hostname < /proc/sys/kernel/hostname
-if [[ -z $hostname ]]; then
-	hostname="default"
-fi
+#read -r hostname < /proc/sys/kernel/hostname
+#if [[ -z $hostname ]]; then
+#	hostname="default"
+#fi
+
+#hostname=$(hostname)
+hostname="default"
 
 host=$1;
 shift || true
 [ "$host" == "" ] && host=$hostname
 
-tmpdir=$(mktemp -p /dev/shm -d --suffix nixos-secrets)
+tmpdir=$(mktemp -d --suffix nixos-secrets)
 trap "rm -rf ${tmpdir};" EXIT
 echo "Decrypting secrets"
 find "$PASSWORD_STORE_DIR/$host" -type f |
