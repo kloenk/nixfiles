@@ -4,6 +4,8 @@
   imports = [
     ./hardware-configuration.nix
 
+    ./mail.nix
+
     #./postgres.nix
 
     #./wireguard.nix

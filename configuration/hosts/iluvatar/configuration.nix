@@ -18,7 +18,7 @@
 
     #./dns.nix
     ./coredns.nix
-    ./mail.nix
+    #./mail.nix
     #./quassel.nix
 
     ../../default.nix

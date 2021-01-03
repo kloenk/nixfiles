@@ -23,27 +23,29 @@
   services.postfix.config = {
     #relay_domains = [ "kloenk.de" ];
     mydestination =
-      lib.mkOverride 25 [ "$myhostname" "hubble.kloenk.de" "localhost" ];
-    maximal_queue_lifetime = "10d";
+      lib.mkOverride 25 [ "$myhostname" "localhost" ]; # TODO: iluvatar.kloenk.dev?
+    #maximal_queue_lifetime = "10d";
   };
 
   mailserver = {
     enable = true;
     localDnsResolver = false; # already running bind
-    fqdn = "mail.kloenk.de";
+    fqdn = "gimli.kloenk.dev";
     domains = [
       "kloenk.de"
       "ad.kloenk.de"
       "drachensegler.kloenk.de"
       "burscheider-imkerverein.de"
+      "kloenk.dev"
     ];
 
     loginAccounts = {
-      "kloenk@kloenk.de" = {
+      "kloenk@kloenk.dev" = {
         hashedPasswordFile =
           config.krops.secrets.files."mail/kloenk@kloenk.de.sha512".path;
 
         aliases = [
+          "kloenk@kloenk.de"
           "admin@kloenk.de"
 
           "postmaster@kloenk.de"
@@ -64,10 +66,21 @@
           "abuse@burscheider-imkerverein.de"
           "delta@kloenk.de"
           "mail@kloenk.de"
+
+          "mail@kloenk.dev"
+          "admin@kloenk.dev"
+          "postmaster@kloenk.dev"
+          "hostmaster@kloenk.dev"
+          "webmaster@kloenk.dev"
+          "abuse@kloenk.dev"
+          "postmaster@ad.kloenk.dev"
+          "hostmaster@ad.kloenk.dev"
+          "webmaster@ad.kloenk.dev"
+          "abuse@ad.kloenk.dev"
         ];
       };
 
-      "finn@kloenk.de" = {
+      "finn@kloenk.dev" = {
         hashedPasswordFile =
           config.krops.secrets.files."mail/finn@kloenk.de.sha512".path;
 
@@ -76,6 +89,12 @@
           "behrens.finn@kloenk.de"
           "info@kloenk.de"
           "me@kloenk.de"
+          "finn@kloenk.de"
+
+          "finn.behrens@kloenk.dev"
+          "behrens.finn@kloenk.dev"
+          "info@kloenk.dev"
+          "me@kloenk.dev"
         ];
       };
 
@@ -94,20 +113,24 @@
           [ "35c3@kloenk.de" "eventphone@kloenk.de" "cryptoparty@kloenk.de" ];
       };
 
-      "schule@kloenk.de" = {
+      "schule@kloenk.dev" = {
         hashedPasswordFile =
           config.krops.secrets.files."mail/schule@kloenk.de.sha512".path;
-        aliases = [ "moodle+llg@kloenk.de" "sv@kloenk.de" ];
+        aliases = [ "moodle+llg@kloenk.de" "sv@kloenk.de" "schule@kloenk.de" ];
       };
 
-      "yougen@kloenk.de" = {
+      "yougen@kloenk.dev" = {
         hashedPasswordFile =
           config.krops.secrets.files."mail/yougen@kloenk.de.sha512".path;
+
+        aliases = [ "yougen@kloenk.de" ];
       };
 
-      "grafana@kloenk.de" = {
+      "grafana@kloenk.dev" = {
         hashedPasswordFile =
           config.krops.secrets.files."mail/grafana@kloenk.de.sha512".path;
+
+        aliases = [ "grafana@kloenk.de" ];
       };
 
       "eljoy@kloenk.de" = {
@@ -124,13 +147,16 @@
       "alertmanager@kloenk.de" = {
         hashedPasswordFile =
           config.krops.secrets.files."mail/alert@kloenk.de.sha512".path;
+
+        aliases = [ "alertmanager@kloenk.dev" ];
       };
 
-      "ad@kloenk.de" = {
+      "ad@kloenk.dev" = {
         hashedPasswordFile =
           config.krops.secrets.files."mail/ad@kloenk.de.sha512".path;
 
         aliases = [
+          "ad@kloenk.de"
           "llgcompanion@kloenk.de"
           "telegram@kloenk.de"
           "fff@kloenk.de"
@@ -139,7 +165,7 @@
           "n26@kloenk.de"
         ];
 
-        catchAll = [ "kloenk.de" "ad.kloenk.de" ];
+        catchAll = [ "kloenk.dev" "kloenk.de" "ad.kloenk.de" ];
       };
 
       "drachensegler@drachensegler.kloenk.de" = {
@@ -178,10 +204,6 @@
         catchAll = [ "burscheider-imkerverein.de" ];
       };
 
-      /* "danny@kloenk.de" ={
-           hashedPasswordFile = config.krops.secrets.files."mail/danny@kloenk.de.sha512".path;
-         };
-      */
     };
 
     extraVirtualAliases = {
