@@ -5,7 +5,7 @@ let
 
   mxKloenk = with dns.combinators.mx;
     map (dns.combinators.ttl 3600) [
-      (mx 10 "mail.kloenk.dev.")
+      (mx 10 "gimli.kloenk.dev.")
       #secondary (20)
     ];
   dmarc = with dns.combinators;
@@ -36,7 +36,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.de.";
       adminEmail = "hostmaster@kloenk.de";
-      serial = 2020122602;
+      serial = 2020122603;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
