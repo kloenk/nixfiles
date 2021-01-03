@@ -48,10 +48,6 @@ in {
     # server = true;
   };
 
-  nixos = makeHost {
-    host = "192.168.178.0";
-    prometheusExporters = [ ];
-  };
 
   sauron = makeHost {
     host = "sauron.kloenk.dev";
@@ -59,7 +55,13 @@ in {
     server = true;
   };
 
+  nixos = makeHost {
+    host = "192.168.178.0";
+    prometheusExporters = [ ];
+  };
+
   samwise = makeHost { host = "6.0.2.4"; };
+  bilbo = makeHost { host = "10.211.55.3"; };
 
   usee-nschl = makeHost {
     host = "usee-nschl.kloenk.dev";
