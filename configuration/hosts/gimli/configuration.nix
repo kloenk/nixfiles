@@ -51,6 +51,12 @@
     ${pkgs.xfsprogs}/bin/mkfs.xfs -m reflink=1 -f /dev/gimli/root
   '';
 
+  fileSystems."/var/src/secrets" = {
+    device = "/persist/secrets";
+    fsType = "none";
+    options = [ "bind" ];
+  };
+
   networking.hostName = "gimli";
   networking.hostId = "8425e349";
   networking.dhcpcd.enable = false;
