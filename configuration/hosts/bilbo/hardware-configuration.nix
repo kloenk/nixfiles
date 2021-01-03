@@ -12,13 +12,13 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/c9f2698d-4e4a-481e-a826-b80a8160d746";
+    { device = "/dev/bilbo/root";
       fsType = "xfs";
     };
 
-  fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/2b170c0d-3ae8-45cb-b7b6-4a57c3079047";
-      fsType = "xfs";
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/98F3-1C11";
+      fsType = "vfat";
     };
 
   fileSystems."/persist" =
@@ -26,9 +26,9 @@
       fsType = "xfs";
     };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/98F3-1C11";
-      fsType = "vfat";
+  fileSystems."/nix" =
+    { device = "/dev/disk/by-uuid/bb02e160-65d2-4eeb-86ac-f3f5ed636d07";
+      fsType = "xfs";
     };
 
   swapDevices = [ ];
