@@ -105,7 +105,7 @@ nginxCfg = pkgs.writeText "nginx.conf" ''
               <script src="/dash.all.min.js"></script>
               <script>
                 (function(){
-                  var url = "http://gimli.kloenk.dev:8080/dash/schluempfli.mpd";
+                  var url = "http://gimli.kloenk.dev:8080/dash/index.mpd";
                   var player = dashjs.MediaPlayer().create();
                   player.initialize(document.querySelector("#player"), url, true);
                 })();
@@ -126,7 +126,6 @@ nginxCfg = pkgs.writeText "nginx.conf" ''
     server {
       access_log stderr;
       error_log stderr;
-      worker_connections 1024;
       listen 1935;
       ping 30s;
       notify_method get;
@@ -149,7 +148,7 @@ nginxCfg = pkgs.writeText "nginx.conf" ''
         record_path /var/lib/rtmp/recordings;
         record_unique on;
 
-        sized video exec ${pkgs.ffmpeg}/bin/ffmpeg -i rtmp://gimli.kloenk.dev:1935/$app/$name -acodec copy -c:v libx264 -preset veryfast -profile:v baseline -vsync cfr -s 480x360 -b:v 400k maxrate 400k -bufsize 400k -threads 0 -r 30 -f flv rtmp://gimli.kloenk.dev:1935/mobile/$;
+        exec ${pkgs.ffmpeg}/bin/ffmpeg -i rtmp://gimli.kloenk.dev:1935/$app/$name -acodec copy -c:v libx264 -preset veryfast -profile:v baseline -vsync cfr -s 480x360 -b:v 400k maxrate 400k -bufsize 400k -threads 0 -r 30 -f flv rtmp://gimli.kloenk.dev:1935/mobile/$;
       }
 
       application mobile {
@@ -260,7 +259,7 @@ in {
               <script src="/dash.all.min.js"></script>
               <script>
                 (function(){
-                  var url = "/dash/schluempfli.mpd";
+                  var url = "/dash/index.mpd";
                   var player = dashjs.MediaPlayer().create();
                   player.initialize(document.querySelector("#player"), url, true);
                 })();

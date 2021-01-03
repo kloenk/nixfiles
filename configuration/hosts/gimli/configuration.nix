@@ -5,7 +5,6 @@
     ./hardware-configuration.nix
 
     #./postgres.nix
-    ./stream.nix
 
     #./wireguard.nix
 
@@ -46,7 +45,7 @@
 
   # delete files in /
   boot.initrd.postDeviceCommands = lib.mkAfter ''
-    ${pkgs.xfsprogs}/bin/mkfs.xfs -m reflink=1 /dev/gimli/root
+    ${pkgs.xfsprogs}/bin/mkfs.xfs -m reflink=1 -f /dev/gimli/root
   '';
 
   networking.hostName = "gimli";
