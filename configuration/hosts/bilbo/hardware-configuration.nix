@@ -11,6 +11,11 @@
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
+  fileSystems."/" =
+    { device = "/dev/disk/by-uuid/c9f2698d-4e4a-481e-a826-b80a8160d746";
+      fsType = "xfs";
+    };
+
   fileSystems."/nix" =
     { device = "/dev/disk/by-uuid/2b170c0d-3ae8-45cb-b7b6-4a57c3079047";
       fsType = "xfs";
