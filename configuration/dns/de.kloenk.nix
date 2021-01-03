@@ -5,19 +5,17 @@ let
 
   mxKloenk = with dns.combinators.mx;
     map (dns.combinators.ttl 3600) [
-      (mx 10 "mail.kloenk.de.")
+      (mx 10 "mail.kloenk.dev.")
       #secondary (20)
     ];
   dmarc = with dns.combinators;
-    [ (txt "v=DMARC1;p=reject;pct=100;rua=mailto:postmaster@kloenk.de") ];
+    [ (txt "v=DMARC1;p=reject;pct=100;rua=mailto:postmaster@kloenk.dev") ];
   spfKloenk = with dns.combinators.spf;
     map (dns.combinators.ttl 600) [
       (strict [
-        "a:kloenk.de"
-        "a:mail.kloenk.de"
-        "a:iluvatar.kloenk.de"
-        "ip4:195.39.247.6/32"
-        "ip6:2a0f:4ac0::6/128"
+        "a:gimli.kloenk.de"
+        "ip4:195.39.247.182/32"
+        "ip6:2a0f:4ac0:0:1::cb2/128"
       ])
     ];
 
@@ -38,7 +36,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.de.";
       adminEmail = "hostmaster@kloenk.de";
-      serial = 2020123001;
+      serial = 2020122602;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
@@ -80,7 +78,6 @@ let
 
       iluvatar.CNAME = [ "iluvatar.kloenk.dev." ];
       manwe.CNAME = [ "manwe.kloenk.dev." ];
-      gimli.CNAME = [ "gimli.kloenk.dev." ];
       sauron.CNAME = [ "sauron.kloenk.dev." ];
       aule.CNAME = [ "aule.kloenk.dev." ];
 

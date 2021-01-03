@@ -4,17 +4,17 @@ let
   dns = inputs.dns.lib.${config.nixpkgs.system}.dns;
 
   mxKloenk = with dns.combinators.mx;
-    map (dns.combinators.ttl 3600) [ (mx 10 "mail.kloenk.dev.") ];
+    map (dns.combinators.ttl 3600) [ (mx 10 "gimli.kloenk.dev.") ];
   dmarc = with dns.combinators;
     [ (txt "v=DMARC1;p=reject;pct=100;rua=mailto:postmaster@kloenk.dev") ];
   spfKloenk = with dns.combinators.spf;
     map (dns.combinators.ttl 600) [
       (strict [
-        "a:kloenk.dev"
-        "a:mail.kloenk.dev"
-        "a:iluvatar.kloenk.dev"
-        "ip4:195.39.247.6/32"
-        "ip6:2a0f:4ac0::6/128"
+        #"a:kloenk.dev"
+        #"a:mail.kloenk.dev"
+        "a:gimli.kloenk.dev"
+        "ip4:195.39.247.182/32"
+        "ip6:2a0f:4ac0:0:1::cb2/128"
       ])
     ];
 
@@ -35,7 +35,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.dev.";
       adminEmail = "hostmaster.kloenk.de."; # TODO: change mail
-      serial = 2021010102;
+      serial = 2021010103;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
@@ -48,6 +48,7 @@ let
     AAAA = map (ttl 600) [ (aaaa "2a0f:4ac0::6") ];
 
     TXT = spfKloenk;
+    MX = mxKloenk;
     CAA = letsEncrypt config.security.acme.email;
 
     subdomains = rec {
@@ -76,8 +77,8 @@ let
 
       matrix = gimli;
       stream = gimli;
+      mail = gimli;
 
-      text.TXT = [ "foobar" ];
     };
   };
 
