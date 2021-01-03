@@ -11,6 +11,7 @@
     ../../default.nix
     ../../common
     ../../common/pbb.nix
+    ../../common/schluempfli.nix { extraGroups = [ "wheel" ]; }
   ];
 
   # vm connection
