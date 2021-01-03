@@ -13,7 +13,7 @@
     ../../default.nix
     ../../common
     ../../common/pbb.nix
-    ../../common/schluempfli.nix { extraGroups = [ "wheel" ]; }
+    (import ../../common/schluempfli.nix { extraGroups = [ "wheel" ]; })
   ];
 
   # vm connection

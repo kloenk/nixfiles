@@ -23,7 +23,7 @@ in {
   iluvatar = makeHost {
     host = "iluvatar.kloenk.dev";
     vm = true;
-    mail = true;
+    #mail = true;
     #wireguard.publicKey = "";
     #wireguard.endpoint = "";
     magicNumber = 252;
@@ -41,6 +41,7 @@ in {
     host = "gimli.kloenk.dev";
     vm = true;
     server = true;
+    mail = true;
   };
 
   thrain = makeHost {
