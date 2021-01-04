@@ -6,6 +6,8 @@
 
     ./mail.nix
 
+    ./wordpress
+
     #./postgres.nix
 
     #./wireguard.nix
