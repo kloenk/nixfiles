@@ -3,8 +3,8 @@
 {
   services.wordpress.trudeltiere = { };
 
-  systemd.services.wordpress-init-trudeltiere.serviceConfig.User =
-    lib.mkOverride 25 config.services.nginx.user;
+  #systemd.services.wordpress-init-trudeltiere.serviceConfig.User =
+  #  lib.mkOverride 25 config.services.nginx.user;
   systemd.services.wordpress-init-trudeltiere.serviceConfig.Group =
     lib.mkOverride 25 config.services.nginx.group;
   services.phpfpm.pools.wordpress-trudeltiere.settings."listen.owner" =
