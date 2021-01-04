@@ -48,6 +48,9 @@ let
             ifcfg.allowedUDPPortRanges "accept") fwcfg.interfaces)
         }
 
+	# DHCPv6
+         ip6 daddr fe80::/64 udp dport 546 accept
+
         ${cfg.extraInput}
 
         counter
