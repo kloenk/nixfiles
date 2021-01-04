@@ -7,6 +7,7 @@
     ./mail.nix
 
     ./wordpress
+    ./mysql.nix
 
     #./postgres.nix
 
