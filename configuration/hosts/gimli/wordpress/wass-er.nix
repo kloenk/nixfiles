@@ -36,8 +36,8 @@ in {
     lib.mkOverride 25 config.services.nginx.group;
 
   services.nginx.virtualHosts."wass-er.com" = {
-    #enableACME = true;
-    #forceSSL = true;
+    enableACME = true;
+    forceSSL = true;
     locations."/" = {
       root = config.services.httpd.virtualHosts.wass-er.documentRoot;
       extraConfig = ''

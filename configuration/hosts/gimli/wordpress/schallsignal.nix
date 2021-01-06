@@ -41,8 +41,8 @@ in {
     lib.mkOverride 25 config.services.nginx.group;
 
   services.nginx.virtualHosts."schallsignal.wass-er.com" = {
-    #enableACME = true;
-    #forceSSL = true;
+    enableACME = true;
+    forceSSL = true;
     locations."/" = {
       root = config.services.httpd.virtualHosts.schallsignal.documentRoot;
       extraConfig = ''
