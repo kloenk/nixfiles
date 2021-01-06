@@ -105,7 +105,7 @@ in {
       buildInputs = [ unzip ];
       installPhase = "mkdir -p $out; cp -R * $out/";
     }) {};
-    twentFourteen = callPackage ({ fetchurl, stdenv, unzip }: stdenv.mkDerivation {
+    twentyFourteen = callPackage ({ fetchurl, stdenv, unzip }: stdenv.mkDerivation {
       name = "twentyFourteen";
       src = fetchurl {
         url = "https://downloads.wordpress.org/theme/twentyfourteen.3.0.zip";
