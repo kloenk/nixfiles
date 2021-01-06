@@ -96,7 +96,7 @@ in {
     }) {};
   };
   wordpressThemes = {
-    twentyTwelf = callPackage ({ fetchurl, stdenv, unzip }: stdenv.mkOverride {
+    twentyTwelf = callPackage ({ fetchurl, stdenv, unzip }: stdenv.mkDerivation {
       name = "twentyTwelf";
       src = fetchurl {
         url = "https://downloads.wordpress.org/theme/twentytwelve.3.3.zip";
@@ -105,7 +105,7 @@ in {
       buildInputs = [ unzip ];
       installPhase = "mkdir -p $out; cp -R * $out/";
     }) {};
-    twentFourteen = callPackage ({ fetchurl, stdenv, unzip }: stdenv.mkOverride {
+    twentFourteen = callPackage ({ fetchurl, stdenv, unzip }: stdenv.mkDerivation {
       name = "twentyFourteen";
       src = fetchurl {
         url = "https://downloads.wordpress.org/theme/twentyfourteen.3.0.zip";
@@ -114,7 +114,7 @@ in {
       buildInputs = [ unzip ];
       installPhase = "mkdir -p $out; cp -R * $out/";
     }) {};
-    twentyFifteen = callPackage ({ fetchurl, stdenv, unzip }: stdenv.mkOverride {
+    twentyFifteen = callPackage ({ fetchurl, stdenv, unzip }: stdenv.mkDerivation {
       name = "twentyFifteen";
       src = fetchurl {
         url = "https://downloads.wordpress.org/theme/twentyfifteen.2.8.zip";
@@ -123,7 +123,7 @@ in {
       buildInputs = [ unzip ];
       installPhase = "mkdir -p $out; cp -R * $out/";
     }) {};
-    twentySixteen = callPackage ({ fetchurl, stdenv, unzip }: stdenv.mkOverride {
+    twentySixteen = callPackage ({ fetchurl, stdenv, unzip }: stdenv.mkDerivation {
       name = "twentySixteen";
       src = fetchurl {
         url = "https://downloads.wordpress.org/theme/twentysixteen.2.3.zip";
@@ -132,7 +132,7 @@ in {
       buildInputs = [ unzip ];
       installPhase = "mkdir -p $out; cp -R * $out/";
     }) {};
-    twentyNineteen = callPackage ({ fetchurl, stdenv, unzip }: stdenv.mkOverride {
+    twentyNineteen = callPackage ({ fetchurl, stdenv, unzip }: stdenv.mkDerivation {
       name = "twentyNineteen";
       src = fetchurl {
         url = "https://downloads.wordpress.org/theme/twentynineteen.1.9.zip";
@@ -141,7 +141,7 @@ in {
       buildInputs = [ unzip ];
       installPhase = "mkdir -p $out; cp -R * $out/";
     }) {};
-    twentyTwenty = callPackage ({ fetchurl, stdenv, unzip }: stdenv.mkOverride {
+    twentyTwenty = callPackage ({ fetchurl, stdenv, unzip }: stdenv.mkDerivation {
       name = "twentyTwenty";
       src = fetchurl {
         url = "https://downloads.wordpress.org/theme/twentytwenty.1.6.zip";
