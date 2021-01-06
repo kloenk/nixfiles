@@ -6,7 +6,7 @@ let
 
     src = pkgs.fetchurl {
       url = "https://downloads.wordpress.org/theme/hitchcock.2.0.2.zip";
-      sha256 = "0000000000000000000000000000000000000000000000000000";
+      sha256 = "sha256-UCyZeC3GwbQu088JaHj9E/0cU1N6ovbcrFyVfZ7uzxE=";
     };
 
     buildInputs = with pkgs; [ unzip ];
