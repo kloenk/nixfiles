@@ -61,4 +61,12 @@ in {
          '';
     };
   };
+
+  services.nginx.virtualHosts."daten.wass-er.com" = {
+    enableACME = true;
+    forceSSL = true;
+    locations."/" = {
+      alias = "/var/lib/wordpress/daten/";
+    };
+  };
 }
