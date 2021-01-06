@@ -3,6 +3,7 @@
 {
   imports = [
     ./trudeltiere.nix
+    ./wass-er.nix
   ];
 
   environment.systemPackages = with pkgs; [
