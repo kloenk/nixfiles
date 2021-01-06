@@ -34,7 +34,7 @@
   };
 
   services.nginx.virtualHosts."moodle.wass-er.com" = {
-    enableAMCE = true;
+    enableACME = true;
     forceSSL = true;
     locations."~ [^/]\\.php(/|$)" = {
       root = "${config.services.moodle.package}/share/moodle";
