@@ -5,6 +5,10 @@
     ./trudeltiere.nix
   ];
 
+  environment.systemPackages = with pkgs; [
+    wp-cli
+  ];
+
   services.httpd.enable = lib.mkOverride 25 false; # No thanks
   services.httpd.group = config.services.nginx.group;
 

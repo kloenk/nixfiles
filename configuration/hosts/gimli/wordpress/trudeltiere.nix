@@ -1,9 +1,25 @@
 { config, lib, pkgs, ... }:
 
-{
+let
+  hitchcock = pkgs.stdenv.mkDerivation {
+    name = "hitchcock";
+
+    src = pkgs.fetchurl {
+      url = "https://downloads.wordpress.org/theme/hitchcock.2.0.2.zip";
+      sha256 = "0000000000000000000000000000000000000000000000000000";
+    };
+
+    buildInputs = with pkgs; [ unzip ];
+    installPhase = "mkdir -p $out; cp -R * $out/";
+  };
+in {
   services.wordpress.trudeltiere = {
     database.name = "db656104473";
     database.tablePrefix = "tIUcycAB";
+
+    themes = [
+      hitchcock
+    ];
   };
 
   #systemd.services.wordpress-init-trudeltiere.serviceConfig.User =
