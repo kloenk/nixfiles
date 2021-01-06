@@ -4,6 +4,7 @@
   imports = [
     ./trudeltiere.nix
     ./wass-er.nix
+    ./schallsignal.nix
   ];
 
   environment.systemPackages = with pkgs; [
