@@ -137,5 +137,11 @@
   services.syncthing.configDir = "/persist/data/syncthing/config";
   services.syncthing.guiAddress = "6.0.2.2:8384";
 
+  # fritz.box
+  services.nginx.virtualHosts."thrain.fritz.box" = {
+    locations."/public/".alias = "/persist/data/public";
+    locations."/public/".extraConfig = "autoindex on";
+  };
+
   system.stateVersion = "20.09";
 }
