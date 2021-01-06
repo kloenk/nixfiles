@@ -67,7 +67,7 @@ in {
   emacs-doom = callPackage ./emacs { };
 
   wordpressPlugins = {
-    kismet-antispam = callPackage ({ fetchurl, mkDerivation, unzip }: mkDerivation {
+    kismet-antispam = callPackage ({ fetchurl, stdenv, unzip }: stdenv.mkDerivation {
       name = "Kismet-Anti-Spam";
       src = fetchurl {
         url = "https://downloads.wordpress.org/plugin/akismet.4.1.7.zip";
@@ -76,7 +76,7 @@ in {
       buildInputs = [ unzip ];
       installPhase = "mkdir -p $out; cp -R * $out/";
     }) {};
-    contactForm = callPackage ({ fetchurl, mkDerivation, unzip }: mkDerivation {
+    contactForm = callPackage ({ fetchurl, stdenv, unzip }: stdenv.mkDerivation {
       name = "Contact-Form-7";
       src = fetchurl {
         url = "https://downloads.wordpress.org/plugin/contact-form-7.5.3.2.zip";
@@ -85,7 +85,7 @@ in {
       buildInputs = [ unzip ];
       installPhase = "mkdir -p $out; cp -R * $out/";
     }) {};
-    backItUp = callPackage ({ fetchurl, mkDerivation, unzip }: mkDerivation {
+    backItUp = callPackage ({ fetchurl, stdenv, unzip }: stdenv.mkDerivation {
       name = "wpBackItUp";
       src = fetchurl {
         url = "https://downloads.wordpress.org/plugin/wp-backitup.1.40.0.zip";
