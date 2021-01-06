@@ -42,7 +42,7 @@
       extraConfig = ''
          fastcgi_index            index.php;
          fastcgi_param   SCRIPT_FILENAME $document_root$fastcgi_script_name;
-         fastcgi_pass             ${config.services.phpfpm.pools.moodle.socket};
+         fastcgi_pass             unix:${config.services.phpfpm.pools.moodle.socket};
          include ${config.services.nginx.package}/conf/fastcgi_params;
          include ${config.services.nginx.package}/conf/fastcgi.conf;
       '';
