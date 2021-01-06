@@ -20,7 +20,7 @@ in {
 
       podlove.publischer
       podlove.button
-      podlove.platforms
+      podlove.player
 
       elementor
       wpforms
