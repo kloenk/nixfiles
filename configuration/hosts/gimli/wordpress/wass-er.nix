@@ -7,7 +7,13 @@ in {
     #database.user = "wp_wass";
     database.tablePrefix = "xfdsM";
 
-    themes = [
+    themes = with pkgs.wordpressThemes; [
+      twentyTwelf
+      twentyFourteen
+      twentyFifteen
+      twentySixteen
+      twentyNineteen
+      twentyTwenty
     ];
     plugins = with pkgs; [
       wordpressPlugins.kismet-antispam
