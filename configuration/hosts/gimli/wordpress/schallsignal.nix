@@ -65,8 +65,16 @@ in {
   services.nginx.virtualHosts."daten.wass-er.com" = {
     enableACME = true;
     forceSSL = true;
-    locations."/" = {
-      alias = "/var/lib/wordpress/daten/";
+    locations."/pod/" = {
+      alias = "/var/lib/wordpress/daten/pod/";
+      exatrConfig = ''
+          add_header Referrer-Policy "no-referrer-when-downgrade" always;
+          add_header Strict-Transport-Security $hsts_header always;
+          add_header X-Content-Type-Options "nosniff";
+          add_header X-Frame-Options "SAMEORIGIN";
+          add_header X-Xss-Protection "1; mode=block";
+          add_header Cache-Control "public";
+      '';
     };
   };
 }
