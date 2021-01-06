@@ -20,6 +20,11 @@ in {
     themes = [
       hitchcock
     ];
+    plugins = with pkgs; [
+      wordpressPlugins.kismet-antispam
+      wordpressPlugins.contactForm
+      wordpressPlugins.backItUp
+    ];
   };
 
   #systemd.services.wordpress-init-trudeltiere.serviceConfig.User =
