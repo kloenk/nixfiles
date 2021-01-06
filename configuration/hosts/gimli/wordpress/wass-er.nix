@@ -3,7 +3,8 @@
 let
 in {
   services.wordpress.wass-er = {
-    database.name = "wordpress_wass-er";
+    database.name = "wp_wass";
+    database.user = "wp_wass";
     database.tablePrefix = "tIUcycAB";
 
     themes = [
