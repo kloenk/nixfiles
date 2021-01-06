@@ -1,7 +1,10 @@
 { config, lib, pkgs, ... }:
 
 {
-  services.wordpress.trudeltiere = { };
+  services.wordpress.trudeltiere = {
+    database.name = "db656104473";
+    database.tablePrefix = "tIUcycAB";
+  };
 
   #systemd.services.wordpress-init-trudeltiere.serviceConfig.User =
   #  lib.mkOverride 25 config.services.nginx.user;
