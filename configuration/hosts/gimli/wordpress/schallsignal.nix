@@ -67,7 +67,7 @@ in {
     forceSSL = true;
     locations."/pod/" = {
       alias = "/var/lib/wordpress/daten/pod/";
-      exatrConfig = ''
+      extraConfig = ''
           add_header Referrer-Policy "no-referrer-when-downgrade" always;
           add_header Strict-Transport-Security $hsts_header always;
           add_header X-Content-Type-Options "nosniff";
