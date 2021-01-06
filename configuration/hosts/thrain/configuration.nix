@@ -140,7 +140,7 @@
   # fritz.box
   services.nginx.virtualHosts."thrain.fritz.box" = {
     locations."/public/".alias = "/persist/data/public";
-    locations."/public/".extraConfig = "autoindex on";
+    locations."/public/".extraConfig = "autoindex on;";
   };
 
   system.stateVersion = "20.09";
