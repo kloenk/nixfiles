@@ -124,8 +124,6 @@ nginxCfg = pkgs.writeText "nginx.conf" ''
 
   rtmp {
     server {
-      access_log stderr;
-      error_log stderr;
       listen 1935;
       ping 30s;
       notify_method get;
@@ -311,9 +309,9 @@ in {
         mkdir -p /var/lib/rtmp/tmp/hls
         mkdir -p /var/lib/rtmp/tmp/dash
         mkdir -p /var/lib/rtmp/recordings;
-        chown rtmp:users /var/lib/rtmp/tmp/hls
-        chown rtmp:users /var/lib/rtmp/tmp/dash
-        chown rtmp:users /var/lib/rtmp/recordings;
+        chown rtmp:nginx /var/lib/rtmp/tmp/hls
+        chown rtmp:nginx /var/lib/rtmp/tmp/dash
+        chown rtmp:nginx /var/lib/rtmp/recordings;
         chmod 755 /var/lib/rtmp/tmp/hls
         chmod 755 /var/lib/rtmp/tmp/dash
         chmod 755 /var/lib/rtmp/recordings;
