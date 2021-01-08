@@ -195,7 +195,7 @@
         (nixpkgs.lib.nixosSystem rec {
           system = host.system;
           modules = [
-            { nixpkgs.overlays = [ home-manager.overlay self.overlay ]; }
+            { nixpkgs.overlays = [ home-manager.overlay self.overlay ] ++ (overlayCombined host.system); }
             nixpkgs.nixosModules.notDetected
             home-manager.nixosModules.home-manager
             (import (./configuration + "/hosts/${name}/configuration.nix"))
