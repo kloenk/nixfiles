@@ -178,6 +178,7 @@ in {
     virtualHosts."usee-nschl.kloenk.dev" = {
       enableACME = true;
       addSSL = true;
+      forceSSL = false;
       locations."/auth".proxyPass = "http://127.0.0.1:8123/";
       locations."/hls".extraConfig = ''
         # Serve HLS fragments
