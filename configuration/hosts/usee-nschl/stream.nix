@@ -147,7 +147,10 @@ nginxCfg = pkgs.writeText "nginx.conf" ''
         record all;
         record_path /var/lib/rtmp/recordings;
         record_unique on;
-''
+      }
+    }
+  }
+'';
         /*exec ${pkgs.ffmpeg}/bin/ffmpeg -i rtmp://gimli.kloenk.dev:1935/$app/$name -acodec copy -c:v libx264 -preset veryfast -profile:v baseline -vsync cfr -s 480x360 -b:v 400k maxrate 400k -bufsize 400k -threads 0 -r 30 -f flv rtmp://gimli.kloenk.dev:1935/mobile/$;
       }
 
@@ -162,11 +165,6 @@ nginxCfg = pkgs.writeText "nginx.conf" ''
 
         dash on;
         dash_path /var/lib/rtmp/tmp/dash/mobile;*/
-        + ''
-      }
-    }
-  }
-'';
 
 in {
 
