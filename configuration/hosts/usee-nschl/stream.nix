@@ -132,8 +132,9 @@ nginxCfg = pkgs.writeText "nginx.conf" ''
 
       application stream {
         live on;
-        allow play all;
-        on_publish https://${config.networking.hostName}.kloenk.dev:443/auth;
+        #allow play all;
+        #on_publish http://usee-auth.kloenk.de/auth;
+        on_publish http://localhost:8123/;
 
         hls on;
         hls_path /var/lib/rtmp/tmp/hls;
@@ -170,6 +171,11 @@ in {
 
   services.nginx = {
     enable = true;
+    vertualHosts."usee-auth.kloenk.de" = {
+      enableACME = false;
+      forceSSL = false;
+      locations."/auth".proxyPass = "http://127.0.0.1:8123/";
+    };
     virtualHosts."usee-nschl.kloenk.dev" = {
       enableACME = true;
       forceSSL = true;
