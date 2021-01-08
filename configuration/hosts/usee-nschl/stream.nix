@@ -10,6 +10,7 @@ nginxCfg = pkgs.writeText "nginx.conf" ''
     worker_connections  128;
   }
   error_log stderr info;
+  access_log stderr info;
   http {
     client_body_temp_path /var/lib/rtmp/nginx_cache_client_body;
     proxy_temp_path /var/lib/rtmp/nginx_cache_proxy;
