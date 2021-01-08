@@ -174,7 +174,7 @@ in {
     enable = true;
     virtualHosts."usee-nschl.kloenk.dev" = {
       enableACME = true;
-      addSSL = true;
+      forceSSL = true;
       locations."/hls".extraConfig = ''
         # Serve HLS fragments
         types {
