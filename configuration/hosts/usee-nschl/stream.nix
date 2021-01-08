@@ -286,9 +286,10 @@ in {
   };
 
   users.users.rtmp = {
-    home = "/var/lib/rtmp";
+    home = "/var/lib/rtmp/.home";
     #uid = genid_uint31 "rtmp";
-    extraGroups = [ "nginx" ];
+    #extraGroups = [ "nginx" ];
+    group = "nginx";
     isNormalUser = true;
     createHome = true;
     openssh = config.users.users.kloenk.openssh;
@@ -299,6 +300,7 @@ in {
     after = [ "network.target" ];
     restartIfChanged = true;
     script = ''
+      cd /var/lib/rtmp
       ${pkgs.nginx.override {
         modules = [
           pkgs.nginxModules.rtmp
