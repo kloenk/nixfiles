@@ -289,11 +289,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1610138030,
-        "narHash": "sha256-Dn9dglB4qFe+bSk0r2NBsoRTxfxnWNEKtL2IDPtEroQ=",
+        "lastModified": 1610139741,
+        "narHash": "sha256-i2U6BlBVviXaV9BzIUJsHfOllEHNw1f0hdo+YqEROHQ=",
         "ref": "main",
-        "rev": "28d61ed07a96f867131f6c96f73afb23d10400d2",
-        "revCount": 2,
+        "rev": "18b7682e4bf7310e415b821d3ea10866df44bad7",
+        "revCount": 3,
         "type": "git",
         "url": "https://git.kloenk.dev/usee/rtmp-auth"
       },
