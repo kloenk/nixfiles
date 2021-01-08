@@ -140,7 +140,7 @@ nginxCfg = pkgs.writeText "nginx.conf" ''
         hls_path /var/lib/rtmp/tmp/hls;
         hls_fragment 2s;
         hls_nested on;
-        hls_playlist_length 10;
+        #hls_playlist_length 10;
 
         dash on;
         dash_path /var/lib/rtmp/tmp/dash;
