@@ -133,12 +133,13 @@ nginxCfg = pkgs.writeText "nginx.conf" ''
       application stream {
         live on;
         allow play all;
+        on_publish https://${config.networking.hostName}.kloenk.dev/auth;
 
         hls on;
         hls_path /var/lib/rtmp/tmp/hls;
         hls_fragment 1;
         hls_nested on;
-        hls_playlist_length 5;
+        hls_playlist_length 10;
 
         dash on;
         dash_path /var/lib/rtmp/tmp/dash;
@@ -172,6 +173,7 @@ in {
     virtualHosts."usee-nschl.kloenk.dev" = {
       enableACME = true;
       forceSSL = true;
+      locations."/auth".proxyPass = "http://127.0.0.1:8123/";
       locations."/hls".extraConfig = ''
         # Serve HLS fragments
         types {
@@ -328,4 +330,11 @@ in {
     1935
     8080
   ];
+
+  systemd.services.rtmp-auth = {
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig.DynamicUser = true;
+    serviceConfig.Environment = [ "USER_DB=/var/src/secrets/auth/htaccess" ];
+    serviceConfig.ExecStart = "${pkgs.rtmp-auth}/bin/rtmp-auth";
+  };
 }

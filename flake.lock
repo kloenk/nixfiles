@@ -278,7 +278,29 @@
         "nixos-org": "nixos-org",
         "nixpkgs": "nixpkgs",
         "qyliss": "qyliss",
+        "rtmp-auth": "rtmp-auth",
         "website": "website"
+      }
+    },
+    "rtmp-auth": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1610138030,
+        "narHash": "sha256-Dn9dglB4qFe+bSk0r2NBsoRTxfxnWNEKtL2IDPtEroQ=",
+        "ref": "main",
+        "rev": "28d61ed07a96f867131f6c96f73afb23d10400d2",
+        "revCount": 2,
+        "type": "git",
+        "url": "https://git.kloenk.dev/usee/rtmp-auth"
+      },
+      "original": {
+        "ref": "main",
+        "type": "git",
+        "url": "https://git.kloenk.dev/usee/rtmp-auth"
       }
     },
     "website": {
