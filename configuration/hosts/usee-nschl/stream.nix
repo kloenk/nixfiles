@@ -129,6 +129,7 @@ nginxCfg = pkgs.writeText "nginx.conf" ''
       ping 30s;
       notify_method get;
       allow play all;
+      buflen 1s;
 
       application stream {
         live on;
@@ -137,7 +138,7 @@ nginxCfg = pkgs.writeText "nginx.conf" ''
 
         hls on;
         hls_path /var/lib/rtmp/tmp/hls;
-        hls_fragment 1;
+        hls_fragment 2s;
         hls_nested on;
         hls_playlist_length 10;
 
