@@ -171,11 +171,11 @@ in {
 
   services.nginx = {
     enable = true;
-    vertualHosts."usee-auth.kloenk.de" = {
+    /*virtualHosts."usee-auth.kloenk.de" = {
       enableACME = false;
       forceSSL = false;
       locations."/auth".proxyPass = "http://127.0.0.1:8123/";
-    };
+    };*/
     virtualHosts."usee-nschl.kloenk.dev" = {
       enableACME = true;
       forceSSL = true;
