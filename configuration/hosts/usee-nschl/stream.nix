@@ -133,8 +133,7 @@ nginxCfg = pkgs.writeText "nginx.conf" ''
       application stream {
         live on;
         #allow play all;
-        #on_publish http://usee-auth.kloenk.de/auth;
-        on_publish http://localhost:8123/;
+        on_publish http://usee-nschl.kloenk.dev/auth;
 
         hls on;
         hls_path /var/lib/rtmp/tmp/hls;
@@ -178,7 +177,7 @@ in {
     };*/
     virtualHosts."usee-nschl.kloenk.dev" = {
       enableACME = true;
-      forceSSL = true;
+      addSSL = true;
       locations."/auth".proxyPass = "http://127.0.0.1:8123/";
       locations."/hls".extraConfig = ''
         # Serve HLS fragments
