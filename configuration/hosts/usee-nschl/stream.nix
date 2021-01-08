@@ -291,7 +291,7 @@ in {
   users.users.rtmp = {
     home = "/var/lib/rtmp";
     #uid = genid_uint31 "rtmp";
-    extraGoups = [ "nginx" ];
+    extraGroups = [ "nginx" ];
     isNormalUser = true;
     createHome = true;
     openssh = config.users.users.kloenk.openssh;
