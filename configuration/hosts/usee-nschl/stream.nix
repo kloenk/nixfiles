@@ -133,7 +133,7 @@ nginxCfg = pkgs.writeText "nginx.conf" ''
       application stream {
         live on;
         allow play all;
-        on_publish https://${config.networking.hostName}.kloenk.dev/auth;
+        on_publish https://${config.networking.hostName}.kloenk.dev:443/auth;
 
         hls on;
         hls_path /var/lib/rtmp/tmp/hls;
