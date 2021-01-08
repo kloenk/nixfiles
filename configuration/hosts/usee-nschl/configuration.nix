@@ -5,7 +5,7 @@
     ./hardware-configuration.nix
 
     #./postgres.nix
-    #./stream.nix
+    ./stream.nix
 
     #./wireguard.nix
 

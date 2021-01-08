@@ -105,7 +105,7 @@ nginxCfg = pkgs.writeText "nginx.conf" ''
               <script src="/dash.all.min.js"></script>
               <script>
                 (function(){
-                  var url = "http://gimli.kloenk.dev:8080/dash/index.mpd";
+                  var url = "http://usee-nschl.kloenk.dev:8080/dash/index.mpd";
                   var player = dashjs.MediaPlayer().create();
                   player.initialize(document.querySelector("#player"), url, true);
                 })();
@@ -147,8 +147,8 @@ nginxCfg = pkgs.writeText "nginx.conf" ''
         record all;
         record_path /var/lib/rtmp/recordings;
         record_unique on;
-
-        exec ${pkgs.ffmpeg}/bin/ffmpeg -i rtmp://gimli.kloenk.dev:1935/$app/$name -acodec copy -c:v libx264 -preset veryfast -profile:v baseline -vsync cfr -s 480x360 -b:v 400k maxrate 400k -bufsize 400k -threads 0 -r 30 -f flv rtmp://gimli.kloenk.dev:1935/mobile/$;
+''
+        /*exec ${pkgs.ffmpeg}/bin/ffmpeg -i rtmp://gimli.kloenk.dev:1935/$app/$name -acodec copy -c:v libx264 -preset veryfast -profile:v baseline -vsync cfr -s 480x360 -b:v 400k maxrate 400k -bufsize 400k -threads 0 -r 30 -f flv rtmp://gimli.kloenk.dev:1935/mobile/$;
       }
 
       application mobile {
@@ -161,7 +161,8 @@ nginxCfg = pkgs.writeText "nginx.conf" ''
         hls_playlist_length 10;
 
         dash on;
-        dash_path /var/lib/rtmp/tmp/dash/mobile;
+        dash_path /var/lib/rtmp/tmp/dash/mobile;*/
+        + ''
       }
     }
   }
@@ -171,7 +172,7 @@ in {
 
   services.nginx = {
     enable = true;
-    virtualHosts."gimli.kloenk.dev" = {
+    virtualHosts."usee-nschl.kloenk.dev" = {
       enableACME = true;
       addSSL = true;
       locations."/hls".extraConfig = ''
@@ -281,9 +282,16 @@ in {
     options = [ "nosuid" "nodev" "noatime" ];
   };
 
+  fileSystems."/var/lib/rtmp" = {
+    device = "/persist/rtmp";
+    fsType = "none";
+    options = [ "bind" ];
+  };
+
   users.users.rtmp = {
     home = "/var/lib/rtmp";
     #uid = genid_uint31 "rtmp";
+    extraGoups = [ "nginx" ];
     isNormalUser = true;
     createHome = true;
     openssh = config.users.users.kloenk.openssh;
@@ -313,13 +321,10 @@ in {
         chmod 755 /var/lib/rtmp/recordings;
       '';
       User = "rtmp";
+      Group = "nginx";
     };
   };
 
-  /*krebs.iptables.tables.filter.INPUT.rules = [
-    { predicate = "-p tcp --dport 1935"; target = "ACCEPT"; }
-    { predicate = "-p tcp --dport 8080"; target = "ACCEPT"; }
-  ];*/
   networking.firewall.allowedTCPPorts = [
     1935
     8080
