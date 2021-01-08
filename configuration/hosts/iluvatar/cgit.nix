@@ -111,5 +111,10 @@ in {
         repo.path=${gitDir}/usee/osp-nix.git
         repo.desc=Nixconfig files for the osp server
         repo.readme=main:README.md
+
+        repo.url=usee/rtmp-auth
+        repo.path=${gitDir}/usee/rtmp-auth.git
+        repo.desc=rtmp auth server for nginx
+        repo.readme=main:README.md
       '';
 }
