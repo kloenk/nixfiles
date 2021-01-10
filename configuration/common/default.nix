@@ -105,6 +105,7 @@
 
     usbutils
     pciutils
+    git
   ];
 
   environment.variables.EDITOR = "vim";

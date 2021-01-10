@@ -83,11 +83,16 @@
     flake = false;
   };
 
+  inputs.rtmp-auth = {
+    url = "git+https://git.kloenk.dev/usee/rtmp-auth?ref=main";
+    inputs.nixpkgs.follows = "/nixpkgs";
+  };
+
   inputs.mixnix.url = "git+https://git.petabyte.dev/petabyteboy/mixnix";
   inputs.mixnix.flake = false;
 
   outputs = inputs@{ self, nixpkgs, nix, hydra, home-manager, mail-server
-    , website, nixos-org, dns, grahamc-config, qyliss, ... }:
+    , website, nixos-org, dns, grahamc-config, qyliss, rtmp-auth, ... }:
     let
 
       overlayCombined = system: [
@@ -95,6 +100,7 @@
         home-manager.overlay
         self.overlay
         (overlays system)
+        rtmp-auth.overlay
       ];
 
       systems = [ "x86_64-linux" "x86_64-darwin" "aarch64-darwin" ];
@@ -189,7 +195,7 @@
         (nixpkgs.lib.nixosSystem rec {
           system = host.system;
           modules = [
-            { nixpkgs.overlays = [ home-manager.overlay self.overlay ]; }
+            { nixpkgs.overlays = [ home-manager.overlay self.overlay ] ++ (overlayCombined host.system); }
             nixpkgs.nixosModules.notDetected
             home-manager.nixosModules.home-manager
             (import (./configuration + "/hosts/${name}/configuration.nix"))

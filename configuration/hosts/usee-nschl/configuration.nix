@@ -5,13 +5,14 @@
     ./hardware-configuration.nix
 
     #./postgres.nix
-    #./stream.nix
+    ./stream.nix
 
     #./wireguard.nix
 
     ../../default.nix
     ../../common
     ../../common/pbb.nix
+    (import ../../common/schluempfli.nix { extraGroups = [ "wheel" ]; })
   ];
 
   # vm connection

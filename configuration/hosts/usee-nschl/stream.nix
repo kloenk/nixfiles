@@ -105,7 +105,7 @@ nginxCfg = pkgs.writeText "nginx.conf" ''
               <script src="/dash.all.min.js"></script>
               <script>
                 (function(){
-                  var url = "http://gimli.kloenk.dev:8080/dash/index.mpd";
+                  var url = "http://usee-nschl.kloenk.dev:8080/dash/index.mpd";
                   var player = dashjs.MediaPlayer().create();
                   player.initialize(document.querySelector("#player"), url, true);
                 })();
@@ -124,22 +124,23 @@ nginxCfg = pkgs.writeText "nginx.conf" ''
 
   rtmp {
     server {
-      access_log stderr;
-      error_log stderr;
+      access_log off;
       listen 1935;
       ping 30s;
       notify_method get;
       allow play all;
+      buflen 1s;
 
       application stream {
         live on;
-        allow play all;
+        #allow play all;
+        on_publish http://usee-nschl.kloenk.dev/auth;
 
         hls on;
         hls_path /var/lib/rtmp/tmp/hls;
-        hls_fragment 1;
+        hls_fragment 2s;
         hls_nested on;
-        hls_playlist_length 10;
+        hls_playlist_length 2;
 
         dash on;
         dash_path /var/lib/rtmp/tmp/dash;
@@ -147,8 +148,11 @@ nginxCfg = pkgs.writeText "nginx.conf" ''
         record all;
         record_path /var/lib/rtmp/recordings;
         record_unique on;
-
-        exec ${pkgs.ffmpeg}/bin/ffmpeg -i rtmp://gimli.kloenk.dev:1935/$app/$name -acodec copy -c:v libx264 -preset veryfast -profile:v baseline -vsync cfr -s 480x360 -b:v 400k maxrate 400k -bufsize 400k -threads 0 -r 30 -f flv rtmp://gimli.kloenk.dev:1935/mobile/$;
+      }
+    }
+  }
+'';
+        /*exec ${pkgs.ffmpeg}/bin/ffmpeg -i rtmp://gimli.kloenk.dev:1935/$app/$name -acodec copy -c:v libx264 -preset veryfast -profile:v baseline -vsync cfr -s 480x360 -b:v 400k maxrate 400k -bufsize 400k -threads 0 -r 30 -f flv rtmp://gimli.kloenk.dev:1935/mobile/$;
       }
 
       application mobile {
@@ -161,19 +165,22 @@ nginxCfg = pkgs.writeText "nginx.conf" ''
         hls_playlist_length 10;
 
         dash on;
-        dash_path /var/lib/rtmp/tmp/dash/mobile;
-      }
-    }
-  }
-'';
+        dash_path /var/lib/rtmp/tmp/dash/mobile;*/
 
 in {
 
   services.nginx = {
     enable = true;
-    virtualHosts."gimli.kloenk.dev" = {
+    /*virtualHosts."usee-auth.kloenk.de" = {
+      enableACME = false;
+      forceSSL = false;
+      locations."/auth".proxyPass = "http://127.0.0.1:8123/";
+    };*/
+    virtualHosts."usee-nschl.kloenk.dev" = {
       enableACME = true;
       addSSL = true;
+      forceSSL = lib.mkForce false;
+      locations."/auth".proxyPass = "http://127.0.0.1:8123/";
       locations."/hls".extraConfig = ''
         # Serve HLS fragments
         types {
@@ -281,9 +288,17 @@ in {
     options = [ "nosuid" "nodev" "noatime" ];
   };
 
+  fileSystems."/var/lib/rtmp" = {
+    device = "/persist/rtmp";
+    fsType = "none";
+    options = [ "bind" ];
+  };
+
   users.users.rtmp = {
-    home = "/var/lib/rtmp";
+    home = "/var/lib/rtmp/.home";
     #uid = genid_uint31 "rtmp";
+    #extraGroups = [ "nginx" ];
+    group = "nginx";
     isNormalUser = true;
     createHome = true;
     openssh = config.users.users.kloenk.openssh;
@@ -294,6 +309,7 @@ in {
     after = [ "network.target" ];
     restartIfChanged = true;
     script = ''
+      cd /var/lib/rtmp
       ${pkgs.nginx.override {
         modules = [
           pkgs.nginxModules.rtmp
@@ -305,23 +321,27 @@ in {
         mkdir -p /var/lib/rtmp/tmp/hls
         mkdir -p /var/lib/rtmp/tmp/dash
         mkdir -p /var/lib/rtmp/recordings;
-        chown rtmp:users /var/lib/rtmp/tmp/hls
-        chown rtmp:users /var/lib/rtmp/tmp/dash
-        chown rtmp:users /var/lib/rtmp/recordings;
+        chown rtmp:nginx /var/lib/rtmp/tmp/hls
+        chown rtmp:nginx /var/lib/rtmp/tmp/dash
+        chown rtmp:nginx /var/lib/rtmp/recordings;
         chmod 755 /var/lib/rtmp/tmp/hls
         chmod 755 /var/lib/rtmp/tmp/dash
         chmod 755 /var/lib/rtmp/recordings;
       '';
       User = "rtmp";
+      Group = "nginx";
     };
   };
 
-  /*krebs.iptables.tables.filter.INPUT.rules = [
-    { predicate = "-p tcp --dport 1935"; target = "ACCEPT"; }
-    { predicate = "-p tcp --dport 8080"; target = "ACCEPT"; }
-  ];*/
   networking.firewall.allowedTCPPorts = [
     1935
     8080
   ];
+
+  systemd.services.rtmp-auth = {
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig.DynamicUser = true;
+    serviceConfig.Environment = [ "USER_DB=/var/src/secrets/auth/htaccess" ];
+    serviceConfig.ExecStart = "${pkgs.rtmp-auth}/bin/rtmp-auth";
+  };
 }
