@@ -71,6 +71,7 @@
   };*/
 
   networking.interfaces.enp1s0.useDHCP = true;
+  networking.interfaces.enp1s0.tempAddress = "disabled";
 
   system.autoUpgrade.enable = true;
   nix.gc.automatic = true;
