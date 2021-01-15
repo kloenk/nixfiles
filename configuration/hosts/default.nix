@@ -64,7 +64,7 @@ in {
   samwise = makeHost { host = "6.0.2.4"; };
   bilbo = makeHost { host = "10.211.55.3"; };
 
-  peregrin = makeHost { host = "localhost"; port = 2222; };
+  peregrin = makeHost { host = "localhost"; port = 2222; system = "aarch64-linux"; };
 
   usee-nschl = makeHost {
     host = "usee-nschl.kloenk.dev";
