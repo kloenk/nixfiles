@@ -33,8 +33,8 @@
 
   users.users.kloenk.initialPassword = "foobaar";
   users.users.kloenk.packages = with pkgs; [
-    python # includes python2 as dependency for vscode
-    platformio # pio command
+    #python # includes python2 as dependency for vscode
+    #platformio # pio command
   ];
 
   programs.sysdig.enable = false; # no aarch64
