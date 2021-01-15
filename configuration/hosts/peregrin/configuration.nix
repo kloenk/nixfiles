@@ -39,6 +39,11 @@
 
   programs.sysdig.enable = false; # no aarch64
 
+  # disable acme
+  systemd.services."acme-peregrin.kloenk.dev".enable = false;
+  systemd.services."acme-peregrin.kloenk.dev".wantedBy = lib.mkForce [];
+  systemd.services."acme-selfsigned-peregrin.kloenk.dev".wantedBy = [ "multi-user.target" ];
+
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes sayyou
