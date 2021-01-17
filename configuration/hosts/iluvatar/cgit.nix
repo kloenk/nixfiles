@@ -116,5 +116,11 @@ in {
         repo.path=${gitDir}/usee/rtmp-auth.git
         repo.desc=rtmp auth server for nginx
         repo.readme=main:README.md
+
+        repo.url=trudeltiere/DasMupfel/remote
+        repo.path=$(gitDir}/trudeltiere/DasMupfel/remote
+        repo.owner=Trudeltiere
+        repo.desc=remote controll for Das Mupfel
+        repo.readme=main:README.md
       '';
 }
