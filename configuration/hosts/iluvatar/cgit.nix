@@ -118,7 +118,7 @@ in {
         repo.readme=main:README.md
 
         repo.url=trudeltiere/DasMupfel/remote
-        repo.path=$(gitDir}/trudeltiere/DasMupfel/remote
+        repo.path=$(gitDir}/trudeltiere/DasMupfel/remote.git
         repo.owner=Trudeltiere
         repo.desc=remote controll for Das Mupfel
         repo.readme=main:README.md
