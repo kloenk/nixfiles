@@ -35,7 +35,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.dev.";
       adminEmail = "hostmaster.kloenk.dev."; # TODO: change mail
-      serial = 2021010106;
+      serial = 2021010107;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
@@ -78,6 +78,12 @@ let
       matrix = gimli;
       stream = gimli;
       mail = gimli;
+
+
+      knuddel-usee.CNAME = [ "stream.unterbachersee.de." ];
+      moodle-usee.CNAME = [ "segelschule.unterbachersee.de." ];
+      bbb-usee.CNAME = [ "schulungsraum.unterbachersee.de." ];
+      pve-usee = host "5.9.118.73" "2a01:4f8:162:6343::2";
 
       _domainkey.subdomains.mail.TXT = [
         (txt ''
