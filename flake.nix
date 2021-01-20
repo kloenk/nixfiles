@@ -88,6 +88,13 @@
     inputs.nixpkgs.follows = "/nixpkgs";
   };
 
+  inputs.fediventure = {
+    type = "gitlab";
+    owner = "fediventure";
+    repo = "fediventure";
+    flake = false;
+  };
+
   inputs.mixnix.url = "git+https://git.petabyte.dev/petabyteboy/mixnix";
   inputs.mixnix.flake = false;
 

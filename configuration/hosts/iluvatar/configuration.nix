@@ -18,6 +18,7 @@
 
     #./dns.nix
     ./coredns.nix
+    ./fediventure.nix
     #./mail.nix
     #./quassel.nix
 

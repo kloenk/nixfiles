@@ -20,6 +20,22 @@
         "type": "github"
       }
     },
+    "fediventure": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1610903094,
+        "narHash": "sha256-je4Sh5g7CyO0UMysPMCd8PGgIsKn7/NICrvsKPIiJhk=",
+        "owner": "fediventure",
+        "repo": "fediventure",
+        "rev": "ea497fb58b93ce31d5b48d85d9f246a38d79aee9",
+        "type": "gitlab"
+      },
+      "original": {
+        "owner": "fediventure",
+        "repo": "fediventure",
+        "type": "gitlab"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -268,6 +284,7 @@
     "root": {
       "inputs": {
         "dns": "dns",
+        "fediventure": "fediventure",
         "flake-compat": "flake-compat",
         "grahamc-config": "grahamc-config",
         "home-manager": "home-manager",
