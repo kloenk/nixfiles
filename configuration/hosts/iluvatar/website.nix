@@ -6,7 +6,7 @@ let
       (lib.splitString "\n" config.services.nginx.commonHttpConfig));
 in {
   services.nginx.virtualHosts = {
-    "lexbeserious.kloenk.dev" = {
+    /*"lexbeserious.kloenk.dev" = {
       enableACME = true;
       forceSSL = true;
       root = inputs.website;
@@ -16,7 +16,7 @@ in {
         add_header Content-Security-Policy "default-src 'self'; frame-ancestors 'none'; object-src 'none'" always;
         add_header Cache-Control $cacheable_types;
       '';
-    };
+    };*/
     "kloenk.dev" = {
       enableACME = true;
       forceSSL = true;
