@@ -23,15 +23,16 @@
     "fediventure": {
       "flake": false,
       "locked": {
-        "lastModified": 1610903094,
-        "narHash": "sha256-je4Sh5g7CyO0UMysPMCd8PGgIsKn7/NICrvsKPIiJhk=",
-        "owner": "fediventure",
+        "lastModified": 1611249943,
+        "narHash": "sha256-G1Tk/yyqJHNjQkf3VymlOXtfEvOCj0CAI/k8GZtKHJs=",
+        "owner": "kloenk",
         "repo": "fediventure",
-        "rev": "ea497fb58b93ce31d5b48d85d9f246a38d79aee9",
+        "rev": "818e93d3245a93ac98c5be706575249f2e3858a1",
         "type": "gitlab"
       },
       "original": {
-        "owner": "fediventure",
+        "owner": "kloenk",
+        "ref": "niv",
         "repo": "fediventure",
         "type": "gitlab"
       }
@@ -296,7 +297,8 @@
         "nixpkgs": "nixpkgs",
         "qyliss": "qyliss",
         "rtmp-auth": "rtmp-auth",
-        "website": "website"
+        "website": "website",
+        "workadventure": "workadventure"
       }
     },
     "rtmp-auth": {
@@ -335,6 +337,23 @@
         "ref": "lexbeserious",
         "type": "git",
         "url": "https://git.petabyte.dev/kloenk/website.git"
+      }
+    },
+    "workadventure": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1611227004,
+        "narHash": "sha256-6AF4T1ctvXzTlhIC8HRk4cb98aa7CY4UeC5Buk/+tyQ=",
+        "owner": "kloenk",
+        "repo": "workadventure-nix",
+        "rev": "b4bfd52e7c27141890a16f913c7a5873fc5a06ef",
+        "type": "gitlab"
+      },
+      "original": {
+        "owner": "kloenk",
+        "ref": "overlay",
+        "repo": "workadventure-nix",
+        "type": "gitlab"
       }
     }
   },

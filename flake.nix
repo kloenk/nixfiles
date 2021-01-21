@@ -90,8 +90,17 @@
 
   inputs.fediventure = {
     type = "gitlab";
-    owner = "fediventure";
+    owner = "kloenk";
     repo = "fediventure";
+    ref = "niv";
+    flake = false;
+  };
+
+  inputs.workadventure = {
+    type = "gitlab";
+    owner = "kloenk";
+    repo = "workadventure-nix";
+    ref = "overlay";
     flake = false;
   };
 
@@ -128,7 +137,7 @@
         imports = [
           self.nixosModules.autoUpgrade
         ];
-        nixpkgs.overlays = [ (overlays system) nix.overlay ];
+        nixpkgs.overlays = [ (overlays system) nix.overlay (import (inputs.workadventure + "/overlay.nix"))];
       };
 
       overlays = system: final: prev: {
@@ -212,6 +221,7 @@
             self.nixosModules.firefox
             self.nixosModules.pleroma
             sourcesModule
+            (import (inputs.fediventure + "/ops/nixos/modules/workadventure/workadventure.nix"))
             {
               # disable home-manager manpage (breaks hydra see https://github.com/rycee/home-manager/issues/1262)
               home-manager.users.kloenk.manual.manpages.enable = false;
