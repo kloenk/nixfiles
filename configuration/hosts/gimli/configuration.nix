@@ -12,6 +12,7 @@
     #./postgres.nix
 
     #./wireguard.nix
+    ./fediventure.nix
 
     ../../default.nix
     ../../common
