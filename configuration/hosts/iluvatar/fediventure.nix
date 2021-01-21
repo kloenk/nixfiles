@@ -10,4 +10,9 @@
     frontend.package = wapkgs.front;
     maps.package = wapkgs.maps;*/
   };
+
+  services.nginx.virtualHosts."play.kloenk.dev" = {
+    enableACME = true;
+    forceSSL = true;
+  };
 }
