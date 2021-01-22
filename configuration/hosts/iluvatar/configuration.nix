@@ -75,6 +75,8 @@
   #nix.gc.options = "--delete-older-than 4d";
   #systemd.services.nixos-upgrade.path = with pkgs; [  gnutar xz.bin gzip config.];
 
+  users.users.root.initialPassword = "foobar";
+
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
