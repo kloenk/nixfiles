@@ -35,7 +35,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.dev.";
       adminEmail = "hostmaster.kloenk.dev."; # TODO: change mail
-      serial = 2021010109;
+      serial = 2021010110;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
@@ -70,6 +70,7 @@ let
       bitwarden = iluvatar;
       play = gimli;
       meet = gimli;
+      turn = gimli;
 
       pleroma = manwe;
 
