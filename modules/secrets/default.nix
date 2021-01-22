@@ -45,11 +45,18 @@ let
   mkDeploySecret = file: pkgs.writeScript "deploy-secret-${removeSuffix ".gpg" (baseNameOf file.source-path)}.sh" ''
     #!${pkgs.runtimeShell}
     set -eu pipefail
+
+    function fail() {
+      rm /run/secrets/tmp/${file.name}
+      echo "failed to decrypt ${file.path}" >&2
+      exit 1
+    }
+
     if [ ! -f "${file.path}" ]; then
       umask 0077
       echo "${file.source-path} -> ${file.path}"
       ${if file.encrypted then ''
-        ${pkgs.gnupg}/bin/gpg --decrypt ${escapeShellArg file.source-path} > ${file.path}
+        ${pkgs.gnupg}/bin/gpg --decrypt ${escapeShellArg file.source-path} > /run/secrets/tmp/${file.name} && mv /run/secrets/tmp/${file.name} ${file.path} || fail
       '' else ''
         cat ${escapeShellArg file.source-path} > ${file.path}
       ''}
@@ -69,6 +76,7 @@ in {
       script = ''
         echo setting up secrets...
         mkdir -p /run/secrets
+        mkdir -p /run/secrets/tmp
         chown root:root /run/secrets
         chmod 0755 /run/secrets
         ${concatMapStringsSep "\n" (file: ''
