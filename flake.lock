@@ -266,6 +266,23 @@
         "type": "github"
       }
     },
+    "petabyte": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1611333472,
+        "narHash": "sha256-oIOT89F6sKZW8Dm2vXDvTreVBhGLL0VORr/DjfyxrfM=",
+        "ref": "secretsBasePath",
+        "rev": "f1670044890aa56778731aa7b26af3f747ba8de1",
+        "revCount": 473,
+        "type": "git",
+        "url": "https://git.petabyte.dev/kloenk/nixfiles-pbb"
+      },
+      "original": {
+        "ref": "secretsBasePath",
+        "type": "git",
+        "url": "https://git.petabyte.dev/kloenk/nixfiles-pbb"
+      }
+    },
     "qyliss": {
       "flake": false,
       "locked": {
@@ -295,6 +312,7 @@
         "nix": "nix_2",
         "nixos-org": "nixos-org",
         "nixpkgs": "nixpkgs",
+        "petabyte": "petabyte",
         "qyliss": "qyliss",
         "rtmp-auth": "rtmp-auth",
         "website": "website",

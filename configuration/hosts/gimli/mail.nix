@@ -42,7 +42,7 @@
     loginAccounts = {
       "kloenk@kloenk.dev" = {
         hashedPasswordFile =
-          config.krops.secrets.files."mail/kloenk@kloenk.de.sha512".path;
+          config.petabyte.secrets."mail/kloenk@kloenk.de.sha512".path;
 
         aliases = [
           "kloenk@kloenk.de"
@@ -82,7 +82,7 @@
 
       "finn@kloenk.dev" = {
         hashedPasswordFile =
-          config.krops.secrets.files."mail/finn@kloenk.de.sha512".path;
+          config.petabyte.secrets."mail/finn@kloenk.de.sha512".path;
 
         aliases = [
           "finn.behrens@kloenk.de"
@@ -100,14 +100,14 @@
 
       "praesidium@kloenk.de" = {
         hashedPasswordFile =
-          config.krops.secrets.files."mail/praesidium@kloenk.de.sha512".path;
+          config.petabyte.secrets."mail/praesidium@kloenk.de.sha512".path;
 
         aliases = [ "präsidium@kloenk.de" ];
       };
 
       "chaos@kloenk.de" = {
         hashedPasswordFile =
-          config.krops.secrets.files."mail/chaos@kloenk.de.sha512".path;
+          config.petabyte.secrets."mail/chaos@kloenk.de.sha512".path;
 
         aliases =
           [ "35c3@kloenk.de" "eventphone@kloenk.de" "cryptoparty@kloenk.de" ];
@@ -115,45 +115,45 @@
 
       "schule@kloenk.dev" = {
         hashedPasswordFile =
-          config.krops.secrets.files."mail/schule@kloenk.de.sha512".path;
+          config.petabyte.secrets."mail/schule@kloenk.de.sha512".path;
         aliases = [ "moodle+llg@kloenk.de" "sv@kloenk.de" "schule@kloenk.de" ];
       };
 
       "yougen@kloenk.dev" = {
         hashedPasswordFile =
-          config.krops.secrets.files."mail/yougen@kloenk.de.sha512".path;
+          config.petabyte.secrets."mail/yougen@kloenk.de.sha512".path;
 
         aliases = [ "yougen@kloenk.de" ];
       };
 
       "grafana@kloenk.dev" = {
         hashedPasswordFile =
-          config.krops.secrets.files."mail/grafana@kloenk.de.sha512".path;
+          config.petabyte.secrets."mail/grafana@kloenk.de.sha512".path;
 
         aliases = [ "grafana@kloenk.de" ];
       };
 
       "eljoy@kloenk.de" = {
         hashedPasswordFile =
-          config.krops.secrets.files."mail/eljoy@kloenk.de.sha512".path;
+          config.petabyte.secrets."mail/eljoy@kloenk.de.sha512".path;
         aliases = [ "eljoy2@kloenk.de" ];
       };
 
       "noreply-punkte@kloenk.de" = {
         hashedPasswordFile =
-          config.krops.secrets.files."mail/nrpunkte@kloenk.de.sha512".path;
+          config.petabyte.secrets."mail/nrpunkte@kloenk.de.sha512".path;
       };
 
       "alertmanager@kloenk.de" = {
         hashedPasswordFile =
-          config.krops.secrets.files."mail/alert@kloenk.de.sha512".path;
+          config.petabyte.secrets."mail/alert@kloenk.de.sha512".path;
 
         aliases = [ "alertmanager@kloenk.dev" ];
       };
 
       "ad@kloenk.dev" = {
         hashedPasswordFile =
-          config.krops.secrets.files."mail/ad@kloenk.de.sha512".path;
+          config.petabyte.secrets."mail/ad@kloenk.de.sha512".path;
 
         aliases = [
           "ad@kloenk.de"
@@ -170,7 +170,7 @@
 
       "drachensegler@drachensegler.kloenk.de" = {
         hashedPasswordFile =
-          config.krops.secrets.files."mail/drachensegler@drachensegler.kloenk.de.sha512".path;
+          config.petabyte.secrets."mail/drachensegler@drachensegler.kloenk.de.sha512".path;
 
         aliases = [
           "drachensegler@kloenk.de"
@@ -188,18 +188,18 @@
 
       "git@kloenk.de" = {
         hashedPasswordFile =
-          config.krops.secrets.files."mail/git@kloenk.de.sha512".path;
+          config.petabyte.secrets."mail/git@kloenk.de.sha512".path;
       };
 
       # burscheider-imkerverein
       "tjaard@burscheider-imkerverein.de" = {
         hashedPasswordFile =
-          config.krops.secrets.files."mail/drachensegler@drachensegler.kloenk.de.sha512".path;
+          config.petabyte.secrets."mail/drachensegler@drachensegler.kloenk.de.sha512".path;
       };
 
       "info@burscheider-imkerverein.de" = {
         hashedPasswordFile =
-          config.krops.secrets.files."mail/info@burscheider-imkerverein.de.sha512".path;
+          config.petabyte.secrets."mail/info@burscheider-imkerverein.de.sha512".path;
 
         catchAll = [ "burscheider-imkerverein.de" ];
       };
@@ -227,7 +227,7 @@
     virusScanning = false;
   };
 
-  krops.secrets.files = {
+  petabyte.secrets = {
     "mail/kloenk@kloenk.de.sha512".owner = "root";
     "mail/finn@kloenk.de.sha512".owner = "root";
     "mail/praesidium@kloenk.de.sha512".owner = "root";
@@ -243,7 +243,6 @@
     "mail/drachensegler@drachensegler.kloenk.de.sha512".owner = "root";
     "mail/info@burscheider-imkerverein.de.sha512".owner = "root";
   };
-  users.users.engelsystem.extraGroups = [ "keys" ];
 
   # sieve mailing ordering
   services.dovecot2 = {

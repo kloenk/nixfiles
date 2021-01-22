@@ -48,7 +48,7 @@
     challengeResponseAuthentication = false;
     permitRootLogin = lib.mkDefault "prohibit-password";
     hostKeys = if (config.networking.hostName != "kexec") then [{
-      path = config.krops.secrets.files."ssh_host_ed25519_key".path;
+      path = config.petabyte.secrets."ssh_host_ed25519_key".path;
       type = "ed25519";
     }] else
       [ ];
@@ -65,15 +65,16 @@
         StreamLocalBindUnlink yes
       '';
   };
-  krops.secrets.files."ssh_host_ed25519_key".owner = "root";
+  petabyte.secrets."ssh_host_ed25519_key".owner = "root";
+  petabyte.secretsDefaultPath = "${../../secrets}/${config.networking.hostName}";
 
   # monitoring
   services.vnstat.enable = lib.mkDefault true;
   programs.sysdig.enable = lib.mkDefault true;
   security.sudo.wheelNeedsPassword = false;
 
-  networking.nftables2.enable = true;
-  networking.nftables2.forwardPolicy = lib.mkDefault "drop";
+  petabyte.nftables.enable = true;
+  petabyte.nftables.forwardPolicy = lib.mkDefault "drop";
 
   services.journald.extraConfig = "SystemMaxUse=2G";
 
@@ -147,6 +148,12 @@
 
   fileSystems."/var/lib/acme" = {
     device = "/persist/data/acme";
+    fsType = "none";
+    options = [ "bind" ];
+  };
+
+  fileSystems."/root/.gnupg" = {
+    device = "/persist/data/gnupg-root";
     fsType = "none";
     options = [ "bind" ];
   };

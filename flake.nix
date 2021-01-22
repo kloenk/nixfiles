@@ -104,11 +104,19 @@
     flake = false;
   };
 
+  inputs.petabyte = {
+    type = "git";
+    #url = "https://git.petabyte.dev/petabyteboy/nixfiles";
+    url = "https://git.petabyte.dev/kloenk/nixfiles-pbb";
+    ref = "secretsBasePath";
+    flake = false;
+  };
+
   inputs.mixnix.url = "git+https://git.petabyte.dev/petabyteboy/mixnix";
   inputs.mixnix.flake = false;
 
   outputs = inputs@{ self, nixpkgs, nix, hydra, home-manager, mail-server
-    , website, nixos-org, dns, grahamc-config, qyliss, rtmp-auth, ... }:
+    , website, nixos-org, dns, grahamc-config, qyliss, rtmp-auth, petabyte, ... }:
     let
 
       overlayCombined = system: [
@@ -220,6 +228,7 @@
             self.nixosModules.deluge2
             self.nixosModules.firefox
             self.nixosModules.pleroma
+            #self.nixosModules.jitsi-videobridge
             sourcesModule
             (import (inputs.fediventure + "/ops/nixos/modules/workadventure/workadventure.nix"))
             {
@@ -239,13 +248,17 @@
         })) nixosHosts);
 
       nixosModules = {
-        secrets = import ./modules/secrets;
         ferm2 = import ./modules/ferm2;
-        nftables = import ./modules/nftables;
+        #nftables = import ./modules/nftables;
         deluge2 = import ./modules/deluge.nix;
         autoUpgrade = import ./modules/upgrade;
         firefox = import ./modules/firefox;
-        pleroma = import ./modules/pleroma;
+        #pleroma = import ./modules/pleroma;
+
+        secrets = import (petabyte + "/modules/secrets");
+        jitsi-videobridge = import (petabyte + "/modules/jitsi-videobridge");
+        pleroma = import (petabyte + "/modules/pleroma");
+        nftables = import (petabyte + "/modules/nftables");
       };
 
       # apps
