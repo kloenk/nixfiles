@@ -3,16 +3,16 @@
 with lib;
 
 let
-  cfg = config.krops.secrets;
-  secret-file = types.submodule ({ config, ... }: {
+  secret-file = types.submodule ({ ... }@moduleAttrs: {
     options = {
       name = mkOption {
         type = types.str;
-        default = config._module.args.name;
+        default = moduleAttrs.config._module.args.name;
       };
       path = mkOption {
         type = types.str;
-        default = "/run/keys/${config.name}";
+        readOnly = true;
+        default = "/run/secrets/${removeSuffix ".gpg" (baseNameOf moduleAttrs.config.source-path)}";
       };
       mode = mkOption {
         type = types.str;
@@ -28,39 +28,61 @@ let
       };
       source-path = mkOption {
         type = types.str;
-        default = "/var/src/secrets/${config.name}";
+        default = "${../../secrets + "/${config.networking.hostName}/${moduleAttrs.config.name}.gpg"}";
+      };
+      encrypted = mkOption {
+        type = types.bool;
+        default = true;
+      };
+      enable = mkOption {
+        type = types.bool;
+        default = true;
       };
     };
   });
+  enabledFiles = filterAttrs (n: file: file.enable) config.petabyte.secrets;
+
+  mkDeploySecret = file: pkgs.writeScript "deploy-secret-${removeSuffix ".gpg" (baseNameOf file.source-path)}.sh" ''
+    #!${pkgs.runtimeShell}
+    set -eu pipefail
+
+    function fail() {
+      rm /run/secrets/tmp/${file.name}
+      echo "failed to decrypt ${file.path}" >&2
+      exit 1
+    }
+
+    if [ ! -f "${file.path}" ]; then
+      umask 0077
+      echo "${file.source-path} -> ${file.path}"
+      ${if file.encrypted then ''
+        ${pkgs.gnupg}/bin/gpg --decrypt ${escapeShellArg file.source-path} > /run/secrets/tmp/${file.name} && mv /run/secrets/tmp/${file.name} ${file.path} || fail
+      '' else ''
+        cat ${escapeShellArg file.source-path} > ${file.path}
+      ''}
+    fi
+    chown ${escapeShellArg file.owner}:${escapeShellArg file.group-name} ${escapeShellArg file.path}
+    chmod ${escapeShellArg file.mode} ${escapeShellArg file.path}
+  '';
+
 in {
-  options.krops.secrets = {
-    files = mkOption {
-      type = with types; attrsOf secret-file;
-      default = { };
-    };
+  options.petabyte.secrets = mkOption {
+    type = with types; attrsOf secret-file;
+    default = {};
   };
-  config = lib.mkIf (cfg.files != { }) {
+  config = mkIf (enabledFiles != {}) {
     system.activationScripts.setup-secrets = let
-      files =
-        unique (map (flip removeAttrs [ "_module" ]) (attrValues cfg.files));
+      files = unique (map (flip removeAttrs ["_module"]) (attrValues enabledFiles));
       script = ''
         echo setting up secrets...
-        mkdir -p /run/keys -m 0750
-        chown root:keys /run/keys
+        mkdir -p /run/secrets
+        mkdir -p /run/secrets/tmp
+        chown root:root /run/secrets
+        chmod 0755 /run/secrets
         ${concatMapStringsSep "\n" (file: ''
-          ${pkgs.coreutils}/bin/install \
-            -D \
-            --compare \
-            --verbose \
-            --mode=${lib.escapeShellArg file.mode} \
-            --owner=${lib.escapeShellArg file.owner} \
-            --group=${lib.escapeShellArg file.group-name} \
-            ${lib.escapeShellArg file.source-path} \
-            ${lib.escapeShellArg file.path} \
-          || echo "failed to copy ${file.source-path} to ${file.path}"
+          ${mkDeploySecret file} || echo "failed to deploy ${file.source-path} to ${file.path}"
         '') files}
       '';
-    in stringAfter [ "users" "groups" ]
-    "source ${pkgs.writeText "setup-secrets.sh" script}";
+    in stringAfter [ "users" "groups" ] "source ${pkgs.writeText "setup-secrets.sh" script}";
   };
 }

@@ -31,6 +31,7 @@
   fileSystems."/persist" =
     { device = "/dev/disk/by-uuid/506b3452-d9d5-466a-bbbb-836f72f05961";
       fsType = "xfs";
+      neededForBoot = true;
     };
 
   swapDevices =
