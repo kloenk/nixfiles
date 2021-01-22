@@ -44,6 +44,8 @@
     ${pkgs.xfsprogs}/bin/mkfs.xfs -m reflink=1 -f /dev/iluvatar/root
   '';
 
+  petabyte.secrets."test".owner = "root";
+
   networking.hostName = "iluvatar";
   networking.domain = "kloenk.dev";
   networking.nameservers = [
