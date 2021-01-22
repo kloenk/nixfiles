@@ -31,7 +31,7 @@
   #else
   #  [ ];
 
-  petabyte.nftables.enabe = true;
+  petabyte.nftables.enable = true;
 
   networking.domain = lib.mkDefault "kloenk.de";
   networking.useNetworkd = lib.mkDefault true;
