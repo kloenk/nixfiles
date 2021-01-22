@@ -26,6 +26,7 @@
   fileSystems."/persist" =
     { device = "/dev/disk/by-uuid/02d1076a-4241-4f65-902a-68a819d3b745";
       fsType = "xfs";
+      neededForBoot = true;
     };
 
   fileSystems."/boot" =

@@ -157,6 +157,7 @@
     device = "/persist/data/gnupg-root";
     fsType = "none";
     options = [ "bind" ];
+    neededForBoot = true;
   };
 
 }
