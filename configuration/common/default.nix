@@ -66,7 +66,8 @@
       '';
   };
   petabyte.secrets."ssh_host_ed25519_key".owner = "root";
-  petabyte.secretsDefaultPath = "${../../secrets}/${config.networking.hostName}";
+  #petabyte.secretsDefaultPath = ../secrets + "/${config.networking.hostName}";
+  #petabyte.secretsDefaultPath = "../../secrets/${config.networking.hostName}";
 
   # monitoring
   services.vnstat.enable = lib.mkDefault true;

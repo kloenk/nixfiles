@@ -106,9 +106,9 @@
 
   inputs.petabyte = {
     type = "git";
-    #url = "https://git.petabyte.dev/petabyteboy/nixfiles";
-    url = "https://git.petabyte.dev/kloenk/nixfiles-pbb";
-    ref = "secretsBasePath";
+    url = "https://git.petabyte.dev/petabyteboy/nixfiles";
+    #url = "https://git.petabyte.dev/kloenk/nixfiles-pbb";
+    ref = "main";
     flake = false;
   };
 
@@ -253,9 +253,10 @@
         deluge2 = import ./modules/deluge.nix;
         autoUpgrade = import ./modules/upgrade;
         firefox = import ./modules/firefox;
+        secrets = import ./modules/secrets;
         #pleroma = import ./modules/pleroma;
 
-        secrets = import (petabyte + "/modules/secrets");
+        #secrets = import (petabyte + "/modules/secrets");
         jitsi-videobridge = import (petabyte + "/modules/jitsi-videobridge");
         pleroma = import (petabyte + "/modules/pleroma");
         nftables = import (petabyte + "/modules/nftables");

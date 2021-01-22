@@ -269,18 +269,18 @@
     "petabyte": {
       "flake": false,
       "locked": {
-        "lastModified": 1611333472,
-        "narHash": "sha256-oIOT89F6sKZW8Dm2vXDvTreVBhGLL0VORr/DjfyxrfM=",
-        "ref": "secretsBasePath",
-        "rev": "f1670044890aa56778731aa7b26af3f747ba8de1",
-        "revCount": 473,
+        "lastModified": 1611231035,
+        "narHash": "sha256-qsMrWXXkAbaTj5qD2Ay2AXNEceJ64LVif7PbI892Zb0=",
+        "ref": "main",
+        "rev": "73976c0277fad8426e057a12e4a47689ee58d3ab",
+        "revCount": 472,
         "type": "git",
-        "url": "https://git.petabyte.dev/kloenk/nixfiles-pbb"
+        "url": "https://git.petabyte.dev/petabyteboy/nixfiles"
       },
       "original": {
-        "ref": "secretsBasePath",
+        "ref": "main",
         "type": "git",
-        "url": "https://git.petabyte.dev/kloenk/nixfiles-pbb"
+        "url": "https://git.petabyte.dev/petabyteboy/nixfiles"
       }
     },
     "qyliss": {
