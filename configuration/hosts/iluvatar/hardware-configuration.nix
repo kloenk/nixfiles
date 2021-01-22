@@ -14,7 +14,7 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/b9ef784d-0958-42cf-b933-1b60fecd8ee4";
+    { device = "/dev/iluvatar/root";
       fsType = "xfs";
     };
 
