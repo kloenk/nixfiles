@@ -18,9 +18,9 @@
       fsType = "xfs";
     };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/1F93-C8E4";
-      fsType = "vfat";
+  fileSystems."/nix" =
+    { device = "/dev/disk/by-uuid/665102b7-1916-4ca7-b3c3-cb935065ed79";
+      fsType = "xfs";
     };
 
   fileSystems."/persist" =
@@ -28,11 +28,13 @@
       fsType = "xfs";
     };
 
-  fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/665102b7-1916-4ca7-b3c3-cb935065ed79";
-      fsType = "xfs";
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/1F93-C8E4";
+      fsType = "vfat";
     };
 
-  swapDevices = [ ];
+  swapDevices =
+    [ { device = "/dev/disk/by-uuid/179092e7-d0f1-4614-8515-78005409e0a8"; }
+    ];
 
 }

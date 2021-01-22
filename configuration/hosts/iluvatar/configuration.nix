@@ -29,7 +29,9 @@
 
   boot.initrd.luks.reusePassphrases = true;
   boot.initrd.luks.devices.cryptRoot.device =
-    "/dev/disk/by-path/virtio-pci-0000:05:00.0";
+    "/dev/disk/by-path/pci-0000:04:00.0-part1";
+  boot.initrd.luks.devices.cryptSwap.device =
+    "/dev/disk/by-path/virtio-pci-0000:08:00.0";
 
   # initrd network
   boot.initrd.network.enable = true;
