@@ -5,13 +5,13 @@
     ./hardware-configuration.nix
     #./wireguard.nix
 
-    #./bitwarden.nix
-    #./postgres.nix
-    #./cgit.nix
-    #./website.nix
+    ./bitwarden.nix
+    ./postgres.nix
+    ./cgit.nix
+    ./website.nix
     #./restic.nix
 
-    #./mysql.nix
+    ./mysql.nix
 
     ./coredns.nix
 

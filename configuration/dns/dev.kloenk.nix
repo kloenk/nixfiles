@@ -35,7 +35,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.dev.";
       adminEmail = "hostmaster.kloenk.dev."; # TODO: change mail
-      serial = 2021010110;
+      serial = 2021010111;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
@@ -43,16 +43,17 @@ let
 
     NS = [ "ns2.he.net." "ns4.he.net." "ns3.he.net." "ns5.he.net." ];
 
-    A = map (ttl 600) [ (a "195.39.247.6") ];
+    /*A = map (ttl 600) [ (a "195.39.247.6") ];
 
-    AAAA = map (ttl 600) [ (aaaa "2a0f:4ac0::6") ];
+    AAAA = map (ttl 600) [ (aaaa "2a0f:4ac0::6") ];*/
+    CNAME = [ "iluvatar.kloenk.dev" ];
 
     TXT = spfKloenk;
     MX = mxKloenk;
     CAA = letsEncrypt config.security.acme.email;
 
     subdomains = rec {
-      iluvatar = hostTTL 1200 "195.39.247.6" "2a0f:4ac0::6";
+      iluvatar.CNAME = [ "iluvatar.wolfsburg.petabyte.dev." ];
       manwe = hostTTL 1200 "195.39.221.187" null;
       gimli.CNAME = [ "gimli.wolfsburg.petabyte.dev." ];
       sauron = hostTTL 1200 "195.39.221.54" "2a0f:4ac4:42:0:f199::1";
