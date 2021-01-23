@@ -64,4 +64,22 @@
     buildInputs = [ unzip ];
     installPhase = "mkdir -p $out; cp -R * $out/";
   }) {};
+  oceanWP = callPackage ({ fetchurl, stdenv, unzip }: stdenv.mkDerivation {
+    name = "Ocean-WP";
+    src = fetchurl {
+      url = "https://downloads.wordpress.org/theme/oceanwp.2.0.2.zip";
+      sha256 = "582a635a62d1400867da4c277602f56bd91f5f83e3b2e39a4f5207461873e422";
+    };
+    buildInputs = [ unzip ];
+    installPhase = "mkdir -p $out; cp -R * $out/";
+  }) {};
+  trance = callPackage ({ fetchurl, stdenv, unzip }: stdenv.mkDerivation {
+    name = "trance";
+    src = fetchurl {
+      url = "https://downloads.wordpress.org/theme/trance.1.14.zip";
+      sha256 = "7a1b55c8ec99b963f162b2fae2908c4e6cf9ae280133e488b0fcd22864349b71";
+    };
+    buildInputs = [ unzip ];
+    installPhase = "mkdir -p $out; cp -R * $out/";
+  }) {};
 }
