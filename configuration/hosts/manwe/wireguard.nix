@@ -42,7 +42,7 @@
     };
     wireguardConfig = {
       ListenPort = 51820;
-      PrivateKeyFile = config.secrets."wg0.key".path;
+      PrivateKeyFile = config.petabyte.secrets."wg0.key".path;
     };
     wireguardPeers = [
       { # iluvatar
