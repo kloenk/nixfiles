@@ -37,6 +37,15 @@
     buildInputs = [ unzip ];
     installPhase = "mkdir -p $out; cp -R * $out/";
   }) {};
+  twentySeventeen = callPackage ({ fetchurl, stdenv, unzip }: stdenv.mkDerivation {
+    name = "twentySeventeen";
+    src = fetchurl {
+      url = "https://downloads.wordpress.org/theme/twentyseventeen.2.5.zip";
+      sha256 = "b608a08344b61a5557718c5257cc39ec1465f7268daca2d921da5f07cfbb9cbc";
+    };
+    buildInputs = [ unzip ];
+    installPhase = "mkdir -p $out; cp -R * $out/";
+  });
   twentyNineteen = callPackage ({ fetchurl, stdenv, unzip }: stdenv.mkDerivation {
     name = "twentyNineteen";
     src = fetchurl {
