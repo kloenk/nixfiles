@@ -35,7 +35,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.dev.";
       adminEmail = "hostmaster.kloenk.dev."; # TODO: change mail
-      serial = 2021010111;
+      serial = 2021010112;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
@@ -46,7 +46,7 @@ let
     /*A = map (ttl 600) [ (a "195.39.247.6") ];
 
     AAAA = map (ttl 600) [ (aaaa "2a0f:4ac0::6") ];*/
-    CNAME = [ "iluvatar.kloenk.dev" ];
+    CNAME = [ "iluvatar.kloenk.dev." ];
 
     TXT = spfKloenk;
     MX = mxKloenk;
