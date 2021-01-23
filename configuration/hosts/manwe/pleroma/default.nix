@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   fileSystems."/var/lib/pleroma" = {
@@ -10,9 +10,10 @@
   services.pleroma = {
     enable = true;
     domain = "pleroma.kloenk.dev";
-    secretsEnvFile = "/var/src/secrets/pleroma/secrets-env";
+    secretsEnvFile = config.petabyte.secrets."pleroma/secrets-env".path;
     configFile = ./config.exs;
   };
+  petabyte.secrets."pleroma/secrets-env".owner = "root";
 
   services.nginx.virtualHosts."pleroma.kloenk.dev" = {
     enableACME = true;

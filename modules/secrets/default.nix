@@ -56,7 +56,7 @@ let
       umask 0077
       echo "${file.source-path} -> ${file.path}"
       ${if file.encrypted then ''
-        ${pkgs.gnupg}/bin/gpg --decrypt ${escapeShellArg file.source-path} > /run/secrets/tmp/${file.name} && mv /run/secrets/tmp/${file.name} ${file.path} || fail
+        ${pkgs.gnupg}/bin/gpg --decrypt ${escapeShellArg file.source-path} > /run/secrets/tmp/${escapeShellArg (baseNameOf file.name)} && mv /run/secrets/tmp/${escapeShellArg (baseNameOf file.name)} ${file.path} || fail
       '' else ''
         cat ${escapeShellArg file.source-path} > ${file.path}
       ''}
