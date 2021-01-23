@@ -160,4 +160,8 @@
     neededForBoot = true;
   };
 
+  fileSystems."/persist" = {
+    neededForBoot = true;
+  };
+
 }
