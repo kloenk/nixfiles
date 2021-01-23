@@ -98,8 +98,8 @@ in {
 
   # alertmanager password
   systemd.services.alertmanager.serviceConfig.EnvironmentFile =
-    [ config.krops.secrets.files."alertmanager/mail".path ];
-  krops.secrets.files."alertmanager/mail".owner = "root";
+    [ config.petabyte.secrets."alertmanager/mail".path ];
+  petabyte.secrets."alertmanager/mail".owner = "root";
 
   services.grafana = {
     enable = true;

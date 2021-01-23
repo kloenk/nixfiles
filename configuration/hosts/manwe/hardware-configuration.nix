@@ -4,34 +4,42 @@
 { config, lib, pkgs, ... }:
 
 {
-  boot.initrd.availableKernelModules =
-    [ "ata_piix" "uhci_hcd" "virtio_pci" "sr_mod" "virtio_blk" ];
+  imports =
+    [ <nixpkgs/nixos/modules/profiles/qemu-guest.nix>
+    ];
+
+  boot.initrd.availableKernelModules = [ "ata_piix" "uhci_hcd" "virtio_pci" "sr_mod" "virtio_blk" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/99931bed-ed51-4c08-a2eb-ba3651fc3e6a";
-    fsType = "xfs";
-  };
+  fileSystems."/" =
+    { device = "/dev/disk/by-uuid/ec1008b1-23d9-46bd-97c4-5fc15bd6cce7";
+      fsType = "xfs";
+    };
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/031B-117D";
-    fsType = "vfat";
-  };
+  fileSystems."/nix" =
+    { device = "/dev/disk/by-uuid/1b4761f3-bbc8-4e00-a9cb-80148d436620";
+      fsType = "xfs";
+    };
 
-  fileSystems."/persist/data" = {
-    device = "/dev/disk/by-uuid/1cf60e4c-a786-4564-a8c0-3ad30c3c2efc";
-    fsType = "xfs";
-  };
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/4C14-192A";
+      fsType = "vfat";
+    };
 
-  fileSystems."/persist/backups/restic-server" = {
-    device = "/dev/disk/by-uuid/33ca7942-3d7a-410e-9b58-5c8354aa0b48";
-    fsType = "xfs";
-  };
+  fileSystems."/persist" =
+    { device = "/dev/disk/by-uuid/88ac85c5-258f-476f-9115-7a5be31f9e57";
+      fsType = "xfs";
+    };
 
-  swapDevices =
-    [{ device = "/dev/disk/by-uuid/37fac272-080e-4e51-b404-f9be0a0dcd89"; }];
+  fileSystems."/root/.gnupg" =
+    { device = "/persist/data/gnupg-root";
+      fsType = "none";
+      options = [ "bind" ];
+    };
 
-  nix.maxJobs = lib.mkDefault 8;
+  swapDevices = [ ];
+
+  nix.maxJobs = lib.mkDefault 12;
 }

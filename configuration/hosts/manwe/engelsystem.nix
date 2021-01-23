@@ -13,7 +13,7 @@
         from.name = "Abi 2021 Punktesystem";
         encryption = "tls";
         username = "noreply-punkte@kloenk.de";
-        password._secret = config.krops.secrets.files."es_mail_password".path;
+        password._secret = config.petabyte.secrets."es_mail_password".path;
       };
       autoarrive = true;
       min_password_length = 6;
@@ -25,8 +25,7 @@
     };
   };
 
-  krops.secrets.files."es_mail_password".owner = "engelsystem";
-  users.users.engelsystem.extraGroups = [ "keys" ];
+  petabyte.secrets."es_mail_password".owner = "engelsystem";
 
   services.nginx.virtualHosts."punkte.kloenk.de" = {
     enableACME = true;

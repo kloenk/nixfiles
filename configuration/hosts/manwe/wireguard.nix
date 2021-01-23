@@ -13,7 +13,7 @@
     };
     wireguardConfig = {
       ListenPort = 51822;
-      PrivateKeyFile = config.krops.secrets.files."usee0.key".path;
+      PrivateKeyFile = config.petabyte.secrets."usee0.key".path;
     };
     wireguardPeers = [
       { # moodle
@@ -42,7 +42,7 @@
     };
     wireguardConfig = {
       ListenPort = 51820;
-      PrivateKeyFile = config.krops.secrets.files."wg0.key".path;
+      PrivateKeyFile = config.secrets."wg0.key".path;
     };
     wireguardPeers = [
       { # iluvatar
@@ -64,6 +64,6 @@
   };
 
   users.users.systemd-network.extraGroups = [ "keys" ];
-  krops.secrets.files."usee0.key".owner = "systemd-network";
-  krops.secrets.files."wg0.key".owner = "systemd-network";
+  petabyte.secrets."usee0.key".owner = "systemd-network";
+  petabyte.secrets."wg0.key".owner = "systemd-network";
 }
