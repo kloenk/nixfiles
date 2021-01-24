@@ -68,24 +68,28 @@ in {
         mimetype.svg=image/svg+xml
 
         #repos
-    		repo.url=kloenk/nix
+        repo.url=kloenk/nix
         repo.path=${gitDir}/kloenk/nix.git
         repo.desc=NixOS configs
+	repo.owner=kloenk
         repo.readme=master:README.md
 
         repo.url=kloenk/Masui
         repo.path=${gitDir}/kloenk/Masui.git
         repo.desc=Masui Swift ui matrix client
+	repo.owner=kloenk
         repo.readme=main:README.md
 
         repo.url=kloenk/brook
         repo.path=${gitDir}/kloenk/brook.git
         repo.desc=A minimal self-hostable streaming setup.
+	repo.owner=kloenk
         repo.readme=master:README.md
 
         repo.url=facharbeit
         repo.path=${gitDir}/facharbeit.nix
         repo.desc=Files for my Facharbeit 
+	repo.owner=kloenk
         repo.readme=master:README.md
 
         repo.url=linux/rust/kloenk
@@ -110,17 +114,25 @@ in {
         repo.url=usee/osp-nix
         repo.path=${gitDir}/usee/osp-nix.git
         repo.desc=Nixconfig files for the osp server
+	repo.owner=USee
         repo.readme=main:README.md
 
         repo.url=usee/rtmp-auth
         repo.path=${gitDir}/usee/rtmp-auth.git
         repo.desc=rtmp auth server for nginx
+	repo.owner=USee
         repo.readme=main:README.md
 
         repo.url=trudeltiere/DasMupfel/remote
         repo.path=${gitDir}/trudeltiere/DasMupfel/remote.git
         repo.owner=Trudeltiere
         repo.desc=remote controll for Das Mupfel
+        repo.readme=main:README.md
+
+        repo.url=trudeltiere/DasMupfel/monitor
+        repo.path=${gitDir}/trudeltiere/DasMupfel/monitor.git
+        repo.owner=Trudeltiere
+        repo.desc=monitor for Das Mupfel
         repo.readme=main:README.md
       '';
 }
