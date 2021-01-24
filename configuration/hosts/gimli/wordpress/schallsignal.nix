@@ -14,16 +14,16 @@ in {
       trance
     ];
     plugins = with pkgs.wordpressPlugins; [
-      kismet-antispam
-      antispamBee
-      backItUp
+      kismet-antispam.out
+      antispamBee.out
+      backItUp.out
 
-      podlove.publisher
-      podlove.button
-      podlove.player
+      podlove.publisher.out
+      podlove.button.out
+      podlove.player.out
 
-      elementor
-      wpforms
+      elementor.out
+      wpforms.out
     ];
   };
 
