@@ -341,7 +341,9 @@ in {
   systemd.services.rtmp-auth = {
     wantedBy = [ "multi-user.target" ];
     serviceConfig.DynamicUser = true;
-    serviceConfig.Environment = [ "USER_DB=/var/src/secrets/auth/htaccess" ];
+    serviceConfig.User = "rtmp-auth";
+    serviceConfig.Environment = [ "USER_DB=${config.petabyte.secrets."auth/htaccess".path}" ];
     serviceConfig.ExecStart = "${pkgs.rtmp-auth}/bin/rtmp-auth";
   };
+  petabyte.secrets."auth/htaccess".owner = "rtmp-auth";
 }
