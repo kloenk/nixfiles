@@ -32,7 +32,7 @@
     wireguardConfig = {
       FirewallMark = 51820;
       ListenPort = 51820;
-      PrivateKeyFile = config.krops.secrets.files."wg0.key".path;
+      PrivateKeyFile = config.petabyte.secrets."wg0.key".path;
     };
     wireguardPeers = [
       /* {
@@ -148,7 +148,7 @@
     wireguardConfig = {
       FirewallMark = 51820;
       ListenPort = 51830;
-      PrivateKeyFile = config.krops.secrets.files."yougen.key".path;
+      PrivateKeyFile = config.petabyte.secrets."yougen.key".path;
     };
     wireguardPeers = [{
       wireguardPeerConfig = {
@@ -166,6 +166,6 @@
   };
 
   users.users.systemd-network.extraGroups = [ "keys" ];
-  krops.secrets.files."wg0.key".owner = "systemd-network";
-  krops.secrets.files."yougen.key".owner = "systemd-network";
+  petabyte.secrets."wg0.key".owner = "systemd-network";
+  petabyte.secrets."yougen.key".owner = "systemd-network";
 }
