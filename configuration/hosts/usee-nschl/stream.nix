@@ -338,9 +338,15 @@ in {
     8080
   ];
 
+
+  users.users.rtmp-auth = {
+    createHome = false;
+    isNormalUser = false;
+    isSystemUser = true;
+  };
+
   systemd.services.rtmp-auth = {
     wantedBy = [ "multi-user.target" ];
-    serviceConfig.DynamicUser = true;
     serviceConfig.User = "rtmp-auth";
     serviceConfig.Environment = [ "USER_DB=${config.petabyte.secrets."auth/htaccess".path}" ];
     serviceConfig.ExecStart = "${pkgs.rtmp-auth}/bin/rtmp-auth";
