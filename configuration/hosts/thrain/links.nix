@@ -52,7 +52,7 @@
           AllowedIPs = [ "0.0.0.0/0" "::/0" ];
           PublicKey = "UoIRXpG/EHmDNDhzFPxZS18YBlj9vBQRRQZMCFhonDA=";
           PersistentKeepalive = 21;
-          Endpoint = "195.39.247.6:51820";
+          Endpoint = "iluvatar.kloenk.dev:51820";
         };
       }];
     };
