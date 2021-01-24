@@ -8,7 +8,7 @@ in {
 
     themes = with pkgs.wordpressThemes; [
       twentyNineteen
-      #twentySeventeen
+      twentySeventeen
       twentyTwenty
       oceanWP
       trance

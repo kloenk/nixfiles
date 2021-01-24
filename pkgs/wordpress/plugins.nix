@@ -8,7 +8,7 @@ let
     };
     buildInputs = [ unzip ];
     installPhase = "mkdir -p $out; cp -R * $out/";
-  } // extraArgs);
+  } // extraArgs) {};
 in {
   kismet-antispam = buildPlugin {
       url = "https://downloads.wordpress.org/plugin/akismet.4.1.7.zip";

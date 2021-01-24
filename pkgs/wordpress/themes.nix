@@ -45,7 +45,7 @@
     };
     buildInputs = [ unzip ];
     installPhase = "mkdir -p $out; cp -R * $out/";
-  });
+  }) {};
   twentyNineteen = callPackage ({ fetchurl, stdenv, unzip }: stdenv.mkDerivation {
     name = "twentyNineteen";
     src = fetchurl {
