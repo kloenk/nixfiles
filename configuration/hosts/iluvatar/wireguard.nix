@@ -12,7 +12,7 @@
   #chain POSTROUTING {
   #  outerface enp1s0 SNAT to 195.39.247.6
   #}
-  networking.nftables2.extraConfig = ''
+  petabyte.nftables.extraConfig = ''
     table ip nat {
       chain postrouting {
         type nat hook postrouting priority srcnat;
@@ -22,7 +22,7 @@
       }
     }
   '';
-  networking.nftables2.forwardPolicy = "accept";
+  petabyte.nftables.forwardPolicy = "accept";
 
   systemd.network.netdevs."30-wg0" = {
     netdevConfig = {
