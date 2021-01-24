@@ -3,7 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./wireguard.nix
+    #./wireguard.nix
 
     ./bitwarden.nix
     ./postgres.nix
