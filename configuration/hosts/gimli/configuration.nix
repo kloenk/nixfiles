@@ -8,6 +8,7 @@
 
     ./wordpress
     ./mysql.nix
+    ./moodle.nix
 
     #./postgres.nix
 

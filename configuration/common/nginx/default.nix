@@ -15,7 +15,8 @@
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
 
-    sslCiphers = "TLSv1.2+HIGH+ECDHE@STRENGTH";
+    #sslCiphers = "TLSv1.2+HIGH+ECDHE@STRENGTH";
+    #sslProtocols = "TLS1.3";
 
     commonHttpConfig = ''
       map $scheme $hsts_header {
