@@ -18,7 +18,7 @@ in {
       antispamBee
       backItUp
 
-      podlove.publischer
+      podlove.publisher
       podlove.button
       podlove.player
 
