@@ -1,10 +1,12 @@
 { config, lib, pkgs, ... }:
 
-{
+let
+  front = pkgs.workadventure.frontend.override { environment."JITSI_URL" = "meet.kloenk.dev"; };
+in {
 
   services.workadventure.instances."play.kloenk.dev" = {
     nginx.domain = "play.kloenk.dev";
-    frontend.package = pkgs.workadventure.front.override { environment."JITSI_URL" = "meet.kloenk.dev"; };
+    frontend.package = front;
     /*backend.package = wapkgs.back;
     puscher.package = wapkgs.pusher;
     frontend.package = wapkgs.front;
