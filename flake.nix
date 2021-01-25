@@ -228,7 +228,7 @@
             self.nixosModules.deluge2
             self.nixosModules.firefox
             self.nixosModules.pleroma
-            #self.nixosModules.jitsi-videobridge
+            self.nixosModules.jitsi-videobridge
             sourcesModule
             (import (inputs.fediventure + "/ops/nixos/modules/workadventure/workadventure.nix"))
             {
