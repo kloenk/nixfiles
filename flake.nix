@@ -92,7 +92,7 @@
     type = "gitlab";
     owner = "kloenk";
     repo = "fediventure";
-    ref = "niv";
+    ref = "jitsi";
     flake = false;
   };
 

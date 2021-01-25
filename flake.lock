@@ -23,16 +23,16 @@
     "fediventure": {
       "flake": false,
       "locked": {
-        "lastModified": 1611249943,
-        "narHash": "sha256-G1Tk/yyqJHNjQkf3VymlOXtfEvOCj0CAI/k8GZtKHJs=",
+        "lastModified": 1611600431,
+        "narHash": "sha256-xSW02NNaJN3Cpm3o3A4IEtM+tzAM37Omz5jusO9Bfxw=",
         "owner": "kloenk",
         "repo": "fediventure",
-        "rev": "818e93d3245a93ac98c5be706575249f2e3858a1",
+        "rev": "6ccaba2c6c290df3852273e2d52c5686f4517c4c",
         "type": "gitlab"
       },
       "original": {
         "owner": "kloenk",
-        "ref": "niv",
+        "ref": "jitsi",
         "repo": "fediventure",
         "type": "gitlab"
       }

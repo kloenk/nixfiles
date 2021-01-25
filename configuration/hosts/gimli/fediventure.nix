@@ -6,6 +6,7 @@ in {
 
   services.workadventure.instances."play.kloenk.dev" = {
     nginx.domain = "play.kloenk.dev";
+    frontend.urls.jitsi = "meet.kloenk.dev";
     #frontend.package = front;
     /*backend.package = wapkgs.back;
     puscher.package = wapkgs.pusher;
