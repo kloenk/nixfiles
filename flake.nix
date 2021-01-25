@@ -228,7 +228,6 @@
             self.nixosModules.deluge2
             self.nixosModules.firefox
             self.nixosModules.pleroma
-            self.nixosModules.jitsi-videobridge
             sourcesModule
             (import (inputs.fediventure + "/ops/nixos/modules/workadventure/workadventure.nix"))
             {
@@ -257,7 +256,6 @@
         #pleroma = import ./modules/pleroma;
 
         #secrets = import (petabyte + "/modules/secrets");
-        jitsi-videobridge = import (petabyte + "/modules/jitsi-videobridge");
         pleroma = import (petabyte + "/modules/pleroma");
         nftables = import (petabyte + "/modules/nftables");
       };
