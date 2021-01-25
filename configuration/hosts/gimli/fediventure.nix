@@ -4,6 +4,7 @@
 
   services.workadventure.instances."play.kloenk.dev" = {
     nginx.domain = "play.kloenk.dev";
+    frontend.package = pkgs.wapkgs.front.override { environment."JITSI_URL" = "https://meet.kloenk.dev/"; };
     /*backend.package = wapkgs.back;
     puscher.package = wapkgs.pusher;
     frontend.package = wapkgs.front;
