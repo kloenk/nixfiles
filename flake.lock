@@ -238,11 +238,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1611492722,
-        "narHash": "sha256-dLbbtpOsJSAcwB31MSRkhN+0Q0g18+XtUEcUPzOslWE=",
+        "lastModified": 1611571641,
+        "narHash": "sha256-45C0rZlHsquseEvzucqMcU2e/QS/H0Gfe0pdAobYWrc=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "513a3ea66508726937f65c257c79edd67059cef6",
+        "rev": "1703d7a4bc7a2dbdcf86e1eb33faca4122bdc73b",
         "type": "github"
       },
       "original": {
@@ -269,11 +269,11 @@
     "petabyte": {
       "flake": false,
       "locked": {
-        "lastModified": 1611231035,
-        "narHash": "sha256-qsMrWXXkAbaTj5qD2Ay2AXNEceJ64LVif7PbI892Zb0=",
+        "lastModified": 1611527278,
+        "narHash": "sha256-yvsQAAqOE1stDrx0j2ZhRoYNF9J9YcSMPmlH6AzYwT8=",
         "ref": "main",
-        "rev": "73976c0277fad8426e057a12e4a47689ee58d3ab",
-        "revCount": 472,
+        "rev": "ab02564338b41c413a74c9748607ccd11e04924c",
+        "revCount": 487,
         "type": "git",
         "url": "https://git.petabyte.dev/petabyteboy/nixfiles"
       },
