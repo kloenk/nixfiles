@@ -71,6 +71,10 @@ in {
 
   emacs-doom = callPackage ./emacs { };
 
+  workadventure.front = prev.workadventure.front.override {
+    environment."JITSI_URL" = "meet.kloenk.dev";
+  };
+
   wordpressPlugins = callPackage ./wordpress/plugins.nix {};
   wordpressThemes = callPackage ./wordpress/themes.nix {};
 }
