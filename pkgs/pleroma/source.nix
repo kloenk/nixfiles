@@ -2,13 +2,13 @@
 { fetchFromGitLab }:
 
 rec {
-  version = "2.2.0";
+  version = "2.2.2";
   src = fetchFromGitLab {
     domain = "git.pleroma.social";
     owner = "pleroma";
     repo = "pleroma";
-    rev = "v2.2.0";
-    sha256 = "04irvwxd5dlfl0jqmr15a13sn4iiwsq86ii3hxpp8a38xb0n52gv";
+    rev = "v2.2.2";
+    sha256 = "0c2na9yy1lkqdgj4ns586b499ka06m0rbxj75m5j99888av5sifm";
   };
 }
 
