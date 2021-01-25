@@ -719,6 +719,7 @@
     fetchGit = {
       rev = "a4e9beb3c1c479d14b352fd9d6dd7b1f6d7deee5";
       url = "https://git.pleroma.social/pleroma/elixir-libraries/prometheus.ex.git";
+      ref = "chore/elixir-1.11";
     };
     version = "a4e9beb3c1c479d14b352fd9d6dd7b1f6d7deee5";
   };
@@ -1136,6 +1137,7 @@
     fetchGit = {
       rev = "9cd8f248c9381ffedc799905050abce194a97514";
       url = "https://git.pleroma.social/pleroma/elixir-libraries/prometheus-phx.git";
+      ref = "no-logging";
     };
     version = "9cd8f248c9381ffedc799905050abce194a97514";
   };
