@@ -55,10 +55,6 @@
   boot.initrd.availableKernelModules = [ "e1000e" ];
   boot.initrd.network.ssh = {
     enable = true;
-    authorizedKeys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBps9Mp/xZax8/y9fW1Gt73SkskcBux1jDAB8rv0EYUt cardno:000611120054"
-    ];
-    hostKeys = [ "/var/src/secrets/initrd/ed25519_host_key" ];
   };
   boot.initrd.preLVMCommands = lib.mkBefore (''
     ip li set eno1 up
