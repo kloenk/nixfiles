@@ -8,13 +8,23 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" "uas" "sd_mod" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" "usbhid" "uas" "sd_mod" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/ec88d174-18db-4417-9ed9-a1996a341935";
+    { device = "/dev/disk/by-uuid/14d176fa-cef8-43aa-8fa0-cd025677c1ce";
+      fsType = "xfs";
+    };
+
+  fileSystems."/persist" =
+    { device = "/dev/disk/by-uuid/1a39811e-9ce0-409d-ad27-68d4d8f01403";
+      fsType = "xfs";
+    };
+
+  fileSystems."/nix" =
+    { device = "/dev/disk/by-uuid/095be75c-c76c-4038-b086-e17191d3c577";
       fsType = "xfs";
     };
 
@@ -23,22 +33,17 @@
       fsType = "vfat";
     };
 
-  fileSystems."/persist" =
-    { device = "/dev/disk/by-uuid/1a39811e-9ce0-409d-ad27-68d4d8f01403";
-      fsType = "xfs";
-    };
-
-  fileSystems."/persist/logs" =
-    { device = "/dev/disk/by-uuid/d70461d1-6d54-4b94-b320-022c64954284";
-      fsType = "xfs";
-    };
-
   fileSystems."/persist/intenso" =
     { device = "/dev/disk/by-uuid/aa04b51e-fc5c-4038-9e7b-08bd852de12d";
       fsType = "ext4";
     };
 
+  fileSystems."/root/.gnupg" =
+    { device = "/persist/data/gnupg-root";
+      fsType = "none";
+      options = [ "bind" ];
+    };
+
   swapDevices = [ ];
 
-  powerManagement.cpuFreqGovernor = lib.mkDefault "ondemand";
 }

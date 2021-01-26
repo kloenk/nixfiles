@@ -70,21 +70,11 @@
   networking.search = [ "fritz.box" ];
   networking.hostId = "37507120";
 
-  # transient root volume
-  boot.initrd.postMountCommands = ''
-    cd /mnt-root
-    chattr -i var/lib/empty
-    rm -rf $(ls -A /mnt-root | grep -v 'nix' | grep -v 'boot' | grep -v 'persist' | grep -v 'var')
-
-    cd /mnt-root/persist
-    rm -rf $(ls -A /mnt-root/persist | grep -v 'secrets' | grep -v 'log' )
-
-    cd /mnt-root/var
-    rm -rf $(ls -A /mnt-root/var | grep -v 'src' | grep -v 'log')
-
-    cd /mnt-root/var/src
-    rm -rf $(ls -A /mnt-root/var/src | grep -v 'secrets')
+  # delete files in /
+  boot.initrd.postDeviceCommands = lib.mkAfter ''
+    ${pkgs.xfsprogs}/bin/mkfs.xfs -m reflink=1 -f /dev/thrain/root
   '';
+  fileSystems."/".device = lib.mkForce "/dev/thrain/root";
 
   services.printing.browsing = true;
   services.printing.enable = true;
