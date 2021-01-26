@@ -34,6 +34,13 @@
       fsType = "vfat";
     };
 
+  fileSystems."/persist/backup" =
+    { device = "/dev/disk/by-uuid/6af8ef3b-4c1c-46c8-bf16-363ea2624abe";
+      fsType = "xfs";
+    };
+
+  boot.initrd.luks.devices."cryptBackup".device = "/dev/disk/by-uuid/34cf48da-a2fc-4eab-b50e-619b536ec8a0";
+
   swapDevices =
     [ { device = "/dev/disk/by-uuid/179092e7-d0f1-4614-8515-78005409e0a8"; }
     ];
