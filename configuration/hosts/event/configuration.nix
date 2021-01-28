@@ -25,7 +25,7 @@
       path = "/boot/a";
     }
     {
-      device = [
+      devices = [
         "/dev/disk/by-id/wwn-0x5000cca24bd020aa"
       ];
       path = "/boot/b";
