@@ -72,6 +72,12 @@ in {
     server = true;
   };
 
+  event = makeHost {
+    host = "event.kloenk.dev";
+    vm = false;
+    server = true;
+  };
+
   # for monitoring only
   bbb-wass = makeHost {
     host = "bbb-wass.kloenk.de";
