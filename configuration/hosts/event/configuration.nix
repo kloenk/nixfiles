@@ -40,18 +40,17 @@
   '';
   fileSystems."/".device = lib.mkForce "/dev/event/root";
 
-  fileSystems."/var/src/secrets" = {
-    device = "/persist/secrets";
-    fsType = "none";
-    options = [ "bind" ];
-  };
-
   networking.hostName = "event";
   networking.dhcpcd.enable = false;
   networking.useDHCP = false;
 
   networking.interfaces.enp4s0.useDHCP = true;
   networking.interfaces.enp4s0.tempAddress = "disabled";
+
+  systemd.network.networks."10-dhcp" = {
+    name = "e*";
+    DHCP = "yes";
+  };
 
   system.autoUpgrade.enable = true;
   nix.gc.automatic = true;
