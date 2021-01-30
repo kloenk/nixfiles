@@ -6,8 +6,8 @@
 
     #./wireguard.nix
     #./fediventure.nix
-    #./jitsi
-    #./prosody.nix
+    ./jitsi
+    ./prosody.nix
 
     ../../default.nix
     ../../common
