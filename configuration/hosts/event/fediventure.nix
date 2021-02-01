@@ -17,6 +17,6 @@ in {
   services.nginx.virtualHosts."world.event.unterbachersee.de" = {
     enableACME = true;
     forceSSL = true;
-    locations."/robots.txt".return = "200 User-agent: *\nDisallow: /\n";
+    locations."/robots.txt".return = "200 \"User-agent: *\\nDisallow: /\\n\"";
   };
 }
