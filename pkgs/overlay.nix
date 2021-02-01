@@ -22,7 +22,7 @@ in {
   spidermonkey_38 = null;
 
   #mixnix = callPackage (inputs.mixnix + "/nix/mix2nix.nix") { };
-  #pleroma = callPackage ./pleroma { };
+  pleroma = callPackage ./pleroma { };
   #pleroma = callPackage (inputs.petabyte + "/pkgs/pleroma") { };
 
   #let source = callPackage ./sourcegraph { }; in inherit (source) ;

@@ -141,7 +141,7 @@
       # patche modules
       patchModule = system: {
         disabledModules =
-          [ "services/games/minecraft-server.nix" "tasks/auto-upgrade.nix" ];
+          [ "services/games/minecraft-server.nix" "tasks/auto-upgrade.nix" "services/networking/pleroma.nix" ];
         imports = [
           self.nixosModules.autoUpgrade
         ];
@@ -227,7 +227,7 @@
             self.nixosModules.nftables
             self.nixosModules.deluge2
             self.nixosModules.firefox
-            #self.nixosModules.pleroma
+            self.nixosModules.pleroma
             sourcesModule
             (import (inputs.fediventure + "/ops/nixos/modules/workadventure/workadventure.nix"))
             {
@@ -256,7 +256,7 @@
         #pleroma = import ./modules/pleroma;
 
         #secrets = import (petabyte + "/modules/secrets");
-        #pleroma = import (petabyte + "/modules/pleroma");
+        pleroma = import (petabyte + "/modules/pleroma");
         nftables = import (petabyte + "/modules/nftables");
       };
 
