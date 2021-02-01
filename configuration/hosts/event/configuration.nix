@@ -5,7 +5,7 @@
     ./hardware-configuration.nix
 
     #./wireguard.nix
-    #./fediventure.nix
+    ./fediventure.nix
     ./jitsi
     ./prosody.nix
 

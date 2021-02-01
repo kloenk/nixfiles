@@ -1,12 +1,12 @@
 { config, lib, pkgs, ... }:
 
 let
-  front = pkgs.workadventure.front.override { environment."JITSI_URL" = "meet.kloenk.dev"; };
+  front = pkgs.workadventure.front.override { environment."JITSI_URL" = "communicate.unterbachersee.de"; };
 in {
 
-  services.workadventure.instances."play.kloenk.dev" = {
-    nginx.domain = "play.kloenk.dev";
-    frontend.urls.jitsi = "meet.kloenk.dev";
+  services.workadventure.instances."world.event.unterbachersee.de" = {
+    nginx.domain = "world.event.unterbachersee.de";
+    frontend.urls.jitsi = "communicate.unterbachersee.de";
     #frontend.package = front;
     /*backend.package = wapkgs.back;
     puscher.package = wapkgs.pusher;
@@ -14,7 +14,7 @@ in {
     maps.package = wapkgs.maps;*/
   };
 
-  services.nginx.virtualHosts."play.kloenk.dev" = {
+  services.nginx.virtualHosts."world.event.unterbachersee.de" = {
     enableACME = true;
     forceSSL = true;
   };
