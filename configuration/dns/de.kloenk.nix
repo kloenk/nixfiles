@@ -36,7 +36,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.de.";
       adminEmail = "hostmaster@kloenk.de";
-      serial = 2020122605;
+      serial = 2020122606;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
@@ -54,7 +54,7 @@ let
 
     MX = mxKloenk;
 
-    TXT = spfKloenk;
+    TXT = spfKloenk ++ [ "google-site-verification=p5ttbvvVzpqKQNUf_kuhwBEFvTavqiUF5BxTytUbGsY" ];
     CAA = letsEncrypt config.security.acme.email;
 
     SRV = [

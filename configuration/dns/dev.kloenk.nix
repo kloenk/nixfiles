@@ -35,7 +35,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.dev.";
       adminEmail = "hostmaster.kloenk.dev."; # TODO: change mail
-      serial = 2021010115;
+      serial = 2021010116;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
@@ -50,7 +50,7 @@ let
     AAAA = map (ttl 600) [ (aaaa "2a0f:4ac0:0:1::548") ];
     #CNAME = [ "iluvatar.kloenk.dev." ];
 
-    TXT = spfKloenk;
+    TXT = spfKloenk ++ [ "google-site-verification=Zi_9C2hSucoEJhLD78ijxMaybtjscN0D3t5TNpoeg6Y" ];
     MX = mxKloenk;
     CAA = letsEncrypt config.security.acme.email;
 

@@ -36,7 +36,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.burscheider-imkerverein.de.";
       adminEmail = "hostmaster@burscheider-imkerverein.de";
-      serial = 2020122605;
+      serial = 2020122606;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
@@ -49,7 +49,7 @@ let
 
     MX = mxKloenk;
 
-    TXT = spfKloenk;
+    TXT = spfKloenk ++ [ "google-site-verification=nwoA8cdOGh7-8MC9B0WQIE3jP_neM6L9zehMgcSnkxE" ];
     CAA = letsEncrypt config.security.acme.email;
 
     subdomains = rec {
