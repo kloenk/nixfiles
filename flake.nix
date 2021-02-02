@@ -112,6 +112,14 @@
     flake = false;
   };
 
+  inputs.krueger70 = {
+    type = "github";
+    owner = "holbeh";
+    repo = "krueger70";
+    ref = "master";
+    inputs.nixpkgs.follows = "/nixpkgs";
+  };
+
   inputs.mixnix.url = "git+https://git.petabyte.dev/petabyteboy/mixnix";
   inputs.mixnix.flake = false;
 
@@ -125,6 +133,7 @@
         self.overlay
         (overlays system)
         rtmp-auth.overlay
+        inputs.krueger70.overlay
       ];
 
       systems = [ "x86_64-linux" "x86_64-darwin" "aarch64-darwin" ];

@@ -114,6 +114,27 @@
         "type": "github"
       }
     },
+    "krueger70": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1612276220,
+        "narHash": "sha256-SqrexVEnjTLbuV6PMlIFK/amq44EUY6rdFWxzGv9ta0=",
+        "owner": "holbeh",
+        "repo": "krueger70",
+        "rev": "f0bcb2ff107140aba52e9f6c6b5fc349c179c200",
+        "type": "github"
+      },
+      "original": {
+        "owner": "holbeh",
+        "ref": "master",
+        "repo": "krueger70",
+        "type": "github"
+      }
+    },
     "lowdown-src": {
       "flake": false,
       "locked": {
@@ -307,6 +328,7 @@
         "grahamc-config": "grahamc-config",
         "home-manager": "home-manager",
         "hydra": "hydra",
+        "krueger70": "krueger70",
         "mail-server": "mail-server",
         "mixnix": "mixnix",
         "nix": "nix_2",
