@@ -11,7 +11,6 @@ in {
       root = pkgs.krueger70;
       extraConfig = ''
         ${commonHeaders}
-        add_header Content-Security-Policy "default-src 'self'; frame-ancestors 'none'; object-src 'none'" always;
         add_header Cache-Control $cacheable_types;
       '';
     };
