@@ -121,11 +121,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1612278596,
-        "narHash": "sha256-djlPnb3fqHw8Vazk3V2DBI38ZU6hmr4uLqXHTjGK5qo=",
+        "lastModified": 1612355903,
+        "narHash": "sha256-e3GR+rBNvO4CE4E2Cxl6XSrB55BMNTNMzWCdrNOJyOY=",
         "owner": "holbeh",
         "repo": "krueger70",
-        "rev": "7e41e4a33f8d164cb04fc773ed91aaeaa1237717",
+        "rev": "7e085a61599dd2e46a506eab04b918f42ca67c80",
         "type": "github"
       },
       "original": {

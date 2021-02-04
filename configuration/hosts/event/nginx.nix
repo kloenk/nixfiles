@@ -5,7 +5,7 @@ let
       (lib.splitString "\n" config.services.nginx.commonHttpConfig));
 in {
   services.nginx.virtualHosts = {
-    "krueger70.trudeltiere.de" = {
+    "gerry70.trudeltiere.de" = {
       enableACME = true;
       forceSSL = true;
       root = pkgs.krueger70;
