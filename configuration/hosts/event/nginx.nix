@@ -12,6 +12,7 @@ in {
       extraConfig = ''
         ${commonHeaders}
         add_header Cache-Control $cacheable_types;
+        add_header X-Frame-Options "*" always;
       '';
     };
   };
