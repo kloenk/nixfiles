@@ -163,6 +163,7 @@
           "punkte@kloenk.de"
           "lkml@kloenk.de"
           "n26@kloenk.de"
+          "gerry70@kloenk.dev"
         ];
 
         catchAll = [ "kloenk.dev" "kloenk.de" "ad.kloenk.de" ];
