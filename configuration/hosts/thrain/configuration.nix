@@ -12,7 +12,7 @@
 
     ../../default.nix
 
-    #../../desktop
+    ../../desktop
 
     ../../common
     ../../common/pbb.nix
@@ -92,6 +92,7 @@
     "docker" # enable docker controll
     "libvirtd" # libvirtd connections
   ];
+  users.users.kloenk.home = "/persist/data/kloenk";
 
   # pa stream foo
   sound.enable = true;
