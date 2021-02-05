@@ -12,6 +12,7 @@ in {
       extraConfig = ''
         ${commonHeaders}
         add_header Cache-Control $cacheable_types;
+        add_header Content-Security-Policy "default-src 'self'; frame-ancestors 'none'; object-src 'none'" always;
         add_header X-Frame-Options "*" always;
       '';
 
