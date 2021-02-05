@@ -12,7 +12,8 @@ in {
       extraConfig = ''
         ${commonHeaders}
         add_header Cache-Control $cacheable_types;
-        add_header X-Frame-Options always;
+        proxy_hide_header X-Frame-Options;
+        add_header X-Frame-Options "*" always;
       '';
     };
   };
