@@ -10,6 +10,7 @@
   environment.systemPackages = with pkgs;
     [
       gnome3.adwaita-icon-theme # gnome-shell-extension-appindicator-32
+      alacritty
     ];
 
   services.udev.packages = with pkgs; [ gnome3.gnome-settings-daemon ];
@@ -23,4 +24,8 @@
   services.gnome3.core-os-services.enable = true;
   services.gnome3.gnome-keyring.enable = true;
   services.gnome3.tracker.enable = true;
+
+  home-manager.users.kloenk = {
+    xdg.configFile."alacritty/alacritty.yml".source = ./alacritty.yml;
+  };
 }

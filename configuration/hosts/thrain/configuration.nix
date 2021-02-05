@@ -13,6 +13,8 @@
     ../../default.nix
 
     ../../desktop
+    #../../desktop/sway.nix
+    ../../desktop/gnome.nix
 
     ../../common
     ../../common/pbb.nix
@@ -129,6 +131,9 @@
     locations."/public/".alias = "/persist/data/public/";
     locations."/public/".extraConfig = "autoindex on;";
   };
+
+  # smartcard
+  services.pcscd.enable = true;
 
   system.stateVersion = "20.09";
 }

@@ -90,7 +90,8 @@
     #atom
     #gvfs
     #gnome3.nautilus # Dependency for atom?
-    emacs-doom
+    #emacs-doom
+    emacs
     rust-analyzer
     irony-server
 
@@ -196,7 +197,7 @@
   nixpkgs.config.pulseaudio = true;
 
   # multicast dns
-  networking.nftables2.extraInput = ''
+  petabyte.nftables.extraInput = ''
     ip6 daddr { ff02::fb, ff02::1:3 } udp dport 5353 accept
     ip daddr { 224.0.0.251, 224.0.0.252 } udp dport 5353 accept
   '';

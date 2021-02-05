@@ -6,7 +6,7 @@
     systemd-run = "${pkgs.systemd}/bin/systemd-run --user --scope";
   in {
     enable = true;
-    #systemdIntegration = true;
+    systemdIntegration = builtins.trace "sway system" true;
     config = {
       bars = [ ];
       input = {
