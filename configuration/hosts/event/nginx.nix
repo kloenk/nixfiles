@@ -14,6 +14,21 @@ in {
         add_header Cache-Control $cacheable_types;
         add_header X-Frame-Options "*" always;
       '';
+
+      locations."/map/" = {
+        alias = (pkgs.fetchFromGitHub {
+          owner = "holbeh";
+          repo = "office-map";
+          rev = "949aa0f567b58a9cbcb13ae4379bd88dcfc597ba";
+          sha256 = "sha256-uIaYf8rc66dy21asA2D3lIJXrHjJfqySwscZEu4LHAE=";
+        } + "/");
+        extraConfig = ''
+           ${commonHeaders}
+          add_header Cache-Control $cacheable_types;
+          add_header X-Frame-Options "*" always;
+          add_header Access-Control-Allow-Origin "*" always;
+        '';
+      };
     };
   };
 }
