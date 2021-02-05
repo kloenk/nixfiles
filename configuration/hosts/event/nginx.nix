@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   commonHeaders = lib.concatStringsSep "\n"
-    (lib.filter (line: lib.hasPrefix "add_header" line)
+    (lib.filter (line: (lib.hasPrefix "add_header" line && !(lib.hasInfix "X-Frame-Options" line)))
       (lib.splitString "\n" config.services.nginx.commonHttpConfig));
 in {
   services.nginx.virtualHosts = {
@@ -12,7 +12,6 @@ in {
       extraConfig = ''
         ${commonHeaders}
         add_header Cache-Control $cacheable_types;
-        proxy_hide_header X-Frame-Options;
         add_header X-Frame-Options "*" always;
       '';
     };
