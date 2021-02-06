@@ -12,7 +12,7 @@ in {
       extraConfig = ''
         ${commonHeaders}
         add_header Cache-Control $cacheable_types;
-        add_header Content-Security-Policy "frame-ancestors https://world.event.unterbachersee.de/; block-all-mixed-content; default-src 'self'; script-src https://gerry70.trudeltiere.de; style-src 'self'; object-src 'none'; img-src 'self'; connect-src 'self'; base-uri https://gerry70.trudeltiere.de; form-action 'none'; worker-src 'none'; require-trusted-types-for 'script';" always;
+        add_header Content-Security-Policy "default-src 'self'; frame-ancestors https://world.event.unterbachersee.de/; object-src 'none'" always;
         add_header X-Frame-Options "*" always;
       '';
 
@@ -24,7 +24,7 @@ in {
           sha256 = "sha256-bcRjpZHxzdk6x1GSgAs8AK3JkFdbQhAEhirtnQp14vQ=";
         } + "/");
         extraConfig = ''
-           ${commonHeaders}
+          ${commonHeaders}
           add_header Cache-Control $cacheable_types;
           add_header X-Frame-Options "*" always;
           add_header Access-Control-Allow-Origin "*" always;
