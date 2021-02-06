@@ -20,14 +20,15 @@ in {
         alias = (pkgs.fetchFromGitHub {
           owner = "holbeh";
           repo = "office-map";
-          rev = "949aa0f567b58a9cbcb13ae4379bd88dcfc597ba";
-          sha256 = "sha256-uIaYf8rc66dy21asA2D3lIJXrHjJfqySwscZEu4LHAE=";
+          rev = "0ea27c804db02c05f7f575325a352d6164a6b5a9";
+          sha256 = "sha256-bcRjpZHxzdk6x1GSgAs8AK3JkFdbQhAEhirtnQp14vQ=";
         } + "/");
         extraConfig = ''
            ${commonHeaders}
           add_header Cache-Control $cacheable_types;
           add_header X-Frame-Options "*" always;
           add_header Access-Control-Allow-Origin "*" always;
+          add_header Content-Security-Policy "default-src 'self'; frame-ancestors 'none'; object-src 'none'" always;
         '';
       };
     };
