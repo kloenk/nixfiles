@@ -8,6 +8,8 @@
     #./timemachine.nix
     ./samba.nix
 
+    ./factorio.nix
+
     ./dns.nix
 
     ../../default.nix
