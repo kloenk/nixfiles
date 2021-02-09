@@ -20,8 +20,8 @@ in {
         alias = (pkgs.fetchFromGitHub {
           owner = "holbeh";
           repo = "office-map";
-          rev = "0ea27c804db02c05f7f575325a352d6164a6b5a9";
-          sha256 = "sha256-bcRjpZHxzdk6x1GSgAs8AK3JkFdbQhAEhirtnQp14vQ=";
+          rev = "V0.1.0";
+          sha256 = "sha256-rjDnv07MYNIzZqyQyiaHYeaEWyqh8Qk5AlqVTxg1xSE=";
         } + "/");
         extraConfig = ''
           ${commonHeaders}
