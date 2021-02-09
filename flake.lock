@@ -20,6 +20,27 @@
         "type": "github"
       }
     },
+    "event_start": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1612897690,
+        "narHash": "sha256-PMAACERG8XlvRlLLAfRV0yJk2Zd2iJWaQUYThyZVyvE=",
+        "owner": "holbeh",
+        "repo": "eventstart",
+        "rev": "0e4f1bf4fd708ec1894fbd2ca22a6467dc546a91",
+        "type": "github"
+      },
+      "original": {
+        "owner": "holbeh",
+        "ref": "preshow",
+        "repo": "eventstart",
+        "type": "github"
+      }
+    },
     "fediventure": {
       "flake": false,
       "locked": {
@@ -323,6 +344,7 @@
     "root": {
       "inputs": {
         "dns": "dns",
+        "event_start": "event_start",
         "fediventure": "fediventure",
         "flake-compat": "flake-compat",
         "grahamc-config": "grahamc-config",
