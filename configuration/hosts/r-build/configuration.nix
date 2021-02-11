@@ -31,7 +31,7 @@
   boot.initrd.postDeviceCommands = lib.mkAfter ''
     ${pkgs.xfsprogs}/bin/mkfs.xfs -m reflink=1 -f /dev/${config.networking.hostName}/root
   '';
-  fileSystems."/".device = lib.mkForce "/dev/manwe/root";
+  fileSystems."/".device = lib.mkForce "/dev/${config.networking.hostName}/root";
 
   # FIME: remove
   security.acme.server = builtins.trace "remove staging environment from acme"
@@ -75,6 +75,7 @@
     networks."30-br0" = {
       name = "br0";
       DHCP = "yes";
+      linkConfig.MACAddress = "00:60:dd:45:44:c0";
       networkConfig = { ConfigureWithoutCarrier = true; };
     };
   };
