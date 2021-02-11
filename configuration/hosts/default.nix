@@ -56,9 +56,10 @@ in {
     server = true;
   };
 
-  nixos = makeHost {
-    host = "192.168.178.0";
+  r-build = makeHost {
+    host = "192.168.178.249";
     prometheusExporters = [ ];
+    server = false;
   };
 
   samwise = makeHost { host = "6.0.2.4"; };

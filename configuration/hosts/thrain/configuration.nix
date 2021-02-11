@@ -50,6 +50,7 @@
   networking.domain = "kloenk.dev";
   networking.hosts = {
     "192.168.178.1" = lib.singleton "fritz.box";
+    "172.16.0.1" = lib.singleton "airlink.local";
     # TODO: barahir
     # TODO: kloenkX?
   };
@@ -95,6 +96,7 @@
   users.users.kloenk.extraGroups = [
     "docker" # enable docker controll
     "libvirtd" # libvirtd connections
+    "audio"
   ];
   users.users.kloenk.home = "/persist/data/kloenk";
 

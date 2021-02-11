@@ -27,6 +27,13 @@
       addresses = [{ addressConfig.Address = "6.0.2.2/24"; }];
     };
 
+    networks."25-tun" = {
+      name = "tap*";
+      DHCP = "yes";
+
+      linkConfig.RequiredForOnline = "no";
+    };
+
     networks."20-lo" = {
       name = "lo";
       DHCP = "no";
