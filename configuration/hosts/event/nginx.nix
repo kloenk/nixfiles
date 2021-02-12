@@ -12,7 +12,7 @@ let
         } + "/";
 in {
 
-  nixpkgs.overlays = [ inputs.event_start.overlay inputs.krueger70.overlay ];
+  nixpkgs.overlays = [ inputs.event_start.overlay ];
 
   services.nginx.virtualHosts = {
     "event.unterbachersee.de" = {
@@ -35,34 +35,6 @@ in {
           add_header X-Frame-Options "*" always;
           add_header Access-Control-Allow-Origin "*" always;
           add_header Content-Security-Policy "default-src 'self'; frame-ancestors https://world.event.unterbachersee.de/; object-src 'none'" always;
-        '';
-      };
-    };
-    "gerry70.trudeltiere.de" = {
-      enableACME = true;
-      forceSSL = true;
-      root = pkgs.krueger70;
-      extraConfig = ''
-        ${commonHeaders}
-        add_header Cache-Control $cacheable_types;
-        add_header Content-Security-Policy "default-src 'self'; frame-ancestors https://world.event.unterbachersee.de/; object-src 'none'" always;
-        add_header X-Frame-Options "*" always;
-      '';
-      locations."/robots.txt".return = "200 \"User-agent: *\\nDisallow: /\\n\"";
-
-      locations."/map/" = {
-        alias = (pkgs.fetchFromGitHub {
-          owner = "holbeh";
-          repo = "office-map";
-          rev = "V0.1.0";
-          sha256 = "sha256-rjDnv07MYNIzZqyQyiaHYeaEWyqh8Qk5AlqVTxg1xSE=";
-        } + "/");
-        extraConfig = ''
-          ${commonHeaders}
-          add_header Cache-Control $cacheable_types;
-          add_header X-Frame-Options "*" always;
-          add_header Access-Control-Allow-Origin "*" always;
-          add_header Content-Security-Policy "default-src 'self'; frame-ancestors 'none'; object-src 'none'" always;
         '';
       };
     };

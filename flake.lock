@@ -27,11 +27,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1613123233,
-        "narHash": "sha256-FKE3OAJGlpBO1j4ZK0IVRRXpCcKejkqYdF08yFcWZ+I=",
+        "lastModified": 1613145390,
+        "narHash": "sha256-vW2d7Lx+kv/Y4AXJCCQp3Fjk0mwW5dVPNqFOADydZ7s=",
         "owner": "holbeh",
         "repo": "eventstart",
-        "rev": "b09034189d2587f5211b22ce22c99c7f4f471d53",
+        "rev": "266fd0f9652999eb96ebd88dd1ed81d1833b9395",
         "type": "github"
       },
       "original": {
@@ -132,27 +132,6 @@
       "original": {
         "owner": "nixos",
         "repo": "hydra",
-        "type": "github"
-      }
-    },
-    "krueger70": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1612873261,
-        "narHash": "sha256-Q4L4z/fl7G11Pis0F9vMRc+qEYnor+Vrkq9G2P9XO6s=",
-        "owner": "holbeh",
-        "repo": "krueger70",
-        "rev": "8c8a9535f19951182cdc6a28be61490168b13c70",
-        "type": "github"
-      },
-      "original": {
-        "owner": "holbeh",
-        "ref": "master",
-        "repo": "krueger70",
         "type": "github"
       }
     },
@@ -350,7 +329,6 @@
         "grahamc-config": "grahamc-config",
         "home-manager": "home-manager",
         "hydra": "hydra",
-        "krueger70": "krueger70",
         "mail-server": "mail-server",
         "mixnix": "mixnix",
         "nix": "nix_2",

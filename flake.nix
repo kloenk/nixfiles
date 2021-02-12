@@ -112,14 +112,6 @@
     flake = false;
   };
 
-  inputs.krueger70 = {
-    type = "github";
-    owner = "holbeh";
-    repo = "krueger70";
-    ref = "master";
-    inputs.nixpkgs.follows = "/nixpkgs";
-  };
-
   inputs.event_start = {
     type = "github";
     owner = "holbeh";

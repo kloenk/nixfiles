@@ -104,7 +104,7 @@
   sound.enable = true;
   hardware.pulseaudio = {
     enable = true;
-    systemWide = true;
+    #systemWide = true;
     package = pkgs.pulseaudio;
     tcp.enable = true;
     tcp.anonymousClients.allowedIpRanges = [
