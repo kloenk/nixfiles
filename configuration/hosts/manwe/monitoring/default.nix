@@ -117,9 +117,6 @@ in {
       }];
       dashboards = [{ options.path = ./dashboards; }];
     };
-    extraOptions = {
-      security.content_security_policy = true;
-    };
   };
 
   services.prometheus = {
