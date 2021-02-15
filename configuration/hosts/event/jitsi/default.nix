@@ -3,10 +3,11 @@
 {
   imports = [
      ./turn.nix
-     #./exporter.nix
+     ./exporter.nix
    ];
 
    services.jitsi-videobridge.openFirewall = true;
+   services.jitsi-videobridge.apis = [ "rest" "colibri" ];
    services.jitsi-meet = {
      enable = true;
      hostName = "communicate.unterbachersee.de";
