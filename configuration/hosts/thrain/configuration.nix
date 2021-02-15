@@ -15,8 +15,9 @@
     ../../default.nix
 
     ../../desktop
-    #../../desktop/sway.nix
-    ../../desktop/gnome.nix
+    ../../desktop/plasma.nix
+    ../../desktop/sway.nix
+    #../../desktop/gnome.nix
 
     ../../common
     ../../common/pbb.nix
@@ -39,8 +40,6 @@
     "/dev/disk/by-id/usb-Intenso_External_USB_3.0_20150609040398-0:0-part5";
   boot.initrd.luks.reusePassphrases = true;
 
-  home-manager.users.kloenk.wayland.windowManager.sway.enable =
-    lib.mkForce false;
   users.users.kloenk.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIuyJjJNWSxO8CFBueBstfdWN4EQBkKfz+A5RsAnR2F9 kloenk@barahir"
   ];

@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  environment.systemPackages = with pkgs; [ spectacle firefox riot-desktop ];
+  environment.systemPackages = with pkgs; [ spectacle firefox ];
 
   services.xserver.enable = true;
   services.xserver.layout = "de";
