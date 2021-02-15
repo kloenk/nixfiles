@@ -7,6 +7,7 @@
    ];
 
    services.jitsi-videobridge.openFirewall = true;
+   services.jitsi-videobridge.apis = [ "rest" "colibri" ];
    services.jitsi-meet = {
      enable = true;
      hostName = "meet.kloenk.dev";
