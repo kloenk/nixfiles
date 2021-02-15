@@ -42,6 +42,7 @@ in {
     vm = true;
     server = true;
     mail = true;
+    prometheusExporters = [ "node-exporter" "nginx-exporter" "jitsi-exporter" ];
   };
 
   thrain = makeHost {

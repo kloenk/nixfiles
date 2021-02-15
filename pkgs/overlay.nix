@@ -34,6 +34,7 @@ in {
   nix-serve = prev.nix-serve.overrideAttrs (oldAttrs: rec {
     meta = oldAttrs.meta // { platforms = final.lib.platforms.linux; };
   });
+  jitsiexporter = callPackage ./jitsiexporter { };
 
   rustc_nightly = prev.rustc.overrideAttrs (oldAttrs: {
     configureFlags = map (flag:

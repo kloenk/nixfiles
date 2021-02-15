@@ -3,7 +3,7 @@
 {
   imports = [
      ./turn.nix
-     #./exporter.nix
+     ./exporter.nix
    ];
 
    services.jitsi-videobridge.openFirewall = true;
