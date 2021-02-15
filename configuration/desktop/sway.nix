@@ -53,7 +53,7 @@
             #xkb_options = if remap_win then "altwin:swap_lalt_lwin" else "''";
             natural_scroll = "enable";
           };
-          "13:0:ANNE_KB_L1_A7D3".xkb_options = "";
+          "13:0:ANNE_KB_L1_A7D3".xkb_options = "''";
           "Wacom ISDv4 90 Pen".map_to_output = "'Unknown 0x02D8 0x00000000'";
         };
         output = {
