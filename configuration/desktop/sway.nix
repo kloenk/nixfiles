@@ -42,7 +42,7 @@
       wallpaper = "`find ${pkgs.wallpapers}/share/wallpapers/* | shuf -n 1`";
       systemd-run = "${pkgs.systemd}/bin/systemd-run --user --scope";
     in {
-      #enable = true;
+      enable = true;
       #systemdIntegration = builtins.trace "sway system" true;
       config = builtins.trace "sway config" {
         bars = [ ];

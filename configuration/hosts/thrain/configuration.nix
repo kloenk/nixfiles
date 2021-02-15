@@ -80,7 +80,14 @@
   services.printing.enable = true;
   services.avahi.enable = true;
 
-  environment.systemPackages = with pkgs; [ lm_sensors virtmanager ];
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "chromium"
+    "factorio-headless"
+    "chromium-unwrapped"
+    "chrome-widevine-cdm"
+  ];
+
+  environment.systemPackages = with pkgs; [ lm_sensors virtmanager chromium ];
 
   # docker
   #virtualisation.docker.enable = true;

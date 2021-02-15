@@ -187,46 +187,46 @@ in {
     sha256 = "sha256-SQuwq0mZSKRG/1V9h4HCPyuVDOpCfrCp4UZkzajo3+U=";
   };
 
-  pixiv_city = fromPixiv {
+  /*pixiv_city = fromPixiv {
     src = "https://www.pixiv.net/en/artworks/32056860";
     url =
       "https://i.pximg.net/img-master/img/2012/12/12/00/22/50/32056860_p0_master1200.jpg";
-    sha256 = "bd146ed7570c2b5998af204fa591be1292699ede67af7133b2dffb2abc4e2380";
-  };
+    sha256 = "sha256-O0yGBHRniqcKG5+O599ZH7RSVTsH455RtV1Uz1t3O4Q=";
+  };*/
 
-  pixiv_orange = fromPixiv {
+  /*pixiv_orange = fromPixiv {
     src = "https://www.pixiv.net/en/artworks/68126524";
     url =
       "https://i.pximg.net/img-original/img/2018/07/19/22/57/08/68126524_p0.jpg";
     sha256 = "b92c6e3a0e48508a88a34d9de58f87ce21ccbacecef0c2e9e5b317daa7cdf630";
-  };
+  };*/
 
   pixiv-72175872 = fromPixiv {
     src = "https://www.pixiv.net/en/artworks/72175872";
     url =
       "https://i.pximg.net/img-original/img/2018/12/19/00/00/04/72175872_p0.jpg";
-    sha256 = "6ec54efc53febfe1fca8614ba226f8f3076fb0aa2c425fc5b8f3acf75760276a";
+    sha256 = "sha256-KjQj9K9hU6iz6Nu9HmFz2g1taDnbit4tlo/fe4GRlNU=";
   };
 
   pixiv-cat = fromPixiv {
     src = "https://www.pixiv.net/en/artworks/73205835";
     url =
       "https://i.pximg.net/img-master/img/2019/02/16/00/00/03/73205835_p0_master1200.jpg";
-    sha256 = "2a630f4d0081fe4f966746b875480df5997c4be40ba30d8c44dfc0db00faa0b7";
+    sha256 = "sha256-sRx5Ri+LO1jKQd+Db9VH7/NQEctMiyn9Ry5e1HE8oz4=";
   };
 
   pixiv-umbrella = fromPixiv {
     src = "https://www.pixiv.net/en/artworks/73838366";
     url =
       "https://i.pximg.net/img-master/img/2019/03/24/00/00/01/73838366_p0_master1200.jpg";
-    sha256 = "1714ad420ab21a0a08d1ed6ef9d769235e1f807bf2107a33b2382f74bd3eeeaf";
+    sha256 = "sha256-iW1kNycqtjXifGLjKLSHlzMLXUn6118CKnR748Ku9Fs=";
   };
 
   pixiv_bioshock_anime = fromPixiv {
     src = "https://www.pixiv.net/en/artworks/588905";
     url =
       "https://i.pximg.net/img-master/img/2008/03/28/13/22/30/588905_p0_master1200.jpg";
-    sha256 = "e2289c25bdee0f2a4cb2579c78169db12dc608255c706b740e480ccf5d25df40";
+    sha256 = "sha256-O0yGBHRniqcKG5+O599ZH7RSVTsH455RtV1Uz1t3O4Q=";
   };
 
   lost_in_space_mag = fromRedditPost {
@@ -258,7 +258,7 @@ in {
 
   city_depth = fromRedditPost {
     url = "https://www.reddit.com/r/wallpapers/comments/g0etum/city_depths_by_alec_tucker_3840x2160/";
-    sha256 = "sha256-KpBR/QUtxVuhY2rQSnkryQOBIt2uvoaXoVMeXf3NKN4=";
+    sha256 = "sha256-DDzYvFb7ba23HJpyV4lPOBGhq3ZVkFgn6+Iyq5G3QYY=";
   };
 
   /*bioshock_skycrane = fromRedditPost {
@@ -290,7 +290,7 @@ in {
   cloudy_moments = fromRedditPost {
     url =
       "https://www.reddit.com/r/Animewallpaper/comments/f4uu8i/cloudy_moments_your_name_2560x1440/";
-    sha256 = "sha256-bP3j3qUsH4sWPE15XZfS4H/6YqadjN2N66ofo7Y/BgA=";
+    sha256 = "sha256-LtI/StsKwq2HV2VcjfQiRQGPcd099nAoak+eFTPpxT4=";
   };
   one_small_step = fromRedditPost {
     url =
@@ -302,11 +302,11 @@ in {
       "https://www.reddit.com/r/Animewallpaper/comments/ahkner/your_name_kimi_no_na_wa_7015x3879/";
     sha256 = "sha256-pi2YmPO2NlooA3lq+UfBNP5VI9ik1uzyBKLj0UKXmFU=";
   };
-  go_home = fromRedditPost {
+  /*go_home = fromRedditPost {
     url =
       "https://www.reddit.com/r/Animewallpaper/comments/fzjd8i/lets_go_home_original_3840x2160/";
     sha256 = "sha256-Gtvp2RW9okF6cx+0jp+FSFpsTYkliNhBF7J+kp56ZnQ=";
-  };
+  };*/
   angle_beats = fromRedditPost {
     url =
       "https://www.reddit.com/r/Animewallpaper/comments/fzlf1h/kanade_tachibana_angel_beats_1920x1080/";
