@@ -78,6 +78,7 @@ in {
     host = "event.kloenk.dev";
     vm = false;
     server = true;
+    prometheusExporters = [ "node-exporter" "nginx-exporter" "jitsi-exporter" ];
   };
 
   # for monitoring only
