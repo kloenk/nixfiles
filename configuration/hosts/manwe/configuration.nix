@@ -15,6 +15,8 @@
     ./wireguard.nix
     ./restic-server.nix
 
+    ./ftb.nix
+
     ../../default.nix
     ../../common
     ../../common/pbb.nix
