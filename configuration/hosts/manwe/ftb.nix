@@ -1,10 +1,10 @@
 { config, lib, pkgs, ... }:
 
 {
-  fileSystems."/var/lib/ftb-server" = {
+  /*fileSystems."/var/lib/ftb-server" = {
     device = "/persist/data/ftb";
     options = [ "bind" ];
-  };
+  };*/
 
   systemd.services.ftb-server = {
     description = "Minecraft ftb server";
@@ -12,16 +12,19 @@
     after = [ "network.target" ];
     requires = [ "ftb-server.socket" ];
     serviceConfig = {
-      RequireMountsFor = "/var/lib/ftb-server";
+      BindPaths = "/persist/data/ftb:/var/lib/ftb-server";
       ReadWritePaths = "/persist/data/ftb";
       Restart = "always";
       DynamicUser = true;
       StateDirectory = "ftb-server";
-      StandartInput = "socket";
-      StandartOutput = "journal";
+      StandardInput = "socket";
+      StandardOutput = "journal";
     };
     script = ''
-      ${pkgs.jre8}/bin/java -Xms512M -Xmx4G -jar ftbserver.jar -nogui
+      pwd
+      cd /var/lib/ftb-server
+      ls
+      ${pkgs.jre8}/bin/java -Xms512M -Xmx4G -jar ftbserver.jar --nogui
     '';
   };
   systemd.sockets.ftb-server = {
