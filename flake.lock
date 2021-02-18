@@ -348,16 +348,15 @@
     "website": {
       "flake": false,
       "locked": {
-        "lastModified": 1603405521,
-        "narHash": "sha256-o1ZvlINMq5J/qeqbcqiHtlEFWC9y95imfi01vHY37TY=",
-        "ref": "lexbeserious",
-        "rev": "f7b6b2fb8b9d4b8f718e53da71b5b41236c59097",
+        "lastModified": 1613647885,
+        "narHash": "sha256-p3r94I75rlWRUFKr7WMsEAffTk4xA9IVvwHNK8RUJws=",
+        "ref": "master",
+        "rev": "c491c6cc4c73eb080f518dfcd1400ecf92730b69",
         "revCount": 17,
         "type": "git",
         "url": "https://git.petabyte.dev/kloenk/website.git"
       },
       "original": {
-        "ref": "lexbeserious",
         "type": "git",
         "url": "https://git.petabyte.dev/kloenk/website.git"
       }
