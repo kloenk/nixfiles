@@ -2,6 +2,8 @@
 
 let
 in {
+  petabyte.secrets."wp/crewkleidung.htaccess".owner = "nginx";
+
   services.wordpress.crewkleidung = {
     database.name = "wp_crewkleidung";
     #database.user = "wp_wass";
@@ -41,6 +43,8 @@ in {
     locations."/" = {
       root = config.services.httpd.virtualHosts.crewkleidung.documentRoot;
       extraConfig = ''
+           auth_basic           "Bitte melde Dich an…";
+           auth_basic_user_file ${config.petabyte.secrets."wp/crewkleidung.htaccess".path};
            index index.php;
            try_files $uri $uri/ /index.php?$args;
          '';
@@ -48,6 +52,8 @@ in {
     locations."~ \\.php$" = {
       root = config.services.httpd.virtualHosts.crewkleidung.documentRoot;
       extraConfig = ''
+           auth_basic           "Bitte melde Dich an…";
+           auth_basic_user_file ${config.petabyte.secrets."wp/crewkleidung.htaccess".path};
            fastcgi_pass unix:${config.services.phpfpm.pools.wordpress-crewkleidung.socket};
            fastcgi_index index.php;
            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
@@ -55,5 +61,6 @@ in {
            include ${config.services.nginx.package}/conf/fastcgi.conf;
          '';
     };
+    locations."/robots.txt".return = "200 \"User-agent: *\\nDisallow: /\\n\"";
   };
 }
