@@ -120,6 +120,13 @@
     inputs.nixpkgs.follows = "/nixpkgs";
   };
 
+  inputs.office-map = {
+    type = "github";
+    owner = "holbeh";
+    repo = "office-map";
+    flake = false;
+  };
+
   inputs.mixnix.url = "git+https://git.petabyte.dev/petabyteboy/mixnix";
   inputs.mixnix.flake = false;
 

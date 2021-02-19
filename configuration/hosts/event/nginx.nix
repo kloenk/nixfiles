@@ -4,12 +4,13 @@ let
     (lib.filter (line: (lib.hasPrefix "add_header" line && !(lib.hasInfix "X-Frame-Options" line)))
       (lib.splitString "\n" config.services.nginx.commonHttpConfig));
 
-  map = pkgs.fetchFromGitHub {
+  map = inputs.office-map + "/";
+  /*map = pkgs.fetchFromGitHub {
           owner = "holbeh";
           repo = "office-map";
-          rev = "V0.1.0";
-          sha256 = "sha256-rjDnv07MYNIzZqyQyiaHYeaEWyqh8Qk5AlqVTxg1xSE=";
-        } + "/";
+          rev = "68a8770064aa6ecdef17852907af20f79ea30ed7";
+          sha256 = "sha256-rjDnv07MYNIzZqyQyiaHYeaEWyqh8qk5AlqVTxg1xSE=";
+        } + "/";*/
 in {
 
   nixpkgs.overlays = [ inputs.event_start.overlay ];

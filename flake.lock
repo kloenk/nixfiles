@@ -270,6 +270,22 @@
         "type": "github"
       }
     },
+    "office-map": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1613761880,
+        "narHash": "sha256-wZ/FCffd8w63Nfhl12O+qgOe9CUZNDL5e3+uQ0HW5+U=",
+        "owner": "holbeh",
+        "repo": "office-map",
+        "rev": "68a8770064aa6ecdef17852907af20f79ea30ed7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "holbeh",
+        "repo": "office-map",
+        "type": "github"
+      }
+    },
     "petabyte": {
       "flake": false,
       "locked": {
@@ -317,6 +333,7 @@
         "nix": "nix_2",
         "nixos-org": "nixos-org",
         "nixpkgs": "nixpkgs",
+        "office-map": "office-map",
         "petabyte": "petabyte",
         "qyliss": "qyliss",
         "rtmp-auth": "rtmp-auth",
