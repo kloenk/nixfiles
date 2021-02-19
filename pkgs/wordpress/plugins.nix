@@ -56,6 +56,18 @@ in {
     sha256 = "58172b18ec17ef795a2cb9f10764d0d1fa6174d981749800791ddccdc6316c79";
   };
 
+  language-de = callPackage ({ fetchzip, stdenv, unzip }: stdenv.mkDerivation {
+    name = "language-de";
+    src = fetchzip {
+      url = "https://de.wordpress.org/wordpress-5.6.1-de_DE.tar.gz";
+      sha256 = "sha256-b0JY8RKBThJbdYxXbH3AOThKQahq9UHBhytTnfkM7wU=";
+    };
+
+    buildInputs = [ unzip ];
+    buildPhase = "ls";
+    installPhase = "mkdir -p $out; cp -r ./wp-content/languages/* $out";
+  }) {};
+
   /*kismet-antispam = callPackage ({ fetchurl, stdenv, unzip }: stdenv.mkDerivation {
     name = "Kismet-Anti-Spam";
     src = fetchurl {

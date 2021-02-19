@@ -22,6 +22,9 @@ in {
       wordpressPlugins.backItUp
       wordpressPlugins.woocomerce
     ];
+    languages = with pkgs.wordpressPlugins; [
+      language-de
+    ];
   };
 
   #systemd.services.wordpress-init-crewkleidung.serviceConfig.User =

@@ -156,7 +156,12 @@
       # patche modules
       patchModule = system: {
         disabledModules =
-          [ "services/games/minecraft-server.nix" "tasks/auto-upgrade.nix" "services/networking/pleroma.nix" ];
+          [
+            "services/games/minecraft-server.nix"
+            "tasks/auto-upgrade.nix"
+            "services/networking/pleroma.nix"
+            "services/web-apps/wordpress.nix"
+          ];
         imports = [
           self.nixosModules.autoUpgrade
         ];
@@ -243,6 +248,7 @@
             self.nixosModules.deluge2
             self.nixosModules.firefox
             self.nixosModules.pleroma
+            self.nixosModules.wordpress
             sourcesModule
             (import (inputs.fediventure + "/ops/nixos/modules/workadventure/workadventure.nix"))
             {
@@ -273,6 +279,7 @@
         #secrets = import (petabyte + "/modules/secrets");
         pleroma = import (petabyte + "/modules/pleroma");
         nftables = import (petabyte + "/modules/nftables");
+        wordpress = import ./modules/wordpress.nix;
       };
 
       # apps
