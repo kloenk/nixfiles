@@ -5,6 +5,7 @@
     ./trudeltiere.nix
     ./wass-er.nix
     ./schallsignal.nix
+    ./crewkleidung.nix
   ];
 
   # remove for production

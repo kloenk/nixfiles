@@ -51,6 +51,11 @@ in {
     sha256 = "8b8a4edf8030e494f7cec02a971b36053631a4440e2afaa51f32afb440df312e";
   };
 
+  woocomerce = buildPlugin {
+    url = "https://downloads.wordpress.org/plugin/woocommerce.5.0.0.zip";
+    sha256 = "58172b18ec17ef795a2cb9f10764d0d1fa6174d981749800791ddccdc6316c79";
+  };
+
   /*kismet-antispam = callPackage ({ fetchurl, stdenv, unzip }: stdenv.mkDerivation {
     name = "Kismet-Anti-Spam";
     src = fetchurl {
