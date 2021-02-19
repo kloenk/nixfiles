@@ -24,6 +24,7 @@ in {
     ];
     languages = with pkgs.wordpressPlugins; [
       language-de
+      woocomerce-de
     ];
   };
 

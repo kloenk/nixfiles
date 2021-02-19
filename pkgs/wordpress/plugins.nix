@@ -65,7 +65,19 @@ in {
 
     buildInputs = [ unzip ];
     buildPhase = "ls";
-    installPhase = "mkdir -p $out; cp -r ./wp-content/languages/* $out";
+    installPhase = "mkdir -p $out; cp -R ./wp-content/languages/* $out";
+  }) {};
+
+  woocomerce-de = callPackage ({ fetchzip, stdenv, unzip }: stdenv.mkDerivation {
+    name = "woocomerce-de";
+    src = fetchzip {
+      url = "https://downloads.wordpress.org/translation/plugin/woocommerce/5.0.0/de_DE.zip";
+      sha256 = "sha256-FG6TBfgCkxvgzFXcT5wpi3JUuUcgTQ0CRXJ2pA1CfsI=";
+      stripRoot = false;
+    };
+
+    buildInputs = [ unzip ];
+    installPhase = "mkdir -p $out/woocommerce; cp -R * $out/woocommerce/";
   }) {};
 
   /*kismet-antispam = callPackage ({ fetchurl, stdenv, unzip }: stdenv.mkDerivation {
