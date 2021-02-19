@@ -74,6 +74,12 @@ in {
 	repo.owner=kloenk
         repo.readme=master:README.md
 
+        repo.url=kloenk/mcc
+        repo.path=${gitDir}/kloenk/mcc.git
+        repo.desc=MC server in C (playground)
+	repo.owner=kloenk
+        repo.readme=master:README.md
+
         repo.url=kloenk/Masui
         repo.path=${gitDir}/kloenk/Masui.git
         repo.desc=Masui Swift ui matrix client
