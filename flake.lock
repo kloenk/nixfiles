@@ -273,11 +273,11 @@
     "office-map": {
       "flake": false,
       "locked": {
-        "lastModified": 1613761880,
-        "narHash": "sha256-wZ/FCffd8w63Nfhl12O+qgOe9CUZNDL5e3+uQ0HW5+U=",
+        "lastModified": 1613843681,
+        "narHash": "sha256-TjyHHYRS6DCsXyccJ/Ujkx2x7t/KP01xqWD+4wuQVEE=",
         "owner": "holbeh",
         "repo": "office-map",
-        "rev": "68a8770064aa6ecdef17852907af20f79ea30ed7",
+        "rev": "fc64e9de502a2321456b9ff1eb8de0adf294b5e3",
         "type": "github"
       },
       "original": {
