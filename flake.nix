@@ -116,7 +116,7 @@
     type = "github";
     owner = "holbeh";
     repo = "eventstart";
-    ref = "preshow";
+    ref = "postshow";
     inputs.nixpkgs.follows = "/nixpkgs";
   };
 
