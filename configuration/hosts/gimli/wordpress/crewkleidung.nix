@@ -56,6 +56,7 @@ in {
            auth_basic_user_file ${config.petabyte.secrets."wp/crewkleidung.htaccess".path};
            index index.php;
            try_files $uri $uri/ /index.php?$args;
+           client_max_body_size 100M;
          '';
     };
     locations."~ \\.php$" = {
@@ -68,6 +69,7 @@ in {
            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
            include ${config.services.nginx.package}/conf/fastcgi_params;
            include ${config.services.nginx.package}/conf/fastcgi.conf;
+           client_max_body_size 100M;
          '';
     };
     locations."/robots.txt".return = "200 \"User-agent: *\\nDisallow: /\\n\"";
