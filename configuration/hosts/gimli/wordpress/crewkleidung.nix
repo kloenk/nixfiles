@@ -66,5 +66,8 @@ in {
          '';
     };
     locations."/robots.txt".return = "200 \"User-agent: *\\nDisallow: /\\n\"";
+    extraConfig = ''
+      client_max_body_size 100M;
+    '';
   };
 }
