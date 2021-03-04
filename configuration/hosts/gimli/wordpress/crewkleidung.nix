@@ -41,6 +41,11 @@ in {
   services.phpfpm.pools.wordpress-crewkleidung.group =
     lib.mkOverride 25 config.services.nginx.group;
 
+  services.phpfpm.phpOptions = ''
+    upload_max_filesize = 8192M
+    post_max_size = 9000M
+  '';
+
   services.nginx.virtualHosts."crewkleidung.wass-er.com" = {
     enableACME = true;
     forceSSL = true;
