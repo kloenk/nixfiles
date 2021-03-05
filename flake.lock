@@ -289,11 +289,11 @@
     "petabyte": {
       "flake": false,
       "locked": {
-        "lastModified": 1611527278,
-        "narHash": "sha256-yvsQAAqOE1stDrx0j2ZhRoYNF9J9YcSMPmlH6AzYwT8=",
+        "lastModified": 1614438817,
+        "narHash": "sha256-PMXQmJnUcgGsjl4NuZtobInwzTzw6N3QaaYk/O9KC34=",
         "ref": "main",
-        "rev": "ab02564338b41c413a74c9748607ccd11e04924c",
-        "revCount": 487,
+        "rev": "de52bf8ed00f3857b2240e74dfb0244928890df0",
+        "revCount": 562,
         "type": "git",
         "url": "https://git.petabyte.dev/petabyteboy/nixfiles"
       },

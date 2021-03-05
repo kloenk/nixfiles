@@ -274,10 +274,10 @@
         autoUpgrade = import ./modules/upgrade;
         firefox = import ./modules/firefox;
         secrets = import ./modules/secrets;
-        #pleroma = import ./modules/pleroma;
+        pleroma = import ./modules/pleroma;
 
         #secrets = import (petabyte + "/modules/secrets");
-        pleroma = import (petabyte + "/modules/pleroma");
+        #pleroma = import (petabyte + "/modules/pleroma");
         nftables = import (petabyte + "/modules/nftables");
         wordpress = import ./modules/wordpress.nix;
       };
