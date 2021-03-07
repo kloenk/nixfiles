@@ -71,25 +71,31 @@ in {
         repo.url=kloenk/nix
         repo.path=${gitDir}/kloenk/nix.git
         repo.desc=NixOS configs
-	repo.owner=kloenk
+	      repo.owner=kloenk
         repo.readme=master:README.md
 
         repo.url=kloenk/mcc
         repo.path=${gitDir}/kloenk/mcc.git
         repo.desc=MC server in C (playground)
-	repo.owner=kloenk
+	      repo.owner=kloenk
         repo.readme=master:README.md
 
         repo.url=kloenk/Masui
         repo.path=${gitDir}/kloenk/Masui.git
         repo.desc=Masui Swift ui matrix client
-	repo.owner=kloenk
+	      repo.owner=kloenk
         repo.readme=main:README.md
 
         repo.url=kloenk/brook
         repo.path=${gitDir}/kloenk/brook.git
         repo.desc=A minimal self-hostable streaming setup.
-	repo.owner=kloenk
+	      repo.owner=kloenk
+        repo.readme=master:README.md
+
+        repo.url=kloenk/touchcraft
+        repo.path=${gitDir}/kloenk/touchcraft.git
+        repo.desc=Touchbar mod for minecraft.
+	      repo.owner=kloenk
         repo.readme=master:README.md
 
         repo.url=facharbeit
