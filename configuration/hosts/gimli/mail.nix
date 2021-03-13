@@ -174,6 +174,7 @@
           config.petabyte.secrets."mail/drachensegler_drachensegler.kloenk.de.sha512".path;
 
         aliases = [
+          "tjaard@burscheider-imkerverein.de"
           "drachensegler@kloenk.de"
           "dlrg@drachensegler.kloenk.de"
           "tjaard@drachensegler.kloenk.de"
@@ -193,16 +194,15 @@
       };
 
       # burscheider-imkerverein
-      "tjaard@burscheider-imkerverein.de" = {
-        hashedPasswordFile =
-          config.petabyte.secrets."mail/drachensegler_drachensegler.kloenk.de.sha512".path;
-      };
-
       "info@burscheider-imkerverein.de" = {
         hashedPasswordFile =
           config.petabyte.secrets."mail/info_burscheider-imkerverein.de.sha512".path;
 
         catchAll = [ "burscheider-imkerverein.de" ];
+      };
+
+      "kontakt@burscheider-imkerverein.de" = {
+        hashedPasswordFile = config.petabyte.secrets."mail/kontakt_burscheider-imkerverein.de.sha512".path;
       };
 
     };
@@ -243,6 +243,7 @@
     "mail/git_kloenk.de.sha512".owner = "root";
     "mail/drachensegler_drachensegler.kloenk.de.sha512".owner = "root";
     "mail/info_burscheider-imkerverein.de.sha512".owner = "root";
+    "mail/kontakt_burscheider-imkerverein.de.sha512".owner = "root";
   };
 
   # sieve mailing ordering
