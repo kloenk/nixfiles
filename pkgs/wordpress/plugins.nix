@@ -72,7 +72,7 @@ in {
     name = "woocomerce-de";
     src = fetchzip {
       url = "https://downloads.wordpress.org/translation/plugin/woocommerce/5.0.0/de_DE.zip";
-      sha256 = "sha256-FG6TBfgCkxvgzFXcT5wpi3JUuUcgTQ0CRXJ2pA1CfsI=";
+      sha256 = "sha256-hfgd8+Zj71wFXj+GMP9QaF70AOzv/1tVHGcqc97YgUM=";
       stripRoot = false;
     };
 

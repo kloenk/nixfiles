@@ -6,8 +6,6 @@
 
   home-manager.useUserPackages = true;
 
-  security.rngd.enable = lib.mkDefault false;
-
   environment.systemPackages = with pkgs; [
     qt5.qtwayland
     lm_sensors
