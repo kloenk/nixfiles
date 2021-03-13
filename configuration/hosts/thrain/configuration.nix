@@ -14,9 +14,9 @@
 
     ../../default.nix
 
-    ../../desktop
-    ../../desktop/plasma.nix
-    ../../desktop/sway.nix
+    #../../desktop
+    #../../desktop/plasma.nix
+    #../../desktop/sway.nix
     #../../desktop/gnome.nix
 
     ../../common
