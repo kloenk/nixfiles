@@ -19,6 +19,8 @@
     #../../desktop/sway.nix
     #../../desktop/gnome.nix
 
+    ./bbb-backup.nix
+
     ../../common
     ../../common/pbb.nix
     ../../common/syncthing.nix
