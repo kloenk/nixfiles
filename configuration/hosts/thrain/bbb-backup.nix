@@ -6,7 +6,7 @@ let
     systemd.services."${unitname}" = {
       after = [ "network.target" ];
       script = ''
-        ${pkgs.rsync}/bin/rsync -a -e "ssh -o UserKnownHostFile=/etc/bbb_hostkey -o IdentityFile=$CREDENTIALS_DIRECTORY/bbb_creds" \
+        ${pkgs.rsync}/bin/rsync -a -e "${pkgs.openssh}/bin/ssh -o UserKnownHostsFile=/etc/bbb_hostkey -o IdentityFile=$CREDENTIALS_DIRECTORY/bbb_creds" \
           root@stream.unterbachersee.de:${dir}/ /var/lib/bbb_backup/${targetDir}/
       '';
 
@@ -51,7 +51,7 @@ in
     createHome = false;
     group = "bbb_backup";
   };
-  users.group.bbb_backup = {};
+  users.groups.bbb_backup = {};
 
   fileSystems."/persist/bbb_backupvideos" = {
     device = "//192.168.178.68/bbb_backupvideos";
