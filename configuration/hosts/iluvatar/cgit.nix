@@ -95,7 +95,13 @@ in {
         repo.url=kloenk/touchcraft
         repo.path=${gitDir}/kloenk/touchcraft.git
         repo.desc=Touchbar mod for minecraft.
-	      repo.owner=kloenk
+	repo.owner=kloenk
+        repo.readme=master:README.md
+
+        repo.url=kloenk/naapple
+        repo.path=${gitDir}/kloenk/naapple.git
+        repo.desc=napster to apple music converter.
+	repo.owner=kloenk
         repo.readme=master:README.md
 
         repo.url=facharbeit
