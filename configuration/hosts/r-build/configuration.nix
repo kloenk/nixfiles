@@ -87,6 +87,12 @@
     onShutdown = "shutdown";
   };
 
+  fileSystems."/var/lib/libvirt" = {
+    device = "/persist/data/libvirt";
+    fsType = "none";
+    options = [ "bind" ];
+  };
+
   users.users.kloenk.extraGroups = [ "libvirtd" ];
   users.users.kloenk.initialPassword = "foobar";
 
