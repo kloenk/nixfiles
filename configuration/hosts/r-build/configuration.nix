@@ -65,6 +65,11 @@
       bridge = [ "br0" ];
     };
 
+    networks."20-copper" = {
+      name = "enp?s*";
+      bridge = [ "br0" ];
+    };
+
     netdevs."30-br0" = {
       netdevConfig = {
         Kind = "bridge";
