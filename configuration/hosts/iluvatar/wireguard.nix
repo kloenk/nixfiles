@@ -112,6 +112,13 @@
           PersistentKeepalive = 21;
         };
       }
+      { # old phone
+        wireguardPeerConfig = {
+          AllowedIPs = [ "192.168.242.211/32" ];
+          PublicKey = "w3UoZ8XT7K9CVPnvXCZ3SVAkiaWXUFOub9i2EFyGmyg=";
+          PersistentKeepalive = 21;
+        };
+      }
       { # louwa (luis)
         wireguardPeerConfig = {
           AllowedIPs = [ "192.168.242.204/32" ];
