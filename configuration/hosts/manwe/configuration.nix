@@ -10,7 +10,7 @@
     ./postgres.nix
     ./redis.nix
     ./mysql.nix
-    ./pleroma
+    # ./pleroma # fucking annoying and not working
 
     ./wireguard.nix
     ./restic-server.nix
