@@ -2,9 +2,9 @@
 
 {
   imports = [
-    ./trudeltiere.nix
-    ./wass-er.nix
-    ./schallsignal.nix
+    #./trudeltiere.nix
+    #./wass-er.nix
+    #./schallsignal.nix
     ./crewkleidung.nix
   ];
 
