@@ -104,6 +104,12 @@ in {
 	repo.owner=kloenk
         repo.readme=master:README.md
 
+        repo.url=kloenk/MusicConverter
+        repo.path=${gitDir}/kloenk/MusicConverter.git
+        repo.desc=napster to apple music converter.
+	repo.owner=kloenk
+        repo.readme=master:README.md
+
         repo.url=facharbeit
         repo.path=${gitDir}/facharbeit.nix
         repo.desc=Files for my Facharbeit 
