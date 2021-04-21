@@ -18,20 +18,23 @@
   ];
 
 
-  boot.supportedFilesystems = [ "ext4" ];
-  boot.loader.grub.enable = false;
-  boot.loader.generic-extlinux-compatible.enable = true;
+  boot.supportedFilesystems = [ "xfs" ];
+  # Use the systemd-boot EFI boot loader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "peregrin";
   networking.useDHCP = false;
-  networking.interfaces.enp0s1.useDHCP = true;
+  networking.interfaces.eth0.useDHCP = true;
 
   nixpkgs.config.allowUnfree = true;
   nix.extraOptions = ''
     builders-use-substitutes = true
   '';
 
-  users.users.kloenk.initialPassword = "foobaar";
+  consol.keyMap = lib.mkForce "de"; # Parallels is not able to use neo2
+
+  users.users.kloenk.initialPassword = "foobar";
   users.users.kloenk.packages = with pkgs; [
     #python # includes python2 as dependency for vscode
     #platformio # pio command
