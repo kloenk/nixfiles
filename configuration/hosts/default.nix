@@ -20,7 +20,10 @@ let
     });
 
 in {
-  peregrin = makeHost { host = "10.211.55.5"; };
+  peregrin = makeHost {
+    host = "10.211.55.5";
+    system = "aarch64-linux";
+  };
 
   # monitoring only - macOS
   # TODO: nix-on-darwin
