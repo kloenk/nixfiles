@@ -32,7 +32,7 @@
     builders-use-substitutes = true
   '';
 
-  consol.keyMap = lib.mkForce "de"; # Parallels is not able to use neo2
+  console.keyMap = lib.mkForce "de"; # Parallels is not able to use neo2
 
   users.users.kloenk.initialPassword = "foobar";
   users.users.kloenk.packages = with pkgs; [
