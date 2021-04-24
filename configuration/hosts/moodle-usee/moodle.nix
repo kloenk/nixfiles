@@ -122,7 +122,7 @@ in {
 
   services.phpfpm.pools.moodle = {
     user = lib.mkForce "moodle";
-    #settings."security.limit_extensions" = ".php";
+    settings."security.limit_extensions" = ".php";
   };
   services.httpd.user = lib.mkForce "nginx";
 
