@@ -110,6 +110,9 @@ in {
     };
   };
 
+  services.phpfpm.pools.moodle.user = lib.mkForce "moodle";
+  services.httpd.user = lib.mkForce "nginx";
+
   services.phpfpm.phpOptions = ''
     upload_max_filesize = 8192M
     post_max_size = 9000M
