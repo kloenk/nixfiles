@@ -99,6 +99,7 @@ in {
       index = "index.php index.html index.htm";
       tryFiles = "$uri $uri/ /index.php";
     };
+    root = "${config.services.moodle.package}/share/moodle";
     locations."~ [^/]\\.php(/|$)" = {
       root = "${config.services.moodle.package}/share/moodle";
          #fastcgi_split_path_info  ^(.+\.php)(.*)$;
