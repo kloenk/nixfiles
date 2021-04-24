@@ -71,11 +71,21 @@ in {
     server = true;
   };
 
+  # usee
   event = makeHost {
     host = "event.kloenk.dev";
     vm = false;
     server = true;
     prometheusExporters = [ "node-exporter" "nginx-exporter" "jitsi-exporter" ];
+  };
+
+  # usee
+  moodle-usee = makeHost {
+    host = "moodle-usee.kloenk.dev";
+    #nixos = false;
+    prometheusExporters = [ "node-exporter" ];
+    vm = true;
+    server = true;
   };
 
   # for monitoring only
@@ -108,13 +118,6 @@ in {
     server = true;
   };
 
-  # for monitoring only
-  moodle-usee = makeHost {
-    host = "moodle-usee.kloenk.de";
-    nixos = false;
-    prometheusExporters = [ "node-exporter" ];
-    server = true;
-  };
 
   # for monitoring only
   # OSP streaming server

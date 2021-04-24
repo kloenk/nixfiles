@@ -17,6 +17,7 @@
 
     ../../default.nix
     ../../common
+    ../../common/transient.nix
   ];
 
   # vm connection

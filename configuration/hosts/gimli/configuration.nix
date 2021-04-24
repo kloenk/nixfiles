@@ -19,7 +19,7 @@
 
     ../../default.nix
     ../../common
-    ../../common/pbb.nix
+    ../../common/transient.nix
     (import ../../common/schluempfli.nix { extraGroups = [ "wheel" ]; })
   ];
 

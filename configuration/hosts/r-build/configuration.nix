@@ -7,7 +7,7 @@
     ../../default.nix
 
     ../../common
-    ../../common/pbb.nix
+    ../../common/transient.nix
   ];
 
   hardware.cpu.intel.updateMicrocode = true;

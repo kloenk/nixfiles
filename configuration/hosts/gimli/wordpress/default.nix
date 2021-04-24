@@ -29,7 +29,7 @@
     wp-cli
   ];*/
 
-  services.httpd.enable = lib.mkOverride 25 false; # No thanks
+  services.httpd.enable = lib.mkOverride 25 false; # No thanks, I choose life
   services.httpd.group = config.services.nginx.group;
 
   fileSystems."/var/lib/wordpress" = {

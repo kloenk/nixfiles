@@ -22,7 +22,7 @@
     ./bbb-backup.nix
 
     ../../common
-    ../../common/pbb.nix
+    ../../common/transient.nix
     ../../common/syncthing.nix
   ];
 

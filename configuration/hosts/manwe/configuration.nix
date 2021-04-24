@@ -19,7 +19,7 @@
 
     ../../default.nix
     ../../common
-    ../../common/pbb.nix
+    ../../common/transient.nix
   ];
 
   # vm connection
