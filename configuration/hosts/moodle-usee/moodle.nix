@@ -92,6 +92,7 @@ in {
     extraConfig = ''
       rewrite ^/(.*\.php)(/)(.*)$ /$1?file=/$3 last;
       fastcgi_intercept_errors on;
+      client_max_body_size 8G;
     '';
     enableACME = true;
     forceSSL = true;
