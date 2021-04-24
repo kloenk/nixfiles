@@ -129,6 +129,7 @@
     allowReboot = true;
     enable = true;
   };*/
+  system.autoUpgrade.enable = true;
   nix.gc.automatic = true;
 
   # node-exporter foo
