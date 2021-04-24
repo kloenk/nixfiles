@@ -91,7 +91,7 @@ in {
   services.nginx.virtualHosts."segelschule.unterbachersee.de" = {
     enableACME = true;
     forceSSL = true;
-    locations."~ ^(.+\\.php)(.*)$" = {
+    locations."~ [^/]\\.php(/|$)" = {
       root = "${config.services.moodle.package}/share/moodle";
          #fastcgi_split_path_info  ^(.+\.php)(.*)$;
       extraConfig = ''
@@ -112,7 +112,7 @@ in {
 
   services.phpfpm.pools.moodle = {
     user = lib.mkForce "moodle";
-    settings."security.limit_extensions" = ".php";
+    #settings."security.limit_extensions" = ".php";
   };
   services.httpd.user = lib.mkForce "nginx";
 
