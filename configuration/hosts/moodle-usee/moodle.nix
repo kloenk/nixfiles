@@ -90,10 +90,15 @@ in {
 
   services.nginx.virtualHosts."segelschule.unterbachersee.de" = {
     extraConfig = ''
-      rewrite ^/moodle/(.*\.php)(/)(.*)$ /moodle/$1?file=/$3 last;
+      rewrite ^/(.*\.php)(/)(.*)$ /$1?file=/$3 last;
+      fastcgi_intercept_errors on;
     '';
     enableACME = true;
     forceSSL = true;
+    locations."/" = {
+      index = "index.php index.html index.htm";
+      tryFiles = "$uri $uri/ /index.php";
+    };
     locations."~ [^/]\\.php(/|$)" = {
       root = "${config.services.moodle.package}/share/moodle";
          #fastcgi_split_path_info  ^(.+\.php)(.*)$;
