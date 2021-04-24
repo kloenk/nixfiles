@@ -88,7 +88,7 @@ in {
     };*/
   };
 
-  services.nginx.virtualHost."segelschule.unterbachersee.de" = {
+  services.nginx.virtualHosts."segelschule.unterbachersee.de" = {
     enableACME = true;
     forceSSL = true;
     locations."~ [^/]\\.php(/|$)" = {

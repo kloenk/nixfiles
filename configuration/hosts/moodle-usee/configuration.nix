@@ -44,7 +44,7 @@
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-  networking.interfaces.ens18 = {
+  /*networking.interfaces.ens18 = {
     ipv4.addresses = [{
       address = "5.9.118.94";
       prefixLength = 32;
@@ -71,13 +71,39 @@
     interface = "ens18";
   };
 
-  networking.nameservers = [ "1.1.1.1" "192.168.178.1" "2001:4860:4860::8888" ];
+  networking.nameservers = [ "1.1.1.1" "192.168.178.1" "2001:4860:4860::8888" ];*/
+  systemd.network.networks."20-ens18" = {
+    name = "ens18";
+    DHCP = "no";
+    dns = [ "1.1.1.1" "2001:4860:4860::8888" ];
+    addresses = [
+      {
+        addressConfig.Address = "5.9.118.94/32";
+      }
+      {
+        addressConfig.Address = "2a01:4f8:162:6343::4/128";
+      }
+    ];
+    routes = [
+      {
+        routeConfig.Gateway = "5.9.118.73";
+        routeConfig.GatewayOnLink = true;
+      }
+      {
+        routeConfig.Gateway = "2a01:4f8:162:6343::2";
+        routeConfig.GatewayOnLink = true;
+      }
+      { 
+        routeConfig.Destination = "5.9.118.93";
+      }
+      {
+        routeConfig.Destination = "2a01:4f8:162:6343::3";
+      }
+    ];
+  };
 
   # Select internationalisation properties.
   console.keyMap = lib.mkForce "de";
-
-  # Set your time zone.
-  time.timeZone = "Europe/Amsterdam";
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

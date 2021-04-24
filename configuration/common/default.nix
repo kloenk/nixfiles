@@ -52,8 +52,9 @@
       type = "ed25519";
     }] else
       [ ];
-    extraConfig = if (config.networking.hostName == "kexec"
-      || config.networking.hostName == "veantur") then
+    extraConfig = let
+      ca = builtins.readDir ../ca;
+    in if !(ca ? "ssh_host_ed25519_key_${config.networking.hostName}-cert.pub") then
       ""
     else
       let
