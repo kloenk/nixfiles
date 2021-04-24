@@ -89,6 +89,9 @@ in {
   };
 
   services.nginx.virtualHosts."segelschule.unterbachersee.de" = {
+    extraConfig = ''
+      rewrite ^/moodle/(.*\.php)(/)(.*)$ /moodle/$1?file=/$3 last;
+    '';
     enableACME = true;
     forceSSL = true;
     locations."~ [^/]\\.php(/|$)" = {
