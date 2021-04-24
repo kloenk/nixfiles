@@ -89,6 +89,9 @@ in {
   };
 
   services.nginx.virtualHosts."segelschule.unterbachersee.de" = {
+    extraConfig = ''
+      index index.php index.html;
+    '';
     enableACME = true;
     forceSSL = true;
     locations."~ [^/]\\.php(/|$)" = {
@@ -110,7 +113,10 @@ in {
     };
   };
 
-  services.phpfpm.pools.moodle.user = lib.mkForce "moodle";
+  services.phpfpm.pools.moodle = {
+    user = lib.mkForce "moodle";
+    settings."security.limit_extensions" = ".php";
+  };
   services.httpd.user = lib.mkForce "nginx";
 
   services.phpfpm.phpOptions = ''
