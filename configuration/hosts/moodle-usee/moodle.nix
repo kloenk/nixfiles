@@ -89,12 +89,9 @@ in {
   };
 
   services.nginx.virtualHosts."segelschule.unterbachersee.de" = {
-    extraConfig = ''
-      index index.php index.html;
-    '';
     enableACME = true;
     forceSSL = true;
-    locations."~ [^/]\\.php(/|$)" = {
+    locations."~ ^(.+\\.php)(.*)$" = {
       root = "${config.services.moodle.package}/share/moodle";
          #fastcgi_split_path_info  ^(.+\.php)(.*)$;
       extraConfig = ''
