@@ -9,6 +9,7 @@
     ./wordpress
     ./mysql.nix
     ./moodle.nix
+    ./restic.nix
 
     #./postgres.nix
 
