@@ -89,7 +89,7 @@
     "chrome-widevine-cdm"
   ];
 
-  environment.systemPackages = with pkgs; [ lm_sensors virtmanager chromium nodejs ];
+  environment.systemPackages = with pkgs; [ lm_sensors virtmanager nodejs ];
 
   # docker
   #virtualisation.docker.enable = true;
