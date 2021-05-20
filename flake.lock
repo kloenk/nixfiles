@@ -94,20 +94,18 @@
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
-        ],
-        "nmt": "nmt"
+        ]
       },
       "locked": {
-        "lastModified": 1590269472,
-        "narHash": "sha256-wiHqSIYJ65/rjTNc8P4UIaU78hKhxdxDo/83n5I+6WU=",
-        "owner": "kloenk",
+        "lastModified": 1621417094,
+        "narHash": "sha256-Csk4p8jFUma7FtMnjEJGTPGxCOnTbb30xr8AXwrUTMM=",
+        "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "fef8561af7fe842e81b38966fa5b2f7228396d14",
+        "rev": "3d18912f5ae7c98bd5249411d98cdf3b28fe1f09",
         "type": "github"
       },
       "original": {
-        "owner": "kloenk",
-        "ref": "flake-overlay",
+        "owner": "nix-community",
         "repo": "home-manager",
         "type": "github"
       }
@@ -229,11 +227,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1621261694,
-        "narHash": "sha256-7WP9pNMwu9295HMfR1HN9f+vhITClfEmDblqhlrA6tA=",
+        "lastModified": 1621423890,
+        "narHash": "sha256-VwSdjGUsof31oUJrWCA7VXQLFG384dMdL/Eao79DU7I=",
         "owner": "nixos",
         "repo": "nix",
-        "rev": "bd6cf25952a42afabea822141798566e0f0583b3",
+        "rev": "af4ff644d5413b603f1ac512e21536a9e903bc34",
         "type": "github"
       },
       "original": {
@@ -260,31 +258,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1621268537,
-        "narHash": "sha256-gbFCEU7g9le/lqxwJ4ld/lANlN701M8kYPoi5GBANzg=",
+        "lastModified": 1621500090,
+        "narHash": "sha256-1w8qI0xfPm1vSN3khCxhyuz0HWGUuIKbz2iUVbccqlI=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "c6a21f2a62baf0ae25923342b4fb1af5722c17ef",
+        "rev": "57acb6f9f7d736bd3fb7eb09c65981f7997c300e",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
         "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nmt": {
-      "locked": {
-        "lastModified": 1590269023,
-        "narHash": "sha256-VNDyjOFqF17vOpNxc0QJ9W8rY2v610j+ov+sv6oPUl8=",
-        "owner": "kloenk",
-        "repo": "nmt",
-        "rev": "6fce291806fb130ce3c2318a06179caa9a381406",
-        "type": "github"
-      },
-      "original": {
-        "owner": "kloenk",
-        "repo": "nmt",
         "type": "github"
       }
     },

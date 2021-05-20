@@ -3,9 +3,8 @@
 
   inputs.home-manager = {
     type = "github";
-    owner = "kloenk";
+    owner = "nix-community";
     repo = "home-manager";
-    ref = "flake-overlay";
     inputs.nixpkgs.follows = "/nixpkgs";
   };
 
@@ -136,7 +135,7 @@
 
       overlayCombined = system: [
         nix.overlay
-        home-manager.overlay
+        #home-manager.overlay
         self.overlay
         (overlays system)
         rtmp-auth.overlay
@@ -239,7 +238,12 @@
         (nixpkgs.lib.nixosSystem rec {
           system = host.system;
           modules = [
-            { nixpkgs.overlays = [ home-manager.overlay self.overlay ] ++ (overlayCombined host.system); }
+            {
+              nixpkgs.overlays = [
+                #home-manager.overlay
+                self.overlay
+              ] ++ (overlayCombined host.system);
+            }
             nixpkgs.nixosModules.notDetected
             home-manager.nixosModules.home-manager
             (import (./configuration + "/hosts/${name}/configuration.nix"))

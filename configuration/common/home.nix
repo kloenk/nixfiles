@@ -16,6 +16,7 @@ let
     }) sshHosts);
 
 in {
+  home.stateVersion = "21.05";
   programs = {
     git = {
       enable = true;
