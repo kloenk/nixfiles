@@ -31,13 +31,14 @@ in {
       forwardAgent = false;
       controlMaster = "auto";
       controlPersist = "15m";
-      matchBlocks = genMatchBlocks // {
-        lycus = {
-          hostname = "10.0.0.5";
-          port = 62954;
-          user = "kloenk";
-          forwardAgent = true;
+      matchBlocks = {
+        "git.petabyte.dev" = {
+          hostname = "git.petabyte.dev";
+          port = 22;
+          user = "git";
+          forwardAgent = false;
         };
+      } // genMatchBlocks // {
         # nyantec
         "berlin.nyantec.com" = {
           hostname = "berlin.nyantec.com";
@@ -65,19 +66,6 @@ in {
         "*.kloenk.dev" = {
           port = 62954;
         };
-
-        /* # gdv
-           gdv01 = {
-             hostname = "gdv01.eventphone.de";
-             port = 22;
-             user = "root";
-           };
-           gdv02 = {
-             hostname = "gdv02.eventphone.de";
-             port = 22;
-             user = "root";
-           };
-        */
       };
     };
 

@@ -38,6 +38,12 @@
     127.0.0.1 ${config.networking.hostName}.kloenk.de
   '';
   networking.useDHCP = lib.mkDefault false;
+  networking.interfaces.lo = lib.mkDefault {
+    ipv4.addresses = [
+      { address = "127.0.0.1"; prefixLength = 32; }
+      { address = "127.0.0.53"; prefixLength = 32; }
+    ];
+  };
 
   # ssh
   services.openssh = {
