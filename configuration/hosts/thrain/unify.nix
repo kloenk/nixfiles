@@ -1,11 +1,14 @@
 { config, pkgs, ... }:
  
  {
+  systemd.services.unify.serviceConfig.BindPaths = "/persist/data/unifi:/var/lib/unifi";
+  systemd.services.unify.serviceConfig.ReadWritePaths = "/persist/data/unifi";
+
    nixpkgs.config.allowUnfree = true;
    services.unifi.enable = true;
    services.unifi.jrePackage = pkgs.jdk;
    services.unifi.unifiPackage = pkgs.unifi;
-   services.unifi.dataDir = "/persist/data/unify";
+   services.unifi.dataDir = "/persist/data/unifi";
    services.mongodb.dbpath = "/persist/data/mongo";
  
    services.nginx.virtualHosts."unifi.thrain.kloenk.dev" = {
