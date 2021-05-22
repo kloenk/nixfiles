@@ -6,9 +6,8 @@
 
    nixpkgs.config.allowUnfree = true;
    services.unifi.enable = true;
-   services.unifi.jrePackage = pkgs.jdk;
+   #services.unifi.jrePackage = pkgs.jdk;
    services.unifi.unifiPackage = pkgs.unifi;
-   services.unifi.dataDir = "/persist/data/unifi";
    services.mongodb.dbpath = "/persist/data/mongo";
  
    services.nginx.virtualHosts."unifi.thrain.kloenk.dev" = {
