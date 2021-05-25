@@ -71,12 +71,6 @@
     flake = false;
   };
 
-  inputs.qyliss = {
-    type = "git";
-    url = "https://git.qyliss.net/nixlib";
-    flake = false;
-  };
-
   inputs.flake-compat = {
     url = "github:edolstra/flake-compat";
     flake = false;
@@ -130,7 +124,7 @@
   inputs.mixnix.flake = false;
 
   outputs = inputs@{ self, nixpkgs, nix, hydra, home-manager, mail-server
-    , website, nixos-org, dns, grahamc-config, qyliss, rtmp-auth, petabyte, ... }:
+    , website, nixos-org, dns, grahamc-config, rtmp-auth, petabyte, ... }:
     let
 
       overlayCombined = system: [
@@ -211,11 +205,7 @@
           inherit (grahamc)
             nixpkgs-maintainer-tools sway-cycle-workspace mutate wl-freeze
             resholve abathur-resholved;
-        }
-        // {
-          inherit (import (qyliss + "/overlays/patches/nixpkgs-wayland") final prev) waylandPkgs;
-        }
-          // { });
+        } // { });
 
       legacyPackages = forAllSystems
         (system: nixpkgsFor.${system} // { isoImage = (iso system); });

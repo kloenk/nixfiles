@@ -5,19 +5,20 @@
     ./hardware-configuration.nix
 
     ./links.nix
-    ./mysql.nix
+    #./mysql.nix
     ./dhcpcd.nix
+    ./dns.nix
 
     ../../default.nix
     ../../common
-    ../../common/pbb.nix
-    ../../common/syncthing.nix
-    ../../desktop
-    ../../desktop/sway.nix
-    ../../desktop/vscode.nix
+    ../../common/transient.nix
+    #../../common/syncthing.nix
+    #../../desktop
+    #../../desktop/sway.nix
+    #../../desktop/vscode.nix
   ];
 
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  #boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   services.logind.lidSwitchDocked = "ignore";
 
@@ -50,18 +51,10 @@
     "cgroup_no_v1=all"
   ];
 
-  boot.initrd.postMountCommands = ''
-    cd /mnt-root
-    chattr -i var/empty
-    rm -rf $(ls -A /mnt-root | grep -v 'nix' | grep -v 'boot' | grep -v 'var' | grep -v 'home' | grep -v 'persist')
-
-    cd /mnt-root/home
-    rm -rf $(ls -A /mnt-root/home | grep -v 'kloenk' | grep -v 'pbb')
-    mkdir /mnt-root/{home/public,mnt} -p
-
-    cd /mnt-root/var
-    rm -rf $(ls -A /mnt-root/var | grep -v 'src')
+  boot.initrd.postDeviceCommands = lib.mkAfter ''
+    ${pkgs.xfsprogs}/bin/mkfs.xfs -m reflink=1 -f /dev/ssd/root
   '';
+  fileSystems."/".device = lib.mkForce "/dev/ssd/root";
 
   systemd.tmpfiles.rules = [
     "Q /persist/data/bluetooth 750 - - - -"
@@ -91,14 +84,14 @@
   '';
 
   environment.systemPackages = with pkgs; [
-    spice_gtk
-    ebtables
-    davfs2
+    #spice_gtk
+    #ebtables
+    #davfs2
     #geogebra
-    gtk-engine-murrine
-    tango-icon-theme
-    breeze-icons
-    gnome3.adwaita-icon-theme
+    #gtk-engine-murrine
+    #tango-icon-theme
+    #breeze-icons
+    #gnome3.adwaita-icon-theme
   ];
 
   services.tlp.enable = true;
@@ -109,37 +102,37 @@
     tpacpi-bat
     acpi # fixme: not in the kernel
     #wine # can we ditch it?
-    spotifywm # spotify fixed for wms
+    #spotifywm # spotify fixed for wms
     python # includes python2 as dependency for vscode
-    platformio # pio command
-    openocd # pio upload for stlink
-    stlink # stlink software
+    #platformio # pio command
+    #openocd # pio upload for stlink
+    #stlink # stlink software
     #teamspeak_client       # team speak
 
     # steam
-    steam
-    steamcontroller
+    #steam
+    #steamcontroller
 
     # minecraft
-    multimc
+    #multimc
 
     # docker controller
-    docker
-    virtmanager
+    #docker
+    #virtmanager
 
     # paint software
-    krita
-    sublime3
+    #krita
+    #sublime3
     wpa_supplicant_gui
   ];
 
   # docker fo
-  virtualisation.docker.enable = true;
+  #virtualisation.docker.enable = true;
 
-  virtualisation.libvirtd = {
-    enable = true;
-    onShutdown = "shutdown";
-  };
+  #virtualisation.libvirtd = {
+  #  enable = true;
+  #  onShutdown = "shutdown";
+  #};
 
   users.users.kloenk.extraGroups = [
     "dialout" # allowes serial connections
@@ -160,13 +153,13 @@
   services.pcscd.enable = true;
   #services.pcscd.plugins = with pkgs; [ ccid pcsc-cyberjack ];
 
-  hardware.bluetooth.enable = true;
+  #hardware.bluetooth.enable = true;
 
   # add bluetooth sink
-  hardware.bluetooth.config.General.Enable = ''
-    Source,Sink,Media,Socket
-  '';
-  hardware.pulseaudio.zeroconf.discovery.enable = true;
+  #hardware.bluetooth.config.General.Enable = ''
+  #  Source,Sink,Media,Socket
+  #'';
+  #hardware.pulseaudio.zeroconf.discovery.enable = true;
 
   nix.gc.automatic = false;
 
@@ -179,5 +172,5 @@
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes sayyou
   # should.
-  system.stateVersion = "20.09";
+  system.stateVersion = "21.05";
 }

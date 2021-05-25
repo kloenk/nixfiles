@@ -304,22 +304,6 @@
         "url": "https://git.petabyte.dev/petabyteboy/nixfiles"
       }
     },
-    "qyliss": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1607655673,
-        "narHash": "sha256-Hk2lTaPuXLuWi18yMX82yvdXp6cAZMj515ODX7Sf0lo=",
-        "ref": "master",
-        "rev": "0182c6ff20c13e07a209b0699b38f1d933183515",
-        "revCount": 233476,
-        "type": "git",
-        "url": "https://git.qyliss.net/nixlib"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://git.qyliss.net/nixlib"
-      }
-    },
     "root": {
       "inputs": {
         "dns": "dns",
@@ -336,7 +320,6 @@
         "nixpkgs": "nixpkgs",
         "office-map": "office-map",
         "petabyte": "petabyte",
-        "qyliss": "qyliss",
         "rtmp-auth": "rtmp-auth",
         "website": "website",
         "workadventure": "workadventure"
