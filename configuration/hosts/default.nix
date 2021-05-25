@@ -65,6 +65,12 @@ in {
     server = false;
   };
 
+  samwise = makeHost {
+    host = "192.168.178.1";
+    server = false;
+    prometheusExporters = [ ];
+  };
+
   usee-nschl = makeHost {
     host = "usee-nschl.kloenk.dev";
     vm = true;

@@ -17,12 +17,12 @@
       max-lease-time 7200;
       authoritative;
 
-      subnet 172.16.0.0 netmask 255.255.255.0 {
-        range 172.16.0.20 172.16.0.50;
-        option routers 172.16.0.1;
+      subnet 192.168.178.0 netmask 255.255.255.0 {
+        range 172.168.178.10 192.168.178.230;
+        option routers 192.168.178.1;
       }
     '';
   };
 
-  systemd.services.dhcpd4.wantedBy = lib.mkForce [ ];
+  #systemd.services.dhcpd4.wantedBy = lib.mkForce [ ];
 }
