@@ -1,0 +1,1 @@
+nix build .#nixosConfigurations.samwise.config.system.build.toplevel --override-input nixpkgs github:nixos/nixpkgs/release-21.05 --override-input nix github:nixos/nix

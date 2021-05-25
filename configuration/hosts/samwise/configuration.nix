@@ -65,9 +65,8 @@
   networking.useDHCP = false;
   networking.wireless.enable = true;
   networking.wireless.interfaces = [ "wlp2s0" ];
-  environment.etc."wpa_supplicant.conf".source =
-    "/var/src/secrets/wpa_supplicant.conf";
-  networking.supplicant.wlp2s0.configFile.path = "/etc/wpa_supplicant.conf";
+  networking.supplicant.wlp2s0.configFile.path = config.petabyte.secrets."wpa_supplicant".path;
+  petabyte.secrets.wpa_supplicant.owner = "root";
   #networking.wireless.userControlled.enable = true;
   networking.nameservers = [ "1.1.1.1" "10.0.0.2" ];
 

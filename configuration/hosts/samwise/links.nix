@@ -2,28 +2,19 @@
 
 let bondName = "world";
 in {
-  systemd.network = {
-    #netdevs."30-bond0" = {
-    #  netdevConfig = {
-    #    Kind = "bond";
-    #    Name = bondName;
-    #  };
-    #  bondConfig = {
-    #    Mode = "active-backup";
-    #    MinLinks = "1";
-    #    FailOverMACPolicy = "active";
-    #  };
-    #};
-    #networks."50-bond0" = {
-    #  name = bondName;
-    #  DHCP = "yes";
-    #};
-    #networks."30-bond0" = {
-    #  name = bondName;
-    #  DHCP = "yes";
-    #  matchConfig.SSID = "TT-WLAN";
-    #};
+  boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
 
+  petabyte.nftables.extraConfig = ''
+    table ip nat {
+      chain postrouting {
+        type nat hook postrouting priority srcnat;
+        ip saddr 192.168.178.0/24 oif wlp2s0 masquerade
+      }
+    }
+  '';
+  petabyte.nftables.forwardPolicy = "accept";
+
+  systemd.network = {
     netdevs."25-vlan" = {
       netdevConfig = {
         Kind = "vlan";
@@ -53,25 +44,10 @@ in {
       name = "lo";
       DHCP = "no";
       addresses = [
-        { addressConfig.Address = "195.39.246.50/32"; }
-        { addressConfig.Address = "2a0f:4ac0:f199::6/128"; }
         { addressConfig.Address = "127.0.0.1/32"; }
         { addressConfig.Address = "127.0.0.53/32"; }
         { addressConfig.Address = "::1/128"; }
       ];
-    };
-    links."30-xiaomi" = {
-      matchConfig = { Property = "ID_SERIAL=Xiaomi_Mi_Note_2_d10974cf"; };
-      linkConfig = {
-        Description = "Xiaomi LTE Uplink";
-        Name = "xiaomi";
-      };
-    };
-    networks."30-xiaomi" = {
-      name = "xiaomi";
-      DHCP = "yes";
-      dhcpV4Config.RouteMetric = 500;
-      linkConfig.RequiredForOnline = "no";
     };
     networks."99-how_cares".linkConfig.RequiredForOnline = "no";
     networks."99-how_cares".linkConfig.Unmanaged = "yes";
