@@ -36,7 +36,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.burscheider-imkerverein.de.";
       adminEmail = "hostmaster@burscheider-imkerverein.de";
-      serial = 2020122607;
+      serial = 2020122608;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
@@ -64,7 +64,7 @@ let
 
       _domainkey.subdomains.mail.TXT = [
         (txt ''
-          "v=DKIM1; k=rsa; " "p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC1D9RI1j3LHkeaHgYVHMpESUZLNwXXYPWGL2pyjHpUIV40gtClvd0QnSK7GRshqQ39bkj72M50vn788BAu3PBHHoICpcQOIE8nds3sAj4IqibSD2pDaunYiArsLxfGtxq8/FfnAHVfO9Cq1nm3EtAvr51tn7j7b25uIjhdrI6B5wIDAQAB"'')
+          v=DKIM1; k=rsa; " "p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC1D9RI1j3LHkeaHgYVHMpESUZLNwXXYPWGL2pyjHpUIV40gtClvd0QnSK7GRshqQ39bkj72M50vn788BAu3PBHHoICpcQOIE8nds3sAj4IqibSD2pDaunYiArsLxfGtxq8/FfnAHVfO9Cq1nm3EtAvr51tn7j7b25uIjhdrI6B5wIDAQAB'')
       ];
     };
   };
