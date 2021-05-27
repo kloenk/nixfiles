@@ -20,6 +20,8 @@
       subnet 192.168.178.0 netmask 255.255.255.0 {
         range 192.168.178.10 192.168.178.230;
         option routers 192.168.178.1;
+        option domain-name-servers 192.168.178.1;
+        allow unknown-clients;
       }
     '';
   };

@@ -21,6 +21,8 @@
   #boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   services.logind.lidSwitchDocked = "ignore";
+  services.logind.lidSwitch = "ignore";
+  services.logind.lidSwitchExternalPower = "ignore";
 
   hardware.enableRedistributableFirmware = true;
   hardware.cpu.intel.updateMicrocode = true;
