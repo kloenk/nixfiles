@@ -1,4 +1,5 @@
 #!@shell@
+export PATH=@path@:/run/wrappers/bin/
 for key in secrets/.public-keys/*
 do
 	gpg --import $key 2>/dev/null

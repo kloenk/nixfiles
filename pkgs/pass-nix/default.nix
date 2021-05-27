@@ -1,6 +1,7 @@
-{ lib, substituteAll, bash, coreutils, pass, gnupg }:
+{ lib, runCommandNoCC, substituteAll, bash, coreutils, pass, gnupg }:
 
-substituteAll {
+let
+pass_nix = substituteAll {
   name = "pass-nix";
   version = "0.0.1";
   
@@ -10,4 +11,8 @@ substituteAll {
   path = lib.makeBinPath [ coreutils pass gnupg ];
   
   meta = { license = lib.licenses.mit; };
-}
+};
+in runCommandNoCC "pass-nix" {} ''
+  mkdir -p $out/bin
+  cp ${pass_nix} $out/bin/pass-nix
+''
