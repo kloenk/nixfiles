@@ -168,11 +168,11 @@
     "mail-server": {
       "flake": false,
       "locked": {
-        "lastModified": 1615112795,
-        "narHash": "sha256-2FE8unWc4pmUeiEKI7NTtmMmGnSlN0ef1uSg3QbnE5c=",
+        "lastModified": 1621793738,
+        "narHash": "sha256-Bl4KGFjOQ1nVtnQfvw6e6/YZf/BLGX+9fR+oN+Yr6Qs=",
         "owner": "simple-nixos-mailserver",
         "repo": "nixos-mailserver",
-        "rev": "7627c29268d2f49ede330a806524447ad9cf9c3f",
+        "rev": "37376efbbf44ac5accaef84ccbbebbdfdc02e95d",
         "type": "gitlab"
       },
       "original": {
