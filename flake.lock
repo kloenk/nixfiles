@@ -120,17 +120,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1605999746,
-        "narHash": "sha256-iurWIKPEza5ICsZOLVE1w6MoCohOqFifnedw/MafyI4=",
-        "owner": "nixos",
+        "lastModified": 1621898460,
+        "narHash": "sha256-8H8i5TBmI1dFPyQd7ZczDSaJns5k7/iJSdi+Is8jvBY=",
+        "owner": "NixOS",
         "repo": "hydra",
-        "rev": "bde8d81876dfc02143e5070e42c78d8f0d83d6f7",
+        "rev": "5b6b8261fc0571c4ee678cbe829ba07ed9372ef0",
         "type": "github"
       },
       "original": {
-        "owner": "nixos",
-        "repo": "hydra",
-        "type": "github"
+        "id": "hydra",
+        "type": "indirect"
       }
     },
     "lowdown-src": {
@@ -207,11 +206,12 @@
         ]
       },
       "locked": {
-        "lastModified": 1605715425,
-        "narHash": "sha256-h4VEpxnPBoUigXeoy0/8z8jUFKkJD9XG5dR/lt/rQCk=",
-        "owner": "NixOS",
+        "lastModified": 1605715426,
+        "narHash": "sha256-H4VEHxnnBoUigXeoy0/8z8jUFKkJD9XG5dR/lt/rQCk=",
+        "owner": "kloenk",
+        "ref": "aarch64-darwin",
         "repo": "nix",
-        "rev": "79aa7d95183cbe6c0d786965f0dbff414fd1aa67",
+        "rev": "f10d302d90b75445ce58d2898cd08d00e6382abc",
         "type": "github"
       },
       "original": {
@@ -227,42 +227,26 @@
         ]
       },
       "locked": {
-        "lastModified": 1621423890,
-        "narHash": "sha256-VwSdjGUsof31oUJrWCA7VXQLFG384dMdL/Eao79DU7I=",
-        "owner": "nixos",
-        "repo": "nix",
-        "rev": "af4ff644d5413b603f1ac512e21536a9e903bc34",
+        "lastModified": 1622109913,
+        "narHash": "sha256-lDZTQluMDXrb5SAPHQTPVxAuw7DsehMPQMt9j8JaeyM=",
+        "owner": "kloenk",
+        "repo": "nixos-nix",
+        "rev": "f10d302d90b75445ce58d2898cd08d00e6382abc",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
         "repo": "nix",
-        "type": "github"
-      }
-    },
-    "nixos-org": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1609260966,
-        "narHash": "sha256-B1BhjWPBHd6iBV8of1mK6WrOP/HYDkyqcFBSU1GuwsA=",
-        "owner": "nixos",
-        "repo": "nixos-org-configurations",
-        "rev": "b316f214cf83d9cb4fc0e3ce0d49f3cbdffce968",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "repo": "nixos-org-configurations",
         "type": "github"
       }
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1621595589,
-        "narHash": "sha256-DUodVnlju9EEMr6w3LJ1E9w0y6Ie2/X0AZidquFpqG0=",
+        "lastModified": 1622103435,
+        "narHash": "sha256-5i5mGg402AANnSRQmWVo7lqiyw3taoMwX26oslOD9c4=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "1085be223345b6446b79e577de0e5d4b2dfc6cda",
+        "rev": "5658fadedb748cb0bdbcb569a53bd6065a5704a9",
         "type": "github"
       },
       "original": {
@@ -316,7 +300,6 @@
         "mail-server": "mail-server",
         "mixnix": "mixnix",
         "nix": "nix_2",
-        "nixos-org": "nixos-org",
         "nixpkgs": "nixpkgs",
         "office-map": "office-map",
         "petabyte": "petabyte",

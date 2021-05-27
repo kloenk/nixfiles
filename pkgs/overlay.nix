@@ -4,6 +4,7 @@ in {
   collectd-wireguard = callPackage ./collectd-wireguard { };
   jblock = callPackage ./jblock { };
   deploy_secrets = callPackage ./deploy_secrets { };
+  pass-nix = callPackage ./pass-nix { };
   wallpapers = callPackage ./wallpapers { };
   fabric-server = callPackage ./fabric-server { };
   pam_nfc = callPackage ./pam_nfc { };
