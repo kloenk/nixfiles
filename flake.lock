@@ -209,7 +209,6 @@
         "lastModified": 1605715426,
         "narHash": "sha256-H4VEHxnnBoUigXeoy0/8z8jUFKkJD9XG5dR/lt/rQCk=",
         "owner": "kloenk",
-        "ref": "aarch64-darwin",
         "repo": "nix",
         "rev": "f10d302d90b75445ce58d2898cd08d00e6382abc",
         "type": "github"
