@@ -23,15 +23,6 @@
     inputs.nixpkgs.follows = "/nixpkgs"; # broken
   };
 
-  inputs.hydra = {
-    type = "github";
-    owner = "nixos";
-    repo = "hydra";
-    #inputs.nixpkgs.follows = "/nixpkgs";
-    #inputs.nix.inputs.nixpkgs.follows = "/nixpkgs";
-    #inputs.nix.follows = "/nix";
-  };
-
   inputs.mail-server = {
     #type = "git";
     #url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver.git";
@@ -47,13 +38,6 @@
     url = "https://git.petabyte.dev/kloenk/website.git";
     flake = false;
     #ref = "lexbeserious";
-  };
-
-  inputs.nixos-org = {
-    type = "github";
-    owner = "nixos";
-    repo = "nixos-org-configurations";
-    flake = false;
   };
 
   inputs.dns = {
@@ -124,7 +108,7 @@
   inputs.mixnix.flake = false;
 
   outputs = inputs@{ self, nixpkgs, nix, hydra, home-manager, mail-server
-    , website, nixos-org, dns, grahamc-config, rtmp-auth, petabyte, ... }:
+    , website, dns, grahamc-config, rtmp-auth, petabyte, ... }:
     let
 
       overlayCombined = system: [
