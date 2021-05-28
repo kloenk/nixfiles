@@ -4,7 +4,8 @@ set -euo pipefail
 cd $(dirname $0)/..
 host=$1
 
-SSH="ssh $LIB_SSH_OPTS"
+lib_ssh_opts=${LIB_SSH_OPTS:=""}
+SSH="ssh $lib_ssh_opts"
 
 function create_key() {
 	hostname=$($SSH $1 "hostname")
