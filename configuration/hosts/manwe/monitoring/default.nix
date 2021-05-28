@@ -154,6 +154,24 @@ in {
             mib = "procurve";
           };
         }
+        {
+          targets = [ "192.168.178.243" ];
+          labels = {
+            hostname = "switch-studio";
+            snmpCommunity = "public";
+            mib = "procurve";
+          };
+        }
+
+        # unifiy (works with procurve??)
+        {
+          targets = [ "192.168.178.243" ];
+          labels = {
+            hostname = "switch-pony";
+            snmpCommunity = "public";
+            mib = "procurve";
+          };
+        }
       ];
       snmp_file = pkgs.writeText "snmp_targets.json" (builtins.toJSON snmp_targets);
     in [
