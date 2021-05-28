@@ -14,8 +14,8 @@ let
   '';
 in {
 
-  fileSystems."/var/lib/prometheus" = {
-    device = "/persist/data/prometheus";
+  fileSystems."/var/lib/prometheus2" = {
+    device = "/persist/data/prometheus2";
     fsType = "none";
     options = [ "bind" ];
   };
@@ -130,8 +130,9 @@ in {
     ];
 
     scrapeConfigs = let
+      # nginx filtered
       filteredHosts =
-        lib.filterAttrs (name: host: host ? prometheusExporters) hosts;
+        lib.filterAttrs (name: host: host ? prometheusExporters && host ? server && host.server) hosts;
       makeTargets = name: host:
         map (exporter: {
           targets = [ host.host.ip ];
@@ -142,10 +143,61 @@ in {
         }) host.prometheusExporters;
       targets = lib.concatLists (lib.mapAttrsToList makeTargets filteredHosts);
       targetsFile = pkgs.writeText "targets.json" (builtins.toJSON targets);
-    in [{
-      job_name = "dummy";
-      file_sd_configs = [{ files = [ (toString targetsFile) ]; }];
-    }];
+
+      # snmp
+      snmp_targets = [
+        {
+          targets = [ "192.168.178.241" ];
+          labels = {
+            hostname = "switch-dachboden";
+            snmpCommunity = "public";
+            mib = "procurve";
+          };
+        }
+      ];
+      snmp_file = pkgs.writeText "snmp_targets.json" (builtins.toJSON snmp_targets);
+    in [
+      {
+        job_name = "dummy";
+        file_sd_configs = [{ files = [ (toString targetsFile) ]; }];
+      }
+      {
+        job_name = "snmp-thrain";
+        # longer timeouts as it is snmp
+        scrape_interval = "120s";
+        scrape_timeout = "90s";
+
+        metrics_path = "/snmp";
+        params = {
+          module = [ "if_mib" ];
+          community = [ "public" ];
+        };
+        relabel_configs = [
+          {
+            source_labels = [ "__address__" ];
+            target_label = "__param_target";
+          }
+          {
+            source_labels = [ "hostname" ];
+            target_label = "instance";
+          }
+          {
+            target_label = "__address__";
+            replacement = "192.168.242.101:9116";
+          }
+          {
+            source_labels = [ "snmpCommunity" ];
+            target_label = "__param_community";
+          }
+          {
+            source_labels = [ "mib" ];
+            target_label = "__param_module";
+          }
+        ];
+
+        file_sd_configs = [{ files = [ (toString snmp_file) ]; }];
+      }
+    ];
 
     alertmanagers = [{
       scheme = "http";

@@ -8,6 +8,7 @@
     ./nfs.nix
     #./timemachine.nix
     ./samba.nix
+    ./snmp
 
     ./factorio.nix
 
