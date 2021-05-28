@@ -3,8 +3,8 @@
 {
   networking.firewall.allowedUDPPorts = [ 67 68 ];
 
-  fileSystems."/var/lib/dhcpd" = {
-    device = "/persist/data/dhcpd";
+  fileSystems."/var/lib/dhcp" = {
+    device = "/persist/data/dhcp";
     fsType = "none";
     options = [ "bind" ];
   };
@@ -19,12 +19,12 @@
 
       subnet 192.168.178.0 netmask 255.255.255.0 {
         range 192.168.178.10 192.168.178.230;
-        option routers 192.168.178.1;
-        option domain-name-servers 192.168.178.1;
+        option routers 192.168.178.2;
+        option domain-name-servers 192.168.178.2;
         allow unknown-clients;
       }
     '';
   };
 
-  systemd.services.dhcpd4.wantedBy = lib.mkForce [ ];
+  #systemd.services.dhcpd4.wantedBy = lib.mkForce [ ];
 }

@@ -4,7 +4,7 @@
   imports = [
     ./hardware-configuration.nix
     ./links.nix
-    ./dhcpd.nix
+    #./dhcpd.nix
     ./nfs.nix
     #./timemachine.nix
     ./samba.nix
