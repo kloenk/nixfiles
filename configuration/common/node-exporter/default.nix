@@ -22,8 +22,9 @@
       allow 192.168.242.0/24;
       allow 195.39.221.187/32;
       allow 2a0f:4ac4:42:f144::/64;
-      deny all;
     '';
+    #  deny all;
+    #'';
     locations."/wireguard/".proxyPass = "http://127.0.0.1:9586/";
     locations."/wireguard/".extraConfig =
       config.services.nginx.virtualHosts."${config.networking.hostName}.kloenk.dev".locations."/node-exporter/".extraConfig;

@@ -126,6 +126,13 @@
           PersistentKeepalive = 21;
         };
       }
+      { # mum
+        wireguardPeerConfig = {
+          AllowedIPs = [ "192.168.242.205/32" ];
+          PublicKey = "QWsfx59OadImT9nLGbx19Unr6GG6zObFBJSoLdtIFls=";
+          PersistentKeepalive = 21;
+        };
+      }
     ];
   };
   systemd.network.networks."30-wg0" = {
