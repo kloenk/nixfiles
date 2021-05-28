@@ -22,10 +22,11 @@
         import log
         forward . tls://1.1.1.1 tls://1.0.0.1
       }
-      fritz.box {
-        import log
-        forward fritz.box 192.168.178.1
-      }
     '';
+    #  fritz.box {
+    #    import log
+    #    forward fritz.box 192.168.178.1
+    #  }
+    #'';
   };
 }

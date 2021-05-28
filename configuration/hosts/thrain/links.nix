@@ -6,12 +6,15 @@
       name = "eno1";
       DHCP = "no";
       dns = [ "127.0.0.1" ];
-      vlan = lib.singleton "vlan1337";
-      addresses = [{ addressConfig.Address = "192.168.178.248/24"; }];
-      routes = [
-        { routeConfig.Gateway = "192.168.178.1"; }
-        { routeConfig.Gateway = "fd00::ca0e:14ff:fe07:a2fa"; }
+      vlan = [ "vlan1337" "nclte" ];
+      addresses = [
+        { addressConfig.Address = "192.168.178.248/24"; }
+        #{ addressConfig.Address = "192.168.178.1/24"; }
       ];
+      #routes = [
+      #  { routeConfig.Gateway = "192.168.178.1"; }
+      #  { routeConfig.Gateway = "fd00::ca0e:14ff:fe07:a2fa"; }
+      #];
     };
 
     netdevs."25-vlan" = {
@@ -22,9 +25,23 @@
       vlanConfig.Id = 1337;
     };
     networks."25-vlan" = {
-      name = config.systemd.network.netdevs."25-vlan".netdevConfig.Name;
+      name = config.systemd.network.netdevs."25-nclte".netdevConfig.Name;
       DHCP = "no";
       addresses = [{ addressConfig.Address = "6.0.2.2/24"; }];
+    };
+
+    netdevs."25-nclte" = {
+      netdevConfig = {
+        Kind = "vlan";
+        Name = "nclte";
+      };
+      vlanConfig.Id = 666;
+    };
+    networks."25-nclte" = {
+      name = config.systemd.network.netdevs."25-nclte".netdevConfig.Name;
+      DHCP = "yes";
+      #addresses = [{ addressConfig.Address = "6.0.2.2/24"; }];
+      linkConfig.RequiredForOnline = "no";
     };
 
     networks."25-tun" = {
@@ -77,4 +94,13 @@
 
   petabyte.secrets."wg0.key".owner = "systemd-network";
   users.users.systemd-network.extraGroups = [ "keys" ];
+
+  petabyte.nftables.extraConfig = ''
+    table ip nat {
+      chain postrouting {
+        type nat hook postrouting priority srcnat;
+        ip saddr 192.168.178.0/24 iif eno1 oif nclte masquerade
+      }
+    }
+  '';
 }
