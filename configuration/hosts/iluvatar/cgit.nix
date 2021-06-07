@@ -110,6 +110,12 @@ in {
 	repo.owner=kloenk
         repo.readme=master:README.md
 
+        repo.url=kloenk/ssh_exporter
+        repo.path=${gitDir}/kloenk/ssh_exporter.git
+        repo.desc=Prometheus exporter for hosts, on which installing software is not possible
+	repo.owner=kloenk
+        repo.readme=main:README.md
+
         repo.url=facharbeit
         repo.path=${gitDir}/facharbeit.nix
         repo.desc=Files for my Facharbeit 
