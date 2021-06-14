@@ -35,7 +35,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.dev.";
       adminEmail = "hostmaster.kloenk.dev."; # TODO: change mail
-      serial = 2021010116;
+      serial = 2021010117;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
@@ -91,6 +91,9 @@ let
       bbb-usee.CNAME = [ "schulungsraum.unterbachersee.de." ];
       event.CNAME = [ "event.unterbachersee.de." ];
       pve-usee = host "5.9.118.73" "2a01:4f8:162:6343::2";
+
+      matrix-push.subdomains.dev = iluvatar;
+      matrix-push.CNAME = iluvatar.CNAME;
 
       _domainkey.subdomains.mail.TXT = [
         (txt ''
