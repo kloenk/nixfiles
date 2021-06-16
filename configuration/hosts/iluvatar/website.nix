@@ -43,5 +43,8 @@ in {
       locations."/public/".alias =
         config.services.nginx.virtualHosts."kloenk.de".locations."/public/".alias;
     };
+    "dev.matrix-push.kloenk.dev" = {
+      locations."/".proxyPass = "localhost:5000";
+    };
   };
 }
