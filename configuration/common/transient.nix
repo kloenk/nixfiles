@@ -53,16 +53,17 @@
      )
    )
  ) // {
-  "acme-fixperms" = {
-     serviceConfig.ReadWritePaths = [ "/persist/data/acme" ];
-     serviceConfig.BindPaths = mkBefore [ 
-       "/persist/data/acme:/var/lib/acme"
-     ];
-   };
+  #"acme-fixperms" = {
+  #   serviceConfig.ReadWritePaths = [ "/persist/data/acme" ];
+  #   serviceConfig.BindPaths = mkBefore [ 
+  #     "/persist/data/acme:/var/lib/acme"
+  #   ];
+  # };
   "acme-selfsigned-ca" = {
      serviceConfig.ReadWritePaths = [ "/persist/data/acme" ];
-     serviceConfig.BindPaths = mkBefore [ 
+     serviceConfig.BindPaths = mkForce [ 
        "/persist/data/acme:/var/lib/acme"
+       "/var/lib/acme/.minica:/tmp/ca"
      ];
    };
  };
