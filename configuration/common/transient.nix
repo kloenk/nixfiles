@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, ... }:
 
 {
   fileSystems."/var/lib/acme" = {
