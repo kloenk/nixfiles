@@ -44,6 +44,8 @@ in {
         config.services.nginx.virtualHosts."kloenk.de".locations."/public/".alias;
     };
     "dev.matrix-push.kloenk.dev" = {
+      enableACME = true;
+      forceSSL = true;
       locations."/".proxyPass = "http://localhost:5000/";
     };
   };
