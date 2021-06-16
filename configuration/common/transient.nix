@@ -31,6 +31,14 @@
              ];
            }
          )
+         (
+           nameValuePair "acme-selfsigned-${name}" {
+             serviceConfig.ReadWritePaths = [ "/persist/data/acme" ];
+             serviceConfig.BindPaths = mkBefore [ 
+               "/persist/data/acme:/var/lib/acme"
+             ];
+           }
+         )
        ]
      ) (
        attrNames config.security.acme.certs
