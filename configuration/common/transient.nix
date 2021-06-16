@@ -17,4 +17,22 @@
   fileSystems."/persist" = {
     neededForBoot = true;
   };
+
+  systemd.services = with lib; listToAttrs (
+   flatten (
+     map (
+       name: [
+         # disable the real acme services
+         (
+           nameValuePair "acme-${name}" {
+             ReadWritePaths = "/persist/data/acme";
+             BindPaths = "/perist/data/acme:/var/lib/acme";
+           }
+         )
+       ]
+     ) (
+       attrNames config.security.acme.certs
+     )
+   )
+ );
 }

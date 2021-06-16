@@ -155,5 +155,4 @@
   ];
   services.resolved.dnssec = "false";
 
-
 }
