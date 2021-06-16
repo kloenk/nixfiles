@@ -39,10 +39,32 @@
              ];
            }
          )
+         (
+           nameValuePair "acme-finished-${name}" {
+             serviceConfig.ReadWritePaths = [ "/persist/data/acme" ];
+             serviceConfig.BindPaths = mkBefore [ 
+               "/persist/data/acme:/var/lib/acme"
+             ];
+           }
+         )
        ]
      ) (
        attrNames config.security.acme.certs
      )
    )
- );
-}
+ ) // {
+  "acme-fixperms" = {
+     serviceConfig.ReadWritePaths = [ "/persist/data/acme" ];
+     serviceConfig.BindPaths = mkBefore [ 
+       "/persist/data/acme:/var/lib/acme"
+     ];
+   };
+  "acme-selfsigned-ca" = {
+     serviceConfig.ReadWritePaths = [ "/persist/data/acme" ];
+     serviceConfig.BindPaths = mkBefore [ 
+       "/persist/data/acme:/var/lib/acme"
+     ];
+   };
+ };
+
+} 
