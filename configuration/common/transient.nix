@@ -25,8 +25,8 @@
          # disable the real acme services
          (
            nameValuePair "acme-${name}" {
-             serviceConfig.ReadWritePaths = "/persist/data/acme";
-             serviceConfig.BindPaths = "/perist/data/acme:/var/lib/acme";
+             serviceConfig.ReadWritePaths = [ "/persist/data/acme" ];
+             serviceConfig.BindPaths = [ "/perist/data/acme:/var/lib/acme" ];
            }
          )
        ]
