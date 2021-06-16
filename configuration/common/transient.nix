@@ -22,11 +22,11 @@
    flatten (
      map (
        name: [
-         # disable the real acme services
+         # fix acme serviceConfig
          (
            nameValuePair "acme-${name}" {
              serviceConfig.ReadWritePaths = [ "/persist/data/acme" ];
-             serviceConfig.BindPaths = [ "/perist/data/acme:/var/lib/acme" ];
+             #serviceConfig.BindPaths = [ "/perist/data/acme:/var/lib/acme" ];
            }
          )
        ]
