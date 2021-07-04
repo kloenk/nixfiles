@@ -27,7 +27,11 @@
   # vm connection
   services.qemuGuest.enable = true;
 
-  boot.supportedFilesystems = [ "zfs" "vfat" "xfs" ];
+  boot.supportedFilesystems = [
+    #"zfs"
+    "vfat"
+    "xfs"
+  ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.grub.enable = false;
   boot.loader.efi.canTouchEfiVariables = true;
