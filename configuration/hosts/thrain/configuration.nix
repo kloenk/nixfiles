@@ -23,6 +23,7 @@
     #../../desktop/gnome.nix
 
     ./bbb-backup.nix
+    ./r-dev.nix
 
     ../../common
     ../../common/transient.nix
