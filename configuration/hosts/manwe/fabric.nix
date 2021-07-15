@@ -19,7 +19,7 @@
       pwd
       cd /var/lib/terra-indrev
       ls
-      ${pkgs.jdk16_headless}/bin/java -Xms512M -Xmx4G -jar ftbserver.jar --nogui
+      ${pkgs.jdk16_headless}/bin/java -Xms512M -Xmx4G -jar fabric-server-launch.jar nogui
     '';
   };
   systemd.sockets.fabric = {
