@@ -30,7 +30,6 @@
       RestrictAddressFamilies = [ "AF_UNIX" "AF_INET" "AF_INET6" "AF_NETLINK" ];
       RestrictRealtime = true;
       RestrictNamespaces = true;
-      MemoryDenyWriteExecute = true;
     };
     /*script = ''
       ${pkgs.jdk16_headless}/bin/java -Xms512M -Xmx4G -jar fabric-server-launch.jar nogui
