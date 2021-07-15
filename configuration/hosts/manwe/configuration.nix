@@ -15,7 +15,7 @@
     ./wireguard.nix
     ./restic-server.nix
 
-    #./ftb.nix
+    ./fabric.nix
 
     ../../default.nix
     ../../common

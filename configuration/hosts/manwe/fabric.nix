@@ -1,33 +1,28 @@
 { config, lib, pkgs, ... }:
 
 {
-  /*fileSystems."/var/lib/ftb-server" = {
-    device = "/persist/data/ftb";
-    options = [ "bind" ];
-  };*/
-
-  systemd.services.ftb-server = {
+  systemd.services.fabric = {
     description = "Minecraft ftb server";
     wantedBy = [ "multi-user.target" ];
     after = [ "network.target" ];
-    requires = [ "ftb-server.socket" ];
+    requires = [ "fabric.socket" ];
     serviceConfig = {
-      BindPaths = "/persist/data/ftb:/var/lib/ftb-server";
-      ReadWritePaths = "/persist/data/ftb";
+      BindPaths = "/persist/data/terra-indrev:/var/lib/terra-indrev";
+      ReadWritePaths = "/persist/data/terra-indrev";
       Restart = "always";
       DynamicUser = true;
-      StateDirectory = "ftb-server";
+      StateDirectory = "terra-indrev";
       StandardInput = "socket";
       StandardOutput = "journal";
     };
     script = ''
       pwd
-      cd /var/lib/ftb-server
+      cd /var/lib/terra-indrev
       ls
-      ${pkgs.jre8}/bin/java -Xms512M -Xmx4G -jar ftbserver.jar --nogui
+      ${pkgs.jdk16_headless}/bin/java -Xms512M -Xmx4G -jar ftbserver.jar --nogui
     '';
   };
-  systemd.sockets.ftb-server = {
+  systemd.sockets.fabric = {
     description = "Minecraft stdin fifo file";
     socketConfig = {
       ListenFIFO = "/run/minecraft/stdin";
