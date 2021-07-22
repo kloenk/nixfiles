@@ -9,7 +9,7 @@
     ./postgres.nix
     ./cgit.nix
     ./website.nix
-    ./restic.nix
+    #./restic.nix
 
     ./mysql.nix
 
