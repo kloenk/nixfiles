@@ -8,7 +8,7 @@
     options = [ "bind" ];
   };
 
-  services.bitwarden_rs = {
+  services.vaultwarden = {
     enable = true;
     backupDir = "/var/lib/bitwarden_rs/backup";
     config = {
