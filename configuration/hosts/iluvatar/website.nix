@@ -95,7 +95,7 @@ in {
       forceSSL = true;
       root = pkgs.matrix-to;
       locations."= /.well-known/apple-app-site-association" = {
-        root = pkgs.writeTextDir ".well-known/apple-app-site-association" "${bultins.toJSON apple_assoc}";
+        root = pkgs.writeTextDir ".well-known/apple-app-site-association" "${builtins.toJSON apple_assoc}";
         extraConfig = ''
           ${commonHeaders}
           default_type application/json;
