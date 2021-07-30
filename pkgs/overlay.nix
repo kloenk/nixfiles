@@ -37,6 +37,8 @@ in {
   });
   jitsiexporter = callPackage ./jitsiexporter { };
 
+  matrix-to = callPackage ./matrix-to { };
+
   rustc_nightly = prev.rustc.overrideAttrs (oldAttrs: {
     configureFlags = map (flag:
       if flag == "--release-channel=stable" then

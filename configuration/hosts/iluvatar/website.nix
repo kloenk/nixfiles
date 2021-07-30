@@ -1,9 +1,50 @@
-{ config, lib, inputs, ... }:
+{ config, lib, inputs, pkgs, ... }:
 
 let
   commonHeaders = lib.concatStringsSep "\n"
     (lib.filter (line: lib.hasPrefix "add_header" line)
       (lib.splitString "\n" config.services.nginx.commonHttpConfig));
+
+  apple_assoc = {
+    applinks = {
+      apps = [];
+      details = [
+        {
+          appIDs = [
+            "7J4U792NQT.im.vector.app"
+            "257L85Q939.chat.schildi.desktop"
+          ];
+          appID = "7J4U792NQT.im.vector.app";
+          components = [
+            {
+              "#" = "/*";
+            }
+          ];
+          paths = [
+            "/*"
+            "/#/*"
+          ];
+        }
+        {
+          appID = "257L85Q939.chat.schildi.desktop";
+          components = [
+            {
+              "#" = "/*";
+            }
+          ];
+          paths = [
+            "/*"
+            "/#/*"
+          ];
+        }
+      ];
+    };
+    webcredentials = {
+      apps = [
+        "7J4U792NQT.im.vector.app"
+      ];
+    };
+  };
 in {
   services.nginx.virtualHosts = {
     /*"lexbeserious.kloenk.dev" = {
@@ -47,6 +88,22 @@ in {
       enableACME = true;
       forceSSL = true;
       locations."/".proxyPass = "http://localhost:5000/";
+    };
+
+    "mx-redir.kloenk.dev" = {
+      enableACME = true;
+      forceSSL = true;
+      root = pkgs.matrix-to;
+      locations."= /.well-known/apple-app-site-association" = {
+        root = pkgs.writeTextDir ".well-known/apple-app-site-association" "${bultins.toJSON apple_assoc}";
+        extraConfig = ''
+          ${commonHeaders}
+          default_type application/json;
+          add_header "Access-Control-Allow-Origin: *";
+          add_header "Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS'";
+          add_header "Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization'";
+        '';
+      };
     };
   };
 }
