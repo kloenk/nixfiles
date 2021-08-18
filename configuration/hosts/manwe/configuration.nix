@@ -16,6 +16,7 @@
     ./restic-server.nix
 
     ./fabric.nix
+    ./m-sandbox.nix
 
     ../../default.nix
     ../../common
