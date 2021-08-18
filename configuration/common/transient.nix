@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, config, pkgs, ... }:
 
 let
   cfg = config.kloenk.transient;
@@ -86,10 +86,10 @@ in {
          "/var/lib/acme/.minica:/tmp/ca"
        ];
       };
+    };
     } // mkIf cfg.enable {
       boot.initrd.postDeviceCommands = lib.mkAfter ''
         ${pkgs.xfsprogs}/bin/mkfs.xfs -m reflink=1 -f /dev/${cfg.vgroup}/${cfg.partition}
       '';
-    };
   };
 } 
