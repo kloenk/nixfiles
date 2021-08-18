@@ -23,9 +23,16 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # delete files in /
+  kloenk.transient.enable = true;
+  /*boot.initrd.postDeviceCommands = lib.mkAfter ''
+    ${pkgs.xfsprogs}/bin/mkfs.xfs -m reflink=1 -f /dev/${config.networking.hostName}/root
+  '';
+  fileSystems."/".device = lib.mkForce "/dev/${config.networking.hostName}/root";*/
+
   networking.hostName = "peregrin";
   networking.useDHCP = false;
-  networking.interfaces.eth0.useDHCP = true;
+  networking.interfaces.enp5s0.useDHCP = true;
 
   nixpkgs.config.allowUnfree = true;
   nix.extraOptions = ''
@@ -51,5 +58,5 @@
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes sayyou
   # should.
-  system.stateVersion = "21.03";
+  system.stateVersion = "21.11";
 }

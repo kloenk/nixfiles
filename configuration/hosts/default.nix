@@ -21,7 +21,7 @@ let
 
 in {
   peregrin = makeHost {
-    host = "10.211.55.5";
+    host = "10.211.55.7";
     system = "aarch64-linux";
   };
 
