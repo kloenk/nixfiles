@@ -10,11 +10,12 @@
 
     ../../default.nix
     ../../common
-    ../../common/pbb.nix
+    ../../common/transient.nix
     #../../common/syncthing.nix
     #../../desktop
     #../../desktop/sway.nix
     #../../desktop/vscode.nix
+
   ];
 
 
