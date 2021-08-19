@@ -20,7 +20,6 @@
 
     ../../default.nix
     ../../common
-    ../../common/transient.nix
     (import ../../common/schluempfli.nix { extraGroups = [ "wheel" ]; })
   ];
 
