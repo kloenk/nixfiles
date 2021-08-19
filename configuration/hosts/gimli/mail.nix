@@ -268,4 +268,13 @@
     modules = [ pkgs.dovecot_pigeonhole ];
     protocols = [ "sieve" ];
   };
+
+  # itsbroken
+  systemd.services.dovecot2.after = lib.mkForce [ "network.target" ];
+  systemd.services.postfix.after = lib.mkForce [
+    "network.target"
+    "dovecot2.service"
+    "opendkim.service"
+    "rspamd.service"
+  ];
 }
