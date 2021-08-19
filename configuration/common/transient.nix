@@ -18,7 +18,11 @@ in {
       };
   };
 
-  config = {
+  config = mkIf cfg.enable {
+    boot.initrd.postDeviceCommands = lib.mkAfter ''
+      ${pkgs.xfsprogs}/bin/mkfs.xfs -m reflink=1 -f /dev/${cfg.vgroup}/${cfg.partition}
+    '';
+
     fileSystems = {
       "/var/lib/acme" = {
         device = "/persist/data/acme";
@@ -34,8 +38,7 @@ in {
       "/persist" = {
         neededForBoot = true;
       };
-    } // mkIf cfg.enable {
-       "/".device = lib.mkForce "/dev/${cfg.vgroup}/${cfg.partition}";
+      "/".device = lib.mkForce "/dev/${cfg.vgroup}/${cfg.partition}";
     };
 
     systemd.services = with lib; listToAttrs (
@@ -87,9 +90,5 @@ in {
        ];
       };
     };
-    } // mkIf cfg.enable {
-      boot.initrd.postDeviceCommands = lib.mkAfter ''
-        ${pkgs.xfsprogs}/bin/mkfs.xfs -m reflink=1 -f /dev/${cfg.vgroup}/${cfg.partition}
-      '';
   };
 } 
