@@ -30,7 +30,6 @@
     owner = "simple-nixos-mailserver";
     repo = "nixos-mailserver";
     ref = "master";
-    flake = false;
   };
 
   inputs.website = {
@@ -240,7 +239,8 @@
               (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix")))
           else
             [ ]) ++ (if (if (host ? mail) then host.mail else false) then
-              [ (import (mail-server + "/default.nix")) ] # nixos-mailserver
+              #[ (import (mail-server + "/default.nix")) ] # nixos-mailserver
+              [ mail-server.nixosModules.mailserver ]
             else
               [ ]);
         })) nixosHosts);
