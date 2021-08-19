@@ -14,9 +14,9 @@
     #./postgres.nix
 
     #./wireguard.nix
-    ./fediventure.nix
-    ./jitsi
-    ./prosody.nix
+    #./fediventure.nix
+    #./jitsi
+    #./prosody.nix
 
     ../../default.nix
     ../../common
