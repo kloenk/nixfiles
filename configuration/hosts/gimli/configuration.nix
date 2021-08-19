@@ -20,7 +20,6 @@
 
     ../../default.nix
     ../../common
-    ../../common/transient.nix
     (import ../../common/schluempfli.nix { extraGroups = [ "wheel" ]; })
   ];
 
@@ -59,9 +58,7 @@
   '');*/
 
   # delete files in /
-  boot.initrd.postDeviceCommands = lib.mkAfter ''
-    ${pkgs.xfsprogs}/bin/mkfs.xfs -m reflink=1 -f /dev/gimli/root
-  '';
+  kloenk.transient.enable = true;
 
   fileSystems."/var/src/secrets" = {
     device = "/persist/secrets";

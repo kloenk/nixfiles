@@ -30,7 +30,6 @@
     owner = "simple-nixos-mailserver";
     repo = "nixos-mailserver";
     ref = "master";
-    flake = false;
   };
 
   inputs.website = {
@@ -227,6 +226,7 @@
             self.nixosModules.firefox
             self.nixosModules.pleroma
             self.nixosModules.wordpress
+            self.nixosModules.transient
             sourcesModule
             (import (inputs.fediventure + "/ops/nixos/modules/workadventure/workadventure.nix"))
             {
@@ -240,7 +240,8 @@
               (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix")))
           else
             [ ]) ++ (if (if (host ? mail) then host.mail else false) then
-              [ (import (mail-server + "/default.nix")) ] # nixos-mailserver
+              #[ (import (mail-server + "/default.nix")) ] # nixos-mailserver
+              [ mail-server.nixosModules.mailserver ]
             else
               [ ]);
         })) nixosHosts);
@@ -253,6 +254,7 @@
         firefox = import ./modules/firefox;
         secrets = import ./modules/secrets;
         pleroma = import ./modules/pleroma;
+        transient = import ./modules/transient;
 
         #secrets = import (petabyte + "/modules/secrets");
         #pleroma = import (petabyte + "/modules/pleroma");

@@ -20,7 +20,6 @@
 
     ../../default.nix
     ../../common
-    ../../common/transient.nix
   ];
 
   # vm connection
@@ -44,10 +43,7 @@
   };
 
   # delete files in /
-  boot.initrd.postDeviceCommands = lib.mkAfter ''
-    ${pkgs.xfsprogs}/bin/mkfs.xfs -m reflink=1 -f /dev/manwe/root
-  '';
-  fileSystems."/".device = lib.mkForce "/dev/manwe/root";
+  kloenk.transient.enable = true;
 
   networking.hostName = "manwe";
   networking.dhcpcd.enable = false;

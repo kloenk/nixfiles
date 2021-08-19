@@ -26,7 +26,6 @@
     ./r-dev.nix
 
     ../../common
-    ../../common/transient.nix
     ../../common/syncthing.nix
   ];
 
@@ -77,10 +76,7 @@
   networking.hostId = "37507120";
 
   # delete files in /
-  boot.initrd.postDeviceCommands = lib.mkAfter ''
-    ${pkgs.xfsprogs}/bin/mkfs.xfs -m reflink=1 -f /dev/thrain/root
-  '';
-  fileSystems."/".device = lib.mkForce "/dev/thrain/root";
+  kloenk.transient.enable = true;
 
   services.printing.browsing = true;
   services.printing.enable = true;

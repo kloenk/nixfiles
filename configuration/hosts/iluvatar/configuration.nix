@@ -17,7 +17,6 @@
 
     ../../default.nix
     ../../common
-    ../../common/transient.nix
   ];
 
   # vm connection
@@ -41,9 +40,8 @@
     enable = true;
   };
 
-  boot.initrd.postDeviceCommands = lib.mkAfter ''
-    ${pkgs.xfsprogs}/bin/mkfs.xfs -m reflink=1 -f /dev/iluvatar/root
-  '';
+  # delete files in `/`
+  kloenk.transient.enable = true;
 
   networking.hostName = "iluvatar";
   networking.domain = "kloenk.dev";

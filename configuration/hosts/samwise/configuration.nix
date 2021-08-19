@@ -11,7 +11,6 @@
 
     ../../default.nix
     ../../common
-    ../../common/transient.nix
     #../../common/syncthing.nix
     #../../desktop
     #../../desktop/sway.nix
@@ -53,10 +52,8 @@
     "cgroup_no_v1=all"
   ];
 
-  boot.initrd.postDeviceCommands = lib.mkAfter ''
-    ${pkgs.xfsprogs}/bin/mkfs.xfs -m reflink=1 -f /dev/ssd/root
-  '';
-  fileSystems."/".device = lib.mkForce "/dev/ssd/root";
+  kloenk.transient.vgroup = "ssd";
+  kloenk.transient.enable = true;
 
   systemd.tmpfiles.rules = [
     "Q /persist/data/bluetooth 750 - - - -"
