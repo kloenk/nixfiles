@@ -31,7 +31,28 @@
     # TODO: barahir
     # TODO: kloenkX?
   };
-  networking.interfaces.eno1.useDHCP = true;
+
+  # networking
+  networking = {
+    vlans.vlan1020 = { interface = "eno1"; id = 1020; };
+    vlans.vlan1337 = { interface = "eno1"; id = 1337; };
+
+    bridges = {
+      br0.interfaces = [ "eno1" ];
+      br1.interfaces = [ "vlan1337" ];
+      airlink.interfaces = [ "vlan1020" ];
+    };
+    interfaces.br0 = {
+      macAddress = "bc:d8:31:e0:e9:2f";
+      useDHCP = true;
+    };
+  };
+
+  systemd.network.networks = {
+    "40-br0".networkConfig.IPv6AcceptRA = "yes";
+    "40-br1".networkConfig.IPv6AcceptRA = "yes";
+    "40-airlink".networkConfig.IPv6AcceptRA = "yes";
+  };
 
   boot.initrd.luks.reusePassphrases = true;
   boot.initrd.luks.devices.cryptRoot.device =
@@ -70,6 +91,8 @@
     locations."/public/".alias = "/persist/data/public/";
     locations."/public/".extraConfig = "autoindex on;";
   };
+
+  users.users.kloenk.initialPassword = "foobar";
 
   # smartcard
   services.pcscd.enable = true;
