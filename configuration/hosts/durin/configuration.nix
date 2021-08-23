@@ -4,6 +4,8 @@
   imports = [
     ./hardware-configuration.nix
 
+    ./containers
+
     ../../common
   ];
 

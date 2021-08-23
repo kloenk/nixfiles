@@ -19,6 +19,7 @@ let
       inherit hostname prometheusExporters server;
     });
 
+  durin-host = "192.168.178.249";
 in {
   peregrin = makeHost {
     host = "10.211.55.7";
@@ -60,7 +61,12 @@ in {
   };
 
   durin = makeHost {
-    host = "192.168.178.249";
+    host = durin-host;
+  };
+
+  durin-rbuild = makeHost {
+    host = durin-host;
+    port = 62957;
   };
 
   r-build = makeHost {
