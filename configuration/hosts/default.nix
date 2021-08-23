@@ -59,6 +59,10 @@ in {
     # server = true;
   };
 
+  durin = makeHost {
+    host = "192.168.178.249";
+  };
+
   r-build = makeHost {
     host = "192.168.178.249";
     prometheusExporters = [ ];

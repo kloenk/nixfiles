@@ -12,6 +12,7 @@ function create_key() {
 	echo $hostname
 	$SSH $1 "sudo sh -c 'rm -rf /root/.gnupg/*'"
 	cat lib/keygen | sed "s/NAME/${hostname}/" | $SSH -o RequestTTY=yes $1 "sudo gpg --generate-key --pinentry-mode loopback --batch /dev/stdin"
+	mkdir -p ./secrets/$hostname/
 	cp ./secrets/.gpg-id ./secrets/$hostname/.gpg-id
 	$SSH $1 "sudo -u root gpg --fingerprint --with-colons | grep '^fpr' | head -n1 | cut -d: -f10" >> ./secrets/$hostname/.gpg-id
 	$SSH $1 "sudo -u root gpg --export --armor" > ./secrets/.public-keys/$hostname

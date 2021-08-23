@@ -55,6 +55,7 @@
   networking.hosts = {
     "192.168.178.1" = lib.singleton "fritz.box";
     "172.16.0.1" = lib.singleton "airlink.local";
+    "192.168.178.249" = [ "durin" "durin.kloenk.dev" "durin.fritz.box" ];
     # TODO: barahir
     # TODO: kloenkX?
   };
