@@ -13,7 +13,7 @@
 
   hardware.cpu.intel.updateMicrocode = true;
   boot.loader.grub.efiSupport = true;
-  boot.loader.grub.device = "none";
+  boot.loader.grub.device = "/dev/disk/by-id/nvme-Seagate_FireCuda_510_SSD_ZP2000GM30001_7MZ00FM5";
   #boot.loader.grub.enable = false;
   #boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
