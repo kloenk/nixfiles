@@ -37,7 +37,7 @@ in {
     };
     execConfig = {
       LinkJournal = "try-guest";
-      NotifyRead = "yes";
+      NotifyReady = "yes";
       PrivateUsers = "yes";
       Boot = "yes";
     };
