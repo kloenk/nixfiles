@@ -24,7 +24,7 @@ in {
 
   systemd.nspawn.rbuild = {
     networkConfig = {
-      VirtualEthernet = "on";
+      VirtualEthernet = "yes";
       Bridge = [ "br0" ];
       Port = [ "62957" ];
     };
