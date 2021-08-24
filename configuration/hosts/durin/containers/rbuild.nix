@@ -41,6 +41,7 @@ in {
       "modprobe@loop.service"
       "modprobe@dm-mod.service"
     ];
+    restartIfChanged = false;
 
     unitConfig.RequiresMountsFor = [ "/var/lib/machines/rbuild" ];
 
