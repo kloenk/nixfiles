@@ -23,6 +23,9 @@ in {
     description = "SSH socket for durin-rbuild systemd container";
     wantedBy = [ "sockets.target" ];
     listenStreams = [ (toString ports.ssh) ];
+    socketConfig = {
+      BindIPv6Only = "both";
+    };
   };
 
   systemd.services.rbuild = {
