@@ -84,6 +84,7 @@ in {
         "/persist/data/rbuild/cache:/home/fin/cache"
         "/persist/data/rbuild/out:/home/fin/packages"
         "/persist/data/airlink/proj:/home/fin/airlink"
+        "/persist/data/airlink/:/home/fin/proj"
         "/dev/kvm"
       ];
     };
