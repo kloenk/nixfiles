@@ -40,10 +40,16 @@ in {
       "modprobe@tun.service"
       "modprobe@loop.service"
       "modprobe@dm-mod.service"
+      "modprobe@kvm.service"
     ];
     restartIfChanged = false;
 
-    unitConfig.RequiresMountsFor = [ "/var/lib/machines/rbuild" ];
+    unitConfig.RequiresMountsFor = [
+      "/var/lib/machines/rbuild"
+      "/persist/data/rbuild/cache"
+      "/persist/data/rbuild/out"
+      "/persist/data/airlink"
+    ];
 
     serviceConfig = {
       ExecStart = "${pkgs.systemd}/bin/systemd-nspawn --quiet --keep-unit --boot --network-veth -U --settings=override --machine=rbuild";
@@ -66,7 +72,7 @@ in {
         "/dev/loop-control rw"
         "block-loop rw"
         "block-blkext rw"
-        "/dev/kvm rm"
+        "/dev/kvm rwm"
         "/dev/mapper/control rw"
         "block-device-mapper rw"
       ];
