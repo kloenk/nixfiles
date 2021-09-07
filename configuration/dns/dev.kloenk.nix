@@ -35,7 +35,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.dev.";
       adminEmail = "hostmaster.kloenk.dev."; # TODO: change mail
-      serial = 2021010121;
+      serial = 2021010122;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
@@ -106,7 +106,7 @@ let
       ];
 
      forest = {
-       subdomains.language.CNAME = [ "cname.crowdin.com" ];
+       subdomains.language.CNAME = [ "cname.crowdin.com." ];
      };
     };
   };
