@@ -28,6 +28,11 @@ in {
     }
   '';
 
+  fileSystems."/var/lib/owncast" = {
+    device = "/persist/data/owncast";
+    options = [ "bind" ];
+  };
+
   services.owncast = {
     enable = true;
     openFirewall = true;
@@ -39,6 +44,7 @@ in {
       enableACME = true;
       forceSSL = true;
       locations."/".proxyPass = "http://127.0.0.1:8080/";
+      locations."/".proxyWebsockets = true;
     };
     /*"event.unterbachersee.de" = {
       locations."/robots.txt".return = "200 \"User-agent: *\\nDisallow: /\\n\"";
