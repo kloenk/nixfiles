@@ -30,6 +30,7 @@ in {
 
   services.owncast = {
     enable = true;
+    openFirewall = true;
   };
 
   services.nginx.virtualHosts = {
