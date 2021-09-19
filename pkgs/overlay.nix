@@ -11,6 +11,8 @@ in {
 
   libnfc0 = callPackage ./libnfc { };
 
+  owncast = callPackage (inputs.nixpkgs_owncast + "/pkgs/servers/owncast/default.nix") { };
+
   redshift = prev.redshift.overrideAttrs (oldAttrs: rec {
     src = final.fetchFromGitHub {
       owner = "minus7";

@@ -28,8 +28,18 @@ in {
     }
   '';
 
+  services.owncast = {
+    enable = true;
+  };
+
   services.nginx.virtualHosts = {
     "event.unterbachersee.de" = {
+      locations."/robots.txt".return = "200 \"User-agent: *\\nDisallow: /\\n\"";
+      enableACME = true;
+      forceSSL = true;
+      locations."/".proxyPass = "http://127.0.0.1:8080/";
+    };
+    /*"event.unterbachersee.de" = {
       locations."/robots.txt".return = "200 \"User-agent: *\\nDisallow: /\\n\"";
       enableACME = true;
       forceSSL = true;
@@ -51,6 +61,6 @@ in {
           add_header Content-Security-Policy "default-src 'self'; frame-ancestors https://world.event.unterbachersee.de/; object-src 'none'" always;
         '';
       };
-    };
+    };*/
   };
 }

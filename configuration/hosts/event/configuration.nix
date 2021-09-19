@@ -5,9 +5,9 @@
     ./hardware-configuration.nix
 
     #./wireguard.nix
-    ./fediventure.nix
-    ./jitsi
-    ./prosody.nix
+    #./fediventure.nix
+    #./jitsi
+    #./prosody.nix
     ./nginx.nix
 
     ../../default.nix

@@ -305,6 +305,22 @@
         "type": "github"
       }
     },
+    "nixpkgs_owncast": {
+      "locked": {
+        "lastModified": 1631542577,
+        "narHash": "sha256-TmJjwiCz4ZPbP6F+hIM/Ne3Y5Dgb6bbUtAz1EyoWZWk=",
+        "owner": "MayNiklas",
+        "repo": "nixpkgs",
+        "rev": "66ed92e26ef0b48841b92c38bd7540b1a226d809",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MayNiklas",
+        "ref": "owncast",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "office-map": {
       "flake": false,
       "locked": {
@@ -351,6 +367,7 @@
         "mixnix": "mixnix",
         "nix": "nix_2",
         "nixpkgs": "nixpkgs_2",
+        "nixpkgs_owncast": "nixpkgs_owncast",
         "office-map": "office-map",
         "petabyte": "petabyte",
         "rtmp-auth": "rtmp-auth",
