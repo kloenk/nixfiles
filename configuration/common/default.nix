@@ -11,6 +11,11 @@
   #  environment.variables.NIX_PATH = lib.mkOverride 25 "/etc/src";
 
   boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
+
+  # zfs
+  boot.zfs.enableUnstable = true; # allow linuxPackages_latest with zfs
+  boot.kernelParams = [ "nohibernate" ]; # https://github.com/openzfs/zfs/issues/260
+
   nix.gc.automatic = lib.mkDefault true;
   nix.gc.options = lib.mkDefault "--delete-older-than 7d";
   nix.trustedUsers = [ "root" "@wheel" "kloenk" ];
