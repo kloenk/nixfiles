@@ -16,6 +16,10 @@
     device = "/persist/data/samba-statedir";
     options = [ "bind" ];
   };
+  fileSystems."/persist/Bag End" = {
+    device = "smials/Bag End";
+    fsType = "zfs";
+  };
 
   services.samba = {
     enable = true;
@@ -50,8 +54,18 @@
         "fruit:time machine" = "yes";
         "vfs objects" = "catia fruit streams_xattr";
       };
+      "Bag End" = {
+        path = "/persist/Bag End";
+        "valid users" = "kloenk";
+        public = "no";
+        writeable = "yes";
+        "force user" = "kloenk";
+        "fruit:aapl" = "yes";
+        "fruit:time machine" = "yes";
+        "vfs objects" = "catia fruit streams_xattr";
+      };
     };
   };
 
-  systemd.targets.samba.unitConfig.RequiresMountsFor = "/var/lib/samba";
+  systemd.targets.samba.unitConfig.RequiresMountsFor = [ "/var/lib/samba" "/persist/Bag End" ];
 }
