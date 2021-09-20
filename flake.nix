@@ -30,6 +30,12 @@
     inputs.nixpkgs.follows = "/nixpkgs"; # broken
   };
 
+  inputs.moodlepkgs = {
+    type = "github";
+    owner = "kloenk";
+    repo = "moodlepkgs";
+    inputs.nixpkgs.follows = "/nixpkgs";
+  };
 
   inputs.mail-server = {
     #type = "git";
@@ -114,7 +120,7 @@
   inputs.mixnix.url = "git+https://git.petabyte.dev/petabyteboy/mixnix";
   inputs.mixnix.flake = false;
 
-  outputs = inputs@{ self, nixpkgs, nix, hydra, home-manager, mail-server
+  outputs = inputs@{ self, nixpkgs, nix, moodlepkgs, hydra, home-manager, mail-server
     , website, dns, grahamc-config, rtmp-auth, petabyte, ... }:
     let
 
@@ -124,6 +130,7 @@
         self.overlay
         (overlays system)
         rtmp-auth.overlay
+        moodlepkgs.overlay
       ];
 
       systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];

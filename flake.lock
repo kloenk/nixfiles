@@ -219,6 +219,26 @@
         "url": "https://git.petabyte.dev/petabyteboy/mixnix"
       }
     },
+    "moodlepkgs": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1632126084,
+        "narHash": "sha256-K1t9F6etCFirzeVUCx4RJ2iTNM662nYKE9UKgQrFb/w=",
+        "owner": "kloenk",
+        "repo": "moodlepkgs",
+        "rev": "f56756c17cee28fd85c30fed81840460b20a7ec1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kloenk",
+        "repo": "moodlepkgs",
+        "type": "github"
+      }
+    },
     "nix": {
       "inputs": {
         "lowdown-src": "lowdown-src",
@@ -365,6 +385,7 @@
         "hydra": "hydra",
         "mail-server": "mail-server",
         "mixnix": "mixnix",
+        "moodlepkgs": "moodlepkgs",
         "nix": "nix_2",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs_owncast": "nixpkgs_owncast",
