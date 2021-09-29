@@ -36,7 +36,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.de.";
       adminEmail = "hostmaster@kloenk.de";
-      serial = 2020122606;
+      serial = 2020122607;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
@@ -117,17 +117,6 @@ let
       moodle-usee.CNAME = [ "segelschule.unterbachersee.de." ];
       bbb-usee.CNAME = [ "schulungsraum.unterbachersee.de." ];
       pve-usee = host "5.9.118.73" "2a01:4f8:162:6343::2";
-
-      source = hostTTL 1200 "195.39.221.186" null; # hosted by y0sh
-
-      gdv01.CNAME = [ "gdv01.eventphone.de." ];
-      gdv02.CNAME = [ "gdv02.eventphone.de." ];
-      gdvstats.CNAME = [ "gdvstats.eventphone.de." ];
-      gdvalerts.CNAME = [ "gdvalerts.eventphone.de." ];
-
-      danny.subdomains = {
-        karin = hostTTL 1200 "195.39.221.56" null;
-      };
 
       _github-challenge-cli-inc.TXT = [ (txt "a5adaebc78") ];
 
