@@ -116,6 +116,12 @@ in {
 	repo.owner=kloenk
         repo.readme=main:README.md
 
+        repo.url=MatrixCore/MatrixCore
+        repo.path=${gitDir}/MatrixCore/MatrixCore.git
+        repo.desc=Matrix libary written in swift 5.5
+	repo.owner=MatrixCore
+        repo.readme=main:README.md
+
         repo.url=facharbeit
         repo.path=${gitDir}/facharbeit.nix
         repo.desc=Files for my Facharbeit 
