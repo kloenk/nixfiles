@@ -1,6 +1,12 @@
 { config, lib, pkgs, ... }:
 
 {
+  fileSystems."/var/lib/gerrit" = {
+    device = "/persist/data/gerrit";
+    fsType = "none";
+    options = [ "bind" ];
+  };
+
   services.gerrit = {
     enable = true;
     serverId = "A530371C-74B2-49CF-87B1-C7F17F717E40";
