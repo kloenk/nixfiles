@@ -17,6 +17,8 @@
       #gerrit.basePath = "/persist/data/gitolite";
       gerrit.defaultBranch = "main";
       httpd.listenUrl = "proxy-https://127.0.0.1:8874/";
+      auth.type = "HTTP";
+      auth.loginUrl = "https://gerrit.kloenk.dev/login/";
     };
   };
 
@@ -24,5 +26,15 @@
     enableACME = true;
     forceSSL = true;
     locations."/".proxyPass = "http://127.0.0.1:8874";
+    locations."/login" = {
+      proxyPass = "http://127.0.0.1:8874";
+      extraConfig = ''
+        auth_basic "Gerrit login";
+        auth_basic_user_file ${config.petabyte.secrets."gerrit/htaccess".path};
+        proxy_set_header Authorization $http_authorization;
+      '';
+    };
   };
+
+  petabyte.secrets."gerrit/htaccess".owner = "nginx";
 }
