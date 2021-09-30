@@ -7,9 +7,11 @@
 
     ./bitwarden.nix
     ./postgres.nix
-    ./cgit.nix
     ./website.nix
     #./restic.nix
+
+    ./cgit.nix
+    ./gerrit.nix
 
     ./mysql.nix
 
