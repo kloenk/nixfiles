@@ -35,7 +35,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.dev.";
       adminEmail = "hostmaster.kloenk.dev."; # TODO: change mail
-      serial = 2021010124;
+      serial = 2021010125;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
@@ -69,7 +69,7 @@ let
       cache = iluvatar;
 
       # SourceHut
-      todo = iluvatar;
+      /*todo = iluvatar;
       paste = iluvatar;
       meta = iluvatar;
       man = iluvatar;
@@ -77,7 +77,7 @@ let
       hub = iluvatar;
       hg = iluvatar;
       dispatch = iluvatar;
-      builds = iluvatar;
+      builds = iluvatar;*/
 
       gerrit = iluvatar;
       git.CNAME = iluvatar.CNAME;
