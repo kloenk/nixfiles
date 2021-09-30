@@ -35,7 +35,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.dev.";
       adminEmail = "hostmaster.kloenk.dev."; # TODO: change mail
-      serial = 2021010123;
+      serial = 2021010124;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
@@ -78,6 +78,8 @@ let
       hg = iluvatar;
       dispatch = iluvatar;
       builds = iluvatar;
+
+      gerrit = iluvatar;
       git.CNAME = iluvatar.CNAME;
       git.MX = mxKloenk;
       git.TXT = spfKloenk;
