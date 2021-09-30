@@ -34,7 +34,7 @@
       '';
     };
     locations."/login" = {
-      proxyPass = "http://127.0.0.1:8874";
+      proxyPass = "http://127.0.0.1:8874/login/";
       extraConfig = ''
         auth_basic "Gerrit login";
         auth_basic_user_file ${config.petabyte.secrets."gerrit/htaccess".path};
