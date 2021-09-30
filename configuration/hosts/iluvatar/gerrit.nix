@@ -16,13 +16,13 @@
       gerrit.canonicalWebUrl = "https://gerrit.kloenk.dev/";
       #gerrit.basePath = "/persist/data/gitolite";
       gerrit.defaultBranch = "main";
-      httpd.listenUrl = "proxy-https://127.0.0.1:8874";
+      httpd.listenUrl = "proxy-https://127.0.0.1:8874/";
     };
   };
 
   services.nginx.virtualHosts."gerrit.kloenk.dev" = {
     enableACME = true;
     forceSSL = true;
-    locations."^~ /r/".proxyPass = "http://127.0.0.1:8874";
+    locations."/".proxyPass = "http://127.0.0.1:8874";
   };
 }
