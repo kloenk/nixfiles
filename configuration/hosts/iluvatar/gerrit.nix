@@ -14,7 +14,7 @@
     builtinPlugins = [ "hooks" "webhooks" ];
     settings = {
       gerrit.canonicalWebUrl = "https://gerrit.kloenk.dev/";
-      gerrit.basePath = "/persist/data/gitolite";
+      #gerrit.basePath = "/persist/data/gitolite";
       gerrit.defaultBranch = "main";
       httpd.listenUrl = "proxy-https://127.0.0.1:8874";
     };
