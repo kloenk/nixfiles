@@ -25,7 +25,14 @@
   services.nginx.virtualHosts."gerrit.kloenk.dev" = {
     enableACME = true;
     forceSSL = true;
-    locations."/".proxyPass = "http://127.0.0.1:8874";
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:8874";
+      extraConfig = ''
+        auth_basic "Gerrit login";
+        auth_basic_user_file ${config.petabyte.secrets."gerrit/htaccess".path};
+        proxy_set_header Authorization $http_authorization;
+      '';
+    };
     locations."/login" = {
       proxyPass = "http://127.0.0.1:8874";
       extraConfig = ''
