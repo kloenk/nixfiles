@@ -18,6 +18,7 @@
       gerrit.defaultBranch = "main";
       httpd.listenUrl = "proxy-https://127.0.0.1:8874/";
       auth.type = "HTTP";
+      auth.httpHeader = "";
       auth.loginUrl = "https://gerrit.kloenk.dev/login/";
     };
   };
