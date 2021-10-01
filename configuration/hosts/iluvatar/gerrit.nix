@@ -4,7 +4,7 @@ let
   oauth = pkgs.fetchurl {
     url = "https://github.com/davido/gerrit-oauth-provider/releases/download/v3.1.3/gerrit-oauth-provider-gab09506.jar";
     sha256 = "ea50d6168393a668b2ee9282058ca7c3b0a1f94df7b501dfe46d071f1622917b";
-    name = "gerrit-oauth-provider.jar";
+    name = "oauth.jar";
   };
 in {
   fileSystems."/var/lib/gerrit" = {
@@ -29,6 +29,7 @@ in {
         type = "OAUTH";
         #loginUrl = "https://gerrit.kloenk.dev/login/";
         cookieSecure = true;
+        gitBasicAuthPolicy = "HTTP";
       };
       "plugin \"gerrit-oauth-provider-github-oauth\"" = {
         "root-url" = "https://github.com/";
