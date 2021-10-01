@@ -1,10 +1,10 @@
 { config, lib, pkgs, ... }:
 
 let
-  oauth = pkgs.fetchUrl {
+  oauth = pkgs.fetchurl {
     url = "https://github.com/davido/gerrit-oauth-provider/releases/download/v3.1.3/gerrit-oauth-provider-gab09506.jar";
     sha256 = "ea50d6168393a668b2ee9282058ca7c3b0a1f94df7b501dfe46d071f1622917b";
-    name = "oauth.jar";
+    name = "gerrit-oauth-provider.jar";
   };
 in {
   fileSystems."/var/lib/gerrit" = {
@@ -18,7 +18,7 @@ in {
     serverId = "A530371C-74B2-49CF-87B1-C7F17F717E40";
     listenAddress = "127.0.0.1:8874";
     builtinPlugins = [ "hooks" "webhooks" ];
-    plugins = [ ];
+    plugins = [ oauth ];
     settings = {
       gerrit.canonicalWebUrl = "https://gerrit.kloenk.dev/";
       #gerrit.basePath = "/persist/data/gitolite";
@@ -36,10 +36,13 @@ in {
       };
     };
   };
-  systemd.services.gerrit.preStart = ''
-    # install the secret config
-    cat ${config.petabyte.secrets."gerrit/secure.config".path} > etc/secure.config
-  '';
+  systemd.services.gerrit.serviceConfig.ExecStartPre = let 
+     secure = pkgs.writeShellScript "install-sercure-gerrit-config" ''
+      # install the secret config
+      cat ${config.petabyte.secrets."gerrit/secure.config".path} > etc/secure.config
+    '';
+    preStart = pkgs.writeShellScript "gerrit-start" config.systemd.services.gerrit.preStart;
+  in lib.mkForce [ preStart "+${secure}"  ];
 
   services.nginx.virtualHosts."gerrit.kloenk.dev" = {
     enableACME = true;
