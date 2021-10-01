@@ -11,7 +11,7 @@
     #./restic.nix
 
     ./cgit.nix
-    ./gerrit.nix
+    #./gerrit.nix
 
     ./mysql.nix
 
