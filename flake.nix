@@ -15,13 +15,6 @@
     #    ref = "from-unstable";
   };
 
-  inputs.nixpkgs_owncast = {
-    type = "github";
-    owner = "MayNiklas";
-    repo = "nixpkgs";
-    ref = "owncast";
-  };
-
   inputs.nix = {
     type = "github";
     owner = "nixos";
@@ -155,7 +148,6 @@
           ];
         imports = [
           self.nixosModules.autoUpgrade
-          (import (inputs.nixpkgs_owncast + "/nixos/modules/services/misc/owncast.nix"))
         ];
         nixpkgs.overlays = [ (overlays system) nix.overlay (import (inputs.workadventure + "/overlay.nix"))];
       };

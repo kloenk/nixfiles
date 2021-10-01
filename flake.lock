@@ -167,16 +167,15 @@
     "lowdown-src_2": {
       "flake": false,
       "locked": {
-        "lastModified": 1628247802,
-        "narHash": "sha256-4XSXGYvKqogR7bubyqYNwBHYCtrIn6XRGXj6+u+BXNs=",
+        "lastModified": 1632468475,
+        "narHash": "sha256-NNOm9CbdA8cuwbvaBHslGbPTiU6bh1Ao+MpEPx4rSGo=",
         "owner": "kristapsdz",
         "repo": "lowdown",
-        "rev": "b4483d0ef85990f54b864158ab786b4a5b3904fa",
+        "rev": "6bd668af3fd098bdd07a1bedd399564141e275da",
         "type": "github"
       },
       "original": {
         "owner": "kristapsdz",
-        "ref": "VERSION_0_8_6",
         "repo": "lowdown",
         "type": "github"
       }
@@ -267,11 +266,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1631859047,
-        "narHash": "sha256-IC0GWKnLUqhNI77V2wMdkHBSgQ7bvFGlaJV9XND7me4=",
+        "lastModified": 1633090828,
+        "narHash": "sha256-zxPkZNa8JmZvuyhV3Agpk+GFFNiIan9ApXthCH1RBbc=",
         "owner": "nixos",
         "repo": "nix",
-        "rev": "37cc50f2c88b50086a1a8ed20631d1427d445b7e",
+        "rev": "9e39314593a76044d7e8715a961b56b19aed5c82",
         "type": "github"
       },
       "original": {
@@ -312,31 +311,15 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1632121949,
-        "narHash": "sha256-8/eFOo8SF7/pChGBc90Axn/6XS/DoX1xD+vzArtzbf0=",
+        "lastModified": 1633093760,
+        "narHash": "sha256-QVw11rQ/y/mdtQ03zNVascEdxNco2qEJ+qdDSyXohTY=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "bdd04deff52fd6eb0d34e08ac8193ddb96c84a96",
+        "rev": "1066137385d133df8ecd666b77a942e9dbc62563",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_owncast": {
-      "locked": {
-        "lastModified": 1631542577,
-        "narHash": "sha256-TmJjwiCz4ZPbP6F+hIM/Ne3Y5Dgb6bbUtAz1EyoWZWk=",
-        "owner": "MayNiklas",
-        "repo": "nixpkgs",
-        "rev": "66ed92e26ef0b48841b92c38bd7540b1a226d809",
-        "type": "github"
-      },
-      "original": {
-        "owner": "MayNiklas",
-        "ref": "owncast",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -388,7 +371,6 @@
         "moodlepkgs": "moodlepkgs",
         "nix": "nix_2",
         "nixpkgs": "nixpkgs_2",
-        "nixpkgs_owncast": "nixpkgs_owncast",
         "office-map": "office-map",
         "petabyte": "petabyte",
         "rtmp-auth": "rtmp-auth",
