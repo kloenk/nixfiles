@@ -7,8 +7,8 @@
     after = [ "network.target" ];
     requires = [ "fabric.socket" ];
     serviceConfig = {
-      BindPaths = "/persist/data/terra-indrev:/var/lib/private/fabric";
-      ReadWritePaths = "/persist/data/terra-indrev";
+      BindPaths = "/persist/data/aof4:/var/lib/private/fabric";
+      ReadWritePaths = "/persist/data/aof4";
       Restart = "always";
       DynamicUser = true;
       StateDirectory = "fabric";
