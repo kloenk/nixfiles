@@ -9,7 +9,7 @@
   services.moodle = {
     enable = true;
     initialPassword = "foobar123";
-    package = pkgs.moodle.override { plugins = with pkgs.moodlePackages; [ bbb tiles sharing_cart scheduler ]; };
+    package = pkgs.moodle.override { plugins = with pkgs.moodlePackages; [ bigbluebuttonbn tiles sharing_cart scheduler ]; };
     virtualHost = {
       adminAddr = "sandbox@kloenk.dev";
       enableACME = true;
