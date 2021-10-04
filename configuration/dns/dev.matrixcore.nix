@@ -35,13 +35,13 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.matrixcore.dev.";
       adminEmail = "hostmaster.kloenk.dev."; # TODO: change mail
-      serial = 2021010125;
+      serial = 2021010126;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
     });
 
-    NS = [ "ns2.he.net." "ns4.he.net." "ns3.he.net." "ns5.he.net." ];
+    NS = [ "ns1.kloenk.dev." "ns1.he.net." "ns2.he.net." "ns4.he.net." "ns3.he.net." "ns5.he.net." ];
 
     /*A = map (ttl 600) [ (a "195.39.247.6") ];
 
