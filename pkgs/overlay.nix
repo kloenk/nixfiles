@@ -11,6 +11,8 @@ in {
 
   libnfc0 = callPackage ./libnfc { };
 
+  moodle = callPackage ./moodle { };
+
   redshift = prev.redshift.overrideAttrs (oldAttrs: rec {
     src = final.fetchFromGitHub {
       owner = "minus7";
