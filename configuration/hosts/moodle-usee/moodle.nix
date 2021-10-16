@@ -75,6 +75,9 @@
     export USER=root
   '');*/
 
+  # fix moodle bug: https://tracker.moodle.org/browse/MDL-72131
+  services.mysql.settings.mysqld.innodb_read_only_compressed = false;
+
   # MARK: DISABLE httpd
   services.httpd.enable = lib.mkOverride 25 false; # No thanks, I choose life
   services.httpd.group = config.services.nginx.group;

@@ -11,6 +11,9 @@
   services.mysql = {
     enable = true;
     package = pkgs.mariadb;
+    settings.mysqld = {
+      innodb_read_only_compressed = false;
+    };
   };
 
   services.mysqlBackup = { enable = true; };
