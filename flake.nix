@@ -87,13 +87,13 @@
     flake = false;
   };
 
-  inputs.petabyte = {
+  /*inputs.petabyte = {
     type = "git";
     url = "https://git.petabyte.dev/petabyteboy/nixfiles";
     #url = "https://git.petabyte.dev/kloenk/nixfiles-pbb";
     ref = "main";
     flake = false;
-  };
+  };*/
 
   inputs.event_start = {
     type = "github";
@@ -110,11 +110,11 @@
     flake = false;
   };
 
-  inputs.mixnix.url = "git+https://git.petabyte.dev/petabyteboy/mixnix";
-  inputs.mixnix.flake = false;
+  #inputs.mixnix.url = "git+https://git.petabyte.dev/petabyteboy/mixnix";
+  #inputs.mixnix.flake = false;
 
   outputs = inputs@{ self, nixpkgs, nix, moodlepkgs, hydra, home-manager, mail-server
-    , website, dns, grahamc-config, rtmp-auth, petabyte, ... }:
+    , website, dns, grahamc-config, rtmp-auth, ... }:
     let
 
       overlayCombined = system: [
@@ -263,10 +263,11 @@
         secrets = import ./modules/secrets;
         pleroma = import ./modules/pleroma;
         transient = import ./modules/transient;
+        nftables = import ./modules/nftables;
 
         #secrets = import (petabyte + "/modules/secrets");
         #pleroma = import (petabyte + "/modules/pleroma");
-        nftables = import (petabyte + "/modules/nftables");
+        #nftables = import (petabyte + "/modules/nftables");
         wordpress = import ./modules/wordpress.nix;
       };
 
