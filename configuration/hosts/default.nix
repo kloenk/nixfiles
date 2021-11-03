@@ -87,13 +87,6 @@ in {
     server = true;
   };
 
-  # usee
-  event = makeHost {
-    host = "event.kloenk.dev";
-    vm = false;
-    server = true;
-    prometheusExporters = [ "node-exporter" "nginx-exporter" "jitsi-exporter" ];
-  };
 
   # usee
   moodle-usee = makeHost {
@@ -102,6 +95,16 @@ in {
     prometheusExporters = [ "node-exporter" ];
     vm = true;
     server = true;
+  };
+
+  # for monitoring only
+  # usee
+  event = makeHost {
+    host = "event.kloenk.dev";
+    nixos = false;
+    vm = false;
+    server = true;
+    prometheusExporters = [ "node-exporter" "nginx-exporter" ];
   };
 
   # for monitoring only
