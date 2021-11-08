@@ -5,8 +5,9 @@
     from.type = "indirect";
     from.id = "kloenk";
     #to.url = "git+https://git.kloenk.dev/kloenk/nix";
-    to.type = "git";
-    to.url = "https://git.kloenk.dev/kloenk/nix";
+    to.repo = "nix";
+    to.owner = "kloenk";
+    to.host = "lab.kloenk.dev";
     exact = false;
   };
 
