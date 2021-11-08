@@ -1,6 +1,11 @@
 { config, pkgs, lib, ... }:
 
 {
+  fileSystems."/var/gitlab" = {
+    device = "/persist/data/gitlab";
+    options = [ "bind" ];
+  };
+
   services.nginx.virtualHosts."lab.kloenk.dev" = {
     enableACME = true;
     forceSSL = true;
