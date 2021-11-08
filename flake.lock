@@ -202,22 +202,6 @@
         "type": "gitlab"
       }
     },
-    "mixnix": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1587327380,
-        "narHash": "sha256-+VkwVR1SKS8Bzs0V8E166R3utaB7oSFd2ueH8mHVJjs=",
-        "ref": "master",
-        "rev": "450d1dd2e9550b67db49accf4e67e560add5c32b",
-        "revCount": 3,
-        "type": "git",
-        "url": "https://git.petabyte.dev/petabyteboy/mixnix"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://git.petabyte.dev/petabyteboy/mixnix"
-      }
-    },
     "moodlepkgs": {
       "inputs": {
         "nixpkgs": [
@@ -340,23 +324,6 @@
         "type": "github"
       }
     },
-    "petabyte": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1617742742,
-        "narHash": "sha256-GwRbgDFtaOO1QayVL5eo2QpAnGFa3dkYLTJx4dC3gs4=",
-        "ref": "main",
-        "rev": "c3b08fe355d08facf2b2d2f0f96050892242cd38",
-        "revCount": 592,
-        "type": "git",
-        "url": "https://git.petabyte.dev/petabyteboy/nixfiles"
-      },
-      "original": {
-        "ref": "main",
-        "type": "git",
-        "url": "https://git.petabyte.dev/petabyteboy/nixfiles"
-      }
-    },
     "root": {
       "inputs": {
         "dns": "dns",
@@ -367,12 +334,10 @@
         "home-manager": "home-manager",
         "hydra": "hydra",
         "mail-server": "mail-server",
-        "mixnix": "mixnix",
         "moodlepkgs": "moodlepkgs",
         "nix": "nix_2",
         "nixpkgs": "nixpkgs_2",
         "office-map": "office-map",
-        "petabyte": "petabyte",
         "rtmp-auth": "rtmp-auth",
         "website": "website",
         "workadventure": "workadventure"
