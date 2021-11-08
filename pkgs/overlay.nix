@@ -11,7 +11,7 @@ in {
 
   libnfc0 = callPackage ./libnfc { };
 
-  moodle = callPackage ./moodle { };
+  #moodle = callPackage ./moodle { };
 
   redshift = prev.redshift.overrideAttrs (oldAttrs: rec {
     src = final.fetchFromGitHub {
