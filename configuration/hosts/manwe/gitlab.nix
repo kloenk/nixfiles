@@ -13,7 +13,7 @@
     smtp = {
       enable = true;
       username = "lab@kloenk.dev";
-      passwordFile = config.petabyte.secrets.files."gitlab/mail".path;
+      passwordFile = config.petabyte.secrets."gitlab/mail".path;
       domain = "mail.kloenk.dev";
       address = "mail.kloenk.dev";
       port = 465;
@@ -26,12 +26,12 @@
     https = true;
 
     initialRootPasswordFile =
-      config.petabyte.secrets.files."gitlab/initial-root-password".path;
+      config.petabyte.secrets."gitlab/initial-root-password".path;
     secrets = {
-      secretFile = config.petabyte.secrets.files."gitlab/secret".path;
-      otpFile = config.petabyte.secrets.files."gitlab/otp-secret".path;
-      dbFile = config.petabyte.secrets.files."gitlab/db-secret".path;
-      jwsFile = config.petabyte.secrets.files."gitlab/jws-secret".path;
+      secretFile = config.petabyte.secrets."gitlab/secret".path;
+      otpFile = config.petabyte.secrets."gitlab/otp-secret".path;
+      dbFile = config.petabyte.secrets."gitlab/db-secret".path;
+      jwsFile = config.petabyte.secrets."gitlab/jws-secret".path;
     };
 
     extraConfig = {
@@ -79,10 +79,10 @@
   # bump worker memory limit to 1.5G
   systemd.services.gitlab.environment.GITLAB_UNICORN_MEMORY_MAX = "1500000000";
 
-  petabyte.secrets.files."gitlab/initial-root-password".owner = "gitlab";
-  petabyte.secrets.files."gitlab/otp-secret".owner = "gitlab";
-  petabyte.secrets.files."gitlab/db-secret".owner = "gitlab";
-  petabyte.secrets.files."gitlab/jws-secret".owner = "gitlab";
-  petabyte.secrets.files."gitlab/secret".owner = "gitlab";
-  petabyte.secrets.files."gitlab/mail".owner = "gitlab";
+  petabyte.secrets."gitlab/initial-root-password".owner = "gitlab";
+  petabyte.secrets."gitlab/otp-secret".owner = "gitlab";
+  petabyte.secrets."gitlab/db-secret".owner = "gitlab";
+  petabyte.secrets."gitlab/jws-secret".owner = "gitlab";
+  petabyte.secrets."gitlab/secret".owner = "gitlab";
+  petabyte.secrets."gitlab/mail".owner = "gitlab";
 }
