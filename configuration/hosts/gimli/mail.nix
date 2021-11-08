@@ -193,6 +193,11 @@
           config.petabyte.secrets."mail/git_kloenk.de.sha512".path;
       };
 
+      "lab@kloenk.de" = {
+        hashedPasswordFile =
+          config.petabyte.secrets."mail/lab_kloenk.dev.sha512".path;
+      };
+
       # burscheider-imkerverein
       "info@burscheider-imkerverein.de" = {
         hashedPasswordFile =
@@ -241,6 +246,7 @@
     "mail/alert_kloenk.de.sha512".owner = "root";
     "mail/ad_kloenk.de.sha512".owner = "root";
     "mail/git_kloenk.de.sha512".owner = "root";
+    "mail/lab_kloenk.dev.sha512".owner = "root";
     "mail/drachensegler_drachensegler.kloenk.de.sha512".owner = "root";
     "mail/info_burscheider-imkerverein.de.sha512".owner = "root";
     "mail/kontakt_burscheider-imkerverein.de.sha512".owner = "root";
