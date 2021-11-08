@@ -10,12 +10,13 @@
     ./postgres.nix
     ./redis.nix
     ./mysql.nix
+    ./gitlab.nix
     # ./pleroma # fucking annoying and not working
 
     ./wireguard.nix
     ./restic-server.nix
 
-    ./fabric.nix
+    #./fabric.nix
     ./m-sandbox.nix
 
     ../../default.nix
