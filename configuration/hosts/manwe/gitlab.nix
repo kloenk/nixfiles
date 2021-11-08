@@ -19,8 +19,8 @@
       enable = true;
       username = "lab@kloenk.dev";
       passwordFile = config.petabyte.secrets."gitlab/mail".path;
-      domain = "mail.kloenk.dev";
-      address = "mail.kloenk.dev";
+      domain = "gimli.kloenk.dev";
+      address = "gimli.kloenk.dev";
       port = 465;
       tls = true;
       enableStartTLSAuto = false;
@@ -53,7 +53,7 @@
         address = "lab+%{key}@kloenk.dev";
         user = config.services.gitlab.smtp.username;
         password._secret = config.services.gitlab.smtp.passwordFile;
-        host = "mail.kloenk.dev";
+        host = "gimli.kloenk.dev";
         port = 993;
         ssl = true;
         start_tls = false;
