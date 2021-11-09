@@ -22,7 +22,7 @@ in {
   systemd.services.prometheus.unitConfig.RequiresMountsFor =
     [ "/var/lib/prometheus" ];
   systemd.services.grafana.after = [ "prometheus.service" ];
-  systemd.services.grafana.unitConfig.EnvronmentFile = [ config.petabyte.secrets."grafana-env".path ];
+  systemd.services.grafana.serviceConfig.EnvironmentFile = [ config.petabyte.secrets."grafana-env".path ];
   petabyte.secrets."grafana-env".owner = "root";
   
 
