@@ -81,6 +81,14 @@
     };
   };
 
+  # gitlab ssh authorized command
+  services.openssh.extraConfig = ''
+    Match User gitlab
+      AuthorizedKeysCommandUser gitlab
+      AuthorizedKeysCommand ${config.services.gitlab.packages.gitlab-shell}/bin/gitlab-shell-authorized-keys-check gitlab %u %k
+    Match all
+  '';
+
   # bump worker memory limit to 1.5G
   systemd.services.gitlab.environment.GITLAB_UNICORN_MEMORY_MAX = "1500000000";
 
