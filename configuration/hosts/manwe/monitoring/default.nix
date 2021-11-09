@@ -121,13 +121,13 @@ in {
       dashboards = [{ options.path = ./dashboards; }];
     };
     extraOptions = {
-      AUTH_GENERIC_OAUTH_ENABLED = "true";
-      AUTH_GENERIC_OAUTH_TLS_SKIP_VERIFY_INSECURE = "false";
-      AUTH_GENERIC_OAUTH_SCOPES = "read_user";
-      AUTH_GENERIC_OAUTH_AUTH_URL = "https://lab.kloenk.dev/oauth/authorize";
-      AUTH_GENERIC_OAUTH_TOKEN_URL = "https://lab.kloenk.dev/oauth/token";
-      AUTH_GENERIC_OAUTH_API_URL = "https://lab.kloenk.dev/api/v4";
-      AUTH_GENERIC_OAUTH_ALLOW_SIGN_UP = "true";
+      AUTH_GITLAB_ENABLED = "true";
+      AUTH_GITLAB_TLS_SKIP_VERIFY_INSECURE = "false";
+      AUTH_GITLAB_SCOPES = "read_user";
+      AUTH_GITLAB_AUTH_URL = "https://lab.kloenk.dev/oauth/authorize";
+      AUTH_GITLAB_TOKEN_URL = "https://lab.kloenk.dev/oauth/token";
+      AUTH_GITLAB_API_URL = "https://lab.kloenk.dev/api/v4";
+      AUTH_GITLAB_ALLOW_SIGN_UP = "true";
     };
   };
 
