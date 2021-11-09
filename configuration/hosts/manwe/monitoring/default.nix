@@ -22,6 +22,9 @@ in {
   systemd.services.prometheus.unitConfig.RequiresMountsFor =
     [ "/var/lib/prometheus" ];
   systemd.services.grafana.after = [ "prometheus.service" ];
+  systemd.services.grafana.unitConfig.EnvronmentFile = [ config.petabyte.secrets."grafan-env".path ];
+  petabyte.secrets."grafana-env".owner = "root";
+  
 
   services.nginx.virtualHosts."grafana.kloenk.dev" = {
     locations."/".proxyPass = "http://127.0.0.1:3001/";
@@ -116,6 +119,15 @@ in {
         isDefault = true;
       }];
       dashboards = [{ options.path = ./dashboards; }];
+    };
+    extraConfig = {
+      AUTH_GENERIC_OAUTH_ENABLE = "true";
+      AUTH_GENERIC_OAUTH_TLS_SKIP_VERIFY_INSECURE = "false";
+      AUTH_GENERIC_OAUTH_SCOPES = "read_api";
+      AUTH_GENERIC_OAUTH_AUTH_URL = "https://lab.kloenk.dev/oauth/authorize";
+      AUTH_GENERIC_OAUTH_TOKEN_URL = "https://lab.kloenk.dev/oauth/token";
+      AUTH_GENERIC_OAUTH_API_URL = "https://lab.kloenk.dev/api/v4";
+      AUTH_GENERIC_OAUTH_ALLOW_SIGN_UP = "true";
     };
   };
 
