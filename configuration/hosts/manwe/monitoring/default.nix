@@ -120,7 +120,7 @@ in {
       }];
       dashboards = [{ options.path = ./dashboards; }];
     };
-    extraConfig = {
+    extraOptions = {
       AUTH_GENERIC_OAUTH_ENABLE = "true";
       AUTH_GENERIC_OAUTH_TLS_SKIP_VERIFY_INSECURE = "false";
       AUTH_GENERIC_OAUTH_SCOPES = "read_api";
