@@ -128,6 +128,7 @@ in {
       AUTH_GITLAB_TOKEN_URL = "https://lab.kloenk.dev/oauth/token";
       AUTH_GITLAB_API_URL = "https://lab.kloenk.dev/api/v4";
       AUTH_GITLAB_ALLOW_SIGN_UP = "true";
+      AUTH_GITLAB_ROLE_ATTRIBUTE_PATH = "is_admin && 'Admin' || 'Viewer'";
     };
   };
 
