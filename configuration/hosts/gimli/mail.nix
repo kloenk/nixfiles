@@ -193,9 +193,10 @@
           config.petabyte.secrets."mail/git_kloenk.de.sha512".path;
       };
 
-      "lab@kloenk.de" = {
+      "lab@kloenk.dev" = {
         hashedPasswordFile =
           config.petabyte.secrets."mail/lab_kloenk.dev.sha512".path;
+        aliases = [ "lab@kloenk.de" ];
       };
 
       # burscheider-imkerverein
