@@ -63,6 +63,7 @@ in {
       forceSSL = true;
       root = inputs.website;
       locations."/public/".alias = "/persist/data/public/";
+      locations."/baz".return = "301 https://www.amazon.de/hz/wishlist/ls/3BJ09JA3JNCN?ref_=wl_share";
       extraConfig = ''
         ${commonHeaders}
         add_header Content-Security-Policy "default-src 'self'; frame-ancestors 'none'; object-src 'none'" always;
