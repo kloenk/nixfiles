@@ -31,10 +31,10 @@ in {
 
     networks."20-eno0" = {
       name = "eno0";
-      DHCP = "no";
+      DHCP = "yes";
       vlan = lib.singleton "vlan1337";
       #dhcpV4Config.RouteMetric = 512;
-      addresses = [{addressConfig.Address = "192.168.178.1/24";}];
+      #addresses = [{addressConfig.Address = "192.168.178.1/24";}];
     };
     networks."20-wlp2s0" = {
       name = "wlp2s0";

@@ -6,14 +6,14 @@
 
     ./links.nix
     #./mysql.nix
-    ./dhcpcd.nix
-    ./dns.nix
+    #./dhcpcd.nix
+    #./dns.nix
 
     ../../default.nix
     ../../common
     #../../common/syncthing.nix
-    #../../desktop
-    #../../desktop/sway.nix
+    ../../desktop
+    ../../desktop/sway.nix
     #../../desktop/vscode.nix
   ];
 
