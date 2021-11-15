@@ -4,7 +4,7 @@ let bondName = "world";
 in {
   boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
 
-  petabyte.nftables.extraConfig = ''
+  /*petabyte.nftables.extraConfig = ''
     table ip nat {
       chain postrouting {
         type nat hook postrouting priority srcnat;
@@ -12,7 +12,7 @@ in {
       }
     }
   '';
-  petabyte.nftables.forwardPolicy = "accept";
+  nftables.forwardPolicy = "accept";*/
 
   systemd.network = {
     netdevs."25-vlan" = {
