@@ -28,7 +28,7 @@
     imagemagick
     gimp
     inkscape
-    #krita
+    krita
     sshfs
     #quasselClient
     pavucontrol

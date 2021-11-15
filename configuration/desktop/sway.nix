@@ -55,7 +55,8 @@
             natural_scroll = "enable";
           };
           "13:0:ANNE_KB_L1_A7D3".xkb_options = "''";
-          "Wacom ISDv4 90 Pen".map_to_output = "'Unknown 0x02D8 0x00000000'";
+          #"Wacom ISDv4 90 Pen".map_to_output = "'Unknown 0x02D8 0x00000000'";
+	  "1386:144:Wacom_ISDv4_90_Pen".map_to_output = "LVDS-1";"
         };
         output = {
           "*" = { background = "${wallpaper} fit #000000"; };
