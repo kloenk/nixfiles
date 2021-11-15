@@ -195,7 +195,7 @@
   nixpkgs.config.pulseaudio = true;
 
   # multicast dns
-  petabyte.nftables.extraInput = ''
+  nftables.extraInput = ''
     ip6 daddr { ff02::fb, ff02::1:3 } udp dport 5353 accept
     ip daddr { 224.0.0.251, 224.0.0.252 } udp dport 5353 accept
   '';
