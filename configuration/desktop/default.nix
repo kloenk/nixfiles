@@ -150,7 +150,7 @@
 
   home-manager.users.kloenk.home.file.".config/VSCodium/User/settings.json".source =
     ./code-settings.json;
-  home-manager.users.kloenk.home.file.".config/qutebrowser/config.py".text = ''
+  /*home-manager.users.kloenk.home.file.".config/qutebrowser/config.py".text = ''
     config.bind('p', 'spawn --userscript qute-pass --dmenu-invocation "wofi --show dmenu"')
     config.bind('P', 'spawn --userscript qute-pass --otp-only --dmenu-invocation "wofi --show dmenu"')
     config.bind('m', 'spawn mpv {url}')
@@ -165,7 +165,7 @@
     import sys, os
     sys.path.append(os.path.join(sys.path[0], '${pkgs.jblock}'))
     config.source("${pkgs.jblock}/jblock/integrations/qutebrowser.py")
-  '';
+  '';*/
 
   home-manager.users.kloenk.home.packages = [ pkgs.kitty ];
   home-manager.users.kloenk.xdg.configFile."kitty/kitty.conf".source =
