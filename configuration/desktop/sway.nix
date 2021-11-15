@@ -39,7 +39,8 @@
 
   home-manager.users.kloenk = {
     wayland.windowManager.sway = let
-      wallpaper = "`find ${pkgs.wallpapers}/share/wallpapers/* | shuf -n 1`";
+      #wallpaper = "`find ${pkgs.wallpapers}/share/wallpapers/* | shuf -n 1`";
+      wallpaper = ./wallpaper-image;
       systemd-run = "${pkgs.systemd}/bin/systemd-run --user --scope";
     in {
       enable = true;
