@@ -172,8 +172,15 @@
     ./kitty.conf;
 
   sound.enable = true;
-  hardware.pulseaudio = {
+  services.pipewire = {
     enable = true;
+    alsa.enable = true;
+    also.support32Bit = true;
+    pulse.enable = true;
+  };
+
+  hardware.pulseaudio = {
+    #enable = true;
     support32Bit = lib.mkDefault true;
 
     # NixOS allows either a lightweight build (default) or full build of PulseAudio to be installed.

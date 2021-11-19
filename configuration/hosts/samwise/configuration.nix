@@ -166,6 +166,8 @@
   services.syncthing.dataDir = "/persist/syncthing/";
   #systemd.homed.enable = true;
 
+  home-manager.users.kloenk.wayland.windowManager.sway.config.output."LVDS-1".transform = "180";
+
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes sayyou

@@ -3,6 +3,17 @@
 {
   hardware.opengl.enable = true;
 
+  xdg = {
+    portal = {
+      enable = true;
+      wlr.enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-gtk
+      ];
+      gtkUsePortal = true;
+    };
+  };
+
   programs.sway.enable = true;
   programs.sway.extraSessionCommands = ''
     export SDL_VIDEODRIVER=wayland
