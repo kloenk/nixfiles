@@ -140,11 +140,8 @@
     "libvirtd" # libvirt group
   ];
 
-  # ssh key from yg-adminpc
-  users.users.kloenk.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPhvJ6hdf4pgsFl8c5lMuDAzUVmJwtSY/O66nDDRAK6J kloenk@adminpc"
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKGOQAYC5hPb/OquezdR/O9yc9PDoO5nV2/FFmLjQNFr u0_a189@localhost"
-  ];
+  # Change home dir
+  users.users.kloenk.home = "/persist/data/kloenk";
 
   services.udev.packages = [ pkgs.openocd ];
 
