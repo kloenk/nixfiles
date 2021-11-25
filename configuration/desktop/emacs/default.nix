@@ -18,7 +18,7 @@ in {
 }*/
 
 let
-  emacs = pkgs.emacs-pgtk;
+  emacs = pkgs.emacs-nox;
   emacsWithPackages = (pkgs.emacsPackagesGen emacs).emacsWithPackages;
   emacsBuild = emacsWithPackages (epkgs:
     (with epkgs; [
