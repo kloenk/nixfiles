@@ -21,7 +21,7 @@
     #../../desktop/plasma.nix
     #../../desktop/sway.nix
     #../../desktop/gnome.nix
-	../../desktop/emacs
+	#../../desktop/emacs
 
     ./bbb-backup.nix
     ./r-dev.nix
