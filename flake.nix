@@ -63,36 +63,9 @@
     flake = false;
   };
 
-  inputs.rtmp-auth = {
-    url = "git+https://git.kloenk.dev/usee/rtmp-auth?ref=main";
-    inputs.nixpkgs.follows = "/nixpkgs";
-  };
-
-  inputs.workadventure = {
-    type = "gitlab";
-    owner = "kloenk";
-    repo = "workadventure-nix";
-    ref = "overlay";
-    flake = false;
-  };
-
-  inputs.event_start = {
-    type = "github";
-    owner = "holbeh";
-    repo = "eventstart";
-    ref = "postshow";
-    inputs.nixpkgs.follows = "/nixpkgs";
-  };
-
-  inputs.office-map = {
-    type = "github";
-    owner = "holbeh";
-    repo = "office-map";
-    flake = false;
-  };
 
   outputs = inputs@{ self, nixpkgs, nix, moodlepkgs, hydra, home-manager, mail-server
-    , website, dns, grahamc-config, rtmp-auth, ... }:
+    , website, dns, grahamc-config, ... }:
     let
 
       overlayCombined = system: [
@@ -100,7 +73,6 @@
         #home-manager.overlay
         self.overlay
         (overlays system)
-        rtmp-auth.overlay
         moodlepkgs.overlay
       ];
 
@@ -127,7 +99,7 @@
         imports = [
           self.nixosModules.autoUpgrade
         ];
-        nixpkgs.overlays = [ (overlays system) nix.overlay (import (inputs.workadventure + "/overlay.nix"))];
+        nixpkgs.overlays = [ (overlays system) nix.overlay ];
       };
 
       overlays = system: final: prev: {
