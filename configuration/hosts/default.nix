@@ -67,13 +67,15 @@ in {
   durin-rbuild = makeHost {
     host = durin-host;
     port = 62957;
+    nixos = false;
   };
 
-  r-build = makeHost {
-    host = "192.168.178.249";
-    prometheusExporters = [ ];
-    server = false;
-  };
+  # Made some magic smoke
+  #r-build = makeHost {
+  #  host = "192.168.178.249";
+  #  prometheusExporters = [ ];
+  #  server = false;
+  #};
 
   samwise = makeHost {
     host = "192.168.178.1";
@@ -81,11 +83,11 @@ in {
     prometheusExporters = [ ];
   };
 
-  usee-nschl = makeHost {
-    host = "usee-nschl.kloenk.dev";
-    vm = true;
-    server = true;
-  };
+  #usee-nschl = makeHost {
+  #  host = "usee-nschl.kloenk.dev";
+  #  vm = true;
+  #  server = true;
+  #};
 
 
   # usee

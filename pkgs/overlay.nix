@@ -2,7 +2,7 @@ inputs: final: prev:
 let inherit (final) callPackage;
 in {
   collectd-wireguard = callPackage ./collectd-wireguard { };
-  jblock = callPackage ./jblock { };
+  #jblock = callPackage ./jblock { };
   deploy_secrets = callPackage ./deploy_secrets { };
   pass-nix = callPackage ./pass-nix { };
   wallpapers = callPackage ./wallpapers { };

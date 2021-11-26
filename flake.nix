@@ -19,7 +19,6 @@
     type = "github";
     owner = "nixos";
     repo = "nix";
-    #ref = "flakes";
     inputs.nixpkgs.follows = "/nixpkgs"; # broken
   };
 
@@ -31,8 +30,6 @@
   };
 
   inputs.mail-server = {
-    #type = "git";
-    #url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver.git";
     type = "gitlab";
     owner = "simple-nixos-mailserver";
     repo = "nixos-mailserver";
@@ -71,14 +68,6 @@
     inputs.nixpkgs.follows = "/nixpkgs";
   };
 
-  inputs.fediventure = {
-    type = "gitlab";
-    owner = "kloenk";
-    repo = "fediventure";
-    ref = "jitsi";
-    flake = false;
-  };
-
   inputs.workadventure = {
     type = "gitlab";
     owner = "kloenk";
@@ -86,14 +75,6 @@
     ref = "overlay";
     flake = false;
   };
-
-  /*inputs.petabyte = {
-    type = "git";
-    url = "https://git.petabyte.dev/petabyteboy/nixfiles";
-    #url = "https://git.petabyte.dev/kloenk/nixfiles-pbb";
-    ref = "main";
-    flake = false;
-  };*/
 
   inputs.event_start = {
     type = "github";
@@ -109,9 +90,6 @@
     repo = "office-map";
     flake = false;
   };
-
-  #inputs.mixnix.url = "git+https://git.petabyte.dev/petabyteboy/mixnix";
-  #inputs.mixnix.flake = false;
 
   outputs = inputs@{ self, nixpkgs, nix, moodlepkgs, hydra, home-manager, mail-server
     , website, dns, grahamc-config, rtmp-auth, ... }:
@@ -154,28 +132,7 @@
 
       overlays = system: final: prev: {
         utillinuxMinimal = final.util-linuxMinimal;
-        #hydra = builtins.trace "eval hydra" hydra.packages.${system}.hydra;
       };
-
-      # iso image
-      iso = system:
-        (nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            (import ./lib/iso-image.nix)
-            (import (nixpkgs
-              + "/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"))
-            nixpkgs.nixosModules.notDetected
-            (import (nixpkgs + "/nixos/modules/installer/cd-dvd/channel.nix"))
-            home-manager.nixosModules.home-manager
-            (patchModule system)
-            sourcesModule
-            {
-              # disable home-manager manpage (breaks hydra see https://github.com/rycee/home-manager/issues/1262)
-              home-manager.users.kloenk.manual.manpages.enable = false;
-            }
-          ];
-        }).config.system.build.isoImage;
 
       # evals
       hosts = import ./configuration/hosts { };
@@ -199,21 +156,12 @@
         } // { });
 
       legacyPackages = forAllSystems
-        (system: nixpkgsFor.${system} // { isoImage = (iso system); });
+        (system: nixpkgsFor.${system});
 
-      packages = nixpkgs.lib.recursiveUpdate (forAllSystems (system: {
-        inherit (self.legacyPackages.${system})
-          isoImage home-manager redshift jblock deploy_secrets wallpapers;
-      })) {
-        "x86_64-linux" = {
-          inherit (import ./lib/deploy.nix {
-            pkgs = nixpkgsFor."x86_64-linux";
-            lib = nixpkgsFor."x86_64-linux".lib;
-            configurations = self.nixosConfigurations;
-          })
-            deploy;
-        };
-      };
+
+      packages = forAllSystems (system: {
+        inherit (nixpkgsFor.${system}) home-manager wallpapers;
+      });
 
       nixosConfigurations = (nixpkgs.lib.mapAttrs (name: host:
         (nixpkgs.lib.nixosSystem rec {
@@ -236,7 +184,6 @@
             self.nixosModules.wordpress
             self.nixosModules.transient
             sourcesModule
-            (import (inputs.fediventure + "/ops/nixos/modules/workadventure/workadventure.nix"))
             {
               # disable home-manager manpage (breaks hydra see https://github.com/rycee/home-manager/issues/1262)
               home-manager.users.kloenk.manual.manpages.enable = false;
@@ -255,7 +202,6 @@
 
       nixosModules = {
         ferm2 = import ./modules/ferm2;
-        #nftables = import ./modules/nftables;
         deluge2 = import ./modules/deluge.nix;
         autoUpgrade = import ./modules/upgrade;
         firefox = import ./modules/firefox;
@@ -264,31 +210,16 @@
         transient = import ./modules/transient;
         nftables = import ./modules/nftables;
 
-        #secrets = import (petabyte + "/modules/secrets");
-        #pleroma = import (petabyte + "/modules/pleroma");
-        #nftables = import (petabyte + "/modules/nftables");
         wordpress = import ./modules/wordpress.nix;
       };
 
-      # apps
-      apps = forAllSystems (system: {
-        deploy_secrets = let
-          app = self.packages.${system}.deploy_secrets.override {
-            #passDir = toString (secrets + "/");
-          };
-        in {
-          type = "app";
-          program = "${app}";
-        };
-      });
-
       # hydra jobs
       hydraJobs = {
-        isoImage.x86_64-linux = (iso "x86_64-linux");
-        configurations = let lib = nixpkgs.lib;
-        in lib.mapAttrs' (name: config:
+        /*configurations = let
+          lib = nixpkgs.lib;
+         in lib.mapAttrs' (name: config:
           lib.nameValuePair name config.config.system.build.toplevel)
-        self.nixosConfigurations;
+         self.nixosConfigurations;*/
         packages = self.packages;
       };
     };
