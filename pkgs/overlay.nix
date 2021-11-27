@@ -12,6 +12,15 @@ in {
 
   libnfc0 = callPackage ./libnfc { };
 
+  restya-board = prev.restya-board.overrideAttrs (oldAttrs: rec {
+    src = let
+      version = "1.7";
+    in final.fetchurl {
+      url = "https://github.com/RestyaPlatform/board/releases/download/v${version}/board-v${version}.zip";
+      hash = "sha256-l4Twk8Yf1yNfO/8udO1ENPFvk1FnsSQTQQ6raiOkRlo=";
+    };
+  });
+
   emacsMacport = prev.emacsMacport.override { stdenv = final.llvmPackages_12.stdenv; };
 
   vemacs = callPackage ./vemacs {  };
