@@ -15,9 +15,9 @@ in {
 
   services.nginx.virtualHosts."restya.kloenk.dev" = {
     enableACME = true;
-    #forceSSL = true;
-    enableSSL = true;
+    forceSSL = true;
     http2 = true;
+    listen = lib.mkForce [ ];
 	locations."~* \\.(css|js|less|html|ttf|woff|jpg|jpeg|gif|png|bmp|ico)" = {
       extraConfig = ''
         ${commonHeaders}
