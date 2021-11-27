@@ -1,6 +1,7 @@
 inputs: final: prev:
 let inherit (final) callPackage;
 in {
+
   collectd-wireguard = callPackage ./collectd-wireguard { };
   #jblock = callPackage ./jblock { };
   deploy_secrets = callPackage ./deploy_secrets { };
@@ -11,7 +12,10 @@ in {
 
   libnfc0 = callPackage ./libnfc { };
 
+  emacsMacport = prev.emacsMacport.override { stdenv = final.llvmPackages_12.stdenv; };
+
   vemacs = callPackage ./vemacs {  };
+  vemacsMac = callPackage ./vemacs/mac.nix {  };
 
   #moodle = callPackage ./moodle { };
 
