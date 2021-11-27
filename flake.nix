@@ -63,9 +63,16 @@
     flake = false;
   };
 
+  inputs.darwin ={
+    type = "github";
+    owner = "lnl7";
+    repo = "nix-darwin";
+    inputs.nixpkgs.follows = "/nixpkgs";
+  };
+
 
   outputs = inputs@{ self, nixpkgs, nix, moodlepkgs, hydra, home-manager, mail-server
-    , website, dns, grahamc-config, ... }:
+    , website, dns, grahamc-config, darwin, ... }:
     let
 
       overlayCombined = system: [
@@ -110,6 +117,10 @@
       hosts = import ./configuration/hosts { };
       nixosHosts = nixpkgs.lib.filterAttrs
         (name: host: if host ? nixos then host.nixos else false) hosts;
+
+      darwinHosts = nixpkgs.lib.filterAttrs
+        (name: host: if host ? darwin then host.darwin else false) (import ./configuration/darwin {});
+
       sourcesModule = {
         _file = ./flake.nix;
         _module.args.inputs = inputs;
@@ -172,6 +183,21 @@
               [ ]);
         })) nixosHosts);
 
+      darwinConfigurations = (nixpkgs.lib.mapAttrs (name: host:
+        (darwin.lib.darwinSystem {
+          system = host.system;
+          modules = [
+            {
+              nixpkgs.overlays = [
+                #home-manager.overlay
+                self.overlay
+              ] ++ (overlayCombined host.system);
+            }
+            #home-manager.nixosModules.home-manager
+            (import (./configuration + "/darwin/${name}/darwin.nix"))
+          ];
+        })) darwinHosts);
+
       nixosModules = {
         ferm2 = import ./modules/ferm2;
         deluge2 = import ./modules/deluge.nix;
@@ -192,6 +218,7 @@
          in lib.mapAttrs' (name: config:
           lib.nameValuePair name config.config.system.build.toplevel)
          self.nixosConfigurations;*/
+        darwinConfigurations = self.darwinConfigurations;
         packages = self.packages;
       };
     };

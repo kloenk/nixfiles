@@ -2,7 +2,7 @@
 
 {
   imports =
-    [ ./nginx ./node-exporter ./zsh ./make-nixpkgs.nix ./kloenk.nix ./pbb.nix ];
+    [ ./common.nix ./nginx ./node-exporter ./zsh ./make-nixpkgs.nix ./kloenk.nix ./pbb.nix ];
 
   # environment.etc."src/nixpkgs".source = config.sources.nixpkgs;
   #  environment.etc."src/nixos-config".text = ''
@@ -16,26 +16,11 @@
   boot.zfs.enableUnstable = true; # allow linuxPackages_latest with zfs
   boot.kernelParams = [ "nohibernate" ]; # https://github.com/openzfs/zfs/issues/260
 
-  nix.gc.automatic = lib.mkDefault true;
-  nix.gc.options = lib.mkDefault "--delete-older-than 7d";
-  nix.trustedUsers = [ "root" "@wheel" "kloenk" ];
-  # nix flakes
-  #nix.package = lib.mkDefault pkgs.nixFlakes;
   nix.systemFeatures = [ "recursive-nix" "kvm" "nixos-test" "big-parallel" ];
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes ca-references recursive-nix progress-bar
-  '';
 
   system.autoUpgrade.flake = "kloenk";
 
-  # binary cache
-  nix.binaryCachePublicKeys = [ 
-    "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-  ];
-  nix.binaryCaches = [
-  #  "https://nix-community.cachix.org/"
-  ];
-
+  # TODO: what works in common?
   networking.domain = lib.mkDefault "kloenk.de";
   networking.useNetworkd = lib.mkDefault true;
   networking.search = [ "kloenk.de" ];
@@ -95,8 +80,6 @@
   console.keyMap = lib.mkDefault "neo";
   console.font = "Lat2-Terminus16";
 
-  time.timeZone = "Europe/Berlin";
-
   environment.systemPackages = with pkgs; [
     #termite.terminfo
     kitty.terminfo
@@ -104,14 +87,10 @@
     rxvt_unicode.terminfo
     restic
     tmux
-    exa
     iptables
     bash-completion
     whois
     qt5.qtwayland
-
-    fd
-    ripgrep
 
     erlang # for escript scripts
     rclone
