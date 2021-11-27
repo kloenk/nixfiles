@@ -4,9 +4,12 @@ let
   commonHeaders = lib.concatStringsSep "\n"
     (lib.filter (line: lib.hasPrefix "add_header" line)
       (lib.splitString "\n" config.services.nginx.commonHttpConfig));
+
+  dataDir = "/persist/data/restya";
 in {
   services.restya-board = {
     enable = true;
+    dataDir = dataDir;
     virtualHost = {
       serverName = "restya.kloenk.dev";
       
@@ -24,4 +27,10 @@ in {
       '';
     };
   };
+
+  systemd.services.restya-board-init.serviceConfig.ExecStartPre = let
+    dont_touch_sql = pkgs.writeShellScript "restya-dont-touch-sql" ''
+      touch ${dataDir}.db-initialized
+    '';
+  in [ dont_touch_sql ];
 }
