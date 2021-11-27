@@ -16,6 +16,26 @@
         "type": "gitlab"
       }
     },
+    "darwin": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1634994402,
+        "narHash": "sha256-xmlCVVOYGpZoxgOqsDOVF0B0ASrnbNGVAEzID9qh2xo=",
+        "owner": "lnl7",
+        "repo": "nix-darwin",
+        "rev": "44da835ac40dab5fd231298b59d83487382d2fab",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lnl7",
+        "repo": "nix-darwin",
+        "type": "github"
+      }
+    },
     "dns": {
       "inputs": {
         "nixpkgs": [
@@ -33,6 +53,21 @@
       "original": {
         "owner": "kloenk",
         "repo": "nix-dns",
+        "type": "github"
+      }
+    },
+    "emacs": {
+      "locked": {
+        "lastModified": 1638004858,
+        "narHash": "sha256-x6IOxtw9llmgxlYQQM+pYRiQvLiYnUBld2cERPFozuA=",
+        "owner": "nix-community",
+        "repo": "emacs-overlay",
+        "rev": "6b1dced80b87704e0317b9f74320f15b097bf7d9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "emacs-overlay",
         "type": "github"
       }
     },
@@ -212,11 +247,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1636377222,
-        "narHash": "sha256-+aGA4gbM+wGqsIfGkNAxXWsUCxUTYTSxW/5LV6IYfa4=",
-        "owner": "nixos",
+        "lastModified": 1635250107,
+        "narHash": "sha256-DlFs26CFD6yoy86IyAm4Hol4mzIgTKd2S1vkxye5oL8=",
+        "owner": "NixOS",
         "repo": "nix",
-        "rev": "6c2af1f201a925c2aa632737765685c72b642847",
+        "rev": "3155862bae7dac0f5e871f6241d8e1a96f9977bd",
         "type": "github"
       },
       "original": {
@@ -257,11 +292,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1636443658,
-        "narHash": "sha256-6e8zhNkrYH6XRF/0RySsSSwv/VpGgFz21AJ6O/otrqE=",
-        "owner": "kloenk",
+        "lastModified": 1637944277,
+        "narHash": "sha256-zcHgy9sl2Hg7TUpb9juJrc6R4EAcApNuqVv/yYOyvVs=",
+        "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "3a229fa6ed535c98066ce72d88a4a040bbea1399",
+        "rev": "62a7edf5d100c9ebef061ed5f8768af9470b229b",
         "type": "github"
       },
       "original": {
@@ -272,7 +307,9 @@
     },
     "root": {
       "inputs": {
+        "darwin": "darwin",
         "dns": "dns",
+        "emacs": "emacs",
         "flake-compat": "flake-compat",
         "grahamc-config": "grahamc-config",
         "home-manager": "home-manager",

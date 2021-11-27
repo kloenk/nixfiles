@@ -11,6 +11,8 @@ in {
 
   libnfc0 = callPackage ./libnfc { };
 
+  vemacs = callPackage ./vemacs {  };
+
   #moodle = callPackage ./moodle { };
 
   redshift = prev.redshift.overrideAttrs (oldAttrs: rec {

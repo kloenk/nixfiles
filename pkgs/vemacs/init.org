@@ -1,0 +1,1007 @@
+#+TITLE:Vika's Literate Emacs config
+#+OPTIONS: H:4
+#+PROPERTY: header-args:emacs-lisp :exports code :noweb yes :tangle ./init.el :comments yes
+#+STARTUP: fold
+
+This is the quest for the perfect Emacs config. It will never be fully
+completed but it will eventually become better over time, which brings
+me closer to the ultimate goal.
+
+#+BEGIN_SRC emacs-lisp :comments no
+;; -*- lexical-binding: t; -*-
+;; Copyright (c) 2021 Vika Shleina
+;;
+;; Author: Vika Shleina <vika@fireburn.ru>
+;;
+;; This file is not part of GNU Emacs.
+(message "Loading Vika's config for Emacs...")
+#+END_SRC
+
+* Initializing, performance optimizations and more
+First, we need to bring our system to a known state where it will be
+more malleable. Additionally, this is the best place to apply
+performance tweaks, since these should be done as early as possible.
+
+** Performance optimisations
+For large packages such as =lsp-mode=, we need to increase the GC
+threshold and since it's heavy on I/O, increase the buffer for
+communicating with subprocesses.
+
+#+BEGIN_SRC emacs-lisp
+;; performance optimization for large packages such as LSP
+(setq gc-cons-threshold 100000000
+      read-process-output-max (* 1024 1024))
+#+END_SRC
+
+** Package management strategies
+This Emacs is intended to be configured using the Nix package manager,
+which happens to be my package manager of choice. In fact, you can get
+the latest version of this config by using the following shell command
+(assuming the latest unstable Nix is installed and flakes are enabled):
+
+#+BEGIN_SRC shell :exports code
+nix build gitlab:vikanezrimaya/nix-flake#emacs
+#+END_SRC
+
+If you do so, Emacs will also be configured with additional packages
+built by Nix.
+
+*** Installing packages using Nix
+Nix manages the =load-path= of Emacs using a wrapper, so we don't have to
+do much. It even can install system packages which Emacs uses directly
+inside of our =PATH=!
+
+To detect if this config is built with Nix or not, we can rely on Nix
+wrappers for Emacs setting load-path to paths within =/nix/store= with the
+following function:
+
+#+BEGIN_SRC emacs-lisp
+(defun vika/built-by-nix-p ()
+  "Detect if this Emacs was configured using Nix."
+  (eval `(or . ,(mapcar
+                 (lambda (path)
+                   (not (eq nil (string-match "/nix/store/[a-z0-9]*-emacs-packages-deps/.*" path))))
+                 load-path))))
+#+END_SRC
+
+This is probably one of the weirdest-looking functions I've ever
+written, but it works surprisingly well. I'm not sure how well does it
+scale though, since my =load-path= is relatively short:
+
+#+BEGIN_SRC emacs-lisp :tangle no :exports both
+(length load-path)
+#+END_SRC
+
+#+RESULTS:
+: 91
+
+*** Installing packages on systems without Nix
+But what if there's no Nix on your system? Don't worry, I've got you
+covered. I've built an approximation of this config using =straight.el=
+and it is in fact automatically activated whenever this Emacs isn't
+built by Nix (I'll show how later).
+
+#+BEGIN_SRC emacs-lisp
+(defun vika/bootstrap-straight.el ()
+  "Bootstrap straight.el and install all the packages."
+  (defvar bootstrap-version)
+  (let ((bootstrap-file
+         (expand-file-name "straight/repos/straight.el/bootstrap.el"
+                           user-emacs-directory))
+        (bootstrap-version 5))
+    (unless (file-exists-p bootstrap-file)
+      (with-current-buffer
+          (url-retrieve-synchronously
+           "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+           'silent 'inhibit-cookies)
+        (goto-char (point-max))
+        (eval-print-last-sexp)))
+    (load bootstrap-file nil 'nomessage))
+  )
+#+END_SRC
+
+You might actually be familiar with this snippet. This is the standard
+straight.el bootstrapping, ripped directly from the straight.el
+homepage.
+
+Now for the list of packages...
+
+**** Packages to install
+#+BEGIN_SRC emacs-lisp
+(defvar vika/required-packages
+  '(
+    aggressive-indent
+    alert
+    company
+    company-nixos-options
+    company-posframe
+    counsel
+    diminish
+    direnv
+    exwm
+    fancy-battery
+    flycheck
+    git-gutter-fringe+
+    htmlize
+    hydra
+    ivy
+    evil-mode
+    lsp-mode
+    lsp-ui
+    ; lsp-dart
+    lsp-python-ms
+    magit
+    mixed-pitch
+    multi-vterm
+    nix-mode
+    notmuch
+    org
+    org-appear
+    org-contrib
+    org-pomodoro
+    org-super-agenda
+    org-super-star
+    org-roam
+    rustic
+    spaceline
+    swiper
+    telephone-line
+    tron-legacy-theme
+    undo-tree
+    vterm
+    yasnippet
+    )
+  "Required packages for this config. Setting this option at runtime has no effect, except when reloading your init file.")
+#+END_SRC
+
+...and for the means to install them.
+
+#+BEGIN_SRC emacs-lisp
+(defun vika/install-packages-with-straight.el ()
+  "Install required packages using straight.el using the list from vika/required-packages"
+  (vika/bootstrap-straight.el)
+  (mapcar 'straight-use-package vika/required-packages))
+#+END_SRC
+
+*** Deciding which install method to use
+Now for the fun part. If we don't use Nix, we need to install packages.
+
+#+BEGIN_SRC emacs-lisp
+(if (not (vika/built-by-nix-p))
+    (vika/bootstrap-straight.el))
+#+END_SRC
+
+* Eye candy
+** Color theme
+#+begin_src emacs-lisp
+(require 'vika-theme) ;; to put it in custom-theme-load-path I guess?...
+(load-theme 'vika t)
+#+end_src
+
+By the way, did you know that =load-theme= had an optional argument
+bypassing the theme safety check? I sure didn't.
+
+** UI enhancements
+I like minimalism. That's all.
+
+#+begin_src emacs-lisp
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+#+end_src
+
+*** evil mode
+#+begin_src emacs-lisp
+(require 'evil)
+(evil-mode 1)
+; (evil +everywhere)
+(message "We have cookies")
+#+end_src
+
+*** HiDPI font size
+Emacs doesn't really support HiDPI displays well due to being
+X11-based. Emacs-pgtk is untested and feels kinda rough, and I don't
+really understand if it works or not, and Google Chrome seems a bit
+unstable on Wayland and crashes often, so I prefer to use the X11
+version.
+
+The font size problem though is easily solved using the default face's
+font size. Let's just change it if we wanna use a HiDPI display.
+
+#+begin_src emacs-lisp
+(defvar vika/default-font-size 98 "Default font size in Emacs.")
+(defvar vika/default-powerline-height 24 "Default Powerline height.")
+
+(defun vika/change-font-size (newheight)
+  (interactive "nNew font size: ")
+  "Set global font size and powerline height to proportional values and then redraw the modeline to prevent weirdness."
+  (setq powerline-height (round (* (/ vika/default-powerline-height (float vika/default-font-size)) newheight)))
+  (set-face-attribute 'default nil :height newheight)
+  (spaceline-compile)
+  )
+#+end_src
+
+** Modeline
+*** Telephone line [disabled]                                 :noexport:
+:PROPERTIES:
+:header-args:emacs-lisp: :exports code :tangle no
+:END:
+=telephone-line= is a Powerline clone for Emacs. Looks fairly
+customizable. Sadly I don't know a thing about faces and modeline
+customization, so I'm mostly using pre-built segments.
+**** org-pomodoro shenanigans
+I use =org-pomodoro= for time-tracking (explained later) and sadly it interferes with modeline config without an option to disable it (boo!) I use the following patch to remedy this:
+
+#+begin_src emacs-lisp
+(defun vika/org-pomodoro-start-no-modeline (&optional state)
+  "Start the `org-pomodoro` timer.
+The argument STATE is optional.  The default state is `:pomodoro`."
+  (when org-pomodoro-timer (cancel-timer org-pomodoro-timer))
+
+  (org-pomodoro-set (or state :pomodoro))
+
+  (when (eq org-pomodoro-state :pomodoro)
+    (org-pomodoro-maybe-play-sound :start)
+    (run-hooks 'org-pomodoro-started-hook))
+  (org-pomodoro-update-mode-line)
+  (org-agenda-maybe-redo))
+(advice-add #'org-pomodoro-start :override #'vika/org-pomodoro-start-no-modeline)
+#+end_src
+
+**** Segments
+***** Patched VC segment
+The stock VCS indicator in the modeline doesn't hide itself when a buffer isn't tied to a VCS. Let's remedy that.
+#+begin_src emacs-lisp
+(telephone-line-defsegment vika/telephone-line-vc-segment ()
+  (if vc-mode (telephone-line-raw vc-mode t) ""))
+#+end_src
+
+***** Pomodoro clock
+Here's a replacement Pomodoro clock.
+#+begin_src emacs-lisp
+(telephone-line-defsegment telephone-line-pomodoro-clock ()
+  (unless (eq org-pomodoro-state :none)
+    (telephone-line-raw (propertize (car (cdr org-pomodoro-mode-line))
+                                    'help-echo (org-clock-get-clock-string)))))
+#+end_src
+***** Battery status
+The default battery-status seems to use the telephone-line-misc-info segment. I don't like that.
+#+begin_src emacs-lisp
+(require 'battery)
+(setq battery-update-interval 5)
+(if (eq battery-status-function nil)
+    (setq battery-status-function 'battery-linux-sysfs))
+(defvar vika/battery-mode-line-string nil)
+(defvar vika/battery-update-timer nil)
+(defun vika/update-battery ()
+  (let ((battery (eval `(,battery-status-function))))
+    (unless (eq "N/A" (cdr (car (cdr (cdr battery)))))
+      (setq vika/battery-mode-line-string
+            (propertize (battery-format "BAT %p%%%%" battery)
+                        'help-echo (battery-format "Power %L, left: %t" battery))
+            )
+      ))
+  (force-mode-line-update t))
+
+(telephone-line-defsegment vika/telephone-line-battery ()
+  (prog1 (telephone-line-raw vika/battery-mode-line-string)
+    (if (eq vika/battery-update-timer nil)
+        (setq vika/battery-update-timer
+              (run-at-time nil battery-update-interval 'vika/update-battery))
+      ))
+  )
+#+end_src
+
+**** The assembled config
+Here I also disable the Org-mode's modeline display, since I exclusively use Pomodoro for now.
+
+#+begin_src emacs-lisp
+(setq telephone-line-primary-left-separator 'telephone-line-tan-left
+      telephone-line-primary-right-separator 'telephone-line-tan-left
+      telephone-line-secondary-left-separator 'telephone-line-tan-hollow-left
+      telephone-line-secondary-right-separator 'telephone-line-tan-hollow-left
+      telephone-line-lhs '((accent vika/telephone-line-vc-segment
+                                   telephone-line-input-info-segment)
+                           (nil telephone-line-projectile-segment
+                                telephone-line-buffer-name-segment
+                                telephone-line-process-segment))
+      telephone-line-rhs '((nil telephone-line-pomodoro-clock
+                                telephone-line-flycheck-segment)
+                           (accent vika/telephone-line-battery)
+                           (nil telephone-line-misc-info-segment)
+                           (accent telephone-line-major-mode-segment
+                                   telephone-line-minor-mode-segment)
+                           (evil telephone-line-airline-position-segment))
+      org-clock-clocked-in-display nil
+      telephone-line-height 24
+      )
+(telephone-line-mode 1)
+#+end_src
+
+*** Spaceline
+Spaceline is a modeline for Emacs extracted from the popular Spacemacs
+config. It's pretty and has lots of integrations. Let's use it!
+
+#+begin_src emacs-lisp
+(require 'spaceline-config)
+#+end_src
+
+Oh, wait, I need to make a few modifications to a certain stock segment.
+
+#+begin_src emacs-lisp
+(spaceline-define-segment org-clock
+  "Show information about the current org clock task.  Configure
+`spaceline-org-clock-format-function' to configure. Requires a currently running
+org clock.
+
+This segment overrides the modeline functionality of `org-mode-line-string'."
+  (if (and (fboundp 'org-clocking-p)
+           (org-clocking-p))
+      (substring-no-properties (funcall spaceline-org-clock-format-function))
+    (propertize "Not clocked in" 'face '((nil (:foreground "#FF2222" :weight bold)))))
+  :global-override org-mode-line-string)
+
+#+end_src
+
+Now we can set our settings.
+
+#+begin_src emacs-lisp
+(progn
+  (setq powerline-height vika/default-powerline-height
+        powerline-default-separator 'wave
+        battery-status-function 'battery-linux-sysfs)
+  (spaceline-emacs-theme))
+#+end_src
+
+** Diminishing modes
+I hate seeing some modes. They're constantly on and very annoying to see
+in the modeline. Let's solve that.
+#+begin_src emacs-lisp
+(diminish 'eldoc-mode)
+(diminish 'visual-line-mode)
+(eval-after-load 'magit '(diminish 'auto-revert-mode))
+(eval-after-load 'company '(diminish 'company-mode))
+(eval-after-load 'undo-tree '(diminish 'undo-tree-mode))
+(eval-after-load 'aggressive-indent '(diminish 'aggressive-indent-mode))
+(eval-after-load 'counsel '(diminish 'counsel-mode))
+(eval-after-load 'ivy '(diminish 'ivy-mode))
+(eval-after-load 'flycheck '(diminish 'flycheck-mode))
+(eval-after-load 'mixed-pitch '(diminish 'mixed-pitch-mode))
+(eval-after-load 'org-indent '(diminish 'org-indent-mode))
+#+end_src
+
+* General life enhancements
+** Undo-tree
+Undo-tree is a powerful undo replacement allowing to navigate file
+history like a tree.
+
+#+begin_src emacs-lisp
+(global-undo-tree-mode 1)
+(setq undo-tree-visualizer-diff t)
+#+end_src
+
+** Ivy and Counsel (and Swiper?)
+Ivy replaces the built-in completing-read function. Counsel provides
+interesting extensions to builtin Emacs commands using Ivy, though their
+usefulness is sometimes debatable. Swiper is an awesome search replacement.
+
+#+begin_src emacs-lisp
+(ivy-mode 1)
+;; TODO figure out if I want counsel-mode or specific Counsel commands like counsel-M-x
+(counsel-mode 1)
+(setq ivy-use-virtual-buffers t
+      enable-recursive-minibuffers t)
+(global-set-key [remap isearch-forward] 'swiper)
+#+end_src
+
+
+** Windmove
+I find it much easier to navigate windows using Windmove rather than =C-x
+o=.
+
+#+begin_src emacs-lisp
+(require 'windmove)
+(mapcar
+ (lambda (definition)
+   (global-set-key (kbd (car definition)) (cdr definition)))
+ '(
+   ("C-x <up>" . windmove-up)       ("C-x <C-up>" . windmove-up)
+   ("C-x <left>" . windmove-left)   ("C-x <C-left>" . windmove-left)
+   ("C-x <down>" . windmove-down)   ("C-x <C-down>" . windmove-down)
+   ("C-x <right>" . windmove-right) ("C-x <C-right>" . windmove-right)))
+
+#+end_src
+
+** VTerm
+VTerm is term, but better and implemented in C (which means it is a lot
+faster). This requires compiling a native plugin. To those having Nix,
+you're in luck and don't need to do anything, =vterm-module= is already
+assembled for you. To those installing via straight.el... well, I hope
+you have CMake and stuff on your system.
+
+#+begin_src emacs-lisp
+;; This form is wrapped in with-demoted-errors because vterm
+;; might require a toolchain to compile its native module.
+;; The toolchain might not be present, so we can just disable
+;; vterm's features if that is the case.
+
+(with-demoted-errors "VTerm Error (demoted): %S"
+  (require 'multi-vterm) ; Theoretically autoloaded functions don't need the require form
+  (defun vika/multi-vterm-open-window (arg)
+    (interactive "P")
+    (if (eq arg nil)
+        (multi-vterm-project)
+      (let ((current-prefix-arg nil))
+        (multi-vterm-dedicated-open))))
+  (global-set-key (kbd "C-c t") 'vika/multi-vterm-open-window))
+#+end_src
+
+*** TODO Make vterm replace itself by term if the native module is unable to be compiled
+
+** Company
+#+begin_src emacs-lisp
+(add-hook 'prog-mode-hook 'company-mode)
+#+end_src
+** Hydra
+Hydra is a key-mapping package allowing to create transient binding maps
+that persist until a key that is not a member of a mapping is called.
+
+#+begin_src emacs-lisp
+(require 'hydra)
+(setq hydra-is-helpful t
+      hydra-hint-display-type 'lv)
+#+end_src
+* Applications
+** Dashboard
+#+begin_src emacs-lisp
+(require 'dashboard)
+(setq initial-buffer-choice (lambda () (get-buffer "*dashboard*"))
+      dashboard-projects-backend 'project-el
+      dashboard-items '((recents  . 10)
+                        (bookmarks . 10)
+                        (projects . 5)
+                        (agenda)
+                        )
+      dashboard-startup-banner 'logo
+      dashboard-set-heading-icons t
+      dashboard-set-file-icons t
+      dashboard-page-separator "\n\n"
+      dashboard-agenda-release-buffers t
+      )
+
+(defun vika/dashboard-setup-startup-hook ()
+  "Setup post initialization hooks.
+If a command line argument is provided,
+assume a filename and skip displaying Dashboard.
+
+In case the command line arguments look like an EXWM startup invocation, still display Dashboard."
+  (when
+      (not (and
+       (> (length command-line-args) 2)
+       (not (string-equal (caddr command-line-args) "vika/exwm-enable"))
+       ))
+    (add-hook 'after-init-hook (lambda ()
+                                 ;; Display useful lists of items
+                                 (dashboard-insert-startupify-lists)))
+    (add-hook 'emacs-startup-hook (lambda ()
+                                    (switch-to-buffer dashboard-buffer-name)
+                                    (goto-char (point-min))
+                                    (redisplay)
+                                    (run-hooks 'dashboard-after-initialize-hook)))))
+
+(advice-add #'dashboard-setup-startup-hook :override #'vika/dashboard-setup-startup-hook)
+(dashboard-setup-startup-hook)
+#+end_src
+** Alert
+Alert is a notifier for Emacs, and some packages hook into it. Let's
+configure some stuff so it would work better!
+
+#+begin_src emacs-lisp
+(setq alert-default-style 'libnotify)
+#+end_src
+
+To test this, you can use the following:
+#+begin_src emacs-lisp :tangle no
+(alert "Test notification" :title "Hello from Emacs")
+#+end_src
+
+** Notmuch
+I like my mail sorted by tags.
+
+#+begin_src emacs-lisp
+(require 'notmuch)
+(setq message-kill-buffer-on-exit t
+      mml-secure-openpgp-sign-with-sender t
+      mm-text-html-renderer 'w3m-standalone
+      mail-user-agent 'notmuch-user-agent)
+(setq-default notmuch-search-oldest-first nil)
+(define-key notmuch-show-mode-map (kbd "C-<return>") 'browse-url-at-point)
+#+end_src
+
+** Org-mode
+Oh, the venerable Org mode. The killer app of Emacs. Honestly, if you
+aren't using Org-mode, why are you even using Emacs?
+
+*** Core config
+#+begin_src emacs-lisp
+(require 'org)
+(setq org-agenda-files '("~/Documents/org/kloenk.org"
+                         "~/Documents/org/inbox.org"
+                         "~/Documents/org/projects.org"
+                         "~/Documents/org/journal.org")
+      org-catch-invisible-edits 'smart
+      org-clock-in-switch-to-state "WORKING"
+      ;; Note: doesn't work, reasons unknown
+      org-clock-out-switch-to-state "NEXT"
+      org-default-notes-file "~/Documents/org/inbox.org"
+      org-directory "~/Documents/org"
+      org-hide-leading-stars nil
+      org-log-done 'time
+      org-log-into-drawer t
+      org-log-note-clock-out t
+      org-log-reschedule 'note
+      org-todo-keywords '((type "TODO(t)" "NEXT(n)" "DONE(d)")
+                          (type "WORKING()" "|")
+                          )
+      org-todo-keyword-faces '(("WORKING" . (:inherit 'org-todo :foreground "yellow"))
+                               ("NEXT" . (:inherit 'org-todo :foreground "yellow" :weight bold))
+                               )
+      org-archive-location "archive/%s_archive::"
+      org-tags-column -72
+      ;; Set stuck projects to those that don't have a defined next step and
+      ;; are therefore otherwise invisible in the agenda.
+      org-stuck-projects '("+project+LEVEL=1" ("NEXT" "WORKING") nil "")
+      org-support-shift-select t
+      org-adapt-indentation nil
+      org-hidden-keywords '(title author email date)
+      org-file-apps '((auto-mode . emacs)
+                      (directory . emacs)
+                      ("\\.mm\\'" . default)
+                      ;; WHYYYYYYYYYYYYYYY
+                      ("\\.x?html?\\'" . (lambda (file link) (browse-url-xdg-open file link)))
+                      ("\\.pdf\\'" . default))
+      org-outline-path-complete-in-steps nil
+      org-refile-targets `((org-agenda-files . ,(cons :level 1)))
+      org-refile-use-outline-path 'file
+      )
+#+end_src
+
+*** My customisations
+#+begin_src emacs-lisp
+(defun vika/org-jump-to-agenda-file ()
+  (interactive)
+  (find-file (completing-read "Org file: " org-agenda-files)))
+(global-set-key (kbd "C-c l") 'org-store-link)
+(global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-c c") 'org-capture)
+(global-set-key (kbd "C-c n") 'vika/org-jump-to-agenda-file)
+
+(setq holiday-bahai-holidays nil
+      holiday-islamic-holidays nil
+      holiday-hebrew-holidays nil)
+
+(require 'org-capture)
+;; Make Capture mark the frame it appears in as urgent to call attention to it.
+(add-hook 'org-capture-mode-hook
+          (lambda ()
+            (x-urgency-hint
+             (window-frame
+              (get-buffer-window (current-buffer)))
+             t)
+            ))
+(require 'org-appear)
+(setq org-hide-emphasis-markers t)
+(add-hook 'org-mode-hook 'org-appear-mode)
+
+(require 'org-superstar)
+(setq org-superstar-leading-bullet " ")
+(add-hook 'org-mode-hook 'org-superstar-mode)
+(setq org-startup-indented t)
+#+end_src
+
+*** Org-roam
+I'm kinda trying to use Org-roam, but it feels clunky and sometimes a
+bit sluggish (probably because it's using SQLite as a C extension?).
+
+Honestly almost no configuration here. I'm not completely sold on this
+Zettelkasten thing, and I need to sort out my keybinds anyway.
+
+#+begin_src emacs-lisp
+(setq org-roam-v2-ack t)
+(setq org-roam-directory "~/Documents/org/roam")
+(org-roam-db-autosync-mode)
+#+end_src
+
+*** Agenda
+First, let's bind RET in the agenda view to go to the file itself. I
+don't remember what was the original binding, but I remember it was VERY
+inconvenient.
+
+#+begin_src emacs-lisp
+(eval-after-load 'org-agenda
+  '(define-key org-agenda-mode-map (kbd "RET") 'org-agenda-goto))
+#+end_src
+
+Then, let's set up my custom commands.
+
+#+begin_src emacs-lisp
+(setq
+ org-agenda-custom-commands
+ '(
+   ("A" "Agenda (detailed)"
+    ((agenda "" nil)
+     (tags-todo "-project-shopping-bookmarks"
+                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'scheduled))
+                 (org-agenda-overriding-header "Unscheduled TODO items:"))
+                )
+     (tags-todo "+project-someday"
+                ((org-agenda-overriding-header "Next steps for open projects:")
+                 (org-agenda-skip-function '(org-agenda-skip-entry-if 'scheduled 'nottodo '("NEXT")))))
+     (stuck "" nil)
+     (tags-todo "+bookmarks" ((org-agenda-overriding-header "Bookmarks:")))
+     (tags-todo "+shopping" ((org-agenda-overriding-header "Shopping List:")))
+     )
+    nil ("~/Documents/org/agenda.html"))
+   ))
+#+end_src
+
+I also have some more minor options that I can keep in a separate block.
+#+begin_src emacs-lisp
+(setq org-agenda-hide-tags-regexp "project\\|bookmarks\\|shopping"
+      org-agenda-skip-additional-timestamps-same-entry t
+      org-agenda-skip-deadline-prewarning-if-scheduled t
+      org-agenda-todo-ignore-scheduled 'all
+      org-agenda-todo-ignore-deadlines 'near
+      org-agenda-ignore-with-date nil
+      org-agenda-dim-blocked-tasks nil
+      org-agenda-tags-column -79
+      org-agenda-tags-todo-honor-ignore-options t)
+#+end_src
+*** Capture
+My capture workflow is very rough and underused.
+
+#+begin_src emacs-lisp
+(setq org-capture-templates
+      '(
+        ("t" "Task (scheduled for today)" entry (file "~/Documents/org/inbox.org")
+         "** TODO %^{Task name}\nSCHEDULED: %t\n:PROPERTIES:\n:CREATED:  %U\n:END:\n\n%U\n%x"
+         :empty-lines 1 :empty-lines-after 1)
+        ("j" "Journal Entry" entry (file+olp+datetree "~/Documents/org/journal.org")
+         "** %^{Entry name}\n:PROPERTIES:\n:CREATED:  %U\n:END:\n%x"
+         :empty-lines 1 :empty-lines-after 1)
+        ("B" "Bookmark" entry (file+olp "~/Documents/org/vika.org" "Bookmarks")
+         "** TODO %:description\n:PROPERTIES:\n:CREATED:  %U\n:END:\n%:annotation\n\n%:initial"
+         :empty-lines 1 :empty-lines-after 1)
+        ("c" "Contacts" entry (file "~/Documents/org/contacts.org")
+         "* %(org-contacts-template-name)\n:PROPERTIES:\n:EMAIL: %(org-contacts-template-email)\n:BIRTHDAY:\n:PHONE:\n:NOTE:\n:ADDRESS:\n:END:")
+        ))
+
+(require 'org-protocol)
+#+end_src
+
+*** Org-babel
+#+begin_src emacs-lisp
+(setq org-babel-load-languages '((emacs-lisp . t)
+                                 (shell . t)
+                                 (ditaa . t)
+                                 (sqlite . t)
+                                 )
+      )
+#+end_src
+
+*** Minor Org things
+#+begin_src emacs-lisp
+;; Quickly insert templates using < key TAB
+(require 'org-tempo)
+;; htmlize code blocks
+(require 'htmlize)
+#+end_src
+
+*** Pomodoros
+#+begin_src emacs-lisp
+(require 'org-pomodoro)
+(global-set-key (kbd "C-c p") 'org-pomodoro)
+(setq org-pomodoro-keep-killed-pomodoro-time t
+      org-pomodoro-start-sound-p t
+      org-pomodoro-ticking-sound-p nil
+      org-pomodoro-format "%s"
+      org-pomodoro-short-break-format "Short~%s"
+      org-pomodoro-long-break-format "Long~%s")
+#+end_src
+
+*** Org-contacts
+#+begin_src emacs-lisp
+(require 'org-contacts)
+(setq org-contacts-files '("~/Documents/org/contacts.org"))
+#+end_src
+
+*** DONE Move Org keybinds to a hydra or a common prefix
+CLOSED: [2021-10-08 Fri 08:15]
+#+begin_src emacs-lisp
+(global-set-key
+ (kbd "<f5>")
+ (defhydra vika/hydra/org (nil nil
+                           :verbosity 1
+                           :exit t)
+   "Org mode global commands"
+   ("a" (org-agenda nil "A") "agenda" :column "Agenda")
+   ("A" org-agenda "selector")
+   ("f" vika/org-jump-to-agenda-file "find file")
+   ("l" org-store-link "store link" :column "Links")
+   ("p" org-pomodoro "Pomodoro" :column "Clocks")
+   ("i" org-clock-in-last "Clock in last")
+   ("o" org-clock-out "Clock out")
+   ("c" org-capture "Capture" :column "Capture")
+   ("C" org-capture-goto-last-stored "last stored")
+   ("r" org-roam-node-find "find" :column "Roam")
+   ))
+#+end_src
+** EXWM
+Surprisingly this might be good for a machine focused solely on
+Emacs. It haven't had an update since 2020 but seems to be used in
+production by many people.
+
+This function asynchronously spawns a shell command as a child of Emacs
+which is very useful to launch various subprocesses and even whole
+applications.
+
+#+begin_src emacs-lisp
+(defun vika/exwm-subprocess (command)
+  (interactive (list (read-shell-command "$ ")))
+  (start-process-shell-command command nil command))
+#+end_src
+
+The following function automatically detects my display configuration,
+sets up my workspaces according to the monitors I am using and
+automatically refreshes EXWM's RandR configuration.
+
+#+begin_src emacs-lisp
+(defun vika/exwm-screen-change-hook ()
+  ;;(message "Running autorandr...")
+  ;;(vika/exwm-subprocess "exec autorandr --change")
+  (let ((autorandr-config
+         (string-trim (shell-command-to-string "autorandr --current")))
+        )
+    (pcase autorandr-config
+      ("docked" (setq exwm-randr-workspace-monitor-plist '(0 "eDP")))
+      ("mobile" (setq exwm-randr-workspace-monitor-plist nil))
+      ))
+  (when exwm--connection (exwm-randr-refresh))
+  )
+#+end_src
+
+The following is a workspace switcher. It is currently disabled and
+reverted to more standard behavior since I was extremely confused by how
+well it worked.
+
+#+begin_src emacs-lisp
+(defvar vika/exwm-previous-workspace nil)
+
+(defun vika/exwm-switch-to-workspace (index)
+  (if (eq exwm-workspace-current-index index)
+      (progn
+        (exwm-workspace-switch-create vika/exwm-previous-workspace)
+        (setq vika/exwm-previous-workspace index)
+        )
+    (setq vika/exwm-previous-workspace exwm-workspace-current-index)
+    (exwm-workspace-switch-create index)
+   ))
+
+;; (defun vika/exwm-switch-to-workspace (index)
+;;   (exwm-workspace-switch-create index)
+;;   )
+#+end_src
+
+This function sits dormant until it's called. Then it pulls all of the
+EXWM config and launches EXWM, taking over the window management.
+
+#+begin_src emacs-lisp
+(defun vika/exwm-enable ()
+  (require 'exwm)
+  (add-hook 'exwm-update-class-hook
+            (lambda ()
+              (exwm-workspace-rename-buffer (string-trim exwm-class-name))))
+
+  ;; Mode line.
+  (defvar vika/exwm-mode-line-string nil "EXWM mode line string.")
+  (defun vika/exwm-update-mode-line ()
+    "Update exwm modeline"
+    (setq exwm-mode-line-string
+          (propertize
+           (concat "EXWM:" (number-to-string exwm-workspace-current-index))
+           'face '((nil (:foreground "#FFFFFF" :weight bold)))
+           ))
+    (force-mode-line-update)
+    )
+  (add-hook 'exwm-workspace-switch-hook #'vika/exwm-update-mode-line)
+  (add-to-list 'global-mode-string 'vika/exwm-mode-line-string)
+  ;; Global keybindings.
+  (setq exwm-input-global-keys
+        `(
+          ;; 's-r': Reset (to line-mode).
+          ([?\s-r] . exwm-reset)
+          ;; 's-w': Switch workspace.
+          ([?\s-w] . exwm-workspace-switch)
+          ;; 's-&': Launch application.
+          ([?\s-d] . vika/exwm-subprocess)
+          ;; 's-NUMBER': Switch to certain workspace.
+          (,(kbd "s-`") . ,(lambda () (interactive)
+                             (vika/exwm-switch-to-workspace 0)))
+          ;; 's-\': toggle input method (using XIM, it should be used with X11 apps)
+          (,(kbd "s-\\") . toggle-input-method)
+
+          ,@(mapcar (lambda (i)
+                      `(,(kbd (format "s-%d" i)) .
+                        ,(lambda () (interactive) (vika/exwm-switch-to-workspace i))))
+                    (number-sequence 1 9))
+          (,(kbd "<XF86MonBrightnessDown>") . (lambda () (interactive)
+                                                (vika/exwm-subprocess "brightnessctl set 5%-")))
+          (,(kbd "<XF86MonBrightnessUp>") . (lambda () (interactive)
+                                              (vika/exwm-subprocess "brightnessctl set +5%")))
+          ))
+
+  ;; Line-editing shortcuts
+  (setq exwm-input-simulation-keys
+        `(([?\C-b] . [left])
+          ([?\C-f] . [right])
+          ([?\C-p] . [up])
+          ([?\C-n] . [down])
+          ([?\C-a] . [home])
+          ([?\C-e] . [end])
+          ([?\M-v] . [prior])
+          ([?\C-v] . [next])
+          ([?\C-d] . [delete])
+          ([?\C-k] . [S-end delete])
+          (,(kbd "M-w") . ,(kbd "C-c"))
+          (,(kbd "C-y") . ,(kbd "C-v"))
+          ))
+
+  (add-hook 'exwm-init-hook
+            (lambda ()
+              (exwm-workspace-switch-create 1)
+              ))
+
+  (setq frame-resize-pixelwise t
+        exwm-workspace-show-all-buffers t)
+  (scroll-bar-mode -1)
+  ;; Configure multiple monitors support
+  (require 'exwm-randr)
+  (exwm-randr-enable)
+  (add-hook 'exwm-randr-screen-change-hook 'vika/exwm-screen-change-hook)
+  (vika/exwm-screen-change-hook)
+   ;; Apparently exwm has a systray. Let's use it?
+  (require 'exwm-systemtray)
+  (exwm-systemtray-enable)
+  ;; Make Emacs input methods work inside EXWM via XIM
+  (require 'exwm-xim)
+  (setenv "GTK_IM_MODULE" "xim")
+  (setenv "QT_IM_MODULE" "xim")
+  (setenv "XMODIFIERS" "@im=exwm-xim")
+  (setenv "CLUTTER_IM_MODULE" "xim")
+  (exwm-xim-enable)
+
+  ;; Start common subprocesses
+  (vika/exwm-subprocess "exec picom --backend glx --vsync")
+  (vika/exwm-subprocess "exec xset dpms 300 300 300")
+  (vika/exwm-subprocess "exec dunst")
+  (vika/exwm-subprocess "exec nm-applet")
+  ;; Make everything pretty
+  (set-frame-parameter (selected-frame) 'alpha '(85 . 85))
+  (add-to-list 'default-frame-alist '(alpha . (85 . 85)))
+  (vika/exwm-subprocess "source ~/.fehbg")
+
+  ;; Enable EXWM
+  (exwm-enable)
+  (setq display-time-default-load-average nil
+        display-time-24hr-format t)
+  (display-time-mode 1)
+  (setq battery-update-interval 3
+        fancy-battery-show-percentage t)
+  (fancy-battery-mode 1)
+  (unless server-process (server-start))
+  )
+#+end_src
+*** TODO Fix Kanji input
+Kanji input works everywhere else but not EXWM buffers.
+
+*** DONE Make Emacs copy-paste work in other apps (EXWM simulation keys?)
+CLOSED: [2021-10-13 Wed 19:26]
+* Programming
+** direnv
+#+begin_src emacs-lisp
+(require 'direnv)
+(direnv-mode)
+#+end_src
+** Major modes and their configuration
+This enables nice-to-have things in most modes. First, visual line mode
+remaps some keys, and I don't like that. Thankfully, there's a way to
+emulate it with some variables (I grabbed them from the visual-line-mode
+internals).
+#+begin_src emacs-lisp
+(defun vika/visual-line-but-dont-change-movement ()
+  (setq-local truncate-lines nil
+              truncate-partial-width-windows nil
+              word-wrap t
+              fringe-indicator-alist
+              (cons (cons 'continuation visual-line-fringe-indicators)
+                    fringe-indicator-alist))
+  )
+
+(add-hook 'prog-mode-hook 'vika/visual-line-but-dont-change-movement)
+(add-hook 'text-mode-hook 'vika/visual-line-but-dont-change-movement)
+#+end_src
+
+Then, we enable commonly used things in programming modes - current line
+highlighting, line numbers and highlighting of matching parens.
+
+#+begin_src emacs-lisp
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (display-line-numbers-mode 1)
+            (hl-line-mode 1)
+            (show-paren-mode 1)
+            ))
+#+end_src
+
+Additionally, let's get rid of tabs and replace them with spaces.
+
+#+begin_src emacs-lisp
+(setq-default tab-width 4
+              indent-tabs-mode nil)
+(defvaralias 'c-basic-offset 'tab-width)
+#+end_src
+
+*** Rust
+#+begin_src emacs-lisp
+(require 'rustic)
+#+end_src
+
+Rustic and LSP sometimes interact in a funny way where lsp-mode can't
+find something from the nix-shell environment. Let's fix that.
+
+#+begin_src emacs-lisp
+(add-hook 'rustic-mode-hook 'direnv-update-environment -100)
+#+end_src
+
+*** Lisp dialects
+=aggressive-indent-mode= is a lifesaver! It allows me to have perfectly
+indented Lisp code all the time.
+
+#+begin_src emacs-lisp
+(require 'aggressive-indent)
+(add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
+;;(add-hook 'clojure-mode-hook #'aggressive-indent-mode)
+
+#+end_src
+
+**** TODO Clojure?
+I kinda wanted to set up clojure for Overtone. Generative music seems like an interesting thing. Unfortunately, Overtone requires JACK, and I can't be bothered to set it up yet. I hope PipeWire can imitate JACK, because if not, I'm gonna be really-really mad.
+*** Dart and Flutter
+#+begin_src emacs-lisp
+;(require 'dart-mode)
+#+end_src
+
+Apparently =lsp-dart= is *extremely dumb* when it comes to searching for the
+Dart and Flutter SDKs. It stubbornly tries to use a Flutter SDK in =PATH=
+if it sees the =flutter= tool in the environment, even if the =FLUTTER_ROOT=
+variable is set (which should probably take priority - what if the user
+has multiple SDKs installed).
+
+**** TODO Find Flutter SDK by looking in =FLUTTER_ROOT= first
+
+** lsp-mode
+#+begin_src emacs-lisp
+(require 'lsp)
+(ignore-errors (require 'lsp-python-ms)
+               (add-hook 'python-mode-hook #'lsp-deferred))
+(add-hook 'nix-mode-hook #'lsp-deferred)
+;(add-hook 'dart-mode-hook #'lsp-deferred)
+#+end_src
+
+* Local variables for this file                               :noexport:
+# Local Variables:
+# org-adapt-indentation: nil
+# indent-tabs-mode: nil
+# org-edit-src-content-indentation: 0
+# fill-column: 72
+# auto-fill-mode: t
+# End:

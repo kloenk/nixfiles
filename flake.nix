@@ -58,6 +58,12 @@
     flake = false;
   };
 
+  inputs.emacs = {
+    type = "github";
+    owner = "nix-community";
+    repo = "emacs-overlay";
+  };
+
   inputs.flake-compat = {
     url = "github:edolstra/flake-compat";
     flake = false;
@@ -72,7 +78,7 @@
 
 
   outputs = inputs@{ self, nixpkgs, nix, moodlepkgs, hydra, home-manager, mail-server
-    , website, dns, grahamc-config, darwin, ... }:
+    , website, dns, grahamc-config, darwin, emacs, ... }:
     let
 
       overlayCombined = system: [
@@ -81,6 +87,7 @@
         self.overlay
         (overlays system)
         moodlepkgs.overlay
+        emacs.overlay
       ];
 
       systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
