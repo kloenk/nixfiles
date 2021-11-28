@@ -12,6 +12,7 @@
     ./mysql.nix
     ./gitlab.nix
     #./restya.nix
+    ./youtrack.nix
     # ./pleroma # fucking annoying and not working
 
     ./wireguard.nix
