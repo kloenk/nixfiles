@@ -4,6 +4,7 @@
   services.jira = {
     enable = true;
     home = "/persist/data/jira";
+    jrePackage = pkgs.jdk8;
   };
 
   services.nginx.virtualHosts."restya.kloenk.dev" = {
@@ -18,6 +19,5 @@
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "atlassian-jira"
-    "oraclejre"
   ];
 }
