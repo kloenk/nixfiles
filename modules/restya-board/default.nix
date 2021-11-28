@@ -266,10 +266,9 @@ in
       after = [ "network.target" ] ++ lib.optional (cfg.database.host == null) "postgresql.service";
 
       script = ''
-       rm -rf "${runDir}"
-       mkdir -m 750 -p "${runDir}"
-       cp -r "${pkgs.restya-board}/"* "${runDir}"
-       chmod -R ${cfg.user} "${runDir}"
+        rm -rf "${runDir}"
+        mkdir -m 750 -p "${runDir}"
+        cp -r "${pkgs.restya-board}/"* "${runDir}"
 
         sed -i "s/@restya.com/@${cfg.virtualHost.serverName}/g" "${runDir}/sql/restyaboard_with_empty_data.sql"
         rm -rf "${runDir}/media"
