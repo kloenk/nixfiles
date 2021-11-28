@@ -109,9 +109,11 @@
             "tasks/auto-upgrade.nix"
             "services/networking/pleroma.nix"
             "services/web-apps/wordpress.nix"
+            "services/web-apps/restya-board.nix"
           ];
         imports = [
           self.nixosModules.autoUpgrade
+          self.nixosModules.restya-board
         ];
         nixpkgs.overlays = [ (overlays system) nix.overlay ];
       };
@@ -214,6 +216,8 @@
         pleroma = import ./modules/pleroma;
         transient = import ./modules/transient;
         nftables = import ./modules/nftables;
+
+        restya-board = import ./modules/restya-board;
 
         wordpress = import ./modules/wordpress.nix;
       };
