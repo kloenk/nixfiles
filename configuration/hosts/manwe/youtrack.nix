@@ -4,7 +4,7 @@
   services.youtrack = {
     enable = true;
     port = 8085;
-    baseUrl = "restya.kloenk.dev";
+    baseUrl = "https://restya.kloenk.dev/";
     virtualHost = "restya.kloenk.dev";
     statePath = "/persist/data/youtrack";
   };
