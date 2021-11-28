@@ -11,7 +11,7 @@
     forceSSL = true;
     http2 = true;
     locations."/" = {
-      proxyPass = "http://${config.services.jira.listenAddress}:${config.services.jira.listenPort}";
+      proxyPass = "http://${config.services.jira.listenAddress}:${toString config.services.jira.listenPort}";
 
     };
   };
