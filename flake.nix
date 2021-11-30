@@ -37,8 +37,10 @@
   };
 
   inputs.website = {
-    type = "git";
-    url = "https://git.petabyte.dev/kloenk/website.git";
+    type = "gitlab";
+    owner = "kloenk";
+    repo = "website";
+    host = "lab.kloenk.dev";
     flake = false;
     #ref = "lexbeserious";
   };

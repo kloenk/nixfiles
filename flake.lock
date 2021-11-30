@@ -339,17 +339,19 @@
     "website": {
       "flake": false,
       "locked": {
-        "lastModified": 1613647885,
-        "narHash": "sha256-p3r94I75rlWRUFKr7WMsEAffTk4xA9IVvwHNK8RUJws=",
-        "ref": "master",
-        "rev": "c491c6cc4c73eb080f518dfcd1400ecf92730b69",
-        "revCount": 17,
-        "type": "git",
-        "url": "https://git.petabyte.dev/kloenk/website.git"
+        "host": "lab.kloenk.dev",
+        "lastModified": 1638293469,
+        "narHash": "sha256-9BEL4ofk9afZqEcfiT09XMfmAbWRzu3SF/o1Th3DD08=",
+        "owner": "kloenk",
+        "repo": "website",
+        "rev": "451e5c74be65351f78be22f322f7e817c97b9945",
+        "type": "gitlab"
       },
       "original": {
-        "type": "git",
-        "url": "https://git.petabyte.dev/kloenk/website.git"
+        "host": "lab.kloenk.dev",
+        "owner": "kloenk",
+        "repo": "website",
+        "type": "gitlab"
       }
     }
   },
