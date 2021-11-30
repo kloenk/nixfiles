@@ -15,4 +15,9 @@
     extra-platforms = x86_64-darwin aarch64-darwin
     system-features = benchmark big-parallel recursive-nix
   '';
+
+  users.users.kloenk.packages = with pkgs; [
+    elixir
+    erlang
+  ];
 }
