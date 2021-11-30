@@ -1,5 +1,5 @@
 inputs: final: prev:
-let inherit (final) callPackage;
+let inherit (final) callPackage stdenv;
 in {
 
   collectd-wireguard = callPackage ./collectd-wireguard { };
@@ -15,6 +15,14 @@ in {
   restya-board = callPackage ./restya-board { };
 
   emacsMacport = prev.emacsMacport.override { stdenv = final.llvmPackages_12.stdenv; };
+  emacsMac = callPackage ./emacs-mac {
+    inherit (final.darwin.apple_sdk.frameworks)
+       AppKit Carbon Cocoa IOKit OSAKit Quartz QuartzCore WebKit
+      ImageCaptureCore GSS ImageIO;
+    UniformTypeIdentifiers = if stdenv.isAarch64 then final.darwin.apple_sdk.frameworks.UniformTypeIdentifiers else null;
+    sigtool = if stdenv.isAarch64 then final.darwin.sigtool else null;
+    stdenv = if stdenv.cc.isClang then final.llvmPackages_12.stdenv else stdenv;
+  };
 
   vemacs = callPackage ./vemacs {  };
   vemacsMac = callPackage ./vemacs/mac.nix {  };
