@@ -340,11 +340,11 @@
       "flake": false,
       "locked": {
         "host": "lab.kloenk.dev",
-        "lastModified": 1638293469,
-        "narHash": "sha256-9BEL4ofk9afZqEcfiT09XMfmAbWRzu3SF/o1Th3DD08=",
+        "lastModified": 1638307081,
+        "narHash": "sha256-oD/+xzkUhEsczm2rTJaVhAlb5R8w/3tKmeki8fa06Bs=",
         "owner": "kloenk",
         "repo": "website",
-        "rev": "451e5c74be65351f78be22f322f7e817c97b9945",
+        "rev": "67e26fc8249c9bc9cc73a8a18988910f348fa780",
         "type": "gitlab"
       },
       "original": {
