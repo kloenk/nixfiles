@@ -52,6 +52,17 @@
     "cgroup_no_v1=all"
   ];
 
+  boot.kernelPatches = [{
+    name = "nl80211-reload";
+    patch = ./0001-nl80211-remove-reload-flag-from-regulatory_request.patch;
+    extraStructuredConfig = with lib.kernel; {
+      EXPERT = yes;
+      CFG80211_CERTIFICATION_ONUS = yes;
+      CFG80211_REQUIRE_SIGNED_REGDB = no;
+    };
+  }];
+
+
   kloenk.transient.vgroup = "ssd";
   kloenk.transient.enable = true;
 
