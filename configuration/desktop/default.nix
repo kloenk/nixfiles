@@ -35,7 +35,7 @@
     gnupg
     mpv
     #tdesktop
-    evince
+    #evince
     youtubeDL
     calcurse
     #neomutt
