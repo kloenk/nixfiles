@@ -87,6 +87,8 @@ in (emacs.pkgs.withPackages (e: (with e; [
   undo-tree
   vterm
   yasnippet
+  doom-themes
+  elixir-mode
 ]) ++ [
   # Custom config for Emacs
   customConfig

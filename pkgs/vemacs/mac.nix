@@ -6,7 +6,6 @@ let
   stdenv = llvmPackages_13.stdenv;
   emacs' = emacsMacport.overrideAttrs (attrs: {
     postInstall = (attrs.postInstall or "") + ''
-      rm $out/share/applications/emacs{,-mail}.desktop
     '';
   });
   emacsPkgs = emacsPackages.overrideScope' (prev: final: {
@@ -85,6 +84,10 @@ in (emacs.pkgs.withPackages (e: (with e; [
   undo-tree
   vterm
   yasnippet
+  elixir-mode
+  doom-themes
+  evil
+  evil-org
 ]) ++ [
   # Custom config for Emacs
   customConfig

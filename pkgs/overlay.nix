@@ -14,7 +14,7 @@ in {
 
   restya-board = callPackage ./restya-board { };
 
-  emacsMacport = prev.emacsMacport.override { stdenv = final.llvmPackages_12.stdenv; };
+  #emacsMacport = prev.emacsMacport.override { stdenv = final.llvmPackages_12.stdenv; };
 
   vemacs = callPackage ./vemacs {  };
   vemacsMac = callPackage ./vemacs/mac.nix {  };

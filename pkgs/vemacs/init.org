@@ -174,8 +174,10 @@ Now for the fun part. If we don't use Nix, we need to install packages.
 * Eye candy
 ** Color theme
 #+begin_src emacs-lisp
-(require 'vika-theme) ;; to put it in custom-theme-load-path I guess?...
-(load-theme 'vika t)
+;; (require 'vika-theme) ;; to put it in custom-theme-load-path I guess?...
+;; (load-theme 'vika t)
+(require 'doom-theme)
+(load-theme doom-theme)
 #+end_src
 
 By the way, did you know that =load-theme= had an optional argument
@@ -195,6 +197,11 @@ I like minimalism. That's all.
 (evil-mode 1)
 ; (evil +everywhere)
 (message "We have cookies")
+#+end_src
+
+*** elixir mode
+#+begin_src emacs_lisp
+(require 'elixir-mode)
 #+end_src
 
 *** HiDPI font size
@@ -596,6 +603,7 @@ aren't using Org-mode, why are you even using Emacs?
 (setq org-superstar-leading-bullet " ")
 (add-hook 'org-mode-hook 'org-superstar-mode)
 (setq org-startup-indented t)
+(auto-save-visited-mode 1)
 #+end_src
 
 *** Org-roam
@@ -995,6 +1003,8 @@ has multiple SDKs installed).
                (add-hook 'python-mode-hook #'lsp-deferred))
 (add-hook 'nix-mode-hook #'lsp-deferred)
 ;(add-hook 'dart-mode-hook #'lsp-deferred)
+(add-hook 'elixir-mode-hook #'lsp-deferred)
+(setq lsp-elixir-dialyzer-enabled t)
 #+end_src
 
 * Local variables for this file                               :noexport:
