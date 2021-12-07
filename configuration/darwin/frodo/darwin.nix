@@ -18,6 +18,7 @@
 
   users.users.kloenk.packages = with pkgs; [
     elixir
+    elixir_ls
     erlang
   ];
 }
