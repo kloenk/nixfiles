@@ -15,6 +15,8 @@
     ./dns.nix
     ./unify.nix
 
+    ./k3s.nix
+
     ../../default.nix
 
     #../../desktop
