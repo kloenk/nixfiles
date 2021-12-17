@@ -51,6 +51,7 @@ in {
           mkdir -p $out
           ln -sf ${pkgs.cni-plugins}/bin/* ${pkgs.cni-plugin-flannel}/bin/* $out
         ''}";
+        systemd_cgroup = true;
       };
     };
   };
