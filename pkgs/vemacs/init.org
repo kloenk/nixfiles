@@ -969,6 +969,17 @@ find something from the nix-shell environment. Let's fix that.
 #+begin_src emacs-lisp
 (add-hook 'rustic-mode-hook 'direnv-update-environment -100)
 #+end_src
+*** C
+#+begin_src emacs-lisp
+(add-hook 'c++-mode-hook 'irony-mode)
+(add-hook 'c-mode-hook 'irony-mode)
+(add-hook 'objc-mode-hook 'irony-mode)
+
+(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+
+
+(add-hook 'irony-mode-hook #'irony-eldoc)
+#+end_src
 
 *** Lisp dialects
 =aggressive-indent-mode= is a lifesaver! It allows me to have perfectly

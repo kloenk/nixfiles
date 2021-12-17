@@ -18,7 +18,10 @@
 
   users.users.kloenk.packages = with pkgs; [
     elixir
-    elixir_ls
     erlang
+
+    # emacs language servers
+    elixir_ls
+    irony-server
   ];
 }

@@ -11,5 +11,8 @@
     cmake
     bat
     skim
+
+    gnupg
+    pinentry_mac
   ];
 }

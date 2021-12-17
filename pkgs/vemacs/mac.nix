@@ -1,6 +1,6 @@
 { lib, llvmPackages_13, fetchurl, fetchgit, runCommandNoCC, makeDesktopItem
 , emacsPackages, emacsMacport, libnotify, rnix-lsp, nixfmt, notmuch, graphviz
-, direnv, dart, hunspell, python-language-server ? null
+, direnv, dart, hunspell, python-language-server ? null, irony-server
 }@pkgs:
 let
   stdenv = llvmPackages_13.stdenv;
@@ -76,6 +76,14 @@ in (emacs.pkgs.withPackages (e: (with e; [
   org-roam
   page-break-lines
   rustic
+  (irony.overrideAttrs (old: {
+    preBuild = ''
+      mkdir -p $out/bin
+      ln -s ${pkgs.irony-server}/bin/irony-server $out/bin/irony-server
+      cd ..
+    '';
+  }))
+  #irony-eldoc
   spaceline
   #speck-mode
   swiper
