@@ -38,7 +38,7 @@ in {
     enable = true;
     role = "server";
     docker = lib.mkForce false;
-    extraFlags = "--flannel-backend=host-gw --snapshotter=zfs --container-runtime-endpoint unix:///run/containerd/containerd.sock";
+    extraFlags = "--flannel-backend=host-gw --container-runtime-endpoint unix:///run/containerd/containerd.sock";
   };
   virtualisation.containerd = {
     enable = true;
