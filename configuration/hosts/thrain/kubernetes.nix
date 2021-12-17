@@ -58,4 +58,6 @@ in {
     # needed if you use swap
     kubelet.extraOpts = "--fail-swap-on=false";
   };
+
+  virtualisation.containerd.settings.plugins."io.containerd.grpc.v1.cri".containerd.snapshotter = "overlayfs";
 }
