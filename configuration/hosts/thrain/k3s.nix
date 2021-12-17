@@ -52,6 +52,7 @@ in {
           ln -sf ${pkgs.cni-plugins}/bin/* ${pkgs.cni-plugin-flannel}/bin/* $out
         ''}";
         systemd_cgroup = true;
+        containerd.snapshotter = "overlayfs";
       };
     };
   };
