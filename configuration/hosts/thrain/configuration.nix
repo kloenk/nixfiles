@@ -15,7 +15,8 @@
     ./dns.nix
     ./unify.nix
 
-    ./k3s.nix
+    #./k3s.nix
+    ./kubernetes.nix
 
     ../../default.nix
 
