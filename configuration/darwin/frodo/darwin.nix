@@ -24,4 +24,6 @@
     elixir_ls
     irony-server
   ];
+
+  services.epmd.enable = true;
 }

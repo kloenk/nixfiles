@@ -206,6 +206,7 @@
             }
             #home-manager.nixosModules.home-manager
             (import (./configuration + "/darwin/${name}/darwin.nix"))
+            self.darwinModules.epmd
           ];
         })) darwinHosts);
 
@@ -222,6 +223,10 @@
         restya-board = import ./modules/restya-board;
 
         wordpress = import ./modules/wordpress.nix;
+      };
+
+      darwinModules = {
+        epmd = import ./modules/darwin/epmd;
       };
 
       # hydra jobs
