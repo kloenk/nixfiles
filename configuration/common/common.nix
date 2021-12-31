@@ -27,7 +27,7 @@
     to.type = "gitlab";
     to.repo = "nix";
     to.owner = "kloenk";
-    to.host = "lab.kloenk.dev";
+    to.host = "cyberchaos.dev";
     exact = false;
   };
 
