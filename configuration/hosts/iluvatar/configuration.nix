@@ -10,6 +10,7 @@
     ./website.nix
     #./restic.nix
 
+    ./pleroma
     ./cgit.nix
     #./gerrit.nix
 

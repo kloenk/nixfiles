@@ -109,7 +109,6 @@
           [
             "services/games/minecraft-server.nix"
             "tasks/auto-upgrade.nix"
-            "services/networking/pleroma.nix"
             "services/web-apps/wordpress.nix"
             "services/web-apps/restya-board.nix"
           ];
@@ -174,7 +173,6 @@
             self.nixosModules.nftables
             self.nixosModules.deluge2
             self.nixosModules.firefox
-            self.nixosModules.pleroma
             self.nixosModules.wordpress
             self.nixosModules.transient
             sourcesModule
@@ -216,7 +214,6 @@
         autoUpgrade = import ./modules/upgrade;
         firefox = import ./modules/firefox;
         secrets = import ./modules/secrets;
-        pleroma = import ./modules/pleroma;
         transient = import ./modules/transient;
         nftables = import ./modules/nftables;
 
