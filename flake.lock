@@ -339,7 +339,7 @@
     "website": {
       "flake": false,
       "locked": {
-        "host": "lab.kloenk.dev",
+        "host": "cyberchaos.dev",
         "lastModified": 1638437988,
         "narHash": "sha256-eovKAaRETZ7wK7rv3jyEELqukY1YxZHYcoK2xKKYtmg=",
         "owner": "kloenk",
@@ -348,7 +348,7 @@
         "type": "gitlab"
       },
       "original": {
-        "host": "lab.kloenk.dev",
+        "host": "cyberchaos.dev",
         "owner": "kloenk",
         "repo": "website",
         "type": "gitlab"

@@ -40,7 +40,7 @@
     type = "gitlab";
     owner = "kloenk";
     repo = "website";
-    host = "lab.kloenk.dev";
+    host = "cyberchaos.dev";
     flake = false;
     #ref = "lexbeserious";
   };
