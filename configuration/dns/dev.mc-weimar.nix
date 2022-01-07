@@ -41,7 +41,7 @@ let
       minimum = 600;
     });
 
-    NS = [ "ns1.he.net." "ns2.he.net." "ns4.he.net." "ns3.he.net." "ns5.he.net." "ns1.kloenk.dev." ];
+    NS = [ "ns2.he.net." "ns4.he.net." "ns3.he.net." "ns1.kloenk.dev." ];
 
     CNAME = [ "manwe.kloenk.dev." ];
 
