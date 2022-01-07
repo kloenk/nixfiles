@@ -10,7 +10,7 @@
   systemd.services.minecraft = {
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
-      ExecStart = "${pkgs.jdk}/bin/java -Dlog4j2.formatMsgNoLookups=true -jar fabric-server-launch.jar nogui";
+      ExecStart = "${pkgs.jdk17_headless}/bin/java -Dlog4j2.formatMsgNoLookups=true -jar fabric-server-launch.jar nogui";
       RuntimeDirectory = "minecraft";
       RootDirectory = "/run/minecraft";
       StateDirectory = "minecraft";
