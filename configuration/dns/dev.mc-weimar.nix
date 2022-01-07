@@ -35,13 +35,13 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.mc-weimar.dev.";
       adminEmail = "hostmaster.kloenk.dev."; # TODO: change mail
-      serial = 2021010129;
+      serial = 2021010130;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
     });
 
-    NS = [ "ns1.kloenk.dev." "ns1.he.net." "ns2.he.net." "ns4.he.net." "ns3.he.net." "ns5.he.net." ];
+    NS = [ "ns1.he.net." "ns2.he.net." "ns4.he.net." "ns3.he.net." "ns5.he.net." "ns1.kloenk.dev." ];
 
     CNAME = [ "manwe.kloenk.dev." ];
 
