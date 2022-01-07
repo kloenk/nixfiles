@@ -10,10 +10,11 @@
     ./postgres.nix
     ./redis.nix
     ./mysql.nix
-    ./gitlab.nix
+    #./gitlab.nix
     #./restya.nix
-    ./youtrack.nix
-    # ./pleroma # fucking annoying and not working
+    #./youtrack.nix
+
+    ./minecraft.nix
 
     ./wireguard.nix
     ./restic-server.nix
