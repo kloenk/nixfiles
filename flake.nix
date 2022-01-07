@@ -79,7 +79,7 @@
   };
 
 
-  outputs = inputs@{ self, nixpkgs, nix, moodlepkgs, hydra, home-manager, mail-server
+  outputs = inputs@{ self, nixpkgs, nix, moodlepkgs, home-manager, mail-server
     , website, dns, grahamc-config, darwin, emacs, ... }:
     let
 

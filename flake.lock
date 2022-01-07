@@ -123,45 +123,7 @@
         "type": "github"
       }
     },
-    "hydra": {
-      "inputs": {
-        "nix": "nix",
-        "nixpkgs": [
-          "hydra",
-          "nix",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1621898460,
-        "narHash": "sha256-8H8i5TBmI1dFPyQd7ZczDSaJns5k7/iJSdi+Is8jvBY=",
-        "owner": "NixOS",
-        "repo": "hydra",
-        "rev": "5b6b8261fc0571c4ee678cbe829ba07ed9372ef0",
-        "type": "github"
-      },
-      "original": {
-        "id": "hydra",
-        "type": "indirect"
-      }
-    },
     "lowdown-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1598695561,
-        "narHash": "sha256-gyH/5j+h/nWw0W8AcR2WKvNBUsiQ7QuxqSJNXAwV+8E=",
-        "owner": "kristapsdz",
-        "repo": "lowdown",
-        "rev": "1705b4a26fbf065d9574dce47a94e8c7c79e052f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "kristapsdz",
-        "repo": "lowdown",
-        "type": "github"
-      }
-    },
-    "lowdown-src_2": {
       "flake": false,
       "locked": {
         "lastModified": 1633514407,
@@ -222,26 +184,6 @@
     "nix": {
       "inputs": {
         "lowdown-src": "lowdown-src",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1605715426,
-        "narHash": "sha256-H4VEHxnnBoUigXeoy0/8z8jUFKkJD9XG5dR/lt/rQCk=",
-        "owner": "kloenk",
-        "repo": "nix",
-        "rev": "f10d302d90b75445ce58d2898cd08d00e6382abc",
-        "type": "github"
-      },
-      "original": {
-        "id": "nix",
-        "type": "indirect"
-      }
-    },
-    "nix_2": {
-      "inputs": {
-        "lowdown-src": "lowdown-src_2",
         "nixpkgs": [
           "nixpkgs"
         ]
@@ -313,10 +255,9 @@
         "flake-compat": "flake-compat",
         "grahamc-config": "grahamc-config",
         "home-manager": "home-manager",
-        "hydra": "hydra",
         "mail-server": "mail-server",
         "moodlepkgs": "moodlepkgs",
-        "nix": "nix_2",
+        "nix": "nix",
         "nixpkgs": "nixpkgs_2",
         "website": "website"
       }
