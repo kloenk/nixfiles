@@ -6,6 +6,7 @@ let
 
   dev_kloenk_zone = (import ../../dns/dev.kloenk.nix { inherit lib inputs config; });
   dev_matrixcore_zone = (import ../../dns/dev.matrixcore.nix { inherit lib inputs config; });
+  dev_mc_weimar_zone = (import ../../dns/dev.mc-weimar.nix { inherit lib inputs config; });
   de_kloenk_zone = (import ../../dns/de.kloenk.nix { inherit lib inputs config; });
   imkerverein_zone = (import ../../dns/de.burscheider-imkerverein.nix { inherit lib inputs config; });
 
@@ -63,6 +64,12 @@ in {
       matrixcore.dev {
         import log
         file ${dev_matrixcore_zone}
+        import he_transfer
+      }
+
+      mc-weimar.dev {
+        import log
+        file ${dev_mc_weimar_zone}
         import he_transfer
       }
 
