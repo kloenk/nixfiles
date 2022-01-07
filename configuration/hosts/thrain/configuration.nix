@@ -16,7 +16,7 @@
     ./unify.nix
 
     #./k3s.nix
-    ./kubernetes.nix
+    #./kubernetes.nix
 
     ../../default.nix
 
@@ -97,7 +97,7 @@
   environment.systemPackages = with pkgs; [ lm_sensors virtmanager nodejs ];
 
   # docker
-  virtualisation.docker.enable = true;
+  #virtualisation.docker.enable = true;
   hardware.steam-hardware.enable = false;
 
   # virtmanager
