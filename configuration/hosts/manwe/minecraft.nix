@@ -1,6 +1,12 @@
 { config, lib, pkgs, ... }:
 
 {
+  fileSystems."/var/lib/minecraft" = {
+    device = "/persist/data/minecraft";
+    fsType = "none";
+    options = [ "bind" ];
+  };
+
   systemd.services.minecraft = {
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
