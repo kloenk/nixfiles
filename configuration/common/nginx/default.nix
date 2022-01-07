@@ -2,7 +2,8 @@
 
 {
   # acme foo
-  security.acme.email = lib.mkDefault "ca@kloenk.de";
+  security.acme.defaults.email = "ca@kloenk.de";
+  #security.acme.defaults.webroot = ""; # TODO: map to persist? systemd rw pathes?
   security.acme.acceptTerms = true;
 
   networking.firewall.allowedTCPPorts = [ 80 443 ];
