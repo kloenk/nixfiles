@@ -17,6 +17,12 @@
       WorkingDirectory = "/var/lib/minecraft";
       BindPaths = "/persist/data/minecraft:/var/lib/minecraft";
       ReadWritePaths = "/persist/data/minecraft";
+
+      ProtectHome = true;
+      ProtectSystem = "full";
+      PrivateDevices = true;
+      NoNewPrivileges = true;
+
       DynamicUser = true;
       BindReadOnlyPaths = [
         "/nix/store"
