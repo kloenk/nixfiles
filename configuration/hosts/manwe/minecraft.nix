@@ -7,7 +7,7 @@
     options = [ "bind" ];
   };
 
-  systemd.services.minecraft = {
+  /*systemd.services.minecraft = {
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       ExecStart = "${pkgs.jdk17_headless}/bin/java -Dlog4j2.formatMsgNoLookups=true -jar fabric-server-launch.jar nogui";
@@ -28,6 +28,6 @@
         "/nix/store"
       ];
     };
-  };
+  };*/
   networking.firewall.allowedTCPPorts = [ 25565 ];
 }
