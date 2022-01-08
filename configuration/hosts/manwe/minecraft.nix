@@ -30,4 +30,10 @@
     };
   };*/
   networking.firewall.allowedTCPPorts = [ 25565 ];
+
+  services.nginx.virtualHosts."mc-weimar.dev" = {
+    enableACME = true;
+    forceSSL = true;
+    locations."/".proxyPass = "http://127.0.0.1:8123/";
+  };
 }
