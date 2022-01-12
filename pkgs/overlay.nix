@@ -30,6 +30,12 @@ in {
     };
   });
 
+  pleroma = prev.pleroma.overrideAttrs (oldAttrs: rec {
+    postBuild = ''
+      mix phx.digest --no-deps-check
+    '' + oldAttrs.postBuild or "";
+  });
+
   spidermonkey_38 = null;
 
   #let source = callPackage ./sourcegraph { }; in inherit (source) ;
