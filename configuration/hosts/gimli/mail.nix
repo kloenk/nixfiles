@@ -39,6 +39,10 @@
       "kloenk.dev"
     ];
 
+    rejectRecipients = [
+      "wattpad@kloenk.de"
+    ];
+
     loginAccounts = {
       "kloenk@kloenk.dev" = {
         hashedPasswordFile =
