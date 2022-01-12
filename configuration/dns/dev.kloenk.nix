@@ -35,7 +35,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.dev.";
       adminEmail = "hostmaster.kloenk.dev."; # TODO: change mail
-      serial = 2021010129;
+      serial = 2021010130;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
@@ -57,9 +57,8 @@ let
     subdomains = rec {
       iluvatar.CNAME = [ "iluvatar.wolfsburg.petabyte.dev." ];
       manwe = hostTTL 1200 "195.39.221.187" null;
-      gimli.CNAME = [ "gimli.wolfsburg.petabyte.dev." ];
-      sauron = hostTTL 1200 "195.39.221.54" "2a0f:4ac4:42:0:f199::1";
-      aule = hostTTL 1200 "89.163.230.234" null;
+      #gimli.CNAME = [ "gimli.wolfsburg.petabyte.dev." ];
+      gimli = hostTTL 1200 "195.39.247.182" "2a0f:4ac0:0:1::cb2";
 
       usee-nschl = hostTTL 1200 "5.9.118.93" "2a01:4f8:162:6343::3";
 
