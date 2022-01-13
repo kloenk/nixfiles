@@ -10,6 +10,7 @@
     ./postgres.nix
     ./redis.nix
     ./mysql.nix
+    ./gitlab-runner.nix
     #./gitlab.nix
     #./restya.nix
     #./youtrack.nix
