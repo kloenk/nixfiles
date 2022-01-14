@@ -43,7 +43,11 @@
         registrationConfigFile =
           config.petabyte.secrets."gitlab/default-env".path;
         dockerImage = "docker:stable";
-        dockerVolumes = [ "/var/run/docker.sock:/var/run/docker.sock" ];
+        dockerVolumes = [
+          "/cache"
+          "/builds:/builds"
+          "/var/run/docker.sock:/var/run/docker.sock"
+        ];
         tagList = [ "docker-images" ];
       };
       ## runner for building docker images
