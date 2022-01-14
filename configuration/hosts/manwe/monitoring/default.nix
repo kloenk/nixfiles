@@ -124,9 +124,9 @@ in {
       AUTH_GITLAB_ENABLED = "true";
       AUTH_GITLAB_TLS_SKIP_VERIFY_INSECURE = "false";
       AUTH_GITLAB_SCOPES = "read_user";
-      AUTH_GITLAB_AUTH_URL = "https://lab.kloenk.dev/oauth/authorize";
-      AUTH_GITLAB_TOKEN_URL = "https://lab.kloenk.dev/oauth/token";
-      AUTH_GITLAB_API_URL = "https://lab.kloenk.dev/api/v4";
+      AUTH_GITLAB_AUTH_URL = "https://cyberchaos.dev/oauth/authorize";
+      AUTH_GITLAB_TOKEN_URL = "https://cyberchaos.dev/oauth/token";
+      AUTH_GITLAB_API_URL = "https://cyberchaos.dev/api/v4";
       AUTH_GITLAB_ALLOW_SIGN_UP = "true";
       AUTH_GITLAB_ROLE_ATTRIBUTE_PATH = "is_admin && 'Admin' || 'Viewer'";
     };
@@ -183,6 +183,14 @@ in {
             hostname = "switch-pony";
             snmpCommunity = "public";
             mib = "procurve";
+          };
+        }
+
+        # minecraft (mc-weimar.dev)
+        {
+          targets = [ "localhost:9225" ];
+          labels = {
+            server_name = "mc-weimar.dev";
           };
         }
       ];

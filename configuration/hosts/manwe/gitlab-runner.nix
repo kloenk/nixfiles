@@ -6,7 +6,7 @@
       isSystemUser = true;
       group = "gitlab-runner";
     };
-    groups.gitlab-runner = {};
+    groups.gitlab-runner = { };
   };
 
   systemd.services.gitlab-runner.serviceConfig = {
@@ -31,12 +31,20 @@
 
   services.gitlab-runner = {
     enable = true;
-    concurrent = 2;
+    concurrent = 6;
     checkInterval = 30;
     services = rec {
       default = {
-        registrationConfigFile = config.petabyte.secrets."gitlab/default-env".path;
+        registrationConfigFile =
+          config.petabyte.secrets."gitlab/default-env".path;
         dockerImage = "debian:stable";
+      };
+      docker-images = {
+        registrationConfigFile =
+          config.petabyte.secrets."gitlab/default-env".path;
+        dockerImage = "docker:stable";
+        dockerVolumes = [ "/var/run/docker.sock:/var/run/docker.sock" ];
+        tagList = [ "docker-images" ];
       };
       ## runner for building docker images
       #docker-images = {
