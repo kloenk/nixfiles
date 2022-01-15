@@ -185,7 +185,9 @@ in {
             mib = "procurve";
           };
         }
-
+      ];
+      snmp_file = pkgs.writeText "snmp_targets.json" (builtins.toJSON snmp_targets);
+      minecraft_targets = [
         # minecraft (mc-weimar.dev)
         {
           targets = [ "localhost:9225" ];
@@ -194,11 +196,15 @@ in {
           };
         }
       ];
-      snmp_file = pkgs.writeText "snmp_targets.json" (builtins.toJSON snmp_targets);
+      minecraft_file = pkgs.writeText "minecraft_targets.json" (builtins.toJSON minecraft_targets);
     in [
       {
         job_name = "dummy";
         file_sd_configs = [{ files = [ (toString targetsFile) ]; }];
+      }
+      {
+        job_name = "minecraft";
+        file_sd_configs = [{ files = [ (toString minecraft_file) ]; }];
       }
       {
         job_name = "snmp-thrain";
