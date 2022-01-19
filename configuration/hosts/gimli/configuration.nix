@@ -11,9 +11,10 @@
     ./moodle.nix
     #./restic.nix
 
-    #./postgres.nix
+    ../iluvatar/postgres.nix
+    ./matrix
 
-    #./wireguard.nix
+    ./wireguard.nix
     #./fediventure.nix
     #./jitsi
     #./prosody.nix
