@@ -77,7 +77,7 @@
     ];
 
     app_service_config_files = [
-      config.petabyte.secrets."matrix/exmpp".path;
+      config.petabyte.secrets."matrix/exmpp".path
     ];
 
     # TODO: `matrix-synapse-shared-secret-auth` for double puppeting?
