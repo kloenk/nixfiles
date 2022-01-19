@@ -7,6 +7,8 @@
     options = [ "bind" ];
   };
 
+  networking.firewall.interfaces.wg0.allowedTCPPorts = [ 8008 ];
+
   services.postgresql = {
     enable = true;
     initialScript = pkgs.writeText "synapse-init.sql" ''
