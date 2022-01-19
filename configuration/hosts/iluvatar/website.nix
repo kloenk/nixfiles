@@ -7,63 +7,78 @@ let
 
   apple_assoc = {
     applinks = {
-      apps = [];
+      apps = [ ];
       details = [
         {
-          appIDs = [
-            "7J4U792NQT.im.vector.app"
-            "257L85Q939.chat.schildi.desktop"
-          ];
+          appIDs =
+            [ "7J4U792NQT.im.vector.app" "257L85Q939.chat.schildi.desktop" ];
           appID = "7J4U792NQT.im.vector.app";
-          components = [
-            {
-              "#" = "/*";
-            }
-          ];
-          paths = [
-            "/*"
-            "/#/*"
-          ];
+          components = [{ "#" = "/*"; }];
+          paths = [ "/*" "/#/*" ];
         }
         {
           appID = "257L85Q939.chat.schildi.desktop";
-          components = [
-            {
-              "#" = "/*";
-            }
-          ];
-          paths = [
-            "/*"
-            "/#/*"
-          ];
+          components = [{ "#" = "/*"; }];
+          paths = [ "/*" "/#/*" ];
         }
       ];
     };
-    webcredentials = {
-      apps = [
-        "7J4U792NQT.im.vector.app"
-      ];
-    };
+    webcredentials = { apps = [ "7J4U792NQT.im.vector.app" ]; };
   };
 in {
   services.nginx.virtualHosts = {
-    /*"lexbeserious.kloenk.dev" = {
-      enableACME = true;
-      forceSSL = true;
-      root = inputs.website;
-      locations."/".index = "lexbeserious.html";
-      extraConfig = ''
-        ${commonHeaders}
-        add_header Content-Security-Policy "default-src 'self'; frame-ancestors 'none'; object-src 'none'" always;
-        add_header Cache-Control $cacheable_types;
-      '';
-    };*/
+    /* "lexbeserious.kloenk.dev" = {
+         enableACME = true;
+         forceSSL = true;
+         root = inputs.website;
+         locations."/".index = "lexbeserious.html";
+         extraConfig = ''
+           ${commonHeaders}
+           add_header Content-Security-Policy "default-src 'self'; frame-ancestors 'none'; object-src 'none'" always;
+           add_header Cache-Control $cacheable_types;
+         '';
+       };
+    */
     "kloenk.dev" = {
       enableACME = true;
       forceSSL = true;
       root = inputs.website;
       locations."/public/".alias = "/persist/data/public/";
-      locations."/baz".return = "301 https://www.amazon.de/hz/wishlist/ls/3BJ09JA3JNCN?ref_=wl_share";
+      locations."/baz".return =
+        "301 https://www.amazon.de/hz/wishlist/ls/3BJ09JA3JNCN?ref_=wl_share";
+
+      locations."= /.well-known/matrix/client" = let
+        client = {
+          "m.homeserver" = { base_url = "https://matrix.kloenk.dev"; };
+        };
+      in {
+        root = pkgs.writeTextDir ".well-known/matrix/client"
+          "${builtins.toJSON client}";
+        extraConfig =
+          config.services.nginx.virtualHosts."kloenk.dev".extraConfig + ''
+            default_type application/json;
+            ${commonHeaders}
+            add_header "Access-Control-Allow-Origin: *";
+            add_header "Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS'";
+            add_header "Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization'";
+          '';
+      };
+      locations."= /.well-known/matrix/server" =
+        let server = { "m.server" = "matrix.kloenk.dev:443"; };
+        in {
+          root = pkgs.writeTextDir ".well-known/matrix/server"
+            "${builtins.toJSON server}";
+          extraConfig =
+            config.services.nginx.virtualHosts."kloenk.dev".extraConfig + ''
+                  default_type application/json;
+              ${commonHeaders}
+              add_header "Access-Control-Allow-Origin: *";
+              add_header "Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS'";
+              add_header "Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization'";
+            '';
+
+        };
+
       extraConfig = ''
         ${commonHeaders}
         add_header Content-Security-Policy "default-src 'self'; frame-ancestors 'none'; object-src 'none'" always;
@@ -96,7 +111,8 @@ in {
       forceSSL = true;
       root = pkgs.matrix-to;
       locations."= /.well-known/apple-app-site-association" = {
-        root = pkgs.writeTextDir ".well-known/apple-app-site-association" "${builtins.toJSON apple_assoc}";
+        root = pkgs.writeTextDir ".well-known/apple-app-site-association"
+          "${builtins.toJSON apple_assoc}";
         extraConfig = ''
           ${commonHeaders}
           default_type application/json;
