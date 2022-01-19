@@ -75,6 +75,13 @@
           Endpoint = "manwe.kloenk.dev:51820";
         };
       }
+      { # gimli
+        wireguardPeerConfig = {
+          AllowedIPs = [ "192.168.242.104/32" ];
+          PublicKey = "z2bkiOj0E0G0jF20+SLqv7jwFZyDtZxdvsiNOCIEbhE=";
+          Endpoint = "gimli.kloenk.dev:51820";
+        };
+      }
 
       { # mi 9 t
         wireguardPeerConfig = {
