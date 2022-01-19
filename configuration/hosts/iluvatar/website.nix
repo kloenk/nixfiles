@@ -58,9 +58,9 @@ in {
           config.services.nginx.virtualHosts."kloenk.dev".extraConfig + ''
             default_type application/json;
             ${commonHeaders}
-            add_header "Access-Control-Allow-Origin: *";
-            add_header "Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS'";
-            add_header "Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization'";
+            add_header "Access-Control-Allow-Origin" "*";
+            add_header "Access-Control-Allow-Methods" "GET, POST, PUT, DELETE, OPTIONS'";
+            add_header "Access-Control-Allow-Headers" "Origin, X-Requested-With, Content-Type, Accept, Authorization'";
           '';
       };
       locations."= /.well-known/matrix/server" =
@@ -70,11 +70,11 @@ in {
             "${builtins.toJSON server}";
           extraConfig =
             config.services.nginx.virtualHosts."kloenk.dev".extraConfig + ''
-                  default_type application/json;
+              default_type application/json;
               ${commonHeaders}
-              add_header "Access-Control-Allow-Origin: *";
-              add_header "Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS'";
-              add_header "Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization'";
+              add_header "Access-Control-Allow-Origin:" "*";
+              add_header "Access-Control-Allow-Methods" "GET, POST, PUT, DELETE, OPTIONS'";
+              add_header "Access-Control-Allow-Headers" "Origin, X-Requested-With, Content-Type, Accept, Authorization'";
             '';
 
         };
