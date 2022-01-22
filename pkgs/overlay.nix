@@ -31,6 +31,7 @@ in {
   });
 
   pleroma = prev.pleroma.overrideAttrs (oldAttrs: rec {
+    patches = [ ./pleroma-apple.patch ];
     postBuild = ''
       mix phx.digest --no-deps-check
     '' + oldAttrs.postBuild or "";

@@ -1,0 +1,90 @@
+From 832828961921866a5f0ef9d13b421748f3262f7f Mon Sep 17 00:00:00 2001
+From: Finn Behrens <me@kloenk.dev>
+Date: Sat, 22 Jan 2022 10:00:43 +0100
+Subject: [PATCH] Add autocompelete values suggested by Apple
+
+Link: https://developer.apple.com/documentation/security/password_autofill/enabling_password_autofill_on_an_html_input_element
+---
+ lib/pleroma/web/templates/o_auth/mfa/totp.html.eex        | 2 +-
+ lib/pleroma/web/templates/o_auth/o_auth/register.html.eex | 8 ++++----
+ lib/pleroma/web/templates/o_auth/o_auth/show.html.eex     | 2 +-
+ .../twitter_api/remote_follow/follow_login.html.eex       | 4 ++--
+ 4 files changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/lib/pleroma/web/templates/o_auth/mfa/totp.html.eex b/lib/pleroma/web/templates/o_auth/mfa/totp.html.eex
+index 29ea7c5fb..27600253c 100644
+--- a/lib/pleroma/web/templates/o_auth/mfa/totp.html.eex
++++ b/lib/pleroma/web/templates/o_auth/mfa/totp.html.eex
+@@ -10,7 +10,7 @@
+ <%= form_for @conn, Routes.mfa_verify_path(@conn, :verify), [as: "mfa"], fn f -> %>
+ <div class="input">
+   <%= label f, :code, "Authentication code" %>
+-  <%= text_input f, :code, [autocomplete: false, autocorrect: "off", autocapitalize: "off", autofocus: true, pattern: "[0-9]*", spellcheck: false] %>
++  <%= text_input f, :code, [autocomplete: "one-time-code", autocorrect: "off", autocapitalize: "off", autofocus: true, pattern: "[0-9]*", spellcheck: false] %>
+   <%= hidden_input f, :mfa_token, value: @mfa_token %>
+   <%= hidden_input f, :state, value: @state %>
+   <%= hidden_input f, :redirect_uri, value: @redirect_uri %>
+diff --git a/lib/pleroma/web/templates/o_auth/o_auth/register.html.eex b/lib/pleroma/web/templates/o_auth/o_auth/register.html.eex
+index 99f900fb7..3ac428b2f 100644
+--- a/lib/pleroma/web/templates/o_auth/o_auth/register.html.eex
++++ b/lib/pleroma/web/templates/o_auth/o_auth/register.html.eex
+@@ -12,11 +12,11 @@
+ 
+ <div class="input">
+   <%= label f, :nickname, "Nickname" %>
+-  <%= text_input f, :nickname, value: @nickname %>
++  <%= text_input f, :nickname, value: @nickname, autocomplete: "username" %>
+ </div>
+ <div class="input">
+   <%= label f, :email, "Email" %>
+-  <%= text_input f, :email, value: @email %>
++  <%= text_input f, :email, value: @email, autocomplete: "email" %>
+ </div>
+ 
+ <%= submit "Proceed as new user", name: "op", value: "register" %>
+@@ -25,11 +25,11 @@
+ 
+ <div class="input">
+   <%= label f, :name, "Name or email" %>
+-  <%= text_input f, :name %>
++  <%= text_input f, :name, autocomplete: "username" %>
+ </div>
+ <div class="input">
+   <%= label f, :password, "Password" %>
+-  <%= password_input f, :password %>
++  <%= password_input f, :password, autocomplete: "password" %>
+ </div>
+ 
+ <%= submit "Proceed as existing user", name: "op", value: "connect" %>
+diff --git a/lib/pleroma/web/templates/o_auth/o_auth/show.html.eex b/lib/pleroma/web/templates/o_auth/o_auth/show.html.eex
+index 181a9519a..d63da6c1d 100644
+--- a/lib/pleroma/web/templates/o_auth/o_auth/show.html.eex
++++ b/lib/pleroma/web/templates/o_auth/o_auth/show.html.eex
+@@ -35,7 +35,7 @@
+       <p>Choose carefully! You won't be able to change this later. You will be able to change your display name, though.</p>
+       <div class="input">
+         <%= label f, :nickname, "Pleroma Handle" %>
+-        <%= text_input f, :nickname, placeholder: "lain" %>
++        <%= text_input f, :nickname, placeholder: "lain", autocomplete: "username" %>
+       </div>
+       <%= hidden_input f, :name, value: @params["name"] %>
+       <%= hidden_input f, :password, value: @params["password"] %>
+diff --git a/lib/pleroma/web/templates/twitter_api/remote_follow/follow_login.html.eex b/lib/pleroma/web/templates/twitter_api/remote_follow/follow_login.html.eex
+index a8026fa9d..bc5fb28e3 100644
+--- a/lib/pleroma/web/templates/twitter_api/remote_follow/follow_login.html.eex
++++ b/lib/pleroma/web/templates/twitter_api/remote_follow/follow_login.html.eex
+@@ -5,9 +5,9 @@
+ <p><%= @followee.nickname %></p>
+ <img height="128" width="128" src="<%= avatar_url(@followee) %>">
+ <%= form_for @conn, Routes.remote_follow_path(@conn, :do_follow), [as: "authorization"], fn f -> %>
+-<%= text_input f, :name, placeholder: "Username", required: true %>
++<%= text_input f, :name, placeholder: "Username", required: true, autocomplete: "username" %>
+ <br>
+-<%= password_input f, :password, placeholder: "Password", required: true %>
++<%= password_input f, :password, placeholder: "Password", required: true, autocomplete: "password" %>
+ <br>
+ <%= hidden_input f, :id, value: @followee.id %>
+ <%= submit "Authorize" %>
+-- 
+2.32.0 (Apple Git-132)
+
