@@ -2,7 +2,8 @@ import Config
 
 config :pleroma, Pleroma.Web.Endpoint,
   url: [host: System.get_env("DOMAIN", "localhost"), scheme: "https", port: 443],
-  http: [port: 0, ip: {:local, "/run/pleroma/pleroma.socket"}],
+  #http: [port: 0, ip: {:local, "/run/pleroma/pleroma.socket"}],
+  http: [port: 0, transport_options: %{socket_opts: [fd: 3]}],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 config :pleroma, :instance,

@@ -21,6 +21,15 @@ in {
   systemd.services.pleroma.environment = {
     DOMAIN = "social.kloenk.dev";
   };
+  systemd.sockets.pleroma = {
+    description = "Pleroma socket";
+    wantedBy = [ "sockets.target" ];
+    listenStreams = [ "/run/pleroma/pleroma.socket" ];
+    socketConfig = {
+      SocketUser = "pleroma";
+      SocketGroup = "nginx";
+    };
+  };
 
   services.nginx.virtualHosts."social.kloenk.dev" = {
     enableACME = true;
