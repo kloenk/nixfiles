@@ -192,6 +192,15 @@
     wantedBy = [ "multi-user.target" ];
     script = let
       script = pkgs.writeShellScript "script" ''
+        # Set up split tunneling
+        CISCO_SPLIT_INC=1
+        CISCO_SPLIT_INC_0_ADDR=132.195.0.0
+        CISCO_SPLIT_INC_0_MASK=255.255.0.0
+        CISCO_SPLIT_INC_0_MASKLEN=16
+        CISCO_SPLIT_INC_0_PROTOCOL=0
+        CISCO_SPLIT_INC_0_SPORT=0
+        CISCO_SPLIT_INC_0_DPORT=0
+
         export INTERNAL_IP4_DNS=
         . ${pkgs.vpnc-scripts}/bin/vpnc-script
       '';
