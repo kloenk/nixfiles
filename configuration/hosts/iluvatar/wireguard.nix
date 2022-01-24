@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   networking.firewall.allowedUDPPorts = [
@@ -19,6 +19,7 @@
         ip saddr { 192.168.242.0-192.168.242.255 } oifname { "wg0" } snat to 192.168.242.1
         ip saddr { 172.16.16.0-172.16.16.255 } oifname "yougen" snat to 172.16.16.1
         oifname "enp1s0" masquerade
+        iifname "wg0" oifname "buw0" masquerade
       }
     }
   '';
@@ -186,7 +187,58 @@
     routes = [{ routeConfig.Destination = "172.16.16.0/24"; }];
   };
 
+  systemd.services.buw0 = {
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+    script = let
+      script = pkgs.writeShellScript "script" ''
+        export INTERNAL_IP4_DNS=
+        . ${pkgs.vpnc-scripts}/bin/vpnc-script
+      '';
+    in ''
+      cat $CREDENTIALS_DIRECTORY/buw0.config > buw0.config
+      echo "script=${script}" >> buw0.config
+      cat $CREDENTIALS_DIRECTORY/buw0.pass | ${pkgs.openconnect}/bin/openconnect https://vpn.uni-wuppertal.de --passwd-on-stdin --config buw0.config
+    '';
+    serviceConfig = {
+      LoadCredential = [
+        "buw0.pass:${config.petabyte.secrets."buw0.pass".path}"
+        "buw0.config:${config.petabyte.secrets."buw0.config".path}"
+      ];
+
+      Restart = "always";
+      RestartSec = "60s";
+      WorkingDirectory = "/run/buw0";
+
+      # sandboxing
+      RuntimeDirectory = "buw0";
+      ReadWritePaths = [ "/dev/net" ];
+      NoNewPrivileges = true;
+      PrivateTmp = true;
+      #PrivateDevices = true;
+      ProtectSystem = "strict";
+      ProtectHome = true;
+      ProtectControlGroups = true;
+      ProtectKernelModules = true;
+      ProtectKernelTunables = true;
+      #RestrictAddressFamilies = [ "AF_UNIX" "AF_INET" "AF_INET6" "AF_NETLINK" ];
+      RestrictRealtime = true;
+      #RestrictNamespaces = true;
+      MemoryDenyWriteExecute = true;
+      DevicePolicy = "closed";
+      DeviceAllow = [
+        "/dev/net/tun rwm"
+      ];
+      CapabilityBoundingSet = [
+        "CAP_NET_ADMIN"
+        "CAP_MKNOD"
+      ];
+    };
+  };
+
   users.users.systemd-network.extraGroups = [ "keys" ];
   petabyte.secrets."wg0.key".owner = "systemd-network";
   petabyte.secrets."wg2.key".owner = "systemd-network";
+  petabyte.secrets."buw0.pass".owner = "root";
+  petabyte.secrets."buw0.config".owner = "root";
 }

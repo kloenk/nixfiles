@@ -48,6 +48,12 @@ in {
         import acl
         forward . tls://1.1.1.1 tls://1.0.0.1
       }
+
+      uni-wuppertal.de {
+        import acl
+        forward . dns://132.195.249.13 dns://132.195.20.13
+      }
+
       version.bind version.server authors.bind hostname.bind id.server {
         import acl
         import log
