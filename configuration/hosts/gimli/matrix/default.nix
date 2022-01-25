@@ -80,6 +80,7 @@
 
     app_service_config_files = [
       config.petabyte.secrets."matrix/exmpp".path
+      config.petabyte.secrets."matrix/exmpp2".path
     ];
 
     # TODO: `matrix-synapse-shared-secret-auth` for double puppeting?
@@ -93,4 +94,5 @@
   };
   
   petabyte.secrets."matrix/exmpp".owner = "matrix-synapse";
+  petabyte.secrets."matrix/exmpp2".owner = "matrix-synapse";
 }
