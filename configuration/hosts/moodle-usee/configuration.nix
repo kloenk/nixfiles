@@ -26,7 +26,7 @@
     ];
   };
 
-  security.acme.email = lib.mkForce "segelschule@unterbachersee.de";
+  security.acme.defaults.email = lib.mkForce "segelschule@unterbachersee.de";
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
