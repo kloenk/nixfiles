@@ -45,7 +45,7 @@
       enable = true;
       nssmdns = true;
 
-      interfaces = [ "vlan1337" "eno1" ];
+      interfaces = [ "vlan1337" "br0" ];
 
       publish = {
         enable = true;
