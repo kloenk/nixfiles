@@ -41,6 +41,7 @@
   boot.loader.grub.enable = false;
   boot.loader.systemd-boot.enable = true;
   boot.supportedFilesystems = [ "zfs" ];
+  boot.zfs.enableUnstable = lib.mkForce true;
 
   boot.initrd.luks.devices."cryptLVM".device =
     "/dev/disk/by-id/wwn-0x5002538e40df324b-part1";
