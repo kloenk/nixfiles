@@ -36,7 +36,7 @@ in {
   '';
 
   # set ports
-  networking.firewall.interfaces.eno1 = allowedPorts;
+  networking.firewall.interfaces.br0 = allowedPorts;
   networking.firewall.interfaces."vlan1337" = allowedPorts;
 
   services.nfs.server = {
