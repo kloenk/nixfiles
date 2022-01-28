@@ -130,7 +130,7 @@
       "2a0a:a541:9ac9:0::/64"
     ];
   };
-  networking.firewall.interfaces.eno1.allowedTCPPorts = lib.singleton 4713;
+  networking.firewall.interfaces.br0.allowedTCPPorts = lib.singleton 4713;
 
   system.autoUpgrade.enable = true;
 
