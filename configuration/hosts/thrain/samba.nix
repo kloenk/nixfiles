@@ -4,11 +4,11 @@
   networking.firewall = {
     allowedTCPPorts = [
       445
-      139 # samba
+      137 138 139 # samba
     ];
     allowedUDPPorts = [
       445
-      139 # samba
+      137 138 139 # netbios
     ];
   };
 
