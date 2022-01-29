@@ -95,6 +95,12 @@
   };
 
   users.users.kloenk.initialPassword = "foobar";
+  users.users.kloenk.extraGroups = [ "libvirtd" ];
+
+  virtualisation.libvirtd = {
+    enable = true;
+    onShutdown = "shutdown";
+  };
 
   # smartcard
   services.pcscd.enable = true;
