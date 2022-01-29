@@ -100,6 +100,13 @@
   virtualisation.libvirtd = {
     enable = true;
     onShutdown = "shutdown";
+    qemu.swtpm.enable = true;
+  };
+
+  fileSystems."/var/lib/libvirt" = {
+    device = "/persist/data/libvirt";
+    fsType = "none";
+    options = [ "bind" ];
   };
 
   # smartcard
