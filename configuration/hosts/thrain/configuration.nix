@@ -74,7 +74,7 @@
   boot.initrd.preLVMCommands = lib.mkBefore (''
     ip li set eno1 up
     ip addr add 192.168.178.248/24 dev eno1 && hasNetwork=1
-    echo > /tmp/foo 'askpass() {
+    echo > /root/.profile 'askpass() {
        stty -echo
        printf "Password: "
        read PASSWORD
