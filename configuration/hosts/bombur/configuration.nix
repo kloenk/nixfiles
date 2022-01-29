@@ -155,6 +155,7 @@
   virtualisation.libvirtd = {
     enable = true;
     onShutdown = "shutdown";
+    qemu.swtpm.enable = true;
   };
 
   users.users.kloenk.extraGroups = [
