@@ -41,6 +41,7 @@
   boot.loader.grub.enable = false;
   boot.loader.systemd-boot.enable = true;
   boot.supportedFilesystems = [ "zfs" ];
+  boot.initrd.supportedFilesystems = [ "zfs" ];
   boot.zfs.enableUnstable = lib.mkForce true;
 
   boot.initrd.luks.devices."cryptLVM".device =
@@ -81,8 +82,9 @@
        stty echo
        printf "\\n"
     
-       printf $PASSWORD | sudo zfs load-key -r smials/BagEnd && \
-       printf $PASSWORD | cryptsetup-askpass
+       printf $PASSWORD | zfs load-key -r smials/BagEnd && \
+       printf $PASSWORD | cryptsetup-askpass 
+       killall zfs
     }
     '
   '');
