@@ -43,6 +43,7 @@
   boot.supportedFilesystems = [ "zfs" ];
   boot.initrd.supportedFilesystems = [ "zfs" ];
   boot.zfs.enableUnstable = lib.mkForce true;
+  boot.zfs.devNodes = "/dev/";
 
   boot.initrd.luks.devices."cryptLVM".device =
     "/dev/disk/by-id/wwn-0x5002538e40df324b-part1";
