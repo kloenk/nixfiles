@@ -17,7 +17,7 @@
     options = [ "bind" ];
   };
   fileSystems."/persist/Bag End" = {
-    device = "smials/Bag End";
+    device = "smials/BagEnd";
     fsType = "zfs";
   };
 
