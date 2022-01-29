@@ -74,18 +74,17 @@
   boot.initrd.preLVMCommands = lib.mkBefore (''
     ip li set eno1 up
     ip addr add 192.168.178.248/24 dev eno1 && hasNetwork=1
-    echo <<EOF> /root/profile
-    askpass() {
-      stty -echo
-      printf "Password: "
-      read PASSWORD
-      stty echo
-      printf "\n"
-
-      printf $PASSWORD | sudo zfs load-key -r smials/BagEnd && \
-      printf $PASSWORD | cryptsetup-askpass
+    echo > /tmp/foo 'askpass() {
+       stty -echo
+       printf "Password: "
+       read PASSWORD
+       stty echo
+       printf "\\n"
+    
+       printf $PASSWORD | sudo zfs load-key -r smials/BagEnd && \
+       printf $PASSWORD | cryptsetup-askpass
     }
-    EOF
+    '
   '');
 
   # TODO: use bind
