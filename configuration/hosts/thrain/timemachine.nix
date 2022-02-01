@@ -35,6 +35,7 @@
           "rwlist" = "nobody";
           "vol size limit" = 250000;
           "valid users" = "@users";
+          "smb2 max credits" = 16384;
         };
       };
     };
