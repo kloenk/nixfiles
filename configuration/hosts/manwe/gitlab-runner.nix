@@ -50,6 +50,22 @@
         ];
         tagList = [ "docker-images" ];
       };
+      exmpp = {
+        registrationConfigFile =
+          config.petabyte.secrets."gitlab/exmpp-env".path;
+        dockerImage = "debian:stable";
+      };
+      docker-images-exmpp = {
+        registrationConfigFile =
+          config.petabyte.secrets."gitlab/exmpp-env".path;
+        dockerImage = "docker:stable";
+        dockerVolumes = [
+          "/cache"
+          "/builds:/builds"
+          "/var/run/docker.sock:/var/run/docker.sock"
+        ];
+        tagList = [ "docker-images" ];
+      };
       ## runner for building docker images
       #docker-images = {
       #  registrationConfigFile = "/run/secrets/gitlab-runner-registration";
