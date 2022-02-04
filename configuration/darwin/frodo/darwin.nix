@@ -5,7 +5,7 @@
     ../../common/darwin.nix
   ];
 
-  environment.systemPackages = [
+  environment.systemPackages = with pkgs; [
     #pkgs.vim
   ];
 
@@ -23,6 +23,7 @@
     # emacs language servers
     elixir_ls
     irony-server
+    sbcl
   ];
 
   services.epmd.enable = true;
