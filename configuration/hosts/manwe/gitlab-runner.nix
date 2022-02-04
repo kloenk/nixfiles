@@ -79,4 +79,5 @@
   };
 
   petabyte.secrets."gitlab/default-env".owner = "gitlab-runner";
+  petabyte.secrets."gitlab/exmpp-env".owner = "gitlab-runner";
 }
