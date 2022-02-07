@@ -15,8 +15,7 @@
        hostname = config.networking.hostName;
      };
      outputs.influxdb_v2 = {
-       database = "telegraf";
-       url = [ "https://influx.kloenk.dev" ];
+       urls = [ "https://influx.kloenk.dev" ];
        token = "$INFLUX_TOKEN";
        organization = "kloenk";
        bucket = "default";
