@@ -22,8 +22,8 @@ in {
   systemd.services.prometheus.unitConfig.RequiresMountsFor =
     [ "/var/lib/prometheus" ];
   systemd.services.grafana.after = [ "prometheus.service" ];
-  systemd.services.grafana.serviceConfig.EnvironmentFile = [ config.petabyte.secrets."grafana-env".path ];
-  petabyte.secrets."grafana-env".owner = "root";
+  systemd.services.grafana.serviceConfig.EnvironmentFile = [ config.sops.secrets."monitoring/grafana/env".path ];
+  sops.secrets."monitoring/grafana/env".owner = "root";
   
 
   services.nginx.virtualHosts."grafana.kloenk.dev" = {
@@ -101,8 +101,8 @@ in {
 
   # alertmanager password
   systemd.services.alertmanager.serviceConfig.EnvironmentFile =
-    [ config.petabyte.secrets."alertmanager/mail".path ];
-  petabyte.secrets."alertmanager/mail".owner = "root";
+    [ config.sops.secrets."monitoring/alertmanager/mail".path ];
+  sops.secrets."monitoring/alertmanager/mail".owner = "root";
 
   services.grafana = {
     enable = true;

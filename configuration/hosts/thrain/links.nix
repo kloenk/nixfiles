@@ -75,7 +75,7 @@
       };
       wireguardConfig = {
         FirewallMark = 51820;
-        PrivateKeyFile = config.petabyte.secrets."wg0.key".path;
+        PrivateKeyFile = config.sops.secrets."wireguard/wg0".path;
       };
       wireguardPeers = [{
         wireguardPeerConfig = {
@@ -98,6 +98,6 @@
     networks."99-how_cares".name = "*";
   };
 
-  petabyte.secrets."wg0.key".owner = "systemd-network";
+  sops.secrets."wireguard/wg0".owner = "systemd-network";
   users.users.systemd-network.extraGroups = [ "keys" ];
 }

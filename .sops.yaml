@@ -1,0 +1,43 @@
+keys:
+  - &kloenk_pgp B44ADFDFF869A66A3FDFDD8B8609A7B519E5E342
+  - &kloenk_age age1p06k9fwwdhwcx6qxt5fyypkdk9wpkhk5fhyzjnykaymz32nwsakqwyfjqm
+  - &server_thrain age1ejyvncc2g7slp30fx72cyawg5z5030mzfq6zy8fk3tm2n72pqghsfmrvp6
+  - &server_manwe age1q0kl8evx9pqtnvwu5ae43d5m9v33kv52xmd7t3e5zrxqzqw7tdeq2c6z5m
+  - &server_gimli age1uud7jnh0gnxc3rznnq4xlkhtg2c7l74n74rnqa4wdkulqhz0ls2svnzgve
+  - &server_iluvatar age19fmyhd7h722ag68g72pv72w4g44fqzs6qpl5ra0e4mtxa204e3vsp8eq6h
+creation_rules:
+  - path_regex: secrets/thrain[^/]*\.yaml$
+    key_groups:
+    - age:
+      - *kloenk_age
+      - *server_thrain
+      pgp:
+      - *kloenk_pgp
+  - path_regex: secrets/manwe[^/]*\.yaml$
+    key_groups:
+      - age:
+          - *kloenk_age
+          - *server_manwe
+        pgp:
+          - *kloenk_pgp
+  - path_regex: secrets/gimli[^/]*\.yaml$
+    key_groups:
+      - age:
+          - *kloenk_age
+          - *server_gimli
+        pgp:
+          - *kloenk_pgp
+  - path_regex: secrets/iluvatar[^/]*\.yaml$
+    key_groups:
+      - age:
+          - *kloenk_age
+          - *server_iluvatar
+        pgp:
+          - *kloenk_pgp
+  - path_regex: secrets/.+\.yaml$
+    key_groups:
+    - age:
+      - *kloenk_age
+      pgp:
+      - *kloenk_pgp
+

@@ -36,12 +36,12 @@
     services = rec {
       default = {
         registrationConfigFile =
-          config.petabyte.secrets."gitlab/default-env".path;
+          config.sops.secrets."gitlab-runner/default-env".path;
         dockerImage = "debian:stable";
       };
       docker-images = {
         registrationConfigFile =
-          config.petabyte.secrets."gitlab/default-env".path;
+          config.sops.secrets."gitlab-runner/default-env".path;
         dockerImage = "docker:stable";
         dockerVolumes = [
           "/cache"
@@ -52,12 +52,12 @@
       };
       exmpp = {
         registrationConfigFile =
-          config.petabyte.secrets."gitlab/exmpp-env".path;
+          config.sops.secrets."gitlab-runner/exmpp-env".path;
         dockerImage = "debian:stable";
       };
       docker-images-exmpp = {
         registrationConfigFile =
-          config.petabyte.secrets."gitlab/exmpp-env".path;
+          config.sops.secrets."gitlab-runner/exmpp-env".path;
         dockerImage = "docker:stable";
         dockerVolumes = [
           "/cache"
@@ -78,6 +78,7 @@
     };
   };
 
-  petabyte.secrets."gitlab/default-env".owner = "gitlab-runner";
-  petabyte.secrets."gitlab/exmpp-env".owner = "gitlab-runner";
+  sops.secrets."gitlab-runner/default-env".owner = "gitlab-runner";
+  sops.secrets."gitlab-runner/exmpp-env".owner = "gitlab-runner";
+  systemd.services.gitlab-runner.serviceConfig.SupplementaryGroups = [ config.users.groups.keys.name ];
 }

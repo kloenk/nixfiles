@@ -14,7 +14,7 @@ in {
   services.pleroma = {
     enable = true;
     configs = [ (lib.fileContents ./config.exs) ];
-    secretConfigFile = config.petabyte.secrets."pleroma/config.secret.exs".path;
+    secretConfigFile = config.sops.secrets."pleroma/config".path;
   };
 
   systemd.services.pleroma.serviceConfig.RuntimeDirectory = "pleroma";
@@ -57,5 +57,6 @@ in {
   };
 
 
-  petabyte.secrets."pleroma/config.secret.exs".owner = "pleroma";
+  sops.secrets."pleroma/config".owner = "pleroma";
+  systemd.services.pleroma.serviceConfig.SupplementaryGroups = [ config.users.groups.keys.name ];
 }

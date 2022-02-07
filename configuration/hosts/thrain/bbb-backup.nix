@@ -11,7 +11,7 @@ let
       '';
 
       serviceConfig = {
-        LoadCredential = "bbb_creds:${config.petabyte.secrets."bbb_creds".path}";
+        LoadCredential = "bbb_creds:${config.sops.secrets."bbb".path}";
         StateDirectory = "bbb_backup/${targetDir}";
         BindPaths = "/persist/bbb_backupvideos/${targetDir}:/var/lib/bbb_backup/${targetDir}";
         ReadWritePaths = "/persist/bbb_backupvideos/${targetDir}";
@@ -42,8 +42,8 @@ let
   };
 in
 {
-  petabyte.secrets."nas_creds".owner = "root";
-  petabyte.secrets."bbb_creds".owner = "root";
+  sops.secrets."bbb".owner = "root";
+  sops.secrets."nas".owner = "root";
   environment.etc."bbb_hostkey".text = "stream.unterbachersee.de,144.76.103.12,2a01:4f8:192:430b::2 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBLqJOQVdy5FlBV77JPVHLMKd5hg1LGW4alDj52Aky3qj7hY95gwzFHnV8UoZqQmt+t4y2i/fT1vWdwDBfQY7zxM=";
 
   users.users.bbb_backup = {
@@ -56,7 +56,7 @@ in
   fileSystems."/persist/bbb_backupvideos" = {
     device = "//192.168.178.68/bbb_backupvideos";
     fsType = "cifs";
-    options = [ "credentials=${config.petabyte.secrets."nas_creds".path}" "uid=bbb_backup" "gid=bbb_backup" ];
+    options = [ "credentials=${config.sops.secrets."nas".path}" "uid=bbb_backup" "gid=bbb_backup" ];
   };
 
 } // backupDir { dir = "/var/bigbluebutton/published/presentation"; targetDir = "published"; }

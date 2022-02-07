@@ -78,9 +78,14 @@
     inputs.nixpkgs.follows = "/nixpkgs";
   };
 
+  inputs.sops-nix = {
+    url = "github:Mic92/sops-nix";
+    inputs.nixpkgs.follows = "/nixpkgs";
+  };
+
 
   outputs = inputs@{ self, nixpkgs, nix, moodlepkgs, home-manager, mail-server
-    , website, dns, grahamc-config, darwin, emacs, ... }:
+    , website, dns, grahamc-config, darwin, emacs, sops-nix, ... }:
     let
 
       overlayCombined = system: [
@@ -175,6 +180,7 @@
             self.nixosModules.firefox
             self.nixosModules.wordpress
             self.nixosModules.transient
+            sops-nix.nixosModules.sops
             sourcesModule
             {
               # disable home-manager manpage (breaks hydra see https://github.com/rycee/home-manager/issues/1262)

@@ -2,13 +2,9 @@
 
 {
   nix.trustedUsers = [ "root" "@wheel" "kloenk" ];
-  # nix flakes
-  #nix.package = lib.mkDefault pkgs.nixFlakes;
-  # darwin?? should have it to
-  #nix.systemFeatures = [ "recursive-nix" "kvm" "nixos-test" "big-parallel" ];
   nix.extraOptions = ''
-    experimental-features = nix-command flakes ca-references recursive-nix progress-bar
-  '';
+    experimental-features = nix-command flakes ca-references
+  ''; # recursive-nix progress-bar
 
   nix.gc.automatic = lib.mkDefault true;
   nix.gc.options = lib.mkDefault "--delete-older-than 7d";

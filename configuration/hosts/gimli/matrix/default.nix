@@ -79,8 +79,8 @@
     ];
 
     app_service_config_files = [
-      config.petabyte.secrets."matrix/exmpp".path
-      config.petabyte.secrets."matrix/exmpp2".path
+      config.sops.secrets."matrix/exmpp".path
+      config.sops.secrets."matrix/exmpp2".path
     ];
 
     # TODO: `matrix-synapse-shared-secret-auth` for double puppeting?
@@ -93,6 +93,7 @@
     url_preview_ip_range_blacklist = ["127.0.0.0/8" "10.0.0.0/8" "172.16.0.0/12" "192.168.0.0/16" "100.64.0.0/10" "169.254.0.0/16" "::1/128" "fe80::/64" "fc00::/7"];
   };
   
-  petabyte.secrets."matrix/exmpp".owner = "matrix-synapse";
-  petabyte.secrets."matrix/exmpp2".owner = "matrix-synapse";
+  sops.secrets."matrix/exmpp".owner = "matrix-synapse";
+  sops.secrets."matrix/exmpp2".owner = "matrix-synapse";
+  systemd.services.matrix-synapse.serviceConfig.SupplementaryGroups = [ config.users.groups.keys.name ];
 }

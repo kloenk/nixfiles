@@ -35,7 +35,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.dev.";
       adminEmail = "hostmaster.kloenk.dev."; # TODO: change mail
-      serial = 2021010130;
+      serial = 2021010131;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
@@ -98,6 +98,7 @@ let
 
       grafana = manwe;
       prometheus = manwe;
+      influx = manwe;
       alertmanager = manwe;
       m-sandbox = manwe;
 
