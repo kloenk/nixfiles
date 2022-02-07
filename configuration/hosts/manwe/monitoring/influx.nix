@@ -34,7 +34,12 @@ in {
       url = "http://127.0.0.1:8086/";
       jsonData = {
         version = "Flux";
+        organization = "kloenk";
+        defaultBucket = "bucket";
         tlsSkipVerify = true;
+      };
+      secureJsonData = {
+        password = "$INFLUX_TOKEN";
       };
     }
   ];
