@@ -9,5 +9,8 @@
        url = [ "https://influx.kloenk.dev" ];
      };
    };
+   environmentFiles = [ config.sops.secrets."monitoring/telegraf/config".path ];
   };
+
+  sops.secrets."monitoring/telegraf/config".owner = "root";
 }
