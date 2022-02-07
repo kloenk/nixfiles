@@ -28,7 +28,7 @@ in {
 
   services.grafana.provision.datasources = [
     {
-      type = "influx";
+      type = "influxdb";
       name = "influx";
       access = "proxy";
       url = "http://127.0.0.1:8086/";
