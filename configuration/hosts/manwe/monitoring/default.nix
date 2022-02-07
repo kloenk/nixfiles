@@ -15,7 +15,7 @@ let
 in {
   imports = [
     ./prometheus.nix
-    ./inlux.nix
+    ./influx.nix
   ];
 
   systemd.services.grafana.after = [ "prometheus.service" ];
