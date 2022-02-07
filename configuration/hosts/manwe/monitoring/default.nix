@@ -14,42 +14,10 @@ let
   '';
 in {
   imports = [
+    ./grafana.nix
     ./prometheus.nix
     ./influx.nix
   ];
 
-  systemd.services.grafana.after = [ "prometheus.service" ];
-  systemd.services.grafana.serviceConfig.EnvironmentFile = [ config.sops.secrets."monitoring/grafana/env".path ];
-  sops.secrets."monitoring/grafana/env".owner = "root";
-  
-
-  services.nginx.virtualHosts."grafana.kloenk.dev" = {
-    locations."/".proxyPass = "http://127.0.0.1:3001/";
-    enableACME = true;
-    forceSSL = true;
-  };
-
-
-  services.grafana = {
-    enable = true;
-    auth.anonymous.enable = true;
-    domain = "grafana.kloenk.dev";
-    port = 3001;
-    rootUrl = "https://grafana.kloenk.dev/";
-    provision = {
-      enable = true;
-      dashboards = [{ options.path = ./dashboards; }];
-    };
-    extraOptions = {
-      AUTH_GITLAB_ENABLED = "true";
-      AUTH_GITLAB_TLS_SKIP_VERIFY_INSECURE = "false";
-      AUTH_GITLAB_SCOPES = "read_user";
-      AUTH_GITLAB_AUTH_URL = "https://cyberchaos.dev/oauth/authorize";
-      AUTH_GITLAB_TOKEN_URL = "https://cyberchaos.dev/oauth/token";
-      AUTH_GITLAB_API_URL = "https://cyberchaos.dev/api/v4";
-      AUTH_GITLAB_ALLOW_SIGN_UP = "true";
-      AUTH_GITLAB_ROLE_ATTRIBUTE_PATH = "is_admin && 'Admin' || 'Viewer'";
-    };
-  };
 
 }
