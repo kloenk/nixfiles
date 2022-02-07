@@ -138,4 +138,12 @@
   ];
   services.resolved.dnssec = "false";
 
+  services.telegraf.extraConfig.inputs = {
+    kernel = {};
+    kernel_vmstat = {};
+    wireguard = {};
+    systemd_units = {
+      unittype = "service,mount,socket,target";
+    };
+  };
 }

@@ -166,6 +166,9 @@
 
   # smartcard
   services.pcscd.enable = true;
+  services.telegraf.extraConfig.inputs = {
+    sensors = {};
+  };
 
   system.stateVersion = "20.09";
 }
