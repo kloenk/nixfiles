@@ -35,11 +35,11 @@ in {
       jsonData = {
         version = "Flux";
         organization = "kloenk";
-        defaultBucket = "bucket";
+        defaultBucket = "default";
         tlsSkipVerify = true;
       };
       secureJsonData = {
-        password = "$INFLUX_TOKEN";
+        token = "$INFLUX_TOKEN";
       };
     }
   ];
