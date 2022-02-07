@@ -43,11 +43,9 @@
       (if (config.networking.hostName != "kexec") then false else true);
     challengeResponseAuthentication = false;
     permitRootLogin = lib.mkDefault "prohibit-password";
-    hostKeys = if (config.networking.hostName != "kexec") then [{
-      path = config.petabyte.secrets."ssh_host_ed25519_key".path;
-      type = "ed25519";
-    }] else
-      [ ];
+
+    hostKeys = [{ path = "/persist/data/openssh/ed25519_key"; type = "ed25519"; }];
+
     extraConfig = let
       ca = builtins.readDir ../ca;
     in if !(ca ? "ssh_host_ed25519_key_${config.networking.hostName}-cert.pub") then
@@ -62,9 +60,8 @@
         StreamLocalBindUnlink yes
       '';
   };
-  petabyte.secrets."ssh_host_ed25519_key".owner = "root";
-  #petabyte.secretsDefaultPath = ../secrets + "/${config.networking.hostName}";
-  #petabyte.secretsDefaultPath = "../../secrets/${config.networking.hostName}";
+  sops.age.sshKeyPaths = [ "/persist/data/openssh/ed25519_key" ];
+  sops.defaultSopsFile = ../../secrets + "/${config.networking.hostName}.yaml";
 
   # monitoring
   services.vnstat.enable = lib.mkDefault true;
@@ -126,9 +123,10 @@
     ];
     port = lib.mkDefault 62955;
     hostKeys = lib.mkDefault [
-      "/persist/data/ssh_initrd_ed25519"
+      config.sops.secrets."initrd/ssh".path
     ];
   };
+  sops.secrets."initrd/ssh".owner = "root";
 
   systemd.tmpfiles.rules = [
     "Q /persist 755 root - - -"

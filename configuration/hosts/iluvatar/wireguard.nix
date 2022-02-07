@@ -33,7 +33,7 @@
     wireguardConfig = {
       FirewallMark = 51820;
       ListenPort = 51820;
-      PrivateKeyFile = config.petabyte.secrets."wg0.key".path;
+      PrivateKeyFile = config.sops.secrets."wireguard/wg0".path;
     };
     wireguardPeers = [
       /* {
@@ -170,7 +170,7 @@
     wireguardConfig = {
       FirewallMark = 51820;
       ListenPort = 51830;
-      PrivateKeyFile = config.petabyte.secrets."wg2.key".path;
+      PrivateKeyFile = config.sops.secrets."wireguard/wg2".path;
     };
     wireguardPeers = [{
       wireguardPeerConfig = {
@@ -211,8 +211,8 @@
     '';
     serviceConfig = {
       LoadCredential = [
-        "buw0.pass:${config.petabyte.secrets."buw0.pass".path}"
-        "buw0.config:${config.petabyte.secrets."buw0.config".path}"
+        "buw0.pass:${config.sops.secrets."buw/vpn/pass".path}"
+        "buw0.config:${config.sops.secrets."buw/vpn/config".path}"
       ];
 
       Restart = "always";
@@ -246,8 +246,8 @@
   };
 
   users.users.systemd-network.extraGroups = [ "keys" ];
-  petabyte.secrets."wg0.key".owner = "systemd-network";
-  petabyte.secrets."wg2.key".owner = "systemd-network";
-  petabyte.secrets."buw0.pass".owner = "root";
-  petabyte.secrets."buw0.config".owner = "root";
+  sops.secrets."wireguard/wg0".owner = "systemd-network";
+  sops.secrets."wireguard/wg2".owner = "systemd-network";
+  sops.secrets."buw/vpn/pass".owner = "root";
+  sops.secrets."buw/vpn/config".owner = "root";
 }

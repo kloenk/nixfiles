@@ -13,7 +13,7 @@
     };
     wireguardConfig = {
       ListenPort = 51822;
-      PrivateKeyFile = config.petabyte.secrets."usee0.key".path;
+      PrivateKeyFile = config.sops.secrets."wireguard/usee0".path;
     };
     wireguardPeers = [
       { # moodle
@@ -42,7 +42,7 @@
     };
     wireguardConfig = {
       ListenPort = 51820;
-      PrivateKeyFile = config.petabyte.secrets."wg0.key".path;
+      PrivateKeyFile = config.sops.secrets."wireguard/wg0".path;
     };
     wireguardPeers = [
       { # iluvatar
@@ -64,6 +64,6 @@
   };
 
   users.users.systemd-network.extraGroups = [ "keys" ];
-  petabyte.secrets."usee0.key".owner = "systemd-network";
-  petabyte.secrets."wg0.key".owner = "systemd-network";
+  sops.secrets."wireguard/usee0".owner = "systemd-network";
+  sops.secrets."wireguard/wg0".owner = "systemd-network";
 }

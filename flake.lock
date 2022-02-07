@@ -275,7 +275,28 @@
         "moodlepkgs": "moodlepkgs",
         "nix": "nix",
         "nixpkgs": "nixpkgs_2",
+        "sops-nix": "sops-nix",
         "website": "website"
+      }
+    },
+    "sops-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1644240878,
+        "narHash": "sha256-JO5WrnP6+5qN3isdmm9VmjzvCM64UElgGnql7vEGjKU=",
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "rev": "95b4393147dba5660bf0d13544ef5ef49d646f89",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "type": "github"
       }
     },
     "utils": {

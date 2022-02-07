@@ -2,7 +2,7 @@
 
 let
 in {
-  petabyte.secrets."wp/crewkleidung.htaccess".owner = "nginx";
+  sops.secrets."wp/crewkleidung/htaccess".owner = "nginx";
 
   services.wordpress.crewkleidung = {
     database.name = "wp_crewkleidung";
@@ -53,7 +53,7 @@ in {
       root = config.services.httpd.virtualHosts.crewkleidung.documentRoot;
       extraConfig = ''
            auth_basic           "Bitte melde Dich an…";
-           auth_basic_user_file ${config.petabyte.secrets."wp/crewkleidung.htaccess".path};
+           auth_basic_user_file ${config.sops.secrets."wp/crewkleidung/htaccess".path};
            index index.php;
            try_files $uri $uri/ /index.php?$args;
            client_max_body_size 100M;
@@ -63,7 +63,7 @@ in {
       root = config.services.httpd.virtualHosts.crewkleidung.documentRoot;
       extraConfig = ''
            auth_basic           "Bitte melde Dich an…";
-           auth_basic_user_file ${config.petabyte.secrets."wp/crewkleidung.htaccess".path};
+           auth_basic_user_file ${config.sops.secrets."wp/crewkleidung/htaccess".path};
            fastcgi_pass unix:${config.services.phpfpm.pools.wordpress-crewkleidung.socket};
            fastcgi_index index.php;
            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
@@ -77,4 +77,5 @@ in {
       client_max_body_size 100M;
     '';
   };
+  systemd.services.nginx.serviceConfig.SupplementaryGroups = [ config.users.groups.keys.name ];
 }
