@@ -24,6 +24,7 @@
     elixir_ls
     irony-server
     sbcl
+    sops
   ];
 
   services.epmd.enable = true;
