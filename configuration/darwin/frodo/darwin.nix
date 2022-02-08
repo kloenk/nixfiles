@@ -9,6 +9,8 @@
     #pkgs.vim
   ];
 
+  networking.hostName = "frodo";
+
   services.nix-daemon.enable = true;
   nix.package = pkgs.nix;
   nix.extraOptions = ''
@@ -28,4 +30,10 @@
   ];
 
   services.epmd.enable = true;
+  services.telegraf = {
+    enable = true;
+    configUrl = "https://influx.kloenk.dev/api/v2/telegrafs/08e1104547058000";
+    environmentFiles = [ "/etc/telegraf.env" ];
+  };
+
 }
