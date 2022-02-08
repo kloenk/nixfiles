@@ -51,6 +51,7 @@
       # This might create errors
       proxy_cookie_path / "/; secure; HttpOnly; SameSite=strict";
     '';
+    statusPage = true;
   };
   services.nginx.virtualHosts."${config.networking.hostName}.kloenk.dev" = {
     #serverAliases = [ "default" ];
@@ -58,5 +59,11 @@
     #forceSSL = true;
     locations."/public/".alias = lib.mkDefault "/persist/data/public/";
     locations."/public/".extraConfig = "autoindex on;";
+  };
+
+  services.telegraf.extraConfig.inputs = {
+    nginx = {
+      urls = [ "http://127.0.0.1/nginx_status" ];
+    };
   };
 }

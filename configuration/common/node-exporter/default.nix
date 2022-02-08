@@ -9,7 +9,6 @@
   services.prometheus.exporters.nginx.enable = true;
   services.prometheus.exporters.wireguard.enable = true;
   services.prometheus.exporters.wireguard.withRemoteIp = true;
-  services.nginx.statusPage = true;
   services.nginx.virtualHosts."${config.networking.hostName}.kloenk.dev" = {
     enableACME = true;
     forceSSL = true;
