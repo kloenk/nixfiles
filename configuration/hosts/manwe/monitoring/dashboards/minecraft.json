@@ -21,55 +21,18 @@
   "description": "Fully-featured metrics collection agent for Minecraft servers.",
   "editable": true,
   "fiscalYearStartMonth": 0,
-  "gnetId": 14756,
-  "graphTooltip": 1,
-  "id": 19,
-  "iteration": 1642255601442,
-  "links": [
-    {
-      "asDropdown": false,
-      "icon": "external link",
-      "includeVars": false,
-      "keepTime": false,
-      "tags": [],
-      "targetBlank": true,
-      "title": "GitHub",
-      "tooltip": "Visit UnifiedMetrics' source code on GitHub",
-      "type": "link",
-      "url": "https://github.com/Cubxity/UnifiedMetrics/"
-    },
-    {
-      "asDropdown": false,
-      "icon": "external link",
-      "includeVars": false,
-      "keepTime": false,
-      "tags": [],
-      "targetBlank": true,
-      "title": "Documentation",
-      "tooltip": "Visit UnifiedMetrics' documentation on GitHub",
-      "type": "link",
-      "url": "https://github.com/Cubxity/UnifiedMetrics/wiki"
-    },
-    {
-      "asDropdown": false,
-      "icon": "external link",
-      "includeVars": false,
-      "keepTime": false,
-      "tags": [],
-      "targetBlank": true,
-      "title": "Discord",
-      "tooltip": "Join Cubxity/UnifiedMetrics' Discord",
-      "type": "link",
-      "url": "https://discord.gg/kDDhqJmPpA"
-    }
-  ],
+  "gnetId": 14755,
+  "graphTooltip": 0,
+  "id": 15,
+  "iteration": 1644322822038,
+  "links": [],
   "liveNow": false,
   "panels": [
     {
       "collapsed": false,
       "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "type": "influxdb",
+        "uid": "PBDC07BC01591819D"
       },
       "gridPos": {
         "h": 1,
@@ -77,90 +40,18 @@
         "x": 0,
         "y": 0
       },
-      "id": 54,
+      "id": 70,
       "panels": [],
       "title": "Overview",
       "type": "row"
     },
     {
       "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "displayName": "Servers",
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#c466f4",
-                "value": null
-              }
-            ]
-          },
-          "unit": "Servers"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 0,
-        "y": 1
-      },
-      "id": 100,
-      "interval": "$interval",
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "count(minecraft_players_count{job=~\"^$job$\",instance=~\"^$instance$\"})",
-          "instant": true,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "$datasource"
       },
       "fieldConfig": {
         "defaults": {
           "decimals": 2,
-          "displayName": "Uptime (Mean)",
           "mappings": [
             {
               "options": {
@@ -176,7 +67,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#c466f4",
+                "color": "purple",
                 "value": null
               }
             ]
@@ -186,22 +77,22 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 4,
+        "h": 5,
+        "w": 6,
+        "x": 0,
         "y": 1
       },
       "id": 5,
       "interval": "$interval",
       "maxDataPoints": 100,
       "options": {
-        "colorMode": "background",
-        "graphMode": "none",
+        "colorMode": "value",
+        "graphMode": "area",
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
-            "lastNotNull"
+            "mean"
           ],
           "fields": "",
           "values": false
@@ -209,28 +100,84 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
-          "exemplar": true,
-          "expr": "time()-avg(process_start_time_seconds{instance=~\"^$instance$\",job=~\"^$job$\"})",
-          "instant": true,
+          "expr": "time()-avg(process_start_time_seconds{instance=~\"$instance\",job=\"$job\"})",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "",
-          "refId": "A"
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "currentSeconds = (int(v: now()) / 1000000000)\r\n\r\nfrom(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"process_start_time_seconds\" and r.server =~ /^${server:pipe}$/)\r\n  |> last()\r\n  |> group()\r\n  |> map(fn: (r) => ({ r with _value: currentSeconds - int(v: r._value) }))\r\n  |> mean()",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  " / 100"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Uptime (Mean)",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "uptime",
+            "binary": {
+              "left": "_time",
+              "operator": "-",
+              "reducer": "sum",
+              "right": "last"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "delta"
+            },
+            "replaceFields": true
+          }
         }
       ],
       "type": "stat"
     },
     {
       "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "$datasource"
       },
       "fieldConfig": {
         "defaults": {
-          "displayName": "Players",
           "mappings": [
             {
               "options": {
@@ -246,7 +193,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#50aad8",
+                "color": "purple",
                 "value": null
               }
             ]
@@ -256,16 +203,16 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 8,
+        "h": 5,
+        "w": 6,
+        "x": 6,
         "y": 1
       },
       "id": 4,
       "interval": "$interval",
       "maxDataPoints": 100,
       "options": {
-        "colorMode": "background",
+        "colorMode": "value",
         "graphMode": "area",
         "justifyMode": "auto",
         "orientation": "auto",
@@ -279,28 +226,23 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
-          "exemplar": true,
-          "expr": "sum(minecraft_players_count{instance=~\"^$instance$\",job=~\"^$job$\"})",
-          "instant": false,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A"
+          "hide": false,
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"minecraft_players_count\" and r.server =~ /^${server:pipe}$/)\r\n  |> last()\r\n  |> group()\r\n  |> sum()",
+          "refId": "B"
         }
       ],
+      "title": "Players",
       "type": "stat"
     },
     {
       "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "$datasource"
       },
       "fieldConfig": {
         "defaults": {
-          "displayName": "Entities",
           "mappings": [
             {
               "options": {
@@ -316,7 +258,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#50aad8",
+                "color": "purple",
                 "value": null
               }
             ]
@@ -326,8 +268,8 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 4,
+        "h": 5,
+        "w": 6,
         "x": 12,
         "y": 1
       },
@@ -335,7 +277,7 @@
       "interval": "$interval",
       "maxDataPoints": 100,
       "options": {
-        "colorMode": "background",
+        "colorMode": "value",
         "graphMode": "area",
         "justifyMode": "auto",
         "orientation": "auto",
@@ -349,28 +291,59 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
-          "exemplar": true,
-          "expr": "sum(minecraft_world_entities_count{instance=~\"^$instance$\",job=~\"^$job$\"})",
-          "instant": false,
+          "expr": "sum(minecraft_world_entities_count{instance=~\"$instance\",job=~\"$job\"})",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "",
-          "refId": "A"
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"minecraft_world_entities_count\" and r.server =~ /^${server:pipe}$/)\r\n  |> last()\r\n  |> group()\r\n  |> sum()",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
         }
       ],
+      "title": "Entities",
       "type": "stat"
     },
     {
       "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "$datasource"
       },
       "fieldConfig": {
         "defaults": {
-          "displayName": "Chunks",
           "mappings": [
             {
               "options": {
@@ -386,7 +359,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#50aad8",
+                "color": "purple",
                 "value": null
               }
             ]
@@ -396,16 +369,16 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 16,
+        "h": 5,
+        "w": 6,
+        "x": 18,
         "y": 1
       },
       "id": 15,
       "interval": "$interval",
       "maxDataPoints": 100,
       "options": {
-        "colorMode": "background",
+        "colorMode": "value",
         "graphMode": "area",
         "justifyMode": "auto",
         "orientation": "auto",
@@ -419,88 +392,51 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
-          "exemplar": true,
-          "expr": "sum(minecraft_world_loaded_chunks{instance=~\"^$instance$\",job=~\"^$job$\"})",
-          "instant": false,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "displayName": "Worlds",
-          "mappings": [
+          "expr": "sum(minecraft_world_loaded_chunks{instance=~\"$instance\",job=~\"$job\"})",
+          "groupBy": [
             {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
             }
           ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#50aad8",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 20,
-        "y": 1
-      },
-      "id": 101,
-      "interval": "$interval",
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "count(minecraft_world_loaded_chunks{instance=~\"^$instance$\",job=~\"^$job$\"})",
-          "instant": false,
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "",
-          "refId": "A"
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"minecraft_world_loaded_chunks\" and r.server =~ /^${server:pipe}$/)\r\n  |> last()\r\n  |> group()\r\n  |> sum()",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
         }
       ],
+      "title": "Chunks",
       "type": "stat"
     },
     {
@@ -513,7 +449,6 @@
             "mode": "thresholds"
           },
           "decimals": 2,
-          "displayName": "TPS (Mean)",
           "mappings": [
             {
               "options": {
@@ -543,24 +478,8 @@
                 "value": 18
               },
               {
-                "color": "#71c1b1",
+                "color": "green",
                 "value": 19
-              },
-              {
-                "color": "#6ED0E0",
-                "value": 21
-              },
-              {
-                "color": "semi-dark-blue",
-                "value": 25
-              },
-              {
-                "color": "#EF843C",
-                "value": 30
-              },
-              {
-                "color": "#E24D42",
-                "value": 35
               }
             ]
           },
@@ -569,18 +488,15 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 4,
+        "h": 5,
+        "w": 6,
         "x": 0,
-        "y": 5
+        "y": 6
       },
       "id": 3,
       "interval": "$interval",
       "maxDataPoints": 100,
       "options": {
-        "colorMode": "background",
-        "graphMode": "area",
-        "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
@@ -589,22 +505,56 @@
           "fields": "",
           "values": false
         },
-        "text": {},
-        "textMode": "auto"
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "text": {}
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
-          "exemplar": true,
-          "expr": "avg(irate(minecraft_tick_duration_seconds_count{instance=~\"^$instance$\",job=~\"^$job$\"}[$__rate_interval]))",
-          "instant": false,
+          "expr": "avg(minecraft_tps{instance=~\"$instance\",job=~\"$job\"})",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "",
-          "refId": "A"
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"minecraft_tick_duration_seconds\" and r._field == \"count\" and r.server =~ /^${server:pipe}$/)\r\n  |> derivative(unit: 1s)\r\n  |> last()\r\n  |> group()\r\n  |> mean()",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
         }
       ],
-      "type": "stat"
+      "title": "TPS (Mean)",
+      "type": "gauge"
     },
     {
       "datasource": {
@@ -616,7 +566,6 @@
             "mode": "thresholds"
           },
           "decimals": 2,
-          "displayName": "MSPT (Mean)",
           "mappings": [
             {
               "options": {
@@ -628,12 +577,13 @@
               "type": "special"
             }
           ],
+          "max": 0.05,
           "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "#71c1b1",
+                "color": "green",
                 "value": null
               },
               {
@@ -655,18 +605,15 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 4,
-        "y": 5
+        "h": 5,
+        "w": 6,
+        "x": 6,
+        "y": 6
       },
       "id": 13,
       "interval": "$interval",
       "maxDataPoints": 100,
       "options": {
-        "colorMode": "background",
-        "graphMode": "area",
-        "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
@@ -675,22 +622,56 @@
           "fields": "",
           "values": false
         },
-        "text": {},
-        "textMode": "auto"
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "text": {}
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
-          "exemplar": true,
-          "expr": "histogram_quantile(0.5, sum(rate(minecraft_tick_duration_seconds_bucket{instance=~\"^$instance$\",job=~\"^$job$\"}[$__rate_interval])) by (le))",
-          "instant": false,
+          "expr": "avg(minecraft_tick_duration_seconds{instance=~\"$instance\",job=~\"$job\"})",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "",
-          "refId": "A"
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "import \"experimental\"\r\n\r\ndoQuantile = (tables=<-, q) => tables\r\n  |> histogramQuantile(quantile: q)\r\n  |> duplicate(as: \"_time\", column: \"_stop\")\r\n  |> window(every: inf)\r\n  |> map(fn: (r) => ({r with _measurement: \"quantile\", _field: string(v: q)}))\r\n  |> experimental.group(mode: \"extend\", columns: [\"_measurement\", \"_field\"])\r\n\r\nhistograms =\r\n  from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"minecraft_tick_duration_seconds\" and r._field != \"count\" and r._field != \"sum\" and r.server =~ /^${server:pipe}$/)\r\n  |> aggregateWindow(fn: last, every: v.windowPeriod)\r\n  |> difference(nonNegative: true)\r\n  |> filter(fn: (r) => exists r._value)\r\n  |> group(columns: [\"_field\"])\r\n  |> window(every: v.windowPeriod)\r\n  |> sum()\r\n  |> map(fn: (r) => ({r with le: float(v: r._field)}))\r\n  |> drop(columns: [\"_field\"])\r\n\r\nhistograms |> doQuantile(q: 0.5)\r\n",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
         }
       ],
-      "type": "stat"
+      "title": "MSPT (Mean)",
+      "type": "gauge"
     },
     {
       "datasource": {
@@ -702,7 +683,6 @@
             "mode": "thresholds"
           },
           "decimals": 2,
-          "displayName": "CPU Load (Mean)",
           "mappings": [
             {
               "options": {
@@ -714,12 +694,13 @@
               "type": "special"
             }
           ],
+          "max": 1,
           "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "#71c1b1",
+                "color": "green",
                 "value": null
               },
               {
@@ -741,18 +722,15 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 8,
-        "y": 5
+        "h": 5,
+        "w": 6,
+        "x": 12,
+        "y": 6
       },
       "id": 19,
       "interval": "$interval",
       "maxDataPoints": 100,
       "options": {
-        "colorMode": "background",
-        "graphMode": "area",
-        "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
@@ -761,108 +739,56 @@
           "fields": "",
           "values": false
         },
-        "text": {},
-        "textMode": "auto"
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "text": {}
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
-          "exemplar": true,
-          "expr": "avg(process_cpu_load_ratio{instance=~\"^$instance$\",job=~\"^$job$\"})",
-          "instant": false,
+          "expr": "sum(process_cpu_load_ratio{instance=~\"$instance\",job=~\"$job\"})",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "uid": "$datasource"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 2,
-          "displayName": "CPU Seconds",
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"process_cpu_load_ratio\" and r.server =~ /^${server:pipe}$/)\r\n  |> last()\r\n  |> group()\r\n  |> sum()",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
               {
-                "color": "#71c1b1",
-                "value": null
+                "params": [
+                  "value"
+                ],
+                "type": "field"
               },
               {
-                "color": "yellow",
-                "value": 0.7
-              },
-              {
-                "color": "orange",
-                "value": 0.8
-              },
-              {
-                "color": "red",
-                "value": 0.9
+                "params": [],
+                "type": "mean"
               }
             ]
-          },
-          "unit": "s"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 12,
-        "y": 5
-      },
-      "id": 103,
-      "interval": "$interval",
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
           ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "sum(irate(process_cpu_seconds_total{instance=~\"^$instance$\",job=~\"^$job$\"}[$__interval]))",
-          "instant": false,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A"
+          "tags": []
         }
       ],
-      "type": "stat"
+      "title": "CPU Load (Total)",
+      "type": "gauge"
     },
     {
       "datasource": {
@@ -874,7 +800,6 @@
             "mode": "thresholds"
           },
           "decimals": 2,
-          "displayName": "Memory Used",
           "mappings": [
             {
               "options": {
@@ -890,7 +815,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#71c1b1",
+                "color": "green",
                 "value": null
               }
             ]
@@ -900,16 +825,16 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 16,
-        "y": 5
+        "h": 5,
+        "w": 6,
+        "x": 18,
+        "y": 6
       },
       "id": 20,
       "interval": "$interval",
       "maxDataPoints": 100,
       "options": {
-        "colorMode": "background",
+        "colorMode": "value",
         "graphMode": "area",
         "justifyMode": "auto",
         "orientation": "auto",
@@ -923,106 +848,67 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
-          "exemplar": true,
-          "expr": "sum(jvm_memory_bytes_used{instance=~\"^$instance$\",job=~\"^$job$\"})",
-          "instant": false,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "uid": "$datasource"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 2,
-          "displayName": "Memory Free",
-          "mappings": [
+          "expr": "sum(jvm_memory_bytes_used{instance=~\"$instance\",job=~\"$job\"})",
+          "groupBy": [
             {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
             }
           ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#71c1b1",
-                "value": null
-              }
-            ]
-          },
-          "unit": "decbytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 20,
-        "y": 5
-      },
-      "id": 102,
-      "interval": "$interval",
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "sum(jvm_memory_bytes_max{instance=~\"^$instance$\",job=~\"^$job$\"} - jvm_memory_bytes_used{instance=~\"^$instance$\",job=~\"^$job$\"})",
           "instant": false,
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "",
-          "refId": "A"
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"jvm_memory_bytes_used\" and r.server =~ /^${server:pipe}$/)\r\n  |> last()\r\n  |> group()\r\n  |> sum()",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
         }
       ],
+      "title": "Memory (Total)",
       "type": "stat"
     },
     {
       "collapsed": false,
       "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "type": "influxdb",
+        "uid": "PBDC07BC01591819D"
       },
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 9
+        "y": 11
       },
-      "id": 62,
+      "id": 78,
       "panels": [],
       "title": "Server",
       "type": "row"
@@ -1039,11 +925,10 @@
           "custom": {
             "axisLabel": "",
             "axisPlacement": "auto",
-            "axisSoftMin": 0,
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 50,
-            "gradientMode": "opacity",
+            "fillOpacity": 10,
+            "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
@@ -1055,8 +940,8 @@
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "never",
-            "spanNulls": true,
+            "showPoints": "auto",
+            "spanNulls": false,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -1066,21 +951,18 @@
             }
           },
           "decimals": 2,
+          "displayName": "tps: ${__field.labels.server}",
           "mappings": [],
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
-          },
-          "unit": "short"
+          }
         },
         "overrides": []
       },
@@ -1088,16 +970,16 @@
         "h": 11,
         "w": 12,
         "x": 0,
-        "y": 10
+        "y": 12
       },
       "id": 11,
       "interval": "$interval",
       "options": {
         "legend": {
           "calcs": [
-            "mean",
+            "min",
             "max",
-            "min"
+            "mean"
           ],
           "displayMode": "table",
           "placement": "bottom"
@@ -1109,11 +991,45 @@
       "pluginVersion": "8.0.4",
       "targets": [
         {
-          "exemplar": true,
-          "expr": "irate(minecraft_tick_duration_seconds_count{instance=~\"^$instance$\",job=~\"^$job$\"}[$__interval])",
+          "alias": "$server: minecraft_tps",
+          "expr": "minecraft_tps{instance=~\"$instance\",job=~\"$job\"}",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
           "interval": "",
-          "legendFormat": "tps: {{job}}",
-          "refId": "A"
+          "legendFormat": "",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"minecraft_tick_duration_seconds\" and r._field == \"count\" and r.server =~ /^${server:pipe}$/)\r\n  |> derivative(unit: 1s)\r\n  |> aggregateWindow(every: v.windowPeriod, fn: (tables=<-, column) => tables)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
         }
       ],
       "title": "TPS",
@@ -1133,14 +1049,17 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 50,
-            "gradientMode": "opacity",
+            "fillOpacity": 10,
+            "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
             "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
@@ -1156,8 +1075,9 @@
               "mode": "line"
             }
           },
-          "decimals": 2,
+          "displayName": "mspt: ${__field.name} quantile",
           "mappings": [],
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -1179,7 +1099,7 @@
         "h": 11,
         "w": 12,
         "x": 12,
-        "y": 10
+        "y": 12
       },
       "id": 12,
       "interval": "$interval",
@@ -1200,35 +1120,45 @@
       "pluginVersion": "8.0.4",
       "targets": [
         {
-          "exemplar": true,
-          "expr": "histogram_quantile(0.5, sum(rate(minecraft_tick_duration_seconds_bucket{instance=~\"^$instance$\",job=~\"^$job$\"}[$__interval])) by (le))",
-          "hide": false,
+          "alias": "$server: minecraft_tick_duration_seconds",
+          "expr": "minecraft_tick_duration_seconds{instance=~\"$instance\",job=~\"$job\"}",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
           "interval": "",
-          "legendFormat": "mspt: 0.5 quantile",
-          "refId": "D"
-        },
-        {
-          "exemplar": true,
-          "expr": "histogram_quantile(0.75, sum(rate(minecraft_tick_duration_seconds_bucket{instance=~\"^$instance$\",job=~\"^$job$\"}[$__interval])) by (le))",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "mspt: 0.75 quantile",
-          "refId": "C"
-        },
-        {
-          "exemplar": true,
-          "expr": "histogram_quantile(0.95, sum(rate(minecraft_tick_duration_seconds_bucket{instance=~\"^$instance$\",job=~\"^$job$\"}[$__interval])) by (le))",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "mspt: 0.95 quantile",
-          "refId": "B"
-        },
-        {
-          "exemplar": true,
-          "expr": "histogram_quantile(0.99, sum(rate(minecraft_tick_duration_seconds_bucket{instance=~\"^$instance$\",job=~\"^$job$\"}[$__interval])) by (le))",
-          "interval": "",
-          "legendFormat": "mspt: 0.99 quantile",
-          "refId": "A"
+          "legendFormat": "",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "import \"experimental\"\r\n\r\ndoQuantile = (tables=<-, q) => tables\r\n  |> histogramQuantile(quantile: q)\r\n  |> duplicate(as: \"_time\", column: \"_stop\")\r\n  |> window(every: inf)\r\n  |> map(fn: (r) => ({r with _measurement: \"quantile\", _field: string(v: q)}))\r\n  |> experimental.group(mode: \"extend\", columns: [\"_measurement\", \"_field\"])\r\n\r\nhistograms =\r\n  from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"minecraft_tick_duration_seconds\" and r._field != \"count\" and r._field != \"sum\" and r.server =~ /^${server:pipe}$/)\r\n  |> aggregateWindow(fn: last, every: v.windowPeriod)\r\n  |> difference(nonNegative: true)\r\n  |> filter(fn: (r) => exists r._value)\r\n  |> group(columns: [\"_field\"])\r\n  |> window(every: v.windowPeriod)\r\n  |> sum()\r\n  |> map(fn: (r) => ({r with le: float(v: r._field)}))\r\n  |> drop(columns: [\"_field\"])\r\n\r\nunion(tables: [\r\n  histograms |> doQuantile(q: 0.99),\r\n  histograms |> doQuantile(q: 0.95),\r\n  histograms |> doQuantile(q: 0.75),\r\n  histograms |> doQuantile(q: 0.5),\r\n])\r\n",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
         }
       ],
       "title": "MSPT",
@@ -1248,8 +1178,8 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 50,
-            "gradientMode": "opacity",
+            "fillOpacity": 10,
+            "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
@@ -1271,6 +1201,8 @@
               "mode": "off"
             }
           },
+          "decimals": 0,
+          "displayName": "players: ${__field.labels.server}",
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -1278,10 +1210,6 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           },
@@ -1293,7 +1221,7 @@
         "h": 10,
         "w": 12,
         "x": 0,
-        "y": 21
+        "y": 23
       },
       "id": 17,
       "interval": "$interval",
@@ -1314,11 +1242,45 @@
       "pluginVersion": "8.0.4",
       "targets": [
         {
-          "exemplar": true,
-          "expr": "minecraft_players_count{instance=~\"^$instance$\",job=~\"^$job$\"}",
+          "alias": "$server: minecraft_players_count",
+          "expr": "minecraft_players_count{instance=~\"$instance\",job=~\"$job\"}",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
           "interval": "",
-          "legendFormat": "players: {{job}}",
-          "refId": "A"
+          "legendFormat": "",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"minecraft_players_count\" and r.server =~ /^${server:pipe}$/)\r\n  |> aggregateWindow(every: v.windowPeriod, fn: last)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
         }
       ],
       "title": "Players",
@@ -1345,14 +1307,14 @@
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "smooth",
+            "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "never",
-            "spanNulls": true,
+            "showPoints": "auto",
+            "spanNulls": false,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -1361,6 +1323,8 @@
               "mode": "off"
             }
           },
+          "decimals": 0,
+          "displayName": "${__field.labels.server}",
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -1368,43 +1332,21 @@
               {
                 "color": "green",
                 "value": null
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": [
-          {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "dmc/minecraft-1"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
+              },
               {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": true
-                }
+                "color": "red",
+                "value": 80
               }
             ]
           }
-        ]
+        },
+        "overrides": []
       },
       "gridPos": {
         "h": 10,
         "w": 12,
         "x": 12,
-        "y": 21
+        "y": 23
       },
       "id": 18,
       "interval": "$interval",
@@ -1421,13 +1363,47 @@
       "pluginVersion": "8.0.4",
       "targets": [
         {
-          "exemplar": true,
-          "expr": "minecraft_players_count{instance=~\"^$instance$\",job=~\"^$job$\"} - minecraft_players_count{instance=~\"^$instance$\",job=~\"^$job$\"} offset $__interval",
+          "alias": "events: join",
+          "expr": "sum(increase(minecraft_events_join_total{instance=~\"$instance\",job=~\"$job\"}[5m]))",
           "format": "time_series",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "{{job}}",
-          "refId": "A"
+          "legendFormat": "events: join",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"minecraft_players_count\" and r.server =~ /^${server:pipe}$/)\r\n  |> difference()\r\n  |> aggregateWindow(every: v.windowPeriod, fn: sum)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
         }
       ],
       "title": "Player flow",
@@ -1436,16 +1412,16 @@
     {
       "collapsed": false,
       "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "type": "influxdb",
+        "uid": "PBDC07BC01591819D"
       },
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 31
+        "y": 33
       },
-      "id": 29,
+      "id": 86,
       "panels": [],
       "repeat": "world",
       "title": "World [$world]",
@@ -1453,8 +1429,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "$datasource"
       },
       "description": "",
       "fieldConfig": {
@@ -1467,8 +1442,8 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 50,
-            "gradientMode": "opacity",
+            "fillOpacity": 10,
+            "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
@@ -1490,6 +1465,7 @@
               "mode": "off"
             }
           },
+          "displayName": "chunks: ${__field.labels.server}",
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -1512,9 +1488,10 @@
         "h": 10,
         "w": 12,
         "x": 0,
-        "y": 32
+        "y": 34
       },
       "id": 38,
+      "interval": "$interval",
       "options": {
         "legend": {
           "calcs": [
@@ -1532,11 +1509,42 @@
       "pluginVersion": "8.0.4",
       "targets": [
         {
-          "exemplar": true,
-          "expr": "minecraft_world_loaded_chunks{instance=~\"^$instance$\",job=~\"^$job$\",world=\"$world\"}",
-          "interval": "",
-          "legendFormat": "chunks: {{job}}",
-          "refId": "A"
+          "alias": "world: chunks",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"minecraft_world_loaded_chunks\" and r.server =~ /^${server:pipe}$/ and r.world =~ /^${world:pipe}$/)\r\n  |> aggregateWindow(every: v.windowPeriod, fn: last)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
         }
       ],
       "title": "Chunks",
@@ -1544,8 +1552,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "$datasource"
       },
       "description": "",
       "fieldConfig": {
@@ -1558,8 +1565,8 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 50,
-            "gradientMode": "opacity",
+            "fillOpacity": 10,
+            "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
@@ -1581,6 +1588,7 @@
               "mode": "off"
             }
           },
+          "displayName": "${__field.name}",
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -1603,9 +1611,10 @@
         "h": 10,
         "w": 12,
         "x": 12,
-        "y": 32
+        "y": 34
       },
       "id": 33,
+      "interval": "$interval",
       "options": {
         "legend": {
           "calcs": [
@@ -1623,19 +1632,81 @@
       "pluginVersion": "8.0.4",
       "targets": [
         {
-          "exemplar": true,
-          "expr": "minecraft_world_entities_count{instance=~\"^$instance$\",job=~\"^$job$\",world=\"$world\"}",
-          "interval": "",
-          "legendFormat": "entities: {{job}}",
-          "refId": "A"
+          "alias": "world: entities",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"minecraft_world_entities_count\" and r.server =~ /^${server:pipe}$/ and r.world =~ /^${world:pipe}$/)\r\n  |> map(fn: (r) => ({ r with _field: \"players: ${r.server}\" }))\r\n  |> aggregateWindow(every: v.windowPeriod, fn: last)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
         },
         {
-          "exemplar": true,
-          "expr": "minecraft_world_players_count{instance=~\"^$instance$\",job=~\"^$job$\",world=\"$world\"}",
+          "alias": "world: entities",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
           "hide": false,
-          "interval": "",
-          "legendFormat": "players: {{job}}",
-          "refId": "B"
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"minecraft_world_players_count\" and r.server =~ /^${server:pipe}$/ and r.name =~ /^${world:pipe}$/)\r\n  |> map(fn: (r) => ({ r with _field: \"entities: ${r.server}\" }))\r\n  |> aggregateWindow(every: ${interval}, fn: (tables=<-, column) => tables)",
+          "rawQuery": true,
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
         }
       ],
       "title": "Entities",
@@ -1644,16 +1715,16 @@
     {
       "collapsed": false,
       "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "type": "influxdb",
+        "uid": "PBDC07BC01591819D"
       },
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 64
+        "y": 44
       },
-      "id": 22,
+      "id": 94,
       "panels": [],
       "title": "JVM: Computation",
       "type": "row"
@@ -1672,8 +1743,8 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 50,
-            "gradientMode": "opacity",
+            "fillOpacity": 10,
+            "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
@@ -1695,6 +1766,7 @@
               "mode": "off"
             }
           },
+          "displayName": "cpu_ratio: ${__field.labels.server}",
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -1717,7 +1789,7 @@
         "h": 11,
         "w": 12,
         "x": 0,
-        "y": 65
+        "y": 45
       },
       "id": 24,
       "interval": "$interval",
@@ -1738,11 +1810,45 @@
       "pluginVersion": "8.0.4",
       "targets": [
         {
-          "exemplar": true,
-          "expr": "process_cpu_load_ratio{instance=~\"^$instance$\",job=~\"^$job$\"}",
+          "alias": "$server: process_cpu_load_ratio",
+          "expr": "process_cpu_load_ratio{instance=~\"$instance\",job=~\"$job\"}",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
           "interval": "",
-          "legendFormat": "cpu: {{job}}",
-          "refId": "A"
+          "legendFormat": "",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"process_cpu_load_ratio\" and r.server =~ /^${server:pipe}$/)\r\n  |> aggregateWindow(every: v.windowPeriod, fn: last)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
         }
       ],
       "title": "CPU Usage",
@@ -1762,8 +1868,8 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 50,
-            "gradientMode": "opacity",
+            "fillOpacity": 10,
+            "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
@@ -1785,7 +1891,9 @@
               "mode": "off"
             }
           },
+          "displayName": "cpu_seconds: ${__field.labels.server}",
           "mappings": [],
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -1807,7 +1915,7 @@
         "h": 11,
         "w": 12,
         "x": 12,
-        "y": 65
+        "y": 45
       },
       "id": 45,
       "interval": "$interval",
@@ -1828,14 +1936,48 @@
       "pluginVersion": "8.0.4",
       "targets": [
         {
-          "exemplar": true,
-          "expr": "irate(process_cpu_seconds_total{instance=~\"^$instance$\",job=~\"^$job$\"}[$__rate_interval])",
+          "alias": "$server: process_cpu_seconds_total",
+          "expr": "rate(process_cpu_seconds_total{instance=~\"$instance\",job=~\"$job\"}[1m])",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
           "interval": "",
-          "legendFormat": "cpu_seconds: {{job}}",
-          "refId": "A"
+          "legendFormat": "process_cpu_seconds_total{instance=''{{instance}}\", job=\"{{job}}\"}",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"process_cpu_seconds_total\" and r.server =~ /^${server:pipe}$/)\r\n  |> derivative(unit: 1s)\r\n  |> aggregateWindow(every: v.windowPeriod, fn: (tables=<-, column) => tables)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
         }
       ],
-      "title": "CPU Seconds",
+      "title": "CPU Time (per second)",
       "type": "timeseries"
     },
     {
@@ -1852,8 +1994,8 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 50,
-            "gradientMode": "opacity",
+            "fillOpacity": 10,
+            "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
@@ -1875,6 +2017,7 @@
               "mode": "off"
             }
           },
+          "displayName": "threads: ${__field.labels.server}",
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -1897,7 +2040,7 @@
         "h": 11,
         "w": 8,
         "x": 0,
-        "y": 76
+        "y": 56
       },
       "id": 25,
       "interval": "$interval",
@@ -1915,14 +2058,48 @@
           "mode": "multi"
         }
       },
-      "pluginVersion": "8.0.4",
+      "pluginVersion": "8.0.5",
       "targets": [
         {
-          "exemplar": true,
-          "expr": "jvm_threads_current_count{instance=~\"^$instance$\",job=~\"^$job$\"}",
+          "alias": "$server: jvm_threads_current_count",
+          "expr": "jvm_threads_current_count{instance=~\"$instance\",job=~\"$job\"}",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
           "interval": "",
-          "legendFormat": "threads: {{job}}",
-          "refId": "A"
+          "legendFormat": "",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"jvm_threads_current_count\" and r.server =~ /^${server:pipe}$/)\r\n  |> aggregateWindow(every: v.windowPeriod, fn: last)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
         }
       ],
       "title": "Threads",
@@ -1965,6 +2142,7 @@
               "mode": "off"
             }
           },
+          "displayName": "daemons: ${__field.labels.server}",
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -1972,10 +2150,6 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           },
@@ -1987,9 +2161,9 @@
         "h": 11,
         "w": 8,
         "x": 8,
-        "y": 76
+        "y": 56
       },
-      "id": 69,
+      "id": 98,
       "interval": "$interval",
       "options": {
         "legend": {
@@ -2005,14 +2179,48 @@
           "mode": "multi"
         }
       },
-      "pluginVersion": "8.0.4",
+      "pluginVersion": "8.0.5",
       "targets": [
         {
-          "exemplar": true,
-          "expr": "jvm_threads_daemon_count{instance=~\"^$instance$\",job=~\"^$job$\"}",
+          "alias": "$server: jvm_threads_current_count",
+          "expr": "jvm_threads_current_count{instance=~\"$instance\",job=~\"$job\"}",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
           "interval": "",
-          "legendFormat": "daemons: {{job}}",
-          "refId": "A"
+          "legendFormat": "",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"jvm_threads_daemon_count\" and r.server =~ /^${server:pipe}$/)\r\n  |> aggregateWindow(every: v.windowPeriod, fn: last)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
         }
       ],
       "title": "Daemons",
@@ -2055,17 +2263,16 @@
               "mode": "off"
             }
           },
+          "decimals": 0,
+          "displayName": "threads_started: ${__field.labels.server}",
           "mappings": [],
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           },
@@ -2077,7 +2284,7 @@
         "h": 11,
         "w": 8,
         "x": 16,
-        "y": 76
+        "y": 56
       },
       "id": 46,
       "interval": "$interval",
@@ -2098,11 +2305,45 @@
       "pluginVersion": "8.0.4",
       "targets": [
         {
-          "exemplar": true,
-          "expr": "jvm_threads_started_total{instance=~\"^$instance$\",job=~\"^$job$\"} - jvm_threads_started_total{instance=~\"^$instance$\",job=~\"^$job$\"} offset $__interval",
+          "alias": "threads: started",
+          "expr": "sum(increase(jvm_threads_started_total{instance=~\"$instance\",job=~\"$job\"}[1m]))",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
           "interval": "",
-          "legendFormat": "threads_started: {{job}}",
-          "refId": "A"
+          "legendFormat": "jvm_threads_started_total",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"jvm_threads_started_total\" and r.server =~ /^${server:pipe}$/)\r\n  |> difference()\r\n  |> aggregateWindow(every: v.windowPeriod, fn: sum)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
         }
       ],
       "title": "Threads started",
@@ -2114,9 +2355,9 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 87
+        "y": 67
       },
-      "id": 71,
+      "id": 100,
       "panels": [],
       "title": "JVM: Memory",
       "type": "row"
@@ -2135,14 +2376,14 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 50,
-            "gradientMode": "opacity",
+            "fillOpacity": 10,
+            "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "stepBefore",
+            "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
@@ -2158,6 +2399,7 @@
               "mode": "off"
             }
           },
+          "displayName": "heap: ${__field.labels.server}",
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -2180,9 +2422,9 @@
         "h": 11,
         "w": 12,
         "x": 0,
-        "y": 88
+        "y": 68
       },
-      "id": 27,
+      "id": 26,
       "interval": "$interval",
       "options": {
         "legend": {
@@ -2198,14 +2440,49 @@
           "mode": "multi"
         }
       },
-      "pluginVersion": "8.0.4",
+      "pluginVersion": "8.0.5",
       "targets": [
         {
-          "exemplar": true,
-          "expr": "jvm_memory_bytes_used{instance=~\"^$instance$\",job=~\"^$job$\",area=\"heap\"}",
+          "alias": "memory: used",
+          "expr": "sum(jvm_memory_bytes_used{instance=~\"$instance\",job=~\"$job\"})",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
           "interval": "",
-          "legendFormat": "heap: {{job}}",
-          "refId": "A"
+          "legendFormat": "memory: used",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"jvm_memory_bytes_used\" and r.server =~ /^${server:pipe}$/ and r.area == \"heap\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: last)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
         }
       ],
       "title": "Heap Memory",
@@ -2225,14 +2502,14 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 50,
-            "gradientMode": "opacity",
+            "fillOpacity": 10,
+            "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "stepBefore",
+            "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
@@ -2248,6 +2525,7 @@
               "mode": "off"
             }
           },
+          "displayName": "nonheap: ${__field.labels.server}",
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -2270,9 +2548,9 @@
         "h": 11,
         "w": 12,
         "x": 12,
-        "y": 88
+        "y": 68
       },
-      "id": 78,
+      "id": 27,
       "interval": "$interval",
       "options": {
         "legend": {
@@ -2288,17 +2566,51 @@
           "mode": "multi"
         }
       },
-      "pluginVersion": "8.0.4",
+      "pluginVersion": "8.0.5",
       "targets": [
         {
-          "exemplar": true,
-          "expr": "jvm_memory_bytes_used{instance=~\"^$instance$\",job=~\"^$job$\",area=\"nonheap\"}",
+          "alias": "nonheap: used",
+          "expr": "sum(jvm_memory_bytes_used{instance=~\"$instance\",job=~\"$job\",area=\"heap\"})",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
           "interval": "",
-          "legendFormat": "nonheap: {{job}}",
-          "refId": "A"
+          "legendFormat": "heap: used",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"jvm_memory_bytes_used\" and r.server =~ /^${server:pipe}$/ and r.area == \"nonheap\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: last)",
+          "rawQuery": true,
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
         }
       ],
-      "title": "Nonheap Memory",
+      "title": "Non-heap Memory",
       "type": "timeseries"
     },
     {
@@ -2322,7 +2634,7 @@
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "stepBefore",
+            "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
@@ -2338,17 +2650,16 @@
               "mode": "off"
             }
           },
+          "decimals": 0,
+          "displayName": "gc_duration: ${__field.labels.gc}",
           "mappings": [],
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           },
@@ -2360,9 +2671,9 @@
         "h": 11,
         "w": 12,
         "x": 0,
-        "y": 99
+        "y": 79
       },
-      "id": 26,
+      "id": 111,
       "interval": "$interval",
       "options": {
         "legend": {
@@ -2379,14 +2690,48 @@
       "pluginVersion": "8.0.4",
       "targets": [
         {
-          "exemplar": true,
-          "expr": "avg by(gc) (jvm_gc_duration_seconds_sum{instance=~\"^$instance$\",job=~\"^$job$\"} - jvm_gc_duration_seconds_sum{instance=~\"^$instance$\",job=~\"^$job$\"} offset $__interval)",
+          "alias": "threads: started",
+          "expr": "sum(increase(jvm_threads_started_total{instance=~\"$instance\",job=~\"$job\"}[1m]))",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
           "interval": "",
-          "legendFormat": "gc_duration: {{gc}}",
-          "refId": "A"
+          "legendFormat": "jvm_threads_started_total",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"jvm_gc_duration_seconds\" and r._field == \"sum\" and r.server =~ /^${server:pipe}$/)\r\n  |> group(columns: [\"gc\"])\r\n  |> difference()\r\n  |> aggregateWindow(every: v.windowPeriod, fn: sum)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
         }
       ],
-      "title": "GC Duration (Mean)",
+      "title": "GC Duration (Total)",
       "type": "timeseries"
     },
     {
@@ -2410,7 +2755,7 @@
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "stepBefore",
+            "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
@@ -2426,17 +2771,16 @@
               "mode": "off"
             }
           },
+          "decimals": 0,
+          "displayName": "gc_freed: ${__field.labels.gc}",
           "mappings": [],
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           },
@@ -2448,14 +2792,15 @@
         "h": 11,
         "w": 12,
         "x": 12,
-        "y": 99
+        "y": 79
       },
-      "id": 85,
+      "id": 112,
       "interval": "$interval",
       "options": {
         "legend": {
           "calcs": [
-            "max"
+            "max",
+            "min"
           ],
           "displayMode": "table",
           "placement": "bottom"
@@ -2467,38 +2812,69 @@
       "pluginVersion": "8.0.4",
       "targets": [
         {
-          "exemplar": true,
-          "expr": "sum by(gc) (jvm_gc_freed_bytes_sum{instance=~\"^$instance$\",job=~\"^$job$\"} - jvm_gc_freed_bytes_sum{instance=~\"^$instance$\",job=~\"^$job$\"} offset $__interval)",
+          "alias": "threads: started",
+          "expr": "sum(increase(jvm_threads_started_total{instance=~\"$instance\",job=~\"$job\"}[1m]))",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
           "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "gc_freed: {{gc}}",
-          "refId": "A"
+          "legendFormat": "jvm_threads_started_total",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": " from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"jvm_gc_freed_bytes\" and r._field == \"sum\" and r.server =~ /^${server:pipe}$/)\r\n  |> group(columns: [\"gc\"])\r\n  |> difference()\r\n  |> aggregateWindow(every: v.windowPeriod, fn: sum)\r\n",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
         }
       ],
       "title": "GC Freed (Total)",
       "type": "timeseries"
     }
   ],
-  "refresh": "10s",
+  "refresh": "",
   "schemaVersion": 34,
   "style": "dark",
-  "tags": [
-    "minecraft"
-  ],
+  "tags": [],
   "templating": {
     "list": [
       {
         "current": {
           "selected": false,
-          "text": "Prometheus",
-          "value": "Prometheus"
+          "text": "influx",
+          "value": "influx"
         },
         "hide": 0,
         "includeAll": false,
         "multi": false,
         "name": "datasource",
         "options": [],
-        "query": "prometheus",
+        "query": "influxdb",
         "queryValue": "",
         "refresh": 1,
         "regex": "",
@@ -2512,48 +2888,18 @@
           "value": "$__all"
         },
         "datasource": {
-          "uid": "$datasource"
+          "type": "influxdb",
+          "uid": "PBDC07BC01591819D"
         },
-        "definition": "query_result(minecraft_players_count)",
+        "definition": "import \"influxdata/influxdb/v1\"\r\n\r\nv1.measurementTagValues(\r\n  bucket: \"${bucket}\",\r\n  measurement: \"minecraft_players_count\",\r\n  tag: \"server\"\r\n)",
         "hide": 0,
         "includeAll": true,
         "multi": true,
-        "name": "job",
+        "name": "server",
         "options": [],
-        "query": {
-          "query": "query_result(minecraft_players_count)",
-          "refId": "grafanacloud-unifiedmetrics-prom-job-Variable-Query"
-        },
+        "query": "import \"influxdata/influxdb/v1\"\r\n\r\nv1.measurementTagValues(\r\n  bucket: \"${bucket}\",\r\n  measurement: \"minecraft_players_count\",\r\n  tag: \"server\"\r\n)",
         "refresh": 2,
-        "regex": "/.*job=\"([^\"]+)/",
-        "skipUrlSync": false,
-        "sort": 1,
-        "tagValuesQuery": "",
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      },
-      {
-        "current": {
-          "selected": false,
-          "text": "All",
-          "value": "$__all"
-        },
-        "datasource": {
-          "uid": "$datasource"
-        },
-        "definition": "query_result(up{job=~\"^$job$\"})",
-        "hide": 0,
-        "includeAll": true,
-        "multi": true,
-        "name": "instance",
-        "options": [],
-        "query": {
-          "query": "query_result(up{job=~\"^$job$\"})",
-          "refId": "StandardVariableQuery"
-        },
-        "refresh": 2,
-        "regex": "/.*instance=\"([^\"]+).*/",
+        "regex": "",
         "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
@@ -2567,19 +2913,29 @@
         "auto_min": "10s",
         "current": {
           "selected": false,
-          "text": "30s",
-          "value": "30s"
+          "text": "10s",
+          "value": "10s"
         },
         "hide": 0,
         "name": "interval",
         "options": [
           {
             "selected": false,
+            "text": "5s",
+            "value": "5s"
+          },
+          {
+            "selected": true,
+            "text": "10s",
+            "value": "10s"
+          },
+          {
+            "selected": false,
             "text": "15s",
             "value": "15s"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "30s",
             "value": "30s"
           },
@@ -2634,7 +2990,7 @@
             "value": "30d"
           }
         ],
-        "query": "15s,30s,1m,10m,30m,1h,6h,12h,1d,7d,14d,30d",
+        "query": "5s,10s,15s,30s,1m,10m,30m,1h,6h,12h,1d,7d,14d,30d",
         "queryValue": "",
         "refresh": 2,
         "skipUrlSync": false,
@@ -2649,24 +3005,29 @@
         "datasource": {
           "uid": "$datasource"
         },
-        "definition": "query_result(minecraft_world_entities_count{instance=~\"$instance\",job=~\"$job\"})",
+        "definition": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart)\r\n  |> filter(fn: (r) => r._measurement == \"minecraft_world_players_count\" and r.server =~ /^${server:pipe}$/)\r\n  |> keyValues(keyColumns: [\"world\"])\r\n  |> group()\r\n  |> keep(columns: [\"world\"])",
         "hide": 0,
         "includeAll": true,
         "multi": true,
         "name": "world",
         "options": [],
-        "query": {
-          "query": "query_result(minecraft_world_entities_count{instance=~\"$instance\",job=~\"$job\"})",
-          "refId": "grafanacloud-unifiedmetrics-prom-world-Variable-Query"
-        },
-        "refresh": 1,
-        "regex": "/.*world=\"([^\"]+).*/",
+        "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart)\r\n  |> filter(fn: (r) => r._measurement == \"minecraft_world_players_count\" and r.server =~ /^${server:pipe}$/)\r\n  |> keyValues(keyColumns: [\"world\"])\r\n  |> group()\r\n  |> keep(columns: [\"world\"])",
+        "refresh": 2,
+        "regex": "",
         "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
         "tagsQuery": "",
         "type": "query",
         "useTags": false
+      },
+      {
+        "hide": 2,
+        "label": "Bucket",
+        "name": "bucket",
+        "query": "default",
+        "skipUrlSync": false,
+        "type": "constant"
       }
     ]
   },
@@ -2674,10 +3035,23 @@
     "from": "now-30m",
     "to": "now"
   },
-  "timepicker": {},
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ]
+  },
   "timezone": "",
-  "title": "UnifiedMetrics - Minecraft",
-  "uid": "kU0rMsi7k",
+  "title": "UnifiedMetrics 0.3.x / InfluxDB Flux",
+  "uid": "xU08wAW7z",
   "version": 1,
   "weekStart": ""
 }
