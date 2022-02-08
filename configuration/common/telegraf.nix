@@ -36,8 +36,11 @@
        system = {};
      };
    };
-   environmentFiles = [ config.sops.secrets."monitoring/telegraf/config".path ];
+   environmentFiles = [ config.sops.secrets."telegraf/env".path ];
   };
 
-  sops.secrets."monitoring/telegraf/config".owner = "root";
+  sops.secrets."telegraf/env" = {
+    sopsFile = ../../secrets/shared/monitoring.yaml;
+    owner = "root";
+  };
 }

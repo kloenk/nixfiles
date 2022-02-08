@@ -30,6 +30,7 @@
     ./r-dev.nix
 
     ../../common
+    ../../common/telegraf.nix
     ../../common/syncthing.nix
   ];
 

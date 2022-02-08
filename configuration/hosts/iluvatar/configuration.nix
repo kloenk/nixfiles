@@ -18,6 +18,7 @@
 
     ./coredns.nix
 
+    ../../common/telegraf.nix
     ../../default.nix
     ../../common
   ];

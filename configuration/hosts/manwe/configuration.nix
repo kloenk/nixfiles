@@ -23,7 +23,6 @@
     ./m-sandbox.nix
 
     ../../common/telegraf.nix
-
     ../../default.nix
     ../../common
   ];
