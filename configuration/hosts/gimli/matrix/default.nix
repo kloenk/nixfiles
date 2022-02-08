@@ -1,6 +1,10 @@
 { lib, config, pkgs, ... }:
 
 {
+  imports = [
+    ./go-neb.nix
+  ];
+
   fileSystems."/var/lib/matrix-synapse" = {
     device = "/persist/data/matrix-synapse";
     fsType = "none";
