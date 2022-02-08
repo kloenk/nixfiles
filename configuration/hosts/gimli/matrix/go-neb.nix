@@ -11,7 +11,7 @@
     enable = true;
     baseUrl = "api.matrix.kloenk.dev";
     bindAddress = "localhost:4050";
-    secretFile = config.sops.secrets."matrix/api/secrets";
+    secretFile = config.sops.secrets."matrix/api/secrets".path;
     config = {
       clients = [
         {
