@@ -6,8 +6,10 @@
     fsType = "none";
     options = [ "bind" ];
   };
-
   systemd.services.unifi.unitConfig.RequireMountsFor = [ "/var/lib/unifi" ];
+
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [ "unifi-controller" ];
 
   services.unifi = {
     enable = true;
