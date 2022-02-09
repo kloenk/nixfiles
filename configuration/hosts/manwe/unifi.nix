@@ -1,6 +1,10 @@
 { lib, pkgs, config, ... }:
 
-{
+let
+  commonHeaders = lib.concatStringsSep "\n"
+    (lib.filter (line: lib.hasPrefix "add_header" line)
+      (lib.splitString "\n" config.services.nginx.commonHttpConfig));
+in {
   fileSystems."/var/lib/unifi" = {
     device = "/persist/data/unifi";
     fsType = "none";
@@ -13,6 +17,7 @@
 
   services.unifi = {
     enable = true;
+    openFirewall = true;
     unifiPackage = pkgs.unifi;
   };
 
@@ -22,7 +27,11 @@
     locations."/" = {
       proxyPass = "https://127.0.0.1:8443/";
       proxyWebsockets = true;
-      extraConfig = "proxy_ssl_verify off;";
+      extraConfig = ''
+        proxy_ssl_verify off;
+        add_header Access-Control-Allow-Origin "*";
+        ${commonHeaders}
+      '';
     };
   };
 }
