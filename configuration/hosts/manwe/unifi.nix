@@ -30,6 +30,7 @@ in {
       extraConfig = ''
         proxy_ssl_verify off;
         add_header Access-Control-Allow-Origin "*";
+        add_header 'Access-Control-Allow-Credentials' 'true';
         ${commonHeaders}
       '';
     };
