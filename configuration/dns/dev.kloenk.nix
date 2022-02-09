@@ -35,7 +35,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.dev.";
       adminEmail = "hostmaster.kloenk.dev."; # TODO: change mail
-      serial = 2021010132;
+      serial = 2021010133;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
@@ -101,6 +101,7 @@ let
       influx = manwe;
       alertmanager = manwe;
       m-sandbox = manwe;
+      unifi = manwe;
 
       matrix = gimli // {
         subdomains.api = gimli;
