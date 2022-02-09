@@ -10,6 +10,7 @@
     ./redis.nix
     ./mysql.nix
     ./gitlab-runner.nix
+    ./unifi.nix
     #./gitlab.nix
     #./restya.nix
     #./youtrack.nix
