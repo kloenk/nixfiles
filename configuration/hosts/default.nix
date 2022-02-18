@@ -102,7 +102,7 @@ in {
   # for monitoring only
   # usee
   event = makeHost {
-    host = "event.kloenk.dev";
+    host = "event.unterbachersee.de";
     nixos = false;
     vm = false;
     server = true;
