@@ -23,8 +23,7 @@
   "fiscalYearStartMonth": 0,
   "gnetId": 14888,
   "graphTooltip": 1,
-  "id": 7,
-  "iteration": 1644254915940,
+  "iteration": 1645450837515,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -38,7 +37,8 @@
       },
       "id": 65058,
       "panels": [],
-      "title": "Quick overview",
+      "repeat": "host",
+      "title": "Quick overview ($host)",
       "type": "row"
     },
     {
@@ -1131,7 +1131,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 4
+        "y": 32
       },
       "id": 65060,
       "panels": [],
@@ -1223,7 +1223,7 @@
         "h": 10,
         "w": 24,
         "x": 0,
-        "y": 5
+        "y": 33
       },
       "id": 12054,
       "interval": "$inter",
@@ -1355,7 +1355,7 @@
         "h": 10,
         "w": 24,
         "x": 0,
-        "y": 15
+        "y": 43
       },
       "id": 65092,
       "interval": "$inter",
@@ -1486,7 +1486,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 25
+        "y": 53
       },
       "id": 54694,
       "interval": "$inter",
@@ -1614,7 +1614,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 25
+        "y": 53
       },
       "id": 65089,
       "interval": "$inter",
@@ -1744,7 +1744,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 32
+        "y": 60
       },
       "id": 28239,
       "interval": "$inter",
@@ -1873,7 +1873,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 32
+        "y": 60
       },
       "id": 65097,
       "interval": "$inter",
@@ -1948,7 +1948,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 40
+        "y": 68
       },
       "id": 65096,
       "panels": [],
@@ -2040,7 +2040,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 41
+        "y": 69
       },
       "id": 52240,
       "interval": "$inter",
@@ -2201,7 +2201,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 41
+        "y": 69
       },
       "id": 65090,
       "interval": "$inter",
@@ -2294,7 +2294,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 49
+        "y": 77
       },
       "hiddenSeries": false,
       "id": 33458,
@@ -2508,7 +2508,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 49
+        "y": 77
       },
       "id": 65091,
       "interval": "$inter",
@@ -2657,7 +2657,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 57
+        "y": 85
       },
       "id": 61850,
       "interval": "$inter",
@@ -2785,7 +2785,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 57
+        "y": 85
       },
       "id": 26024,
       "interval": "$inter",
@@ -2913,7 +2913,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 65
+        "y": 93
       },
       "id": 13782,
       "interval": "$inter",
@@ -3099,7 +3099,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 65
+        "y": 93
       },
       "id": 56720,
       "interval": "$inter",
@@ -3285,7 +3285,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 73
+        "y": 101
       },
       "id": 60200,
       "interval": "$inter",
@@ -3417,7 +3417,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 81
+        "y": 109
       },
       "id": 65059,
       "panels": [],
@@ -3484,7 +3484,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 82
+        "y": 110
       },
       "id": 42026,
       "interval": "$inter",
@@ -3670,7 +3670,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 90
+        "y": 118
       },
       "id": 28572,
       "interval": "$inter",
@@ -3856,7 +3856,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 98
+        "y": 126
       },
       "id": 65093,
       "interval": "$inter",
@@ -3991,7 +3991,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 105
+        "y": 133
       },
       "id": 65094,
       "interval": "$inter",
@@ -4238,7 +4238,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 112
+        "y": 140
       },
       "id": 58901,
       "interval": "$inter",
@@ -4425,7 +4425,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 112
+        "y": 140
       },
       "id": 50643,
       "interval": "$inter",
@@ -4561,7 +4561,7 @@
       {
         "allFormat": "glob",
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "influx",
           "value": "influx"
         },
@@ -4580,10 +4580,11 @@
         "type": "datasource"
       },
       {
+        "allValue": ".*",
         "current": {
-          "selected": false,
-          "text": "manwe",
-          "value": "manwe"
+          "selected": true,
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": {
           "type": "influxdb",
@@ -4591,7 +4592,7 @@
         },
         "definition": "import \"influxdata/influxdb/schema\"\nschema.tagValues(bucket: v.bucket, tag: \"host\")",
         "hide": 0,
-        "includeAll": false,
+        "includeAll": true,
         "label": "host",
         "multi": false,
         "name": "host",
@@ -4774,7 +4775,7 @@
       {
         "allValue": ".*",
         "current": {
-          "selected": false,
+          "selected": true,
           "text": [
             "All"
           ],
