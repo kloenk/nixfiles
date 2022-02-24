@@ -30,10 +30,13 @@
   # vm connection
   services.qemuGuest.enable = true;
 
-  boot.supportedFilesystems = [ "xfs" "vfat" ];
+  boot.supportedFilesystems = [ "xfs" "vfat" "zfs" ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.grub.enable = false;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.zfs.enableUnstable = lib.mkForce true;
+  #boot.zfs.devNodes = "/dev/";
+  networking.hostId = "8b8282a6";
 
   boot.initrd.luks.reusePassphrases = true;
   boot.initrd.luks.devices."cryptData".device =
