@@ -169,6 +169,7 @@
   services.pcscd.enable = true;
   services.telegraf.extraConfig.inputs = {
     sensors = {};
+    zfs = {};
   };
 
   system.stateVersion = "20.09";
