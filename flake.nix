@@ -174,7 +174,7 @@
             nixpkgs.nixosModules.notDetected
             home-manager.nixosModules.home-manager
             (import (./configuration + "/hosts/${name}/configuration.nix"))
-            self.nixosModules.secrets
+            #self.nixosModules.secrets
             self.nixosModules.nftables
             self.nixosModules.deluge2
             self.nixosModules.firefox
@@ -219,7 +219,7 @@
         deluge2 = import ./modules/deluge.nix;
         autoUpgrade = import ./modules/upgrade;
         firefox = import ./modules/firefox;
-        secrets = import ./modules/secrets;
+        #secrets = import ./modules/secrets;
         transient = import ./modules/transient;
         nftables = import ./modules/nftables;
 
