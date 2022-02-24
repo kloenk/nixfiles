@@ -70,5 +70,7 @@
     config.nix.package.out
   ];
 
+  services.telegraf.extraConfig.inputs.zfs = {};
+
   system.stateVersion = "21.03";
 }
