@@ -157,6 +157,10 @@
     privateKeyFile = "/var/src/secrets/usee0.key";
   };
 
+  services.telegraf.extraConfig = {
+    global_tags.tenant = "usee";
+  };
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
