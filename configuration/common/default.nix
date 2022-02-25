@@ -16,7 +16,7 @@
   boot.zfs.enableUnstable = true; # allow linuxPackages_latest with zfs
   boot.kernelParams = [ "nohibernate" ]; # https://github.com/openzfs/zfs/issues/260
 
-  nix.systemFeatures = [ "recursive-nix" "kvm" "nixos-test" "big-parallel" ];
+  nix.system-features = [ "recursive-nix" "kvm" "nixos-test" "big-parallel" ];
 
   system.autoUpgrade.flake = "kloenk";
 
@@ -41,7 +41,7 @@
     ports = [ 62954 ];
     passwordAuthentication = lib.mkDefault
       (if (config.networking.hostName != "kexec") then false else true);
-    challengeResponseAuthentication = false;
+    kbdInteractiveAuthentication = false;
     permitRootLogin = lib.mkDefault "prohibit-password";
 
     hostKeys = [{ path = "/persist/data/openssh/ed25519_key"; type = "ed25519"; }];

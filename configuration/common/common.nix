@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  nix.trustedUsers = [ "root" "@wheel" "kloenk" ];
+  nix.trusted-users = [ "root" "@wheel" "kloenk" ];
   nix.extraOptions = ''
     experimental-features = nix-command flakes
   ''; # recursive-nix progress-bar
@@ -10,10 +10,10 @@
   nix.gc.options = lib.mkDefault "--delete-older-than 7d";
 
   # binary cache
-  nix.binaryCachePublicKeys = [
+  nix.trusted-public-keys = [
     "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
   ];
-  nix.binaryCaches = [
+  nix.substituters = [
   #  "https://nix-community.cachix.org/"
   ];
   nix.registry.kloenk = {

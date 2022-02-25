@@ -56,12 +56,12 @@
 
   programs.ssh.knownHosts = {
     "kloenk.de" = {
-      hostNames = [ "*.kloenk.de" ];
+      extraHostNames = [ "*.kloenk.de" ];
       certAuthority = true;
       publicKeyFile = toString ./server_ca.pub;
     };
     "kloenk.dev" = {
-      hostNames = [ "*.kloenk.dev" ];
+      extraHostNames = [ "*.kloenk.dev" ];
       certAuthority = true;
       publicKeyFile = toString ./server_ca.pub;
     };
