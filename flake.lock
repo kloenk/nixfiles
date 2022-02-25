@@ -169,11 +169,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1632126084,
-        "narHash": "sha256-K1t9F6etCFirzeVUCx4RJ2iTNM662nYKE9UKgQrFb/w=",
+        "lastModified": 1645786407,
+        "narHash": "sha256-7BJwjs1zGp32tJUP/wPYwy++lTRAPCTvMzTyyt0Ao/o=",
         "owner": "kloenk",
         "repo": "moodlepkgs",
-        "rev": "f56756c17cee28fd85c30fed81840460b20a7ec1",
+        "rev": "392fb1cbe0408daa27e62edaea5ff224fea72e5a",
         "type": "github"
       },
       "original": {
@@ -266,11 +266,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1645738190,
-        "narHash": "sha256-hy5Gvto7a4vRpMjhesKmQfMdq8sNbnaCm34PxOVeRYc=",
+        "lastModified": 1645786032,
+        "narHash": "sha256-74psta0pQqAPMP/G/SX0WazRu0VbVpyM5dtFdo26a4E=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "c3f5dc69cdff75a054db50eec743e0693d296978",
+        "rev": "71a9297c27777c66da3f1b993847912d82cd9dc4",
         "type": "github"
       },
       "original": {

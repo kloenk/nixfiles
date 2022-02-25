@@ -13,6 +13,7 @@
 
     ../../default.nix
     ../../common
+    ../../common/telegraf.nix
   ];
 
   services.qemuGuest.enable = true;
