@@ -3,7 +3,7 @@
 {
   nix.trustedUsers = [ "root" "@wheel" "kloenk" ];
   nix.extraOptions = ''
-    experimental-features = nix-command flakes ca-references
+    experimental-features = nix-command flakes
   ''; # recursive-nix progress-bar
 
   nix.gc.automatic = lib.mkDefault true;
