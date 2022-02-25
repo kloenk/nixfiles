@@ -1,8 +1,16 @@
 { config, pkgs, lib, ... }:
 
 {
-  imports =
-    [ ./common.nix ./nginx ./node-exporter ./zsh ./make-nixpkgs.nix ./kloenk.nix ./pbb.nix ];
+  imports = [
+    ./common.nix
+    ./nginx
+    ./node-exporter
+    ./zsh
+    ./make-nixpkgs.nix
+    ./kloenk.nix
+    ./pbb.nix
+    ./initrd.nix
+  ];
 
   # environment.etc."src/nixpkgs".source = config.sources.nixpkgs;
   #  environment.etc."src/nixos-config".text = ''
@@ -14,7 +22,8 @@
 
   # zfs
   boot.zfs.enableUnstable = true; # allow linuxPackages_latest with zfs
-  boot.kernelParams = [ "nohibernate" ]; # https://github.com/openzfs/zfs/issues/260
+  boot.kernelParams =
+    [ "nohibernate" ]; # https://github.com/openzfs/zfs/issues/260
 
   nix.system-features = [ "recursive-nix" "kvm" "nixos-test" "big-parallel" ];
 
@@ -30,8 +39,14 @@
   networking.useDHCP = lib.mkDefault false;
   networking.interfaces.lo = lib.mkDefault {
     ipv4.addresses = [
-      { address = "127.0.0.1"; prefixLength = 8; }
-      { address = "127.0.0.53"; prefixLength = 32; }
+      {
+        address = "127.0.0.1";
+        prefixLength = 8;
+      }
+      {
+        address = "127.0.0.53";
+        prefixLength = 32;
+      }
     ];
   };
 
@@ -44,11 +59,14 @@
     kbdInteractiveAuthentication = false;
     permitRootLogin = lib.mkDefault "prohibit-password";
 
-    hostKeys = [{ path = "/persist/data/openssh/ed25519_key"; type = "ed25519"; }];
+    hostKeys = [{
+      path = "/persist/data/openssh/ed25519_key";
+      type = "ed25519";
+    }];
 
-    extraConfig = let
-      ca = builtins.readDir ../ca;
-    in if !(ca ? "ssh_host_ed25519_key_${config.networking.hostName}-cert.pub") then
+    extraConfig = let ca = builtins.readDir ../ca;
+    in if !(ca
+      ? "ssh_host_ed25519_key_${config.networking.hostName}-cert.pub") then
       ""
     else
       let
@@ -122,11 +140,7 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBps9Mp/xZax8/y9fW1Gt73SkskcBux1jDAB8rv0EYUt cardno:000612029874"
     ];
     port = lib.mkDefault 62955;
-    hostKeys = lib.mkDefault [
-      config.sops.secrets."initrd/ssh".path
-    ];
   };
-  sops.secrets."initrd/ssh".owner = "root";
 
   systemd.tmpfiles.rules = [
     "Q /persist 755 root - - -"
@@ -139,12 +153,11 @@
   services.resolved.dnssec = "false";
 
   services.telegraf.extraConfig.inputs = {
-    kernel = {};
-    kernel_vmstat = {};
-    wireguard = {};
-    systemd_units = {
-      unittype = "service,mount,socket,target";
-    };
+    kernel = { };
+    kernel_vmstat = { };
+    wireguard = { };
+    systemd_units = { unittype = "service,mount,socket,target"; };
   };
-  systemd.services.telegraf.serviceConfig.AmbientCapabilities = [ "CAP_NET_ADMIN" ];
+  systemd.services.telegraf.serviceConfig.AmbientCapabilities =
+    [ "CAP_NET_ADMIN" ];
 }
