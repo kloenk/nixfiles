@@ -1,7 +1,7 @@
 { lib, config, ... }:
 let
   inherit (lib) mkIf;
-  cfg = boot.initrd;
+  cfg = config.boot.initrd;
 in {
   config = mkIf cfg.network.ssh.enable {
     boot.initrd.network.ssh = {
