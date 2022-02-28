@@ -7,7 +7,7 @@ let
       after = [ "network.target" ];
       script = ''
         ${pkgs.rsync}/bin/rsync -a -e "${pkgs.openssh}/bin/ssh -o UserKnownHostsFile=/etc/bbb_hostkey -o IdentityFile=$CREDENTIALS_DIRECTORY/bbb_creds" \
-          root@stream.unterbachersee.de:${dir}/ /var/lib/bbb_backup/${targetDir}/
+          root@event.unterbachersee.de:${dir}/ /var/lib/bbb_backup/${targetDir}/
       '';
 
       serviceConfig = {
@@ -44,7 +44,7 @@ in
 {
   sops.secrets."bbb".owner = "root";
   sops.secrets."nas".owner = "root";
-  environment.etc."bbb_hostkey".text = "stream.unterbachersee.de,144.76.103.12,2a01:4f8:192:430b::2 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBLqJOQVdy5FlBV77JPVHLMKd5hg1LGW4alDj52Aky3qj7hY95gwzFHnV8UoZqQmt+t4y2i/fT1vWdwDBfQY7zxM=";
+  environment.etc."bbb_hostkey".text = "event.unterbachersee.de,46.4.108.116,2a01:4f8:141:4fc::2 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG4rHGk+z7rfTZAor8rh2n6DvzAKsssLe1P8CJcGvXFB";
 
   users.users.bbb_backup = {
     isSystemUser = true;
