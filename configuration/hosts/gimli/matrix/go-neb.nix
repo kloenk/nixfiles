@@ -42,6 +42,15 @@
             message_type = "m.text";
           };
         }
+        {
+          ID = "influx_slack_usee";
+          Type = "slackapi";
+          UserID = "@slackapi:kloenk.dev";
+          Config = {
+            room_id = "!KSOiDCRCUNPscvhLRd:petabyte.dev";
+            message_type = "m.text";
+          };
+        }
       ];
     };
   };
