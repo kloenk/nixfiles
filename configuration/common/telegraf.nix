@@ -35,6 +35,7 @@
        swap = {};
        system = {};
        ping.urls = [ "1.1.1.1" ] ++ lib.optional (config.networking.hostName != "iluvatar") "kloenk.dev";
+       ping.binary = "${pkgs.iputils}/bin/ping"
      };
    };
    environmentFiles = [ config.sops.secrets."telegraf/env".path ];
