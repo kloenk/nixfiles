@@ -23,7 +23,7 @@
   "fiscalYearStartMonth": 0,
   "gnetId": 14888,
   "graphTooltip": 1,
-  "iteration": 1645450837515,
+  "iteration": 1646127600421,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -1131,7 +1131,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 32
+        "y": 4
       },
       "id": 65060,
       "panels": [],
@@ -1223,7 +1223,7 @@
         "h": 10,
         "w": 24,
         "x": 0,
-        "y": 33
+        "y": 5
       },
       "id": 12054,
       "interval": "$inter",
@@ -1247,6 +1247,10 @@
       "targets": [
         {
           "alias": "$tag_host: $col",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "PBDC07BC01591819D"
+          },
           "dsType": "influxdb",
           "function": "mean",
           "groupBy": [
@@ -1355,7 +1359,7 @@
         "h": 10,
         "w": 24,
         "x": 0,
-        "y": 43
+        "y": 15
       },
       "id": 65092,
       "interval": "$inter",
@@ -1486,7 +1490,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 53
+        "y": 25
       },
       "id": 54694,
       "interval": "$inter",
@@ -1586,7 +1590,7 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "normal"
+              "mode": "none"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -1614,7 +1618,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 53
+        "y": 25
       },
       "id": 65089,
       "interval": "$inter",
@@ -1744,7 +1748,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 60
+        "y": 32
       },
       "id": 28239,
       "interval": "$inter",
@@ -1873,7 +1877,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 60
+        "y": 32
       },
       "id": 65097,
       "interval": "$inter",
@@ -1948,7 +1952,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 68
+        "y": 40
       },
       "id": 65096,
       "panels": [],
@@ -2040,7 +2044,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 69
+        "y": 41
       },
       "id": 52240,
       "interval": "$inter",
@@ -2201,7 +2205,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 69
+        "y": 41
       },
       "id": 65090,
       "interval": "$inter",
@@ -2294,7 +2298,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 77
+        "y": 49
       },
       "hiddenSeries": false,
       "id": 33458,
@@ -2508,7 +2512,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 77
+        "y": 49
       },
       "id": 65091,
       "interval": "$inter",
@@ -2657,7 +2661,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 85
+        "y": 57
       },
       "id": 61850,
       "interval": "$inter",
@@ -2785,7 +2789,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 85
+        "y": 57
       },
       "id": 26024,
       "interval": "$inter",
@@ -2913,7 +2917,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 93
+        "y": 65
       },
       "id": 13782,
       "interval": "$inter",
@@ -3099,7 +3103,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 93
+        "y": 65
       },
       "id": 56720,
       "interval": "$inter",
@@ -3285,7 +3289,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 101
+        "y": 73
       },
       "id": 60200,
       "interval": "$inter",
@@ -3417,7 +3421,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 109
+        "y": 81
       },
       "id": 65059,
       "panels": [],
@@ -3484,7 +3488,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 110
+        "y": 82
       },
       "id": 42026,
       "interval": "$inter",
@@ -3670,7 +3674,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 118
+        "y": 90
       },
       "id": 28572,
       "interval": "$inter",
@@ -3856,7 +3860,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 126
+        "y": 98
       },
       "id": 65093,
       "interval": "$inter",
@@ -3991,7 +3995,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 133
+        "y": 105
       },
       "id": 65094,
       "interval": "$inter",
@@ -4238,7 +4242,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 140
+        "y": 112
       },
       "id": 58901,
       "interval": "$inter",
@@ -4425,7 +4429,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 140
+        "y": 112
       },
       "id": 50643,
       "interval": "$inter",
@@ -4550,6 +4554,177 @@
       ],
       "title": "Packets Error",
       "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 120
+      },
+      "id": 65099,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${datasource}"
+          },
+          "query": "measurement = from(bucket: v.bucket)\n  |> range(start: v.timeRangeStart)\n  |> filter(fn: (r) => r.host =~ /$host$/)\n  |> filter(fn: (r) => r._measurement == \"ping\")\n\nmeasurement\n  |> filter(fn: (r) => r._field == \"average_response_ms\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> yield(name: \"ping\")\n\n\n",
+          "refId": "A"
+        }
+      ],
+      "title": "Ping",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 120
+      },
+      "id": 65101,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${datasource}"
+          },
+          "query": "measurement = from(bucket: v.bucket)\n  |> range(start: v.timeRangeStart)\n  |> filter(fn: (r) => r.host =~ /$host$/)\n  |> filter(fn: (r) => r._measurement == \"ping\")\n\n\nmeasurement\n  |> filter(fn: (r) => r._field == \"result_code\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> yield(name: \"status\")",
+          "refId": "A"
+        }
+      ],
+      "title": "Ping result",
+      "type": "timeseries"
     }
   ],
   "refresh": false,
@@ -4561,7 +4736,7 @@
       {
         "allFormat": "glob",
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "influx",
           "value": "influx"
         },
