@@ -34,7 +34,7 @@
        processes = {};
        swap = {};
        system = {};
-       ping.urls = [ "1.1.1.1" ] ++ lib.optional (config.networking.hostName != iluvatar) "kloenk.dev";
+       ping.urls = [ "1.1.1.1" ] ++ lib.optional (config.networking.hostName != "iluvatar") "kloenk.dev";
      };
    };
    environmentFiles = [ config.sops.secrets."telegraf/env".path ];
