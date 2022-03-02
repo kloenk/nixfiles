@@ -33,6 +33,7 @@ let
         RestrictNamespaces = true;
         MemoryDenyWriteExecute = true;
       };
+      unitConfig.RequiresMountsFor = [ "/persist/bbb_backupvideos/${targetDir}" ];
     };
     systemd.timers."${unitname}" = {
       wantedBy = [ "timers.target" ];
