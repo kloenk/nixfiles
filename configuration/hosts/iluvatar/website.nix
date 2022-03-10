@@ -100,6 +100,11 @@ in {
       locations."/public/".alias =
         config.services.nginx.virtualHosts."kloenk.de".locations."/public/".alias;
     };
+    "matrixcore.dev" = {
+      enableACME = true;
+      forceSSL = true;
+      root = "/persist/data/matrixcore.dev";
+    };
     "dev.matrix-push.kloenk.dev" = {
       enableACME = true;
       forceSSL = true;
