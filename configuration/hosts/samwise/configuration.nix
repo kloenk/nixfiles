@@ -52,7 +52,7 @@
     "cgroup_no_v1=all"
   ];
 
-  boot.kernelPatches = [
+  /*boot.kernelPatches = [
     {
       name = "nl80211-reload";
       patch = ./0001-nl80211-reset-regdom-when-reloading-regdb.patch;
@@ -66,7 +66,7 @@
       name = "nl80211-reload-remove";
       patch = ./0001-nl80211-remove-reload-flag-from-regulatory_request.patch;
     }
-  ];
+  ];*/
 
 
   kloenk.transient.vgroup = "ssd";
