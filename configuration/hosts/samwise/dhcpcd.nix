@@ -11,16 +11,16 @@
 
   services.dhcpd4 = {
     enable = true;
-    interfaces = [ "eno0" ];
+    interfaces = [ "dtag0" ];
     extraConfig = ''
       default-lease-time 600;
       max-lease-time 7200;
       authoritative;
 
-      subnet 192.168.178.0 netmask 255.255.255.0 {
-        range 192.168.178.10 192.168.178.230;
-        option routers 192.168.178.1;
-        option domain-name-servers 192.168.178.1;
+      subnet 192.168.188.0 netmask 255.255.255.0 {
+        range 192.168.188.10 192.168.188.230;
+        option routers 192.168.188.1;
+        option domain-name-servers 192.168.188.1;
         allow unknown-clients;
       }
     '';

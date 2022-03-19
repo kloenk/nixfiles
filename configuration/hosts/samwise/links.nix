@@ -29,10 +29,23 @@ in {
       addresses = [{ addressConfig.Address = "6.0.2.4/24"; }];
     };
 
+    netdevs."25-dtag" = {
+      netdevConfig = {
+        Kind = "vlan";
+        Name = "dtag0";
+      };
+      vlanConfig.Id = 1002;
+    };
+    networks."25-dtag" = {
+      name = config.systemd.network.netdevs."25-dtag".netdevConfig.Name;
+      DHCP = "no";
+      address = [{ addressConfig.Address = "192.168.188.1/24"; }];
+    };
+
     networks."20-eno0" = {
       name = "eno0";
       DHCP = "yes";
-      vlan = lib.singleton "vlan1337";
+      vlan = [ "vlan1337" "dtag0" ];
       #dhcpV4Config.RouteMetric = 512;
       #addresses = [{addressConfig.Address = "192.168.178.1/24";}];
     };

@@ -6,7 +6,7 @@
 
     ./links.nix
     #./mysql.nix
-    #./dhcpcd.nix
+    ./dhcpcd.nix
     #./dns.nix
 
     ../../default.nix
