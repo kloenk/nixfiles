@@ -39,7 +39,7 @@ in {
     networks."25-dtag" = {
       name = config.systemd.network.netdevs."25-dtag".netdevConfig.Name;
       DHCP = "no";
-      address = [{ addressConfig.Address = "192.168.188.1/24"; }];
+      addresses = [{ addressConfig.Address = "192.168.188.1/24"; }];
     };
 
     networks."20-eno0" = {
