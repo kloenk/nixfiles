@@ -6,6 +6,7 @@ keys:
   - &server_gimli age1uud7jnh0gnxc3rznnq4xlkhtg2c7l74n74rnqa4wdkulqhz0ls2svnzgve
   - &server_iluvatar age19fmyhd7h722ag68g72pv72w4g44fqzs6qpl5ra0e4mtxa204e3vsp8eq6h
   - &server_moodle age1xq2s075hy7fah8la38jpa642f2j4zvhv7qa3c4gprhcyhkx8rsastndc4q
+  - &server_samwise age1e7sgfwlfzq3vud6xdg32wqvdugk80lpcd6nu3v755t04qpewxf5qnpj752
 creation_rules:
   - path_regex: secrets/thrain[^/]*\.yaml$
     key_groups:
@@ -40,6 +41,13 @@ creation_rules:
       - age:
           - *kloenk_age
           - *server_moodle
+        pgp:
+          - *kloenk_pgp
+  - path_regex: secrets/samwise[^/]*\.yaml$
+    key_groups:
+      - age:
+          - *kloenk_age
+          - *server_samwise
         pgp:
           - *kloenk_pgp
   - path_regex: secrets/shared/[^/]*\.yaml$

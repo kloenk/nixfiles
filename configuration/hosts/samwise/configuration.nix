@@ -81,8 +81,8 @@
   networking.useDHCP = false;
   networking.wireless.enable = true;
   networking.wireless.interfaces = [ "wlp2s0" ];
-  networking.supplicant.wlp2s0.configFile.path = config.petabyte.secrets."wpa_supplicant".path;
-  petabyte.secrets.wpa_supplicant.owner = "root";
+  networking.supplicant.wlp2s0.configFile.path = config.sops.secrets."wpa_supplicant".path;
+  sops.secrets.wpa_supplicant.owner = "root";
   #networking.wireless.userControlled.enable = true;
   networking.nameservers = [ "1.1.1.1" "10.0.0.2" ];
 
