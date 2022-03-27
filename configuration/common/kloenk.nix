@@ -38,7 +38,7 @@
       unzip
       jq
       pass
-      pass-otp
+      #pass-otp
       neofetch
       onefetch
       sl
