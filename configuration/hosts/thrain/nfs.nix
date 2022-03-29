@@ -2,8 +2,8 @@
 
 let
   allowedPorts = {
-    allowedTCPPorts = [ 111 2049 4000 4001 4002 ];
-    allowedUDPPorts = [ 111 2049 4000 4001 4002 ];
+    allowedTCPPorts = [ 111 2049 4000 4001 4002 15777 ];
+    allowedUDPPorts = [ 111 2049 4000 4001 4002 15777 ];
   };
 in {
   fileSystems."/export/kloenk" = {
