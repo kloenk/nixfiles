@@ -79,6 +79,8 @@
   services.mysql.settings.mysqld.innodb_read_only_compressed = false;
 
   services.postgresql = {
+    enable = true;
+    package = pkgs.postgresql_14;
     ensureDatabases = [ "moodle" ];
     ensureUsers = [{
       name = "moodle";
