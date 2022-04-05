@@ -22,7 +22,7 @@
   services.postgresqlBackup = {
     enable = true;
     compression = "zstd";
-    databases = "moodle";
+    databases = [ "moodle" ];
   };
 
   /*
