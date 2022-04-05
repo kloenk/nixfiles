@@ -11,6 +11,9 @@
       forceSSL = true;
       hostName = "segelschule.unterbachersee.de";
     };
+    database = {
+      type = "pgsql";
+    };
     extraConfig = ''
       $CFG->xsendfile = 'X-Accel-Redirect';
       $CFG->xsendfilealiases = array(
