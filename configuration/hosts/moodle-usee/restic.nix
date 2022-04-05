@@ -5,7 +5,8 @@
     initialize = true;
     passwordFile = "/var/src/secrets/restic/password";
     paths = [
-      config.services.mysqlBackup.location
+      #config.services.mysqlBackup.location
+      config.services.postgresqlBackup.location
       "/etc/nixos"
       "/var/lib/moodle"
     ];
@@ -18,12 +19,18 @@
     ln -sf /var/src/secrets/restic/rclone.conf /root/.config/rclone/rclone.conf
   '');
 
+  services.postgresqlBackup = {
+    enable = true;
+    compression = "zstd";
+    databases = "moodle";
+  };
+
+  /*
   systemd.services.restic-backups-moodle-usee.after = [ "mysql-backup.service" ];
   systemd.services.restic-backups-moodle-usee.wants = [ "mysql-backup.service" ];
-
   services.mysqlBackup.enable = true;
   services.mysqlBackup.databases = [
     "moodle"
     "mysql"
-  ];
+  ];*/
 }
