@@ -27,6 +27,8 @@
     irony-server
     sbcl
     sops
+
+    sqlite-web
   ];
 
   services.epmd.enable = true;
