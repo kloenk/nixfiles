@@ -21,6 +21,7 @@
 
     #./fabric.nix
     ./m-sandbox.nix
+    ./engelsystem.nix
 
     ../../common/telegraf.nix
     ../../default.nix
