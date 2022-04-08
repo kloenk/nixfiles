@@ -128,7 +128,7 @@ let
           v=DKIM1; k=rsa; " "p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC5KMotmbfWWCLUgFeUc87fO2Heie+Ye1VPELqGhX60br1VyMnhzCc0uR1Hdjt9ts6ykemyIBBHwRa/GfJnyQq+u6nk0v9kDuNs2E3EftcHpYA1E0LCPs5Wl6d2q50IwKt609XiZWok+C/0hnG7gjYTzI6T2a6vhL7hoQfTpLZJCQIDAQAB'')
       ];
 
-      satisfactory = hostTTL "81.169.152.161" null;
+      satisfactory = hostTTL 600 "81.169.152.161" null;
 
       rssr.subdomains = {
         engel = manwe;
