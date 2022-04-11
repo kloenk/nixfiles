@@ -57,7 +57,7 @@
 
       { # thrain
         wireguardPeerConfig = {
-          AllowedIPs = [ "192.168.242.101/32" ];
+          AllowedIPs = [ "192.168.242.101/32" "192.168.178.0/24" ];
           PublicKey = "RiRB/fiZ/x88f78kRQasSwWYBuBjc5DxW2OFaa67zjg=";
           PersistentKeepalive = 21;
         };

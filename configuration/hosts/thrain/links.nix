@@ -1,6 +1,19 @@
 { config, pkgs, lib, ... }:
 
 {
+  boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
+
+  nftables.extraConfig = ''
+    table ip nat {
+      chain postrouting {
+        type nat hook postrouting priority srcnat;
+        ip saddr { 192.168.242.0-192.168.242.255 } oifname { "wg0" } snat to 192.168.242.101
+        oifname "br0" masquerade
+        iifname "wg0" oifname "br0" masquerade
+      }
+    }
+  '';
+
   systemd.network = {
     networks."20-eno1" = {
       name = "eno1";
