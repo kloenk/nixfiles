@@ -20,6 +20,7 @@
     ./restic-server.nix
 
     #./fabric.nix
+    ./satisfactory.nix
     ./m-sandbox.nix
     ./engelsystem.nix
 
