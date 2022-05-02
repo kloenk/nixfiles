@@ -84,21 +84,6 @@
         };
       }
 
-      { # mi 9 t
-        wireguardPeerConfig = {
-          AllowedIPs = [ "192.168.242.111/32" ];
-          PublicKey = "3DpdBLKiw10+nnoh3Fvohdbo4NQDblfGH7WNmk7J7lA=";
-          PersistentKeepalive = 21;
-        };
-      }
-
-      { # Pocophone
-        wireguardPeerConfig = {
-          AllowedIPs = [ "192.168.242.202/32" ];
-          PublicKey = "FvBat+gZV47VgiyVRF0QL79rzpk66kQxai0cs9Zvyhw=";
-          PersistentKeepalive = 21;
-        };
-      }
       { # laptop
         wireguardPeerConfig = {
           AllowedIPs = [ "192.168.242.203/32" ];
@@ -127,17 +112,10 @@
           PersistentKeepalive = 21;
         };
       }
-      { # louwa (luis)
-        wireguardPeerConfig = {
-          AllowedIPs = [ "192.168.242.204/32" ];
-          PublicKey = "EAeeDBxci3TAhQExLNU0GzKyhBV30Ku9O1uLKXYzUkU=";
-          PersistentKeepalive = 21;
-        };
-      }
-      { # mum
+      { # satisfactory server
         wireguardPeerConfig = {
           AllowedIPs = [ "192.168.242.205/32" ];
-          PublicKey = "QWsfx59OadImT9nLGbx19Unr6GG6zObFBJSoLdtIFls=";
+          PublicKey = "s7ZsEcUKkyf6sxL37+oL0YJAVmAkugaJfpii6pWRYlk=";
           PersistentKeepalive = 21;
         };
       }
