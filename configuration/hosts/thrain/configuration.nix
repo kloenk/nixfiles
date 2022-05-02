@@ -172,5 +172,7 @@
     zfs = {};
   };
 
+  programs.ssh.forwardX11 = true;
+
   system.stateVersion = "20.09";
 }
