@@ -119,6 +119,14 @@
           PersistentKeepalive = 21;
         };
       }
+      { # windoof
+        wireguardPeerConfig = {
+          AllowedIPs = [ "192.168.242.206/32" ];
+          PublicKey = "o2LgVxxvZIeEU9An4G5UTLL/WF/fpKcwchvD3rP+ln0";
+          PersistentKeepalive = 21;
+        };
+      }
+
     ];
   };
   systemd.network.networks."30-wg0" = {
