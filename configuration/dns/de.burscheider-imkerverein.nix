@@ -36,8 +36,8 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.burscheider-imkerverein.de.";
       adminEmail = "hostmaster@burscheider-imkerverein.de";
-      serial = 2020122608;
-      refresh = 3600;
+      serial = 2020122609;
+      refresh = 600;
       expire = 604800;
       minimum = 600;
     });

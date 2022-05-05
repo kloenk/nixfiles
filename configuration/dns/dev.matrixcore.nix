@@ -35,8 +35,8 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.matrixcore.dev.";
       adminEmail = "hostmaster.kloenk.dev."; # TODO: change mail
-      serial = 2021010128;
-      refresh = 3600;
+      serial = 2021010129;
+      refresh = 600;
       expire = 604800;
       minimum = 600;
     });
@@ -50,7 +50,7 @@ let
     AAAA = map (ttl 600) [ (aaaa "2a0f:4ac0:0:1::548") ];
     #CNAME = [ "iluvatar.kloenk.dev." ];
 
-    TXT = spfKloenk; #++ [ "google-site-verification=Zi_9C2hSucoEJhLD78ijxMaybtjscN0D3t5TNpoeg6Y" ];
+    TXT = spfKloenk ++ [ "google-site-verification=HNiDFThpZZWaFE0YH4TzDN2coqiBoedYzj0CxDN6Nl8" ];
     MX = mxKloenk;
     CAA = letsEncrypt config.security.acme.email;
 
