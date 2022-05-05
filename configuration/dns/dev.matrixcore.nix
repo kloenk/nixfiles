@@ -35,7 +35,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.matrixcore.dev.";
       adminEmail = "hostmaster.kloenk.dev."; # TODO: change mail
-      serial = 2021010126;
+      serial = 2021010127;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
@@ -77,6 +77,11 @@ let
       matrix-push.CNAME = iluvatar.CNAME;
 
       mx-redir.CNAME = iluvatar.CNAME;
+
+      blog.CNAME = [ "matrixcore.github.io." ];
+      _github-challenge-MatrixCore-organization.TXT = [
+        (txt ''c56620a5d1'')
+      ];
 
       /*_domainkey.subdomains.mail.TXT = [
         (txt ''
