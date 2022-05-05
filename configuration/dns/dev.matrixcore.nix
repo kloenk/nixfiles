@@ -82,7 +82,7 @@ let
       _github-challenge-MatrixCore-organization.TXT = [
         (txt ''c56620a5d1'')
       ];
-      blog.subdomain.www.CNAME = [ "blog" ];
+      blog.subdomains.www.CNAME = [ "blog" ];
 
       /*_domainkey.subdomains.mail.TXT = [
         (txt ''
