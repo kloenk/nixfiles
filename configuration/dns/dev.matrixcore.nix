@@ -35,7 +35,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.matrixcore.dev.";
       adminEmail = "hostmaster.kloenk.dev."; # TODO: change mail
-      serial = 2021010127;
+      serial = 2021010128;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
@@ -58,11 +58,11 @@ let
       iluvatar.CNAME = [ "iluvatar.wolfsburg.petabyte.dev." ];
       ns1 = iluvatar;
 
-      cgit = iluvatar;
+      #cgit = iluvatar;
 
-      git.CNAME = iluvatar.CNAME;
+      #git.CNAME = iluvatar.CNAME;
       git.MX = mxKloenk;
-      git.TXT = spfKloenk;
+      #git.TXT = spfKloenk;
       git.subdomains._dmarc.TXT = dmarc;
 
       _dmarc.TXT = dmarc;
@@ -82,6 +82,7 @@ let
       _github-challenge-MatrixCore-organization.TXT = [
         (txt ''c56620a5d1'')
       ];
+      blog.subdomain.www.CNAME = [ "blog" ];
 
       /*_domainkey.subdomains.mail.TXT = [
         (txt ''
