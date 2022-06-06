@@ -20,6 +20,10 @@
     device = "smials/BagEnd";
     fsType = "zfs";
   };
+  fileSystems."/persist/Mac" = {
+    device = "smials/Mac";
+    fsType = "zfs";
+  };
 
   services.samba = {
     enable = true;
@@ -71,6 +75,15 @@
         "force user" = "kloenk";
         "fruit:aapl" = "yes";
         "fruit:time machine" = "yes";
+        "vfs objects" = "catia fruit streams_xattr";
+      };
+      "Mac" = {
+        path = "/persist/Mac";
+        "valid users" = "kloenk";
+        public = "no";
+        writeable = "yes";
+        "force user" = "kloenk";
+        "fruit:aapl" = "yes";
         "vfs objects" = "catia fruit streams_xattr";
       };
     };
