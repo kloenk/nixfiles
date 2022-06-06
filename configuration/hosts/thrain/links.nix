@@ -103,7 +103,9 @@
       name = "wg0";
       linkConfig = { RequiredForOnline = "yes"; };
       addresses = [{ addressConfig.Address = "192.168.242.101/24"; }];
-      routes = [{ routeConfig.Destination = "192.168.242.0/24"; }];
+      routes = [
+        { routeConfig.Destination = "192.168.242.0/24"; }
+      ];
     };
 
     networks."99-how_cares".linkConfig.RequiredForOnline = "no";
