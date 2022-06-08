@@ -12,7 +12,7 @@
     #./restic.nix
 
     ../iluvatar/postgres.nix
-    ./matrix
+    # ./matrix
 
     ./wireguard.nix
     #./fediventure.nix
