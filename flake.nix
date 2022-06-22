@@ -89,7 +89,7 @@
     let
 
       overlayCombined = system: [
-        nix.overlay
+        nix.overlays.default
         #home-manager.overlay
         self.overlay
         (overlays system)
@@ -121,7 +121,7 @@
           self.nixosModules.autoUpgrade
           self.nixosModules.restya-board
         ];
-        nixpkgs.overlays = [ (overlays system) nix.overlay ];
+        nixpkgs.overlays = [ (overlays system) nix.overlays.default ];
       };
 
       overlays = system: final: prev: {
