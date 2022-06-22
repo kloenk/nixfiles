@@ -77,10 +77,17 @@ in {
   #  server = false;
   #};
 
-  samwise = makeHost {
+  samwisethink = makeHost {
     host = "192.168.178.1";
     server = false;
     prometheusExporters = [ ];
+  };
+
+  samwise = {
+    host = "";
+    server = false;
+    system = "aarch64-linux";
+    vm = true;
   };
 
   #usee-nschl = makeHost {

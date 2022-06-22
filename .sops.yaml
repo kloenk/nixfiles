@@ -44,7 +44,7 @@ creation_rules:
           - *server_moodle
         pgp:
           - *kloenk_pgp
-  - path_regex: secrets/samwise[^/]*\.yaml$
+  - path_regex: secrets/samwisethink[^/]*\.yaml$
     key_groups:
       - age:
           - *kloenk_age
