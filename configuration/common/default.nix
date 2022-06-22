@@ -80,7 +80,6 @@
   };
   sops.age.sshKeyPaths = [ "/persist/data/openssh/ed25519_key" ];
   sops.defaultSopsFile = ../../secrets + "/${config.networking.hostName}.yaml";
-  sops.path = "/run/secrets-sops";
 
   # monitoring
   services.vnstat.enable = lib.mkDefault true;
