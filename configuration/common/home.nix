@@ -39,7 +39,7 @@ in {
           user = "git";
           forwardAgent = false;
         };
-      } // genMatchBlocks // {
+      } // /* genMatchBlocks // */ {
         # nyantec
         "berlin.nyantec.com" = {
           hostname = "berlin.nyantec.com";
