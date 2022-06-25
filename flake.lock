@@ -636,11 +636,11 @@
         "wayland": "wayland"
       },
       "locked": {
-        "lastModified": 1656173299,
-        "narHash": "sha256-gJzhWOf/zV8S6ka8WFIJeOKLwxYcdN9wvttUXSZ2EhY=",
+        "lastModified": 1656174576,
+        "narHash": "sha256-mpmhVQw8pJKFLACrm8i/foZ+Ye+tNM9zITLFyCKmydY=",
         "owner": "~vikanezrimaya",
         "repo": "nix-flake",
-        "rev": "c56e73c589e4b7d4821c400d5a95a23fc669500d",
+        "rev": "299a216d856f562d5be05fa5126d0419de4b6ed1",
         "type": "sourcehut"
       },
       "original": {
