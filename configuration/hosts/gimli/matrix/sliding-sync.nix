@@ -4,6 +4,8 @@
   services.matrix-sliding-sync-proxy = {
     enable = true;
     dbName = "syncv3";
+    bind = "localhost:8009";
+    server = "http://localhost:8008/";
   };
 
   services.postgresql = {
