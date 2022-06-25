@@ -46,58 +46,64 @@
   services.matrix-synapse = {
     enable = true;
 
-    enable_registration = false;
     #registration_shared_secret = "secret";
 
-    server_name = "kloenk.dev";
-    public_baseurl = "https://matrix.kloenk.dev:443/";
-
-    database_type = "psycopg2";
-    database_args = {
-      database = "matrix-synapse";
-    };
-
-    listeners = [
-      {
-        bind_address = "127.0.0.1";
-        port = 8008;
-        resources = [
-          { names = [ "client" ]; compress = true; }
-          { names = [ "federation" ]; compress = false; }
-        ];
-        type = "http";
-        tls = false;
-        x_forwarded = true;
-      }
-      {
-        bind_address = "192.168.242.104";
-        port = 8008;
-        resources = [
-          { names = [ "client" ]; compress = true; }
-          #{ names = [ "federation" ]; compress = false; } # should not be needed, AS should only use client
-        ];
-        type = "http";
-        tls = false;
-        x_forwarded = false;
-      }
-    ];
-
-    app_service_config_files = [
-      config.sops.secrets."matrix/exmpp".path
-      config.sops.secrets."matrix/exmpp2".path
-    ];
 
     # TODO: `matrix-synapse-shared-secret-auth` for double puppeting?
 
-    extraConfig = ''
-      max_upload_size: "100M"
-    '';
     extraConfigFiles = [
       config.sops.secrets."matrix/config".path
     ];
 
-    url_preview_enabled            = true;
-    url_preview_ip_range_blacklist = ["127.0.0.0/8" "10.0.0.0/8" "172.16.0.0/12" "192.168.0.0/16" "100.64.0.0/10" "169.254.0.0/16" "::1/128" "fe80::/64" "fc00::/7"];
+    settings = {
+      server_name = "kloenk.dev";
+      public_baseurl = "https://matrix.kloenk.dev:443/";
+
+      enable_registration = false;
+
+      listeners = [
+        {
+          bind_addresses = [ "127.0.0.1" ];
+          port = 8008;
+          resources = [
+            { names = [ "client" ]; compress = true; }
+            { names = [ "federation" ]; compress = false; }
+          ];
+          type = "http";
+          tls = false;
+          x_forwarded = true;
+        }
+        {
+          bind_addresses = [ "192.168.242.104" ];
+          port = 8008;
+          resources = [
+            { names = [ "client" ]; compress = true; }
+            #{ names = [ "federation" ]; compress = false; } # should not be needed, AS should only use client
+          ];
+          type = "http";
+          tls = false;
+          x_forwarded = false;
+        }
+      ];
+
+      database_type = "psycopg2";
+      database_args = {
+        database = "matrix-synapse";
+      };
+
+      extraConfig = ''
+        max_upload_size: "100M"
+      '';
+
+      app_service_config_files = [
+      #  config.sops.secrets."matrix/exmpp".path
+      #  config.sops.secrets."matrix/exmpp2".path
+      ];
+
+
+      url_preview_enabled            = true;
+      url_preview_ip_range_blacklist = ["127.0.0.0/8" "10.0.0.0/8" "172.16.0.0/12" "192.168.0.0/16" "100.64.0.0/10" "169.254.0.0/16" "::1/128" "fe80::/64" "fc00::/7"];
+    };
   };
   
   sops.secrets."matrix/exmpp".owner = "matrix-synapse";
