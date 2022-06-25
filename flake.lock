@@ -209,11 +209,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1655858799,
-        "narHash": "sha256-Ws6BKlVuEVO29Ab3OEUfVLbWTECv/5Ax3yOMq/UeY0E=",
+        "lastModified": 1656150467,
+        "narHash": "sha256-IJcYUzBfHhk0bklnWROwvw3P4txsfas+EzPb3fD+dvw=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "06bb67ab24bd6e6c6d2bc97ecbcddd6c8b07ac18",
+        "rev": "e0baf8ee0c3578ea158df99f4443fdd30b9bfe14",
         "type": "github"
       },
       "original": {
@@ -636,11 +636,11 @@
         "wayland": "wayland"
       },
       "locked": {
-        "lastModified": 1656168020,
-        "narHash": "sha256-xxEDlEHelKlDd9MWGji9kxJtAV7kzifBYed2aPGW5+I=",
+        "lastModified": 1656171976,
+        "narHash": "sha256-WBlaB1a25fhqlfYywsMOiXBRtHNZesL6vHKzuwweqxs=",
         "owner": "~vikanezrimaya",
         "repo": "nix-flake",
-        "rev": "0a33865089fba4e1b56095d9b4eaaee38e2e0ff7",
+        "rev": "ab143c11f56478d203a920d63708f901e2eff024",
         "type": "sourcehut"
       },
       "original": {
