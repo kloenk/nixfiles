@@ -2,7 +2,8 @@
 
 {
   imports = [
-    ./go-neb.nix
+    #./go-neb.nix
+    ./sliding-sync.nix
   ];
 
   fileSystems."/var/lib/matrix-synapse" = {
