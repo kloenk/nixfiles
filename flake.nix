@@ -83,9 +83,15 @@
     inputs.nixpkgs.follows = "/nixpkgs";
   };
 
+  inputs.vika = {
+    type = "sourcehut";
+    owner = "~vikanezrimaya";
+    repo = "nix-flake";
+  };
+
 
   outputs = inputs@{ self, nixpkgs, nix, moodlepkgs, home-manager, mail-server
-    , website, dns, grahamc-config, darwin, emacs, sops-nix, ... }:
+    , website, dns, grahamc-config, darwin, emacs, sops-nix, vika, ... }:
     let
 
       overlayCombined = system: [
@@ -182,6 +188,8 @@
             self.nixosModules.transient
             sops-nix.nixosModules.sops
             sourcesModule
+
+            vika.nixosModules.matrix-sliding-sync-proxy
             {
               # disable home-manager manpage (breaks hydra see https://github.com/rycee/home-manager/issues/1262)
               home-manager.users.kloenk.manual.manpages.enable = false;

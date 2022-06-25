@@ -8,11 +8,11 @@
 
     ./wordpress
     ./mysql.nix
-    ./moodle.nix
+    #./moodle.nix
     #./restic.nix
 
     ../iluvatar/postgres.nix
-    # ./matrix
+    ./matrix
 
     ./wireguard.nix
     #./fediventure.nix
