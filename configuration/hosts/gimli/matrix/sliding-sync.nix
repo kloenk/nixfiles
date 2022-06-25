@@ -5,7 +5,7 @@
     enable = true;
     dbName = "syncv3";
     bind = ":8009";
-    server = "http://localhost:8008/";
+    server = "http://localhost:8008";
   };
 
   services.postgresql = {
