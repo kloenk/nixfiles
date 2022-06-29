@@ -162,4 +162,6 @@
   };
   systemd.services.telegraf.serviceConfig.AmbientCapabilities =
     [ "CAP_NET_ADMIN" ];
+
+  documentation.nixos.enable = false;
 }
