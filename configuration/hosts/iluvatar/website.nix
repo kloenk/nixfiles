@@ -81,7 +81,7 @@ in {
 
       extraConfig = ''
         ${commonHeaders}
-        add_header Content-Security-Policy "default-src 'self'; frame-ancestors 'none'; object-src 'none'" always;
+        add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; frame-ancestors 'none'; object-src 'none'" always;
         add_header Cache-Control $cacheable_types;
       '';
     };
@@ -92,7 +92,7 @@ in {
       locations."/public/".alias = "/persist/data/public/";
       extraConfig = ''
         ${commonHeaders}
-        add_header Content-Security-Policy "default-src 'self'; frame-ancestors 'none'; object-src 'none'" always;
+        add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; frame-ancestors 'none'; object-src 'none'" always;
         add_header Cache-Control $cacheable_types;
       '';
     };
