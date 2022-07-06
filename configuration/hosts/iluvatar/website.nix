@@ -42,7 +42,7 @@ in {
     "kloenk.dev" = {
       enableACME = true;
       forceSSL = true;
-      root = inputs.website;
+      root = pkgs.kloenk-www;
       locations."/public/".alias = "/persist/data/public/";
       locations."/baz".return =
         "301 https://www.amazon.de/hz/wishlist/ls/3BJ09JA3JNCN?ref_=wl_share";
@@ -88,7 +88,7 @@ in {
     "kloenk.de" = {
       enableACME = true;
       forceSSL = true;
-      root = inputs.website;
+      root = pkgs.kloenk-www;
       locations."/public/".alias = "/persist/data/public/";
       extraConfig = ''
         ${commonHeaders}

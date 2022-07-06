@@ -45,6 +45,13 @@
     #ref = "lexbeserious";
   };
 
+  inputs.kloenk-www = {
+    type = "gitlab";
+    owner = "kloenk";
+    repo = "www";
+    host = "cyberchaos.dev";
+  };
+
   inputs.dns = {
     type = "github";
     owner = "kloenk";
@@ -91,7 +98,7 @@
 
 
   outputs = inputs@{ self, nixpkgs, nix, moodlepkgs, home-manager, mail-server
-    , website, dns, grahamc-config, darwin, emacs, sops-nix, vika, ... }:
+    , website, dns, grahamc-config, darwin, emacs, sops-nix, vika, kloenk-www, ... }:
     let
 
       overlayCombined = system: [
@@ -101,6 +108,7 @@
         (overlays system)
         moodlepkgs.overlay
         emacs.overlay
+        kloenk-www.overlay
       ];
 
       systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
