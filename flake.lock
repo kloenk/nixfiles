@@ -138,6 +138,22 @@
     "flake-compat_3": {
       "flake": false,
       "locked": {
+        "lastModified": 1650374568,
+        "narHash": "sha256-Z+s0J8/r907g149rllvwhb4pKi8Wam5ij0st8PwAh+E=",
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "rev": "b4a34015c698c7793d592d66adbab377907a2be8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
+    "flake-compat_4": {
+      "flake": false,
+      "locked": {
         "lastModified": 1648199409,
         "narHash": "sha256-JwPKdC2PoVBkG6E+eWw3j6BMR6sL3COpYWfif7RVb8Y=",
         "owner": "edolstra",
@@ -246,6 +262,28 @@
         "url": "https://git.sr.ht/~vikanezrimaya/kittybox"
       }
     },
+    "kloenk-www": {
+      "inputs": {
+        "flake-compat": "flake-compat_3",
+        "nixpkgs": "nixpkgs",
+        "papermod": "papermod"
+      },
+      "locked": {
+        "host": "cyberchaos.dev",
+        "lastModified": 1657130862,
+        "narHash": "sha256-yhIy4QZ6wj+V63z/FaDjfBZ22T4xKTzIcImgEWFgulc=",
+        "owner": "kloenk",
+        "repo": "www",
+        "rev": "2c0df1de1d5557268ad484950ccf36169d7ccac8",
+        "type": "gitlab"
+      },
+      "original": {
+        "host": "cyberchaos.dev",
+        "owner": "kloenk",
+        "repo": "www",
+        "type": "gitlab"
+      }
+    },
     "lowdown-src": {
       "flake": false,
       "locked": {
@@ -265,7 +303,7 @@
     "mail-server": {
       "inputs": {
         "blobs": "blobs",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": "nixpkgs_2",
         "nixpkgs-22_05": "nixpkgs-22_05",
         "utils": "utils_2"
       },
@@ -367,16 +405,15 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1642635915,
-        "narHash": "sha256-vabPA32j81xBO5m3+qXndWp5aqepe+vu96Wkd9UnngM=",
+        "lastModified": 1657056915,
+        "narHash": "sha256-pzpuGI0+UHNlWae91QYeAlK0rY0FGZJAhHfRArHNwKY=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "6d8215281b2f87a5af9ed7425a26ac575da0438f",
+        "rev": "c9ad20e7ebbe27a29d12353d15cdc853f896291b",
         "type": "github"
       },
       "original": {
         "id": "nixpkgs",
-        "ref": "nixos-unstable",
         "type": "indirect"
       }
     },
@@ -461,11 +498,26 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1656492412,
-        "narHash": "sha256-CdTRqPFyE/t/nRfnfN3fxm+OOKjeJdaDbXm7E7k+Fxc=",
+        "lastModified": 1642635915,
+        "narHash": "sha256-vabPA32j81xBO5m3+qXndWp5aqepe+vu96Wkd9UnngM=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "6d8215281b2f87a5af9ed7425a26ac575da0438f",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "nixos-unstable",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
+        "lastModified": 1656502381,
+        "narHash": "sha256-J+vS8KoXu1gh2JURWUky9Yi+g36ojelg/MvLiQgq1r8=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "72f17cca89ec773e5845f5fa1bffcf0b7a4e2094",
+        "rev": "254440d811ff65a56d67ad2d27e115bdbf30c998",
         "type": "github"
       },
       "original": {
@@ -474,7 +526,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
+    "nixpkgs_4": {
       "locked": {
         "lastModified": 1652433491,
         "narHash": "sha256-k9FMMZzsAdhetvbZ9RvFrfgLGA7veAQEDF1XkFyAhPc=",
@@ -522,6 +574,22 @@
         "type": "gitlab"
       }
     },
+    "papermod": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1656084609,
+        "narHash": "sha256-t0oMROiSXSwxOGWg+E/f43yLBmwcyd8ZH0E28t6vVYQ=",
+        "owner": "adityatelange",
+        "repo": "hugo-PaperMod",
+        "rev": "9af128a8a638d139771afc30a8f331a73ce810b1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "adityatelange",
+        "repo": "hugo-PaperMod",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "darwin": "darwin",
@@ -530,10 +598,11 @@
         "flake-compat": "flake-compat",
         "grahamc-config": "grahamc-config",
         "home-manager": "home-manager",
+        "kloenk-www": "kloenk-www",
         "mail-server": "mail-server",
         "moodlepkgs": "moodlepkgs",
         "nix": "nix",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs_3",
         "sops-nix": "sops-nix",
         "vika": "vika",
         "website": "website"
@@ -644,7 +713,7 @@
         "flake-utils": "flake-utils",
         "kittybox": "kittybox",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_4",
         "nixpkgs-power-profiles-daemon": "nixpkgs-power-profiles-daemon",
         "rust-overlay": "rust-overlay",
         "sops-nix": "sops-nix_2",
@@ -689,7 +758,7 @@
     "wayland": {
       "inputs": {
         "cachix": "cachix",
-        "flake-compat": "flake-compat_3",
+        "flake-compat": "flake-compat_4",
         "nixpkgs": [
           "vika",
           "nixpkgs"
