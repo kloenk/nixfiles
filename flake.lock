@@ -270,11 +270,11 @@
       },
       "locked": {
         "host": "cyberchaos.dev",
-        "lastModified": 1657121399,
-        "narHash": "sha256-41yDUvxalsA8u6Rx41VKAxTn8wbBOcvCTigAKnzKx6g=",
+        "lastModified": 1657123388,
+        "narHash": "sha256-Ga01ZhexOwev3/D5lFXuG1idrfeBZN25JzgdhMqI8lE=",
         "owner": "kloenk",
         "repo": "www",
-        "rev": "70b2a0c6d42bd7265620e60f9c5be0a661b85734",
+        "rev": "116028124b35709c86cc57cdcd7f9fe93e5e4186",
         "type": "gitlab"
       },
       "original": {
