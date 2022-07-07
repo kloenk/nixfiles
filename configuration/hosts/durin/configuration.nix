@@ -109,6 +109,8 @@
     options = [ "bind" ];
   };
 
+  nix.gc.automatic = lib.mkForce false;
+
   # smartcard
   services.pcscd.enable = true;
 
