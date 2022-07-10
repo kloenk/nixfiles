@@ -90,6 +90,7 @@ in {
       forceSSL = true;
       root = pkgs.kloenk-www;
       locations."/public/".alias = "/persist/data/public/";
+      locations."/".extraConfig = "return 301 https://kloenk.dev;";
       extraConfig = ''
         ${commonHeaders}
         add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; frame-ancestors 'none'; object-src 'none'" always;
