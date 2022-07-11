@@ -90,7 +90,6 @@
 
   services.postgresql = {
     enable = true;
-    package = pkgs.postgresql_14;
     ensureDatabases = [ "moodle" ];
     ensureUsers = [{
       name = "moodle";
