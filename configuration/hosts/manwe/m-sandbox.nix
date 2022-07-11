@@ -9,12 +9,20 @@
   services.moodle = {
     enable = true;
     initialPassword = "foobar123";
-    package = pkgs.moodle.override { plugins = with pkgs.moodlePackages; [ bigbluebuttonbn tiles sharing_cart scheduler ]; };
+    package = pkgs.moodle.override { plugins = with pkgs.moodlePackages; [
+      /*bigbluebuttonbn*/
+      tiles
+      sharing_cart
+      scheduler
+    ]; };
     virtualHost = {
       adminAddr = "sandbox@kloenk.dev";
       enableACME = true;
       forceSSL = true;
       hostName = "m-sandbox.kloenk.dev";
+    };
+    database = {
+      type = "pgsql";
     };
     extraConfig = ''
       $CFG->xsendfile = 'X-Accel-Redirect';
@@ -79,6 +87,16 @@
     sleep 30s
     export USER=root
   '');*/
+
+  services.postgresql = {
+    enable = true;
+    package = pkgs.postgresql_14;
+    ensureDatabases = [ "moodle" ];
+    ensureUsers = [{
+      name = "moodle";
+      ensurePermissions."DATABASE moodle" = "ALL PRIVILEGES";
+    }];
+  };
 
   # MARK: DISABLE httpd
   services.httpd.enable = lib.mkOverride 25 false; # No thanks, I choose life
