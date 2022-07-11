@@ -8,7 +8,7 @@
 
     ./wordpress
     ./mysql.nix
-    #./moodle.nix
+    ./moodle.nix
     #./restic.nix
 
     ../iluvatar/postgres.nix
