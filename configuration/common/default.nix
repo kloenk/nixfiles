@@ -92,7 +92,8 @@
   services.journald.extraConfig = "SystemMaxUse=2G";
 
   i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
-  console.keyMap = lib.mkDefault "neo";
+  #console.keyMap = lib.mkDefault "neo";
+  console.keyMap = lib.mkDefault "de";
   console.font = "Lat2-Terminus16";
 
   environment.systemPackages = with pkgs; [
