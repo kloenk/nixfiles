@@ -12,7 +12,6 @@
     type = "github";
     owner = "nixos";
     repo = "nixpkgs";
-    #    ref = "from-unstable";
   };
 
   inputs.nix = {
@@ -36,15 +35,6 @@
     ref = "master";
   };
 
-  inputs.website = {
-    type = "gitlab";
-    owner = "kloenk";
-    repo = "website";
-    host = "cyberchaos.dev";
-    flake = false;
-    #ref = "lexbeserious";
-  };
-
   inputs.kloenk-www = {
     type = "gitlab";
     owner = "kloenk";
@@ -60,22 +50,10 @@
     inputs.nixpkgs.follows = "/nixpkgs";
   };
 
-  inputs.grahamc-config = {
-    type = "github";
-    owner = "grahamc";
-    repo = "nixos-config";
-    flake = false;
-  };
-
   inputs.emacs = {
     type = "github";
     owner = "nix-community";
     repo = "emacs-overlay";
-  };
-
-  inputs.flake-compat = {
-    url = "github:edolstra/flake-compat";
-    flake = false;
   };
 
   inputs.darwin ={
@@ -96,9 +74,15 @@
     repo = "nix-flake";
   };
 
+  inputs.flake-compat = {
+    url = "github:edolstra/flake-compat";
+    flake = false;
+  };
+
+  inputs.deploy-rs.url = "github:serokell/deploy-rs";
 
   outputs = inputs@{ self, nixpkgs, nix, moodlepkgs, home-manager, mail-server
-    , website, dns, grahamc-config, darwin, emacs, sops-nix, vika, kloenk-www, ... }:
+    , dns, darwin, emacs, sops-nix, vika, kloenk-www, deploy-rs, ... }:
     let
 
       overlayCombined = system: [
@@ -109,6 +93,8 @@
         moodlepkgs.overlay
         emacs.overlay
         kloenk-www.overlay
+        # (final: prev: (deploy-rs.overlay final prev).deploy-rs)
+        deploy-rs.overlay
       ];
 
       systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
@@ -158,14 +144,8 @@
     in {
       overlay = final: prev:
         let
-          grahamc = (import (grahamc-config + "/packages/overlay.nix") {
-            secrets = null;
-          } final prev);
         in ((import ./pkgs/overlay.nix inputs final prev) // {
-          inherit (grahamc)
-            nixpkgs-maintainer-tools sway-cycle-workspace mutate wl-freeze
-            resholve abathur-resholved;
-        } // { });
+        });
 
       legacyPackages = forAllSystems
         (system: nixpkgsFor.${system});
@@ -246,6 +226,13 @@
 
       darwinModules = {
         epmd = import ./modules/darwin/epmd;
+      };
+
+      deploy.sshOpts = [ "-p" "62954" ];
+      deploy.nodes.manwe.profiles.system = {
+        user = "kloenk";
+        hostname = "manwe.kloenk.dev";
+        path = "deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.manwe";
       };
 
       # hydra jobs
