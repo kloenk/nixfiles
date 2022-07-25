@@ -4,7 +4,7 @@
   services.moodle = {
     enable = true;
     initialPassword = "foobar123";
-    package = pkgs.moodle.override { plugins = with pkgs.moodlePackages; [ bigbluebuttonbn tiles sharing_cart scheduler ]; };
+    package = pkgs.moodle.override { plugins = with pkgs.moodlePackages; [ /* bigbluebuttonbn */ tiles sharing_cart scheduler ]; };
     virtualHost = {
       adminAddr = "holger.behrens@unterbachersee.de";
       enableACME = true;
@@ -90,6 +90,9 @@
       ensurePermissions."DATABASE moodle" = "ALL PRIVILEGES";
     }];
   };
+
+  # de locales
+  i18n.supportedLocales = [ "de_DE.UTF-8/UTF-8" ];
 
   # MARK: DISABLE httpd
   services.httpd.enable = lib.mkOverride 25 false; # No thanks, I choose life
