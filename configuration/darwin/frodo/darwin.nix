@@ -2,6 +2,8 @@
 
 {
   imports = [
+    ./postgres.nix
+
     ../../common/darwin.nix
   ];
 
