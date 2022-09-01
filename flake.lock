@@ -169,6 +169,21 @@
     },
     "flake-utils": {
       "locked": {
+        "lastModified": 1656928814,
+        "narHash": "sha256-RIFfgBuKz6Hp89yRr7+NR5tzIAbn52h8vT6vXkYjZoM=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "7e2a3b3dfd9af950a856d66b0a7d01e3c18aa249",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_2": {
+      "locked": {
         "lastModified": 1656065134,
         "narHash": "sha256-oc6E6ByIw3oJaIyc67maaFcnjYOz1mMcOtHxbEf9NwQ=",
         "owner": "numtide",
@@ -182,7 +197,7 @@
         "type": "github"
       }
     },
-    "flake-utils_2": {
+    "flake-utils_3": {
       "locked": {
         "lastModified": 1623875721,
         "narHash": "sha256-A8BU7bjS5GirpAUv4QA+QnJ4CceLHkcXdRp4xITDB0s=",
@@ -240,7 +255,7 @@
     },
     "kittybox": {
       "inputs": {
-        "flake-utils": "flake-utils_2",
+        "flake-utils": "flake-utils_3",
         "naersk": "naersk",
         "nixpkgs": [
           "vika",
@@ -384,6 +399,27 @@
       "original": {
         "owner": "nixos",
         "repo": "nix",
+        "type": "github"
+      }
+    },
+    "nix-minecraft": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1661660705,
+        "narHash": "sha256-A6/oLU+DiecGdJDtKpRtLbppHgF8ASCvPkaxw4Yx/8I=",
+        "owner": "Infinidoge",
+        "repo": "nix-minecraft",
+        "rev": "031fbcbd7fab70fbf5c5cf706ccde512ada03dd0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Infinidoge",
+        "repo": "nix-minecraft",
         "type": "github"
       }
     },
@@ -602,6 +638,7 @@
         "mail-server": "mail-server",
         "moodlepkgs": "moodlepkgs",
         "nix": "nix",
+        "nix-minecraft": "nix-minecraft",
         "nixpkgs": "nixpkgs_3",
         "sops-nix": "sops-nix",
         "vika": "vika",
@@ -710,7 +747,7 @@
     "vika": {
       "inputs": {
         "emacs": "emacs_2",
-        "flake-utils": "flake-utils",
+        "flake-utils": "flake-utils_2",
         "kittybox": "kittybox",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_4",
