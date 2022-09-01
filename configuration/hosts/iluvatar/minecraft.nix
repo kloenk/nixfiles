@@ -33,6 +33,7 @@
       };
 
       package = pkgs.fabricServers.fabric-1_19;
+      jvmOpts = "-Xmx2G -Xms1G -classpath ./config/bluemap/postgresql-42.5.0.jar";
 
       symlinks = {
         mods = pkgs.linkFarmFromDrvs "mods" (map pkgs.fetchModrinthMod
@@ -101,6 +102,27 @@
     };
   };
 
+  /*services.nginx.virtualHosts."escapetheminecraft.kloenk.dev" = {
+    enableACME = true;
+    forceSSL = true;
+
+    root = ""
+
+    locations = {
+
+    };
+  };*/
+
+  services.postgresql = {
+    ensureDatabases = [ "minecraft_escapetheaverage" ];
+    ensureUsers = [
+      {
+        name = "minecraft";
+        ensurePermissions."DATABASE minecraft_escapetheaverage" = "ALL PRIVILEGES";
+      }
+    ];
+  };
+
   services.restic.backups.minecraft = {
     passwordFile = config.sops.secrets."minecraft/restic".path;
     initialize = true;
@@ -109,7 +131,13 @@
       OnCalendar = "*-*-* *:00:00";
       RandomizedDelaySec = "10m";
     };
-    paths = [ "/persist/data/minecraft/escapetheminecraft/world" ];
+    paths = [
+      "/persist/data/minecraft/escapetheminecraft/world"
+      "/persist/data/minecraft/escapetheminecraft/config"
+      "/persist/data/minecraft/escapetheminecraft/ops.json"
+      "/persist/data/minecraft/escapetheminecraft/banned-*.json"
+
+    ];
     repository = "rest:http://192.168.242.103:8080/minecraft";
     user = "minecraft";
   };
