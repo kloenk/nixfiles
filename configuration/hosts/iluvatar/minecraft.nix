@@ -32,26 +32,62 @@
       package = pkgs.fabricServers.fabric-1_19;
 
       symlinks = {
-        mods = pkgs.linkFarmFromDrvs "mods" (map pkgs.fetchModrinthMod (builtins.attrValues {
-          Lithium = { id = "sIKhU9s4"; hash = "fbc0efb6db294155c5705672731e9ca58ddc5b36fb75544e1693514ca8a282d6"; };
-          Phosphor = { id = "Di0Jgej2"; hash = "9e93a97d8fe149b6b8f782417432768c708704c6825ad2af3d280628698db895"; };
-          Taterzens = { id = "TV31TyVu"; hash = "f88b4230b36dffcb7d522039c85290b1c4973d58fa4b15ca6d5598d6602b7e5d"; };
-          TraderNPCs = { id = "gRw25odj"; hash = "c97cac2c6d363047c49d574c922e6e9f90412713f124716b352f23c8862656bd"; };
-          C2ME = { id = "yU5A8Qx5"; hash = "528c8791f1c4ea538948689e410b2e6c8fe15951772f82558922257b4faf6696"; };
-          LazyDFU = { id = "4SHylIO9"; hash = "8c7993348a12d607950266e7aad1040ac99dd8fe35bb43a96cc7ff3404e77c5d"; };
-          FerriteCore = { id = "7epbwkFg"; hash = "58ab281bc8efdb1a56dff38d6f143d2e53df335656d589adff8f07d082dbea77"; };
-          Krypton = { id = "UJ6FlFnK"; hash = "2383b86960752fef9f97d67f3619f7f022d824f13676bb8888db7fea4ad1f76a"; };
-          BlueMap = { id = "URGg6hB0"; hash = "b50d1402c8fe2b34f57db53acd18ae6910a6c31821f2106941bc493b36ae41a7"; };
+        mods = pkgs.linkFarmFromDrvs "mods" (map pkgs.fetchModrinthMod
+          (builtins.attrValues {
+            Lithium = {
+              id = "sIKhU9s4";
+              hash =
+                "fbc0efb6db294155c5705672731e9ca58ddc5b36fb75544e1693514ca8a282d6";
+            };
+            Phosphor = {
+              id = "Di0Jgej2";
+              hash =
+                "9e93a97d8fe149b6b8f782417432768c708704c6825ad2af3d280628698db895";
+            };
+            Taterzens = {
+              id = "TV31TyVu";
+              hash =
+                "f88b4230b36dffcb7d522039c85290b1c4973d58fa4b15ca6d5598d6602b7e5d";
+            };
+            TraderNPCs = {
+              id = "gRw25odj";
+              hash =
+                "c97cac2c6d363047c49d574c922e6e9f90412713f124716b352f23c8862656bd";
+            };
+            C2ME = {
+              id = "yU5A8Qx5";
+              hash =
+                "528c8791f1c4ea538948689e410b2e6c8fe15951772f82558922257b4faf6696";
+            };
+            LazyDFU = {
+              id = "4SHylIO9";
+              hash =
+                "8c7993348a12d607950266e7aad1040ac99dd8fe35bb43a96cc7ff3404e77c5d";
+            };
+            FerriteCore = {
+              id = "7epbwkFg";
+              hash =
+                "58ab281bc8efdb1a56dff38d6f143d2e53df335656d589adff8f07d082dbea77";
+            };
+            Krypton = {
+              id = "UJ6FlFnK";
+              hash =
+                "2383b86960752fef9f97d67f3619f7f022d824f13676bb8888db7fea4ad1f76a";
+            };
+            BlueMap = {
+              id = "URGg6hB0";
+              hash =
+                "b50d1402c8fe2b34f57db53acd18ae6910a6c31821f2106941bc493b36ae41a7";
+            };
 
-          /*
-          Starlight = { id = "4ew9whL8"; hash = "00w0alwq2bnbi1grxd2c22kylv93841k8dh0d5501cl57j7p0hgb"; };
-          Lithium = { id = "MoF1cn6g"; hash = "0gw75p4zri2l582zp6l92vcvpywsqafhzc5a61jcpgasjsp378v1"; };
-          FerriteCore = { id = "776Z5oW9"; hash = "1gvy92q1dy6zb7335yxib4ykbqrdvfxwwb2a40vrn7gkkcafh6dh"; };
-          Krypton = { id = "vJQ7plH2"; hash = "1y6sn1pjd9kl2ig73zg3zb7f6p2a36sa9f7gjzawrpnp0q6az4cf"; };
-          LazyDFU = { id = "C6e265zK"; hash = "1fga62yiz8189qrl33l4p5m05ic90dda3y9bg7iji6z97p4js8mj"; };
-          C2ME = { id = "5P5gJ4ws"; hash = "1xyhyy7v99k4cvxq5b47jgra481m73zx025ylps0kjlwx7b90jkh"; };
-          */
-        }));
+            /* Starlight = { id = "4ew9whL8"; hash = "00w0alwq2bnbi1grxd2c22kylv93841k8dh0d5501cl57j7p0hgb"; };
+               Lithium = { id = "MoF1cn6g"; hash = "0gw75p4zri2l582zp6l92vcvpywsqafhzc5a61jcpgasjsp378v1"; };
+               FerriteCore = { id = "776Z5oW9"; hash = "1gvy92q1dy6zb7335yxib4ykbqrdvfxwwb2a40vrn7gkkcafh6dh"; };
+               Krypton = { id = "vJQ7plH2"; hash = "1y6sn1pjd9kl2ig73zg3zb7f6p2a36sa9f7gjzawrpnp0q6az4cf"; };
+               LazyDFU = { id = "C6e265zK"; hash = "1fga62yiz8189qrl33l4p5m05ic90dda3y9bg7iji6z97p4js8mj"; };
+               C2ME = { id = "5P5gJ4ws"; hash = "1xyhyy7v99k4cvxq5b47jgra481m73zx025ylps0kjlwx7b90jkh"; };
+            */
+          }));
       };
     };
   };
@@ -64,50 +100,48 @@
       OnCalendar = "*-*-* *:00:00";
       RandomizedDelaySec = "10m";
     };
-    paths = [
-      "/persist/data/minecraft/escapetheminecraft/world"
-    ];
+    paths = [ "/persist/data/minecraft/escapetheminecraft/world" ];
     repository = "rest:http://192.168.242.103:8080/minecraft";
     user = "minecraft";
   };
 
   sops.secrets."minecraft/restic".owner = "minecraft";
 
-  /*nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [ "minecraft-20w20a" "minecraft-server" ];
+  /* nixpkgs.config.allowUnfreePredicate = pkg:
+       builtins.elem (lib.getName pkg) [ "minecraft-20w20a" "minecraft-server" ];
 
-  services.minecraft-server = {
-    enable = true;
-    dataDir = "/persist/data/minecraft/eljoy";
-    declarative = true;
-    eula = true;
-    package = pkgs.minecraft-20w20a;
-    openFirewall = true;
-    stopCommands = ''
-      echo "say This server is stopping in 3.."
-      sleep 1
-      echo "say 2.."
-      sleep 1
-      echo "say 1.."
-      sleep 1
-    '';
-    serverProperties = {
-      server-port = 25565;
-      max-players = 20;
-      motd = builtins.trace "TODO: set motd for minecraft"
-        "please provide a motd for me";
-      difficulty = "normal";
-      force-gamemode = true;
-      white-list = true;
-      #"rcon.password"
-    };
-    whitelist = {
-      kloenk = "c16d92b1-eca1-4387-93de-4f27de56ff03";
-      Drachensegler = "7698b19e-6cb9-4ce1-9a16-3f578263eea3";
-      Ennsn456 = "812e9708-f096-41bc-a64d-9251c211dd32";
-    };
-  };
-*/
+     services.minecraft-server = {
+       enable = true;
+       dataDir = "/persist/data/minecraft/eljoy";
+       declarative = true;
+       eula = true;
+       package = pkgs.minecraft-20w20a;
+       openFirewall = true;
+       stopCommands = ''
+         echo "say This server is stopping in 3.."
+         sleep 1
+         echo "say 2.."
+         sleep 1
+         echo "say 1.."
+         sleep 1
+       '';
+       serverProperties = {
+         server-port = 25565;
+         max-players = 20;
+         motd = builtins.trace "TODO: set motd for minecraft"
+           "please provide a motd for me";
+         difficulty = "normal";
+         force-gamemode = true;
+         white-list = true;
+         #"rcon.password"
+       };
+       whitelist = {
+         kloenk = "c16d92b1-eca1-4387-93de-4f27de56ff03";
+         Drachensegler = "7698b19e-6cb9-4ce1-9a16-3f578263eea3";
+         Ennsn456 = "812e9708-f096-41bc-a64d-9251c211dd32";
+       };
+     };
+  */
   /* systemd.services.minecraft-server.serviceConfig.StandardInput = "socket";
      systemd.services.minecraft-server.serviceConfig.StandardOutput = "journal";
 
