@@ -36,8 +36,8 @@
       package = pkgs.fabricServers.fabric-1_19;
 
       symlinks = {
-        config = {
-          "bluemap/core.conf" = pkgs.writeTextFile {
+        config = pkgs.linkFarmFromDrvs "config" [
+          (pkgs.writeTextFile {
             name = "bluemap/core.conf";
             text = ''
               accept-download: true
@@ -46,8 +46,8 @@
               scan-for-mod-resources: true
               metrics: false
             '';
-          };
-        };
+          })
+        ];
 
         mods = pkgs.linkFarmFromDrvs "mods" (map pkgs.fetchModrinthMod
           (builtins.attrValues {
