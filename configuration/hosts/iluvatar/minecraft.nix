@@ -6,7 +6,7 @@
     eula = true;
     dataDir = "/persist/data/minecraft/";
 
-    escapetheminecraft = {
+    servers.escapetheminecraft = {
       enable = true;
       openFirewall = true;
       whitelist = {
