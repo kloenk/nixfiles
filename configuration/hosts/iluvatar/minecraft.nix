@@ -33,8 +33,7 @@
       };
 
       package = pkgs.fabricServers.fabric-1_19;
-      jvmOpts =
-        "-Xmx2G -Xms1G";
+      jvmOpts = "-Xmx2G -Xms1G";
 
       symlinks = {
         mods = pkgs.linkFarmFromDrvs "mods" (map pkgs.fetchModrinthMod
@@ -103,23 +102,44 @@
     };
   };
 
-  /* services.nginx.virtualHosts."escapetheminecraft.kloenk.dev" = {
-       enableACME = true;
-       forceSSL = true;
+  services.nginx.virtualHosts."escapetheminecraft.kloenk.dev" = {
+    enableACME = true;
+    forceSSL = true;
 
-       root = ""
+    root = "/persist/data/minecraft/escapetheminecraft/bluemap/web";
 
-       locations = {
+    locations = {
+      "/".tryFiles = "$uri /index.php";
+      "~* /(maps/[^/]*/live/.*)".proxPass = "http://127.0.0.1:8100/$1";
+      "~ \\.php$" = {
+        extraConfig = ''
+          fastcgi_pass  unix:${config.services.phpfpm.pools.bluemap.socket};
+          fastcgi_index index.php;
+        '';
+      };
+    };
+  };
 
-       };
-     };
-  */
+  services.phpfpm.bluemap = {
+    user = "minecraft";
+    settings = {
+      pm = "dynamic";
+      "listen.owner" = config.services.nginx.user;
+      "pm.max_children" = 5;
+      "pm.start_servers" = 2;
+      "pm.min_spare_servers" = 1;
+      "pm.max_spare_servers" = 3;
+      "pm.max_requests" = 500;
+    };
+  };
 
   services.mysql.ensureDatabases = [ "minecraft_escapetheaverage" ];
   services.mysql.ensureUsers = [
     {
       name = "minecraft";
-      ensurePermissions = { "minecraft_escapetheaverage.*" = "ALL PRIVILEGES"; };
+      ensurePermissions = {
+        "minecraft_escapetheaverage.*" = "ALL PRIVILEGES";
+      };
     }
     {
       name = "nginx";
