@@ -33,7 +33,8 @@
       };
 
       package = pkgs.fabricServers.fabric-1_19;
-      jvmOpts = "-Xmx2G -Xms1G -classpath ./config/bluemap/postgresql-42.5.0.jar";
+      jvmOpts =
+        "-Xmx2G -Xms1G";
 
       symlinks = {
         mods = pkgs.linkFarmFromDrvs "mods" (map pkgs.fetchModrinthMod
@@ -102,26 +103,40 @@
     };
   };
 
-  /*services.nginx.virtualHosts."escapetheminecraft.kloenk.dev" = {
-    enableACME = true;
-    forceSSL = true;
+  /* services.nginx.virtualHosts."escapetheminecraft.kloenk.dev" = {
+       enableACME = true;
+       forceSSL = true;
 
-    root = ""
+       root = ""
 
-    locations = {
+       locations = {
 
-    };
-  };*/
+       };
+     };
+  */
 
-  services.postgresql = {
-    ensureDatabases = [ "minecraft_escapetheaverage" ];
-    ensureUsers = [
-      {
-        name = "minecraft";
-        ensurePermissions."DATABASE minecraft_escapetheaverage" = "ALL PRIVILEGES";
-      }
-    ];
-  };
+  services.mysql.ensureDatabases = [ "minecraft_escapetheaverage" ];
+  services.mysql.ensureUsers = [
+    {
+      name = "minecraft";
+      ensurePermissions = { "minecraft_escapetheaverage.*" = "ALL PRIVILEGES"; };
+    }
+    {
+      name = "nginx";
+      ensurePermissions = { "minecraft_escapetheaverage.*" = "SELECT"; };
+    }
+  ];
+
+  /* services.postgresql = {
+       ensureDatabases = [ "minecraft_escapetheaverage" ];
+       ensureUsers = [
+         {
+           name = "minecraft";
+           ensurePermissions."DATABASE minecraft_escapetheaverage" = "ALL PRIVILEGES";
+         }
+       ];
+     };
+  */
 
   services.restic.backups.minecraft = {
     passwordFile = config.sops.secrets."minecraft/restic".path;
