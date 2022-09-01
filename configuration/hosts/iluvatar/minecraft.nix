@@ -110,7 +110,7 @@
 
     locations = {
       "/".tryFiles = "$uri /index.php";
-      "~* /(maps/[^/]*/live/.*)".proxyPass = "http://127.0.0.1:8100/$1";
+      "~* /(maps/[^/\\s]*/live/.*)".proxyPass = "http://127.0.0.1:8100/$1";
       "~ \\.php$" = {
         extraConfig = ''
           fastcgi_pass  unix:${config.services.phpfpm.pools.bluemap.socket};
