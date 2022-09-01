@@ -38,6 +38,11 @@
       symlinks = {
         mods = pkgs.linkFarmFromDrvs "mods" (map pkgs.fetchModrinthMod
           (builtins.attrValues {
+            FabricAPI = {
+              id = "3KmOcp6b";
+              hash = "0cb35b8f42302001e82f1a08b7b9b70070dcc7488b43d08d93d1e2adafd6cdc7";
+            };
+
             Lithium = {
               id = "sIKhU9s4";
               hash =
