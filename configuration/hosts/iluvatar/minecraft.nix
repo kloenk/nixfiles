@@ -34,7 +34,7 @@
       symlinks = {
         mods = pkgs.linkFarmFromDrvs "mods" (map pkgs.fetchModrinthMod (builtins.attrValues {
           Lithium = { id = "sIKhU9s4"; hash = "fbc0efb6db294155c5705672731e9ca58ddc5b36fb75544e1693514ca8a282d6"; };
-          Phosphor = { id = "Di0Jgej2"; hash = "9e93a97d8fe149b6b8f782417432768c708704c6825ad2af3d280628698db895"; };
+          Phosphor = { id = "Di0Jgej2"; hash = "9e93a97d8fe149b6b8f782417432768c708704c6825ad2af3d280628698db895"; };
           Taterzens = { id = "TV31TyVu"; hash = "f88b4230b36dffcb7d522039c85290b1c4973d58fa4b15ca6d5598d6602b7e5d"; };
           TraderNPCs = { id = "gRw25odj"; hash = "c97cac2c6d363047c49d574c922e6e9f90412713f124716b352f23c8862656bd"; };
           C2ME = { id = "yU5A8Qx5"; hash = "528c8791f1c4ea538948689e410b2e6c8fe15951772f82558922257b4faf6696"; };
