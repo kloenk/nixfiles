@@ -10,6 +10,6 @@
     appendOnly = true;
     extraFlags = [ "--no-auth" ];
     prometheus = true;
-    listenAddress = "192.168.56.1:8080";
+    listenAddress = ":8080";
   };
 }
