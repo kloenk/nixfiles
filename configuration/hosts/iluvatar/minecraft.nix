@@ -112,6 +112,9 @@
       "/".tryFiles = "$uri /index.php";
       "~* /(maps/[^/\\s]*/live/.*)".proxyPass = "http://127.0.0.1:8100/$1";
       "~ \\.php$" = {
+        fastcgiParams = {
+          SCRIPT_FILENAME = "$document_root$fastcgi_script_name";
+        };
         extraConfig = ''
           fastcgi_pass  unix:${config.services.phpfpm.pools.bluemap.socket};
           fastcgi_index index.php;
