@@ -120,7 +120,7 @@
     };
   };
 
-  services.phpfpm.bluemap = {
+  services.phpfpm.pools.bluemap = {
     user = "minecraft";
     settings = {
       pm = "dynamic";
