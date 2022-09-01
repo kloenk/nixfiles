@@ -36,6 +36,21 @@
       package = pkgs.fabricServers.fabric-1_19;
 
       symlinks = {
+        config = {
+          bluemap = {
+            "core.conf" = pkgs.writeTextFile {
+              name = "core.conf";
+              text = ''
+                accept-download: true
+                data: "bluemap"
+                render-tnhread-count: 1
+                scan-for-mod-resources: true
+                metrics: false
+              '';
+            };
+          };
+        };
+
         mods = pkgs.linkFarmFromDrvs "mods" (map pkgs.fetchModrinthMod
           (builtins.attrValues {
             FabricAPI = {
