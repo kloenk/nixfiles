@@ -1,9 +1,8 @@
 { config, pkgs, lib, ... }:
 
 {
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "minecraft-server"
-  ];
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [ "minecraft-server" ];
 
   services.minecraft-servers = {
     enable = true;
@@ -36,24 +35,12 @@
       package = pkgs.fabricServers.fabric-1_19;
 
       symlinks = {
-        config = pkgs.linkFarmFromDrvs "config" [
-          (pkgs.writeTextFile {
-            name = "bluemap/core.conf";
-            text = ''
-              accept-download: true
-              data: "bluemap"
-              render-tnhread-count: 1
-              scan-for-mod-resources: true
-              metrics: false
-            '';
-          })
-        ];
-
         mods = pkgs.linkFarmFromDrvs "mods" (map pkgs.fetchModrinthMod
           (builtins.attrValues {
             FabricAPI = {
               id = "3KmOcp6b";
-              hash = "0cb35b8f42302001e82f1a08b7b9b70070dcc7488b43d08d93d1e2adafd6cdc7";
+              hash =
+                "0cb35b8f42302001e82f1a08b7b9b70070dcc7488b43d08d93d1e2adafd6cdc7";
             };
 
             Lithium = {
