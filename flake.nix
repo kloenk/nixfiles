@@ -96,6 +96,9 @@
     repo = "nix-flake";
   };
 
+  inputs.nix-minecraft.url = "github:Infinidoge/nix-minecraft";
+  inputs.nix-minecraft.inputs.nixpkgs.follows = "/nixpkgs";
+
 
   outputs = inputs@{ self, nixpkgs, nix, moodlepkgs, home-manager, mail-server
     , website, dns, grahamc-config, darwin, emacs, sops-nix, vika, kloenk-www, ... }:
@@ -109,6 +112,7 @@
         moodlepkgs.overlay
         emacs.overlay
         kloenk-www.overlay
+        inputs.nix-minecraft.overlay
       ];
 
       systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
@@ -197,6 +201,7 @@
             sops-nix.nixosModules.sops
             sourcesModule
 
+            inputs.nix-minecraft.nixosModules.minecraft-servers
             vika.nixosModules.matrix-sliding-sync-proxy
             {
               # disable home-manager manpage (breaks hydra see https://github.com/rycee/home-manager/issues/1262)
