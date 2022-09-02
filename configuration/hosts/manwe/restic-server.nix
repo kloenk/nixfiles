@@ -1,9 +1,8 @@
 { config, lib, ... }:
 
-
 {
   networking.firewall.interfaces.usee0.allowedTCPPorts = [ 8080 ];
-  networking.firewall.interfaces.wg00.allowedTCPPorts = [ 8080 ];
+  networking.firewall.interfaces.wg0.allowedTCPPorts = [ 8080 ];
 
   services.restic.server = {
     enable = true;
