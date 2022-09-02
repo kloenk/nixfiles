@@ -31,6 +31,8 @@
     sops
 
     sqlite-web
+
+    nixfmt
   ];
 
   services.epmd.enable = true;
