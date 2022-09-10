@@ -1,9 +1,6 @@
 { lib, pkgs, config, ... }:
 
-let
-  ports = {
-    ssh = 62957;
-  };
+let ports = { ssh = 62957; };
 in {
   fileSystems."/var/lib/machines/rbuild" = {
     device = "/persist/data/fedora-32";
@@ -23,15 +20,17 @@ in {
     description = "SSH socket for durin-rbuild systemd container";
     wantedBy = [ "sockets.target" ];
     listenStreams = [ (toString ports.ssh) ];
-    socketConfig = {
-      BindIPv6Only = "both";
-    };
+    socketConfig = { BindIPv6Only = "both"; };
   };
 
   systemd.services.rbuild = {
     description = "Airlink build systemd container";
     wantedBy = [ "machines.target" ];
-    wants = [ "modprobe@tun.service" "modprobe@loop.service" "modprobe@dm-mod.service" ];
+    wants = [
+      "modprobe@tun.service"
+      "modprobe@loop.service"
+      "modprobe@dm-mod.service"
+    ];
     partOf = [ "machines.target" ];
     before = [ "machines.target" ];
     after = [
@@ -52,7 +51,8 @@ in {
     ];
 
     serviceConfig = {
-      ExecStart = "${pkgs.systemd}/bin/systemd-nspawn --quiet --keep-unit --boot --network-veth -U --settings=override --machine=rbuild";
+      ExecStart =
+        "${pkgs.systemd}/bin/systemd-nspawn --quiet --keep-unit --boot --network-veth -U --settings=override --machine=rbuild --capability=CAP_MKNOD";
       KillMode = "mixed";
       Type = "notify";
       RestartForceExitStatus = "133";
