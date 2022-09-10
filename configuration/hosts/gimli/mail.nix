@@ -35,6 +35,7 @@
       "kloenk.de"
       "ad.kloenk.de"
       "drachensegler.kloenk.de"
+      "drachensegler.kloenk.dev"
       "burscheider-imkerverein.de"
       "kloenk.dev"
     ];
@@ -64,6 +65,10 @@
           "hostmaster@drachensegler.kloenk.de"
           "webmaster@drachensegler.kloenk.de"
           "abuse@drachensegler.kloenk.de"
+          "postmaster@drachensegler.kloenk.dev"
+          "hostmaster@drachensegler.kloenk.dev"
+          "webmaster@drachensegler.kloenk.dev"
+          "abuse@drachensegler.kloenk.dev"
           "postmaster@burscheider-imkerverein.de"
           "hostmaster@burscheider-imkerverein.de"
           "webmaster@burscheider-imkerverein.de"
@@ -164,7 +169,7 @@
           "autodesk@drachensegler.kloenk.de"
         ];
 
-        catchAll = [ "drachensegler.kloenk.de" ];
+        catchAll = [ "drachensegler.kloenk.dev" "drachensegler.kloenk.de" ];
       };
 
       "git@kloenk.de" = {
