@@ -35,7 +35,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.dev.";
       adminEmail = "hostmaster.kloenk.dev."; # TODO: change mail
-      serial = 2021010138;
+      serial = 2021010139;
       refresh = 600;
       expire = 604800;
       minimum = 600;
@@ -43,14 +43,17 @@ let
 
     NS = [ "ns2.he.net." "ns4.he.net." "ns3.he.net." "ns5.he.net." ];
 
-    /*A = map (ttl 600) [ (a "195.39.247.6") ];
+    /* A = map (ttl 600) [ (a "195.39.247.6") ];
 
-    AAAA = map (ttl 600) [ (aaaa "2a0f:4ac0::6") ];*/
+       AAAA = map (ttl 600) [ (aaaa "2a0f:4ac0::6") ];
+    */
     A = map (ttl 600) [ (a "195.39.247.187") ];
     AAAA = map (ttl 600) [ (aaaa "2a0f:4ac0:0:1::548") ];
     #CNAME = [ "iluvatar.kloenk.dev." ];
 
-    TXT = spfKloenk ++ [ "google-site-verification=Zi_9C2hSucoEJhLD78ijxMaybtjscN0D3t5TNpoeg6Y" ];
+    TXT = spfKloenk ++ [
+      "google-site-verification=Zi_9C2hSucoEJhLD78ijxMaybtjscN0D3t5TNpoeg6Y"
+    ];
     MX = mxKloenk;
     CAA = letsEncrypt config.security.acme.email;
 
@@ -68,15 +71,16 @@ let
       cache = iluvatar;
 
       # SourceHut
-      /*todo = iluvatar;
-      paste = iluvatar;
-      meta = iluvatar;
-      man = iluvatar;
-      lists = iluvatar;
-      hub = iluvatar;
-      hg = iluvatar;
-      dispatch = iluvatar;
-      builds = iluvatar;*/
+      /* todo = iluvatar;
+         paste = iluvatar;
+         meta = iluvatar;
+         man = iluvatar;
+         lists = iluvatar;
+         hub = iluvatar;
+         hg = iluvatar;
+         dispatch = iluvatar;
+         builds = iluvatar;
+      */
 
       gerrit = iluvatar;
       git.CNAME = iluvatar.CNAME;
@@ -107,12 +111,9 @@ let
       m-sandbox = manwe;
       unifi = manwe;
 
-      matrix = gimli // {
-        subdomains.api = gimli;
-      };
+      matrix = gimli // { subdomains.api = gimli; };
       stream = gimli;
       mail = gimli;
-
 
       knuddel-usee.CNAME = [ "stream.unterbachersee.de." ];
       moodle-usee.CNAME = [ "segelschule.unterbachersee.de." ];
@@ -131,14 +132,15 @@ let
         (txt ''
           v=DKIM1; k=rsa; " "p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC5KMotmbfWWCLUgFeUc87fO2Heie+Ye1VPELqGhX60br1VyMnhzCc0uR1Hdjt9ts6ykemyIBBHwRa/GfJnyQq+u6nk0v9kDuNs2E3EftcHpYA1E0LCPs5Wl6d2q50IwKt609XiZWok+C/0hnG7gjYTzI6T2a6vhL7hoQfTpLZJCQIDAQAB'')
       ];
+      drachensegler.subdomains._domainkey.subdomains.mail.TXT = [
+        (txt ''
+          v=DKIM1; k=rsa; " "p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCl1K0nT6nViifArMweC+/SHsekNCGuTOaXvkGVabr+aAC/56d2brxocLoVeVBDVMdY6PkQ9BCNMYVWPuw1n78LXH+dRoyezulp5124scitz2daGQT6MaeWAGYKJHw8aZQj6c5ahxJJHEOkGx6/o1E2UO3LvKpXxxldyAoGnHe7MwIDAQAB'')
+      ];
 
       satisfactory = hostTTL 600 "81.169.152.161" null;
 
-      rssr.subdomains = {
-        engel = manwe;
-      };
+      rssr.subdomains = { engel = manwe; };
     };
   };
 
-in
-  dns.writeZone "kloenk.dev" zone
+in dns.writeZone "kloenk.dev" zone
