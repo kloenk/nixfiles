@@ -35,7 +35,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.dev.";
       adminEmail = "hostmaster.kloenk.dev."; # TODO: change mail
-      serial = 2021010137;
+      serial = 2021010138;
       refresh = 600;
       expire = 604800;
       minimum = 600;
@@ -85,6 +85,10 @@ let
       git.subdomains._dmarc.TXT = dmarc;
 
       _dmarc.TXT = dmarc;
+
+      drachensegler.MX = mxKloenk;
+      drachensegler.TXT = spfKloenk;
+      drachensegler.subdomains._dmarc.TXT = dmarc;
 
       bitwarden = iluvatar;
       play = gimli;
