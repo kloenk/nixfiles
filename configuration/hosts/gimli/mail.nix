@@ -161,6 +161,8 @@
           "tjaard@burscheider-imkerverein.de"
           "drachensegler@kloenk.de"
           "dlrg@drachensegler.kloenk.de"
+          "dlrg.jugend@drachensegler.kloenk.de"
+          "dlrg.jugend@drachensegler.kloenk.dev"
           "tjaard@drachensegler.kloenk.de"
           "tjaard@kloenk.de"
           "schule@drachensegler.kloenk.de"
