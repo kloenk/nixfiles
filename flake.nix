@@ -19,7 +19,7 @@
     type = "github";
     owner = "nixos";
     repo = "nix";
-    inputs.nixpkgs.follows = "/nixpkgs"; # broken
+    #inputs.nixpkgs.follows = "/nixpkgs"; # broken
   };
 
   inputs.moodlepkgs = {
@@ -105,7 +105,10 @@
     let
 
       overlayCombined = system: [
-        nix.overlays.default
+        #nix.overlays.default
+        (final: prev: {
+          nix = nix.packages.${system}.nix;
+        })
         #home-manager.overlay
         self.overlay
         (overlays system)

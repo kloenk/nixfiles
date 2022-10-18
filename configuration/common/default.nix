@@ -29,17 +29,6 @@
 
   system.autoUpgrade.flake = "kloenk";
 
-
-  nix.settings.trusted-users = [ "root" "@wheel" "kloenk" ];
-  # binary cache
-  nix.settings.trusted-public-keys = [
-    "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-  ];
-  nix.settings.substituters = [
-  #  "https://nix-community.cachix.org/"
-  ];
-
-
   # TODO: what works in common?
   networking.domain = lib.mkDefault "kloenk.de";
   networking.useNetworkd = lib.mkDefault true;

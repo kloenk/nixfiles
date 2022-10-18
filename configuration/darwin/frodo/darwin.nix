@@ -24,6 +24,8 @@
     elixir
     erlang
 
+    go
+
     # emacs language servers
     elixir_ls
     irony-server
