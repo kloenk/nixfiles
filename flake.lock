@@ -325,11 +325,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1645786407,
-        "narHash": "sha256-7BJwjs1zGp32tJUP/wPYwy++lTRAPCTvMzTyyt0Ao/o=",
+        "lastModified": 1666088339,
+        "narHash": "sha256-NyQcyIaPQiV0lEy3qvla1eu4ZU0SAFuv8ghQOScMPQM=",
         "owner": "kloenk",
         "repo": "moodlepkgs",
-        "rev": "392fb1cbe0408daa27e62edaea5ff224fea72e5a",
+        "rev": "e4d40bbb460ca80b047137b82b770b3732b8bd9f",
         "type": "github"
       },
       "original": {
