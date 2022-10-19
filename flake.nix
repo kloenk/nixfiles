@@ -123,6 +123,7 @@
 
         defaults = { pkgs, ... }: {
           imports = [ ./configuration/common ];
+          nixpkgs.system = "x86_64-linux";
 
           deployment.buildOnTarget = true;
         };
