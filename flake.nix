@@ -119,11 +119,10 @@
 
     in {
       colmena = {
-        meta = { nixpkgs = nixpkgs; };
+        meta = { nixpkgs = import nixpkgs { system = "x86_64-linux"; }; };
 
         defaults = { pkgs, ... }: {
           imports = [ ./configuration/common ];
-          nixpkgs.system = "x86_64-linux";
 
           deployment.buildOnTarget = true;
         };
