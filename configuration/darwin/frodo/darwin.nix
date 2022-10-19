@@ -23,6 +23,9 @@
   users.users.kloenk.packages = with pkgs; [
     elixir
     erlang
+    pkg-config
+    gh
+    neomutt
 
     go
 
