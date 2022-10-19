@@ -122,7 +122,15 @@
         meta = { nixpkgs = import nixpkgs { system = "x86_64-linux"; }; };
 
         defaults = { pkgs, ... }: {
+          modules = [
+            home-manager.nixosModules.home-manager
+            sops-nix.nixosModules.sops
+            inputs.nix-minecraft.nixosModules.minecraft-servers
+            vika.nixosModules.matrix-sliding-sync-proxy
+          ];
           imports = [ ./configuration/common ];
+          # disable home-manager manpage (breaks hydra see https://github.com/rycee/home-manager/issues/1262)
+          home-manager.users.kloenk.manual.manpages.enable = false;
 
           deployment.buildOnTarget = true;
         };
