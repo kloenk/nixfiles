@@ -8,7 +8,7 @@
     ./bitwarden.nix
     ./postgres.nix
     ./website.nix
-    ./minecraft.nix
+    #./minecraft.nix
     #./restic.nix
 
     ./pleroma
