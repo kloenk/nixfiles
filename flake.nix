@@ -77,8 +77,8 @@
   inputs.nix-minecraft.url = "github:Infinidoge/nix-minecraft";
   inputs.nix-minecraft.inputs.nixpkgs.follows = "/nixpkgs";
 
-  outputs = inputs@{ self, nixpkgs, nix, moodlepkgs, mail-server, kloenk-www
-    , dns, darwin, sops-nix, vika, ... }:
+  outputs = inputs@{ self, nixpkgs, nix, home-manager, moodlepkgs, mail-server
+    , kloenk-www, dns, darwin, sops-nix, vika, ... }:
     let
       overlayCombined = system: [
         #nix.overlays.default
