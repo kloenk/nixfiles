@@ -25,9 +25,12 @@
     erlang
     pkg-config
     gh
+    glab
     neomutt
-
     go
+
+    wireguard-tools
+    wireguard-go
 
     # emacs language servers
     elixir_ls
