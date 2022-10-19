@@ -1,5 +1,5 @@
 {
-  description = "Kloenk's Nixos configuration";
+  description = "Kloenk's NixOS configuration";
 
   inputs.home-manager = {
     type = "github";
@@ -36,15 +36,6 @@
     ref = "master";
   };
 
-  inputs.website = {
-    type = "gitlab";
-    owner = "kloenk";
-    repo = "website";
-    host = "cyberchaos.dev";
-    flake = false;
-    #ref = "lexbeserious";
-  };
-
   inputs.kloenk-www = {
     type = "gitlab";
     owner = "kloenk";
@@ -60,25 +51,12 @@
     inputs.nixpkgs.follows = "/nixpkgs";
   };
 
-  inputs.grahamc-config = {
-    type = "github";
-    owner = "grahamc";
-    repo = "nixos-config";
-    flake = false;
-  };
-
-  inputs.emacs = {
-    type = "github";
-    owner = "nix-community";
-    repo = "emacs-overlay";
-  };
-
   inputs.flake-compat = {
     url = "github:edolstra/flake-compat";
     flake = false;
   };
 
-  inputs.darwin ={
+  inputs.darwin = {
     type = "github";
     owner = "lnl7";
     repo = "nix-darwin";
@@ -99,26 +77,21 @@
   inputs.nix-minecraft.url = "github:Infinidoge/nix-minecraft";
   inputs.nix-minecraft.inputs.nixpkgs.follows = "/nixpkgs";
 
-
-  outputs = inputs@{ self, nixpkgs, nix, moodlepkgs, home-manager, mail-server
-    , website, dns, grahamc-config, darwin, emacs, sops-nix, vika, kloenk-www, ... }:
+  outputs = inputs@{ self, nixpkgs, nix, moodlepkgs, mail-server, kloenk-www
+    , dns, darwin, sops-nix, vika, ... }:
     let
-
       overlayCombined = system: [
         #nix.overlays.default
-        (final: prev: {
-          nix = nix.packages.${system}.nix;
-        })
+        (final: prev: { nix = nix.packages.${system}.nix; })
         #home-manager.overlay
         self.overlay
-        (overlays system)
         moodlepkgs.overlay
-        emacs.overlay
         kloenk-www.overlay
         inputs.nix-minecraft.overlay
       ];
 
-      systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
+      systems =
+        [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
 
       forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f system);
 
@@ -130,142 +103,36 @@
         });
 
       # patche modules
-      patchModule = system: {
-        disabledModules =
-          [
-            "services/games/minecraft-server.nix"
-            "tasks/auto-upgrade.nix"
-            "services/web-apps/wordpress.nix"
-            "services/web-apps/restya-board.nix"
-          ];
-        imports = [
-          self.nixosModules.autoUpgrade
-          self.nixosModules.restya-board
-        ];
-        nixpkgs.overlays = [ (overlays system) nix.overlays.default ];
-      };
-
-      overlays = system: final: prev: {
-        utillinuxMinimal = final.util-linuxMinimal;
-      };
-
-      # evals
-      hosts = import ./configuration/hosts { };
-      nixosHosts = nixpkgs.lib.filterAttrs
-        (name: host: if host ? nixos then host.nixos else false) hosts;
-
-      darwinHosts = nixpkgs.lib.filterAttrs
-        (name: host: if host ? darwin then host.darwin else false) (import ./configuration/darwin {});
-
-      sourcesModule = {
-        _file = ./flake.nix;
-        _module.args.inputs = inputs;
-      };
+      /* patchModule = system: {
+           disabledModules =
+             [
+               "services/games/minecraft-server.nix"
+               "tasks/auto-upgrade.nix"
+               "services/web-apps/wordpress.nix"
+               "services/web-apps/restya-board.nix"
+             ];
+           imports = [
+           ];
+           nixpkgs.overlays = [ (overlays system) nix.overlays.default ];
+         };
+      */
 
     in {
-      overlay = final: prev:
-        let
-          grahamc = (import (grahamc-config + "/packages/overlay.nix") {
-            secrets = null;
-          } final prev);
-        in ((import ./pkgs/overlay.nix inputs final prev) // {
-          inherit (grahamc)
-            nixpkgs-maintainer-tools sway-cycle-workspace mutate wl-freeze
-            resholve abathur-resholved;
-        } // { });
+      colmena = {
+        meta = { nixpkgs = nixpkgs; };
 
-      legacyPackages = forAllSystems
-        (system: nixpkgsFor.${system});
+        defaults = { pkgs, ... }: {
+          imports = [ ./configuration/common ];
 
+          deployment.buildOnTarget = true;
+        };
 
-      packages = forAllSystems (system: {
-        inherit (nixpkgsFor.${system}) home-manager wallpapers;
-      });
+        thrain = {
+          deployment.allowLocalDeployment = true;
+          deployment.targetHost = null;
 
-      nixosConfigurations = (nixpkgs.lib.mapAttrs (name: host:
-        (nixpkgs.lib.nixosSystem rec {
-          system = host.system;
-          modules = [
-            {
-              nixpkgs.overlays = [
-                #home-manager.overlay
-                self.overlay
-              ] ++ (overlayCombined host.system);
-            }
-            nixpkgs.nixosModules.notDetected
-            home-manager.nixosModules.home-manager
-            (import (./configuration + "/hosts/${name}/configuration.nix"))
-            #self.nixosModules.secrets
-            self.nixosModules.nftables
-            self.nixosModules.deluge2
-            self.nixosModules.firefox
-            self.nixosModules.wordpress
-            self.nixosModules.transient
-            sops-nix.nixosModules.sops
-            sourcesModule
-
-            inputs.nix-minecraft.nixosModules.minecraft-servers
-            vika.nixosModules.matrix-sliding-sync-proxy
-            {
-              # disable home-manager manpage (breaks hydra see https://github.com/rycee/home-manager/issues/1262)
-              home-manager.users.kloenk.manual.manpages.enable = false;
-              #home-manager.users.pbb.manual.manpage.enable = false;
-            }
-            (patchModule host.system)
-          ] ++ (if (if (host ? vm) then host.vm else false) then
-            (nixpkgs.lib.singleton
-              (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix")))
-          else
-            [ ]) ++ (if (if (host ? mail) then host.mail else false) then
-              [ mail-server.nixosModules.mailserver ]
-            else
-              [ ]);
-        })) nixosHosts);
-
-      darwinConfigurations = (nixpkgs.lib.mapAttrs (name: host:
-        (darwin.lib.darwinSystem {
-          system = host.system;
-          modules = [
-            {
-              nixpkgs.overlays = [
-                #home-manager.overlay
-                self.overlay
-              ] ++ (overlayCombined host.system);
-            }
-            #home-manager.nixosModules.home-manager
-            (import (./configuration + "/darwin/${name}/darwin.nix"))
-            self.darwinModules.epmd
-          ];
-        })) darwinHosts);
-
-      nixosModules = {
-        ferm2 = import ./modules/ferm2;
-        deluge2 = import ./modules/deluge.nix;
-        autoUpgrade = import ./modules/upgrade;
-        firefox = import ./modules/firefox;
-        #secrets = import ./modules/secrets;
-        transient = import ./modules/transient;
-        nftables = import ./modules/nftables;
-
-        restya-board = import ./modules/restya-board;
-
-        wordpress = import ./modules/wordpress.nix;
-      };
-
-      darwinModules = {
-        epmd = import ./modules/darwin/epmd;
-      };
-
-      # hydra jobs
-      hydraJobs = {
-        /*configurations = let
-          lib = nixpkgs.lib;
-         in lib.mapAttrs' (name: config:
-          lib.nameValuePair name config.config.system.build.toplevel)
-         self.nixosConfigurations;*/
-        darwinConfigurations = self.darwinConfigurations;
-        packages = self.packages;
+          imports = [ ./configuration/hosts/thrain ];
+        };
       };
     };
 }
-
