@@ -84,45 +84,17 @@
         };
       }
 
-      { # laptop
-        wireguardPeerConfig = {
-          AllowedIPs = [ "192.168.242.203/32" ];
-          PublicKey = "HZ4+ZZ7OOJj7cidpUGtvzJEFr9tF3sb8zFDbELjsYjo=";
-          PersistentKeepalive = 21;
-        };
-      }
-      { # mbp
+      { # frodo
         wireguardPeerConfig = {
           AllowedIPs = [ "192.168.242.201/32" ];
-          PublicKey = "5dwOBGEIencNKOu5NzL9R7q+CxPIbJ8c9CzVPma4g3U=";
+          PublicKey = "SpO+SIv/XzgKCuWH3SN1qNknZ+X4HWf48SQNl6Gw+SM=";
           PersistentKeepalive = 21;
         };
       }
-      { # iphone
+      { # sting
         wireguardPeerConfig = {
           AllowedIPs = [ "192.168.242.210/32" ];
           PublicKey = "iSYB99dCUvYhHAz5HaPSzhXYPyyntOtiucrDUBFVvBE=";
-          PersistentKeepalive = 21;
-        };
-      }
-      { # old phone
-        wireguardPeerConfig = {
-          AllowedIPs = [ "192.168.242.211/32" ];
-          PublicKey = "w3UoZ8XT7K9CVPnvXCZ3SVAkiaWXUFOub9i2EFyGmyg=";
-          PersistentKeepalive = 21;
-        };
-      }
-      { # satisfactory server
-        wireguardPeerConfig = {
-          AllowedIPs = [ "192.168.242.205/32" ];
-          PublicKey = "s7ZsEcUKkyf6sxL37+oL0YJAVmAkugaJfpii6pWRYlk=";
-          PersistentKeepalive = 21;
-        };
-      }
-      { # windoof
-        wireguardPeerConfig = {
-          AllowedIPs = [ "192.168.242.206/32" ];
-          PublicKey = "o2LgVxxvZIeEU9An4G5UTLL/WF/fpKcwchvD3rP+ln0=";
           PersistentKeepalive = 21;
         };
       }
