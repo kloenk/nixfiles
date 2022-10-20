@@ -1,4 +1,4 @@
-{ config, lib, inputs, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   commonHeaders = lib.concatStringsSep "\n"

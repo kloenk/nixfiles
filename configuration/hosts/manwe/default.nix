@@ -25,7 +25,6 @@
 
     ../../common/telegraf.nix
     ../../default.nix
-    ../../common
   ];
 
   # vm connection
