@@ -21,8 +21,7 @@
 
     ../../common/telegraf.nix
     ../../default.nix
-    ../../common
-    (import ../../common/schluempfli.nix { extraGroups = [ "wheel" ]; })
+    (import ../../common/schluempfli.nix { extraGroups = [ ]; })
   ];
 
   # vm connection

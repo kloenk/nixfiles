@@ -5,8 +5,6 @@
     ./hardware-configuration.nix
 
     ./containers
-
-    ../../common
   ];
 
   # FIME: remove
@@ -102,6 +100,7 @@
     onShutdown = "shutdown";
     qemu.swtpm.enable = true;
   };
+  security.polkit.enable = true;
 
   fileSystems."/var/lib/libvirt" = {
     device = "/persist/data/libvirt";
