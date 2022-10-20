@@ -182,20 +182,32 @@
           deployment.targetHost = "iluvatar.kloenk.dev";
           deployment.tags = [ "salat" "DUS6" "remote" ];
 
-          imports = [ ./configuration/hosts/iluvatar ];
+          imports = [
+            ./configuration/hosts/iluvatar
+            (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix"))
+          ];
         };
         gimli = { pkgs, nodes, ... }: {
           deployment.targetHost = "gimli.kloenk.dev";
           deployment.tags = [ "salat" "DUS6" "remote" ];
 
-          imports =
-            [ ./configuration/hosts/gimli mail-server.nixosModules.mailserver ];
+          imports = [
+            ./configuration/hosts/gimli
+            mail-server.nixosModules.mailserver
+            (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix"))
+          ];
         };
         manwe = { pkgs, nodes, ... }: {
           deployment.targetHost = "manwe.kloenk.dev";
           deployment.tags = [ "DUS6" "pve" "remote" ];
 
-          imports = [ ./configuration/hosts/iluvatar ];
+          imports = [
+            ./configuration/hosts/manwe
+            (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix"))
+          ];
+
+          # ZFS kernel
+          nixpkgs.config.allowBroken = true;
         };
 
         # USee
@@ -203,7 +215,10 @@
           deployment.targetHost = "moodle-usee.kloenk.dev";
           deployment.tags = [ "usee" "remote" ];
 
-          imports = [ ./configuration/hosts/iluvatar ];
+          imports = [
+            ./configuration/hosts/moodle-usee
+            (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix"))
+          ];
         };
 
         # Pony
@@ -213,6 +228,7 @@
 
           imports = [ ./configuration/hosts/thrain ];
 
+          # ZFS kernel
           nixpkgs.config.allowBroken = true;
         };
         durin = { pkgs, nodes, ... }: {

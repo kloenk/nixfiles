@@ -5,8 +5,6 @@
     ./hardware-configuration.nix
 
     ./containers
-
-    ../../common
   ];
 
   # FIME: remove
