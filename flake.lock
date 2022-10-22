@@ -365,11 +365,11 @@
       },
       "locked": {
         "host": "cyberchaos.dev",
-        "lastModified": 1666439837,
-        "narHash": "sha256-/1KoRBZXh/3Lbq3NldWLh+f4l2W7Cig0Wn7C3YZ8kKY=",
+        "lastModified": 1666476771,
+        "narHash": "sha256-r1sh3PmfXhvK6lXhH3lqjlGe+jTO9Z0fQ/VftVZusU0=",
         "owner": "escapethegit",
         "repo": "jlly_dc",
-        "rev": "a118fdf34885ef07ae9e078140c098baffa483c3",
+        "rev": "f47ffc2ac0ab256f2631c7a8b499b78a8cf2fb44",
         "type": "gitlab"
       },
       "original": {
