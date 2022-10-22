@@ -16,6 +16,8 @@
     bat
     skim
 
+    colmena
+
     gnupg
     pinentry_mac
   ];

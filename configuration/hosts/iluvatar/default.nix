@@ -8,8 +8,11 @@
     ./bitwarden.nix
     ./postgres.nix
     ./website.nix
-    #./minecraft.nix
     #./restic.nix
+
+    # Escape service
+    #./minecraft.nix
+    ./jlly.nix
 
     ./pleroma
     ./cgit.nix

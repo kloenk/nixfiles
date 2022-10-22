@@ -79,11 +79,16 @@
     inputs.nixpkgs.follows = "/nixpkgs";
   };
 
+  inputs.jlly = {
+    url = "gitlab:escapethegit/jlly_dc?host=cyberchaos.dev";
+    inputs.nixpkgs.follows = "/nixpkgs";
+  };
+
   inputs.nix-minecraft.url = "github:Infinidoge/nix-minecraft";
   inputs.nix-minecraft.inputs.nixpkgs.follows = "/nixpkgs";
 
   outputs = inputs@{ self, nixpkgs, nix, home-manager, moodlepkgs, mail-server
-    , kloenk-www, dns, darwin, sops-nix, vika, colmena, ... }:
+    , kloenk-www, dns, darwin, sops-nix, vika, colmena, jlly, ... }:
     let
       overlayCombined = system: [
         #nix.overlays.default
@@ -94,6 +99,7 @@
         kloenk-www.overlay
         inputs.nix-minecraft.overlay
         colmena.overlay
+        jlly.overlays.default
       ];
 
       systems =
@@ -159,6 +165,7 @@
             sops-nix.nixosModules.sops
             inputs.nix-minecraft.nixosModules.minecraft-servers
             vika.nixosModules.matrix-sliding-sync-proxy
+            jlly.nixosModules.default
 
             self.nixosModules.nftables
             self.nixosModules.deluge2
