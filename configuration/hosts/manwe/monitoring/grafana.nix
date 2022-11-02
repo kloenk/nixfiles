@@ -14,9 +14,9 @@ let
   '';
 in {
   systemd.services.grafana.after = [ "prometheus.service" ];
-  systemd.services.grafana.serviceConfig.EnvironmentFile = [ config.sops.secrets."monitoring/grafana/env".path ];
+  systemd.services.grafana.serviceConfig.EnvironmentFile =
+    [ config.sops.secrets."monitoring/grafana/env".path ];
   sops.secrets."monitoring/grafana/env".owner = "root";
-
 
   services.nginx.virtualHosts."grafana.kloenk.dev" = {
     locations."/".proxyPass = "http://127.0.0.1:3001/";
@@ -32,7 +32,6 @@ in {
     }];
   };
 
-
   services.grafana = {
     enable = true;
     auth.anonymous.enable = true;
@@ -43,19 +42,22 @@ in {
       enable = true;
       dashboards = [{ options.path = ./dashboards; }];
     };
-    extraOptions = {
-      AUTH_GITLAB_ENABLED = "true";
-      AUTH_GITLAB_TLS_SKIP_VERIFY_INSECURE = "false";
-      AUTH_GITLAB_SCOPES = "read_user";
-      AUTH_GITLAB_AUTH_URL = "https://cyberchaos.dev/oauth/authorize";
-      AUTH_GITLAB_TOKEN_URL = "https://cyberchaos.dev/oauth/token";
-      AUTH_GITLAB_API_URL = "https://cyberchaos.dev/api/v4";
-      AUTH_GITLAB_ALLOW_SIGN_UP = "true";
-      AUTH_GITLAB_ROLE_ATTRIBUTE_PATH = "is_admin && 'Admin' || 'Viewer'";
+    settings = {
+      database = {
+        type = "postgres";
+        host = "/run/postgresql";
+        user = "grafana";
+      };
 
-      DATABASE_TYPE = "postgres";
-      DATABASE_HOST = "/run/postgresql";
-      DATABASE_USER = "grafana";
+      "auth.gitlab" = {
+        enabled = true;
+        scopes = "read_user";
+        auth_url = "https://cyberchaos.dev/oauth/authorize";
+        token_url = "https://cyberchaos.dev/oauth/token";
+        api_url = "https://cyberchaos.dev/api/v4";
+        allow_sign_up = true;
+        role_attribute_path = "is_admin && 'Admin' || 'Viewer'";
+      };
     };
   };
 }
