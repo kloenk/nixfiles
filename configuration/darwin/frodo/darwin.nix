@@ -28,6 +28,7 @@
     glab
     neomutt
     go
+    nil
 
     wireguard-tools
     wireguard-go

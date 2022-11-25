@@ -13,6 +13,7 @@
     # Escape service
     #./minecraft.nix
     ./jlly.nix
+    ./fleet_bot.nix
 
     ./pleroma
     ./cgit.nix

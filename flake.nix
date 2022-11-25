@@ -84,11 +84,16 @@
     inputs.nixpkgs.follows = "/nixpkgs";
   };
 
+  inputs.fleet_bot = {
+    url = "github:fleetyards/fleet_bot";
+    inputs.nixpks.follows = "/nixpkgs";
+  };
+
   inputs.nix-minecraft.url = "github:Infinidoge/nix-minecraft";
   inputs.nix-minecraft.inputs.nixpkgs.follows = "/nixpkgs";
 
   outputs = inputs@{ self, nixpkgs, nix, home-manager, moodlepkgs, mail-server
-    , kloenk-www, dns, darwin, sops-nix, vika, colmena, jlly, ... }:
+    , kloenk-www, dns, darwin, sops-nix, vika, colmena, jlly, fleet_bot, ... }:
     let
       overlayCombined = system: [
         #nix.overlays.default
@@ -100,6 +105,7 @@
         inputs.nix-minecraft.overlay
         colmena.overlay
         jlly.overlays.default
+        fleet_bot.overlays.default
       ];
 
       systems =
@@ -166,10 +172,11 @@
             inputs.nix-minecraft.nixosModules.minecraft-servers
             vika.nixosModules.matrix-sliding-sync-proxy
             jlly.nixosModules.default
+            fleet_bot.nixosModules.default
 
             self.nixosModules.nftables
             self.nixosModules.deluge2
-            self.nixosModules.firefox
+            #self.nixosModules.firefox
             self.nixosModules.wordpress
             self.nixosModules.transient
           ];
@@ -250,7 +257,7 @@
         ferm2 = import ./modules/ferm2;
         deluge2 = import ./modules/deluge.nix;
         autoUpgrade = import ./modules/upgrade;
-        firefox = import ./modules/firefox;
+        #firefox = import ./modules/firefox;
         #secrets = import ./modules/secrets;
         transient = import ./modules/transient;
         nftables = import ./modules/nftables;
