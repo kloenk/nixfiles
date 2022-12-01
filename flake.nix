@@ -89,6 +89,10 @@
     inputs.nixpks.follows = "/nixpkgs";
   };
 
+  inputs.akkoma-nixpkgs = {
+    url = "github:illdefined/nixpkgs/akkoma";
+  };
+
   inputs.nix-minecraft.url = "github:Infinidoge/nix-minecraft";
   inputs.nix-minecraft.inputs.nixpkgs.follows = "/nixpkgs";
 
@@ -106,6 +110,13 @@
         colmena.overlay
         jlly.overlays.default
         fleet_bot.overlays.default
+        (final: prev: {
+          akkoma = final.callPackage (inputs.akkoma-nixpkgs + "/pkgs/servers/akkoma") { };
+          akkoma-frontends = nixpkgs.lib.recurseIntoAttrs {
+            pleroma-fe = final.callPackage (inputs.akkoma-nixpkgs + "/pkgs/servers/akkoma/pleroma-fe") { };
+            admin-fe = final.callPackage (inputs.akkoma-nixpkgs + "/pkgs/servers/akkoma/admin-fe") { };
+          };
+        })
       ];
 
       systems =
@@ -179,6 +190,7 @@
             #self.nixosModules.firefox
             self.nixosModules.wordpress
             self.nixosModules.transient
+            (inputs.akkoma-nixpkgs + "/nixos/modules/services/web-apps/akkoma.nix")
           ];
           # disable home-manager manpage (breaks hydra see https://github.com/rycee/home-manager/issues/1262)
           home-manager.users.kloenk.manual.manpages.enable = false;

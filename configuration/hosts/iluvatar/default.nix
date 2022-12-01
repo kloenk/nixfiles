@@ -15,7 +15,8 @@
     ./jlly.nix
     ./fleet_bot.nix
 
-    ./pleroma
+    #./pleroma
+    ./akkoma.nix
     ./cgit.nix
     #./gerrit.nix
 

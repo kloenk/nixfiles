@@ -12,7 +12,7 @@ in {
   };
 
   services.pleroma = {
-    enable = true;
+    enable = false;
     configs = [ (lib.fileContents ./config.exs) ];
     secretConfigFile = config.sops.secrets."pleroma/config".path;
   };

@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "akkoma-nixpkgs": {
+      "locked": {
+        "lastModified": 1669714515,
+        "narHash": "sha256-CqB57KZwtjDjj15gPJD8AUqcoXSFesLoBFNeieHPPZ4=",
+        "owner": "illdefined",
+        "repo": "nixpkgs",
+        "rev": "ce27dca1d2b810a27e8c406c62d77fc16a176761",
+        "type": "github"
+      },
+      "original": {
+        "owner": "illdefined",
+        "ref": "akkoma",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "blobs": {
       "flake": false,
       "locked": {
@@ -914,6 +930,7 @@
     },
     "root": {
       "inputs": {
+        "akkoma-nixpkgs": "akkoma-nixpkgs",
         "colmena": "colmena",
         "darwin": "darwin",
         "dns": "dns",
