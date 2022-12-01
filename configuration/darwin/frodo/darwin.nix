@@ -29,6 +29,7 @@
     neomutt
     go
     nil
+    chatterino2
 
     wireguard-tools
     wireguard-go
