@@ -357,11 +357,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1669416999,
-        "narHash": "sha256-D9ddg6H3hh26GXSfoonBrpnbqFVt/IgZkzjzjjIzyI8=",
+        "lastModified": 1670240510,
+        "narHash": "sha256-4rmKzzhYGQwuzxTg6gxC9myFy1yZGik14PX5CVeeLuQ=",
         "owner": "fleetyards",
         "repo": "fleet_bot",
-        "rev": "ce7ef0a4b7291ea563671f65352d3ad7ad959ab8",
+        "rev": "8ce532eade45995343a1c9885640e5adfcdbcc8f",
         "type": "github"
       },
       "original": {
