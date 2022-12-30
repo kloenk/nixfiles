@@ -149,6 +149,16 @@
       packages =
         forAllSystems (system: { inherit (nixpkgsFor.${system}) wallpapers; });
 
+      nixosConfigurations = {
+        iluvatar = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { nodes = self.colmena; pkgs = self.colmena.meta.nixpkgs; };
+          modules = [
+            self.colmena.defaults
+            self.colmena.iluvatar
+          ];
+        };
+      };
       colmena = {
         meta = {
           nixpkgs = import nixpkgs {
@@ -194,7 +204,7 @@
         # DUS 6
         iluvatar = { pkgs, nodes, ... }: {
           deployment.targetHost = "iluvatar.kloenk.dev";
-          deployment.tags = [ "salat" "DUS6" "remote" ];
+          deployment.tags = [ "hetzner" "remote" ];
 
           imports = [
             ./configuration/hosts/iluvatar
