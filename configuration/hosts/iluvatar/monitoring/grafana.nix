@@ -22,15 +22,15 @@
 
   services.grafana = {
     enable = true;
-    auth.anonymous.enable = true;
     domain = "grafana.kloenk.dev";
-    port = 3001;
-    rootUrl = "https://grafana.kloenk.dev/";
     provision = {
       enable = true;
       #dashboards = [{ options.path = ./dashboards; }];
     };
     settings = {
+      "auth.anonymous".enabled = true;
+      server.root_url = "https://grafana.kloenk.dev/";
+      server.http_port = 3001;
       database = {
         type = "postgres";
         host = "/run/postgresql";
