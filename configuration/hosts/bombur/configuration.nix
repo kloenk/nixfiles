@@ -18,19 +18,17 @@
   ];
 
   # nl80211 kernel patch
-  boot.kernelPatches = [
-    {
-      name = "nl80211-reload";
-      patch = ./nl80211.patch;
-      extraConfig = ''
-        EXPERT y
-        CFG80211_CERTIFICATION_ONUS y
-        CFG80211_REQUIRE_SIGNED_REGDB n
-        CFG80211_DEBUGFS y
-      '';
-        #CFG80211_USE_KERNEL_REGDB_KEYS n
-    }
-  ];
+  boot.kernelPatches = [{
+    name = "nl80211-reload";
+    patch = ./nl80211.patch;
+    extraConfig = ''
+      EXPERT y
+      CFG80211_CERTIFICATION_ONUS y
+      CFG80211_REQUIRE_SIGNED_REGDB n
+      CFG80211_DEBUGFS y
+    '';
+    #CFG80211_USE_KERNEL_REGDB_KEYS n
+  }];
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
@@ -49,15 +47,16 @@
     "/dev/disk/by-uuid/00403151-c9d8-4ce4-98f8-78f885f82ccd";
   boot.initrd.luks.devices."cryptRoot".allowDiscards = true;
 
-  /*systemd.services.coreboot-battery-treshold = {
-    serviceConfig.Type = "oneshot";
-    wantedBy = [ "multi-user.target" ];
-    path = with pkgs; [ ectool ];
-    script = ''
-      ectool -w 0xb0 -z 0x46
-      ectool -w 0xb1 -z 0x5a
-    '';
-  };*/
+  /* systemd.services.coreboot-battery-treshold = {
+       serviceConfig.Type = "oneshot";
+       wantedBy = [ "multi-user.target" ];
+       path = with pkgs; [ ectool ];
+       script = ''
+         ectool -w 0xb0 -z 0x46
+         ectool -w 0xb1 -z 0x5a
+       '';
+     };
+  */
   boot.consoleLogLevel = 0;
   boot.kernelParams = [
     "quiet"
@@ -65,18 +64,19 @@
     "cgroup_no_v1=all"
   ];
 
-  /*boot.initrd.postMountCommands = ''
-    cd /mnt-root
-    chattr -i var/empty
-    rm -rf $(ls -A /mnt-root | grep -v 'nix' | grep -v 'boot' | grep -v 'var' | grep -v 'home' | grep -v 'persist')
+  /* boot.initrd.postMountCommands = ''
+       cd /mnt-root
+       chattr -i var/empty
+       rm -rf $(ls -A /mnt-root | grep -v 'nix' | grep -v 'boot' | grep -v 'var' | grep -v 'home' | grep -v 'persist')
 
-    cd /mnt-root/home
-    rm -rf $(ls -A /mnt-root/home | grep -v 'kloenk' | grep -v 'pbb')
-    mkdir /mnt-root/{home/public,mnt} -p
+       cd /mnt-root/home
+       rm -rf $(ls -A /mnt-root/home | grep -v 'kloenk' | grep -v 'pbb')
+       mkdir /mnt-root/{home/public,mnt} -p
 
-    cd /mnt-root/var
-    rm -rf $(ls -A /mnt-root/var | grep -v 'src')
-  '';*/
+       cd /mnt-root/var
+       rm -rf $(ls -A /mnt-root/var | grep -v 'src')
+     '';
+  */
 
   systemd.tmpfiles.rules = [
     "Q /persist/data/bluetooth 750 - - - -"

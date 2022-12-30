@@ -32,7 +32,12 @@ let
       outputHashAlgo = "sha256";
       outputHashMode = "recursive";
     } ''
-      dir=$out/share/wallpapers/${if (if meta ? nsfw then meta.nsfw else false) then n name "nsfw/" else ""}/
+      dir=$out/share/wallpapers/${
+        if (if meta ? nsfw then meta.nsfw else false) then
+          n name "nsfw/"
+        else
+          ""
+      }/
 
       mkdir -p $dir
       ${curl}/bin/curl --insecure ${url} > $dir/${name}
@@ -71,12 +76,13 @@ in {
 
   cubes-pbb = fromUrl {
     url =
-       "https://git.pbb.lc/petabyteboy/nixfiles/raw/branch/master/configuration/desktop/wallpapers/cubes.png";
+      "https://git.pbb.lc/petabyteboy/nixfiles/raw/branch/master/configuration/desktop/wallpapers/cubes.png";
     sha256 = "sha256-x/2eGoFsuSq/y+LzYiKXETFjiNztR7J0RrjLbHm3MOk=";
   };
 
   sao-pbb = fromUrl {
-    url = "https://git.pbb.lc/petabyteboy/nixfiles/raw/branch/master/configuration/desktop/wallpapers/sao.png";
+    url =
+      "https://git.pbb.lc/petabyteboy/nixfiles/raw/branch/master/configuration/desktop/wallpapers/sao.png";
     sha256 = "sha256-+vhxAzIY+T52zZsfxGpA3cBwVSr0eEgCS2liRhRmayM=";
   };
 
@@ -140,11 +146,12 @@ in {
     sha256 = "sha256-h/gT2tqy2Ywx5ahJggOP0V7WUYYbm0nbCCN2odklW3Y=";
   };
 
-  /*kurapika_chains = fromUrl {
-    url = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/cb25e9b6-9a51-4021-9332-ce5ba139f5aa/d6v1bax-45f52f8c-e6e3-4a39-967a-ab7bf5a1d6f7.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sIm9iaiI6W1t7InBhdGgiOiIvZi9jYjI1ZTliNi05YTUxLTQwMjEtOTMzMi1jZTViYTEzOWY1YWEvZDZ2MWJheC00NWY1MmY4Yy1lNmUzLTRhMzktOTY3YS1hYjdiZjVhMWQ2ZjcuanBnIn1dXX0.0aPZV_qioAMFdvDlKTsqlA77XAij9W-JQUiuiE8f6WE";
-    name = "kurapika_chains";
-    sha256 = "0000000000000000000000000000000000000000000000000000";
-  };*/
+  /* kurapika_chains = fromUrl {
+       url = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/cb25e9b6-9a51-4021-9332-ce5ba139f5aa/d6v1bax-45f52f8c-e6e3-4a39-967a-ab7bf5a1d6f7.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sIm9iaiI6W1t7InBhdGgiOiIvZi9jYjI1ZTliNi05YTUxLTQwMjEtOTMzMi1jZTViYTEzOWY1YWEvZDZ2MWJheC00NWY1MmY4Yy1lNmUzLTRhMzktOTY3YS1hYjdiZjVhMWQ2ZjcuanBnIn1dXX0.0aPZV_qioAMFdvDlKTsqlA77XAij9W-JQUiuiE8f6WE";
+       name = "kurapika_chains";
+       sha256 = "0000000000000000000000000000000000000000000000000000";
+     };
+  */
 
   hisuka_stars = fromUrl {
     url = "https://i.imgur.com/Tas7Ebq.png";
@@ -177,7 +184,8 @@ in {
   };
 
   kilua_blood = fromUrl {
-    url = "https://www3.picturepush.com/photo/a/11425511/1024/Anonymous/Hunter-x-Hunter---Killua.Zoldyck.full.837345.jpg";
+    url =
+      "https://www3.picturepush.com/photo/a/11425511/1024/Anonymous/Hunter-x-Hunter---Killua.Zoldyck.full.837345.jpg";
     name = "killua_blood";
     sha256 = "sha256-C98DEVoeztkRhBTO6foKFibiTojkfzxk40AvUcSHCN4=";
   };
@@ -187,19 +195,21 @@ in {
     sha256 = "sha256-SQuwq0mZSKRG/1V9h4HCPyuVDOpCfrCp4UZkzajo3+U=";
   };
 
-  /*pixiv_city = fromPixiv {
-    src = "https://www.pixiv.net/en/artworks/32056860";
-    url =
-      "https://i.pximg.net/img-master/img/2012/12/12/00/22/50/32056860_p0_master1200.jpg";
-    sha256 = "sha256-O0yGBHRniqcKG5+O599ZH7RSVTsH455RtV1Uz1t3O4Q=";
-  };*/
+  /* pixiv_city = fromPixiv {
+       src = "https://www.pixiv.net/en/artworks/32056860";
+       url =
+         "https://i.pximg.net/img-master/img/2012/12/12/00/22/50/32056860_p0_master1200.jpg";
+       sha256 = "sha256-O0yGBHRniqcKG5+O599ZH7RSVTsH455RtV1Uz1t3O4Q=";
+     };
+  */
 
-  /*pixiv_orange = fromPixiv {
-    src = "https://www.pixiv.net/en/artworks/68126524";
-    url =
-      "https://i.pximg.net/img-original/img/2018/07/19/22/57/08/68126524_p0.jpg";
-    sha256 = "b92c6e3a0e48508a88a34d9de58f87ce21ccbacecef0c2e9e5b317daa7cdf630";
-  };*/
+  /* pixiv_orange = fromPixiv {
+       src = "https://www.pixiv.net/en/artworks/68126524";
+       url =
+         "https://i.pximg.net/img-original/img/2018/07/19/22/57/08/68126524_p0.jpg";
+       sha256 = "b92c6e3a0e48508a88a34d9de58f87ce21ccbacecef0c2e9e5b317daa7cdf630";
+     };
+  */
 
   pixiv-72175872 = fromPixiv {
     src = "https://www.pixiv.net/en/artworks/72175872";
@@ -236,35 +246,41 @@ in {
   };
 
   tomorrowland = fromRedditPost {
-    url = "https://www.reddit.com/r/LargeImages/comments/3zyz6c/2880x1800_tomorrowland_field_and_city_rwallpaper/";
+    url =
+      "https://www.reddit.com/r/LargeImages/comments/3zyz6c/2880x1800_tomorrowland_field_and_city_rwallpaper/";
 
     sha256 = "sha256-SikIuI3F+10S/dfm8dwMAsZmQIw4I0FlfEV/xVWA4nk=";
   };
 
   alita = fromRedditPost {
-    url = "https://www.reddit.com/r/LargeImages/comments/fk9fcj/7680x4800_alita_battle_angel_rwallpapers/";
+    url =
+      "https://www.reddit.com/r/LargeImages/comments/fk9fcj/7680x4800_alita_battle_angel_rwallpapers/";
     sha256 = "sha256-XYwlqRxJcsLJi/WL/qIseYDkJfKXYofIdC/CE0Hv12U=";
   };
 
   clouds = fromRedditPost {
-    url = "https://www.reddit.com/r/wallpapers/comments/g2e2rh/refulgence_2560_x_1440/";
+    url =
+      "https://www.reddit.com/r/wallpapers/comments/g2e2rh/refulgence_2560_x_1440/";
     sha256 = "sha256-MBCsGrSajqJfQB7V7B7zVhH2/SvX98hRq9sL0fOgCV4=";
   };
 
   argo_ship = fromRedditPost {
-    url = "https://www.reddit.com/r/StarshipPorn/comments/frh9x4/the_argo_taking_off_from_a_remote_moon_in_the/";
+    url =
+      "https://www.reddit.com/r/StarshipPorn/comments/frh9x4/the_argo_taking_off_from_a_remote_moon_in_the/";
     sha256 = "sha256-lffXq7MJVmbOZj2PG1oKyuR2/4xeTh1+BikRg0yeUMc=";
   };
 
   city_depth = fromRedditPost {
-    url = "https://www.reddit.com/r/wallpapers/comments/g0etum/city_depths_by_alec_tucker_3840x2160/";
+    url =
+      "https://www.reddit.com/r/wallpapers/comments/g0etum/city_depths_by_alec_tucker_3840x2160/";
     sha256 = "sha256-DDzYvFb7ba23HJpyV4lPOBGhq3ZVkFgn6+Iyq5G3QYY=";
   };
 
-  /*bioshock_skycrane = fromRedditPost {
-    url = "https://www.reddit.com/r/gaming/comments/87hknr/some_bioshock_wallpapers/";
-    sha256 = "sha256-fHJf+XCsSIGscBKTnd05yhceBjZINMJsGgWAD0xsoLs=";
-  };*/
+  /* bioshock_skycrane = fromRedditPost {
+       url = "https://www.reddit.com/r/gaming/comments/87hknr/some_bioshock_wallpapers/";
+       sha256 = "sha256-fHJf+XCsSIGscBKTnd05yhceBjZINMJsGgWAD0xsoLs=";
+     };
+  */
 
   life_is_strange = fromRedditPost {
     url =
@@ -302,11 +318,12 @@ in {
       "https://www.reddit.com/r/Animewallpaper/comments/ahkner/your_name_kimi_no_na_wa_7015x3879/";
     sha256 = "sha256-pi2YmPO2NlooA3lq+UfBNP5VI9ik1uzyBKLj0UKXmFU=";
   };
-  /*go_home = fromRedditPost {
-    url =
-      "https://www.reddit.com/r/Animewallpaper/comments/fzjd8i/lets_go_home_original_3840x2160/";
-    sha256 = "sha256-Gtvp2RW9okF6cx+0jp+FSFpsTYkliNhBF7J+kp56ZnQ=";
-  };*/
+  /* go_home = fromRedditPost {
+       url =
+         "https://www.reddit.com/r/Animewallpaper/comments/fzjd8i/lets_go_home_original_3840x2160/";
+       sha256 = "sha256-Gtvp2RW9okF6cx+0jp+FSFpsTYkliNhBF7J+kp56ZnQ=";
+     };
+  */
   angle_beats = fromRedditPost {
     url =
       "https://www.reddit.com/r/Animewallpaper/comments/fzlf1h/kanade_tachibana_angel_beats_1920x1080/";

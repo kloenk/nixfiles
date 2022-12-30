@@ -4,45 +4,44 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" "usbhid" "uas" "sd_mod" ];
+  boot.initrd.availableKernelModules =
+    [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" "usbhid" "uas" "sd_mod" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/14d176fa-cef8-43aa-8fa0-cd025677c1ce";
-      fsType = "xfs";
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/14d176fa-cef8-43aa-8fa0-cd025677c1ce";
+    fsType = "xfs";
+  };
 
-  fileSystems."/persist" =
-    { device = "/dev/disk/by-uuid/1a39811e-9ce0-409d-ad27-68d4d8f01403";
-      fsType = "xfs";
-    };
+  fileSystems."/persist" = {
+    device = "/dev/disk/by-uuid/1a39811e-9ce0-409d-ad27-68d4d8f01403";
+    fsType = "xfs";
+  };
 
-  fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/095be75c-c76c-4038-b086-e17191d3c577";
-      fsType = "xfs";
-    };
+  fileSystems."/nix" = {
+    device = "/dev/disk/by-uuid/095be75c-c76c-4038-b086-e17191d3c577";
+    fsType = "xfs";
+  };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/78C8-696A";
-      fsType = "vfat";
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/78C8-696A";
+    fsType = "vfat";
+  };
 
-  fileSystems."/persist/intenso" =
-    { device = "/dev/disk/by-uuid/aa04b51e-fc5c-4038-9e7b-08bd852de12d";
-      fsType = "ext4";
-    };
+  fileSystems."/persist/intenso" = {
+    device = "/dev/disk/by-uuid/aa04b51e-fc5c-4038-9e7b-08bd852de12d";
+    fsType = "ext4";
+  };
 
-  fileSystems."/root/.gnupg" =
-    { device = "/persist/data/gnupg-root";
-      fsType = "none";
-      options = [ "bind" ];
-    };
+  fileSystems."/root/.gnupg" = {
+    device = "/persist/data/gnupg-root";
+    fsType = "none";
+    options = [ "bind" ];
+  };
 
   swapDevices = [ ];
 

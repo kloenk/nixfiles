@@ -24,20 +24,11 @@
   networking.interfaces.wlan0.useDHCP = true;
 
   i18n.defaultLocale = "de_DE.UTF-8";
-  console = {
-    keyMap = "de";
-  };
+  console = { keyMap = "de"; };
 
   services.openssh.ports = [ 62954 ];
 
-  environment.systemPackages = with pkgs; [
-    wget
-    vim
-    curl
-    tmux
-    htop
-    nload
-  ];
+  environment.systemPackages = with pkgs; [ wget vim curl tmux htop nload ];
 
   users.users.kloenk.initialPassword = "foobar";
 

@@ -41,16 +41,26 @@ let
       minimum = 600;
     });
 
-    NS = [ "ns1.kloenk.dev." "ns1.he.net." "ns2.he.net." "ns4.he.net." "ns3.he.net." "ns5.he.net." ];
+    NS = [
+      "ns1.kloenk.dev."
+      "ns1.he.net."
+      "ns2.he.net."
+      "ns4.he.net."
+      "ns3.he.net."
+      "ns5.he.net."
+    ];
 
-    /*A = map (ttl 600) [ (a "195.39.247.6") ];
+    /* A = map (ttl 600) [ (a "195.39.247.6") ];
 
-    AAAA = map (ttl 600) [ (aaaa "2a0f:4ac0::6") ];*/
+       AAAA = map (ttl 600) [ (aaaa "2a0f:4ac0::6") ];
+    */
     A = map (ttl 600) [ (a "49.12.72.200") ];
     AAAA = map (ttl 600) [ (aaaa "2a01:4f8:c012:b874::") ];
     #CNAME = [ "iluvatar.kloenk.dev." ];
 
-    TXT = spfKloenk ++ [ "google-site-verification=HNiDFThpZZWaFE0YH4TzDN2coqiBoedYzj0CxDN6Nl8" ];
+    TXT = spfKloenk ++ [
+      "google-site-verification=HNiDFThpZZWaFE0YH4TzDN2coqiBoedYzj0CxDN6Nl8"
+    ];
     MX = mxKloenk;
     CAA = letsEncrypt config.security.acme.email;
 
@@ -73,18 +83,16 @@ let
       mx-redir.CNAME = iluvatar.CNAME;
 
       blog.CNAME = [ "matrixcore.github.io." ];
-      _github-challenge-MatrixCore-organization.TXT = [
-        (txt ''c56620a5d1'')
-      ];
+      _github-challenge-MatrixCore-organization.TXT = [ (txt "c56620a5d1") ];
       blog.subdomains.www.CNAME = [ "blog" ];
 
-      /*_domainkey.subdomains.mail.TXT = [
-        (txt ''
-          v=DKIM1; k=rsa; " "p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC5KMotmbfWWCLUgFeUc87fO2Heie+Ye1VPELqGhX60br1VyMnhzCc0uR1Hdjt9ts6ykemyIBBHwRa/GfJnyQq+u6nk0v9kDuNs2E3EftcHpYA1E0LCPs5Wl6d2q50IwKt609XiZWok+C/0hnG7gjYTzI6T2a6vhL7hoQfTpLZJCQIDAQAB'')
-      ];*/
+      /* _domainkey.subdomains.mail.TXT = [
+           (txt ''
+             v=DKIM1; k=rsa; " "p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC5KMotmbfWWCLUgFeUc87fO2Heie+Ye1VPELqGhX60br1VyMnhzCc0uR1Hdjt9ts6ykemyIBBHwRa/GfJnyQq+u6nk0v9kDuNs2E3EftcHpYA1E0LCPs5Wl6d2q50IwKt609XiZWok+C/0hnG7gjYTzI6T2a6vhL7hoQfTpLZJCQIDAQAB'')
+         ];
+      */
 
     };
   };
 
-in
-  dns.writeZone "matrixcore.dev" zone
+in dns.writeZone "matrixcore.dev" zone

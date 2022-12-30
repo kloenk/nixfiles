@@ -1,14 +1,14 @@
 { callPackage }:
 
 let
-  buildTheme = { name ? builtins.baseNameOf url, url, sha256, ...  }@extraArgs: callPackage ({fetchurl, stdenv, unzip }: stdenv.mkDerivation {
-    inherit name;
-    src = fetchurl {
-      inherit url sha256;
-    };
-    buildInputs = [ unzip ];
-    installPhase = "mkdir -p $out; cp -R * $out/";
-  } // extraArgs) {};
+  buildTheme = { name ? builtins.baseNameOf url, url, sha256, ... }@extraArgs:
+    callPackage ({ fetchurl, stdenv, unzip }:
+      stdenv.mkDerivation {
+        inherit name;
+        src = fetchurl { inherit url sha256; };
+        buildInputs = [ unzip ];
+        installPhase = "mkdir -p $out; cp -R * $out/";
+      } // extraArgs) { };
 in {
   twentyTwelf = buildTheme {
     url = "https://downloads.wordpress.org/theme/twentytwelve.3.3.zip";

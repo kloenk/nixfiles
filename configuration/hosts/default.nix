@@ -40,29 +40,12 @@ in {
     server = true;
   };
 
-  manwe = makeHost {
-    host = "manwe.kloenk.dev";
-    vm = true;
-    #mail = true;
-    server = true;
-  };
-
-  gimli = makeHost {
-    host = "gimli.kloenk.dev";
-    vm = true;
-    server = true;
-    mail = true;
-    prometheusExporters = [ "node-exporter" "nginx-exporter" "jitsi-exporter" ];
-  };
-
   thrain = makeHost {
     host = "192.168.178.248";
     # server = true;
   };
 
-  durin = makeHost {
-    host = durin-host;
-  };
+  durin = makeHost { host = durin-host; };
 
   durin-rbuild = makeHost {
     host = durin-host;
@@ -95,7 +78,6 @@ in {
   #  vm = true;
   #  server = true;
   #};
-
 
   # usee
   moodle-usee = makeHost {
@@ -145,7 +127,6 @@ in {
     prometheusExporters = [ "node-exporter" "bbb-exporter" ];
     server = true;
   };
-
 
   # for monitoring only
   # OSP streaming server

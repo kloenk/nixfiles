@@ -54,7 +54,9 @@ let
 
     MX = mxKloenk;
 
-    TXT = spfKloenk ++ [ "google-site-verification=p5ttbvvVzpqKQNUf_kuhwBEFvTavqiUF5BxTytUbGsY" ];
+    TXT = spfKloenk ++ [
+      "google-site-verification=p5ttbvvVzpqKQNUf_kuhwBEFvTavqiUF5BxTytUbGsY"
+    ];
     CAA = letsEncrypt config.security.acme.email;
 
     SRV = [
@@ -73,12 +75,13 @@ let
     ];
 
     subdomains = rec {
-      /*iluvatar = hostTTL 1200 "195.39.247.6" "2a0f:4ac0::6";
-      manwe = hostTTL 1200 "195.39.221.187" null;
-      sauron = hostTTL 1200 "195.39.221.54" "2a0f:4ac4:42:0:f199::1";
-      melkor = hostTTL 1200 "195.39.221.51" null;
-      bombadil = hostTTL 1200 "195.39.221.52" null;
-      aule = hostTTL 1200 "195.39.221.50" null;*/
+      /* iluvatar = hostTTL 1200 "195.39.247.6" "2a0f:4ac0::6";
+         manwe = hostTTL 1200 "195.39.221.187" null;
+         sauron = hostTTL 1200 "195.39.221.54" "2a0f:4ac4:42:0:f199::1";
+         melkor = hostTTL 1200 "195.39.221.51" null;
+         bombadil = hostTTL 1200 "195.39.221.52" null;
+         aule = hostTTL 1200 "195.39.221.50" null;
+      */
 
       iluvatar.CNAME = [ "iluvatar.kloenk.dev." ];
       ns1 = iluvatar;

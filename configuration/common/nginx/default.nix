@@ -62,8 +62,6 @@
   };
 
   services.telegraf.extraConfig.inputs = {
-    nginx = {
-      urls = [ "http://localhost/nginx_status" ];
-    };
+    nginx = { urls = [ "http://localhost/nginx_status" ]; };
   };
 }

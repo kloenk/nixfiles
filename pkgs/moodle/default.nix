@@ -9,8 +9,7 @@ in stdenv.mkDerivation rec {
   inherit version;
 
   src = fetchurl {
-    url =
-      "https://download.moodle.org/stable311/moodle-latest-311.tgz";
+    url = "https://download.moodle.org/stable311/moodle-latest-311.tgz";
     #  "https://download.moodle.org/stable${stableVersion}/${pname}-${version}.tgz";
     sha256 = "d159d4efee39d59f3142bb7f1b931efaf0b11849499093351f3f4c8002ec4cce";
   };

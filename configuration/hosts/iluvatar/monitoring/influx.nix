@@ -32,7 +32,7 @@ in {
     };
   };
 
-# services.grafana.provision.datasources.settings.datasources.*.name
+  # services.grafana.provision.datasources.settings.datasources.*.name
   #services.grafana.provision.datasources.settings.datasources = {
   #  influx = {
   #    type = "influxdb";

@@ -55,11 +55,15 @@ let
       preStart = mkOption {
         type = types.lines;
         description = "command to execute before starting xonotic";
-        example = "ln -s ${./warfare.pk3} ./data/maps"; # TODO: validate on how to install a map
+        example = "ln -s ${
+            ./warfare.pk3
+          } ./data/maps"; # TODO: validate on how to install a map
         default = "";
       };
 
-      openFirewall = (mkEnableOption "open udp port for xonotic") // { default = true; };
+      openFirewall = (mkEnableOption "open udp port for xonotic") // {
+        default = true;
+      };
 
       package = mkOption {
         type = types.package;
@@ -94,12 +98,13 @@ in {
     };
 
     networking.firewall.allowedUDPPorts = let
-      firewallServers = lib.filterAttrs (name: host: host.openFirewall) cfg.servers;
+      firewallServers =
+        lib.filterAttrs (name: host: host.openFirewall) cfg.servers;
     in lib.mapAttrsToList (name: host: host.config.port) cfg.servers;
 
-    systemd.tmpfiles.rules = let
-      makeRule = name: host: "Q ${cfg.dataDir}/${name} 750 xonotic - - -";
-    in lib.mapAttrsToList (name: host: makeRule name host) cfg.servers;
+    systemd.tmpfiles.rules =
+      let makeRule = name: host: "Q ${cfg.dataDir}/${name} 750 xonotic - - -";
+      in lib.mapAttrsToList (name: host: makeRule name host) cfg.servers;
 
     systemd.services = (lib.mapAttrs' (name: config:
       let userDir = "${cfg.dataDir}/${name}";

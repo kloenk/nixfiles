@@ -11,13 +11,14 @@ in {
 
       policies = mkOption {
         type = types.attrs;
-        default = {};
+        default = { };
         description = "firefox policy rules";
       };
     };
   };
 
   config = mkIf cfg.enable {
-    environment.etc."firefox/policies.json".text = builtins.toJSON { policies = cfg.policies; };
+    environment.etc."firefox/policies.json".text =
+      builtins.toJSON { policies = cfg.policies; };
   };
 }

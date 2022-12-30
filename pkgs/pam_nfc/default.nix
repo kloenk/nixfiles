@@ -1,4 +1,5 @@
-{ stdenv, fetchFromGitHub, libnfc, pam, autoconf, automake, libtool, m4, pkgconfig }:
+{ stdenv, fetchFromGitHub, libnfc, pam, autoconf, automake, libtool, m4
+, pkgconfig }:
 
 stdenv.mkDerivation rec {
   name = "pam_nfc-${version}";

@@ -25,7 +25,8 @@
   boot.kernelParams =
     [ "nohibernate" ]; # https://github.com/openzfs/zfs/issues/260
 
-  nix.settings.system-features = [ "recursive-nix" "kvm" "nixos-test" "big-parallel" ];
+  nix.settings.system-features =
+    [ "recursive-nix" "kvm" "nixos-test" "big-parallel" ];
 
   system.autoUpgrade.flake = "kloenk";
 

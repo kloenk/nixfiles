@@ -6,7 +6,8 @@ let
 in {
   options = {
     services.epmd = {
-      enable = mkEnableOption "Erlang Port Mapper Daemon (epmd), which acts as a name server on all hosts involved in distributed Erlang computations.";
+      enable = mkEnableOption
+        "Erlang Port Mapper Daemon (epmd), which acts as a name server on all hosts involved in distributed Erlang computations.";
 
       package = mkOption {
         type = types.package;

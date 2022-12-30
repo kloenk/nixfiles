@@ -24,7 +24,7 @@
     #../../desktop/plasma.nix
     #../../desktop/sway.nix
     #../../desktop/gnome.nix
-	#../../desktop/emacs
+    #../../desktop/emacs
 
     ./bbb-backup.nix
     ./r-dev.nix
@@ -34,7 +34,8 @@
   ];
 
   # FIME: remove
-  security.acme.defaults.server = builtins.trace "remove staging environment from acme"
+  security.acme.defaults.server =
+    builtins.trace "remove staging environment from acme"
     "https://acme-staging-v02.api.letsencrypt.org/directory";
 
   hardware.cpu.intel.updateMicrocode = true;
@@ -70,9 +71,7 @@
   # initrd ssh server
   boot.initrd.network.enable = true;
   boot.initrd.availableKernelModules = [ "e1000e" ];
-  boot.initrd.network.ssh = {
-    enable = true;
-  };
+  boot.initrd.network.ssh = { enable = true; };
   boot.initrd.preLVMCommands = lib.mkBefore (''
     ip li set eno1 up
     ip addr add 192.168.178.248/24 dev eno1 && hasNetwork=1
@@ -83,7 +82,7 @@
        read PASSWORD
        stty echo
        printf "\\n"
-    
+
        printf $PASSWORD | zfs load-key -r smials/BagEnd && \
        printf $PASSWORD | cryptsetup-askpass 
        killall zfs
@@ -103,12 +102,13 @@
   services.printing.enable = true;
   services.avahi.enable = true;
 
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "chromium"
-    "factorio-headless"
-    "chromium-unwrapped"
-    "chrome-widevine-cdm"
-  ];
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "chromium"
+      "factorio-headless"
+      "chromium-unwrapped"
+      "chrome-widevine-cdm"
+    ];
 
   environment.systemPackages = with pkgs; [ lm_sensors virtmanager nodejs ];
 
@@ -168,8 +168,8 @@
   # smartcard
   services.pcscd.enable = true;
   services.telegraf.extraConfig.inputs = {
-    sensors = {};
-    zfs = {};
+    sensors = { };
+    zfs = { };
   };
 
   services.openssh.forwardX11 = true;

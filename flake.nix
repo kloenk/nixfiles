@@ -89,11 +89,14 @@
     inputs.nixpks.follows = "/nixpkgs";
   };
 
+  inputs.devenv.url = "github:cachix/devenv";
+
   inputs.nix-minecraft.url = "github:Infinidoge/nix-minecraft";
   inputs.nix-minecraft.inputs.nixpkgs.follows = "/nixpkgs";
 
   outputs = inputs@{ self, nixpkgs, nix, home-manager, moodlepkgs, mail-server
-    , kloenk-www, dns, darwin, sops-nix, vika, colmena, jlly, fleet_bot, ... }:
+    , kloenk-www, dns, darwin, sops-nix, vika, colmena, jlly, fleet_bot, devenv
+    , ... }:
     let
       overlayCombined = system: [
         #nix.overlays.default
@@ -149,9 +152,9 @@
       packages =
         forAllSystems (system: { inherit (nixpkgsFor.${system}) wallpapers; });
 
-      nixosConfigurations = let
-        hive = inputs.colmena.lib.makeHive self.outputs.colmena;
-      in hive.nodes;
+      nixosConfigurations =
+        let hive = inputs.colmena.lib.makeHive self.outputs.colmena;
+        in hive.nodes;
 
       colmena = {
         meta = {
@@ -188,7 +191,8 @@
           # disable home-manager manpage (breaks hydra see https://github.com/rycee/home-manager/issues/1262)
           home-manager.users.kloenk.manual.manpages.enable = false;
 
-          environment.systemPackages = [ /* pkgs.colmena */ ];
+          environment.systemPackages = [ # pkgs.colmena
+          ];
 
           deployment = nixpkgs.lib.mkIf colmena {
             buildOnTarget = true;
@@ -211,29 +215,6 @@
             (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix"))
           ];
         };
-        gimli = { pkgs, nodes, ... }: {
-          deployment.targetHost = "gimli.kloenk.dev";
-          deployment.tags = [ "salat" "DUS6" "remote" ];
-
-          imports = [
-            ./configuration/hosts/gimli
-            mail-server.nixosModules.mailserver
-            (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix"))
-          ];
-        };
-        manwe = { pkgs, nodes, ... }: {
-          deployment.targetHost = "manwe.kloenk.dev";
-          deployment.tags = [ "DUS6" "pve" "remote" ];
-
-          imports = [
-            ./configuration/hosts/manwe
-            (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix"))
-          ];
-
-          # ZFS kernel
-          nixpkgs.config.allowBroken = true;
-        };
-
         # USee
         moodle-usee = { pkgs, nodes, ... }: {
           deployment.targetHost = "moodle-usee.kloenk.dev";
@@ -291,5 +272,23 @@
             self.darwinModules.epmd
           ];
         })) darwinHosts);
+
+      devShells = forAllSystems (system:
+        let pkgs = nixpkgsFor.${system};
+        in {
+          devenv = devenv.lib.mkShell {
+            inherit inputs pkgs;
+            modules = [{
+              languages.nix.enable = true;
+
+              pre-commit.hooks.actionlint.enable = true;
+              pre-commit.hooks.nixfmt.enable = true;
+            }];
+          };
+          default = self.devShells.${system}.devenv;
+        });
+
+      checks = forAllSystems
+        (system: { devenv_ci = self.devShells.${system}.devenv.ci; });
     };
 }

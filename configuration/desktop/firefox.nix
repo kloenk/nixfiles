@@ -4,13 +4,11 @@
   programs.firefox = {
     enable = true;
     policies = {
-      Bookmarks = [
-        {
-          Title = "github";
-          URL = "https://github.com";
-          Placement = "menu";
-        }
-      ];
+      Bookmarks = [{
+        Title = "github";
+        URL = "https://github.com";
+        Placement = "menu";
+      }];
       Certificates.Install = [ ];
       Cookies.AcceptThirdParty = "from-visited";
       Cookies.RejectTracker = true;
@@ -41,11 +39,11 @@
           "https://addons.mozilla.org/firefox/downloads/file/3582859/momentum-1.17.17-fx.xpi"
           "https://addons.mozilla.org/firefox/downloads/file/3539016/adblock_plus-3.8.4-an+fx.xpi"
         ];
-        Locked = [
-        ];
+        Locked = [ ];
       };
       Homepage = {
-        URL = "moz-extension://081d1ae0-6f51-4c23-be0f-233a3ffc3f42/dashboard.html";
+        URL =
+          "moz-extension://081d1ae0-6f51-4c23-be0f-233a3ffc3f42/dashboard.html";
         Locked = true;
         StartPage = "homepage";
       };
@@ -57,9 +55,7 @@
       PasswordManagerEnabled = false;
       PSFjs.EnablePermissions = false;
       Permissions = {
-        Microphone = {
-          Allow = [ "https://meet.pbb.lc" ];
-        };
+        Microphone = { Allow = [ "https://meet.pbb.lc" ]; };
         Notifications = {
           Block = [ "https://reddit.com" "https://youtube.com" ];
         };
@@ -72,7 +68,7 @@
         "extensions.htmlaboutaddons.recommendations.enabled" = false;
         #security.default_personal_cert = "cert";
       };
-      RequestedLocales = ["de" "en-US"];
+      RequestedLocales = [ "de" "en-US" ];
       SSLVersionMin = "tls1.2";
       UserMessaging = {
         WhatsNew = false;

@@ -45,45 +45,42 @@
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-  /*networking.interfaces.ens18 = {
-    ipv4.addresses = [{
-      address = "5.9.118.94";
-      prefixLength = 32;
-    }];
-    ipv6.addresses = [{
-      address = "2a01:4f8:162:6343::4";
-      prefixLength = 128;
-    }];
-    #  ipv4.routes [{}];
-    ipv4.routes = [
-      { address = "5.9.118.93"; prefixLength = 32; }
-    ];
-    ipv6.routes = [
-      { address = "2a01:4f8:162:6343::3"; prefixLength = 128; }
-    ];
-  };
-  networking.defaultGateway = {
-    address = "5.9.118.73";
-    interface = "ens18";
-  };
+  /* networking.interfaces.ens18 = {
+       ipv4.addresses = [{
+         address = "5.9.118.94";
+         prefixLength = 32;
+       }];
+       ipv6.addresses = [{
+         address = "2a01:4f8:162:6343::4";
+         prefixLength = 128;
+       }];
+       #  ipv4.routes [{}];
+       ipv4.routes = [
+         { address = "5.9.118.93"; prefixLength = 32; }
+       ];
+       ipv6.routes = [
+         { address = "2a01:4f8:162:6343::3"; prefixLength = 128; }
+       ];
+     };
+     networking.defaultGateway = {
+       address = "5.9.118.73";
+       interface = "ens18";
+     };
 
-  networking.defaultGateway6 = {
-    address = "2a01:4f8:162:6343::2";
-    interface = "ens18";
-  };
+     networking.defaultGateway6 = {
+       address = "2a01:4f8:162:6343::2";
+       interface = "ens18";
+     };
 
-  networking.nameservers = [ "1.1.1.1" "192.168.178.1" "2001:4860:4860::8888" ];*/
+     networking.nameservers = [ "1.1.1.1" "192.168.178.1" "2001:4860:4860::8888" ];
+  */
   systemd.network.networks."20-ens18" = {
     name = "ens18";
     DHCP = "no";
     dns = [ "1.1.1.1" "2001:4860:4860::8888" ];
     addresses = [
-      {
-        addressConfig.Address = "5.9.118.94/32";
-      }
-      {
-        addressConfig.Address = "2a01:4f8:162:6343::4/128";
-      }
+      { addressConfig.Address = "5.9.118.94/32"; }
+      { addressConfig.Address = "2a01:4f8:162:6343::4/128"; }
     ];
     routes = [
       {
@@ -94,12 +91,8 @@
         routeConfig.Gateway = "2a01:4f8:162:6343::2";
         routeConfig.GatewayOnLink = true;
       }
-      { 
-        routeConfig.Destination = "5.9.118.93";
-      }
-      {
-        routeConfig.Destination = "2a01:4f8:162:6343::3";
-      }
+      { routeConfig.Destination = "5.9.118.93"; }
+      { routeConfig.Destination = "2a01:4f8:162:6343::3"; }
     ];
   };
 
@@ -109,7 +102,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [ wget vim nano tmux htop nload ];
-
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 62954 80 443 ];
@@ -126,40 +118,38 @@
   security.sudo.wheelNeedsPassword = false;
 
   # autoUpgrade  
-  /*system.autoUpgrade = {
-    allowReboot = true;
-    enable = true;
-  };*/
+  /* system.autoUpgrade = {
+       allowReboot = true;
+       enable = true;
+     };
+  */
   system.autoUpgrade.enable = true;
   nix.gc.automatic = true;
 
   # node-exporter foo
-  /*services.prometheus.exporters.node.enable = true;
-  services.prometheus.exporters.node.enabledCollectors = [ "logind" "systemd" ];
-  services.httpd.virtualHosts."moodle-usee.kloenk.de" = {
-    enableACME = true;
-    #forceSSL = true;
-    addSSL = true;
-    locations."/node-exporter/".proxyPass = "http://127.0.0.1:9100/";
-  };*/
+  /* services.prometheus.exporters.node.enable = true;
+     services.prometheus.exporters.node.enabledCollectors = [ "logind" "systemd" ];
+     services.httpd.virtualHosts."moodle-usee.kloenk.de" = {
+       enableACME = true;
+       #forceSSL = true;
+       addSSL = true;
+       locations."/node-exporter/".proxyPass = "http://127.0.0.1:9100/";
+     };
+  */
 
   # wireguard
   networking.wireguard.enable = true;
   networking.wireguard.interfaces.usee0 = {
     ips = [ "192.168.56.2/24" ];
-    peers = [
-      {
-        allowedIPs = [ "192.168.56.0/24" ];
-        endpoint = "manwe.kloenk.dev:51822";
-        publicKey = "CIzg7RjyEO9Df2muABFyGKDfuWBBxvy1MA2ONOhw+lo=";
-      }
-    ];
+    peers = [{
+      allowedIPs = [ "192.168.56.0/24" ];
+      endpoint = "manwe.kloenk.dev:51822";
+      publicKey = "CIzg7RjyEO9Df2muABFyGKDfuWBBxvy1MA2ONOhw+lo=";
+    }];
     privateKeyFile = "/var/src/secrets/usee0.key";
   };
 
-  services.telegraf.extraConfig = {
-    global_tags.tenant = "usee";
-  };
+  services.telegraf.extraConfig = { global_tags.tenant = "usee"; };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

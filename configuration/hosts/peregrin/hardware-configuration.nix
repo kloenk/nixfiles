@@ -11,25 +11,25 @@
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/39a1712f-6724-49cf-b583-c8e950a38c4a";
-      fsType = "xfs";
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/39a1712f-6724-49cf-b583-c8e950a38c4a";
+    fsType = "xfs";
+  };
 
-  fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/523a8782-b907-4428-8cdd-08b10592c282";
-      fsType = "xfs";
-    };
+  fileSystems."/nix" = {
+    device = "/dev/disk/by-uuid/523a8782-b907-4428-8cdd-08b10592c282";
+    fsType = "xfs";
+  };
 
-  fileSystems."/persist" =
-    { device = "/dev/disk/by-uuid/026ff2f7-e31a-4584-a352-8349a01c2a9e";
-      fsType = "xfs";
-    };
+  fileSystems."/persist" = {
+    device = "/dev/disk/by-uuid/026ff2f7-e31a-4584-a352-8349a01c2a9e";
+    fsType = "xfs";
+  };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/B058-2C26";
-      fsType = "vfat";
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/B058-2C26";
+    fsType = "vfat";
+  };
 
   swapDevices = [ ];
 

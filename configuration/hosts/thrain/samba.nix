@@ -4,11 +4,15 @@
   networking.firewall = {
     allowedTCPPorts = [
       445
-      137 138 139 # samba
+      137
+      138
+      139 # samba
     ];
     allowedUDPPorts = [
       445
-      137 138 139 # netbios
+      137
+      138
+      139 # netbios
     ];
   };
 
@@ -89,5 +93,6 @@
     };
   };
 
-  systemd.targets.samba.unitConfig.RequiresMountsFor = [ "/var/lib/samba" "/persist/Bag End" ];
+  systemd.targets.samba.unitConfig.RequiresMountsFor =
+    [ "/var/lib/samba" "/persist/Bag End" ];
 }

@@ -1,20 +1,19 @@
-{ stdenv, nix, perlPackages, buildEnv, fetchFromGitHub
-, makeWrapper, autoconf, automake, libtool, unzip, pkgconfig, sqlite, libpqxx
-, gitAndTools, mercurial, darcs, subversion, breezy, openssl, bzip2, libxslt
-, guile, perl, postgresql, nukeReferences, git, boehmgc, nlohmann_json
-, docbook_xsl, openssh, gnused, coreutils, findutils, gzip, lzma, gnutar
-, rpm, dpkg, cdrkit, pixz, lib, boost, autoreconfHook, src ? null, version ? null
-, migration ? false, patches ? []
-, tests ? {}
-}:
+{ stdenv, nix, perlPackages, buildEnv, fetchFromGitHub, makeWrapper, autoconf
+, automake, libtool, unzip, pkgconfig, sqlite, libpqxx, gitAndTools, mercurial
+, darcs, subversion, breezy, openssl, bzip2, libxslt, guile, perl, postgresql
+, nukeReferences, git, boehmgc, nlohmann_json, docbook_xsl, openssh, gnused
+, coreutils, findutils, gzip, lzma, gnutar, rpm, dpkg, cdrkit, pixz, lib, boost
+, autoreconfHook, src ? null, version ? null, migration ? false, patches ? [ ]
+, tests ? { } }:
 
 with stdenv;
 
 let
   perlDeps = buildEnv {
     name = "hydra-perl-deps";
-    paths = with perlPackages; lib.closePropagation
-      [ ModulePluggable
+    paths = with perlPackages;
+      lib.closePropagation [
+        ModulePluggable
         CatalystActionREST
         CatalystAuthenticationStoreDBIxClass
         CatalystDevel
@@ -73,19 +72,49 @@ in stdenv.mkDerivation rec {
 
   inherit stdenv src version patches;
 
-  buildInputs =
-    [ makeWrapper autoconf automake libtool unzip nukeReferences sqlite libpqxx
-      gitAndTools.top-git mercurial /*darcs*/ subversion breezy openssl bzip2 libxslt
-      perlDeps perl nix
-      postgresql # for running the tests
-      nlohmann_json
-      boost
-    ];
+  buildInputs = [
+    makeWrapper
+    autoconf
+    automake
+    libtool
+    unzip
+    nukeReferences
+    sqlite
+    libpqxx
+    gitAndTools.top-git
+    mercurial # darcs
+    subversion
+    breezy
+    openssl
+    bzip2
+    libxslt
+    perlDeps
+    perl
+    nix
+    postgresql # for running the tests
+    nlohmann_json
+    boost
+  ];
 
-  hydraPath = lib.makeBinPath (
-    [ sqlite subversion openssh nix coreutils findutils pixz
-      gzip bzip2 lzma gnutar unzip git gitAndTools.top-git mercurial /*darcs*/ gnused breezy
-    ] ++ lib.optionals stdenv.isLinux [ rpm dpkg cdrkit ] );
+  hydraPath = lib.makeBinPath ([
+    sqlite
+    subversion
+    openssh
+    nix
+    coreutils
+    findutils
+    pixz
+    gzip
+    bzip2
+    lzma
+    gnutar
+    unzip
+    git
+    gitAndTools.top-git
+    mercurial # darcs
+    gnused
+    breezy
+  ] ++ lib.optionals stdenv.isLinux [ rpm dpkg cdrkit ]);
 
   nativeBuildInputs = [ autoreconfHook pkgconfig ];
 

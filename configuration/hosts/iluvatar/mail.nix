@@ -22,8 +22,10 @@
 
   services.postfix.config = {
     #relay_domains = [ "kloenk.de" ];
-    mydestination =
-      lib.mkOverride 25 [ "$myhostname" "localhost" ]; # TODO: iluvatar.kloenk.dev?
+    mydestination = lib.mkOverride 25 [
+      "$myhostname"
+      "localhost"
+    ]; # TODO: iluvatar.kloenk.dev?
     #maximal_queue_lifetime = "10d";
   };
 
@@ -40,9 +42,7 @@
       "kloenk.dev"
     ];
 
-    rejectRecipients = [
-      "wattpad@kloenk.de"
-    ];
+    rejectRecipients = [ "wattpad@kloenk.de" ];
 
     loginAccounts = {
       "kloenk@kloenk.dev" = {
@@ -188,7 +188,8 @@
       };
 
       "kontakt@burscheider-imkerverein.de" = {
-        hashedPasswordFile = config.sops.secrets."mail/kontakt_burscheider-imkerverein.de.sha512".path;
+        hashedPasswordFile =
+          config.sops.secrets."mail/kontakt_burscheider-imkerverein.de.sha512".path;
       };
 
     };

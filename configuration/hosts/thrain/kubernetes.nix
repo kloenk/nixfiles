@@ -31,21 +31,17 @@ in {
     options = [ "bind" ];
   };
 
-
   # resolve master hostname
   networking.extraHosts = "${kubeMasterIP} ${kubeMasterHostname}";
 
   # packages for administration tasks
-  environment.systemPackages = with pkgs; [
-    kompose
-    kubectl
-    kubernetes
-  ];
+  environment.systemPackages = with pkgs; [ kompose kubectl kubernetes ];
 
   services.kubernetes = {
-    roles = ["master" "node"];
+    roles = [ "master" "node" ];
     masterAddress = kubeMasterHostname;
-    apiserverAddress = "https://${kubeMasterHostname}:${toString kubeMasterAPIServerPort}";
+    apiserverAddress =
+      "https://${kubeMasterHostname}:${toString kubeMasterAPIServerPort}";
     easyCerts = true;
     apiserver = {
       securePort = kubeMasterAPIServerPort;
@@ -59,5 +55,6 @@ in {
     kubelet.extraOpts = "--fail-swap-on=false";
   };
 
-  virtualisation.containerd.settings.plugins."io.containerd.grpc.v1.cri".containerd.snapshotter = "overlayfs";
+  virtualisation.containerd.settings.plugins."io.containerd.grpc.v1.cri".containerd.snapshotter =
+    "overlayfs";
 }

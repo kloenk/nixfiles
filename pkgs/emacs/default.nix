@@ -7,5 +7,5 @@ callPackage (builtins.fetchGit {
   doomPrivateDir = "${./doom.d}";
   emacsPackages = emacsPackagesFor emacs;
 }
-  #nix-mode
-  #rust-mode
+#nix-mode
+#rust-mode

@@ -2,14 +2,13 @@
 
 let
 
-in
-
-stdenv.mkDerivation rec {
+in stdenv.mkDerivation rec {
   pname = "rstya-board";
   version = "1.7";
 
   src = fetchzip {
-    url = "https://github.com/RestyaPlatform/board/releases/download/v${version}/board-v${version}.zip";
+    url =
+      "https://github.com/RestyaPlatform/board/releases/download/v${version}/board-v${version}.zip";
     sha256 = "sha256-UQ+x7hvBLiHykYCmjJZU8QBwoQn8qi8M6B8h/JA1ZbI=";
     stripRoot = false;
   };

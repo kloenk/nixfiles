@@ -1,4 +1,4 @@
-{  }:
+{ }:
 
 let
   makeDarwin = { user ? "kloenk", ... }@extraArgs:
@@ -7,6 +7,4 @@ let
       system = "aarch64-darwin";
       inherit user;
     } // extraArgs);
-in {
-  frodo = makeDarwin { };
-}
+in { frodo = makeDarwin { }; }

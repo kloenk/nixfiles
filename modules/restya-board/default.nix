@@ -15,9 +15,7 @@ let
 
   poolName = "restya-board";
 
-in
-
-{
+in {
 
   ###### interface
 
@@ -60,21 +58,22 @@ in
           '';
         };
 
-        /*listenHost = mkOption {
-          type = types.str;
-          default = "localhost";
-          description = ''
-            Listen address for the virtualhost to use.
-          '';
-        };
+        /* listenHost = mkOption {
+             type = types.str;
+             default = "localhost";
+             description = ''
+               Listen address for the virtualhost to use.
+             '';
+           };
 
-        listenPort = mkOption {
-          type = types.int;
-          default = 3000;
-          description = ''
-            Listen port for the virtualhost to use.
-          '';
-        };*/
+           listenPort = mkOption {
+             type = types.int;
+             default = 3000;
+             description = ''
+               Listen port for the virtualhost to use.
+             '';
+           };
+        */
       };
 
       database = {
@@ -170,7 +169,6 @@ in
 
   };
 
-
   ###### implementation
 
   config = mkIf cfg.enable {
@@ -262,8 +260,9 @@ in
       serviceConfig.RemainAfterExit = true;
 
       wantedBy = [ "multi-user.target" ];
-      requires = lib.optional (cfg.database.host == null) "postgresql.service" ;
-      after = [ "network.target" ] ++ lib.optional (cfg.database.host == null) "postgresql.service";
+      requires = lib.optional (cfg.database.host == null) "postgresql.service";
+      after = [ "network.target" ]
+        ++ lib.optional (cfg.database.host == null) "postgresql.service";
 
       script = ''
         rm -rf "${runDir}"
@@ -282,9 +281,16 @@ in
           sed -i "s/^.*'R_DB_PASSWORD'.*$/define('R_DB_PASSWORD', 'restya');/g" "${runDir}/server/php/config.inc.php"
         '' else ''
           sed -i "s/^.*'R_DB_HOST'.*$/define('R_DB_HOST', '${cfg.database.host}');/g" "${runDir}/server/php/config.inc.php"
-          sed -i "s/^.*'R_DB_PASSWORD'.*$/define('R_DB_PASSWORD', ${if cfg.database.passwordFile == null then "''" else "'file_get_contents(${cfg.database.passwordFile})'"});/g" "${runDir}/server/php/config.inc.php
+          sed -i "s/^.*'R_DB_PASSWORD'.*$/define('R_DB_PASSWORD', ${
+            if cfg.database.passwordFile == null then
+              "''"
+            else
+              "'file_get_contents(${cfg.database.passwordFile})'"
+          });/g" "${runDir}/server/php/config.inc.php
         ''}
-        sed -i "s/^.*'R_DB_PORT'.*$/define('R_DB_PORT', '${toString cfg.database.port}');/g" "${runDir}/server/php/config.inc.php"
+        sed -i "s/^.*'R_DB_PORT'.*$/define('R_DB_PORT', '${
+          toString cfg.database.port
+        }');/g" "${runDir}/server/php/config.inc.php"
         sed -i "s/^.*'R_DB_NAME'.*$/define('R_DB_NAME', '${cfg.database.name}');/g" "${runDir}/server/php/config.inc.php"
         sed -i "s/^.*'R_DB_USER'.*$/define('R_DB_USER', '${cfg.database.user}');/g" "${runDir}/server/php/config.inc.php"
 
@@ -350,31 +356,29 @@ in
       isSystemUser = true;
       createHome = false;
       home = runDir;
-      group  = "restya-board";
+      group = "restya-board";
     };
-    users.groups.restya-board = {};
+    users.groups.restya-board = { };
 
+    /* services.postgresql.identMap = optionalString (cfg.database.host == null)
+         ''
+           restya-board-users restya-board restya_board
+         '';
 
-    /*services.postgresql.identMap = optionalString (cfg.database.host == null)
-      ''
-        restya-board-users restya-board restya_board
-      '';
-
-    services.postgresql.authentication = optionalString (cfg.database.host == null)
-      ''
-        local restya_board all ident map=restya-board-users
-      '';*/
+       services.postgresql.authentication = optionalString (cfg.database.host == null)
+         ''
+           local restya_board all ident map=restya-board-users
+         '';
+    */
 
     services.postgresql = mkIf (cfg.database.host == null) {
       enable = true;
-      ensureUsers = [
-        {
-          name = "${cfg.database.user}";
-          ensurePermissions = {
-            "DATABASE ${cfg.database.name}" = "ALL PRIVILEGES";
-          };
-        }
-      ];
+      ensureUsers = [{
+        name = "${cfg.database.user}";
+        ensurePermissions = {
+          "DATABASE ${cfg.database.name}" = "ALL PRIVILEGES";
+        };
+      }];
 
       ensureDatabases = [ cfg.database.name ];
     };

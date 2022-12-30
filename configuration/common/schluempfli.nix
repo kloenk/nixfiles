@@ -1,4 +1,4 @@
-{ extraGroups ? [] }:
+{ extraGroups ? [ ] }:
 
 { pkgs, ... }:
 

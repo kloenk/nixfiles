@@ -23,15 +23,16 @@
     "172.16.0.1" = [ "airlink.local" ];
   };
 
-  boot.initrd.luks.devices."crpytLVM".device = "/dev/disk/by-id/wwn-0x600508b1001c577e51960d44ae47cb27-part2";
+  boot.initrd.luks.devices."crpytLVM".device =
+    "/dev/disk/by-id/wwn-0x600508b1001c577e51960d44ae47cb27-part2";
   boot.initrd.luks.reusePassphrases = true;
-
 
   # delete files in /
   boot.initrd.postDeviceCommands = lib.mkAfter ''
     ${pkgs.xfsprogs}/bin/mkfs.xfs -m reflink=1 -f /dev/${config.networking.hostName}/root
   '';
-  fileSystems."/".device = lib.mkForce "/dev/${config.networking.hostName}/root";
+  fileSystems."/".device =
+    lib.mkForce "/dev/${config.networking.hostName}/root";
 
   # FIME: remove
   security.acme.server = builtins.trace "remove staging environment from acme"
@@ -52,12 +53,13 @@
   boot.initrd.network.ssh.enable = true;
   boot.initrd.availableKernelModules = [ "myri10ge" ];
 
-  /*networking.interfaces.br0.ipv4.addresses = [
-    {
-      address = "192.168.178.249";
-      prefixLength = 24;
-    }
-  ];*/
+  /* networking.interfaces.br0.ipv4.addresses = [
+       {
+         address = "192.168.178.249";
+         prefixLength = 24;
+       }
+     ];
+  */
 
   systemd.network = {
     networks."20-glas" = {

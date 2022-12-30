@@ -4,15 +4,16 @@ let bondName = "world";
 in {
   boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
 
-  /*petabyte.nftables.extraConfig = ''
-    table ip nat {
-      chain postrouting {
-        type nat hook postrouting priority srcnat;
-        ip saddr 192.168.178.0/24 oif wlp2s0 masquerade
-      }
-    }
-  '';
-  nftables.forwardPolicy = "accept";*/
+  /* petabyte.nftables.extraConfig = ''
+       table ip nat {
+         chain postrouting {
+           type nat hook postrouting priority srcnat;
+           ip saddr 192.168.178.0/24 oif wlp2s0 masquerade
+         }
+       }
+     '';
+     nftables.forwardPolicy = "accept";
+  */
 
   systemd.network = {
     netdevs."25-vlan" = {
