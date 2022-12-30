@@ -8,41 +8,30 @@
     [ (modulesPath + "/profiles/qemu-guest.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "virtio_pci" "sr_mod" "virtio_blk" ];
+  boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "virtio_pci" "sd_mod" "sr_mod" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
-  boot.kernelModules = [ "kvm-amd" ];
+  boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/iluvatar/root";
+    { device = "/dev/disk/by-uuid/3dcb1df9-7f9c-4eac-88f1-102784d0faea";
       fsType = "xfs";
-    };
-
-  fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/665102b7-1916-4ca7-b3c3-cb935065ed79";
-      fsType = "xfs";
-    };
-
-  fileSystems."/persist" =
-    { device = "/dev/disk/by-uuid/02d1076a-4241-4f65-902a-68a819d3b745";
-      fsType = "xfs";
-      neededForBoot = true;
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/1F93-C8E4";
+    { device = "/dev/disk/by-uuid/516A-6EEC";
       fsType = "vfat";
     };
 
-  fileSystems."/persist/backup" =
-    { device = "/dev/disk/by-uuid/6af8ef3b-4c1c-46c8-bf16-363ea2624abe";
-      fsType = "xfs";
-    };
+  swapDevices = [ ];
 
-  boot.initrd.luks.devices."cryptBackup".device = "/dev/disk/by-uuid/34cf48da-a2fc-4eab-b50e-619b536ec8a0";
+  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
+  # (the default) this is the recommended approach. When using systemd-networkd it's
+  # still possible to use this option, but it's recommended to use it in conjunction
+  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
+  networking.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp1s0.useDHCP = lib.mkDefault true;
 
-  swapDevices =
-    [ { device = "/dev/disk/by-uuid/179092e7-d0f1-4614-8515-78005409e0a8"; }
-    ];
-
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

@@ -13,8 +13,8 @@ let
         #"a:kloenk.dev"
         #"a:mail.kloenk.dev"
         "a:gimli.kloenk.dev"
-        "ip4:195.39.247.182/32"
-        "ip6:2a0f:4ac0:0:1::cb2/128"
+        "ip4:9.12.72.200/32"
+        "ip6:2a01:4f8:c012:b874::/128"
       ])
     ];
 
@@ -35,7 +35,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.matrixcore.dev.";
       adminEmail = "hostmaster.kloenk.dev."; # TODO: change mail
-      serial = 2021010129;
+      serial = 2021010130;
       refresh = 600;
       expire = 604800;
       minimum = 600;
@@ -46,8 +46,8 @@ let
     /*A = map (ttl 600) [ (a "195.39.247.6") ];
 
     AAAA = map (ttl 600) [ (aaaa "2a0f:4ac0::6") ];*/
-    A = map (ttl 600) [ (a "195.39.247.187") ];
-    AAAA = map (ttl 600) [ (aaaa "2a0f:4ac0:0:1::548") ];
+    A = map (ttl 600) [ (a "49.12.72.200") ];
+    AAAA = map (ttl 600) [ (aaaa "2a01:4f8:c012:b874::") ];
     #CNAME = [ "iluvatar.kloenk.dev." ];
 
     TXT = spfKloenk ++ [ "google-site-verification=HNiDFThpZZWaFE0YH4TzDN2coqiBoedYzj0CxDN6Nl8" ];
@@ -55,7 +55,7 @@ let
     CAA = letsEncrypt config.security.acme.email;
 
     subdomains = rec {
-      iluvatar.CNAME = [ "iluvatar.wolfsburg.petabyte.dev." ];
+      iluvatar.CNAME = [ "iluvatar.kloenk.dev." ];
       ns1 = iluvatar;
 
       #cgit = iluvatar;
@@ -66,12 +66,6 @@ let
       git.subdomains._dmarc.TXT = dmarc;
 
       _dmarc.TXT = dmarc;
-
-      /*grafana = manwe;
-      prometheus = manwe;
-      alertmanager = manwe;*/
-
-      #matrix = gimli;
 
       matrix-push.subdomains.dev = iluvatar;
       matrix-push.CNAME = iluvatar.CNAME;

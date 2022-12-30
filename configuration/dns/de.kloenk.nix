@@ -14,8 +14,8 @@ let
     map (dns.combinators.ttl 600) [
       (strict [
         "a:gimli.kloenk.de"
-        "ip4:195.39.247.182/32"
-        "ip6:2a0f:4ac0:0:1::cb2/128"
+        "ip4:49.12.72.200/32"
+        "ip6:2a01:4f8:c012:b874::/128"
       ])
     ];
 
@@ -36,7 +36,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.de.";
       adminEmail = "hostmaster@kloenk.de";
-      serial = 2020122608;
+      serial = 2020122609;
       refresh = 600;
       expire = 604800;
       minimum = 600;
@@ -45,8 +45,8 @@ let
     NS = [ "ns2.he.net." "ns4.he.net." "ns3.he.net." "ns5.he.net." ];
 
     #A = map (ttl 600) [ (a "195.39.247.6") ];
-    A = map (ttl 600) [ (a "195.39.247.187") ];
-    AAAA = map (ttl 600) [ (aaaa "2a0f:4ac0:0:1::548") ];
+    A = map (ttl 600) [ (a "49.12.72.200") ];
+    AAAA = map (ttl 600) [ (aaaa "2a01:4f8:c012:b874::") ];
 
     #AAAA = map (ttl 600) [ (aaaa "2a0f:4ac0::6") ];
 
@@ -81,10 +81,6 @@ let
       aule = hostTTL 1200 "195.39.221.50" null;*/
 
       iluvatar.CNAME = [ "iluvatar.kloenk.dev." ];
-      manwe.CNAME = [ "manwe.kloenk.dev." ];
-      sauron.CNAME = [ "sauron.kloenk.dev." ];
-      aule.CNAME = [ "aule.kloenk.dev." ];
-
       ns1 = iluvatar;
 
       _dmarc.TXT = dmarc;
@@ -99,18 +95,6 @@ let
 
       mail = iluvatar;
       bitwarden = iluvatar;
-
-      grafana = manwe;
-      prometheus = manwe;
-      alertmanager = manwe;
-      #fwd = manwe; # TODO
-      #schule = manwe; # TODO
-      punkte = manwe;
-
-      #hydra = melkor;
-      cache = iluvatar; # TODO: somewhere else
-
-      luna.CNAME = [ "luna.pbb.lc." ];
 
       bbb-wass.CNAME = [ "bbb.wass-er.com." ];
       knuddel-usee.CNAME = [ "stream.unterbachersee.de." ];

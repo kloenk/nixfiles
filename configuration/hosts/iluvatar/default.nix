@@ -1,4 +1,4 @@
-{ configs, pkgs, lib, ... }:
+{ config, pkgs, lib, ...}:
 
 {
   imports = [
@@ -8,48 +8,21 @@
     ./bitwarden.nix
     ./postgres.nix
     ./website.nix
-    #./restic.nix
 
-    # Escape service
-    #./minecraft.nix
-    ./jlly.nix
-    ./fleet_bot.nix
-
-    ./pleroma
-    ./cgit.nix
-    #./gerrit.nix
-
-    ./mysql.nix
+    #./mysql.nix
 
     ./coredns.nix
 
     ../../common/telegraf.nix
-    ../../default.nix
   ];
 
   # vm connection
   services.qemuGuest.enable = true;
 
   boot.supportedFilesystems = [ "vfat" "xfs" ];
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.grub.enable = false;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  boot.initrd.luks.reusePassphrases = true;
-  boot.initrd.luks.devices.cryptRoot.device =
-    "/dev/disk/by-path/pci-0000:04:00.0-part1";
-  boot.initrd.luks.devices.cryptSwap.device =
-    "/dev/disk/by-path/virtio-pci-0000:08:00.0";
-
-  # initrd network
-  boot.initrd.network.enable = true;
-  boot.initrd.availableKernelModules = [ "virtio-pci" ];
-  boot.initrd.network.ssh = {
-    enable = true;
-  };
-
-  # delete files in `/`
-  kloenk.transient.enable = true;
+  boot.loader.grub.enable = true;
+  boot.loader.grub.version = 2;
+  boot.loader.grub.device = "/dev/sda";
 
   networking.hostName = "iluvatar";
   networking.domain = "kloenk.dev";
@@ -64,6 +37,7 @@
       127.0.0.1 iluvatar.kloenk.dev
     '';
 
+
   networking.dhcpcd.enable = false;
   networking.useDHCP = false;
   networking.interfaces.enp1s0.useDHCP = true;
@@ -72,21 +46,12 @@
   # running bind/coredn
   services.resolved.enable = false;
 
-  services.vnstat.enable = true;
-
-  # TODO: set DNS via networkd
-
-  # auto update/garbage collector
-  system.autoUpgrade.enable = true;
   nix.gc.automatic = true;
-  #nix.gc.options = "--delete-older-than 4d";
-  #systemd.services.nixos-upgrade.path = with pkgs; [  gnutar xz.bin gzip config.];
-
   users.users.root.initialPassword = "foobar";
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = "21.03";
+  system.stateVersion = "23.05";
 }

@@ -12,14 +12,14 @@
     enable = true;
     backupDir = "/var/lib/bitwarden_rs/backup";
     config = {
-      domain = "https://bitwarden.kloenk.de";
-      signupsAllowed = true;
+      domain = "https://bitwarden.kloenk.dev";
+      signupsAllowed = false;
       rocketPort = 8222;
       rocketLog = "critical";
     };
   };
 
-  services.nginx.virtualHosts."bitwarden.kloenk.de" = {
+  services.nginx.virtualHosts."bitwarden.kloenk.dev" = {
     enableACME = true;
     forceSSL = true;
     # Allow large attachments

@@ -13,8 +13,8 @@ let
         #"a:kloenk.dev"
         #"a:mail.kloenk.dev"
         "a:gimli.kloenk.dev"
-        "ip4:195.39.247.182/32"
-        "ip6:2a0f:4ac0:0:1::cb2/128"
+        "ip4:49.12.72.200/32"
+        "ip6:2a01:4f8:c012:b874::/64"
       ])
     ];
 
@@ -35,7 +35,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.dev.";
       adminEmail = "hostmaster.kloenk.dev."; # TODO: change mail
-      serial = 2021010140;
+      serial = 2021010141;
       refresh = 600;
       expire = 604800;
       minimum = 600;
@@ -47,8 +47,8 @@ let
 
        AAAA = map (ttl 600) [ (aaaa "2a0f:4ac0::6") ];
     */
-    A = map (ttl 600) [ (a "195.39.247.187") ];
-    AAAA = map (ttl 600) [ (aaaa "2a0f:4ac0:0:1::548") ];
+    A = map (ttl 600) [ (a "49.12.72.200") ];
+    AAAA = map (ttl 600) [ (aaaa "2a01:4f8:c012:b874::") ];
     #CNAME = [ "iluvatar.kloenk.dev." ];
 
     TXT = spfKloenk ++ [
@@ -58,17 +58,17 @@ let
     CAA = letsEncrypt config.security.acme.email;
 
     subdomains = rec {
-      iluvatar.CNAME = [ "iluvatar.wolfsburg.petabyte.dev." ];
-      manwe = hostTTL 1200 "195.39.221.187" null;
+      iluvatar.CNAME = [ "kloenk.dev." ];
+      #manwe = hostTTL 1200 "195.39.221.187" null;
       #gimli.CNAME = [ "gimli.wolfsburg.petabyte.dev." ];
-      gimli = hostTTL 1200 "195.39.247.182" "2a0f:4ac0:0:1::cb2";
+      gimli = iluvatar; #hostTTL 1200 "195.39.247.182" "2a0f:4ac0:0:1::cb2";
 
       usee-nschl = hostTTL 1200 "5.9.118.93" "2a01:4f8:162:6343::3";
 
       ns1 = iluvatar;
 
-      cgit = iluvatar;
-      cache = iluvatar;
+      #cgit = iluvatar;
+      #cache = iluvatar;
 
       # SourceHut
       /* todo = iluvatar;
@@ -82,12 +82,6 @@ let
          builds = iluvatar;
       */
 
-      gerrit = iluvatar;
-      git.CNAME = iluvatar.CNAME;
-      git.MX = mxKloenk;
-      git.TXT = spfKloenk;
-      git.subdomains._dmarc.TXT = dmarc;
-
       _dmarc.TXT = dmarc;
 
       drachensegler.MX = mxKloenk;
@@ -95,24 +89,13 @@ let
       drachensegler.subdomains._dmarc.TXT = dmarc;
 
       bitwarden = iluvatar;
-      play = gimli;
-      meet = gimli;
-      turn = gimli;
 
       social = iluvatar;
-      ghost = manwe;
-
-      escapetheminecraft = iluvatar;
 
       grafana = manwe;
-      prometheus = manwe;
       influx = manwe;
-      alertmanager = manwe;
-      m-sandbox = manwe;
-      unifi = manwe;
 
       matrix = gimli // { subdomains.api = gimli; };
-      stream = gimli;
       mail = gimli;
 
       knuddel-usee.CNAME = [ "stream.unterbachersee.de." ];
@@ -136,8 +119,6 @@ let
         (txt ''
           v=DKIM1; k=rsa; " "p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCl1K0nT6nViifArMweC+/SHsekNCGuTOaXvkGVabr+aAC/56d2brxocLoVeVBDVMdY6PkQ9BCNMYVWPuw1n78LXH+dRoyezulp5124scitz2daGQT6MaeWAGYKJHw8aZQj6c5ahxJJHEOkGx6/o1E2UO3LvKpXxxldyAoGnHe7MwIDAQAB'')
       ];
-
-      satisfactory = hostTTL 600 "81.169.152.161" null;
 
       rssr.subdomains = { engel = manwe; };
     };

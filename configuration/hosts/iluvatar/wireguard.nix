@@ -69,20 +69,6 @@
           PersistentKeepalive = 21;
         };
       }
-      { # manwe
-        wireguardPeerConfig = {
-          AllowedIPs = [ "192.168.242.103/32" ];
-          PublicKey = "JRI1Z4XOrTAsyMqQ39f3QZ47aUftUnNeIjpxnfTUT3k=";
-          Endpoint = "manwe.kloenk.dev:51820";
-        };
-      }
-      { # gimli
-        wireguardPeerConfig = {
-          AllowedIPs = [ "192.168.242.104/32" ];
-          PublicKey = "z2bkiOj0E0G0jF20+SLqv7jwFZyDtZxdvsiNOCIEbhE=";
-          Endpoint = "gimli.kloenk.dev:51820";
-        };
-      }
 
       { # frodo
         wireguardPeerConfig = {
@@ -117,7 +103,6 @@
   networking.hosts = {
     #"10.0.0.2" = [ "io.yougen.de" "git.yougen.de" ];
     #"10.0.0.5" = [ "grafana.yougen.de" "hydra.yougen.de" "lycus.yougen.de" ];
-    "172.16.16.3" = [ "core.josefstrasse.yougen.de" ];
   };
 
   systemd.network.netdevs."30-wg2" = {
