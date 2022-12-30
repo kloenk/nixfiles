@@ -59,6 +59,7 @@ let
 
     subdomains = rec {
       iluvatar.CNAME = [ "kloenk.dev." ];
+
       #manwe = hostTTL 1200 "195.39.221.187" null;
       #gimli.CNAME = [ "gimli.wolfsburg.petabyte.dev." ];
       gimli = iluvatar; #hostTTL 1200 "195.39.247.182" "2a0f:4ac0:0:1::cb2";
@@ -92,8 +93,8 @@ let
 
       social = iluvatar;
 
-      grafana = manwe;
-      influx = manwe;
+      grafana = iluvatar;
+      influx = iluvatar;
 
       matrix = gimli // { subdomains.api = gimli; };
       mail = gimli;
@@ -120,7 +121,6 @@ let
           v=DKIM1; k=rsa; " "p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCl1K0nT6nViifArMweC+/SHsekNCGuTOaXvkGVabr+aAC/56d2brxocLoVeVBDVMdY6PkQ9BCNMYVWPuw1n78LXH+dRoyezulp5124scitz2daGQT6MaeWAGYKJHw8aZQj6c5ahxJJHEOkGx6/o1E2UO3LvKpXxxldyAoGnHe7MwIDAQAB'')
       ];
 
-      rssr.subdomains = { engel = manwe; };
     };
   };
 
