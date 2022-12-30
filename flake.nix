@@ -207,6 +207,7 @@
 
           imports = [
             ./configuration/hosts/iluvatar
+            mail-server.nixosModules.mailserver
             (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix"))
           ];
         };
