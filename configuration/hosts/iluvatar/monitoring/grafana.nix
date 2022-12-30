@@ -22,13 +22,13 @@
 
   services.grafana = {
     enable = true;
-    domain = "grafana.kloenk.dev";
     provision = {
       enable = true;
       #dashboards = [{ options.path = ./dashboards; }];
     };
     settings = {
       "auth.anonymous".enabled = true;
+      server.domain = "grafana.kloenk.dev";
       server.root_url = "https://grafana.kloenk.dev/";
       server.http_port = 3001;
       database = {
