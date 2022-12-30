@@ -14,8 +14,8 @@ let
     map (dns.combinators.ttl 600) [
       (strict [
         "a:gimli.kloenk.de"
-        "ip4:195.39.247.182/32"
-        "ip6:2a0f:4ac0:0:1::cb2/128"
+        "ip4:49.12.72.200/32"
+        "ip6:2a01:4f8:c012:b874::/64"
       ])
     ];
 
@@ -36,7 +36,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.burscheider-imkerverein.de.";
       adminEmail = "hostmaster@burscheider-imkerverein.de";
-      serial = 2020122609;
+      serial = 2020122610;
       refresh = 600;
       expire = 604800;
       minimum = 600;
@@ -44,8 +44,9 @@ let
 
     NS = [ "ns2.he.net." "ns4.he.net." "ns3.he.net." "ns5.he.net." ];
 
-    A = map (ttl 600) [ (a "195.39.247.182") ];
-    AAAA = map (ttl 600) [ (aaaa "2a0f:4ac0:0:1::cb2") ];
+
+    A = map (ttl 600) [ (a "49.12.72.200") ];
+    AAAA = map (ttl 600) [ (aaaa "2a01:4f8:c012:b874::") ];
 
     MX = mxKloenk;
 
