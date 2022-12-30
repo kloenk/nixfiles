@@ -188,7 +188,7 @@
           # disable home-manager manpage (breaks hydra see https://github.com/rycee/home-manager/issues/1262)
           home-manager.users.kloenk.manual.manpages.enable = false;
 
-          environment.systemPackages = [ pkgs.colmena ];
+          environment.systemPackages = [ /* pkgs.colmena */ ];
 
           deployment = nixpkgs.lib.mkIf colmena {
             buildOnTarget = true;
