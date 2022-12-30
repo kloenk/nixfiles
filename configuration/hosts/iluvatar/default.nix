@@ -37,6 +37,10 @@
       127.0.0.1 iluvatar.kloenk.dev
     '';
 
+  systemd.network.networks."40-enp1s0" = {
+    name = "enp1s0";
+    addresses = [{ addressConfig.Address = "2a01:4f8:c012:b874::/64"; }];
+  };
 
   networking.dhcpcd.enable = false;
   networking.useDHCP = false;
