@@ -291,4 +291,9 @@
       checks = forAllSystems
         (system: { devenv_ci = self.devShells.${system}.devenv.ci; });
     };
+  nixConfig = {
+    extra-substituters = [ "https://kloenk.cachix.org" ];
+    extra-trusted-public-keys =
+      [ "kloenk.cachix.org-1:k52XSkCLOxnmEnjzuedYOzf0MtQp8P3epqOmAlCHYpc=" ];
+  };
 }

@@ -1,0 +1,21 @@
+name: "Nix build"
+on:
+  push:
+    branches: [ "main", "staging", "trying" ]
+    tags: ['v*']
+  pull_request:
+    branches: [ "main" ]
+jobs:
+  nix-build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: cachix/install-nix-action@v18
+      with:
+        extra_nix_config: |
+          access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+    - uses: cachix/cachix-action@v11
+      with:
+        name: kloenk
+        signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
+    - run: nix flake check
