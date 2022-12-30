@@ -152,7 +152,7 @@
       nixosConfigurations = {
         iluvatar = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { nodes = self.colmena; pkgs = self.colmena.meta.nixpkgs; };
+          specialArgs = { nodes = self.colmena; pkgs = self.colmena.meta.nixpkgs; colmena = false; };
           modules = [
             self.colmena.defaults
             self.colmena.iluvatar
@@ -168,9 +168,10 @@
           allowApplyAll = false;
 
           specialArgs.inputs = inputs;
+          specialArgs.colmena = true;
         };
 
-        defaults = { pkgs, ... }: {
+        defaults = { pkgs, colmena ? true, ... }: {
           disabledModules = [
             "services/games/minecraft-server.nix"
             "services/web-apps/wordpress.nix"
@@ -195,16 +196,20 @@
 
           environment.systemPackages = with pkgs; [ colmena ];
 
-          deployment.buildOnTarget = true;
-          deployment.allowLocalDeployment = true;
-          deployment.targetPort = 62954;
-          deployment.targetUser = "kloenk";
+          deployment = nixpkgs.lib.mkIf colmena {
+            buildOnTarget = true;
+            allowLocalDeployment = true;
+            targetPort = 62954;
+            targetUser = "kloenk";
+          };
         };
 
         # DUS 6
         iluvatar = { pkgs, nodes, ... }: {
-          deployment.targetHost = "iluvatar.kloenk.dev";
-          deployment.tags = [ "hetzner" "remote" ];
+          deployment = nixpkgs.lib.mkIf colmena {
+            targetHost = "iluvatar.kloenk.dev";
+            tags = [ "hetzner" "remote" ];
+          };
 
           imports = [
             ./configuration/hosts/iluvatar
