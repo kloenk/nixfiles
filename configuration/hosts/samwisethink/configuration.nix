@@ -52,22 +52,22 @@
     "cgroup_no_v1=all"
   ];
 
-  /*boot.kernelPatches = [
-    {
-      name = "nl80211-reload";
-      patch = ./0001-nl80211-reset-regdom-when-reloading-regdb.patch;
-      extraStructuredConfig = with lib.kernel; {
-        EXPERT = yes;
-        CFG80211_CERTIFICATION_ONUS = yes;
-        CFG80211_REQUIRE_SIGNED_REGDB = no;
-      };
-    }
-    {
-      name = "nl80211-reload-remove";
-      patch = ./0001-nl80211-remove-reload-flag-from-regulatory_request.patch;
-    }
-  ];*/
-
+  /* boot.kernelPatches = [
+       {
+         name = "nl80211-reload";
+         patch = ./0001-nl80211-reset-regdom-when-reloading-regdb.patch;
+         extraStructuredConfig = with lib.kernel; {
+           EXPERT = yes;
+           CFG80211_CERTIFICATION_ONUS = yes;
+           CFG80211_REQUIRE_SIGNED_REGDB = no;
+         };
+       }
+       {
+         name = "nl80211-reload-remove";
+         patch = ./0001-nl80211-remove-reload-flag-from-regulatory_request.patch;
+       }
+     ];
+  */
 
   kloenk.transient.vgroup = "ssd";
   kloenk.transient.enable = true;
@@ -81,7 +81,8 @@
   networking.useDHCP = false;
   networking.wireless.enable = true;
   networking.wireless.interfaces = [ "wlp2s0" ];
-  networking.supplicant.wlp2s0.configFile.path = config.sops.secrets."wpa_supplicant".path;
+  networking.supplicant.wlp2s0.configFile.path =
+    config.sops.secrets."wpa_supplicant".path;
   sops.secrets.wpa_supplicant.owner = "root";
   #networking.wireless.userControlled.enable = true;
   networking.nameservers = [ "1.1.1.1" "10.0.0.2" ];
@@ -98,16 +99,17 @@
     builders-use-substitutes = true
   '';
 
-  environment.systemPackages = with pkgs; [
-    #spice_gtk
-    #ebtables
-    #davfs2
-    #geogebra
-    #gtk-engine-murrine
-    #tango-icon-theme
-    #breeze-icons
-    #gnome3.adwaita-icon-theme
-  ];
+  environment.systemPackages = with pkgs;
+    [
+      #spice_gtk
+      #ebtables
+      #davfs2
+      #geogebra
+      #gtk-engine-murrine
+      #tango-icon-theme
+      #breeze-icons
+      #gnome3.adwaita-icon-theme
+    ];
 
   services.tlp.enable = true;
 
@@ -180,7 +182,8 @@
   services.syncthing.dataDir = "/persist/syncthing/";
   #systemd.homed.enable = true;
 
-  home-manager.users.kloenk.wayland.windowManager.sway.config.output."LVDS-1".transform = "180";
+  home-manager.users.kloenk.wayland.windowManager.sway.config.output."LVDS-1".transform =
+    "180";
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database

@@ -12,14 +12,12 @@
     #../../desktop/vscode.nix
   ];
 
-
   hardware.enableRedistributableFirmware = true;
 
   boot.supportedFilesystems = [ "xfs" "vfat" ];
   boot.loader.grub.enable = false;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = false;
-
 
   networking.hostName = "bilbo";
   networking.useDHCP = false;
@@ -44,7 +42,6 @@
     #teamspeak_client       # team speak
   ];
 
-
   users.users.kloenk.extraGroups = [
     "dialout" # allowes serial connections
     "plugdev" # allowes stlink connection
@@ -53,7 +50,6 @@
 
   services.pcscd.enable = true;
   #services.pcscd.plugins = with pkgs; [ ccid pcsc-cyberjack ];
-
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database

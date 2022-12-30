@@ -1,16 +1,17 @@
 { lib, pkgs, config, ... }:
 
 {
-  /*nix.registry.kloenk = {
-    from.type = "indirect";
-    from.id = "kloenk";
-    #to.url = "git+https://git.kloenk.dev/kloenk/nix";
-    to.type = "gitlab";
-    to.repo = "nix";
-    to.owner = "kloenk";
-    to.host = "lab.kloenk.dev";
-    exact = false;
-  };*/
+  /* nix.registry.kloenk = {
+       from.type = "indirect";
+       from.id = "kloenk";
+       #to.url = "git+https://git.kloenk.dev/kloenk/nix";
+       to.type = "gitlab";
+       to.repo = "nix";
+       to.owner = "kloenk";
+       to.host = "lab.kloenk.dev";
+       exact = false;
+     };
+  */
 
   users.users.kloenk = {
     isNormalUser = true;

@@ -44,13 +44,14 @@ let
 
     NS = [ "ns2.he.net." "ns4.he.net." "ns3.he.net." "ns5.he.net." ];
 
-
     A = map (ttl 600) [ (a "49.12.72.200") ];
     AAAA = map (ttl 600) [ (aaaa "2a01:4f8:c012:b874::") ];
 
     MX = mxKloenk;
 
-    TXT = spfKloenk ++ [ "google-site-verification=nwoA8cdOGh7-8MC9B0WQIE3jP_neM6L9zehMgcSnkxE" ];
+    TXT = spfKloenk ++ [
+      "google-site-verification=nwoA8cdOGh7-8MC9B0WQIE3jP_neM6L9zehMgcSnkxE"
+    ];
     CAA = letsEncrypt config.security.acme.email;
 
     subdomains = rec {
@@ -61,7 +62,6 @@ let
 
       drachensegler.MX = mxKloenk;
       drachensegler.TXT = spfKloenk;
-
 
       _domainkey.subdomains.mail.TXT = [
         (txt ''

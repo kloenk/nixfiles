@@ -150,22 +150,23 @@
 
   home-manager.users.kloenk.home.file.".config/VSCodium/User/settings.json".source =
     ./code-settings.json;
-  /*home-manager.users.kloenk.home.file.".config/qutebrowser/config.py".text = ''
-    config.bind('p', 'spawn --userscript qute-pass --dmenu-invocation "wofi --show dmenu"')
-    config.bind('P', 'spawn --userscript qute-pass --otp-only --dmenu-invocation "wofi --show dmenu"')
-    config.bind('m', 'spawn mpv {url}')
-    config.bind('M', 'hint links spawn mpv {hint-url}')
+  /* home-manager.users.kloenk.home.file.".config/qutebrowser/config.py".text = ''
+       config.bind('p', 'spawn --userscript qute-pass --dmenu-invocation "wofi --show dmenu"')
+       config.bind('P', 'spawn --userscript qute-pass --otp-only --dmenu-invocation "wofi --show dmenu"')
+       config.bind('m', 'spawn mpv {url}')
+       config.bind('M', 'hint links spawn mpv {hint-url}')
 
-    c.content.host_blocking.enabled = False
-    c.content.host_blocking.lists = [
-      'https://easylist.to/easylist/easylist.txt',
-      'https://easylist.to/easylist/easyprivacy.txt'
-    ]
+       c.content.host_blocking.enabled = False
+       c.content.host_blocking.lists = [
+         'https://easylist.to/easylist/easylist.txt',
+         'https://easylist.to/easylist/easyprivacy.txt'
+       ]
 
-    import sys, os
-    sys.path.append(os.path.join(sys.path[0], '${pkgs.jblock}'))
-    config.source("${pkgs.jblock}/jblock/integrations/qutebrowser.py")
-  '';*/
+       import sys, os
+       sys.path.append(os.path.join(sys.path[0], '${pkgs.jblock}'))
+       config.source("${pkgs.jblock}/jblock/integrations/qutebrowser.py")
+     '';
+  */
 
   home-manager.users.kloenk.home.packages = [ pkgs.kitty ];
   home-manager.users.kloenk.xdg.configFile."kitty/kitty.conf".source =

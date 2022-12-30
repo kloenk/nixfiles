@@ -56,5 +56,4 @@ let
       ];
     };
   };
-in
-  dns.writeZone "mc-weimar.dev" zone
+in dns.writeZone "mc-weimar.dev" zone

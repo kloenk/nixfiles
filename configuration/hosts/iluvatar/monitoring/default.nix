@@ -1,8 +1,5 @@
 { lib, config, pkgs, ... }:
 
 {
-  imports = [
-    ./grafana.nix
-    ./influx.nix
-  ];
+  imports = [ ./grafana.nix ./influx.nix ];
 }

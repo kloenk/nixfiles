@@ -8,12 +8,14 @@
   ];
 
   # FIME: remove
-  security.acme.defaults.server = builtins.trace "remove staging environment from acme"
+  security.acme.defaults.server =
+    builtins.trace "remove staging environment from acme"
     "https://acme-staging-v02.api.letsencrypt.org/directory";
 
   hardware.cpu.intel.updateMicrocode = true;
   boot.loader.grub.efiSupport = true;
-  boot.loader.grub.device = "/dev/disk/by-id/nvme-Seagate_FireCuda_510_SSD_ZP2000GM30001_7MZ00FM5";
+  boot.loader.grub.device =
+    "/dev/disk/by-id/nvme-Seagate_FireCuda_510_SSD_ZP2000GM30001_7MZ00FM5";
   #boot.loader.grub.enable = false;
   #boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -34,8 +36,14 @@
 
   # networking
   networking = {
-    vlans.vlan1020 = { interface = "eno1"; id = 1020; };
-    vlans.vlan1337 = { interface = "eno1"; id = 1337; };
+    vlans.vlan1020 = {
+      interface = "eno1";
+      id = 1020;
+    };
+    vlans.vlan1337 = {
+      interface = "eno1";
+      id = 1337;
+    };
 
     bridges = {
       br0.interfaces = [ "eno1" ];
@@ -61,22 +69,20 @@
   # initrd ssh server
   boot.initrd.network.enable = true;
   boot.initrd.availableKernelModules = [ "e1000e" ];
-  boot.initrd.network.ssh = {
-    enable = true;
-  };
+  boot.initrd.network.ssh = { enable = true; };
 
-  /*
-  boot.initrd.preLVMCommands = lib.mkBefore (''
-    ip li set eno1 up
-    ip addr add 192.168.178.249/24 dev eno1 && hasNetwork=1
-  '');
+  /* boot.initrd.preLVMCommands = lib.mkBefore (''
+       ip li set eno1 up
+       ip addr add 192.168.178.249/24 dev eno1 && hasNetwork=1
+     '');
   */
 
   services.openssh.extraConfig = ''
     StreamLocalBindUnlink yes
   '';
 
-  networking.nameservers = [ "192.168.178.248" "1.1.1.1" "2001:4860:4860::8888" ];
+  networking.nameservers =
+    [ "192.168.178.248" "1.1.1.1" "2001:4860:4860::8888" ];
   networking.search = [ "fritz.box" ];
 
   kloenk.transient.enable = true;

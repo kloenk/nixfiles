@@ -7,9 +7,10 @@
     ../../common/darwin.nix
   ];
 
-  environment.systemPackages = with pkgs; [
-    #pkgs.vim
-  ];
+  environment.systemPackages = with pkgs;
+    [
+      #pkgs.vim
+    ];
 
   networking.hostName = "frodo";
 
@@ -30,6 +31,7 @@
     go
     nil
     chatterino2
+    direnv
 
     wireguard-tools
     wireguard-go

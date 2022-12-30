@@ -1,4 +1,4 @@
-{ fetchFromGitHub, nixStable, callPackage, fetchpatch, nixosTests, nix}:
+{ fetchFromGitHub, nixStable, callPackage, fetchpatch, nixosTests, nix }:
 
 {
   # Package for phase-1 of the db migration for Hydra.

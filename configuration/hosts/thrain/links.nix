@@ -21,10 +21,11 @@
       dns = [ "127.0.0.1" ];
       bridge = [ "br0" ];
       vlan = [ "vlan1337" ];
-      /*addresses = [
-        { addressConfig.Address = "192.168.178.248/24"; }
-        #{ addressConfig.Address = "192.168.178.2/24"; }
-      ];*/
+      /* addresses = [
+           { addressConfig.Address = "192.168.178.248/24"; }
+           #{ addressConfig.Address = "192.168.178.2/24"; }
+         ];
+      */
       #routes = [
       #  { routeConfig.Gateway = "192.168.178.1"; }
       #  { routeConfig.Gateway = "fd00::ca0e:14ff:fe07:a2fa"; }
@@ -53,14 +54,16 @@
     networks."25-br0" = {
       name = "br0";
       DHCP = "no";
-      addresses = [
-        { addressConfig.Address = "192.168.178.248/24"; }
-        #{ addressConfig.Address = "192.168.178.2/24"; }
-      ];
-      routes = [
-        { routeConfig.Gateway = "192.168.178.1"; }
+      addresses = [{
+        addressConfig.Address = "192.168.178.248/24";
+      }
+      #{ addressConfig.Address = "192.168.178.2/24"; }
+        ];
+      routes = [{
+        routeConfig.Gateway = "192.168.178.1";
+      }
       #  { routeConfig.Gateway = "fd00::ca0e:14ff:fe07:a2fa"; }
-      ];
+        ];
     };
 
     networks."25-tun" = {
@@ -103,9 +106,7 @@
       name = "wg0";
       linkConfig = { RequiredForOnline = "yes"; };
       addresses = [{ addressConfig.Address = "192.168.242.101/24"; }];
-      routes = [
-        { routeConfig.Destination = "192.168.242.0/24"; }
-      ];
+      routes = [{ routeConfig.Destination = "192.168.242.0/24"; }];
     };
 
     networks."99-how_cares".linkConfig.RequiredForOnline = "no";

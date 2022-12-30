@@ -6,12 +6,14 @@ let
 
   doDocker = config.virtualisation.docker.enable && cfg.generateDockerRules;
 
-  mkPorts = cond: ports: ranges: action: let
-    portStrings = (map (range: "${toString range.from}-${toString range.to}") ranges)
-               ++ (map toString ports);
-  in lib.optionalString (portStrings != []) ''
-    ${cond} dport { ${lib.concatStringsSep ", " portStrings} } ${action}
-  '';
+  mkPorts = cond: ports: ranges: action:
+    let
+      portStrings =
+        (map (range: "${toString range.from}-${toString range.to}") ranges)
+        ++ (map toString ports);
+    in lib.optionalString (portStrings != [ ]) ''
+      ${cond} dport { ${lib.concatStringsSep ", " portStrings} } ${action}
+    '';
 
   ruleset = ''
     table inet filter {
@@ -26,17 +28,24 @@ let
         ct state established,related accept
 
         iifname { ${
-          lib.concatStringsSep "," (["lo"] ++ fwcfg.trustedInterfaces)
+          lib.concatStringsSep "," ([ "lo" ] ++ fwcfg.trustedInterfaces)
         } } accept
 
-        ${mkPorts "tcp" fwcfg.allowedTCPPorts fwcfg.allowedTCPPortRanges "accept"}
-        ${mkPorts "udp" fwcfg.allowedUDPPorts fwcfg.allowedUDPPortRanges "accept"}
+        ${
+          mkPorts "tcp" fwcfg.allowedTCPPorts fwcfg.allowedTCPPortRanges
+          "accept"
+        }
+        ${
+          mkPorts "udp" fwcfg.allowedUDPPorts fwcfg.allowedUDPPortRanges
+          "accept"
+        }
 
         ${
           lib.concatStringsSep "\n" (lib.mapAttrsToList (name: ifcfg:
-              mkPorts "iifname ${name} tcp" ifcfg.allowedTCPPorts ifcfg.allowedTCPPortRanges "accept"
-            + mkPorts "iifname ${name} udp" ifcfg.allowedUDPPorts ifcfg.allowedUDPPortRanges "accept"
-          ) fwcfg.interfaces)
+            mkPorts "iifname ${name} tcp" ifcfg.allowedTCPPorts
+            ifcfg.allowedTCPPortRanges "accept"
+            + mkPorts "iifname ${name} udp" ifcfg.allowedUDPPorts
+            ifcfg.allowedUDPPortRanges "accept") fwcfg.interfaces)
         }
 
         # DHCPv6
@@ -58,11 +67,13 @@ let
         type filter hook forward priority filter
         policy ${cfg.forwardPolicy}
 
-        ${lib.optionalString doDocker ''
-          oifname docker0 ct state invalid drop
-          oifname docker0 ct state established,related accept
-          iifname docker0 accept
-        ''}
+        ${
+          lib.optionalString doDocker ''
+            oifname docker0 ct state invalid drop
+            oifname docker0 ct state established,related accept
+            iifname docker0 accept
+          ''
+        }
 
         ${cfg.extraForward}
 
@@ -183,8 +194,7 @@ in {
       };
     };
 
-    virtualisation.docker = lib.mkIf doDocker {
-      extraOptions = "--iptables=false";
-    };
+    virtualisation.docker =
+      lib.mkIf doDocker { extraOptions = "--iptables=false"; };
   };
 }

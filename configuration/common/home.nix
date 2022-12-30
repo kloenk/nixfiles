@@ -39,35 +39,26 @@ in {
           user = "git";
           forwardAgent = false;
         };
-      } // /* genMatchBlocks // */ {
-        # nyantec
-        "berlin.nyantec.com" = {
-          hostname = "berlin.nyantec.com";
-          port = 24;
-          user = "fin";
-          forwardAgent = true;
-        };
-        "*.nyantec.com" = {
-          user = "fin";
-          forwardAgent = true;
-        };
-        "airlink.one" = {
-          user = "fin";
-        };
+      } // # genMatchBlocks //
+        {
+          # nyantec
+          "berlin.nyantec.com" = {
+            hostname = "berlin.nyantec.com";
+            port = 24;
+            user = "fin";
+            forwardAgent = true;
+          };
+          "*.nyantec.com" = {
+            user = "fin";
+            forwardAgent = true;
+          };
+          "airlink.one" = { user = "fin"; };
 
-        "*.petabyte.dev" = {
-          port = 62954;
+          "*.petabyte.dev" = { port = 62954; };
+          "*.pbb.lc" = { port = 62954; };
+          "*.kloenk.de" = { port = 62954; };
+          "*.kloenk.dev" = { port = 62954; };
         };
-        "*.pbb.lc" = {
-          port = 62954;
-        };
-        "*.kloenk.de" = {
-          port = 62954;
-        };
-        "*.kloenk.dev" = {
-          port = 62954;
-        };
-      };
     };
 
     vim = {

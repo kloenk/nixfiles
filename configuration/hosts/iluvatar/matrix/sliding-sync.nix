@@ -12,18 +12,17 @@
 
   services.nginx.virtualHosts."matrix.kloenk.dev".locations = {
     "/_matrix/client/unstable/org.matrix.msc3575/" = {
-      proxyPass = "http://localhost:8009/_matrix/client/unstable/org.matrix.msc3575/";
+      proxyPass =
+        "http://localhost:8009/_matrix/client/unstable/org.matrix.msc3575/";
       priority = 900;
     };
   };
 
   services.postgresql = {
-    ensureUsers = [
-      {
-        name = "matrix-sliding-sync-proxy";
-        ensurePermissions."DATABASE syncv3" = "ALL PRIVILEGES";
-      }
-    ];
+    ensureUsers = [{
+      name = "matrix-sliding-sync-proxy";
+      ensurePermissions."DATABASE syncv3" = "ALL PRIVILEGES";
+    }];
     ensureDatabases = [ "syncv3" ];
   };
 }

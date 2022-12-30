@@ -62,7 +62,7 @@ let
 
       #manwe = hostTTL 1200 "195.39.221.187" null;
       #gimli.CNAME = [ "gimli.wolfsburg.petabyte.dev." ];
-      gimli = iluvatar; #hostTTL 1200 "195.39.247.182" "2a0f:4ac0:0:1::cb2";
+      gimli = iluvatar; # hostTTL 1200 "195.39.247.182" "2a0f:4ac0:0:1::cb2";
 
       usee-nschl = hostTTL 1200 "5.9.118.93" "2a01:4f8:162:6343::3";
 

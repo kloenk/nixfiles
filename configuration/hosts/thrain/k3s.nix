@@ -15,9 +15,7 @@ let
       }
       {
         type = "portmap";
-        capabilities = {
-          portMappings = true;
-        };
+        capabilities = { portMappings = true; };
       }
     ];
   };
@@ -46,9 +44,10 @@ in {
     settings = {
       version = 2;
       plugins."io.containerd.grpc.v1.cri" = {
-        cni.conf_dir = "${pkgs.writeTextDir "net.d/10-flannel.conflist" flannel}/net.d";
+        cni.conf_dir =
+          "${pkgs.writeTextDir "net.d/10-flannel.conflist" flannel}/net.d";
         # FIXME: upstream
-        cni.bin_dir = "${pkgs.runCommand "cni-bin-dir" {} ''
+        cni.bin_dir = "${pkgs.runCommand "cni-bin-dir" { } ''
           mkdir -p $out
           ln -sf ${pkgs.cni-plugins}/bin/* ${pkgs.cni-plugin-flannel}/bin/* $out
         ''}";

@@ -25,12 +25,12 @@
     databases = [ "moodle" ];
   };
 
-  /*
-  systemd.services.restic-backups-moodle-usee.after = [ "mysql-backup.service" ];
-  systemd.services.restic-backups-moodle-usee.wants = [ "mysql-backup.service" ];
-  services.mysqlBackup.enable = true;
-  services.mysqlBackup.databases = [
-    "moodle"
-    "mysql"
-  ];*/
+  /* systemd.services.restic-backups-moodle-usee.after = [ "mysql-backup.service" ];
+     systemd.services.restic-backups-moodle-usee.wants = [ "mysql-backup.service" ];
+     services.mysqlBackup.enable = true;
+     services.mysqlBackup.databases = [
+       "moodle"
+       "mysql"
+     ];
+  */
 }

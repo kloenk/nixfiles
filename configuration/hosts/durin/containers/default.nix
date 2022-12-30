@@ -1,7 +1,5 @@
 { lib, pkgs, config, ... }:
 
 {
-  imports = [
-    ./rbuild.nix
-  ];
+  imports = [ ./rbuild.nix ];
 }

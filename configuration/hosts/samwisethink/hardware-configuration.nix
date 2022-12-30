@@ -4,37 +4,35 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" "sd_mod" "sdhci_pci" ];
+  boot.initrd.availableKernelModules =
+    [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" "sd_mod" "sdhci_pci" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/92bc57b7-1642-4fcb-aed6-4adcf79320a5";
-      fsType = "xfs";
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/92bc57b7-1642-4fcb-aed6-4adcf79320a5";
+    fsType = "xfs";
+  };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/A372-55E3";
-      fsType = "vfat";
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/A372-55E3";
+    fsType = "vfat";
+  };
 
-  fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/1278d6fc-137f-4eff-b887-bed1e38476ae";
-      fsType = "xfs";
-    };
+  fileSystems."/nix" = {
+    device = "/dev/disk/by-uuid/1278d6fc-137f-4eff-b887-bed1e38476ae";
+    fsType = "xfs";
+  };
 
-  fileSystems."/persist" =
-    { device = "/dev/disk/by-uuid/207577a0-31c7-410b-b837-d8ddc1f0238a";
-      fsType = "xfs";
-    };
+  fileSystems."/persist" = {
+    device = "/dev/disk/by-uuid/207577a0-31c7-410b-b837-d8ddc1f0238a";
+    fsType = "xfs";
+  };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/bffd054e-fb5d-45bb-bf3a-564691b76ca6"; }
-    ];
+    [{ device = "/dev/disk/by-uuid/bffd054e-fb5d-45bb-bf3a-564691b76ca6"; }];
 
 }

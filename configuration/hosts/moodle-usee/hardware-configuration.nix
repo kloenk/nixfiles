@@ -4,28 +4,26 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports =
-    [ (modulesPath + "/profiles/qemu-guest.nix")
-    ];
+  imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
 
-  boot.initrd.availableKernelModules = [ "ata_piix" "uhci_hcd" "virtio_pci" "sd_mod" "sr_mod" ];
+  boot.initrd.availableKernelModules =
+    [ "ata_piix" "uhci_hcd" "virtio_pci" "sd_mod" "sr_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/f7a758a7-fa9b-4d8e-8411-5b07c48164cf";
-      fsType = "xfs";
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/f7a758a7-fa9b-4d8e-8411-5b07c48164cf";
+    fsType = "xfs";
+  };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/1f7133ee-1fad-4a18-a61f-68717ee81662";
-      fsType = "ext2";
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/1f7133ee-1fad-4a18-a61f-68717ee81662";
+    fsType = "ext2";
+  };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/7dfcdc37-7713-4984-88c0-998a4c422d7a"; }
-    ];
+    [{ device = "/dev/disk/by-uuid/7dfcdc37-7713-4984-88c0-998a4c422d7a"; }];
 
   nix.maxJobs = lib.mkDefault 8;
 }

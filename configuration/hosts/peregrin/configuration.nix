@@ -17,7 +17,6 @@
 
   ];
 
-
   boot.supportedFilesystems = [ "xfs" ];
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -38,17 +37,19 @@
   console.keyMap = lib.mkForce "de"; # Parallels is not able to use neo2
 
   users.users.kloenk.initialPassword = "foobar";
-  users.users.kloenk.packages = with pkgs; [
-    #python # includes python2 as dependency for vscode
-    #platformio # pio command
-  ];
+  users.users.kloenk.packages = with pkgs;
+    [
+      #python # includes python2 as dependency for vscode
+      #platformio # pio command
+    ];
 
   programs.sysdig.enable = false; # no aarch64
 
   # disable acme
   systemd.services."acme-peregrin.kloenk.dev".enable = false;
-  systemd.services."acme-peregrin.kloenk.dev".wantedBy = lib.mkForce [];
-  systemd.services."acme-selfsigned-peregrin.kloenk.dev".wantedBy = [ "multi-user.target" ];
+  systemd.services."acme-peregrin.kloenk.dev".wantedBy = lib.mkForce [ ];
+  systemd.services."acme-selfsigned-peregrin.kloenk.dev".wantedBy =
+    [ "multi-user.target" ];
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database

@@ -8,10 +8,12 @@
   nix.settings.trusted-users = [ "root" "@wheel" "kloenk" ];
   # binary cache
   nix.settings.trusted-public-keys = [
-    "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    "kloenk.cachix.org-1:k52XSkCLOxnmEnjzuedYOzf0MtQp8P3epqOmAlCHYpc="
+    #"nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
   ];
   nix.settings.substituters = [
-  #  "https://nix-community.cachix.org/"
+    "https://kloenk.cachix.org"
+    #"https://nix-community.cachix.org/"
   ];
 
   nix.gc.automatic = lib.mkDefault true;
