@@ -11,6 +11,11 @@
 
     #./mysql.nix
 
+    ./fleet_bot.nix
+    ./jlly.nix
+
+    ./mail.nix
+
     ./coredns.nix
 
     ../../common/telegraf.nix
