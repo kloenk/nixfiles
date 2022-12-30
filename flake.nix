@@ -149,16 +149,10 @@
       packages =
         forAllSystems (system: { inherit (nixpkgsFor.${system}) wallpapers; });
 
-      nixosConfigurations = {
-        iluvatar = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { nodes = self.colmena; pkgs = self.colmena.meta.nixpkgs; colmena = false; };
-          modules = [
-            self.colmena.defaults
-            self.colmena.iluvatar
-          ];
-        };
-      };
+      nixosConfigurations = let
+        hive = inputs.colmena.lib.makeHive self.outputs.colmena;
+      in hive.nodes;
+
       colmena = {
         meta = {
           nixpkgs = import nixpkgs {
