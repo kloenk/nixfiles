@@ -80,7 +80,7 @@
   };
 
   inputs.jlly = {
-    url = "gitlab:escapethegit/jlly_dc?host=cyberchaos.dev";
+    url = "github:kloenk/jlly_bot";
     inputs.nixpkgs.follows = "/nixpkgs";
   };
 
@@ -165,10 +165,9 @@
           allowApplyAll = false;
 
           specialArgs.inputs = inputs;
-          specialArgs.colmena = true;
         };
 
-        defaults = { pkgs, colmena ? true, ... }: {
+        defaults = { pkgs, ... }: {
           disabledModules = [
             "services/games/minecraft-server.nix"
             "services/web-apps/wordpress.nix"
@@ -194,7 +193,7 @@
           environment.systemPackages = [ # pkgs.colmena
           ];
 
-          deployment = nixpkgs.lib.mkIf colmena {
+          deployment = {
             buildOnTarget = true;
             allowLocalDeployment = true;
             targetPort = 62954;
@@ -204,7 +203,7 @@
 
         # DUS 6
         iluvatar = { pkgs, nodes, ... }: {
-          deployment = nixpkgs.lib.mkIf colmena {
+          deployment = {
             targetHost = "iluvatar.kloenk.dev";
             tags = [ "hetzner" "remote" ];
           };
@@ -278,12 +277,15 @@
         in {
           devenv = devenv.lib.mkShell {
             inherit inputs pkgs;
-            modules = [{
-              languages.nix.enable = true;
+            modules = [
+              ({ pkgs, ... }: { packages = [ pkgs.colmena ]; })
+              {
+                languages.nix.enable = true;
 
-              pre-commit.hooks.actionlint.enable = true;
-              pre-commit.hooks.nixfmt.enable = true;
-            }];
+                pre-commit.hooks.actionlint.enable = true;
+                pre-commit.hooks.nixfmt.enable = true;
+              }
+            ];
           };
           default = self.devShells.${system}.devenv;
         });

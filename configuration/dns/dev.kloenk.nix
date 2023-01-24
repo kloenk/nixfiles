@@ -35,7 +35,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.dev.";
       adminEmail = "hostmaster.kloenk.dev."; # TODO: change mail
-      serial = 2021010141;
+      serial = 2021010142;
       refresh = 600;
       expire = 604800;
       minimum = 600;
@@ -111,6 +111,7 @@ let
       matrix-push.CNAME = iluvatar.CNAME;
 
       mx-redir.CNAME = iluvatar.CNAME;
+      _github-pages-challenge-Kloenk.TXT = [ "93721bf4d3b9ab1d6af40409424d90" ];
 
       _domainkey.subdomains.mail.TXT = [
         (txt ''

@@ -69,11 +69,11 @@
         "stable": "stable"
       },
       "locked": {
-        "lastModified": 1667072567,
-        "narHash": "sha256-z8ciml6BOzVDX3MbRY22C5GonJrDxi2xrVuS6Gyxorc=",
+        "lastModified": 1669917327,
+        "narHash": "sha256-YYjaNOUJZaM5t35GbWtfX825TlI9LAksbfdhaCYWmfY=",
         "owner": "zhaofengli",
         "repo": "colmena",
-        "rev": "5432fe488ebec7ee30aaea5fb18a759e30e59612",
+        "rev": "64c46fa0169233d4faed70c52583cd3183c7f5aa",
         "type": "github"
       },
       "original": {
@@ -473,18 +473,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1671311352,
-        "narHash": "sha256-6KwJniowuW8oGMNIWKeBwwT+BnDVdLO+bJs2TbjJ4aU=",
+        "lastModified": 1673340195,
+        "narHash": "sha256-g9YBOQz16WbWcN4+kYIAQMt04ZJQ6uEZiR5jexsBnNk=",
         "owner": "kloenk",
         "repo": "jlly_bot",
-        "rev": "9551e18927f1bb21b643a6a326f637ba52bbd639",
+        "rev": "e32ae2b17483d0a19138f92db2cd83b66e2a356d",
         "type": "github"
       },
       "original": {
-        "host": "cyberchaos.dev",
-        "owner": "escapethegit",
-        "repo": "jlly_dc",
-        "type": "gitlab"
+        "owner": "kloenk",
+        "repo": "jlly_bot",
+        "type": "github"
       }
     },
     "kittybox": {
@@ -956,11 +955,11 @@
     },
     "nixpkgs_6": {
       "locked": {
-        "lastModified": 1672393855,
-        "narHash": "sha256-CTFDjj5mLCthoQgcU75WMMTWBJ1w30A/+DJ5HT2TQtI=",
+        "lastModified": 1673338841,
+        "narHash": "sha256-8QT5W9uJWR35p8bXK05z0E4xBxN9/BYkAeSSfjvIfts=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "9a56a9a8a1f446cb6f93d59ae584e591401aaea0",
+        "rev": "e1f9232310ff05709058a4d4b20b2c53484140a5",
         "type": "github"
       },
       "original": {
@@ -1191,16 +1190,16 @@
     },
     "stable": {
       "locked": {
-        "lastModified": 1660496378,
-        "narHash": "sha256-sgAhmrC1iSnl5T2VPPiMpciH1aRw5c7PYEdXX6jd6Gk=",
+        "lastModified": 1669735802,
+        "narHash": "sha256-qtG/o/i5ZWZLmXw108N2aPiVsxOcidpHJYNkT45ry9Q=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "879121648fe522b38cc1cf75aef160a14a1f2e7b",
+        "rev": "731cc710aeebecbf45a258e977e8b68350549522",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixos-22.05",
+        "ref": "nixos-22.11",
         "repo": "nixpkgs",
         "type": "github"
       }
