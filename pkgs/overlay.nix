@@ -59,7 +59,7 @@ in {
       else
         flag) oldAttrs.configureFlags;
   });
-  rust-bindgen = prev.rust-bindgen.override {
+  rust-bindgen_c11 = prev.rust-bindgen.override {
     clang = final.clang_11;
     llvmPackages = final.llvmPackages_11;
   };
