@@ -43,6 +43,7 @@
     sops
 
     dfu-util
+    ffmpeg
 
     sqlite-web
 
