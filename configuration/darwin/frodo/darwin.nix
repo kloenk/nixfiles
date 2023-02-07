@@ -42,6 +42,8 @@
     sbcl
     sops
 
+    dfu-util
+
     sqlite-web
 
     nixfmt

@@ -17,7 +17,6 @@
       chain postrouting {
         type nat hook postrouting priority srcnat;
         ip saddr { 192.168.242.0-192.168.242.255 } oifname { "wg0" } snat to 192.168.242.1
-        ip saddr { 172.16.16.0-172.16.16.255 } oifname "yougen" snat to 172.16.16.1
         oifname "enp1s0" masquerade
         iifname "wg0" oifname "buw0" masquerade
       }
@@ -93,14 +92,10 @@
     addresses = [{ addressConfig.Address = "192.168.242.1/24"; }];
     routes = [{
       routeConfig.Destination = "192.168.242.0/24";
-    }
-    #{ routeConfig.Destination = "10.0.0.0/24"; }
-      ];
+    }];
   };
 
   networking.hosts = {
-    #"10.0.0.2" = [ "io.yougen.de" "git.yougen.de" ];
-    #"10.0.0.5" = [ "grafana.yougen.de" "hydra.yougen.de" "lycus.yougen.de" ];
   };
 
   systemd.network.netdevs."30-wg2" = {

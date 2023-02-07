@@ -48,6 +48,7 @@
   systemd.network.networks."40-enp1s0" = {
     name = "enp1s0";
     addresses = [{ addressConfig.Address = "2a01:4f8:c012:b874::/64"; }];
+    routes = [{ routeConfig.Gateway = "fe80::1"; }];
   };
 
   networking.dhcpcd.enable = false;
