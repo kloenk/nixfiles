@@ -488,11 +488,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1673340195,
-        "narHash": "sha256-g9YBOQz16WbWcN4+kYIAQMt04ZJQ6uEZiR5jexsBnNk=",
+        "lastModified": 1676038571,
+        "narHash": "sha256-EGs++JZUO59t8stUf5PJob19z8pnNG6T2ZX4BYLf9zQ=",
         "owner": "kloenk",
         "repo": "jlly_bot",
-        "rev": "e32ae2b17483d0a19138f92db2cd83b66e2a356d",
+        "rev": "6c6d144f03b5e7f75716e91af601730de4a8a787",
         "type": "github"
       },
       "original": {
