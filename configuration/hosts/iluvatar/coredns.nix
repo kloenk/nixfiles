@@ -10,6 +10,8 @@ let
     (import ../../dns/dev.matrixcore.nix { inherit lib inputs config; });
   de_kloenk_zone =
     (import ../../dns/de.kloenk.nix { inherit lib inputs config; });
+  de_p3tr1ch0rr_zone =
+    (import ../../dns/de.p3tr1ch0rr.nix { inherit lib inputs config; });
   imkerverein_zone = (import ../../dns/de.burscheider-imkerverein.nix {
     inherit lib inputs config;
   });
@@ -86,6 +88,12 @@ in {
       kloenk.de {
         import log
         file ${de_kloenk_zone}
+        import he_transfer
+      }
+
+      p3tr1ch0rr.de {
+        import log
+        file ${de_p3tr1ch0rr_zone}
         import he_transfer
       }
 
