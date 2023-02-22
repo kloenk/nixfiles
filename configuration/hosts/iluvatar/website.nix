@@ -134,6 +134,8 @@ in {
       forceSSL = true;
       locations."/".return = "301 https://twitch.tv/p3tr1ch0rr";
       locations."/discord".return = "301 https://discord.gg/CcX9qKtT";
+      locations."/kofi".return = "301 https://ko-fi.com/p3tr1ch0rr";
+      locations."/ko-fi".return = "301 https://ko-fi.com/p3tr1ch0rr";
     };
   };
 }
