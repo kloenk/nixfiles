@@ -36,7 +36,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.de.";
       adminEmail = "hostmaster@kloenk.de";
-      serial = 2020122609;
+      serial = 2020122610;
       refresh = 600;
       expire = 604800;
       minimum = 600;
@@ -66,7 +66,7 @@ let
 
       _domainkey.subdomains.mail.TXT = [
         (txt ''
-          v=DKIM1; k=rsa; " "p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDJ5QgJzy63zC5f7qwHn3sgVrjDLaoLLX3ZnQNbmNms4+OJxNgBlb9uqTNqCEV9ScUX/2V+6IY2TqdhdWaNBif+agsym2UvNbCpvyZt5UFEJsGFoccNLR4iDkBKr8uplaW7GTBf5sUfbPQ2ens7mKvNEa5BMCXQI5oNa1Q6MKLjxwIDAQAB'')
+          v=DKIM1; k=rsa; " "p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDeP0+6Zzo+No/So3XAH2+ow7+6B4JyCK4TvLlfxu3OPvFaqom/OvCkQLRJY9bii4Rxw8XECFczvBs9Y+AhfK8miR87Ibg94/9n/jpYzZm7BoyKwZlayA3G62abULw6znEGu+OfKpnoKHIAiJbjlRuZUj/8Z7HsUAFXoPkTJzCEWQIDAQAB'')
       ];
     };
   };
