@@ -40,6 +40,7 @@
       "drachensegler.kloenk.dev"
       "burscheider-imkerverein.de"
       "kloenk.dev"
+      "p3tr1ch0rr.de"
     ];
 
     rejectRecipients = [ "wattpad@kloenk.de" ];
@@ -86,6 +87,13 @@
           "hostmaster@ad.kloenk.dev"
           "webmaster@ad.kloenk.dev"
           "abuse@ad.kloenk.dev"
+
+          "mail@p3tr1ch0rr.de"
+          "admin@p3tr1ch0rr.de"
+          "postmaster@p3tr1ch0rr.de"
+          "hostmaster@p3tr1ch0rr.de"
+          "webmaster@p3tr1ch0rr.de"
+          "abuse@p3tr1ch0rr.de"
         ];
       };
 
@@ -192,6 +200,18 @@
           config.sops.secrets."mail/kontakt_burscheider-imkerverein.de.sha512".path;
       };
 
+      "me@p3tr1ch0rr.de" = {
+        hashedPasswordFile =
+          config.sops.secrets."mail/me_p3tr1ch0rr.de.bcypt".path;
+
+        aliases = [
+          "tobi@p3tr1ch0rr.de"
+          "p3tr1ch0rr@p3tr1ch0rr.de"
+          "p3tr@p3tr1ch0rr.de"
+        ];
+        catchAll = [ "p3tr1ch0rr.de" ];
+      };
+
     };
 
     extraVirtualAliases = {
@@ -227,6 +247,7 @@
     "mail/drachensegler_drachensegler.kloenk.de.sha512".owner = "root";
     "mail/info_burscheider-imkerverein.de.sha512".owner = "root";
     "mail/kontakt_burscheider-imkerverein.de.sha512".owner = "root";
+    "mail/me_p3tr1ch0rr.de.bcypt".owner = "root";
   };
 
   # sieve mailing ordering
