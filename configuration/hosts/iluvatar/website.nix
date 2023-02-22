@@ -128,5 +128,12 @@ in {
         '';
       };
     };
+
+    "p3tr1ch0rr.de" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/".return = "301 https://twitch.tv/p3tr1ch0rr";
+      locations."/discord".return = "301 https://discord.gg/CcX9qKtT";
+    };
   };
 }
