@@ -25,20 +25,15 @@ let
     };
     webcredentials = { apps = [ "7J4U792NQT.im.vector.app" ]; };
   };
+
+  p3tr_locations = {
+    "/" = { return = "301 https://twitch.tv/p3tr1ch0rr"; };
+    "/discord" = { return = "301 https://discord.gg/CcX9qKtT"; };
+    "/kofi" = { return = "301 https://ko-fi.com/p3tr1ch0rr"; };
+    "/ko-fi" = { return = "301 https://ko-fi.com/p3tr1ch0rr"; };
+  };
 in {
   services.nginx.virtualHosts = {
-    /* "lexbeserious.kloenk.dev" = {
-         enableACME = true;
-         forceSSL = true;
-         root = inputs.website;
-         locations."/".index = "lexbeserious.html";
-         extraConfig = ''
-           ${commonHeaders}
-           add_header Content-Security-Policy "default-src 'self'; frame-ancestors 'none'; object-src 'none'" always;
-           add_header Cache-Control $cacheable_types;
-         '';
-       };
-    */
     "kloenk.dev" = {
       enableACME = true;
       forceSSL = true;
@@ -132,10 +127,12 @@ in {
     "p3tr1ch0rr.de" = {
       enableACME = true;
       forceSSL = true;
-      locations."/".return = "301 https://twitch.tv/p3tr1ch0rr";
-      locations."/discord".return = "301 https://discord.gg/CcX9qKtT";
-      locations."/kofi".return = "301 https://ko-fi.com/p3tr1ch0rr";
-      locations."/ko-fi".return = "301 https://ko-fi.com/p3tr1ch0rr";
+      locations = p3tr_locations;
+    };
+    "www.p3tr1ch0rr.de" = {
+      enableACME = true;
+      forceSSL = true;
+      locations = p3tr_locations;
     };
   };
 }
