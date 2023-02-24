@@ -60,6 +60,10 @@
         include ${config.services.nginx.package}/conf/fastcgi.conf;
       '';
     };
+    locations."/how-to" = {
+      alias = "/var/lib/moodle/how-to";
+      index = "index.html index.mp4";
+    };
     locations."/dataroot/" = {
       alias = "/var/lib/moodle/";
       extraConfig = ''

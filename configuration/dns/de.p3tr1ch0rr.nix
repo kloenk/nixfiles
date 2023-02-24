@@ -61,7 +61,7 @@ let
 
     subdomains = rec {
       #ns1 = iluvatar;
-      www.CNAME = "p3tr1ch0rr.de.";
+      www.CNAME = [ "p3tr1ch0rr.de." ];
 
       _dmarc.TXT = dmarc;
 
