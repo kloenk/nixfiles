@@ -21,7 +21,7 @@ in {
   users.groups.minecraft = { };
 
   systemd.sockets.minecraft-vh3 = {
-    bindsTo = [ "minecraft-server.service" ];
+    bindsTo = [ "minecraft-vh3.service" ];
     socketConfig = {
       ListenFIFO = "/run/minecraft-vh3-server.stdin";
       SocketMode = "0660";
