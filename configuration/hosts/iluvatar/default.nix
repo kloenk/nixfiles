@@ -10,6 +10,7 @@
     ./website.nix
 
     #./mysql.nix
+    ./vh3.nix
 
     ./fleet_bot.nix
     ./jlly.nix
