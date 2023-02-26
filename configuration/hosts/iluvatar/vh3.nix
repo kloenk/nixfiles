@@ -51,6 +51,13 @@ in {
       StandardOutput = "journal";
       StandardError = "journal";
 
+      # Scheduling
+      IOSchedulingClass = "best-effort";
+      IOSchedulingPriority = 5;
+      CPUWeight = 90;
+      MemoryHigh = "12G";
+      #MemoryMax = "14G";
+
       # Hardening
       CapabilityBoundingSet = [ "" ];
       DeviceAllow = [ "" ];
