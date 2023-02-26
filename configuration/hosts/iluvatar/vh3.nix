@@ -38,6 +38,8 @@ in {
     requires = [ "minecraft-vh3.socket" ];
     after = [ "network.target" "minecraft-server.socket" "postgresql.service" ];
 
+    path = [ pkgs.bash pkgs.jdk17_headless ];
+
     serviceConfig = {
       ExecStart = "/persist/data/minecraft-vh3/start.sh";
       ExecStop = "${stopScript} $MAINPID";
