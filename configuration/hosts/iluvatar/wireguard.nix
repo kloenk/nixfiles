@@ -76,6 +76,20 @@
           PersistentKeepalive = 21;
         };
       }
+      { # windoof
+        wireguardPeerConfig = {
+          AllowedIPs = [ "192.168.242.202/32" ];
+          PublicKey = "aSkX5/y831rSZib/l0QhC1mmmaggNjdMNfQ0Qrz8rxA=";
+          PersistentKeepalive = 21;
+        };
+      }
+      { # p3tr1ch0rr
+        wireguardPeerConfig = {
+          AllowedIPs = [ "192.168.242.203/32" ];
+          PublicKey = "HkPEHcCRrj7hMKaqCD8XSXNwFKtij8vuShgv1vb8CTg=";
+          PersistentKeepalive = 21;
+        };
+      }
       { # sting
         wireguardPeerConfig = {
           AllowedIPs = [ "192.168.242.210/32" ];
