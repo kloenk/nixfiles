@@ -45,6 +45,9 @@
     dfu-util
     ffmpeg
 
+    mpc-cli
+    ario
+
     sqlite-web
 
     nixfmt

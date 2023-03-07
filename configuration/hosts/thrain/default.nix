@@ -28,6 +28,7 @@
 
     ./bbb-backup.nix
     ./r-dev.nix
+    ./mpd.nix
 
     ../../common/telegraf.nix
     ../../common/syncthing.nix
