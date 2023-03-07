@@ -31,6 +31,9 @@ let
     "/discord" = { return = "301 https://discord.gg/CcX9qKtT"; };
     "/kofi" = { return = "301 https://ko-fi.com/p3tr1ch0rr"; };
     "/ko-fi" = { return = "301 https://ko-fi.com/p3tr1ch0rr"; };
+    "/spotify" = { return = "301 https://open.spotify.com/user/chilsninkio"; };
+    "/musik" = { return = "301 https://open.spotify.com/user/chilsninkio"; };
+    "/music" = { return = "301 https://open.spotify.com/user/chilsninkio"; };
   };
 in {
   services.nginx.virtualHosts = {
