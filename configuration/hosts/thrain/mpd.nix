@@ -18,6 +18,7 @@
         name		"MPD HTTP Stream"
         encoder		"vorbis"		# optional, vorbis oder lame
         port		"6601"
+        always_on       "yes"
         quality		"5.0"			# entweder
         #	bitrate		"128"			# oder
         format		"44100:16:1"
