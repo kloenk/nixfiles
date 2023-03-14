@@ -235,12 +235,18 @@
           # ZFS kernel
           nixpkgs.config.allowBroken = true;
         };
-        durin = { pkgs, nodes, ... }: {
-          deployment.targetHost = "durin.fritz.box";
+        elrond = { pkgs, nodes, ... }: {
+          deployment.targetHost = "192.168.178.247";
           deployment.tags = [ "pony" "local" ];
 
-          imports = [ ./configuration/hosts/durin ];
+          imports = [ ./configuration/hosts/elrond ];
         };
+        #durin = { pkgs, nodes, ... }: {
+        #  deployment.targetHost = "durin.fritz.box";
+        #  deployment.tags = [ "pony" "local" ];
+
+        #  imports = [ ./configuration/hosts/durin ];
+        #};
       };
 
       nixosModules = {
@@ -289,6 +295,8 @@
           };
           default = self.devShells.${system}.devenv;
         });
+
+      formatter = forAllSystems (system: nixpkgsFor.${system}.nixfmt);
 
       checks = forAllSystems
         (system: { devenv_ci = self.devShells.${system}.devenv.ci; });
