@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     ./links.nix
     ./devenv.nix
+    ./desktop.nix
 
     ../../common/telegraf.nix
   ];
