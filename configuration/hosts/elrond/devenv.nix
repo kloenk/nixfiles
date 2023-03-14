@@ -9,6 +9,7 @@
       "vscode-extension-ms-vscode-cpptools"
       "vscode-extension-github-copilot"
 
+      "discord"
       "chromium"
       "chromium-unwrapped"
       "chrome-widevine-cdm"
