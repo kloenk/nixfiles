@@ -21,14 +21,12 @@ let
 
   durin-host = "192.168.178.249";
 in {
-  peregrin = makeHost {
-    host = "10.211.55.7";
-    system = "aarch64-linux";
-  };
+  #peregrin = makeHost {
+  #  host = "10.211.55.7";
+  #  system = "aarch64-linux";
+  #};
 
   # monitoring only - macOS
-  # TODO: nix-on-darwin
-  # bilbo = makeHost { host = "" };
 
   iluvatar = makeHost {
     host = "iluvatar.kloenk.dev";
@@ -45,13 +43,13 @@ in {
     # server = true;
   };
 
-  durin = makeHost { host = durin-host; };
+  #durin = makeHost { host = durin-host; };
 
-  durin-rbuild = makeHost {
-    host = durin-host;
-    port = 62957;
-    nixos = false;
-  };
+  #durin-rbuild = makeHost {
+  #  host = durin-host;
+  #  port = 62957;
+  #  nixos = false;
+  #};
 
   # Made some magic smoke
   #r-build = makeHost {
@@ -60,23 +58,17 @@ in {
   #  server = false;
   #};
 
-  samwisethink = makeHost {
-    host = "192.168.178.1";
-    server = false;
-    prometheusExporters = [ ];
-  };
+  #samwisethink = makeHost {
+  #  host = "192.168.178.1";
+  #  server = false;
+  #  prometheusExporters = [ ];
+  #};
 
-  samwise = {
-    host = "";
-    server = false;
-    system = "aarch64-linux";
-    vm = true;
-  };
-
-  #usee-nschl = makeHost {
-  #  host = "usee-nschl.kloenk.dev";
+  #samwise = {
+  #  host = "";
+  #  server = false;
+  #  system = "aarch64-linux";
   #  vm = true;
-  #  server = true;
   #};
 
   # usee
