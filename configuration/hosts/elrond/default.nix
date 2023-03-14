@@ -4,6 +4,7 @@
   imports = [
     ./hardware-configuration.nix
     ./links.nix
+    ./devenv.nix
 
     ../../common/telegraf.nix
   ];
@@ -39,6 +40,8 @@
   services.avahi.enable = true;
 
   environment.systemPackages = with pkgs; [ lm_sensors virtmanager nodejs ];
+
+  users.users.kloenk.password = "foobar";
 
   # virtmanager
   virtualisation.libvirtd = {

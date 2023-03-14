@@ -239,7 +239,10 @@
           deployment.targetHost = "192.168.178.247";
           deployment.tags = [ "pony" "local" ];
 
-          imports = [ ./configuration/hosts/elrond ];
+          imports = [
+            ./configuration/hosts/elrond
+            vika.nixosModules.gnome
+          ];
         };
         #durin = { pkgs, nodes, ... }: {
         #  deployment.targetHost = "durin.fritz.box";
