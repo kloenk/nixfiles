@@ -10,6 +10,14 @@
       "vscode-extension-github-copilot"
 
       "discord"
+
+      "steam"
+      "steam-original"
+      "steam-run"
+      "steam-run-native"
+      "steam-runtime"
+      "steam-original"
+
       "chromium"
       "chromium-unwrapped"
       "chrome-widevine-cdm"
@@ -18,11 +26,13 @@
   users.users.kloenk = {
     packages = with pkgs;
       [
+        nil
         (vscode-with-extensions.override {
           vscodeExtensions = with vscode-extensions;
             [
               matklad.rust-analyzer
               bbenoist.nix
+              jnoortheen.nix-ide
               ms-python.python
               ms-vscode-remote.remote-ssh
               vscodevim.vim
@@ -32,6 +42,7 @@
               twxs.cmake
               github.copilot
               eamodio.gitlens
+              gruntfuggly.todo-tree
             ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
               {
                 name = "mesonbuild";

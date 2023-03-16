@@ -5,7 +5,11 @@
     ./hardware-configuration.nix
     ./links.nix
     ./devenv.nix
+
+    ./pipewire.nix
+    ./gaming.nix
     ./desktop.nix
+    ./mpd.nix
 
     ../../common/telegraf.nix
   ];

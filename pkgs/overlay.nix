@@ -19,6 +19,8 @@ in {
   vemacs = callPackage ./vemacs { };
   vemacsMac = callPackage ./vemacs/mac.nix { };
 
+  obs-tuna = final.qt6Packages.callPackage ./obs-tuna { };
+
   #moodle = callPackage ./moodle { };
 
   redshift = prev.redshift.overrideAttrs (oldAttrs: rec {
