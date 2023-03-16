@@ -21,6 +21,11 @@ in {
     options = [ "bind" ];
   };
 
+  fileSystems."/export/Mac" = {
+    device = "/persist/Mac";
+    options = [ "bind" ];
+  };
+
   /* fileSystems."/export/timemachine" = {
        device = "/persist/data/timemachine";
        options = [ "bind" ];
@@ -33,6 +38,7 @@ in {
     /export/kloenk 6.0.2.0/24(rw,nohide,no_subtree_check,root_squash,anonuid=1000,anongid=1000,insecure,crossmnt) 192.168.178.0/24(ro,hide,all_squash)
     /export/Filme 6.0.2.0/24(rw,nohide,no_subtree_check,root_squash,anonuid=1000,anongid=1000,insecure,crossmnt) 192.168.178.0/24(ro,nohide,no_subtree_check,root_squash,anonuid=1000,anongid=1000,insecure,crossmnt)
     /export/mama 6.0.2.0/24(rw,nohide,no_subtree_check,root_squash,anonuid=1000,anongid=1000,insecure) 192.168.178.0/24(rw,nohide,no_subtree_check,all_squash,anonuid=1000,anongid=1000,insecure)
+    /export/Mac 6.0.2.0/24(rw,nohide,no_subtree_check,root_squash,anonuid=1000,anongid=1000,insecure) 192.168.178.0/24(rw,nohide,no_subtree_check,all_squash,anonuid=1000,anongid=1000,insecure)
   '';
 
   # set ports
