@@ -7,6 +7,7 @@
     wineWowPackages.staging
 
     discord
+    xonotic
 
     # OBS
     (wrapOBS {

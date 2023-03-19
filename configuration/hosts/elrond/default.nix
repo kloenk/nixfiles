@@ -58,6 +58,7 @@
     "docker" # enable docker controll
     "libvirtd" # libvirtd connections
     "audio"
+    "pipewire"
   ];
 
   # smartcard

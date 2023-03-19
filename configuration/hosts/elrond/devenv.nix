@@ -26,6 +26,11 @@
   users.users.kloenk = {
     packages = with pkgs;
       [
+        alacritty
+        schildichat-desktop-wayland
+
+        elixir
+        elixir_ls
         nil
         (vscode-with-extensions.override {
           vscodeExtensions = with vscode-extensions;
@@ -43,6 +48,7 @@
               github.copilot
               eamodio.gitlens
               gruntfuggly.todo-tree
+              elixir-lsp.vscode-elixir-ls
             ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
               {
                 name = "mesonbuild";
