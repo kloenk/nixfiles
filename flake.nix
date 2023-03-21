@@ -86,7 +86,12 @@
 
   inputs.fleet_bot = {
     url = "github:fleetyards/fleet_bot";
-    inputs.nixpks.follows = "/nixpkgs";
+    inputs.nixpkgs.follows = "/nixpkgs";
+  };
+
+  inputs.p3tr = {
+    url = "github:kloenk/p3tr";
+    inputs.nixpkgs.follows = "/nixpkgs";
   };
 
   inputs.devenv.url = "github:cachix/devenv";
@@ -95,7 +100,7 @@
   inputs.nix-minecraft.inputs.nixpkgs.follows = "/nixpkgs";
 
   outputs = inputs@{ self, nixpkgs, nix, home-manager, moodlepkgs, mail-server
-    , kloenk-www, dns, darwin, sops-nix, vika, colmena, jlly, fleet_bot, devenv
+    , kloenk-www, dns, darwin, sops-nix, vika, colmena, jlly, fleet_bot, p3tr, devenv
     , ... }:
     let
       overlayCombined = system: [
@@ -109,6 +114,7 @@
         colmena.overlay
         jlly.overlays.default
         fleet_bot.overlays.default
+        p3tr.overlays.default
       ];
 
       systems =
@@ -162,7 +168,7 @@
             system = "x86_64-linux";
             overlays = (overlayCombined "x86_64-linux");
           };
-          allowApplyAll = false;
+          #allowApplyAll = false;
 
           specialArgs.inputs = inputs;
         };
@@ -180,6 +186,7 @@
             vika.nixosModules.matrix-sliding-sync-proxy
             jlly.nixosModules.default
             fleet_bot.nixosModules.default
+            p3tr.nixosModules.default
 
             self.nixosModules.nftables
             self.nixosModules.deluge2
