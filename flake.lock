@@ -1485,11 +1485,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1679401395,
-        "narHash": "sha256-qSSmMStmhmwiFdw3UxSuUxYRGvlg3hOZ2KupjDgYa6U=",
+        "lastModified": 1679402133,
+        "narHash": "sha256-/V+wZ/v/ZPSUlKzNMhswvvhbIEEnxZl5IoxJ827uDl8=",
         "owner": "kloenk",
         "repo": "p3tr",
-        "rev": "8c8ad8fea01e1ecc9156608c7dd01af8bfb418b8",
+        "rev": "6d157e99750c622a192af71ffd1242b8da2a0458",
         "type": "github"
       },
       "original": {
