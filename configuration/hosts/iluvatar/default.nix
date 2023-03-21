@@ -14,6 +14,7 @@
 
     ./fleet_bot.nix
     ./jlly.nix
+    ./p3tr.nix
 
     ./mail.nix
 
