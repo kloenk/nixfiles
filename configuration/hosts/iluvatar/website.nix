@@ -28,7 +28,7 @@ let
 
   p3tr_locations = {
     "/" = { return = "301 https://twitch.tv/p3tr1ch0rr"; };
-    "/discord" = { return = "301 https://discord.gg/CcX9qKtT"; };
+    "/discord" = { return = "301 https://discord.gg/8Y9dKHq7Zr"; };
     "/kofi" = { return = "301 https://ko-fi.com/p3tr1ch0rr"; };
     "/ko-fi" = { return = "301 https://ko-fi.com/p3tr1ch0rr"; };
     "/spotify" = { return = "301 https://open.spotify.com/user/chilsninkio"; };
