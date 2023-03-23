@@ -4,6 +4,8 @@ let
   bbb_wass_zone =
     pkgs.writeText "bbb.zone" (builtins.readFile (toString ./bbb-wass.zone));
 
+  eu_kloenk_zone =
+    (import ../../dns/eu.kloenk.nix { inherit lib inputs config; });
   dev_kloenk_zone =
     (import ../../dns/dev.kloenk.nix { inherit lib inputs config; });
   dev_matrixcore_zone =
@@ -71,6 +73,12 @@ in {
         import log
         log
         chaos CoreDNS hostmaster@kloenk.de
+      }
+
+      kloenk.eu {
+        import log
+        file ${eu_kloenk_zone}
+        import he_transfer
       }
 
       kloenk.dev {
