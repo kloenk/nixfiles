@@ -97,4 +97,4 @@ let
     };
   };
 
-in dns.writeZone "kloenk.dev" zone
+in dns.writeZone "kloenk.eu" zone
