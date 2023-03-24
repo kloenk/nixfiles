@@ -28,7 +28,9 @@
       [
         alacritty
         schildichat-desktop-wayland
+        gh
 
+        direnv
         elixir
         elixir_ls
         nil
@@ -49,6 +51,11 @@
               eamodio.gitlens
               gruntfuggly.todo-tree
               elixir-lsp.vscode-elixir-ls
+              vscode-extensions.mkhl.direnv
+              dracula-theme.theme-dracula
+              zhuangtongfa.material-theme
+              tobiasalthoff.atom-material-theme
+              mskelton.one-dark-theme
             ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
               {
                 name = "mesonbuild";
