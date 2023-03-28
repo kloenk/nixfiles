@@ -4,15 +4,15 @@ let
   dns = inputs.dns.lib.${config.nixpkgs.system}.dns;
 
   mxKloenk = with dns.combinators.mx;
-    map (dns.combinators.ttl 3600) [ (mx 10 "gimli.kloenk.dev.") ];
+    map (dns.combinators.ttl 3600) [ (mx 10 "gimli.kloenk.eu.") ];
   dmarc = with dns.combinators;
-    [ (txt "v=DMARC1;p=reject;pct=100;rua=mailto:postmaster@kloenk.dev") ];
+    [ (txt "v=DMARC1;p=reject;pct=100;rua=mailto:postmaster@kloenk.eu") ];
   spfKloenk = with dns.combinators.spf;
     map (dns.combinators.ttl 600) [
       (strict [
         #"a:kloenk.dev"
         #"a:mail.kloenk.dev"
-        "a:gimli.kloenk.dev"
+        "a:gimli.kloenk.eu"
         "ip4:49.12.72.200/32"
         "ip6:2a01:4f8:c012:b874::/64"
       ])
@@ -34,8 +34,8 @@ let
   zone = with dns.combinators; {
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.dev.";
-      adminEmail = "hostmaster.kloenk.dev."; # TODO: change mail
-      serial = 2021010142;
+      adminEmail = "hostmaster.kloenk.eu.";
+      serial = 2021010143;
       refresh = 600;
       expire = 604800;
       minimum = 600;
@@ -53,11 +53,13 @@ let
     CAA = letsEncrypt config.security.acme.email;
 
     subdomains = rec {
-      iluvatar.CNAME = [ "kloenk.eu." ];
+      iluvatar = {
+        A = map (ttl 600) [ (a "49.12.72.200") ];
+
+        AAAA = map (ttl 600) [ (aaaa "2a01:4f8:c012:b874::") ];
+      };
 
       gimli = iluvatar; # hostTTL 1200 "195.39.247.182" "2a0f:4ac0:0:1::cb2";
-
-      usee-nschl = hostTTL 1200 "5.9.118.93" "2a01:4f8:162:6343::3";
 
       ns1 = iluvatar;
 
@@ -66,8 +68,6 @@ let
       drachensegler.MX = mxKloenk;
       drachensegler.TXT = spfKloenk;
       drachensegler.subdomains._dmarc.TXT = dmarc;
-
-      bitwarden = iluvatar;
 
       social = iluvatar;
 
