@@ -25,7 +25,7 @@
     '';
   };
 
-  services.nginx.virtualHosts."matrix.kloenk.dev" = {
+  services.nginx.virtualHosts."matrix.kloenk.eu" = {
     forceSSL = true;
     enableACME = true;
     locations = {
@@ -52,8 +52,8 @@
     extraConfigFiles = [ config.sops.secrets."matrix/config".path ];
 
     settings = {
-      server_name = "kloenk.dev";
-      public_baseurl = "https://matrix.kloenk.dev:443/";
+      server_name = "kloenk.eu";
+      public_baseurl = "https://matrix.kloenk.eu:443/";
 
       enable_registration = false;
 
@@ -76,7 +76,7 @@
           x_forwarded = true;
         }
         {
-          bind_addresses = [ "192.168.242.104" ];
+          bind_addresses = [ "192.168.242.1" ];
           port = 8008;
           resources = [{
             names = [ "client" ];

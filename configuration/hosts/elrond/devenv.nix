@@ -30,6 +30,7 @@
         chatterino2
         schildichat-desktop-wayland
         gh
+        sops
 
         direnv
         elixir

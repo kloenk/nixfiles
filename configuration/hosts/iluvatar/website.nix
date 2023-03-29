@@ -45,15 +45,26 @@ in {
       locations."/baz".return =
         "301 https://www.amazon.de/hz/wishlist/ls/3BJ09JA3JNCN?ref_=wl_share";
 
+      extraConfig = ''
+        ${commonHeaders}
+        add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; frame-ancestors 'none'; object-src 'none'" always;
+        add_header Cache-Control $cacheable_types;
+      '';
+    };
+    "kloenk.eu" = {
+      enableACME = true;
+      forceSSL = true;
+      root = pkgs.kloenk-www;
+      locations."/public/".alias = "/persist/data/public/";
       locations."= /.well-known/matrix/client" = let
         client = {
-          "m.homeserver" = { base_url = "https://matrix.kloenk.dev"; };
+          "m.homeserver" = { base_url = "https://matrix.kloenk.eu"; };
         };
       in {
         root = pkgs.writeTextDir ".well-known/matrix/client"
           "${builtins.toJSON client}";
         extraConfig =
-          config.services.nginx.virtualHosts."kloenk.dev".extraConfig + ''
+          config.services.nginx.virtualHosts."kloenk.eu".extraConfig + ''
             default_type application/json;
             ${commonHeaders}
             add_header "Access-Control-Allow-Origin" "*";
@@ -62,12 +73,12 @@ in {
           '';
       };
       locations."= /.well-known/matrix/server" =
-        let server = { "m.server" = "matrix.kloenk.dev:443"; };
+        let server = { "m.server" = "matrix.kloenk.eu:443"; };
         in {
           root = pkgs.writeTextDir ".well-known/matrix/server"
             "${builtins.toJSON server}";
           extraConfig =
-            config.services.nginx.virtualHosts."kloenk.dev".extraConfig + ''
+            config.services.nginx.virtualHosts."kloenk.eu".extraConfig + ''
               default_type application/json;
               ${commonHeaders}
               add_header "Access-Control-Allow-Origin:" "*";
@@ -88,7 +99,7 @@ in {
       forceSSL = true;
       root = pkgs.kloenk-www;
       locations."/public/".alias = "/persist/data/public/";
-      locations."/".extraConfig = "return 301 https://kloenk.dev;";
+      locations."/".extraConfig = "return 301 https://kloenk.eu;";
       extraConfig = ''
         ${commonHeaders}
         add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; frame-ancestors 'none'; object-src 'none'" always;
