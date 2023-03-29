@@ -8,6 +8,7 @@
     ./bitwarden.nix
     ./postgres.nix
     ./website.nix
+    ./akkoma.nix
 
     #./mysql.nix
     ./vh3.nix

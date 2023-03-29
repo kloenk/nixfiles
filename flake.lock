@@ -803,11 +803,11 @@
       },
       "locked": {
         "host": "cyberchaos.dev",
-        "lastModified": 1677710553,
-        "narHash": "sha256-CdpQTOplbVXCjvpMvdbIDYmeKFqpLR7y9ddMTECy9yY=",
+        "lastModified": 1680089756,
+        "narHash": "sha256-JfCCOOp2lEYYpNtg4hNh9dFt8BcLfofYoGH/2OQXaTc=",
         "owner": "kloenk",
         "repo": "www",
-        "rev": "daebb741c67d2b20f8a229bbdc70c6b6cb64d15d",
+        "rev": "a7e559ca8a15351219a7ee6bcab5a11d8a69bd44",
         "type": "gitlab"
       },
       "original": {

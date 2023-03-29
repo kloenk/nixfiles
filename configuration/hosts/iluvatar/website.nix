@@ -42,6 +42,7 @@ in {
       forceSSL = true;
       root = pkgs.kloenk-www;
       locations."/public/".alias = "/persist/data/public/";
+      locations."/".extraConfig = "return 301 https://kloenk.eu;";
       locations."/baz".return =
         "301 https://www.amazon.de/hz/wishlist/ls/3BJ09JA3JNCN?ref_=wl_share";
 
