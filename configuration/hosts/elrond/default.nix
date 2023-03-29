@@ -65,7 +65,7 @@
   services.pcscd.enable = true;
   services.telegraf.extraConfig.inputs = { sensors = { }; };
 
-  services.openssh.forwardX11 = true;
+  services.openssh.settings.X11Forwarding = true;
 
   system.stateVersion = "23.05";
 }

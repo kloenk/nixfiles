@@ -27,6 +27,7 @@
     packages = with pkgs;
       [
         alacritty
+        chatterino2
         schildichat-desktop-wayland
         gh
 

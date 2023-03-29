@@ -55,27 +55,17 @@
   services.openssh = {
     enable = true;
     ports = [ 62954 ];
-    passwordAuthentication = lib.mkDefault
+    settings.PasswordAuthentication = lib.mkDefault
       (if (config.networking.hostName != "kexec") then false else true);
-    kbdInteractiveAuthentication = false;
-    permitRootLogin = lib.mkDefault "prohibit-password";
+    settings.KbdInteractiveAuthentication = false;
+    settings.PermitRootLogin = lib.mkDefault "prohibit-password";
 
     hostKeys = [{
       path = "/persist/data/openssh/ed25519_key";
       type = "ed25519";
     }];
 
-    extraConfig = let ca = builtins.readDir ../ca;
-    in if !(ca
-      ? "ssh_host_ed25519_key_${config.networking.hostName}-cert.pub") then
-      ""
-    else
-      let
-        hostCertificate = pkgs.writeText "host_cert_ed25519" (builtins.readFile
-          (toString ../ca
-            + "/ssh_host_ed25519_key_${config.networking.hostName}-cert.pub"));
-      in ''
-        HostCertificate ${hostCertificate}
+    extraConfig = ''
         StreamLocalBindUnlink yes
       '';
   };
