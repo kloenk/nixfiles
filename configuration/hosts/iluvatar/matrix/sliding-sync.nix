@@ -6,11 +6,12 @@
     dbName = "syncv3";
     bind = ":8009";
     server = "http://localhost:8008";
+    package = pkgs.matrix-sliding-sync;
   };
 
   networking.firewall.interfaces.wg0.allowedTCPPorts = [ 8009 ];
 
-  services.nginx.virtualHosts."matrix.kloenk.dev".locations = {
+  services.nginx.virtualHosts."matrix.kloenk.eu".locations = {
     "/_matrix/client/unstable/org.matrix.msc3575/" = {
       proxyPass =
         "http://localhost:8009/_matrix/client/unstable/org.matrix.msc3575/";

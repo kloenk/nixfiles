@@ -21,6 +21,8 @@ in {
 
   obs-tuna = final.qt6Packages.callPackage ./obs-tuna { };
 
+  matrix-sliding-sync = final.callPackage ./matrix-sliding-sync { };
+
   #moodle = callPackage ./moodle { };
 
   redshift = prev.redshift.overrideAttrs (oldAttrs: rec {

@@ -60,6 +60,7 @@ in {
       locations."= /.well-known/matrix/client" = let
         client = {
           "m.homeserver" = { base_url = "https://matrix.kloenk.eu"; };
+          "org.matrix.msc3575.proxy" = { url = "https://matrix.kloenk.eu"; };
         };
       in {
         root = pkgs.writeTextDir ".well-known/matrix/client"

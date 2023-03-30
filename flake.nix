@@ -183,7 +183,7 @@
             home-manager.nixosModules.home-manager
             sops-nix.nixosModules.sops
             inputs.nix-minecraft.nixosModules.minecraft-servers
-            vika.nixosModules.matrix-sliding-sync-proxy
+            self.nixosModules.matrix-sliding-sync
             jlly.nixosModules.default
             fleet_bot.nixosModules.default
             p3tr.nixosModules.default
@@ -271,6 +271,7 @@
         restya-board = import ./modules/restya-board;
 
         wordpress = import ./modules/wordpress.nix;
+        matrix-sliding-sync = import ./modules/matrix-sliding-sync;
       };
 
       darwinModules = { epmd = import ./modules/darwin/epmd; };
