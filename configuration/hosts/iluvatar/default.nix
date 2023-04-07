@@ -22,6 +22,7 @@
     ./coredns.nix
 
     ./monitoring
+    ./kuma.nix
     ./matrix
 
     ../../common/telegraf.nix

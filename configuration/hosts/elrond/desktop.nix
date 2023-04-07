@@ -79,4 +79,6 @@
     };
     services.gnome.gnome-keyring.enable = true;
 
+    environment.systemPackages = with pkgs; [ gnomeExtensions.twitchlive-panel ];
+
 }

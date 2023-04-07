@@ -11,7 +11,11 @@
 
   networking.firewall.interfaces.wg0.allowedTCPPorts = [ 8009 ];
 
-  services.nginx.virtualHosts."matrix.kloenk.eu".locations = {
+  services.nginx.virtualHosts."Type your prompt and the code generation will just begin. To edit some existing code, you can also select something before perform this command, when accepting the change, the selected code will be replaced with the generated one.
+
+Type your prompt and the code generation will just begin. To edit some existing code, you can also select something before perform this command, when accepting the change, the selected code will be replaced with the generated one.
+
+matrix.kloenk.eu".locations = {
     "/_matrix/client/unstable/org.matrix.msc3575/" = {
       proxyPass =
         "http://localhost:8009/_matrix/client/unstable/org.matrix.msc3575/";

@@ -35,7 +35,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.dev.";
       adminEmail = "hostmaster.kloenk.eu.";
-      serial = 2021010143;
+      serial = 2021010144;
       refresh = 600;
       expire = 604800;
       minimum = 600;
@@ -60,6 +60,8 @@ let
       };
 
       gimli = iluvatar; # hostTTL 1200 "195.39.247.182" "2a0f:4ac0:0:1::cb2";
+
+      uptime = iluvatar;
 
       ns1 = iluvatar;
 

@@ -32,6 +32,16 @@
         gh
         sops
 
+        rustup
+        openssl
+        openssl.dev
+        gcc
+        clang
+        pkg-config
+
+        cargo-generate
+        bpf-linker
+
         direnv
         elixir
         elixir_ls
@@ -70,6 +80,12 @@
                 publisher = "stevemoser";
                 version = "1.9.0";
                 sha256 = "sha256-3wlXIvikzs2XiO9MzB0MbUYxkAKCDbTlv4lP9phAYYQ=";
+              }
+              {
+                name = "aicursor";
+                publisher = "ktiays";
+                version = "0.3.2";
+                sha256 = "sha256-Sx6r8sNarkdV2yJ4SmHQn5nu3yJFcWFR1qJzF0rHffY=";
               }
             ];
         })
