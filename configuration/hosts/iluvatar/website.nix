@@ -65,8 +65,8 @@ in {
       in {
         root = pkgs.writeTextDir ".well-known/matrix/client"
           "${builtins.toJSON client}";
-        extraConfig =
-          config.services.nginx.virtualHosts."kloenk.eu".extraConfig + ''
+        extraConfig = config.services.nginx.virtualHosts."kloenk.eu".extraConfig
+          + ''
             default_type application/json;
             ${commonHeaders}
             add_header "Access-Control-Allow-Origin" "*";

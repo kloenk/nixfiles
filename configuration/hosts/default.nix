@@ -43,9 +43,7 @@ in {
     # server = true;
   };
 
-  elrond = makeHost {
-    host = "192.168.178.247";
-  };
+  elrond = makeHost { host = "192.168.178.247"; };
 
   #durin = makeHost { host = durin-host; };
 

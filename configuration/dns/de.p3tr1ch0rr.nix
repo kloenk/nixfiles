@@ -42,7 +42,8 @@ let
       minimum = 600;
     });
 
-    NS = [ "ns1.he.net." "ns2.he.net." "ns4.he.net." "ns3.he.net." "ns5.he.net." ];
+    NS =
+      [ "ns1.he.net." "ns2.he.net." "ns4.he.net." "ns3.he.net." "ns5.he.net." ];
 
     #A = map (ttl 600) [ (a "195.39.247.6") ];
     A = map (ttl 600) [ (a "49.12.72.200") ];
@@ -54,10 +55,10 @@ let
 
     MX = mxKloenk;
 
-    TXT = spfKloenk ++ [];
+    TXT = spfKloenk ++ [ ];
     CAA = letsEncrypt config.security.acme.email;
 
-    SRV = [];
+    SRV = [ ];
 
     subdomains = rec {
       #ns1 = iluvatar;

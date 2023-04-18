@@ -3,10 +3,11 @@
 {
   environment.pathsToLink = [ "/share/zsh" ];
 
-  environment.systemPackages = with pkgs; [ fzf ];
+  environment.systemPackages = with pkgs; [ fzf exa ripgrep direnv ];
 
-  home-manager.users.kloenk.programs.zsh = {
-    initExtra = ''
+  programs.zsh = {
+    enable = true;
+    interactiveShellInit = ''
       function use {
         packages=()
         packages_fmt=()
@@ -43,32 +44,22 @@
         fi
       }
       compdef _nix nix
+
+      eval "$(direnv hook zsh)"
     '';
-    enable = true;
-    autocd = true;
+    syntaxHighlighting.enable = true;
     enableCompletion = true;
-    enableAutosuggestions = true;
-    localVariables = config.environment.variables;
-    oh-my-zsh = {
+    autosuggestions.enable = true;
+    setOptions = [ "AUTO_CD" ];
+    ohMyZsh = {
       enable = true;
       theme = "fishy";
       plugins = [
         #"git"
         "sudo"
         "ripgrep"
-        "cargo"
       ];
     };
-    plugins = [
-      # {
-      #   name = "zsh-fast-syntax-highlighting";
-      #   src = pkgs.zsh-fast-syntax-highlighting;
-      # }
-      {
-        name = "zsh-syntax-highlighting";
-        src = pkgs.zsh-syntax-highlighting;
-      }
-    ];
     shellAliases = {
       ls = "exa";
       l = "exa -a";

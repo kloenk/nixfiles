@@ -1,6 +1,5 @@
-{ lib, stdenv, fetchgit
-, obs-studio, cmake, pkg-config
-, zlib, curl, dbus, qtbase }:
+{ lib, stdenv, fetchgit, obs-studio, cmake, pkg-config, zlib, curl, dbus, qtbase
+}:
 
 stdenv.mkDerivation rec {
   pname = "obs-tuna";

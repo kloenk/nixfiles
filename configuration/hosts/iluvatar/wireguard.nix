@@ -104,13 +104,10 @@
     name = "wg0";
     linkConfig = { RequiredForOnline = "no"; };
     addresses = [{ addressConfig.Address = "192.168.242.1/24"; }];
-    routes = [{
-      routeConfig.Destination = "192.168.242.0/24";
-    }];
+    routes = [{ routeConfig.Destination = "192.168.242.0/24"; }];
   };
 
-  networking.hosts = {
-  };
+  networking.hosts = { };
 
   systemd.network.netdevs."30-wg2" = {
     netdevConfig = {

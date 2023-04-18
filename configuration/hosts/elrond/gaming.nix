@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 {
-  users.users.kloenk.packages = with pkgs; [ 
+  users.users.kloenk.packages = with pkgs; [
     prismlauncher
     steam-run-native
     wineWowPackages.staging
@@ -22,10 +22,11 @@
 
   programs.steam = {
     enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    remotePlay.openFirewall =
+      true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall =
+      true; # Open ports in the firewall for Source Dedicated Server
   };
-
 
   networking.firewall.allowedTCPPorts = [ 4455 ];
 

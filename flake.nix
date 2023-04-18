@@ -1,13 +1,6 @@
 {
   description = "Kloenk's NixOS configuration";
 
-  inputs.home-manager = {
-    type = "github";
-    owner = "nix-community";
-    repo = "home-manager";
-    inputs.nixpkgs.follows = "/nixpkgs";
-  };
-
   inputs.nixpkgs = {
     type = "github";
     owner = "nixos";
@@ -99,9 +92,9 @@
   inputs.nix-minecraft.url = "github:Infinidoge/nix-minecraft";
   inputs.nix-minecraft.inputs.nixpkgs.follows = "/nixpkgs";
 
-  outputs = inputs@{ self, nixpkgs, nix, home-manager, moodlepkgs, mail-server
-    , kloenk-www, dns, darwin, sops-nix, vika, colmena, jlly, fleet_bot, p3tr, devenv
-    , ... }:
+  outputs = inputs@{ self, nixpkgs, nix, moodlepkgs, mail-server, kloenk-www
+    , dns, darwin, sops-nix, vika, colmena, jlly, fleet_bot, p3tr, devenv, ...
+    }:
     let
       overlayCombined = system: [
         #nix.overlays.default
@@ -180,7 +173,7 @@
           ];
           imports = [
             ./configuration/common
-            home-manager.nixosModules.home-manager
+            #home-manager.nixosModules.home-manager
             sops-nix.nixosModules.sops
             inputs.nix-minecraft.nixosModules.minecraft-servers
             self.nixosModules.matrix-sliding-sync
@@ -193,9 +186,12 @@
             #self.nixosModules.firefox
             self.nixosModules.wordpress
             self.nixosModules.transient
+
+            vika.nixosModules.colorfulMotd
+            vika.nixosModules.secureSSHClient
           ];
           # disable home-manager manpage (breaks hydra see https://github.com/rycee/home-manager/issues/1262)
-          home-manager.users.kloenk.manual.manpages.enable = false;
+          #home-manager.users.kloenk.manual.manpages.enable = false;
 
           environment.systemPackages = [ # pkgs.colmena
           ];
@@ -249,6 +245,7 @@
           imports = [
             ./configuration/hosts/elrond
             vika.nixosModules.gnome
+            vika.nixosModules.bgrtSplash
           ];
         };
         #durin = { pkgs, nodes, ... }: {

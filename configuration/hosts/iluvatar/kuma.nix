@@ -10,8 +10,11 @@
   };
 
   services.nginx.virtualHosts."uptime.kloenk.eu" = {
-    locations."/".proxyPass = "http://localhost:${config.services.uptime-kuma.settings.PORT}/";
+    locations."/".proxyPass =
+      "http://localhost:${config.services.uptime-kuma.settings.PORT}/";
+    locations."/".proxyWebsockets = true;
     enableACME = true;
     forceSSL = true;
+    kTLS = true;
   };
 }

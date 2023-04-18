@@ -10,6 +10,7 @@
     ./kloenk.nix
     ./pbb.nix
     ./initrd.nix
+    ./environment.nix
   ];
 
   # environment.etc."src/nixpkgs".source = config.sources.nixpkgs;
@@ -66,8 +67,8 @@
     }];
 
     extraConfig = ''
-        StreamLocalBindUnlink yes
-      '';
+      StreamLocalBindUnlink yes
+    '';
   };
   sops.age.sshKeyPaths = [ "/persist/data/openssh/ed25519_key" ];
   sops.defaultSopsFile = ../../secrets + "/${config.networking.hostName}.yaml";
@@ -111,11 +112,6 @@
   environment.variables.EDITOR = "vim";
 
   users.users.kloenk.shell = lib.mkOverride 75 pkgs.zsh;
-
-  home-manager.users.kloenk = import ./home.nix {
-    pkgs = pkgs;
-    lib = lib;
-  };
 
   #programs.fish.enable = true;
   programs.zsh.enable = true;

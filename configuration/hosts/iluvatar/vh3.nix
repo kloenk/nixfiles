@@ -87,11 +87,12 @@ in {
     allowedUDPPorts = [ 25565 ];
   };
 
-  /*services.postgresql = {
-    ensureUsers = [{
-      name = "minecraft-vh3";
-      ensurePermissions."DATABASE vh3" = "ALL PRIVILEGES";
-    }];
-    ensureDatabases = [ "vh3" ];
-  };*/
+  /* services.postgresql = {
+       ensureUsers = [{
+         name = "minecraft-vh3";
+         ensurePermissions."DATABASE vh3" = "ALL PRIVILEGES";
+       }];
+       ensureDatabases = [ "vh3" ];
+     };
+  */
 }

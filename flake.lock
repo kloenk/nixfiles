@@ -656,27 +656,6 @@
         "type": "github"
       }
     },
-    "home-manager": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "utils": "utils"
-      },
-      "locked": {
-        "lastModified": 1667347482,
-        "narHash": "sha256-KuRYeitjusSdkJ/PeHzPfAIVwVjbtG5v+To6ffy8tiQ=",
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "rev": "04e844090ed17298bfbe0f8249109b15770571bc",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "type": "github"
-      }
-    },
     "huawei-wmi": {
       "flake": false,
       "locked": {
@@ -938,7 +917,7 @@
         "flake-compat": "flake-compat_8",
         "nixpkgs": "nixpkgs_4",
         "nixpkgs-22_11": "nixpkgs-22_11",
-        "utils": "utils_2"
+        "utils": "utils"
       },
       "locked": {
         "lastModified": 1671738303,
@@ -1095,11 +1074,11 @@
         "nixpkgs-regression": "nixpkgs-regression_3"
       },
       "locked": {
-        "lastModified": 1680367323,
-        "narHash": "sha256-leedRn7854vB1fflZoYFLPppp5BoeFQWvecuBNJtpyY=",
+        "lastModified": 1681462250,
+        "narHash": "sha256-e22+8kY9XyAHM5rvrkUw8Ns6ZSAVTiNfKjMLLHtyL8A=",
         "owner": "nixos",
         "repo": "nix",
-        "rev": "ea1cbc3df57d6625fa67248cc085f3fd91cba440",
+        "rev": "7eac8838df029c9dfeac6db149a306ed72c02555",
         "type": "github"
       },
       "original": {
@@ -1434,11 +1413,11 @@
     },
     "nixpkgs_6": {
       "locked": {
-        "lastModified": 1680371819,
-        "narHash": "sha256-+JjtistAuCJJ8n1MEx+afEGdLDGQl/2m92qx8eSrXAM=",
+        "lastModified": 1681467702,
+        "narHash": "sha256-lnZll1rJM6R6xIMkyt2JK0DF13BGBdSNg4pKtVdFlKI=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "c0df1f8f413d85b75459f6c629795abb760fc199",
+        "rev": "bc8ebd6a1249ea537fc229ff0108e8e3101f6f38",
         "type": "github"
       },
       "original": {
@@ -1669,7 +1648,6 @@
         "dns": "dns",
         "flake-compat": "flake-compat_3",
         "fleet_bot": "fleet_bot",
-        "home-manager": "home-manager",
         "jlly": "jlly",
         "kloenk-www": "kloenk-www",
         "mail-server": "mail-server",
@@ -1767,21 +1745,6 @@
       }
     },
     "utils": {
-      "locked": {
-        "lastModified": 1667077288,
-        "narHash": "sha256-bdC8sFNDpT0HK74u9fUkpbf1MEzVYJ+ka7NXCdgBoaA=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "6ee9ebb6b1ee695d2cacc4faa053a7b9baa76817",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "utils_2": {
       "locked": {
         "lastModified": 1605370193,
         "narHash": "sha256-YyMTf3URDL/otKdKgtoMChu4vfVL3vCMkRqpGifhUn0=",
