@@ -32,6 +32,7 @@
     nil
     chatterino2
     direnv
+    nushell
 
     wireguard-tools
     wireguard-go
