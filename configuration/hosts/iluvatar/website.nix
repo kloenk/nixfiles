@@ -34,6 +34,7 @@ let
     "/spotify" = { return = "301 https://open.spotify.com/user/chilsninkio"; };
     "/musik" = { return = "301 https://open.spotify.com/user/chilsninkio"; };
     "/music" = { return = "301 https://open.spotify.com/user/chilsninkio"; };
+    "/insta" = { return = "301 https://instagram.com/p3tr_1ch0rr"; };
   };
 in {
   services.nginx.virtualHosts = {
