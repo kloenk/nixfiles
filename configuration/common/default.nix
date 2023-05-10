@@ -75,7 +75,7 @@
 
   # monitoring
   services.vnstat.enable = lib.mkDefault true;
-  programs.sysdig.enable = lib.mkDefault true;
+  # programs.sysdig.enable = lib.mkDefault true;
   security.sudo.wheelNeedsPassword = false;
 
   nftables.enable = true;
@@ -103,6 +103,7 @@
     erlang # for escript scripts
     rclone
     wireguard-tools
+    nushell
 
     usbutils
     pciutils

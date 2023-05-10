@@ -66,6 +66,7 @@
             zhuangtongfa.material-theme
             tobiasalthoff.atom-material-theme
             mskelton.one-dark-theme
+            vscode-extensions.ms-vscode.hexeditor
           ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
             {
               name = "mesonbuild";
