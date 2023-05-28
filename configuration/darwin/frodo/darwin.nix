@@ -33,6 +33,7 @@
     chatterino2
     direnv
     nushell
+    youtube-dl
 
     wireguard-tools
     wireguard-go
