@@ -15,6 +15,7 @@
   };
 
   programs.ssh = {
+    pubkeyAcceptedKeyTypes = [ "ecdsa-sha2-nistp256" ];
     extraConfig = ''
       Host *.kloenk.de
         Port 62954
@@ -222,4 +223,5 @@
       enableSSHSupport = true;
     };
   };
+
 }
