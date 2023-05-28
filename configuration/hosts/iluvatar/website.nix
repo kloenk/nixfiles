@@ -141,6 +141,16 @@ in {
       };
     };
 
+    "sysbadge.kloenk.eu" = {
+      enableACME = true;
+      forceSSL = true;
+      root = pkgs.sysbadge_web;
+      locations."/".extraConfig = ''
+        ${commonHeaders}
+        add_header Content-Security-Policy "default-src 'self' data: api.pluralkit.me; script-src 'self' 'unsafe-inline'; object-src 'none'; frame-ancestors 'none'";
+      '';
+    };
+
     "p3tr1ch0rr.de" = {
       enableACME = true;
       forceSSL = true;

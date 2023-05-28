@@ -87,14 +87,19 @@
     inputs.nixpkgs.follows = "/nixpkgs";
   };
 
+  inputs.sysbadge = {
+    url = "gitlab:kloenk/sysbadge?host=cyberchaos.dev";
+    inputs.nixpkgs.follows = "/nixpkgs";
+  };
+
   inputs.devenv.url = "github:cachix/devenv";
 
   inputs.nix-minecraft.url = "github:Infinidoge/nix-minecraft";
   inputs.nix-minecraft.inputs.nixpkgs.follows = "/nixpkgs";
 
   outputs = inputs@{ self, nixpkgs, nix, moodlepkgs, mail-server, kloenk-www
-    , dns, darwin, sops-nix, vika, colmena, jlly, fleet_bot, p3tr, devenv, ...
-    }:
+    , dns, darwin, sops-nix, vika, colmena, jlly, fleet_bot, p3tr, sysbadge
+    , devenv, ... }:
     let
       overlayCombined = system: [
         #nix.overlays.default
@@ -108,6 +113,7 @@
         jlly.overlays.default
         fleet_bot.overlays.default
         p3tr.overlays.default
+        sysbadge.overlays.sysbadge
       ];
 
       systems =
