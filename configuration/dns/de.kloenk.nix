@@ -36,8 +36,8 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.de.";
       adminEmail = "hostmaster@kloenk.de";
-      serial = 2020122609;
-      refresh = 600;
+      serial = 2020122610;
+      refresh = 3600;
       expire = 604800;
       minimum = 600;
     });
@@ -58,21 +58,6 @@ let
       "google-site-verification=p5ttbvvVzpqKQNUf_kuhwBEFvTavqiUF5BxTytUbGsY"
     ];
     CAA = letsEncrypt config.security.acme.email;
-
-    SRV = [
-      {
-        service = "minecraft";
-        proto = "tcp";
-        port = 20023;
-        target = "game.00y.de.";
-      }
-      {
-        service = "ts3";
-        proto = "udp";
-        port = 790;
-        target = "web.xorit.de.";
-      }
-    ];
 
     subdomains = rec {
       /* iluvatar = hostTTL 1200 "195.39.247.6" "2a0f:4ac0::6";
