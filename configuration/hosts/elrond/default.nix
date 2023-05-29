@@ -10,6 +10,7 @@
     ./gaming.nix
     ./desktop.nix
     ./mpd.nix
+    ./kde.nix
 
     ../../common/telegraf.nix
   ];
