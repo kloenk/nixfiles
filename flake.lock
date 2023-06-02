@@ -676,6 +676,23 @@
         "type": "github"
       }
     },
+    "freertos": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1675377627,
+        "narHash": "sha256-AxXsNpf6zzmkyY8AeCyN1HtHnSNz8JECljVURLEgUeY=",
+        "owner": "FreeRTOS",
+        "repo": "FreeRTOS-Kernel",
+        "rev": "570ade4001e50adbf06a074582ea993af562e0e1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "FreeRTOS",
+        "ref": "smp",
+        "repo": "FreeRTOS-Kernel",
+        "type": "github"
+      }
+    },
     "gitignore": {
       "inputs": {
         "nixpkgs": [
@@ -2083,6 +2100,7 @@
     "sysbadge": {
       "inputs": {
         "devenv": "devenv_4",
+        "freertos": "freertos",
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -2091,11 +2109,11 @@
       },
       "locked": {
         "host": "cyberchaos.dev",
-        "lastModified": 1685294044,
-        "narHash": "sha256-nFQxGH0GCovSW6EuFz40iAta3m/PGe638UAbi1yMjDM=",
+        "lastModified": 1685732213,
+        "narHash": "sha256-y8Lu8Thm+5bF9+m4KYNQ7g5ARy028ZO/BiZNM5tjf5I=",
         "owner": "kloenk",
         "repo": "sysbadge",
-        "rev": "67824475326ff8a8960f1816fc47aa938a9d8cbc",
+        "rev": "f1b7115d4c435a4e238805841f08fd04d1006a0a",
         "type": "gitlab"
       },
       "original": {
