@@ -147,7 +147,7 @@ in {
       root = pkgs.sysbadge_web;
       locations."/".extraConfig = ''
         ${commonHeaders}
-        add_header Content-Security-Policy "default-src 'self' data: api.pluralkit.me; script-src 'self' 'unsafe-inline'; object-src 'none'; frame-ancestors 'none'";
+        add_header Content-Security-Policy "default-src 'self' data: api.pluralkit.me; script-src 'self' 'unsafe-inline'; object-src 'none'; frame-ancestors 'none'; style-src 'self' 'unsafe-inline'";
       '';
     };
 
