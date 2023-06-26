@@ -6,6 +6,9 @@
     steam-run-native
     wineWowPackages.staging
 
+    lutris
+    gamescope
+
     discord
     xonotic
 

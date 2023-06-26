@@ -250,7 +250,7 @@
 
           imports = [
             ./configuration/hosts/elrond
-            vika.nixosModules.gnome
+            #vika.nixosModules.gnome
             vika.nixosModules.bgrtSplash
           ];
         };

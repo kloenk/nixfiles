@@ -82,6 +82,6 @@
   };
   services.gnome.gnome-keyring.enable = true;
 
-  environment.systemPackages = with pkgs; [ gnomeExtensions.twitchlive-panel ];
+  environment.systemPackages = with pkgs; [ gnomeExtensions.twitchlive-panel wl-clipboard ];
 
 }
