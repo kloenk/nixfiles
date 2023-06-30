@@ -4,6 +4,10 @@
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
       "clion"
+      "ruby-mine"
+      "webstorm"
+      "idea-ultimate"
+      "datagrip"
 
       "vscode"
       "vscode-with-extensions"
@@ -62,10 +66,15 @@
       bpf-linker
 
       jetbrains.clion
+      jetbrains.ruby-mine
+      jetbrains.webstorm
+      jetbrains.idea-ultimate
+      jetbrains.datagrip
+
       direnv
       elixir
       elixir_ls
-      nil
+      #nil
       (vscode-with-extensions.override {
         vscodeExtensions = with vscode-extensions;
           [
