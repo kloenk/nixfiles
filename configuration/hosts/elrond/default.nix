@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     ./links.nix
     ./devenv.nix
+    ./podman.nix
 
     ./pipewire.nix
     ./gaming.nix

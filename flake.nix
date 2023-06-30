@@ -253,6 +253,7 @@
             #vika.nixosModules.gnome
             vika.nixosModules.bgrtSplash
           ];
+          users.users.kloenk.packages = [ inputs.nixpkgs.legacyPackages.x86_64-linux.nil ];
         };
         #durin = { pkgs, nodes, ... }: {
         #  deployment.targetHost = "durin.fritz.box";
