@@ -4,6 +4,7 @@
   imports = [
     ./common.nix
     ./nginx
+    ./nginx/kloenk.nix
     ./node-exporter
     ./zsh
     ./make-nixpkgs.nix

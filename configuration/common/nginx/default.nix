@@ -2,7 +2,6 @@
 
 {
   # acme foo
-  security.acme.defaults.email = "ca@kloenk.de";
   #security.acme.defaults.webroot = ""; # TODO: map to persist? systemd rw pathes?
   security.acme.acceptTerms = true;
 
@@ -52,13 +51,6 @@
       proxy_cookie_path / "/; secure; HttpOnly; SameSite=strict";
     '';
     statusPage = true;
-  };
-  services.nginx.virtualHosts."${config.networking.hostName}.kloenk.dev" = {
-    #serverAliases = [ "default" ];
-    #enableACME = true;
-    #forceSSL = true;
-    locations."/public/".alias = lib.mkDefault "/persist/data/public/";
-    locations."/public/".extraConfig = "autoindex on;";
   };
 
   services.telegraf.extraConfig.inputs = {
