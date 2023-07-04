@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 
 {
   security.acme.defaults.email = "ca@kloenk.de";
