@@ -202,6 +202,8 @@
           environment.systemPackages = [ # pkgs.colmena
           ];
 
+          nix.channel.enable = false;
+
           deployment = {
             buildOnTarget = true;
             allowLocalDeployment = true;

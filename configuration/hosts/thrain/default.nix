@@ -148,7 +148,7 @@
   };
   networking.firewall.interfaces.br0.allowedTCPPorts = lib.singleton 4713;
 
-  system.autoUpgrade.enable = true;
+  system.autoUpgrade.enable = false;
 
   #services.calibre-server.enable = true;
   #services.calibre-server.libraryDir = "/persist/data/syncthing/data/Library";
