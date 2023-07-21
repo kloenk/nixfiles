@@ -35,16 +35,16 @@
     # Make an RP2040 in BOOTSEL mode writable by all users, so you can `picotool`
     # without `sudo`. 
     SUBSYSTEM=="usb", ATTRS{idVendor}=="2e8a", ATTRS{idProduct}=="0003", MODE="0666"
-    
+
     # Symlink an RP2040 running MicroPython from /dev/pico.
     #
     # Then you can `mpr connect $(realpath /dev/pico)`.
     SUBSYSTEM=="tty", ATTRS{idVendor}=="2e8a", ATTRS{idProduct}=="0005", SYMLINK+="pico"
-    
-    
+
+
     #picoprobe
     SUBSYSTEM=="usb", ATTRS{idVendor}=="2e8a", MODE="0666"
-    
+
     #after adding this execute
     # sudo udevadm control --reload-rules &&  sudo udevadm trigger 
     # connect and disconnetc the USB device
@@ -57,6 +57,7 @@
       schildichat-desktop-wayland
       gh
       sops
+      blackbox-terminal
 
       rustup
       #gcc
@@ -97,7 +98,11 @@
             zhuangtongfa.material-theme
             tobiasalthoff.atom-material-theme
             mskelton.one-dark-theme
-            vscode-extensions.ms-vscode.hexeditor
+            ms-vscode.hexeditor
+
+            phoenixframework.phoenix
+            bradlc.vscode-tailwindcss
+
           ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
             {
               name = "mesonbuild";
