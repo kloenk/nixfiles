@@ -103,7 +103,7 @@
     let
       overlayCombined = system: [
         #nix.overlays.default
-        (final: prev: { nix = nix.packages.${system}.nix; })
+        #(final: prev: { nix = nix.packages.${system}.nix; })
         #home-manager.overlay
         self.overlays.kloenk
         moodlepkgs.overlay
@@ -202,7 +202,7 @@
           environment.systemPackages = [ # pkgs.colmena
           ];
 
-          nix.channel.enable = false;
+          #nix.channel.enable = false;
 
           deployment = {
             buildOnTarget = true;

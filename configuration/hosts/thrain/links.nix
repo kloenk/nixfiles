@@ -20,7 +20,7 @@
       DHCP = "no";
       dns = [ "127.0.0.1" ];
       bridge = [ "br0" ];
-      vlan = [ "vlan1337" ];
+      vlan = [ "vlan1337" "mgmt" ];
       /* addresses = [
            { addressConfig.Address = "192.168.178.248/24"; }
            #{ addressConfig.Address = "192.168.178.2/24"; }
