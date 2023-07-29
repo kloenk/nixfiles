@@ -44,6 +44,18 @@
       DHCP = "no";
       addresses = [{ addressConfig.Address = "6.0.2.2/24"; }];
     };
+    netdevs."25-mgmt" = {
+      netdevConfig = {
+        Kind = "vlan";
+        Name = "mgmt";
+      };
+      vlanConfig.Id = 44;
+    };
+    networks."25-mgmt" = {
+      name = config.systemd.network.netdevs."25-mgmt".netdevConfig.Name;
+      DHCP = "no";
+      addresses = [{ addressConfig.Address = "192.168.44.1/24"; }];
+    };
 
     netdevs."25-br0" = {
       netdevConfig = {
