@@ -53,6 +53,8 @@
     sqlite-web
 
     nixfmt
+    darwin.iproute2mac
+    pwgen
   ];
 
   services.epmd.enable = true;
