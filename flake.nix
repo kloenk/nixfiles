@@ -252,7 +252,7 @@
 
           imports = [
             ./configuration/hosts/elrond
-            #vika.nixosModules.gnome
+            vika.nixosModules.gnome
             vika.nixosModules.bgrtSplash
           ];
           users.users.kloenk.packages =
