@@ -27,12 +27,13 @@
     pkg-config
     gh
     glab
-    neomutt
+    #neomutt
     go
     nil
     chatterino2
     direnv
     nushell
+    uutils-coreutils
     youtube-dl
 
     wireguard-tools
@@ -59,7 +60,7 @@
 
   services.epmd.enable = true;
   services.telegraf = {
-    enable = true;
+    enable = false;
     configUrl = "https://influx.kloenk.dev/api/v2/telegrafs/08e1104547058000";
     environmentFiles = [ "/etc/telegraf.env" ];
   };
