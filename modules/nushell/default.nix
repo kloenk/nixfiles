@@ -56,6 +56,8 @@ in {
           text = ''
             ${cfg.pkg}/bin/nu --config ${configFile} --env-config ${envConfigFile} "$@"
           '';
+        } // {
+          passthru = { shellPath = "/bin/nu"; };
         };
       };
 
