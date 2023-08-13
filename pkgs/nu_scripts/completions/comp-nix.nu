@@ -2,6 +2,55 @@ def "nu-complete nix log-format" [] {
   ['raw', 'internal-json', 'bar', 'bar-with-logs']
 }
 
+def "nu-complete nix args" [context: string] {
+  let args = ($context | split row " ")
+  let pos = ($args | length) - 1
+  if ($args | last | is-empty) {
+    return []
+  }
+
+  let nix_args = ($args | last $pos )
+  nu-complete-get nix args $nix_args 
+
+  #try {
+  #  let comps = (sh -c $"NIX_GET_COMPLETIONS=($pos) ($context)" | from ssv -a -n)
+  #  print $comps
+  #  $comps
+  #  | filter { |comp| ($comp.column1 == "attrs" or $comp.column1 == "normal") == false }
+  #  | each { |comp| { value: $comp.column1 }}
+  #} catch { [] }
+}
+
+def "nu-complete-get nix args" [args: list<string>] {
+  let len = ($args | length)
+  let res = (do { NIX_GET_COMPLETIONS=$len nix $args } | complete)
+  if $res.exit_code != 0 {
+    return []
+  }
+
+  let res = ($res.stdout | from ssv -a)
+
+  try { return (nu-complete-parse nix normal $res.normal) }
+  try { return (nu-complete-parse nix attrs $res.attrs) }
+  try { return (nu-complete-parse nix filenames $res.filenames) }
+
+  print ($res | columns)
+
+  return $res
+}
+
+def "nu-complete-parse nix normal" [data: list<string>] {
+  $data | each { |d| {value: $d} }
+}
+
+def "nu-complete-parse nix attrs" [data: list<string>] {
+  $data | each { |d| {value: $d} }
+}
+
+def "nu-complete-parse nix filenames" [data: list<string>] {
+  $data | each { |d| {value: $d} }
+}
+
 #a tool for reproducible and declarative configuration management
 export extern "nix" [
   --help    #Show usage information.
@@ -161,7 +210,7 @@ export extern "nix" [
   --use-sqlite-wal    #Enable the use-sqlite-wal setting.
   --user-agent-suffix: string    #Set the user-agent-suffix setting.
   --warn-dirty    #Enable the warn-dirty setting.
-  ...args: any
+  ...args: any@"nu-complete nix args"
 ]
 
 #build a derivation or fetch a store path
@@ -183,13 +232,13 @@ export extern "nix build" [
   --no-registries    #Don't allow lookups in the flake registries. This option is deprecated; use 
   --no-update-lock-file    #Do not allow any updates to the flake's lock file.
   --no-write-lock-file    #Do not write the flake's newly generated lock file.
-  --override-input    #Override a specific flake input (e.g. dwarffs/nixpkgs). This implies --no-write-lock-file.
+  --override-input: string@"nu-complete nix args"    #Override a specific flake input (e.g. dwarffs/nixpkgs). This implies --no-write-lock-file.
   --recreate-lock-file    #Recreate the flake's lock file from scratch.
-  --update-input    #Update a specific flake input (ignoring its previous entry in the lock file).
+  --update-input: string@"nu-complete nix args"    #Update a specific flake input (ignoring its previous entry in the lock file).
   --derivation    #Operate on the store derivation rather than its outputs.
   --expr    #Interpret installables as attribute paths relative to the Nix expression expr.
   --file(-f)    #file
-  ...args: any                              # Arguments to be passed to your program
+  ...args: string@"nu-complete nix args"  # Arguments to be passed to your program
 ]
 
 #run a bash shell that provides the build environment of a derivation
@@ -224,12 +273,12 @@ export extern "nix develop" [
   --derivation    #Operate on the store derivation rather than its outputs.
   --expr    #Interpret installables as attribute paths relative to the Nix expression expr.
   --file(-f)    #file
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #manage Nix flakes
 export extern "nix flake" [
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any                             # Arguments to be passed to your program
 ]
 
 #copy a flake and all its inputs to a store
@@ -251,7 +300,7 @@ export extern "nix flake archive" [
   --override-input    #Override a specific flake input (e.g. dwarffs/nixpkgs). This implies --no-write-lock-file.
   --recreate-lock-file    #Recreate the flake's lock file from scratch.
   --update-input    #Update a specific flake input (ignoring its previous entry in the lock file).
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #check whether the flake evaluates and run its tests
@@ -271,7 +320,7 @@ export extern "nix flake check" [
   --override-input    #Override a specific flake input (e.g. dwarffs/nixpkgs). This implies --no-write-lock-file.
   --recreate-lock-file    #Recreate the flake's lock file from scratch.
   --update-input    #Update a specific flake input (ignoring its previous entry in the lock file).
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #clone flake repository
@@ -291,7 +340,7 @@ export extern "nix flake clone" [
   --override-input    #Override a specific flake input (e.g. dwarffs/nixpkgs). This implies --no-write-lock-file.
   --recreate-lock-file    #Recreate the flake's lock file from scratch.
   --update-input    #Update a specific flake input (ignoring its previous entry in the lock file).
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #show flake metadata
@@ -311,7 +360,7 @@ export extern "nix flake info" [
   --override-input    #Override a specific flake input (e.g. dwarffs/nixpkgs). This implies --no-write-lock-file.
   --recreate-lock-file    #Recreate the flake's lock file from scratch.
   --update-input    #Update a specific flake input (ignoring its previous entry in the lock file).
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #create a flake in the current directory from a template
@@ -323,7 +372,7 @@ export extern "nix flake init" [
   --impure    #Allow access to mutable paths and repositories.
   --include(-I)    #path
   --override-flake    #Override the flake registries, redirecting original-ref to resolved-ref.
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #create missing lock file entries
@@ -340,8 +389,8 @@ export extern "nix flake lock" [
   --no-update-lock-file    #Do not allow any updates to the flake's lock file.
   --override-input    #Override a specific flake input (e.g. dwarffs/nixpkgs). This implies --no-write-lock-file.
   --recreate-lock-file    #Recreate the flake's lock file from scratch.
-  --update-input    #Update a specific flake input (ignoring its previous entry in the lock file).
-  ...args: any                              # Arguments to be passed to your program
+  --update-input: string@"nu-complete nix args"   #Update a specific flake input (ignoring its previous entry in the lock file).
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #show flake metadata
@@ -361,7 +410,7 @@ export extern "nix flake metadata" [
   --override-input    #Override a specific flake input (e.g. dwarffs/nixpkgs). This implies --no-write-lock-file.
   --recreate-lock-file    #Recreate the flake's lock file from scratch.
   --update-input    #Update a specific flake input (ignoring its previous entry in the lock file).
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #create a flake in the specified directory from a template
@@ -373,7 +422,7 @@ export extern "nix flake new" [
   --impure    #Allow access to mutable paths and repositories.
   --include(-I)    #path
   --override-flake    #Override the flake registries, redirecting original-ref to resolved-ref.
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #download the source tree denoted by a flake reference into the Nix
@@ -393,7 +442,7 @@ export extern "nix flake prefetch" [
   --override-input    #Override a specific flake input (e.g. dwarffs/nixpkgs). This implies --no-write-lock-file.
   --recreate-lock-file    #Recreate the flake's lock file from scratch.
   --update-input    #Update a specific flake input (ignoring its previous entry in the lock file).
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #show the outputs provided by a flake
@@ -414,7 +463,7 @@ export extern "nix flake show" [
   --override-input    #Override a specific flake input (e.g. dwarffs/nixpkgs). This implies --no-write-lock-file.
   --recreate-lock-file    #Recreate the flake's lock file from scratch.
   --update-input    #Update a specific flake input (ignoring its previous entry in the lock file).
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #update flake lock file 
@@ -429,12 +478,12 @@ export extern "nix flake update" [
   --inputs-from    #Use the inputs of the specified flake as registry entries.
   --no-registries    #Don't allow lookups in the flake registries. This option is deprecated; use 
   --override-input    #Override a specific flake input (e.g. dwarffs/nixpkgs). This implies --no-write-lock-file.
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #show help about nix or a particular subcommand
 export extern "nix help" [
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #manage Nix profiles
@@ -445,7 +494,7 @@ export extern "nix profile" [
 #show the closure difference between each version of a profile
 export extern "nix profile diff-closures" [
   --profile    #The profile to update.
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #show all versions of a profile
@@ -457,7 +506,7 @@ export extern "nix profile history" [
   --impure    #Allow access to mutable paths and repositories.
   --include(-I)    #path
   --override-flake    #Override the flake registries, redirecting original-ref to resolved-ref.
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #install a package into a profile
@@ -480,7 +529,7 @@ export extern "nix profile install" [
   --derivation    #Operate on the store derivation rather than its outputs.
   --expr    #Interpret installables as attribute paths relative to the Nix expression expr.
   --file(-f)    #file
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #list installed packages
@@ -492,7 +541,7 @@ export extern "nix profile list" [
   --impure    #Allow access to mutable paths and repositories.
   --include(-I)    #path
   --override-flake    #Override the flake registries, redirecting original-ref to resolved-ref.
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #remove packages from a profile
@@ -504,7 +553,7 @@ export extern "nix profile remove" [
   --impure    #Allow access to mutable paths and repositories.
   --include(-I)    #path
   --override-flake    #Override the flake registries, redirecting original-ref to resolved-ref.
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #roll back to the previous version or a specified version of a
@@ -512,7 +561,7 @@ export extern "nix profile rollback" [
   --dry-run    #Show what this command would do without doing it.
   --profile    #The profile to update.
   --to    #The profile version to roll back to.
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #upgrade packages using their most recent flake
@@ -535,7 +584,7 @@ export extern "nix profile upgrade" [
   --derivation    #Operate on the store derivation rather than its outputs.
   --expr    #Interpret installables as attribute paths relative to the Nix expression expr.
   --file(-f)    #file
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #delete non-current versions of a profile 
@@ -543,7 +592,7 @@ export extern "nix profile wipe-history" [
   --dry-run    #Show what this command would do without doing it.
   --older-than    #Delete versions older than the specified age. age must be in the format Nd, where N denotes
   --profile    #The profile to update.
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #start an interactive environment for evaluating Nix expressions
@@ -554,7 +603,7 @@ export extern "nix repl" [
   --impure    #Allow access to mutable paths and repositories.
   --include(-I)    #path
   --override-flake    #Override the flake registries, redirecting original-ref to resolved-ref.
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #run a Nix application
@@ -576,7 +625,7 @@ export extern "nix run" [
   --derivation    #Operate on the store derivation rather than its outputs.
   --expr    #Interpret installables as attribute paths relative to the Nix expression expr.
   --file(-f)    #file
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #search for packages
@@ -599,7 +648,7 @@ export extern "nix search" [
   --derivation    #Operate on the store derivation rather than its outputs.
   --expr    #Interpret installables as attribute paths relative to the Nix expression expr.
   --file(-f)    #file
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #run a shell in which the specified packages are available 
@@ -625,7 +674,7 @@ export extern "nix shell" [
   --derivation    #Operate on the store derivation rather than its outputs.
   --expr    #Interpret installables as attribute paths relative to the Nix expression expr.
   --file(-f)    #file
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #bundle an application so that it works outside of the Nix store
@@ -649,7 +698,7 @@ export extern "nix bundle" [
   --derivation    #Operate on the store derivation rather than its outputs.
   --expr    #Interpret installables as attribute paths relative to the Nix expression expr.
   --file(-f)    #file
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #copy paths between Nix stores
@@ -677,7 +726,7 @@ export extern "nix copy" [
   --expr    #Interpret installables as attribute paths relative to the Nix expression expr.
   --file(-f)    #file
   --no-recursive    #Apply operation to specified paths only.
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #open the Nix expression of a Nix package in $EDITOR
@@ -699,7 +748,7 @@ export extern "nix edit" [
   --derivation    #Operate on the store derivation rather than its outputs.
   --expr    #Interpret installables as attribute paths relative to the Nix expression expr.
   --file(-f)    #file
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #evaluate a Nix expression
@@ -726,7 +775,7 @@ export extern "nix eval" [
   --derivation    #Operate on the store derivation rather than its outputs.
   --expr    #Interpret installables as attribute paths relative to the Nix expression expr.
   --file(-f)    #file
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #reformat your code in the standard style
@@ -748,7 +797,7 @@ export extern "nix fmt" [
   --derivation    #Operate on the store derivation rather than its outputs.
   --expr    #Interpret installables as attribute paths relative to the Nix expression expr.
   --file(-f)    #file
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #show the build log of the specified packages or paths, if available
@@ -770,7 +819,7 @@ export extern "nix log" [
   --derivation    #Operate on the store derivation rather than its outputs.
   --expr    #Interpret installables as attribute paths relative to the Nix expression expr.
   --file(-f)    #file
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #query information about store paths
@@ -799,7 +848,7 @@ export extern "nix path-info" [
   --expr    #Interpret installables as attribute paths relative to the Nix expression expr.
   --file(-f)    #file
   --recursive(-r)    #Apply operation to closure of the specified paths.
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #manage the flake registry
@@ -816,12 +865,12 @@ export extern "nix registry add" [
   --impure    #Allow access to mutable paths and repositories.
   --include(-I)    #path
   --override-flake    #Override the flake registries, redirecting original-ref to resolved-ref.
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #list available Nix flakes
 export extern "nix registry list" [
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #pin a flake to its current version or to the current version of a flake
@@ -833,13 +882,13 @@ export extern "nix registry pin" [
   --impure    #Allow access to mutable paths and repositories.
   --include(-I)    #path
   --override-flake    #Override the flake registries, redirecting original-ref to resolved-ref.
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #remove flake from user flake registry 
 export extern "nix registry remove" [
   --registry    #The registry to operate on.
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #show why a package has another package in its closure 
@@ -863,18 +912,18 @@ export extern "nix why-depends" [
   --derivation    #Operate on the store derivation rather than its outputs.
   --expr    #Interpret installables as attribute paths relative to the Nix expression expr.
   --file(-f)    #file
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #daemon to perform store operations on behalf of non-root clients
 export extern "nix daemon" [
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #show registered store types and their available options
 export extern "nix describe-stores" [
   --json    #Produce output in JSON format, suitable for consumption by another program.
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #compute and convert cryptographic hashes
@@ -889,7 +938,7 @@ export extern "nix hash file" [
   --base64    #Print the hash in base-64 format.
   --sri    #Print the hash in SRI format.
   --type    #hash algorithm ('md5', 'sha1', 'sha256', or 'sha512')
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #print cryptographic hash of the NAR serialisation of a path
@@ -899,31 +948,31 @@ export extern "nix hash path" [
   --base64    #Print the hash in base-64 format.
   --sri    #Print the hash in SRI format.
   --type    #hash algorithm ('md5', 'sha1', 'sha256', or 'sha512')
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #convert a hash to base-16 representation
 export extern "nix hash to-base16" [
   --type    #hash algorithm ('md5', 'sha1', 'sha256', or 'sha512'). Optional as can also be gotten from
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #convert a hash to base-32 representation
 export extern "nix hash to-base32" [
   --type    #hash algorithm ('md5', 'sha1', 'sha256', or 'sha512'). Optional as can also be gotten from
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #convert a hash to base-64 representation
 export extern "nix hash to-base64" [
   --type    #hash algorithm ('md5', 'sha1', 'sha256', or 'sha512'). Optional as can also be gotten from
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #convert a hash to SRI representation
 export extern "nix hash to-sri" [
   --type    #hash algorithm ('md5', 'sha1', 'sha256', or 'sha512'). Optional as can also be gotten from
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #generate and convert Nix signing keys
@@ -933,13 +982,13 @@ export extern "nix key" [
 
 #generate a public key for verifying store paths from a
 export extern "nix key convert-secret-to-public" [
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #generate a secret key for signing store paths
 export extern "nix key generate-secret" [
   --key-name    #Identifier of the key (e.g. cache.example.org-1).
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #create or inspect NAR files
@@ -949,12 +998,12 @@ export extern "nix nar" [
 
 #print the contents of a file inside a NAR file on stdout
 export extern "nix nar cat" [
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #serialise a path to stdout in NAR format
 export extern "nix nar dump-path" [
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #show information about a path inside a NAR file 
@@ -963,7 +1012,7 @@ export extern "nix nar ls" [
   --json    #Produce output in JSON format, suitable for consumption by another program.
   --long(-l)    #Show detailed file information.
   --recursive(-R)    #List subdirectories recursively.
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #print shell code that can be sourced by bash to reproduce the build
@@ -988,7 +1037,7 @@ export extern "nix print-dev-env" [
   --derivation    #Operate on the store derivation rather than its outputs.
   --expr    #Interpret installables as attribute paths relative to the Nix expression expr.
   --file(-f)    #file
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #manipulate a Nix realisation
@@ -1018,13 +1067,13 @@ export extern "nix realisation info" [
   --expr    #Interpret installables as attribute paths relative to the Nix expression expr.
   --file(-f)    #file
   --recursive(-r)    #Apply operation to closure of the specified paths.
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #show the Nix configuration
 export extern "nix show-config" [
   --json    #Produce output in JSON format, suitable for consumption by another program.
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #show the contents of a store derivation
@@ -1047,7 +1096,7 @@ export extern "nix show-derivation" [
   --derivation    #Operate on the store derivation rather than its outputs.
   --expr    #Interpret installables as attribute paths relative to the Nix expression expr.
   --file(-f)    #file
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #manipulate a Nix store 
@@ -1059,19 +1108,19 @@ export extern "nix store" [
 export extern "nix store add-file" [
   --dry-run    #Show what this command would do without doing it.
   --name(-n)    #name
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #add a path to the Nix store
 export extern "nix store add-path" [
   --dry-run    #Show what this command would do without doing it.
   --name(-n)    #name
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #print the contents of a file in the Nix store on stdout
 export extern "nix store cat" [
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #copy store path signatures from substituters
@@ -1096,7 +1145,7 @@ export extern "nix store copy-sigs" [
   --expr    #Interpret installables as attribute paths relative to the Nix expression expr.
   --file(-f)    #file
   --recursive(-r)    #Apply operation to closure of the specified paths.
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #delete paths from the Nix store
@@ -1121,7 +1170,7 @@ export extern "nix store delete" [
   --expr    #Interpret installables as attribute paths relative to the Nix expression expr.
   --file(-f)    #file
   --recursive(-r)    #Apply operation to closure of the specified paths.
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #show what packages and versions were added and removed between
@@ -1143,7 +1192,7 @@ export extern "nix store diff-closures" [
   --derivation    #Operate on the store derivation rather than its outputs.
   --expr    #Interpret installables as attribute paths relative to the Nix expression expr.
   --file(-f)    #file
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #serialise a store path to stdout in NAR format
@@ -1167,14 +1216,14 @@ export extern "nix store dump-path" [
   --expr    #Interpret installables as attribute paths relative to the Nix expression expr.
   --file(-f)    #file
   --recursive(-r)    #Apply operation to closure of the specified paths.
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #perform garbage collection on a Nix store
 export extern "nix store gc" [
   --dry-run    #Show what this command would do without doing it.
   --max    #Stop after freeing n bytes of disk space.
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #show information about a path in the Nix store
@@ -1183,7 +1232,7 @@ export extern "nix store ls" [
   --json    #Produce output in JSON format, suitable for consumption by another program.
   --long(-l)    #Show detailed file information.
   --recursive(-R)    #List subdirectories recursively.
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #rewrite a path or closure to content-addressed form
@@ -1210,17 +1259,17 @@ export extern "nix store make-content-addressed" [
   --expr    #Interpret installables as attribute paths relative to the Nix expression expr.
   --file(-f)    #file
   --recursive(-r)    #Apply operation to closure of the specified paths.
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #replace identical files in the store by hard links
 export extern "nix store optimise" [
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #test whether a store can be accessed
 export extern "nix store ping" [
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #download a file into the Nix store
@@ -1230,7 +1279,7 @@ export extern "nix store prefetch-file" [
   --hash-type    #hash algorithm ('md5', 'sha1', 'sha256', or 'sha512')
   --json    #Produce output in JSON format, suitable for consumption by another program.
   --name    #Override the name component of the resulting store path. It defaults to the base name of 
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #repair store paths
@@ -1254,7 +1303,7 @@ export extern "nix store repair" [
   --expr    #Interpret installables as attribute paths relative to the Nix expression expr.
   --file(-f)    #file
   --recursive(-r)    #Apply operation to closure of the specified paths.
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #sign store paths
@@ -1279,7 +1328,7 @@ export extern "nix store sign" [
   --expr    #Interpret installables as attribute paths relative to the Nix expression expr.
   --file(-f)    #file
   --recursive(-r)    #Apply operation to closure of the specified paths.
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #verify the integrity of store paths 
@@ -1307,7 +1356,7 @@ export extern "nix store verify" [
   --expr    #Interpret installables as attribute paths relative to the Nix expression expr.
   --file(-f)    #file
   --recursive(-r)    #Apply operation to closure of the specified paths.
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #copy build logs between Nix stores
@@ -1331,12 +1380,12 @@ export extern "nix store copy-log" [
   --derivation    #Operate on the store derivation rather than its outputs.
   --expr    #Interpret installables as attribute paths relative to the Nix expression expr.
   --file(-f)    #file
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #check your system for potential problems and print a PASS or FAIL for each
 export extern "nix doctor" [
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
 
 #upgrade Nix to the latest stable version 
@@ -1344,5 +1393,5 @@ export extern "nix upgrade-nix" [
   --dry-run    #Show what this command would do without doing it.
   --nix-store-paths-url    #The URL of the file that contains the store paths of the latest Nix release.
   --profile(-p)    #profile-dir
-  ...args: any                              # Arguments to be passed to your program
+  ...args: any@"nu-complete nix args"                              # Arguments to be passed to your program
 ]
