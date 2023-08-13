@@ -13,6 +13,7 @@
     #./mysql.nix
     ./vh3.nix
 
+    ./atuin.nix
     ./fleet_bot.nix
     ./jlly.nix
     ./p3tr.nix
@@ -26,6 +27,7 @@
     ./matrix
 
     ../../common/telegraf.nix
+    # ../../common/nushell.nix # FIXME: breaks ncsd
   ];
 
   # vm connection

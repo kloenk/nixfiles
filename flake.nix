@@ -183,6 +183,7 @@
             sops-nix.nixosModules.sops
             inputs.nix-minecraft.nixosModules.minecraft-servers
             self.nixosModules.matrix-sliding-sync
+            self.nixosModules.nushell
             jlly.nixosModules.default
             fleet_bot.nixosModules.default
             p3tr.nixosModules.default
@@ -279,6 +280,7 @@
 
         wordpress = import ./modules/wordpress.nix;
         matrix-sliding-sync = import ./modules/matrix-sliding-sync;
+        nushell = import ./modules/nushell;
       };
 
       darwinModules = { epmd = import ./modules/darwin/epmd; };

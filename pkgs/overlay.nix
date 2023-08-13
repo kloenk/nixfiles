@@ -14,6 +14,8 @@ in {
 
   restya-board = callPackage ./restya-board { };
 
+  nu_kloenk = callPackage ./nu_scripts { };
+
   #emacsMacport = prev.emacsMacport.override { stdenv = final.llvmPackages_12.stdenv; };
 
   vemacs = callPackage ./vemacs { };

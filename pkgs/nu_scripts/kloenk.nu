@@ -1,7 +1,13 @@
 mut nix = {}
 
+# config
+source config/direnv.nu
+use config/exa.nu *
+
+# commands
 use commands/use.nu usex
 
+# completions
 use completions/comp-cargo.nu *
 use completions/comp-git.nu *
 use completions/comp-make.nu *

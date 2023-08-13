@@ -99,6 +99,7 @@
             tobiasalthoff.atom-material-theme
             mskelton.one-dark-theme
             ms-vscode.hexeditor
+            thenuprojectcontributors.vscode-nushell-lang
 
             phoenixframework.phoenix
             bradlc.vscode-tailwindcss

@@ -14,6 +14,7 @@
     #./kde.nix
 
     ../../common/telegraf.nix
+    ../../common/nushell.nix
   ];
 
   # FIME: remove
@@ -49,6 +50,7 @@
   environment.systemPackages = with pkgs; [ lm_sensors virtmanager nodejs ];
 
   users.users.kloenk.password = "foobar";
+  users.users.kloenk.shell = lib.mkOverride 50 config.programs.nushell.wrapper;
 
   # virtmanager
   virtualisation.libvirtd = {

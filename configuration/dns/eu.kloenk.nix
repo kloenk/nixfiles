@@ -35,7 +35,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.dev.";
       adminEmail = "hostmaster.kloenk.eu.";
-      serial = 2021010145;
+      serial = 2021010146;
       refresh = 600;
       expire = 604800;
       minimum = 600;
@@ -72,6 +72,8 @@ let
       drachensegler.subdomains._dmarc.TXT = dmarc;
 
       social = iluvatar;
+
+      atuin = iluvatar;
 
       grafana = iluvatar;
       influx = iluvatar;

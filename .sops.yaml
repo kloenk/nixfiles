@@ -69,6 +69,7 @@ creation_rules:
           - *server_iluvatar
           - *server_moodle
           - *server_durin
+          - *server_elrond
         pgp:
           - *kloenk_pgp
   - path_regex: secrets/.+\.yaml$
