@@ -12,7 +12,7 @@ let
 in {
   users.users.kloenk.packages = [ pkgs.atuin ];
 
-  environment.sessionVariables.ATUIN_CONFIG_DIR = "/etc/atuin/";
+  environment.variables.ATUIN_CONFIG_DIR = "/etc/atuin/";
   environment.etc."atuin/config.toml".source = let
     format = pkgs.formats.toml { };
     configFile = format.generate "config.toml" configAttr;
