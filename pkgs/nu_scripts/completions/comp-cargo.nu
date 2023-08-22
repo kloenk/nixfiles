@@ -23,8 +23,24 @@ def "nu-complete cargo profiles" [] {
   open Cargo.toml | get profile | transpose | get column0
 }
 
-def "nu-complete cargo features" [] {
-  open Cargo.toml | get features | transpose | get column0
+def "nu-complete cargo features" [context: string] {
+  let metadata = (nu-cargo medatada package $context).features
+  $metadata | transpose key value | get key
+}
+
+def "nu-cargo get pkgid" [context: string] {
+  return (($context | parse -r '^.*(-p|--package)([\s+]|[={1}])([a-zA-Z_-]+).*$').capture2 | get -i 0)
+}
+
+def "nu-cargo medatada package" [context: string] {
+  let pkgid = (nu-cargo get pkgid $context)
+  let metadata = (cargo metadata --no-deps --format-version=1 --offline | from json).packages
+  let metadata = if ($pkgid | is-empty) {
+    $metadata
+  } else {
+    $metadata | filter { |p| $p.name == $pkgid}
+  }
+  return $metadata
 }
 
 # `cargo --list` is slow, `open` is faster.

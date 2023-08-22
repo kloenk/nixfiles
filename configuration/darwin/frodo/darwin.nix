@@ -28,6 +28,7 @@
     pkg-config
     gh
     glab
+    evcxr
     #neomutt
     go
     nil
