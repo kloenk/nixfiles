@@ -6,6 +6,10 @@ def "nu-complete cargo targets" [type: string] {
 def "nu-complete cargo bins" [] { nu-complete cargo targets bin }
 def "nu-complete cargo examples" [] { nu-complete cargo targets example }
 
+def "nu-complete rustc targets" [] {
+  ^rustc --print target-list | from tsv -n | get column1
+}
+
 def "nu-complete cargo packages" [] {
   let metadata = (^cargo metadata --format-version=1 --offline --no-deps)
   if $metadata == '' {
@@ -99,7 +103,7 @@ export extern "cargo build" [
   --features(-F): string@"nu-complete cargo features" # Space or comma separated list of features to activate
   --all-features      # Activate all available features of all selected packages
   --no-default-features # Do not activate the default feature of the selected packages
-  --target: string    # Build for the given architecture.
+  --target: string@"nu-complete rustc targets"    # Build for the given architecture.
   --release(-r)       # Build optimized artifacts with the release profile
   --profile: string@"nu-complete cargo profiles" # Build with the given profile
   --ignore-rust-version # Ignore `rust-version` specification in packages
@@ -139,7 +143,7 @@ export extern "cargo check" [
   --features(-F): string@"nu-complete cargo features" # Space or comma separated list of features to activate
   --all-features # Activate all available features
   --no-default-features # Do not activate the `default` feature
-  --target: string # Check for the given architecture
+  --target: string@"nu-complete rustc targets"    # Check for the given architecture
   --release(-r) # Check optimized artifacts with the release profile
   --profile: string@"nu-complete cargo profiles" # Check with the given profile
   --ignore-rust-version # Ignore `rust-version` specification in packages
@@ -167,7 +171,7 @@ export extern "cargo clean" [
   --release                # Remove all artifacts in the release directory
   --profile                # Remove all artifacts in the directory with the given profile name
   --target-dir: path       # Directory for all generated artifacts and intermediate files
-  --target: string         # Clean for the given architecture
+  --target: string@"nu-complete rustc targets"    # Clean for the given architecture
   --verbose(-v)            # Use verbose output. May be specified twice for "very verbose" output
   --quiet(-q)              # Do not print cargo log messages
   --color: string@"nu-complete cargo color" # Control when colored output is used
@@ -196,7 +200,7 @@ export extern "cargo doc" [
   --features(-F): string@"nu-complete cargo features" # Space or comma separated list of features to activate
   --all-features            # Activate all available features of all selected packages
   --no-default-features     # Do not activate the default feature of the selected packages
-  --target: string          # Document for the given architecture
+  --target: string@"nu-complete rustc targets"    # Document for the given architecture
   --release(-r)             # Document optimized artifacts with the release profile
   --profile: string@"nu-complete cargo profiles" # Document with the given profile
   --ignore-rust-version     # Ignore `rust-version` specification in packages
@@ -261,7 +265,7 @@ export extern "cargo run" [
   --features(-F): string@"nu-complete cargo features" # Space or comma separated list of features to activate
   --all-features                            # Activate all available features
   --no-default-features                     # Do not activate the `default` feature
-  --target: string                          # Build for the target triple
+  --target: string@"nu-complete rustc targets"    # Build for the target triple
   --target-dir: path                        # Directory for all generated artifacts
   --manifest-path: path                     # Path to Cargo.toml
   --message-format: string                  # Error format
@@ -300,7 +304,7 @@ export extern "cargo test" [
   --features(-F): string@"nu-complete cargo features" # Space or comma separated list of features to activate
   --all-features # Activate all available features of all selected packages
   --no-default-features # Do not activate the default feature of the selected packages
-  --target: string # Test for the given architecture
+  --target: string@"nu-complete rustc targets"    # Test for the target triple
   --release(-r) # Test optimized artifacts with the release profile
   --profile: string@"nu-complete cargo profiles" # Test with the given profile
   --ignore-rust-version # Ignore `rust-version` specification in packages
@@ -343,7 +347,7 @@ export extern "cargo bench" [
   --features(-F): string@"nu-complete cargo features" # Space or comma separated list of features to activate
   --all-features # Activate all available features of all selected packages
   --no-default-features # Do not activate the default feature of the selected packages
-  --target: string # Benchmark for the given architecture
+  --target: string@"nu-complete rustc targets"    # Benschmark for the target triple
   --profile: string@"nu-complete cargo profiles" # Build artifacts with the specified profile
   --ignore-rust-version # Ignore `rust-version` specification in packages
   --timings: string # Output information how long each compilation takes
@@ -403,7 +407,7 @@ export extern "cargo publish" [
   --index: string # The URL of the registry index to use
   --registry: string # Name of the registry to publish to
   --package(-p): string@"nu-complete cargo packages" # The package to publish
-  --target: string # Publish for the given architecture
+  --target: string@"nu-complete rustc targets"    # Pu8blish for the target triple
   --target-dir: path # Directory for all generated artifacts and intermediate files
   --features(-F): string@"nu-complete cargo features" # Space or comma separated list of features to activate
   --all-features # Activate all available features of all selected packages
@@ -533,7 +537,7 @@ export extern "cargo clippy" [
   --features(-F): string@"nu-complete cargo features" # Space or comma separated list of features to activate
   --all-features # Activate all available features
   --no-default-features # Do not activate the `default` feature
-  --target: string # Check for the given architecture
+  --target: string@"nu-complete rustc targets"    # Clippy for the target triple
   --release(-r) # Check optimized artifacts with the release profile
   --profile: string@"nu-complete cargo profiles" # Check with the given profile
   --ignore-rust-version # Ignore `rust-version` specification in packages
@@ -597,6 +601,6 @@ export extern "cargo add" [
   --registry              # Package registry for this dependency
   --dev                   # Add as development dependency
   --build                 # Add as build dependency
-  --target                # Add as dependency to the given target platform
+  --target: string@"nu-complete rustc targets"    # Add as dependency to the given target platform
   ...args
 ]
