@@ -11,6 +11,7 @@
   environment.systemPackages = with pkgs;
     [
       #pkgs.vim
+      wezterm
     ];
 
   networking.hostName = "frodo";
@@ -67,4 +68,5 @@
     environmentFiles = [ "/etc/telegraf.env" ];
   };
 
+  security.pam.enableSudoTouchIdAuth = true;
 }
