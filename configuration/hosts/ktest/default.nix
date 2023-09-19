@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../../common/nushell.nix
+    #../../common/nushell.nix
     ./links.nix
   ];
 
