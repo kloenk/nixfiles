@@ -4,6 +4,7 @@
   imports = [
     #./go-neb.nix
     ./sliding-sync.nix
+    ./heisenbridge.nix
   ];
 
   fileSystems."/var/lib/matrix-synapse" = {
@@ -98,6 +99,7 @@
       '';
 
       app_service_config_files = [
+        "/var/lib/heisenbridge/registration.yml"
         #  config.sops.secrets."matrix/exmpp".path
         #  config.sops.secrets."matrix/exmpp2".path
       ];
