@@ -57,7 +57,6 @@ in {
       enableACME = true;
       forceSSL = true;
       root = pkgs.kloenk-www;
-      locations."/public/".alias = "/persist/data/public/";
       locations."= /.well-known/matrix/client" = let
         client = {
           "m.homeserver" = { base_url = "https://matrix.kloenk.eu"; };
@@ -71,12 +70,13 @@ in {
             default_type application/json;
             ${commonHeaders}
             add_header "Access-Control-Allow-Origin" "*";
-            add_header "Access-Control-Allow-Methods" "GET, POST, PUT, DELETE, OPTIONS'";
-            add_header "Access-Control-Allow-Headers" "Origin, X-Requested-With, Content-Type, Accept, Authorization'";
+            add_header "Access-Control-Allow-Methods" "GET, POST, PUT, DELETE, OPTIONS";
+            add_header "Access-Control-Allow-Headers" "Origin, X-Requested-With, Content-Type, Accept, Authorization";
           '';
       };
       locations."= /.well-known/matrix/server" =
-        let server = { "m.server" = "matrix.kloenk.eu:443"; };
+        let 
+          server = { "m.server" = "matrix.kloenk.eu:443"; };
         in {
           root = pkgs.writeTextDir ".well-known/matrix/server"
             "${builtins.toJSON server}";
@@ -84,12 +84,13 @@ in {
             config.services.nginx.virtualHosts."kloenk.eu".extraConfig + ''
               default_type application/json;
               ${commonHeaders}
-              add_header "Access-Control-Allow-Origin:" "*";
-              add_header "Access-Control-Allow-Methods" "GET, POST, PUT, DELETE, OPTIONS'";
-              add_header "Access-Control-Allow-Headers" "Origin, X-Requested-With, Content-Type, Accept, Authorization'";
+              add_header "Access-Control-Allow-Origin" "*";
+              add_header "Access-Control-Allow-Methods" "GET, POST, PUT, DELETE, OPTIONS";
+              add_header "Access-Control-Allow-Headers" "Origin, X-Requested-With, Content-Type, Accept, Authorization";
             '';
 
         };
+      locations."/public/".alias = "/persist/data/public/";
 
       extraConfig = ''
         ${commonHeaders}
