@@ -265,6 +265,16 @@
 
         #  imports = [ ./configuration/hosts/durin ];
         #};
+
+        ktest = { pkgs, nodes, ... }: {
+          deployment.targetHost = "192.168.64.101";
+          deployment.tags = [ "vm" "frodo" ];
+
+          imports = [
+            ./configuration/hosts/ktest
+            (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix"))
+          ];
+        };
       };
 
       nixosModules = {
