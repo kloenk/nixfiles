@@ -29,7 +29,7 @@
       nload
       htop
       ripgrep
-      exa
+      eza
       bat
       progress
       pv

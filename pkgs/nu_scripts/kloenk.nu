@@ -2,7 +2,7 @@ mut nix = {}
 
 # config
 source config/direnv.nu
-use config/exa.nu *
+use config/eza.nu *
 
 # commands
 use commands/use.nu usex

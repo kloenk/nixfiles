@@ -3,7 +3,7 @@
 {
   environment.pathsToLink = [ "/share/zsh" ];
 
-  environment.systemPackages = with pkgs; [ fzf exa ripgrep direnv ];
+  environment.systemPackages = with pkgs; [ fzf eza ripgrep direnv ];
 
   programs.zsh = {
     enable = true;
@@ -61,12 +61,12 @@
       ];
     };
     shellAliases = {
-      ls = "exa";
-      l = "exa -a";
-      ll = "exa -lgh";
-      la = "exa -lagh";
-      lt = "exa -T";
-      lg = "exa -lagh --git";
+      ls = "eza";
+      l = "eza -a";
+      ll = "eza -lgh";
+      la = "eza -lagh";
+      lt = "eza -T";
+      lg = "eza -lagh --git";
     };
   };
 }

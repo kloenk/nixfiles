@@ -3,7 +3,7 @@
 {
   imports = [ ./atuin.nix ];
 
-  environment.systemPackages = with pkgs; [ fzf exa ripgrep direnv atuin ];
+  environment.systemPackages = with pkgs; [ fzf eza ripgrep direnv atuin ];
 
   programs.nushell = {
     enable = true;
