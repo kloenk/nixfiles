@@ -6,9 +6,7 @@
       name = "enp0s1";
       DHCP = "no";
       addresses = [{ addressConfig.Address = "192.168.64.101/24"; }];
-      routes = [{
-        routeConfig.Gateway = "192.168.64.1";
-      }];
+      routes = [{ routeConfig.Gateway = "192.168.64.1"; }];
     };
 
     networks."20-lo" = {

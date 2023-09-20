@@ -92,6 +92,11 @@
     inputs.nixpkgs.follows = "/nixpkgs";
   };
 
+  inputs.oxalica = {
+    url = "github:oxalica/rust-overlay";
+    inputs.nixpkgs.follows = "/nixpkgs";
+  };
+
   inputs.devenv.url = "github:cachix/devenv";
 
   inputs.nix-minecraft.url = "github:Infinidoge/nix-minecraft";
@@ -99,7 +104,7 @@
 
   outputs = inputs@{ self, nixpkgs, nix, moodlepkgs, mail-server, kloenk-www
     , dns, darwin, sops-nix, vika, colmena, jlly, fleet_bot, p3tr, sysbadge
-    , devenv, ... }:
+    , oxalica, devenv, ... }:
     let
       overlayCombined = system: [
         #nix.overlays.default
@@ -114,6 +119,7 @@
         fleet_bot.overlays.default
         p3tr.overlays.default
         sysbadge.overlays.sysbadge
+        oxalica.overlays.default
       ];
 
       systems =
@@ -329,6 +335,7 @@
               }
             ];
           };
+          kernel = pkgs.callPackage ./dev/kernel.nix { };
           default = self.devShells.${system}.devenv;
         });
 

@@ -75,8 +75,7 @@ in {
           '';
       };
       locations."= /.well-known/matrix/server" =
-        let 
-          server = { "m.server" = "matrix.kloenk.eu:443"; };
+        let server = { "m.server" = "matrix.kloenk.eu:443"; };
         in {
           root = pkgs.writeTextDir ".well-known/matrix/server"
             "${builtins.toJSON server}";

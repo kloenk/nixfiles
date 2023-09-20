@@ -33,7 +33,7 @@
     #neomutt
     go
     nil
-    chatterino2
+    #chatterino2
     direnv
     nushell
     uutils-coreutils

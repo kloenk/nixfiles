@@ -2,8 +2,9 @@
 
 {
   imports = [
-    #../../common/nushell.nix
     ./links.nix
+
+    ../../common/nushell.nix
   ];
 
   boot.loader.grub.enable = false;
@@ -18,7 +19,6 @@
 
   users.users.kloenk.password = "foobar";
 
-
   nixpkgs.config.allowBroken = true;
   # Hardware config
   boot.initrd.availableKernelModules = [ "xhci_pci" "sr_mod" "bcache" ];
@@ -26,15 +26,15 @@
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-label/NIXOS";
-      fsType = "bcachefs";
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-label/NIXOS";
+    fsType = "bcachefs";
+  };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-label/BOOT";
-      fsType = "vfat";
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-label/BOOT";
+    fsType = "vfat";
+  };
 
   swapDevices = [ ];
 

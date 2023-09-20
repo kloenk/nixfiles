@@ -5,7 +5,7 @@ let
 
   configFile = writeConfigFile "config.nu" ''
     let configJson = (open -r ${jsonConfigFile} | from json)
-    let-env config = $configJson
+    $env.config = $configJson
     $env.config.hooks.display_output = {||
       if (term size).columns >= 100 { table -e } else { table }
     }
@@ -13,10 +13,10 @@ let
       null
     }
 
-    let-env NU_LIB_DIRS = (open -r ${
+    $env.NU_LIB_DIRS = (open -r ${
       jsonFormater.generate "nuLibsDirs" cfg.dirs.libs
     } | from json)
-    let-env NU_PLUGIN_DIRS = (open -r ${
+    $env.NU_PLUGIN_DIRS = (open -r ${
       jsonFormater.generate "nuPluginsDirs" cfg.dirs.plugins
     } | from json)
 
