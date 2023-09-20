@@ -9,7 +9,7 @@
   boot.loader.grub.enable = false;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = false;
-  boot.supportedFilesystems = [ "bcachefs" ];
+  boot.supportedFilesystems = [ "bcachefs" "virtiofs" ];
   boot.initrd.supportedFilesystems = [ "bcachefs" ];
 
   networking.useDHCP = false;

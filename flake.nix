@@ -167,6 +167,10 @@
             system = "x86_64-linux";
             overlays = (overlayCombined "x86_64-linux");
           };
+          nodeNixpkgs.ktest = import nixpkgs {
+            system = "aarch64-linux";
+            overlays = (overlayCombined "aarch64-linux");
+          };
           #allowApplyAll = false;
 
           specialArgs.inputs = inputs;
