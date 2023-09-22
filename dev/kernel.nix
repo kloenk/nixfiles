@@ -37,7 +37,8 @@ pkgs.mkShell {
       llvmPackages.lld
       llvmPackages.bintools
       llvmPackages.llvm
-    ] ++ pkgs.lib.optional pkgs.stdenv.isDarwin pkgs.libiconv;
+    ] ++ pkgs.lib.optional pkgs.stdenv.isDarwin pkgs.libiconv
+    ++ pkgs.lib.optionals pkgs.stdenv.isLinux (pkgs.linux.buildInputs ++ pkgs.linux.nativeBuildInputs);
 
   shellHook = ''
     alias ls=exa
