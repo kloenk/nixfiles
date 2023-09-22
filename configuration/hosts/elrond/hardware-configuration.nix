@@ -7,51 +7,23 @@
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   boot.initrd.availableKernelModules =
-    [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
+    [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "bcache" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/c461144e-889e-4e35-930b-c3993ddb39ea";
-    fsType = "btrfs";
-    options = [ "subvol=root" ];
-  };
-
-  boot.initrd.luks.devices."cryptRoot".device =
-    "/dev/disk/by-uuid/b5de61d7-c49b-4c65-bded-5e08e33803ec";
-
-  fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/c461144e-889e-4e35-930b-c3993ddb39ea";
-    fsType = "btrfs";
-    options = [ "subvol=nix" ];
-  };
-
-  fileSystems."/persist" = {
-    device = "/dev/disk/by-uuid/c461144e-889e-4e35-930b-c3993ddb39ea";
-    fsType = "btrfs";
-    options = [ "subvol=persist" ];
-  };
-
-  fileSystems."/var/log" = {
-    device = "/dev/disk/by-uuid/c461144e-889e-4e35-930b-c3993ddb39ea";
-    fsType = "btrfs";
-    options = [ "subvol=logs" ];
-  };
-
-  fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/c461144e-889e-4e35-930b-c3993ddb39ea";
-    fsType = "btrfs";
-    options = [ "subvol=home" ];
+    device = "/dev/disk/by-uuid/f19a5f96-9f10-453c-9de2-d351e1e858c8";
+    fsType = "bcachefs";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/E804-30A5";
+    device = "/dev/disk/by-uuid/9E0B-DBAB";
     fsType = "vfat";
   };
 
   swapDevices =
-    [{ device = "/dev/disk/by-uuid/a5bc66ce-9922-4ec6-ac02-5d04b8122376"; }];
+    [{ device = "/dev/disk/by-uuid/f6885562-1e14-4411-9a55-ab4e585e568c"; }];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

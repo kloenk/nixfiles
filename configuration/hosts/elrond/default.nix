@@ -26,11 +26,8 @@
   boot.loader.grub.enable = false;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = false;
-  boot.supportedFilesystems = [ "btrfs" ];
-  boot.initrd.supportedFilesystems = [ "btrfs" ];
-
-  boot.initrd.luks.devices."cryptRoot".device =
-    "/dev/disk/by-uuid/b5de61d7-c49b-4c65-bded-5e08e33803ec";
+  boot.supportedFilesystems = [ "bcachefs" ];
+  boot.initrd.supportedFilesystems = [ "bcachefs" ];
 
   networking.useDHCP = false;
   networking.hostName = "elrond";

@@ -164,7 +164,8 @@
           modules = [
             (import ./configuration/iso.nix)
             {
-              nixpkgs.overlays = (overlayCombined final.stdenv.targetPlatform.system);
+              nixpkgs.overlays =
+                (overlayCombined final.stdenv.targetPlatform.system);
             }
             sops-nix.nixosModules.sops
             self.nixosModules.nftables

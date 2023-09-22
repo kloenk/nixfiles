@@ -36,11 +36,11 @@
     fsType = "vfat";
   };
 
-  fileSystems."/home/kloenk/Developer" =
-    { device = "share";
-      fsType = "9p";
-      options = [ "trans=virtio" "version=9p2000.L" ];
-    };
+  fileSystems."/home/kloenk/Developer" = {
+    device = "share";
+    fsType = "9p";
+    options = [ "trans=virtio" "version=9p2000.L" ];
+  };
 
   swapDevices = [ ];
 
