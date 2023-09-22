@@ -111,6 +111,7 @@
         #(final: prev: { nix = nix.packages.${system}.nix; })
         #home-manager.overlay
         self.overlays.kloenk
+        self.overlays.iso
         moodlepkgs.overlay
         kloenk-www.overlay
         inputs.nix-minecraft.overlay
@@ -157,6 +158,21 @@
       overlays.kloenk = final: prev:
         (import ./pkgs/overlay.nix inputs final prev);
       overlays.default = self.overlays.kloenk;
+      overlays.iso = final: prev: {
+        iso = (nixpkgs.lib.nixosSystem {
+          system = final.stdenv.targetPlatform.system;
+          modules = [
+            (import ./configuration/iso.nix)
+            {
+              nixpkgs.overlays = (overlayCombined final.stdenv.targetPlatform.system);
+            }
+            sops-nix.nixosModules.sops
+            self.nixosModules.nftables
+
+            vika.nixosModules.colorfulMotd
+          ];
+        }).config.system.build.isoImage;
+      };
 
       legacyPackages = forAllSystems (system: nixpkgsFor.${system});
 

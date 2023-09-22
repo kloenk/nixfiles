@@ -47,7 +47,7 @@
   services.printing.enable = true;
   services.avahi.enable = true;
 
-  environment.systemPackages = with pkgs; [ lm_sensors virtmanager nodejs ];
+  environment.systemPackages = with pkgs; [ lm_sensors virt-manager nodejs ];
 
   users.users.kloenk.password = "foobar";
   #users.users.kloenk.shell = lib.mkOverride 50 config.programs.nushell.wrapper; # FIME: not a shell package
