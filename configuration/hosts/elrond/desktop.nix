@@ -56,7 +56,7 @@
   in [ "L+ /run/gdm/.config/monitors.xml - - - - ${monitors-xml}" ];
 
   fonts = {
-    fonts = with pkgs; [
+    packages = with pkgs; [
       dejavu_fonts
       (nerdfonts.override {
         fonts = [
@@ -69,7 +69,7 @@
       })
       noto-fonts
       noto-fonts-cjk
-      noto-fonts-emoji
+    noto-fonts-emoji
       noto-fonts-extra
     ];
     fontconfig.defaultFonts = {

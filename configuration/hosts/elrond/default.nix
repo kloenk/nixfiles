@@ -10,6 +10,7 @@
     ./pipewire.nix
     ./gaming.nix
     ./desktop.nix
+    ./hyprland
     ./mpd.nix
     #./kde.nix
 
