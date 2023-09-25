@@ -8,7 +8,7 @@ in {
   };
 
 
-  environment.systemPackages = with pkgs; [ weztern ];
+  environment.systemPackages = with pkgs; [ wezterm ];
 
   systemd.user.tmpfiles.rules = [
     "L+ %h/.config/hypr/hyprland.conf  - - - - ${config}"

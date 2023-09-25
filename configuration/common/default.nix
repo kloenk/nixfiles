@@ -153,5 +153,10 @@
   systemd.services.telegraf.serviceConfig.AmbientCapabilities =
     [ "CAP_NET_ADMIN" ];
 
+  # Sysbadge udev rules
+  services.udev.extraRules = ''
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="33ff", ATTRS{idProduct}=="4025", MODE="0666"
+  '';
+
   documentation.nixos.enable = false;
 }

@@ -103,6 +103,7 @@
 
             phoenixframework.phoenix
             bradlc.vscode-tailwindcss
+            github.vscode-github-actions
 
           ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
             {
