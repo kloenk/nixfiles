@@ -8,6 +8,8 @@ let
     (import ../../dns/eu.kloenk.nix { inherit lib inputs config; });
   dev_kloenk_zone =
     (import ../../dns/dev.kloenk.nix { inherit lib inputs config; });
+  dev_sysbadge_zone =
+    (import ../../dns/dev.sysbadge.nix { inherit lib inputs config; });
   dev_matrixcore_zone =
     (import ../../dns/dev.matrixcore.nix { inherit lib inputs config; });
   de_kloenk_zone =
@@ -84,6 +86,12 @@ in {
       kloenk.dev {
         import log
         file ${dev_kloenk_zone}
+        import he_transfer
+      }
+
+      sysbadge.dev {
+        import log
+        file ${dev_sysbadge_zone}
         import he_transfer
       }
 
