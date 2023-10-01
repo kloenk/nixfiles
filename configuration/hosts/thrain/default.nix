@@ -43,6 +43,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.supportedFilesystems = [ "zfs" ];
   boot.initrd.supportedFilesystems = [ "zfs" ];
+  boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
   boot.zfs.enableUnstable = lib.mkForce true;
   boot.zfs.devNodes = "/dev/";
 
@@ -110,7 +111,7 @@
       "chrome-widevine-cdm"
     ];
 
-  environment.systemPackages = with pkgs; [ lm_sensors virtmanager nodejs ];
+  environment.systemPackages = with pkgs; [ lm_sensors virt-manager nodejs ];
 
   # docker
   #virtualisation.docker.enable = true;
@@ -118,7 +119,7 @@
 
   # virtmanager
   virtualisation.libvirtd = {
-    #enable = true;
+    enable = true;
     onShutdown = "shutdown";
   };
 
