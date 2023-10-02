@@ -107,6 +107,8 @@
           "info@kloenk.de"
           "me@kloenk.de"
           "finn@kloenk.de"
+          "applications@kloenk.de"
+          "applications@kloenk.dev"
 
           "finn.behrens@kloenk.dev"
           "behrens.finn@kloenk.dev"
