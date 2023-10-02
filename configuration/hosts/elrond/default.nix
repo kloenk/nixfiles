@@ -12,10 +12,11 @@
     ./desktop.nix
     ./hyprland
     ./mpd.nix
+    ./disko.nix
     #./kde.nix
 
     ../../common/telegraf.nix
-    ../../common/nushell.nix
+    #../../common/nushell.nix
   ];
 
   # FIME: remove

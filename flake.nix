@@ -97,6 +97,11 @@
     inputs.nixpkgs.follows = "/nixpkgs";
   };
 
+  inputs.disko = {
+    url = "github:nix-community/disko";
+    inputs.nixpkgs.follows = "/nixpkgs";
+  };
+
   inputs.devenv.url = "github:cachix/devenv";
 
   inputs.nix-minecraft.url = "github:Infinidoge/nix-minecraft";
@@ -104,7 +109,7 @@
 
   outputs = inputs@{ self, nixpkgs, nix, moodlepkgs, mail-server, kloenk-www
     , dns, darwin, sops-nix, vika, colmena, jlly, fleet_bot, p3tr, sysbadge
-    , oxalica, devenv, ... }:
+    , oxalica, disko, devenv, ... }:
     let
       overlayCombined = system: [
         #nix.overlays.default
@@ -214,6 +219,7 @@
             jlly.nixosModules.default
             fleet_bot.nixosModules.default
             p3tr.nixosModules.default
+            disko.nixosModules.default
 
             self.nixosModules.nftables
             self.nixosModules.deluge2
