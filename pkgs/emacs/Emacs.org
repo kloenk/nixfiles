@@ -1,0 +1,223 @@
+#+TITLE: Emacs Configuration
+#+PROPERTY: header-args:emacs-lisp :tangle init.el :comments org
+
+* Early init config
+Taken from bedrock early init
+#+begin_src emacs-lisp :tangle early-init.el
+    (setq gc-cons-threshold 10000000)
+    (setq byte-compile-warnings '(not obsolete))
+    (setq warning-suppress-log-types '((comp) (bytecomp)))
+    (setq native-comp-async-report-warnings-errors 'silent)
+ 
+  ;; Silence stupid startup message
+  (setq inhibit-startup-echo-area-message (user-login-name))
+
+  ;; Default frame configuration: full screen, good-looking title bar on macOS
+  (setq frame-resize-pixelwise t)
+
+  (setq default-frame-alist '((fullscreen . maximized)
+
+                              ;; You can turn off scroll bars by uncommenting these lines:
+                              ;; (vertical-scroll-bars . nil)
+                              ;; (horizontal-scroll-bars . nil)
+
+                              ;; Setting the face in here prevents flashes of
+                              ;; color as the theme gets activated
+                              (background-color . "#000000")
+                              (ns-appearance . dark)
+                              (ns-transparent-titlebar . t)))
+#+end_src
+
+* Basic config
+** Package source
+#+begin_src emacs-lisp
+  (setq package-archives '(("melpa" . "https://melpa.org/packages/")
+  ("org" . "https://orgmode.org/elpa/")
+  ("elpa" . "https://elpa.gnu.org/pacakge/")))
+
+  (require 'use-package-ensure)
+  (setq use-package-always-ensure t)
+#+end_src
+
+** Pasting
+#+begin_src emacs-lisp
+(when (getenv "WAYLAND_DISPLAY")
+  (setq wl-copy-p nil
+        interprogram-cut-function (lambda (text)
+                                    (setq-local process-connection-type 'pipe)
+                                    (setq wl-copy-p (start-process "wl-copy" nil "wl-copy" "-f" "-n"))
+                                    (process-send-string wl-copy-p text)
+                                    (process-send-eof wl-copy-p))
+        interprogram-paste-function (lambda ()
+                                      (unless (and wl-copy-p (process-live-p wl-copy-p))
+                                        (shell-command-to-string "wl-paste -n | tr -d '\r'")))))
+#+end_src
+
+** UI
+Configure basic UI settings like disabling the startup message
+#+begin_src emacs-lisp
+  (setq inhibit-startup-message t)
+
+  (scroll-bar-mode -1)       ; Disable visible scrollbar
+  (tool-bar-mode -1)         ; Disable the toolbar
+  (tooltip-mode -1)          ; Disable tooltips
+  (set-fringe-mode 10)       ; Give some breathing room
+
+  (menu-bar-mode -1)         ; Disable the menu bar
+
+  (column-number-mode)
+  (global-display-line-numbers-mode t)
+
+  (dolist (mode '(org-mode-hook
+                  term-mode-hook
+                  shell-mode-hook
+                  eshell-mode-hook))
+    (add-hook mode (lambda () (display-line-numbers-mode 0))))
+#+end_src
+** Keybind Configuration
+#+begin_src emacs-lisp
+  ;; Make ESC quit prompts
+  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+
+
+  (use-package evil
+    :init
+    (setq evil-want-integration t)
+    (setq evil-want-keybinding nil)
+    (setq evil-want-C-u-scroll t)
+    (setq evil-want-C-i-jump nil)
+    :config
+    (evil-mode 1)
+    (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+    (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
+
+    ;; Use visual line motions even outside visual-line-mode buffers
+    (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+    (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+
+    (evil-set-initial-state 'message-buffer-mode 'normal)
+    (evil-set-initial-state 'dashboard-mode 'normal))
+
+  (use-package evil-collection
+    :after evil
+    :config
+    (evil-collection-init))
+#+end_src
+
+** Simplify Leader Bindings (general.el)
+#+begin_src emacs-lisp
+  (use-package general
+    :config
+    (general-create-definer kloenk/key-def
+			    :keymaps '(normal insert visual emacs)
+			    :prefix "SPC"
+			    :global-prefix "C-SPC")
+
+    (kloenk/key-def
+     ;"SPC" '(counsel-M-x :which-key "M-x")
+     "t" '(:ignore t :whick-key "toggles")
+     "tt" '(counsel-load-theme :which-key "choose theme")))
+#+end_src
+
+** Command Log Mode
+#+begin_src emacs-lisp
+  (use-package command-log-mode)
+#+end_src
+
+*** Color Theme
+#+begin_src emacs-lisp
+  (use-package doom-themes
+    :init (load-theme 'doom-dracula t))
+#+end_src
+
+*** Better Modeline
+#+begin_src emacs-lisp :tangle no
+  (use-package all-the-icons)
+
+  (use-package doom-modeline
+    :init (doom-modeline-mode 1)
+    :custom ((doom-modeline-height 15)))
+#+end_src
+
+** Which Key
+#+begin_src emacs-lisp
+  (use-package which-key
+    :init (which-key-mode)
+    :diminish whick-key-mode
+    :config
+    (setq which-key-idle-delay 1))
+#+end_src
+
+* Ivy and Counsel
+** Ivy (currently disabled)
+#+begin_src emacs-lisp :tangle no
+    (use-package ivy
+      :diminish
+      :bind (("C-s" . swiper)
+	     :map ivy-minibuffer-map
+	     ("TAB" . ivy-alt-done)
+	     ("C-l" . ivy-alt-done)) ; TODO
+      :config
+      (ivy-mode 1))
+#+end_src
+
+** Helm
+#+begin_src emacs-lisp
+  (use-package helm
+    :config
+    (helm-mode 1)
+    :general
+    (kloenk/key-def "SPC" '(helm-M-x :which-key "Find commands")))
+    ;(kloenk/leader-key-def
+    ;  "SPC" '(helm-M-x :which-key "Find commands")))
+#+end_src
+
+** Counsel
+
+#+begin_src emacs-lisp
+    (use-package counsel
+      :bind (("C-M-j" . 'counsel-switch-buffer)
+	     :map minibuffer-local-map
+	     ("C-r" . 'counsel-minibuffer-history))
+      :config
+      (counsel-mode 1))
+  
+    (use-package ivy-rich
+      :init
+      (ivy-rich-mode 1))
+#+end_src
+
+** Helpfull
+#+begin_src emacs-lisp
+  (use-package helpful
+    :custom
+    (counsel-describe-function-function #'helpful-callable)
+    (counsel-describe-variable-function #'helpful-variable)
+    :bind
+    ([remap describe-function] . counsel-describe-function)
+    ([remap describe-command] . helpful-command)
+    ([remap describe-variable] . counsel-describe-variable)
+    ([remap describe-key] . helpful-key))
+#+end_src
+
+* Org Mode
+** Nicer heading Bullets
+#+begin_src emacs-lisp
+  (use-package org-bullets
+    :after org
+    :hook (org-mode . org-bullets-mode)
+    :custom
+    (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+#+end_src
+
+** Auto-tangle Configuration Files
+#+begin_src emacs-lisp
+  (defun kloenk/org-babel-tangle-config ()
+    (when (string-equal (buffer-file-name)
+                        (expand-file-name "~/kloenk.emacs.d/Emacs.org"))
+      (let ((org-confirm-babel-evaluate nil))
+        (org-babel-tangle))))
+
+  (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'kloenk/org-babel-tangle-config)))
+#+end_src
+
