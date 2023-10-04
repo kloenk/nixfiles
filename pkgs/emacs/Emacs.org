@@ -8,49 +8,100 @@ Taken from bedrock early init
     (setq byte-compile-warnings '(not obsolete))
     (setq warning-suppress-log-types '((comp) (bytecomp)))
     (setq native-comp-async-report-warnings-errors 'silent)
- 
+
   ;; Silence stupid startup message
   (setq inhibit-startup-echo-area-message (user-login-name))
-
+  
   ;; Default frame configuration: full screen, good-looking title bar on macOS
   (setq frame-resize-pixelwise t)
 
   (setq default-frame-alist '((fullscreen . maximized)
 
-                              ;; You can turn off scroll bars by uncommenting these lines:
-                              ;; (vertical-scroll-bars . nil)
-                              ;; (horizontal-scroll-bars . nil)
+			      ;; You can turn off scroll bars by uncommenting these lines:
+			      ;; (vertical-scroll-bars . nil)
+			      ;; (horizontal-scroll-bars . nil)
 
-                              ;; Setting the face in here prevents flashes of
-                              ;; color as the theme gets activated
-                              (background-color . "#000000")
-                              (ns-appearance . dark)
-                              (ns-transparent-titlebar . t)))
+			      ;; Setting the face in here prevents flashes of
+			      ;; color as the theme gets activated
+			      (background-color . "#000000")
+			      (ns-appearance . dark)
+			      (ns-transparent-titlebar . t)))
 #+end_src
 
 * Basic config
 ** Package source
+Adding Melpa, Org and elpa as package source. and imply ~:ensure t~
 #+begin_src emacs-lisp
-  (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-  ("org" . "https://orgmode.org/elpa/")
-  ("elpa" . "https://elpa.gnu.org/pacakge/")))
+  (setq package-archives '(
+			   ("melpa" . "https://melpa.org/packages/")
+			   ("org" . "https://orgmode.org/elpa/")
+			   ("elpa" . "https://elpa.gnu.org/packages/")))
 
   (require 'use-package-ensure)
   (setq use-package-always-ensure t)
 #+end_src
 
-** Pasting
+** Helper functions
+**** Nix Detection
+This config file is meant to be used with the nix package manager, but has some code if nix is not available.
 #+begin_src emacs-lisp
-(when (getenv "WAYLAND_DISPLAY")
-  (setq wl-copy-p nil
-        interprogram-cut-function (lambda (text)
-                                    (setq-local process-connection-type 'pipe)
-                                    (setq wl-copy-p (start-process "wl-copy" nil "wl-copy" "-f" "-n"))
-                                    (process-send-string wl-copy-p text)
-                                    (process-send-eof wl-copy-p))
-        interprogram-paste-function (lambda ()
-                                      (unless (and wl-copy-p (process-live-p wl-copy-p))
-                                        (shell-command-to-string "wl-paste -n | tr -d '\r'")))))
+  (defvar kloenk/build-by-nix-p (not (eq nil (string-match "/nix/store/[a-z0-9]*-*" user-init-file)))
+    "If this Emacs was configured using nix")
+#+end_src
+*** OS Detection macro
+Helper to detect os
+#+begin_src emacs-lisp
+  (defmacro with-system (type &rest body)
+  "Evaluate BODY if `system-type' equals TYPE."
+  (declare (indent defun))
+  `(when (eq system-type ',type)
+     ,@body))
+#+end_src
+
+
+** OS Level Config
+*** Linux
+**** Pasting
+Fix some pasting problems on wayland
+#+begin_src emacs-lisp
+(with-system gnu/linux
+  (when (getenv "WAYLAND_DISPLAY")
+    (setq wl-copy-p nil
+	  interprogram-cut-function (lambda (text)
+				      (setq-local process-connection-type 'pipe)
+				      (setq wl-copy-p (start-process "wl-copy" nil "wl-copy" "-f" "-n"))
+				      (process-send-string wl-copy-p text)
+				      (process-send-eof wl-copy-p))
+	  interprogram-paste-function (lambda ()
+					(unless (and wl-copy-p (process-live-p wl-copy-p))
+					  (shell-command-to-string "wl-paste -n | tr -d '\r'"))))))
+#+end_src
+
+
+**** NixOS
+***** Nix-based exec path
+Nix substitutes its own folder on top of the exec-path every
+time. Direnv will delete it from exec-path and break some things, so we
+need to put it back.
+
+#+begin_src emacs-lisp
+(defvar kloenk/nix-exec-dir nil
+  "Variable for Nix-built binary dependencies.")
+
+(if kloenk/build-by-nix-p
+    (setq kloenk/nix-exec-dir (car exec-path)))
+#+end_src
+*** MacOS
+**** modifiers
+Delete defaul modifiers and reconfigure for MacOS to allow other input modes.
+#+begin_src emacs-lisp
+  (with-system darwin
+	       (setq mac-command-modifier 'meta
+      mac-option-modifier 'none
+      default-input-method "MacOSX"
+      select-enable-clipboard t)
+  (global-set-key (kbd "M-v") 'clipboard-yank)
+  (global-set-key (kbd "M-c") 'clipboard-kill-ring-save))
 #+end_src
 
 ** UI
@@ -109,14 +160,31 @@ Configure basic UI settings like disabling the startup message
   (use-package general
     :config
     (general-create-definer kloenk/key-def
-			    :keymaps '(normal insert visual emacs)
-			    :prefix "SPC"
-			    :global-prefix "C-SPC")
+      :keymaps '(normal insert visual emacs)
+      :prefix "SPC"
+      :global-prefix "C-SPC")
 
     (kloenk/key-def
-     ;"SPC" '(counsel-M-x :which-key "M-x")
-     "t" '(:ignore t :whick-key "toggles")
-     "tt" '(counsel-load-theme :which-key "choose theme")))
+      "h" '(:ignore t :which-key "Help")
+      "t" '(:ignore t :whick-key "toggles")
+      "tt" '(counsel-load-theme :which-key "choose theme")))
+  (unless kloenk/build-by-nix-p
+    (defun kloenk/reload-config ()
+      "Reload user init file"
+      (interactive)
+	 (load-file user-init-file))
+    (kloenk/key-def
+      "h r" '(:ignore t :whick-key "reload")
+      "h r r" '(kloenk/reload-config :which-key "reload config")))
+#+end_src
+
+*** Buffer keybinds
+#+begin_src emacs-lisp
+      (kloenk/key-def
+	"b d" '(kill-current-buffer :which-key "Kill current buffer")
+	"b k" '(kill-buffer :which-key "Kill buffer")
+	"b s" '(save-buffer :which-key "Save current buffer")
+	"b X" '(scratch-buffer :which-key "Switch to scratch buffer"))
 #+end_src
 
 ** Command Log Mode
@@ -131,13 +199,6 @@ Configure basic UI settings like disabling the startup message
 #+end_src
 
 *** Better Modeline
-#+begin_src emacs-lisp :tangle no
-  (use-package all-the-icons)
-
-  (use-package doom-modeline
-    :init (doom-modeline-mode 1)
-    :custom ((doom-modeline-height 15)))
-#+end_src
 
 ** Which Key
 #+begin_src emacs-lisp
@@ -147,44 +208,56 @@ Configure basic UI settings like disabling the startup message
     :config
     (setq which-key-idle-delay 1))
 #+end_src
-
-* Ivy and Counsel
-** Ivy (currently disabled)
-#+begin_src emacs-lisp :tangle no
-    (use-package ivy
-      :diminish
-      :bind (("C-s" . swiper)
-	     :map ivy-minibuffer-map
-	     ("TAB" . ivy-alt-done)
-	     ("C-l" . ivy-alt-done)) ; TODO
-      :config
-      (ivy-mode 1))
+** Modeline
+#+begin_src emacs-lisp
+	(use-package spaceline
+	  :init
+	  (spaceline-spacemacs-theme)
+	  (spaceline-helm-mode))
 #+end_src
 
+Now we can set our settings.
+
+#+begin_src emacs-lisp
+(progn
+  (setq powerline-height 24
+        powerline-default-separator 'wave)
+  ;; Disable some segments when waybar is active
+  ;; Note: this will require re-enabling if you are
+  ;; jumping in from TTY
+  ;; but why would you?...
+  ;(if (eq (call-process "pgrep" nil nil nil "waybar") 0)
+  ;    (progn
+  ;; Just disable these.
+  (spaceline-toggle-org-clock-off)
+  (spaceline-toggle-org-pomodoro-off)
+        ;))
+  (spaceline-emacs-theme 'timeclock))
+#+end_src
+* Ivy and Counsel
 ** Helm
 #+begin_src emacs-lisp
-  (use-package helm
-    :config
-    (helm-mode 1)
-    :general
-    (kloenk/key-def "SPC" '(helm-M-x :which-key "Find commands")))
-    ;(kloenk/leader-key-def
-    ;  "SPC" '(helm-M-x :which-key "Find commands")))
+    (use-package helm
+      :config
+      (helm-mode 1)
+      :general
+      (kloenk/key-def ":" '(helm-M-x :which-key "Find commands"))
+      ("M-x" '(helm-M-x :which-key "Find Commands")))
 #+end_src
 
 ** Counsel
 
 #+begin_src emacs-lisp
-    (use-package counsel
-      :bind (("C-M-j" . 'counsel-switch-buffer)
-	     :map minibuffer-local-map
-	     ("C-r" . 'counsel-minibuffer-history))
-      :config
-      (counsel-mode 1))
-  
-    (use-package ivy-rich
-      :init
-      (ivy-rich-mode 1))
+  (use-package counsel
+    :bind (("C-M-j" . 'counsel-switch-buffer)
+	   :map minibuffer-local-map
+	   ("C-r" . 'counsel-minibuffer-history))
+    :general
+    (kloenk/key-def
+      "," '(counsel-switch-buffer :which-key "Switch buffer")
+      "b ," '(counsel-switch-buffer :which-key "Switch buffer"))
+    :config
+    (counsel-mode 1))
 #+end_src
 
 ** Helpfull
@@ -193,6 +266,11 @@ Configure basic UI settings like disabling the startup message
     :custom
     (counsel-describe-function-function #'helpful-callable)
     (counsel-describe-variable-function #'helpful-variable)
+    :general
+    (kloenk/key-def "h f" '(counsel-describe-function :which-key "Describe function"))
+    (kloenk/key-def "h c" '(helpful-command :which-key "Describe command"))
+    (kloenk/key-def "h v" '(counsel-describe-variable :which-key "Describe variable"))
+    (kloenk/key-def "h k" '(helpful-key :which-key "Describe Key"))
     :bind
     ([remap describe-function] . counsel-describe-function)
     ([remap describe-command] . helpful-command)
@@ -213,11 +291,84 @@ Configure basic UI settings like disabling the startup message
 ** Auto-tangle Configuration Files
 #+begin_src emacs-lisp
   (defun kloenk/org-babel-tangle-config ()
-    (when (string-equal (buffer-file-name)
-                        (expand-file-name "~/kloenk.emacs.d/Emacs.org"))
+    (when (string-equal (helm-basename (buffer-file-name))
+                        "Emacs.org")
       (let ((org-confirm-babel-evaluate nil))
         (org-babel-tangle))))
 
   (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'kloenk/org-babel-tangle-config)))
 #+end_src
+* Project management
+#+begin_src emacs-lisp
+      (use-package projectile
+	:ensure t
+	:init
+	(projectile-mode +1)
+	:config
+	(setq projectile-project-search-path '(("~/Developer/" . 1) "~/proj/"))
+	)
+      (use-package helm-projectile
+	:init
+	(helm-projectile-on)
+	:general
+	(kloenk/key-def "," '(projectile-find-file :which-key "Find file in project")))
 
+#+end_src
+* Programing
+** EditorConfig
+#+begin_src emacs-lisp
+  (use-package editorconfig
+    :config
+    (editorconfig-mode 1))
+#+end_src
+** direnv
+#+begin_src emacs-lisp
+  (use-package direnv
+    :config
+    (advice-add #'direnv-update-directory-environment :override #'kloenk/direnv-update-directory-environment)
+    (direnv-mode))
+
+  ;; Patch direnv-mode to prepend kloenk/nix-exec-dir to exec-path
+  (defun kloenk/direnv-update-directory-environment (&optional directory force-summary)
+    "Update the environment for DIRECTORY.
+
+    When FORCE-SUMMARY is non-nil or when called interactively, show a summary message."
+    (interactive)
+    (let ((directory (or directory default-directory))
+	  (old-directory direnv--active-directory)
+	  (items)
+	  (summary)
+	  (show-summary (or force-summary (called-interactively-p 'interactive))))
+      (when (file-remote-p directory)
+	(user-error "Cannot use direnv for remote files"))
+      (setq direnv--active-directory directory
+	    items (direnv--export direnv--active-directory)
+	    summary (direnv--summarise-changes items))
+      (when (and direnv-always-show-summary (not (string-empty-p summary)))
+	(setq show-summary t))
+      (when show-summary
+	(direnv--show-summary summary old-directory direnv--active-directory))
+      (dolist (pair items)
+	(let ((name (car pair))
+	      (value (cdr pair)))
+	  (setenv name value)
+	  (when (string-equal name "PATH")
+	    (setq exec-path (append (list kloenk/nix-exec-dir) (parse-colon-path value) (list exec-directory)))
+	    ;; Prevent `eshell-path-env` getting out-of-sync with $PATH:
+	    (when (derived-mode-p 'eshell-mode)
+	      (setq eshell-path-env value)))))))
+#+end_src
+** Nix Mode
+#+begin_src emacs-lisp
+  (use-package nix-mode
+    :mode "\\.nix\\'")
+
+  (use-package nix-repl
+    :ensure nix-mode
+    :commands (nix-repl))
+  (use-package nix-flake
+    :ensure nix-mode
+    :config
+    (setq nix-flake-add-to-registry nil))
+  (use-package helm-nixos-options)
+#+end_src

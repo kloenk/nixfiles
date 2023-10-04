@@ -1,2 +1,7 @@
-init.el
+auto-save-list
 early-init.el
+eln-cache
+elpa
+init.el
+projectile-bookmarks.eld
+transient
