@@ -20,7 +20,6 @@
       DHCP = "no";
       dns = [ "127.0.0.1" ];
       bridge = [ "br0" ];
-      vlan = [ "vlan1337" "mgmt" ];
       /* addresses = [
            { addressConfig.Address = "192.168.178.248/24"; }
            #{ addressConfig.Address = "192.168.178.2/24"; }
@@ -44,6 +43,7 @@
       DHCP = "no";
       addresses = [{ addressConfig.Address = "6.0.2.2/24"; }];
     };
+
     netdevs."25-mgmt" = {
       netdevConfig = {
         Kind = "vlan";
@@ -54,7 +54,41 @@
     networks."25-mgmt" = {
       name = config.systemd.network.netdevs."25-mgmt".netdevConfig.Name;
       DHCP = "no";
-      addresses = [{ addressConfig.Address = "192.168.44.1/24"; }];
+      bridge = [ "br-mgmt" ];
+    };
+    netdevs."25-br-mgmt" = {
+      netdevConfig = {
+        Kind = "bridge";
+        Name = "br-mgmt";
+      };
+    };
+    networks."25-br-mgmt" = {
+      name = "br-mgmt";
+      DHCP = "no";
+      addresses = [{ addressConfig.Address = "192.168.44.5/24"; }];
+    };
+
+    netdevs."25-guests" = {
+      netdevConfig = {
+        Kind = "vlan";
+        Name = "guests";
+      };
+      vlanConfig.Id = 45;
+    };
+    networks."25-guests" = {
+      name = config.systemd.network.netdevs."25-guests".netdevConfig.Name;
+      DHCP = "no";
+      bridge = [ "br-guests" ];
+    };
+    netdevs."25-br-guests" = {
+      netdevConfig = {
+        Kind = "bridge";
+        Name = "br-guests";
+      };
+    };
+    networks."25-br-guests" = {
+      name = "br-guests";
+      DHCP = "no";
     };
 
     netdevs."25-br0" = {
@@ -66,6 +100,7 @@
     networks."25-br0" = {
       name = "br0";
       DHCP = "no";
+      vlan = [ "vlan1337" "mgmt" "guests" ];
       addresses = [{
         addressConfig.Address = "192.168.178.248/24";
       }
