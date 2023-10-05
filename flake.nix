@@ -102,6 +102,11 @@
     inputs.nixpkgs.follows = "/nixpkgs";
   };
 
+  inputs.emacs-overlay = {
+    url = "github:nix-community/emacs-overlay";
+    inputs.nixpkgs.follows = "/nixpkgs";
+  };
+
   inputs.devenv.url = "github:cachix/devenv";
 
   inputs.nix-minecraft.url = "github:Infinidoge/nix-minecraft";
@@ -109,7 +114,7 @@
 
   outputs = inputs@{ self, nixpkgs, nix, moodlepkgs, mail-server, kloenk-www
     , dns, darwin, sops-nix, vika, colmena, jlly, fleet_bot, p3tr, sysbadge
-    , oxalica, disko, devenv, ... }:
+    , oxalica, disko, emacs-overlay, devenv, ... }:
     let
       overlayCombined = system: [
         #nix.overlays.default
@@ -126,6 +131,7 @@
         p3tr.overlays.default
         sysbadge.overlays.sysbadge
         oxalica.overlays.default
+        emacs-overlay.overlays.default
       ];
 
       systems =

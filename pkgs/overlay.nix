@@ -92,8 +92,8 @@ in {
       } // (args.argsOverride or { }));
   in callPackage linux_rust_pkg { };
 
-  emacs-doom = callPackage ./emacs { };
-
   wordpressPlugins = callPackage ./wordpress/plugins.nix { };
   wordpressThemes = callPackage ./wordpress/themes.nix { };
+
+  kloenk-emacs = callPackage ./emacs { emacs = final.emacs29-pgtk; };
 }

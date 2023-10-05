@@ -5,3 +5,4 @@ elpa
 init.el
 projectile-bookmarks.eld
 transient
+tramp
