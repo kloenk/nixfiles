@@ -4,11 +4,11 @@
   imports = [
     ./hardware-configuration.nix
     ./disko.nix
-    ./wireguard.nix
+    #./wireguard.nix
 
     #./bitwarden.nix
     #./postgres.nix
-    ./website.nix
+    #./website.nix
     #./akkoma.nix
 
     #./mysql.nix
@@ -21,13 +21,13 @@
 
     #./mail.nix
 
-    ./coredns.nix
+    #./coredns.nix
 
     #./monitoring
     #./kuma.nix
     #./matrix
 
-    ../../common/telegraf.nix
+    #../../common/telegraf.nix
     # ../../common/nushell.nix # FIXME: breaks ncsd
   ];
 
