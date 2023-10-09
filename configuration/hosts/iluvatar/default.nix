@@ -3,28 +3,29 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./disko.nix
     ./wireguard.nix
 
-    ./bitwarden.nix
-    ./postgres.nix
+    #./bitwarden.nix
+    #./postgres.nix
     ./website.nix
-    ./akkoma.nix
+    #./akkoma.nix
 
     #./mysql.nix
-    ./vh3.nix
+    #./vh3.nix
 
-    ./atuin.nix
-    ./fleet_bot.nix
-    ./jlly.nix
-    ./p3tr.nix
+    #./atuin.nix
+    #./fleet_bot.nix
+    #./jlly.nix
+    #./p3tr.nix
 
-    ./mail.nix
+    #./mail.nix
 
     ./coredns.nix
 
-    ./monitoring
-    ./kuma.nix
-    ./matrix
+    #./monitoring
+    #./kuma.nix
+    #./matrix
 
     ../../common/telegraf.nix
     # ../../common/nushell.nix # FIXME: breaks ncsd
@@ -34,9 +35,9 @@
   services.qemuGuest.enable = true;
 
   boot.supportedFilesystems = [ "vfat" "xfs" ];
-  boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
-  boot.loader.grub.device = "/dev/sda";
+  boot.loader.grub.enable = false;
+  boot.loader.systemd-boot.enable = true;
+  boot.initrd.supportedFilesystems = [ "vfat" "xfs" ];
 
   networking.hostName = "iluvatar";
   networking.domain = "kloenk.dev";
@@ -53,7 +54,7 @@
 
   systemd.network.networks."40-enp1s0" = {
     name = "enp1s0";
-    addresses = [{ addressConfig.Address = "2a01:4f8:c012:b874::/64"; }];
+    addresses = [{ addressConfig.Address = "2a01:4f8:c012:b874::1/64"; }];
     routes = [{ routeConfig.Gateway = "fe80::1"; }];
   };
 
@@ -66,11 +67,10 @@
   services.resolved.enable = false;
 
   nix.gc.automatic = true;
-  users.users.root.initialPassword = "foobar";
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = "23.05";
+  system.stateVersion = "23.11";
 }
