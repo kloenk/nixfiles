@@ -208,9 +208,11 @@
           disabledModules = [
             "services/games/minecraft-server.nix"
             "services/web-apps/wordpress.nix"
+            "services/matrix/synapse.nix"
           ];
           imports = [
             ./configuration/common
+            ./modules/matrix.nix
             #home-manager.nixosModules.home-manager
             sops-nix.nixosModules.sops
             inputs.nix-minecraft.nixosModules.minecraft-servers
