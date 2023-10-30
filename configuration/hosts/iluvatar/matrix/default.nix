@@ -3,7 +3,7 @@
 {
   imports = [
     #./go-neb.nix
-    ./sliding-sync.nix
+    # ./sliding-sync.nix
     ./heisenbridge.nix
   ];
 
@@ -31,6 +31,19 @@
     enableACME = true;
     locations = {
       "/_matrix" = { proxyPass = "http://127.0.0.1:8008"; };
+      "/_matrix/client/unstable/org.matrix.msc3575/" =
+        let cfg = config.services.matrix-synapse.sliding-sync;
+        in lib.mkIf cfg.enable {
+          proxyPass =
+            "http://${cfg.settings.SYNCV3_BINDADDR}/_matrix/client/unstable/org.matrix.msc3575/";
+          priority = 900;
+        };
+      "/client/server.json" =
+        let cfg = config.services.matrix-synapse.sliding-sync;
+        in lib.mkIf cfg.enable {
+          proxyPass = "http://${cfg.settings.SYNCV3_BINDADDR}";
+          priority = 900;
+        };
       /* "/".root = pkgs.element-web.override {
            conf.default_server_config = {
              "m.homeserver" = {
@@ -55,6 +68,11 @@
     settings = {
       server_name = "kloenk.eu";
       public_baseurl = "https://matrix.kloenk.eu:443/";
+
+      sliding-sync = {
+        enabled = true;
+        settings.SYNCV3_SERVER = "https://matrix.kloenk.eu";
+      };
 
       enable_registration = false;
 
