@@ -68,7 +68,7 @@ let
          aule = hostTTL 1200 "195.39.221.50" null;
       */
 
-      iluvatar.CNAME = [ "iluvatar.kloenk.dev." ];
+      iluvatar.CNAME = [ "kloenk.de." ];
       ns1 = iluvatar;
 
       gimli = iluvatar;
