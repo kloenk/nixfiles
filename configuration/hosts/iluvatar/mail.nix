@@ -32,7 +32,7 @@
   mailserver = {
     enable = true;
     localDnsResolver = false; # already running bind
-    fqdn = "gimli.kloenk.dev";
+    fqdn = "gimli.kloenk.de";
     domains = [
       "kloenk.de"
       "ad.kloenk.de"

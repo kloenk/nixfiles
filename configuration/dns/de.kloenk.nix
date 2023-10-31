@@ -5,7 +5,7 @@ let
 
   mxKloenk = with dns.combinators.mx;
     map (dns.combinators.ttl 3600) [
-      (mx 10 "gimli.kloenk.dev.")
+      (mx 10 "gimli.kloenk.de.")
       #secondary (20)
     ];
   dmarc = with dns.combinators;
@@ -70,6 +70,8 @@ let
 
       iluvatar.CNAME = [ "iluvatar.kloenk.dev." ];
       ns1 = iluvatar;
+
+      gimli = iluvatar;
 
       _dmarc.TXT = dmarc;
 
