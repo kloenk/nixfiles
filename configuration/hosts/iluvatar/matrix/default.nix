@@ -65,14 +65,15 @@
 
     extraConfigFiles = [ config.sops.secrets."matrix/config".path ];
 
+    sliding-sync = {
+      enable = true;
+      environmentFile = config.sops.secrets."matrix/sliding-sync/env".path;
+      settings.SYNCV3_SERVER = "https://matrix.kloenk.eu";
+    };
+
     settings = {
       server_name = "kloenk.eu";
       public_baseurl = "https://matrix.kloenk.eu:443/";
-
-      sliding-sync = {
-        enabled = true;
-        settings.SYNCV3_SERVER = "https://matrix.kloenk.eu";
-      };
 
       enable_registration = false;
 
@@ -140,6 +141,7 @@
   sops.secrets."matrix/exmpp".owner = "matrix-synapse";
   sops.secrets."matrix/exmpp2".owner = "matrix-synapse";
   sops.secrets."matrix/config".owner = "matrix-synapse";
+  sops.secrets."matrix/sliding-sync/env".owner = "root";
   systemd.services.matrix-synapse.serviceConfig.SupplementaryGroups =
     [ config.users.groups.keys.name ];
 }
