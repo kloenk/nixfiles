@@ -36,7 +36,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.de.";
       adminEmail = "hostmaster@kloenk.de";
-      serial = 2020122611;
+      serial = 2020122612;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
@@ -72,6 +72,8 @@ let
       ns1 = iluvatar;
 
       gimli = iluvatar;
+
+      auth = iluvatar;
 
       _dmarc.TXT = dmarc;
 
