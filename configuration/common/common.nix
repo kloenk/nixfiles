@@ -21,10 +21,10 @@
   nix.registry.kloenk = {
     from.type = "indirect";
     from.id = "kloenk";
-    #to.url = "git+https://git.kloenk.dev/kloenk/nix";
-    to.type = "github";
-    to.repo = "nixfiles";
+    to.type = "gitlab";
+    to.repo = "nix";
     to.owner = "kloenk";
+    to.host = "cyberchaos.dev";
     exact = false;
   };
 
