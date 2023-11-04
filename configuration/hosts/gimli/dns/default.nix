@@ -5,20 +5,17 @@ let
     pkgs.writeText "bbb.zone" (builtins.readFile (toString ./bbb-wass.zone));
 
   eu_kloenk_zone =
-    (import ../../dns/eu.kloenk.nix { inherit lib inputs config; });
+    (import ../../../dns/eu.kloenk.nix { inherit lib inputs config; });
   dev_kloenk_zone =
-    (import ../../dns/dev.kloenk.nix { inherit lib inputs config; });
+    (import ../../../dns/dev.kloenk.nix { inherit lib inputs config; });
   dev_sysbadge_zone =
-    (import ../../dns/dev.sysbadge.nix { inherit lib inputs config; });
+    (import ../../../dns/dev.sysbadge.nix { inherit lib inputs config; });
   dev_matrixcore_zone =
-    (import ../../dns/dev.matrixcore.nix { inherit lib inputs config; });
+    (import ../../../dns/dev.matrixcore.nix { inherit lib inputs config; });
   de_kloenk_zone =
-    (import ../../dns/de.kloenk.nix { inherit lib inputs config; });
+    (import ../../../dns/de.kloenk.nix { inherit lib inputs config; });
   de_p3tr1ch0rr_zone =
-    (import ../../dns/de.p3tr1ch0rr.nix { inherit lib inputs config; });
-  imkerverein_zone = (import ../../dns/de.burscheider-imkerverein.nix {
-    inherit lib inputs config;
-  });
+    (import ../../../dns/de.p3tr1ch0rr.nix { inherit lib inputs config; });
 
   he_secondary =
     "159.69.179.160 51.254.249.185 51.254.249.182 216.218.133.2 2001:470:600::2 5.45.100.14 164.132.31.112";
@@ -116,12 +113,6 @@ in {
       bbb.wass-er.com {
         import log
         file ${bbb_wass_zone}
-        import he_transfer
-      }
-
-      burscheider-imkerverein.de {
-        import log
-        file ${imkerverein_zone}
         import he_transfer
       }
 

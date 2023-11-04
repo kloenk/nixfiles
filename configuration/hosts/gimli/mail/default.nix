@@ -17,7 +17,7 @@
     25
     465
     993
-    4190 # sieve
+    4190 # e
   ];
 
   services.postfix.config = {
@@ -166,7 +166,6 @@
           config.sops.secrets."mail/drachensegler_drachensegler.kloenk.de.sha512".path;
 
         aliases = [
-          "tjaard@burscheider-imkerverein.de"
           "drachensegler@kloenk.de"
           "dlrg@drachensegler.kloenk.de"
           "dlrg.jugend@drachensegler.kloenk.de"
@@ -185,19 +184,6 @@
       "git@kloenk.de" = {
         hashedPasswordFile =
           config.sops.secrets."mail/git_kloenk.de.sha512".path;
-      };
-
-      # burscheider-imkerverein
-      "info@burscheider-imkerverein.de" = {
-        hashedPasswordFile =
-          config.sops.secrets."mail/info_burscheider-imkerverein.de.sha512".path;
-
-        catchAll = [ "burscheider-imkerverein.de" ];
-      };
-
-      "kontakt@burscheider-imkerverein.de" = {
-        hashedPasswordFile =
-          config.sops.secrets."mail/kontakt_burscheider-imkerverein.de.sha512".path;
       };
 
       "me@p3tr1ch0rr.de" = {
@@ -245,8 +231,6 @@
     "mail/ad_kloenk.de.sha512".owner = "root";
     "mail/git_kloenk.de.sha512".owner = "root";
     "mail/drachensegler_drachensegler.kloenk.de.sha512".owner = "root";
-    "mail/info_burscheider-imkerverein.de.sha512".owner = "root";
-    "mail/kontakt_burscheider-imkerverein.de.sha512".owner = "root";
     "mail/me_p3tr1ch0rr.de.bcypt".owner = "root";
   };
 

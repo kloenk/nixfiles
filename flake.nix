@@ -277,7 +277,7 @@
 
           imports = [
             ./configuration/hosts/gimli
-            # mail-server.nixosModules.mailserver
+            mail-server.nixosModules.mailserver
             (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix"))
           ];
         };

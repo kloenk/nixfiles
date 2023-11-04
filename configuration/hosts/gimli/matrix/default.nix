@@ -138,8 +138,6 @@
     };
   };
 
-  sops.secrets."matrix/exmpp".owner = "matrix-synapse";
-  sops.secrets."matrix/exmpp2".owner = "matrix-synapse";
   sops.secrets."matrix/config".owner = "matrix-synapse";
   sops.secrets."matrix/sliding-sync/env".owner = "root";
   systemd.services.matrix-synapse.serviceConfig.SupplementaryGroups =
