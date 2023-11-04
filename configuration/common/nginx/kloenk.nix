@@ -2,7 +2,7 @@
 
 {
   security.acme.defaults.email = "ca@kloenk.de";
-  services.nginx.virtualHosts."${config.networking.hostName}.kloenk.dev" = {
+  services.nginx.virtualHosts."${config.networking.hostName}.kloenk.de" = {
     #serverAliases = [ "default" ];
     #enableACME = true;
     #forceSSL = true;
