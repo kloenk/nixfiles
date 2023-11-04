@@ -11,7 +11,7 @@
     ./akkoma.nix
 
     #./mysql.nix
-    ./vh3.nix
+    # ./vh3.nix
 
     ./atuin.nix
     ./fleet_bot.nix
