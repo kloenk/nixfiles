@@ -1,5 +1,4 @@
 keys:
-  - &kloenk_pgp B44ADFDFF869A66A3FDFDD8B8609A7B519E5E342
   - &kloenk_age age1p06k9fwwdhwcx6qxt5fyypkdk9wpkhk5fhyzjnykaymz32nwsakqwyfjqm
 
   - &server_thrain age1ejyvncc2g7slp30fx72cyawg5z5030mzfq6zy8fk3tm2n72pqghsfmrvp6
@@ -17,50 +16,36 @@ creation_rules:
     - age:
       - *kloenk_age
       - *server_thrain
-      pgp:
-      - *kloenk_pgp
   - path_regex: secrets/manwe[^/]*\.yaml$
     key_groups:
       - age:
           - *kloenk_age
           - *server_manwe
-        pgp:
-          - *kloenk_pgp
   - path_regex: secrets/gimli[^/]*\.yaml$
     key_groups:
       - age:
           - *kloenk_age
           - *server_gimli
-        pgp:
-          - *kloenk_pgp
   - path_regex: secrets/iluvatar[^/]*\.yaml$
     key_groups:
       - age:
           - *kloenk_age
           - *server_iluvatar
-        pgp:
-          - *kloenk_pgp
   - path_regex: secrets/moodle-usee[^/]*\.yaml$
     key_groups:
       - age:
           - *kloenk_age
           - *server_moodle
-        pgp:
-          - *kloenk_pgp
   - path_regex: secrets/samwisethink[^/]*\.yaml$
     key_groups:
       - age:
           - *kloenk_age
           - *server_samwise
-        pgp:
-          - *kloenk_pgp
   - path_regex: secrets/durin[^/]*\.yaml$
     key_groups:
       - age:
           - *kloenk_age
           - *server_durin
-        pgp:
-          - *kloenk_pgp
   - path_regex: secrets/shared/[^/]*\.yaml$
     key_groups:
       - age:
@@ -73,12 +58,8 @@ creation_rules:
           - *server_durin
           - *server_elrond
           - *darwin_frodo
-        pgp:
-          - *kloenk_pgp
   - path_regex: secrets/.+\.yaml$
     key_groups:
     - age:
       - *kloenk_age
-      pgp:
-      - *kloenk_pgp
 
