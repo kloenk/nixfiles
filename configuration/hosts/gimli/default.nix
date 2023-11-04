@@ -5,6 +5,8 @@
     ./disko.nix
     ./links.nix
 
+    ../../profiles/bcachefs.nix
+
     # ./mail
     # ./matrix
     # ./dns    

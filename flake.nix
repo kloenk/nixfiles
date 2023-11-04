@@ -102,6 +102,11 @@
     inputs.nixpkgs.follows = "/nixpkgs";
   };
 
+  inputs.bcachefs-tools = {
+    url = "gitlab:kloenk/bcachefs-tools/nix-flake?host=cyberchaos.dev";
+    inputs.nixpkgs.follows = "/nixpkgs";
+  };
+
   inputs.devenv.url = "github:cachix/devenv";
 
   inputs.nix-minecraft.url = "github:Infinidoge/nix-minecraft";
@@ -126,6 +131,7 @@
         p3tr.overlays.default
         sysbadge.overlays.sysbadge
         oxalica.overlays.default
+        inputs.bcachefs-tools.overlays.default
       ];
 
       systems =
@@ -273,7 +279,7 @@
             ./configuration/hosts/gimli
             # mail-server.nixosModules.mailserver
             (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix"))
-          ]
+          ];
         };
 
         # USee
