@@ -13,10 +13,10 @@
     #./mysql.nix
     # ./vh3.nix
 
-    ./atuin.nix
-    ./fleet_bot.nix
-    ./jlly.nix
-    ./p3tr.nix
+    # ./atuin.nix
+    # ./fleet_bot.nix
+    # ./jlly.nix
+    # ./p3tr.nix
 
     ./monitoring
     ./kuma.nix
