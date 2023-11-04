@@ -95,19 +95,19 @@
           tls = false;
           x_forwarded = true;
         }
-        {
-          bind_addresses = [ "192.168.242.1" ];
-          port = 8008;
-          resources = [{
-            names = [ "client" ];
-            compress = true;
-          }
-          #{ names = [ "federation" ]; compress = false; } # should not be needed, AS should only use client
-            ];
-          type = "http";
-          tls = false;
-          x_forwarded = false;
-        }
+        # {
+        #   bind_addresses = [ "192.168.242.1" ];
+        #   port = 8008;
+        #   resources = [{
+        #     names = [ "client" ];
+        #     compress = true;
+        #   }
+        #   #{ names = [ "federation" ]; compress = false; } # should not be needed, AS should only use client
+        #     ];
+        #   type = "http";
+        #   tls = false;
+        #   x_forwarded = false;
+        # }
       ];
 
       database_type = "psycopg2";
