@@ -20,6 +20,15 @@ let
   he_secondary =
     "159.69.179.160 51.254.249.185 51.254.249.182 216.218.133.2 2001:470:600::2 5.45.100.14 164.132.31.112";
 in {
+  # running bind/coredn
+  services.resolved.enable = false;
+  networking.nameservers = [
+    "2001:470:20::2"
+    "2001:4860:4860::8888"
+    "2001:4860:4860::8844"
+    "1.1.1.1"
+  ];
+
   networking.firewall = {
     allowedTCPPorts = [ 53 ];
     allowedUDPPorts = [ 53 ];

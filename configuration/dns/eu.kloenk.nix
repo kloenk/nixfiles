@@ -35,7 +35,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.eu.";
       adminEmail = "hostmaster.kloenk.de.";
-      serial = 2021010147;
+      serial = 2021010148;
       refresh = 600;
       expire = 604800;
       minimum = 600;
@@ -43,8 +43,8 @@ let
 
     NS = [ "ns2.he.net." "ns4.he.net." "ns3.he.net." "ns5.he.net." ];
 
-    A = map (ttl 600) [ (a "49.12.72.200") ];
-    AAAA = map (ttl 600) [ (aaaa "2a01:4f8:c012:b874::") ];
+    A = map (ttl 600) [ (a "168.119.57.172") ];
+    AAAA = map (ttl 600) [ (aaaa "2a01:4f8:c013:1a4b::") ];
 
     TXT = spfKloenk ++ [
       "google-site-verification=Zi_9C2hSucoEJhLD78ijxMaybtjscN0D3t5TNpoeg6Y"
@@ -53,11 +53,7 @@ let
     CAA = letsEncrypt config.security.acme.email;
 
     subdomains = rec {
-      iluvatar = {
-        A = map (ttl 600) [ (a "49.12.72.200") ];
-
-        AAAA = map (ttl 600) [ (aaaa "2a01:4f8:c012:b874::") ];
-      };
+      iluvatar.CNAME = [ "kloenk.eu." ];
 
       gimli = hostTTL 1200 "49.12.72.200" "2a01:4f8:c012:b874::";
       ns1 = gimli;

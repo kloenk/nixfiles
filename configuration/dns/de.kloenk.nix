@@ -36,7 +36,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.de.";
       adminEmail = "hostmaster@kloenk.de";
-      serial = 2020122613;
+      serial = 2020122614;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
@@ -45,8 +45,8 @@ let
     NS = [ "ns2.he.net." "ns4.he.net." "ns3.he.net." "ns5.he.net." ];
 
     #A = map (ttl 600) [ (a "195.39.247.6") ];
-    A = map (ttl 600) [ (a "5.75.216.37") ];
-    AAAA = map (ttl 600) [ (aaaa "2a01:4f8:c012:b874::") ];
+    A = map (ttl 600) [ (a "168.119.57.172") ];
+    AAAA = map (ttl 600) [ (aaaa "2a01:4f8:c013:1a4b::") ];
 
     #AAAA = map (ttl 600) [ (aaaa "2a0f:4ac0::6") ];
 
