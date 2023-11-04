@@ -23,9 +23,9 @@
             end = "-10G";
             content = {
               type = "filesystem";
-              format = "xfs";
+              format = "bcachefs";
               mountpoint = "/";
-              extraArgs = [ "-m reflink=1" ];
+              # extraArgs = [ "-m reflink=1" ];
             };
           };
           swap = {
