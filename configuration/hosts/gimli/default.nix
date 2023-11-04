@@ -7,11 +7,11 @@
 
     ../../profiles/bcachefs.nix
 
-    # ./mail
-    # ./matrix
-    # ./dns    
-
     ./postgres.nix
+
+    ./mail
+    ./matrix
+    ./dns
 
     ../../common/telegraf.nix
   ];

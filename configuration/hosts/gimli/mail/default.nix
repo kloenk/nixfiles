@@ -38,9 +38,9 @@
       "ad.kloenk.de"
       "drachensegler.kloenk.de"
       "drachensegler.kloenk.dev"
-      "burscheider-imkerverein.de"
       "kloenk.dev"
       "p3tr1ch0rr.de"
+      "sysbadge.dev"
     ];
 
     rejectRecipients = [ "wattpad@kloenk.de" ];
@@ -70,10 +70,10 @@
           "hostmaster@drachensegler.kloenk.dev"
           "webmaster@drachensegler.kloenk.dev"
           "abuse@drachensegler.kloenk.dev"
-          "postmaster@burscheider-imkerverein.de"
-          "hostmaster@burscheider-imkerverein.de"
-          "webmaster@burscheider-imkerverein.de"
-          "abuse@burscheider-imkerverein.de"
+          "postmaster@sysabdge.dev"
+          "hostmaster@sysabdge.dev"
+          "webmaster@sysabdge.dev"
+          "abuse@sysabdge.dev"
           "delta@kloenk.de"
           "mail@kloenk.de"
 
@@ -114,6 +114,8 @@
           "behrens.finn@kloenk.dev"
           "info@kloenk.dev"
           "me@kloenk.dev"
+
+          "info@sysbadge.dev"
         ];
       };
 
@@ -130,12 +132,6 @@
           config.sops.secrets."mail/grafana_kloenk.de.sha512".path;
 
         aliases = [ "grafana@kloenk.de" ];
-      };
-
-      "eljoy@kloenk.de" = {
-        hashedPasswordFile =
-          config.sops.secrets."mail/eljoy_kloenk.de.sha512".path;
-        aliases = [ "eljoy2@kloenk.de" ];
       };
 
       "alertmanager@kloenk.de" = {
