@@ -4,15 +4,15 @@ let
   dns = inputs.dns.lib.${config.nixpkgs.system}.dns;
 
   mxKloenk = with dns.combinators.mx;
-    map (dns.combinators.ttl 3600) [ (mx 10 "gimli.kloenk.eu.") ];
+    map (dns.combinators.ttl 3600) [ (mx 10 "gimli.kloenk.de.") ];
   dmarc = with dns.combinators;
-    [ (txt "v=DMARC1;p=reject;pct=100;rua=mailto:postmaster@kloenk.eu") ];
+    [ (txt "v=DMARC1;p=reject;pct=100;rua=mailto:postmaster@kloenk.de") ];
   spfKloenk = with dns.combinators.spf;
     map (dns.combinators.ttl 600) [
       (strict [
         #"a:kloenk.dev"
         #"a:mail.kloenk.dev"
-        "a:gimli.kloenk.eu"
+        "a:gimli.kloenk.de"
         "ip4:49.12.72.200/32"
         "ip6:2a01:4f8:c012:b874::/64"
       ])
@@ -33,9 +33,9 @@ let
 
   zone = with dns.combinators; {
     SOA = ((ttl 600) {
-      nameServer = "ns1.kloenk.dev.";
-      adminEmail = "hostmaster.kloenk.eu.";
-      serial = 2021010146;
+      nameServer = "ns1.kloenk.eu.";
+      adminEmail = "hostmaster.kloenk.de.";
+      serial = 2021010147;
       refresh = 600;
       expire = 604800;
       minimum = 600;
@@ -59,11 +59,11 @@ let
         AAAA = map (ttl 600) [ (aaaa "2a01:4f8:c012:b874::") ];
       };
 
-      gimli = iluvatar; # hostTTL 1200 "195.39.247.182" "2a0f:4ac0:0:1::cb2";
+      gimli = hostTTL 1200 "49.12.72.200" "2a01:4f8:c012:b874::";
+      ns1 = gimli;
 
       uptime = iluvatar;
 
-      ns1 = iluvatar;
 
       _dmarc.TXT = dmarc;
 
@@ -77,10 +77,11 @@ let
 
       grafana = iluvatar;
       influx = iluvatar;
+      sysbadge = iluvatar;
 
       matrix = gimli // { subdomains.api = gimli; };
       mail = gimli;
-      sysbadge = gimli;
+
 
       knuddel-usee.CNAME = [ "stream.unterbachersee.de." ];
       moodle-usee.CNAME = [ "segelschule.unterbachersee.de." ];

@@ -9,7 +9,7 @@ let
       #secondary (20)
     ];
   dmarc = with dns.combinators;
-    [ (txt "v=DMARC1;p=reject;pct=100;rua=mailto:postmaster@kloenk.dev") ];
+    [ (txt "v=DMARC1;p=reject;pct=100;rua=mailto:postmaster@kloenk.de") ];
   spfKloenk = with dns.combinators.spf;
     map (dns.combinators.ttl 600) [
       (strict [
@@ -36,7 +36,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.de.";
       adminEmail = "hostmaster@kloenk.de";
-      serial = 2020122612;
+      serial = 2020122613;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
@@ -45,7 +45,7 @@ let
     NS = [ "ns2.he.net." "ns4.he.net." "ns3.he.net." "ns5.he.net." ];
 
     #A = map (ttl 600) [ (a "195.39.247.6") ];
-    A = map (ttl 600) [ (a "49.12.72.200") ];
+    A = map (ttl 600) [ (a "5.75.216.37") ];
     AAAA = map (ttl 600) [ (aaaa "2a01:4f8:c012:b874::") ];
 
     #AAAA = map (ttl 600) [ (aaaa "2a0f:4ac0::6") ];
@@ -69,9 +69,10 @@ let
       */
 
       iluvatar.CNAME = [ "kloenk.de." ];
-      ns1 = iluvatar;
 
-      gimli = iluvatar;
+      gimli = hostTTL 1200 "49.12.72.200" "2a01:4f8:c012:b874::";
+      mail = gimli;
+      ns1 = gimli;
 
       auth = iluvatar;
 
@@ -85,7 +86,6 @@ let
       ad.TXT = spfKloenk;
       ad.subdomains._dmarc.TXT = dmarc;
 
-      mail = iluvatar;
       bitwarden = iluvatar;
 
       bbb-wass.CNAME = [ "bbb.wass-er.com." ];
