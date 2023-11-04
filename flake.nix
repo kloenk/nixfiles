@@ -199,6 +199,10 @@
             system = "aarch64-linux";
             overlays = (overlayCombined "aarch64-linux");
           };
+          nodeNixpkgs.gimli = import nixpkgs {
+            system = "aarch64-linux";
+            overlays = (overlayCombined "aarch64-linux");
+          };
           #allowApplyAll = false;
 
           specialArgs.inputs = inputs;
@@ -246,11 +250,11 @@
           };
         };
 
-        # DUS 6
+        # hetzner
         iluvatar = { pkgs, nodes, ... }: {
           deployment = {
             targetHost = "iluvatar.kloenk.dev";
-            tags = [ "hetzner" "remote" ];
+            tags = [ "hetzner" "falkenstein" "remote" ];
           };
 
           imports = [
@@ -259,6 +263,19 @@
             (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix"))
           ];
         };
+        gimli = { pkgs, nodes, ... }: {
+          deployment = {
+            targetHost = "gimli.kloenk.de";
+            tags = [ "hetzner" "falkenstein" "remote" ];
+          };
+
+          imports = [
+            ./configuration/hosts/gimli
+            # mail-server.nixosModules.mailserver
+            (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix"))
+          ]
+        };
+
         # USee
         moodle-usee = { pkgs, nodes, ... }: {
           deployment.targetHost = "moodle-usee.kloenk.dev";
