@@ -11,6 +11,8 @@
     # ./matrix
     # ./dns    
 
+    ./postgres.nix
+
     ../../common/telegraf.nix
   ];
 
