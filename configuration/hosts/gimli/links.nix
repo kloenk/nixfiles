@@ -11,7 +11,7 @@ in
         matchConfig.MACAddress = "96:00:02:ae:9b:77";
         linkConfig.Name = "eth0";
     };
-    networks."20-eth0" = {
+    networks."10-eth0" = {
       name = "eth0";
       addresses = [
         { addressConfig.Address = "2a01:4f8:c012:b874::/64"; }
