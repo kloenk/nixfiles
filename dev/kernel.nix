@@ -20,7 +20,7 @@
 pkgs.mkShell {
   buildInputs = with pkgs;
     [
-      (rust-bin.stable."1.72.0".default.override {
+      (rust-bin.stable."1.73.0".default.override {
         extensions = [ "rust-src" ];
       })
       rust-bindgen

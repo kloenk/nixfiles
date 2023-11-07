@@ -4,7 +4,9 @@
   imports = [
     ./links.nix
 
-    ../../common/nushell.nix
+    ../../profiles/bcachefs.nix
+
+    # ../../common/nushell.nix
   ];
 
   boot.loader.grub.enable = false;
@@ -43,6 +45,8 @@
   };
 
   swapDevices = [ ];
+
+  environment.systemPackages = with pkgs; [ nodejs ];
 
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
 
