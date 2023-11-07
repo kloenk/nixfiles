@@ -4,7 +4,6 @@
   imports = [
     #./postgres.nix
 
-    ../../common/darwin.nix
     #../../common/nushell.nix
   ];
 

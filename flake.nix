@@ -358,12 +358,14 @@
             {
               nixpkgs.overlays = (overlayCombined host.system);
             }
+            ./profiles/base/darwin
             #home-manager.nixosModules.home-manager
             (import (./configuration + "/darwin/${name}/darwin.nix"))
             self.nixosModules.nushell
             sops-nix.darwinModules.sops
             self.darwinModules.epmd
           ];
+          specialArgs = inputs;
         })) darwinHosts);
 
       devShells = forAllSystems (system:
