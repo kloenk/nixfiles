@@ -173,7 +173,7 @@
         iso = (nixpkgs.lib.nixosSystem {
           system = final.stdenv.targetPlatform.system;
           modules = [
-            (import ./configuration/iso.nix)
+            (import ./profiles/iso.nix)
             {
               nixpkgs.overlays =
                 (overlayCombined final.stdenv.targetPlatform.system);
@@ -188,8 +188,7 @@
 
       legacyPackages = forAllSystems (system: nixpkgsFor.${system});
 
-      packages =
-        forAllSystems (system: { inherit (nixpkgsFor.${system}) wallpapers; });
+      packages = forAllSystems (system: { });
 
       nixosConfigurations =
         let hive = inputs.colmena.lib.makeHive self.outputs.colmena;
@@ -212,6 +211,7 @@
           #allowApplyAll = false;
 
           specialArgs.inputs = inputs;
+          specialArgs.self = self;
         };
 
         defaults = { pkgs, ... }: {
@@ -220,7 +220,7 @@
             "services/web-apps/wordpress.nix"
           ];
           imports = [
-            ./configuration/common
+            ./profiles/base/nixos
             #home-manager.nixosModules.home-manager
             sops-nix.nixosModules.sops
             inputs.nix-minecraft.nixosModules.minecraft-servers
@@ -246,7 +246,7 @@
           environment.systemPackages = [ # pkgs.colmena
           ];
 
-          #nix.channel.enable = false;
+          nix.channel.enable = false;
 
           deployment = {
             buildOnTarget = true;
@@ -264,7 +264,7 @@
           };
 
           imports = [
-            ./configuration/hosts/iluvatar
+            ./hosts/iluvatar
             mail-server.nixosModules.mailserver
             (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix"))
           ];
@@ -276,7 +276,7 @@
           };
 
           imports = [
-            ./configuration/hosts/gimli
+            ./hosts/gimli
             mail-server.nixosModules.mailserver
             (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix"))
           ];
@@ -288,7 +288,7 @@
           deployment.tags = [ "usee" "remote" ];
 
           imports = [
-            ./configuration/hosts/moodle-usee
+            ./hosts/moodle-usee
             (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix"))
           ];
         };
@@ -298,7 +298,7 @@
           deployment.targetHost = "192.168.178.248";
           deployment.tags = [ "pony" "local" ];
 
-          imports = [ ./configuration/hosts/thrain ];
+          imports = [ ./hosts/thrain ];
 
           # ZFS kernel
           nixpkgs.config.allowBroken = true;
@@ -308,26 +308,20 @@
           deployment.tags = [ "pony" "local" ];
 
           imports = [
-            ./configuration/hosts/elrond
+            ./hosts/elrond
             vika.nixosModules.gnome
             # vika.nixosModules.bgrtSplash
           ];
           users.users.kloenk.packages =
             [ inputs.nixpkgs.legacyPackages.x86_64-linux.nil ];
         };
-        #durin = { pkgs, nodes, ... }: {
-        #  deployment.targetHost = "durin.fritz.box";
-        #  deployment.tags = [ "pony" "local" ];
-
-        #  imports = [ ./configuration/hosts/durin ];
-        #};
 
         ktest = { pkgs, nodes, ... }: {
           deployment.targetHost = "192.168.64.101";
           deployment.tags = [ "vm" "frodo" ];
 
           imports = [
-            ./configuration/hosts/ktest
+            ./hosts/ktest
             (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix"))
           ];
         };
@@ -355,40 +349,43 @@
         (darwin.lib.darwinSystem {
           system = host.system;
           modules = [
-            {
-              nixpkgs.overlays = (overlayCombined host.system);
-            }
+            { nixpkgs.overlays = (overlayCombined host.system); }
+            ./profiles/base/darwin
             #home-manager.nixosModules.home-manager
             (import (./configuration + "/darwin/${name}/darwin.nix"))
             self.nixosModules.nushell
             sops-nix.darwinModules.sops
             self.darwinModules.epmd
           ];
+          specialArgs.inputs = inputs;
+          specialArgs.self = self;
         })) darwinHosts);
 
       devShells = forAllSystems (system:
         let pkgs = nixpkgsFor.${system};
         in {
-          devenv = devenv.lib.mkShell {
-            inherit inputs pkgs;
-            modules = [
-              ({ pkgs, ... }: { packages = [ pkgs.colmena ]; })
-              {
-                languages.nix.enable = true;
+          # devenv = devenv.lib.mkShell {
+          #   inherit inputs pkgs;
+          #   modules = [
+          #     ({ pkgs, ... }: { packages = [ pkgs.colmena ]; })
+          #     {
+          #       languages.nix.enable = true;
 
-                pre-commit.hooks.actionlint.enable = true;
-                pre-commit.hooks.nixfmt.enable = true;
-              }
-            ];
-          };
+          #       pre-commit.hooks.actionlint.enable = true;
+          #       pre-commit.hooks.nixfmt.enable = true;
+          #     }
+          #   ];
+          # };
           kernel = pkgs.callPackage ./dev/kernel.nix { };
-          default = self.devShells.${system}.devenv;
+          # default = self.devShells.${system}.devenv;
         });
 
       formatter = forAllSystems (system: nixpkgsFor.${system}.nixfmt);
 
-      checks = forAllSystems
-        (system: { devenv_ci = self.devShells.${system}.devenv.ci; });
+      checks = forAllSystems (system:
+        {
+          #devenv_ci = self.devShells.${system}.devenv.ci;
+        });
     };
   nixConfig = {
     extra-substituters = [ "https://kloenk.cachix.org" ];
