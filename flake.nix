@@ -328,7 +328,7 @@
           deployment.tags = [ "vm" "frodo" ];
 
           imports = [
-            ./configuration/hosts/ktest
+            ./hosts/ktest
             (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix"))
           ];
         };

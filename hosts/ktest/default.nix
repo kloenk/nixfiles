@@ -5,8 +5,8 @@
     ./links.nix
 
     ../../profiles/bcachefs.nix
+    ../../profiles/hetzner_vm.nix
 
-    # ../../common/nushell.nix
   ];
 
   boot.loader.grub.enable = false;
@@ -17,7 +17,7 @@
 
   networking.useDHCP = false;
   networking.hostName = "ktest";
-  networking.domain = "kloenk.dev";
+  networking.domain = "kloenk.de";
 
   users.users.kloenk.password = "foobar";
 
