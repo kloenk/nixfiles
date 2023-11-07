@@ -11,9 +11,7 @@
     ./moodle.nix
     ./restic.nix
 
-    ../../default.nix
-    ../../common
-    ../../common/telegraf.nix
+    ../../profiles/telegraf.nix
   ];
 
   services.qemuGuest.enable = true;

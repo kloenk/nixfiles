@@ -15,7 +15,8 @@
     ./disko.nix
     #./kde.nix
 
-    ../../common/telegraf.nix
+    ../../profiles/telegraf.nix
+    # ../../profiles/syncthing.nix
     #../../common/nushell.nix
   ];
 

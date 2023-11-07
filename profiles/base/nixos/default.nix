@@ -43,6 +43,7 @@
     #"L+ /etc/shadow - - - - /persist/data/shadow"
   ];
   services.resolved.dnssec = "false";
+  networking.domain = lib.mkDefault "kloenk.de";
 
   # Services
   services.nginx.enable = lib.mkDefault true;

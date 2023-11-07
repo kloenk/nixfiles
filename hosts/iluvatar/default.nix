@@ -7,8 +7,8 @@
 
     ./bitwarden.nix
     ./postgres.nix
-    ./website.nix
-    ./akkoma.nix
+    # ./website.nix
+    # ./akkoma.nix
 
     #./mysql.nix
     # ./vh3.nix
@@ -18,10 +18,10 @@
     # ./jlly.nix
     # ./p3tr.nix
 
-    ./monitoring
-    ./kuma.nix
+    # ./monitoring
+    # ./kuma.nix
 
-    ../../common/telegraf.nix
+    ../../profiles/telegraf.nix
     # ../../common/nushell.nix # FIXME: breaks ncsd
   ];
 

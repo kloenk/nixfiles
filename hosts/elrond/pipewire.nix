@@ -12,7 +12,6 @@
     jack2Full
     jack_capture
     carla
-    cadence
   ];
   services.upower.enable = true;
   hardware.pulseaudio.enable = lib.mkForce false;

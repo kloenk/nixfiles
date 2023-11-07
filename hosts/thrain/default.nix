@@ -10,14 +10,14 @@
     ./samba.nix
     ./snmp
 
-    ./factorio.nix
+    # ./factorio.nix
+
+    ./initrd.nix
 
     ./dns.nix
 
     #./k3s.nix
     #./kubernetes.nix
-
-    ../../default.nix
 
     #../../desktop
     #../../desktop/plasma.nix
@@ -29,8 +29,8 @@
     ./r-dev.nix
     ./mpd.nix
 
-    ../../common/telegraf.nix
-    ../../common/syncthing.nix
+    ../../profiles/telegraf.nix
+    ../../profiles/syncthing.nix
   ];
 
   # FIME: remove

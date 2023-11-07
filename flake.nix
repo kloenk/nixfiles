@@ -189,7 +189,7 @@
       legacyPackages = forAllSystems (system: nixpkgsFor.${system});
 
       packages =
-        forAllSystems (system: { inherit (nixpkgsFor.${system}) wallpapers; });
+        forAllSystems (system: { });
 
       nixosConfigurations =
         let hive = inputs.colmena.lib.makeHive self.outputs.colmena;
@@ -265,7 +265,7 @@
           };
 
           imports = [
-            ./configuration/hosts/iluvatar
+            ./hosts/iluvatar
             mail-server.nixosModules.mailserver
             (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix"))
           ];
@@ -289,7 +289,7 @@
           deployment.tags = [ "usee" "remote" ];
 
           imports = [
-            ./configuration/hosts/moodle-usee
+            ./hosts/moodle-usee
             (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix"))
           ];
         };
@@ -299,7 +299,7 @@
           deployment.targetHost = "192.168.178.248";
           deployment.tags = [ "pony" "local" ];
 
-          imports = [ ./configuration/hosts/thrain ];
+          imports = [ ./hosts/thrain ];
 
           # ZFS kernel
           nixpkgs.config.allowBroken = true;
@@ -309,19 +309,13 @@
           deployment.tags = [ "pony" "local" ];
 
           imports = [
-            ./configuration/hosts/elrond
+            ./hosts/elrond
             vika.nixosModules.gnome
             # vika.nixosModules.bgrtSplash
           ];
           users.users.kloenk.packages =
             [ inputs.nixpkgs.legacyPackages.x86_64-linux.nil ];
         };
-        #durin = { pkgs, nodes, ... }: {
-        #  deployment.targetHost = "durin.fritz.box";
-        #  deployment.tags = [ "pony" "local" ];
-
-        #  imports = [ ./configuration/hosts/durin ];
-        #};
 
         ktest = { pkgs, nodes, ... }: {
           deployment.targetHost = "192.168.64.101";
@@ -372,26 +366,28 @@
       devShells = forAllSystems (system:
         let pkgs = nixpkgsFor.${system};
         in {
-          devenv = devenv.lib.mkShell {
-            inherit inputs pkgs;
-            modules = [
-              ({ pkgs, ... }: { packages = [ pkgs.colmena ]; })
-              {
-                languages.nix.enable = true;
+          # devenv = devenv.lib.mkShell {
+          #   inherit inputs pkgs;
+          #   modules = [
+          #     ({ pkgs, ... }: { packages = [ pkgs.colmena ]; })
+          #     {
+          #       languages.nix.enable = true;
 
-                pre-commit.hooks.actionlint.enable = true;
-                pre-commit.hooks.nixfmt.enable = true;
-              }
-            ];
-          };
+          #       pre-commit.hooks.actionlint.enable = true;
+          #       pre-commit.hooks.nixfmt.enable = true;
+          #     }
+          #   ];
+          # };
           kernel = pkgs.callPackage ./dev/kernel.nix { };
-          default = self.devShells.${system}.devenv;
+          # default = self.devShells.${system}.devenv;
         });
 
       formatter = forAllSystems (system: nixpkgsFor.${system}.nixfmt);
 
       checks = forAllSystems
-        (system: { devenv_ci = self.devShells.${system}.devenv.ci; });
+        (system: {
+          #devenv_ci = self.devShells.${system}.devenv.ci;
+        });
     };
   nixConfig = {
     extra-substituters = [ "https://kloenk.cachix.org" ];
