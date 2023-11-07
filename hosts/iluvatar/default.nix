@@ -14,7 +14,7 @@
     # ./vh3.nix
 
     # ./atuin.nix
-    ./fleet_bot.nix
+    # ./fleet_bot.nix
     # ./jlly.nix
     # ./p3tr.nix
 
