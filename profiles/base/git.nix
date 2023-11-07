@@ -1,15 +1,9 @@
 { pkgs, lib, ... }:
 
 let
-  ignore = [
-    ".venv"
-    ".idea"
-    ".tmp"
-    "*.iml"
-  ];
+  ignore = [ ".venv" ".idea" ".tmp" "*.iml" ];
   ignoreFile = pkgs.writeText "gitignore" (lib.concatStringsSep "\n" ignore);
-in 
-{
+in {
   programs.git = {
     enable = true;
     config = {

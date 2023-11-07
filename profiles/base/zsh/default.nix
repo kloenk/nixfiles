@@ -54,12 +54,7 @@
     ohMyZsh = {
       enable = true;
       theme = "fishy";
-      plugins = [
-        "git"
-        "gitfast"
-        "sudo"
-        "ripgrep"
-      ];
+      plugins = [ "git" "gitfast" "sudo" "ripgrep" ];
     };
     shellAliases = {
       ls = "eza";

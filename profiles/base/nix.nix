@@ -8,12 +8,9 @@
     '';
     settings = {
       trusted-users = [ "root" "@wheel" "kloenk" ];
-      trusted-public-keys = [
-        "kloenk.cachix.org-1:k52XSkCLOxnmEnjzuedYOzf0MtQp8P3epqOmAlCHYpc="
-      ];
-      substituters = [
-        "https://kloenk.cachix.org"
-      ];
+      trusted-public-keys =
+        [ "kloenk.cachix.org-1:k52XSkCLOxnmEnjzuedYOzf0MtQp8P3epqOmAlCHYpc=" ];
+      substituters = [ "https://kloenk.cachix.org" ];
     };
     gc = {
       automatic = lib.mkDefault true;

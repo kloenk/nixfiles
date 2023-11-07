@@ -8,7 +8,6 @@
     ./nginx.nix
 
     # dont work under darwin currently
-    ../ssh.nix
     ../vim.nix
     ../git.nix
     ../zsh
@@ -93,9 +92,11 @@
   ];
 
   # Deployment
-  deployment.tags = [ pkgs.stdenv.hostPlatform.system config.networking.domain ];
+  deployment.tags =
+    [ pkgs.stdenv.hostPlatform.system config.networking.domain ];
   deployment.targetUser = lib.mkDefault "kloenk";
   deployment.targetHost = lib.mkDefault config.networking.fqdn;
-  deployment.targetPort = lib.mkDefault (lib.head config.services.openssh.ports);
+  deployment.targetPort =
+    lib.mkDefault (lib.head config.services.openssh.ports);
 
 }

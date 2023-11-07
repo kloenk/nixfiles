@@ -77,38 +77,37 @@
 
       enable_registration = false;
 
-      listeners = [
-        {
-          bind_addresses = [ "127.0.0.1" ];
-          port = 8008;
-          resources = [
-            {
-              names = [ "client" ];
-              compress = true;
-            }
-            {
-              names = [ "federation" ];
-              compress = false;
-            }
-          ];
-          type = "http";
-          tls = false;
-          x_forwarded = true;
-        }
-        # {
-        #   bind_addresses = [ "192.168.242.1" ];
-        #   port = 8008;
-        #   resources = [{
-        #     names = [ "client" ];
-        #     compress = true;
-        #   }
-        #   #{ names = [ "federation" ]; compress = false; } # should not be needed, AS should only use client
-        #     ];
-        #   type = "http";
-        #   tls = false;
-        #   x_forwarded = false;
-        # }
-      ];
+      listeners = [{
+        bind_addresses = [ "127.0.0.1" ];
+        port = 8008;
+        resources = [
+          {
+            names = [ "client" ];
+            compress = true;
+          }
+          {
+            names = [ "federation" ];
+            compress = false;
+          }
+        ];
+        type = "http";
+        tls = false;
+        x_forwarded = true;
+      }
+      # {
+      #   bind_addresses = [ "192.168.242.1" ];
+      #   port = 8008;
+      #   resources = [{
+      #     names = [ "client" ];
+      #     compress = true;
+      #   }
+      #   #{ names = [ "federation" ]; compress = false; } # should not be needed, AS should only use client
+      #     ];
+      #   type = "http";
+      #   tls = false;
+      #   x_forwarded = false;
+      # }
+        ];
 
       database_type = "psycopg2";
       database_args = { database = "matrix-synapse"; };

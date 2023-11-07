@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }:
 
-{ 
+{
   imports = [
     ./disko.nix
     ./links.nix

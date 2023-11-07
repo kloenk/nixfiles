@@ -60,7 +60,6 @@ let
 
       uptime = iluvatar;
 
-
       _dmarc.TXT = dmarc;
 
       drachensegler.MX = mxKloenk;
@@ -77,7 +76,6 @@ let
 
       matrix = gimli // { subdomains.api = gimli; };
       mail = gimli;
-
 
       knuddel-usee.CNAME = [ "stream.unterbachersee.de." ];
       moodle-usee.CNAME = [ "segelschule.unterbachersee.de." ];

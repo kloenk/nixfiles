@@ -188,8 +188,7 @@
 
       legacyPackages = forAllSystems (system: nixpkgsFor.${system});
 
-      packages =
-        forAllSystems (system: { });
+      packages = forAllSystems (system: { });
 
       nixosConfigurations =
         let hive = inputs.colmena.lib.makeHive self.outputs.colmena;
@@ -350,9 +349,7 @@
         (darwin.lib.darwinSystem {
           system = host.system;
           modules = [
-            {
-              nixpkgs.overlays = (overlayCombined host.system);
-            }
+            { nixpkgs.overlays = (overlayCombined host.system); }
             ./profiles/base/darwin
             #home-manager.nixosModules.home-manager
             (import (./configuration + "/darwin/${name}/darwin.nix"))
@@ -360,7 +357,8 @@
             sops-nix.darwinModules.sops
             self.darwinModules.epmd
           ];
-          specialArgs = inputs;
+          specialArgs.inputs = inputs;
+          specialArgs.self = self;
         })) darwinHosts);
 
       devShells = forAllSystems (system:
@@ -384,8 +382,8 @@
 
       formatter = forAllSystems (system: nixpkgsFor.${system}.nixfmt);
 
-      checks = forAllSystems
-        (system: {
+      checks = forAllSystems (system:
+        {
           #devenv_ci = self.devShells.${system}.devenv.ci;
         });
     };

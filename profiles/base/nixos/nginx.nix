@@ -1,4 +1,3 @@
-
 { config, pkgs, lib, ... }:
 
 {
@@ -47,12 +46,13 @@
   };
 
   # Public file serving
-  services.nginx.virtualHosts."${config.networking.hostName}.${config.networking.domain}" = {
-    enableACME = true;
-    forceSSL = true;
-    locations."/public/".alias = lib.mkDefault "/persist/data/public/";
-    locations."/public/".extraConfig = "autoindex on;";
-  };
+  services.nginx.virtualHosts."${config.networking.hostName}.${config.networking.domain}" =
+    {
+      enableACME = true;
+      forceSSL = true;
+      locations."/public/".alias = lib.mkDefault "/persist/data/public/";
+      locations."/public/".extraConfig = "autoindex on;";
+    };
 
   # Montioring
   services.telegraf.extraConfig.inputs = {

@@ -1,18 +1,11 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ./nix.nix
-  ];
+  imports = [ ./nix.nix ./ssh.nix ];
 
   time.timeZone = "Europe/Berlin";
 
-  environment.systemPackages = with pkgs; [
-    eza
-    fd
-    ripgrep
-    htop
-  ];
+  environment.systemPackages = with pkgs; [ eza fd ripgrep htop ];
 
   sops.defaultSopsFile = ../../secrets + "/${config.networking.hostName}.yaml";
 }

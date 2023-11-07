@@ -1,9 +1,7 @@
 { pkgs, ... }:
 
 {
-  imports = [
-    ../default.nix
-  ];
+  imports = [ ../default.nix ];
 
   nix.configureBuildUsers = true;
   nix.useDaemon = true;

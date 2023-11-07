@@ -1,8 +1,8 @@
 { inputs, config, lib, pkgs, ... }:
 
 let
-  bbb_wass_zone =
-    pkgs.writeText "bbb.zone" (builtins.readFile (toString ./zones/bbb-wass.zone));
+  bbb_wass_zone = pkgs.writeText "bbb.zone"
+    (builtins.readFile (toString ./zones/bbb-wass.zone));
 
   eu_kloenk_zone =
     (import ./zones/eu.kloenk.nix { inherit lib inputs config; });
