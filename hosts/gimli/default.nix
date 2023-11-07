@@ -6,25 +6,16 @@
     ./links.nix
 
     ../../profiles/bcachefs.nix
+    ../../profiles/hetzner_vm.nix
+    ../../profiles/postgres.nix
 
-    ./postgres.nix
+    ../../services/matrix
+    ../../services/mail
+    ../../services/dns
 
-    ./mail
-    ./matrix
-    ./dns
-
-    ../../common/telegraf.nix
+    ../../profiles/telegraf.nix
   ];
 
-  # vm connection
-  services.qemuGuest.enable = true;
-
-  boot.supportedFilesystems = [ "vfat" "bcachefs" ];
-  boot.initrd.supportedFilesystems = [ "bcachefs" ];
-  boot.initrd.kernelModules = [ "virtio_gpu" ];
-  boot.kernelParams = [
-    "console=tty"
-  ];
   boot.loader.grub.enable = false;
   boot.loader.systemd-boot.enable = true;
   boot.initrd.systemd.enable = true;

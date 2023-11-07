@@ -11,6 +11,10 @@
     ../ssh.nix
     ../vim.nix
     ../git.nix
+    ../zsh
+
+    ../../users/root
+    ../../users/kloenk
   ];
 
   # Boot
@@ -55,15 +59,37 @@
   systemd.services.telegraf.serviceConfig.AmbientCapabilities =
     [ "CAP_NET_ADMIN" ];
 
-
+  programs.gnupg = {
+    agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
+  };
   # TODO: certificatFiles
 
   # Users
   users.mutableUsers = false;
   security.sudo.wheelNeedsPassword = false;
-  hardware.enableAllFirmware = true;
+  hardware.enableRedistributableFirmware = true;
+  programs.mtr.enable = true;
 
   documentation.nixos.enable = false;
+
+  environment.systemPackages = with pkgs; [
+    alacritty.terminfo
+    rxvt_unicode.terminfo
+    restic
+    tmux
+    iptables
+    bash-completion
+    whois
+
+    rclone
+    wireguard-tools
+
+    usbutils
+    pciutils
+  ];
 
   # Deployment
   deployment.tags = [ pkgs.stdenv.hostPlatform.system config.networking.domain ];

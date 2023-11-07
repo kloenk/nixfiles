@@ -2,26 +2,27 @@
 
 let
   bbb_wass_zone =
-    pkgs.writeText "bbb.zone" (builtins.readFile (toString ./bbb-wass.zone));
+    pkgs.writeText "bbb.zone" (builtins.readFile (toString ./zones/bbb-wass.zone));
 
   eu_kloenk_zone =
-    (import ../../../dns/eu.kloenk.nix { inherit lib inputs config; });
+    (import ./zones/eu.kloenk.nix { inherit lib inputs config; });
   dev_kloenk_zone =
-    (import ../../../dns/dev.kloenk.nix { inherit lib inputs config; });
+    (import ./zones/dev.kloenk.nix { inherit lib inputs config; });
   dev_sysbadge_zone =
-    (import ../../../dns/dev.sysbadge.nix { inherit lib inputs config; });
+    (import ./zones/dev.sysbadge.nix { inherit lib inputs config; });
   dev_matrixcore_zone =
-    (import ../../../dns/dev.matrixcore.nix { inherit lib inputs config; });
+    (import ./zones/dev.matrixcore.nix { inherit lib inputs config; });
   de_kloenk_zone =
-    (import ../../../dns/de.kloenk.nix { inherit lib inputs config; });
+    (import ./zones/de.kloenk.nix { inherit lib inputs config; });
   de_p3tr1ch0rr_zone =
-    (import ../../../dns/de.p3tr1ch0rr.nix { inherit lib inputs config; });
+    (import ./zones/de.p3tr1ch0rr.nix { inherit lib inputs config; });
 
   he_secondary =
     "159.69.179.160 51.254.249.185 51.254.249.182 216.218.133.2 2001:470:600::2 5.45.100.14 164.132.31.112";
 in {
   # running bind/coredn
   services.resolved.enable = false;
+
   networking.nameservers = [
     "2001:470:20::2"
     "2001:4860:4860::8888"

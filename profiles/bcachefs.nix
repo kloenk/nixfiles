@@ -1,4 +1,5 @@
 { pkgs, lib, ... }: {
+  boot.initrd.supportedFilesystems = [ "vfat" "bcachefs" ];
   boot.supportedFilesystems = [ "bcachefs" "cifs" "vfat" "xfs" ];
 # working:
   boot.kernelPackages = lib.mkForce (pkgs.linuxPackagesFor (pkgs.linux_6_6.override {

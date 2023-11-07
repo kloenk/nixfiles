@@ -1,4 +1,4 @@
-{ lib, pkgs, config, ... }:
+{ lib, pkgs, config, self, ... }:
 
 {
   services.telegraf = {
@@ -15,7 +15,7 @@
         hostname = config.networking.hostName;
       };
       outputs.influxdb_v2 = {
-        urls = [ "https://influx.kloenk.dev" ];
+        urls = [ "https://influx.kloenk.de" ];
         token = "$INFLUX_TOKEN";
         organization = "kloenk";
         bucket = "default";
@@ -35,9 +35,7 @@
         processes = { };
         swap = { };
         system = { };
-        ping.urls = [ "1.1.1.1" ]
-          ++ lib.optional (config.networking.hostName != "iluvatar")
-          "kloenk.dev";
+        ping.urls = [ "1.1.1.1" ];
         ping.binary = "${pkgs.iputils}/bin/ping";
       };
     };
@@ -45,7 +43,7 @@
   };
 
   sops.secrets."telegraf/env" = {
-    sopsFile = ../../secrets/shared/monitoring.yaml;
+    sopsFile = ../secrets/shared/monitoring.yaml;
     owner = "root";
   };
 }

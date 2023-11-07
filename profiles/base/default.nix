@@ -15,11 +15,4 @@
   ];
 
   sops.defaultSopsFile = ../../secrets + "/${config.networking.hostName}.yaml";
-
-  programs.gnupg = {
-    agent = {
-      enable = true;
-      enableSSHSupport = true;
-    };
-  };
 }

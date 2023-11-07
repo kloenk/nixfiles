@@ -4,8 +4,8 @@
   services.syncthing = {
     enable = true;
     openDefaultPorts = true;
-    #configDir = "/persist/data/syncthing/config";
-    configDir = lib.mkDefault "${config.services.syncthing.dataDir}/conf";
+    dataDir = lib.mkDefault "/persist/data/syncthing/data";
+    configDir = lib.mkDefault "/persist/data/syncthing/conf";
   };
 
   users.users.kloenk.extraGroups = [ "syncthing" ];

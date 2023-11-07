@@ -173,7 +173,7 @@
         iso = (nixpkgs.lib.nixosSystem {
           system = final.stdenv.targetPlatform.system;
           modules = [
-            (import ./configuration/iso.nix)
+            (import ./profiles/iso.nix)
             {
               nixpkgs.overlays =
                 (overlayCombined final.stdenv.targetPlatform.system);
@@ -212,6 +212,7 @@
           #allowApplyAll = false;
 
           specialArgs.inputs = inputs;
+          specialArgs.self = self;
         };
 
         defaults = { pkgs, ... }: {
@@ -220,7 +221,7 @@
             "services/web-apps/wordpress.nix"
           ];
           imports = [
-            ./configuration/common
+            ./profiles/base/nixos
             #home-manager.nixosModules.home-manager
             sops-nix.nixosModules.sops
             inputs.nix-minecraft.nixosModules.minecraft-servers
@@ -246,7 +247,7 @@
           environment.systemPackages = [ # pkgs.colmena
           ];
 
-          #nix.channel.enable = false;
+          nix.channel.enable = false;
 
           deployment = {
             buildOnTarget = true;
@@ -276,7 +277,7 @@
           };
 
           imports = [
-            ./configuration/hosts/gimli
+            ./hosts/gimli
             mail-server.nixosModules.mailserver
             (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix"))
           ];

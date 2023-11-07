@@ -1,4 +1,4 @@
-{ config, ... }:
+{ lib, config, ... }:
 
 {
   networking.useNetworkd = lib.mkDefault true;
@@ -6,7 +6,7 @@
   networking.hosts = {
     "127.0.0.1" = let
       hostName = config.networking.hostName;
-    in [ hostName "${hostName}.kloenk.de" "${hostName.kloenk.eu}" "${hostName}.kloenk.dev" ];
+    in [ hostName "${hostName}.kloenk.de" "${hostName}.kloenk.eu" "${hostName}.kloenk.dev" ];
   };
   networking.useDHCP = lib.mkDefault false;
   networking.interfaces.lo = lib.mkDefault {

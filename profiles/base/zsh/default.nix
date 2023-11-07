@@ -55,7 +55,8 @@
       enable = true;
       theme = "fishy";
       plugins = [
-        #"git"
+        "git"
+        "gitfast"
         "sudo"
         "ripgrep"
       ];

@@ -29,7 +29,7 @@
         to.repo = "nix";
         exact = false;
       };
-      nixpkgs.flake = args.nixpkgs;
+      nixpkgs.flake = args.inputs.nixpkgs;
     };
   };
 }
