@@ -7,19 +7,19 @@
 
     ./bitwarden.nix
     ./postgres.nix
-    # ./website.nix
+    ./website.nix
     # ./akkoma.nix
 
     #./mysql.nix
     # ./vh3.nix
 
     # ./atuin.nix
-    # ./fleet_bot.nix
+    ./fleet_bot.nix
     # ./jlly.nix
     # ./p3tr.nix
 
-    # ./monitoring
-    # ./kuma.nix
+    ./monitoring
+    ./kuma.nix
 
     ../../profiles/telegraf.nix
     # ../../common/nushell.nix # FIXME: breaks ncsd

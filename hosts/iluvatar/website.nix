@@ -124,32 +124,22 @@ in {
       locations."/".proxyPass = "http://localhost:5000/";
     };
 
-    "mx-redir.kloenk.dev" = {
-      enableACME = true;
-      forceSSL = true;
-      root = pkgs.matrix-to;
-      locations."= /.well-known/apple-app-site-association" = {
-        root = pkgs.writeTextDir ".well-known/apple-app-site-association"
-          "${builtins.toJSON apple_assoc}";
-        extraConfig = ''
-          ${commonHeaders}
-          default_type application/json;
-          add_header Access-Control-Allow-Origin "*";
-          add_header Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS";
-          add_header Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept, Authorization";
-        '';
-      };
-    };
-
-    "sysbadge.kloenk.eu" = {
-      enableACME = true;
-      forceSSL = true;
-      root = pkgs.sysbadge_web;
-      locations."/".extraConfig = ''
-        ${commonHeaders}
-        add_header Content-Security-Policy "default-src 'self' data: api.pluralkit.me; script-src 'self' 'unsafe-inline'; object-src 'none'; frame-ancestors 'none'; style-src 'self' 'unsafe-inline'";
-      '';
-    };
+    # "mx-redir.kloenk.dev" = {
+    #   enableACME = true;
+    #   forceSSL = true;
+    #   root = pkgs.matrix-to;
+    #   locations."= /.well-known/apple-app-site-association" = {
+    #     root = pkgs.writeTextDir ".well-known/apple-app-site-association"
+    #       "${builtins.toJSON apple_assoc}";
+    #     extraConfig = ''
+    #       ${commonHeaders}
+    #       default_type application/json;
+    #       add_header Access-Control-Allow-Origin "*";
+    #       add_header Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS";
+    #       add_header Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept, Authorization";
+    #     '';
+    #   };
+    # };
 
     "p3tr1ch0rr.de" = {
       enableACME = true;
