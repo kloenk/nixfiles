@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./nix.nix ./ssh.nix ];
+  imports = [ ./nix.nix ./ssh.nix ./git.nix ];
 
   time.timeZone = "Europe/Berlin";
 

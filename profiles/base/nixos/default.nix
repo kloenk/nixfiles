@@ -9,7 +9,6 @@
 
     # dont work under darwin currently
     ../vim.nix
-    ../git.nix
     ../zsh
 
     ../../users/root

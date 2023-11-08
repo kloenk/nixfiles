@@ -343,7 +343,10 @@
         nushell = import ./modules/nushell;
       };
 
-      darwinModules = { epmd = import ./modules/darwin/epmd; };
+      darwinModules = {
+        epmd = import ./modules/darwin/epmd;
+        git = import ./modules/darwin/git.nix;
+      };
 
       darwinConfigurations = (nixpkgs.lib.mapAttrs (name: host:
         (darwin.lib.darwinSystem {
@@ -355,7 +358,9 @@
             (import (./configuration + "/darwin/${name}/darwin.nix"))
             self.nixosModules.nushell
             sops-nix.darwinModules.sops
+
             self.darwinModules.epmd
+            self.darwinModules.git
           ];
           specialArgs.inputs = inputs;
           specialArgs.self = self;
