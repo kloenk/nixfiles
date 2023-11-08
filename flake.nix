@@ -236,6 +236,7 @@
             #self.nixosModules.firefox
             self.nixosModules.wordpress
             self.nixosModules.transient
+            self.nixosModules.helix
 
             vika.nixosModules.colorfulMotd
             vika.nixosModules.secureSSHClient
@@ -341,11 +342,13 @@
         wordpress = import ./modules/wordpress.nix;
         matrix-sliding-sync = import ./modules/matrix-sliding-sync;
         nushell = import ./modules/nushell;
+        helix = import ./modules/helix;
       };
 
       darwinModules = {
         epmd = import ./modules/darwin/epmd;
         git = import ./modules/darwin/git.nix;
+        helix = import ./modules/helix/darwin.nix;
       };
 
       darwinConfigurations = (nixpkgs.lib.mapAttrs (name: host:
@@ -361,6 +364,7 @@
 
             self.darwinModules.epmd
             self.darwinModules.git
+            self.darwinModules.helix
           ];
           specialArgs.inputs = inputs;
           specialArgs.self = self;
