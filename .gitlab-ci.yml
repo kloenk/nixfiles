@@ -1,0 +1,8 @@
+check:
+  stage: lint
+  needs: []
+  tags:
+    - nix
+  script:
+    - nix flake check -L
+
