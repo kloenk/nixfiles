@@ -7,3 +7,4 @@ result*
 .DS_Store
 tmp
 .pre-commit-config.yaml
+.direnv/

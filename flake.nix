@@ -107,14 +107,18 @@
     inputs.nixpkgs.follows = "/nixpkgs";
   };
 
-  inputs.devenv.url = "github:cachix/devenv";
+  inputs.pre-commit = {
+    url = "github:cachix/pre-commit-hooks.nix";
+    inputs.nixpkgs.follows = "/nixpkgs";
+    inputs.nixpkgs-stable.follows = "/nixpkgs";
+  };
 
   inputs.nix-minecraft.url = "github:Infinidoge/nix-minecraft";
   inputs.nix-minecraft.inputs.nixpkgs.follows = "/nixpkgs";
 
   outputs = inputs@{ self, nixpkgs, nix, moodlepkgs, mail-server, kloenk-www
     , dns, darwin, sops-nix, vika, colmena, jlly, fleet_bot, p3tr, sysbadge
-    , oxalica, disko, devenv, ... }:
+    , oxalica, disko, ... }:
     let
       overlayCombined = system: [
         #nix.overlays.default
@@ -373,28 +377,20 @@
       devShells = forAllSystems (system:
         let pkgs = nixpkgsFor.${system};
         in {
-          # devenv = devenv.lib.mkShell {
-          #   inherit inputs pkgs;
-          #   modules = [
-          #     ({ pkgs, ... }: { packages = [ pkgs.colmena ]; })
-          #     {
-          #       languages.nix.enable = true;
-
-          #       pre-commit.hooks.actionlint.enable = true;
-          #       pre-commit.hooks.nixfmt.enable = true;
-          #     }
-          #   ];
-          # };
           kernel = pkgs.callPackage ./dev/kernel.nix { };
-          # default = self.devShells.${system}.devenv;
+          default = pkgs.mkShell {
+            inherit (self.checks.${system}.pre-commit) shellHook;
+          };
         });
 
       formatter = forAllSystems (system: nixpkgsFor.${system}.nixfmt);
 
-      checks = forAllSystems (system:
-        {
-          #devenv_ci = self.devShells.${system}.devenv.ci;
-        });
+      checks = forAllSystems (system: {
+        pre-commit = inputs.pre-commit.lib.${system}.run {
+          src = self;
+          hooks = { nixfmt.enable = true; };
+        };
+      });
     };
   nixConfig = {
     extra-substituters = [ "https://kloenk.cachix.org" ];

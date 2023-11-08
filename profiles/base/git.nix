@@ -10,6 +10,7 @@ let
     "target/"
     "result"
     "result-*"
+    ".direnv/"
   ];
   ignoreFile = pkgs.writeText "gitignore" (lib.concatStringsSep "\n" ignore);
 in {
