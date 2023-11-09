@@ -5,6 +5,8 @@
     (modulesPath + "/installer/cd-dvd/installation-cd-minimal.nix")
 
     ./bcachefs.nix
+    ./hetzner_vm.nix
+
     ./base/nixos
   ];
 
