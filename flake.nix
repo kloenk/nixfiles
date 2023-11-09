@@ -136,12 +136,16 @@
         sysbadge.overlays.sysbadge
         oxalica.overlays.default
         inputs.bcachefs-tools.overlays.default
+        (final: prev: { bcachefs-tools = final.bcachefs; })
       ];
 
       systems =
         [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
 
-      forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f system);
+      forSomeSystems = systems: f:
+        nixpkgs.lib.genAttrs systems (system: f system);
+      forAllSystems = f: forSomeSystems systems f;
+      #forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f system);
 
       # Memoize nixpkgs for different platforms for efficiency.
       nixpkgsFor = forAllSystems (system:
@@ -183,17 +187,23 @@
                 (overlayCombined final.stdenv.targetPlatform.system);
             }
             sops-nix.nixosModules.sops
+            colmena.nixosModules.deploymentOptions
+
             self.nixosModules.nftables
+            self.nixosModules.helix
 
             vika.nixosModules.colorfulMotd
           ];
+          specialArgs.inputs = inputs;
+          specialArgs.self = self;
         }).config.system.build.isoImage;
       };
 
       legacyPackages = forAllSystems (system: nixpkgsFor.${system});
 
-      packages = forAllSystems
-        (system: { inherit (self.legacyPackages.${system}) iso; });
+      packages = (forAllSystems (system: { }))
+        // (forSomeSystems [ "x86_64-linux" "aarch64-linux" ]
+          (system: { inherit (nixpkgsFor.${system}) iso; }));
 
       nixosConfigurations =
         let hive = inputs.colmena.lib.makeHive self.outputs.colmena;

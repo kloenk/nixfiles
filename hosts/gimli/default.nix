@@ -25,6 +25,9 @@
 
   nix.gc.automatic = true;
 
+  fileSystems."/".device =
+    lib.mkForce "/dev/disk/by-partuuid/b9c887ad-75f8-4d6f-8cf6-4ee63c07a203";
+
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you

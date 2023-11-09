@@ -29,7 +29,7 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-label/NIXOS";
+    device = "/dev/disk/by-partuuid/2af244c2-ed06-4129-a137-c15a7fb8fac8";
     fsType = "bcachefs";
   };
 

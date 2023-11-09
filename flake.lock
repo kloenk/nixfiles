@@ -10,11 +10,11 @@
       },
       "locked": {
         "host": "cyberchaos.dev",
-        "lastModified": 1699097530,
-        "narHash": "sha256-7BT+QGrbGOHN04Z6UhxIdCWW5gicE0LSndsDamGgNKI=",
+        "lastModified": 1699269791,
+        "narHash": "sha256-KTVennN98po4w+RNUNDCKd9bgUSnlvqim7nqmmRHsHc=",
         "owner": "kloenk",
         "repo": "bcachefs-tools",
-        "rev": "66635fcb23e22fcb63999265a5b4eafcdef0a5b9",
+        "rev": "9359cc02c87078e9757af2f78fe3a8b4cad074d9",
         "type": "gitlab"
       },
       "original": {
