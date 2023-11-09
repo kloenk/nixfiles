@@ -1,11 +1,13 @@
-{ modulesPath, ... }:
+{ modulesPath, lib, ... }:
 
 {
   imports = [
     (modulesPath + "/installer/cd-dvd/installation-cd-minimal.nix")
 
-    ./common
+    ./bcachefs.nix
+    ./base/nixos
   ];
 
-  boot.supportedFilesystems = [ "bcachefs" ];
+  boot.initrd.supportedFilesystems = lib.mkForce [ "vfat" "bcachefs" ];
+  boot.supportedFilesystems = lib.mkForce [ "bcachefs" "cifs" "vfat" "xfs" ];
 }

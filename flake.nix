@@ -192,7 +192,8 @@
 
       legacyPackages = forAllSystems (system: nixpkgsFor.${system});
 
-      packages = forAllSystems (system: { });
+      packages = forAllSystems
+        (system: { inherit (self.legacyPackages.${system}) iso; });
 
       nixosConfigurations =
         let hive = inputs.colmena.lib.makeHive self.outputs.colmena;
