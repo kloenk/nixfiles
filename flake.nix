@@ -136,6 +136,7 @@
         sysbadge.overlays.sysbadge
         oxalica.overlays.default
         inputs.bcachefs-tools.overlays.default
+        (final: prev: { bcachefs-tools = final.bcachefs; })
       ];
 
       systems =
