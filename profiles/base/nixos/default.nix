@@ -46,7 +46,7 @@
   # Services
   services.nginx.enable = lib.mkDefault true;
 
-  services.journald.extraConfig = "SystemMaxUse=2G";
+  services.journald.extraConfig = lib.mkDefault "SystemMaxUse=2G";
 
   ## Monitoring
   services.telegraf.extraConfig.inputs = {

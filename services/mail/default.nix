@@ -28,6 +28,11 @@
     ]; # TODO: iluvatar.kloenk.dev?
     #maximal_queue_lifetime = "10d";
   };
+  services.dovecot2.extraConfig = ''
+    service imap {
+      vsz_limit = 1024MB
+    }
+  '';
 
   mailserver = {
     enable = true;
