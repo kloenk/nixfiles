@@ -28,11 +28,6 @@
     ]; # TODO: iluvatar.kloenk.dev?
     #maximal_queue_lifetime = "10d";
   };
-  services.dovecot2.extraConfig = ''
-    service imap {
-      vsz_limit = 1024MB
-    }
-  '';
 
   mailserver = {
     enable = true;
@@ -257,6 +252,10 @@
       imapc_features = $imapc_features fetch-headers
       # Read multiple mails in parallel, improves performance
       mail_prefetch_count = 20
+
+      service imap {
+        vsz_limit = 1024MB
+      }
     '';
     modules = [ pkgs.dovecot_pigeonhole ];
     protocols = [ "sieve" ];
