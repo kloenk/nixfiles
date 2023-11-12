@@ -3,7 +3,6 @@
 {
   networking.firewall.allowedUDPPorts = [
     51820 # wg0
-    51830 # wg2
   ];
 
   # NATING
@@ -47,24 +46,10 @@
          }
       */
 
-      { # bombadil
-        wireguardPeerConfig = {
-          AllowedIPs = [ "192.168.242.52/32" ];
-          PublicKey = "zXEZM2MwTNHENXA5aSL5h0mVWvVWxTH3TlKmYoIxzCk=";
-        };
-      }
-
       { # thrain
         wireguardPeerConfig = {
           AllowedIPs = [ "192.168.242.101/32" "192.168.178.0/24" ];
           PublicKey = "RiRB/fiZ/x88f78kRQasSwWYBuBjc5DxW2OFaa67zjg=";
-          PersistentKeepalive = 21;
-        };
-      }
-      { # barahir
-        wireguardPeerConfig = {
-          AllowedIPs = [ "192.168.242.102/32" ];
-          PublicKey = "4SUbImacuAjRwiK/G3CTmczirJQCI20EdJvPwJfCQxQ=";
           PersistentKeepalive = 21;
         };
       }
@@ -108,31 +93,6 @@
   };
 
   networking.hosts = { };
-
-  systemd.network.netdevs."30-wg2" = {
-    netdevConfig = {
-      Kind = "wireguard";
-      Name = "wg2";
-    };
-    wireguardConfig = {
-      FirewallMark = 51820;
-      ListenPort = 51830;
-      PrivateKeyFile = config.sops.secrets."wireguard/wg2".path;
-    };
-    wireguardPeers = [{
-      wireguardPeerConfig = {
-        AllowedIPs = [ "172.16.16.3/32" ];
-        PublicKey = "1uKmuo0q9GYOAPmYi3e20AHPech6XlpRTyrdsqGvkgs=";
-        PersistentKeepalive = 21;
-      };
-    }];
-  };
-  systemd.network.networks."30-wg2" = {
-    name = "wg2";
-    linkConfig.RequiredForOnline = "no";
-    addresses = [{ addressConfig.Address = "172.16.16.1/24"; }];
-    routes = [{ routeConfig.Destination = "172.16.16.0/24"; }];
-  };
 
   systemd.services.buw0 = {
     after = [ "network.target" ];
@@ -189,7 +149,6 @@
 
   users.users.systemd-network.extraGroups = [ "keys" ];
   sops.secrets."wireguard/wg0".owner = "systemd-network";
-  sops.secrets."wireguard/wg2".owner = "systemd-network";
   sops.secrets."buw/vpn/pass".owner = "root";
   sops.secrets."buw/vpn/config".owner = "root";
 }

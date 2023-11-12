@@ -35,7 +35,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.eu.";
       adminEmail = "hostmaster.kloenk.de.";
-      serial = 2021010148;
+      serial = 2021010149;
       refresh = 600;
       expire = 604800;
       minimum = 600;
@@ -53,12 +53,12 @@ let
     CAA = letsEncrypt config.security.acme.email;
 
     subdomains = rec {
-      iluvatar.CNAME = [ "kloenk.eu." ];
+      varda.CNAME = [ "kloenk.eu." ];
 
       gimli = hostTTL 1200 "49.12.72.200" "2a01:4f8:c012:b874::";
       ns1 = gimli;
 
-      uptime = iluvatar;
+      uptime = varda;
 
       _dmarc.TXT = dmarc;
 
@@ -66,13 +66,13 @@ let
       drachensegler.TXT = spfKloenk;
       drachensegler.subdomains._dmarc.TXT = dmarc;
 
-      social = iluvatar;
+      social = varda;
 
-      atuin = iluvatar;
+      atuin = varda;
 
-      grafana = iluvatar;
-      influx = iluvatar;
-      sysbadge = iluvatar;
+      grafana = varda;
+      influx = varda;
+      sysbadge = varda;
 
       matrix = gimli // { subdomains.api = gimli; };
       mail = gimli;

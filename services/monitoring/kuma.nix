@@ -1,6 +1,12 @@
 { config, pkgs, ... }:
 
 {
+  fileSystems."/var/lib/uptime-kuma" = {
+    device = "/persist/data/uptime-kuma";
+    fsType = "none";
+    options = [ "bind" ];
+  };
+
   services.uptime-kuma = {
     enable = true;
     settings = {

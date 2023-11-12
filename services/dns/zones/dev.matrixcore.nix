@@ -35,7 +35,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.matrixcore.dev.";
       adminEmail = "hostmaster.kloenk.dev."; # TODO: change mail
-      serial = 2021010130;
+      serial = 2021010131;
       refresh = 600;
       expire = 604800;
       minimum = 600;
@@ -65,22 +65,22 @@ let
     CAA = letsEncrypt config.security.acme.email;
 
     subdomains = rec {
-      iluvatar.CNAME = [ "iluvatar.kloenk.dev." ];
-      ns1 = iluvatar;
+      varda.CNAME = [ "varda.kloenk.dev." ];
+      ns1 = varda;
 
-      #cgit = iluvatar;
+      #cgit = varda;
 
-      #git.CNAME = iluvatar.CNAME;
+      #git.CNAME = varda.CNAME;
       git.MX = mxKloenk;
       #git.TXT = spfKloenk;
       git.subdomains._dmarc.TXT = dmarc;
 
       _dmarc.TXT = dmarc;
 
-      matrix-push.subdomains.dev = iluvatar;
-      matrix-push.CNAME = iluvatar.CNAME;
+      matrix-push.subdomains.dev = varda;
+      matrix-push.CNAME = varda.CNAME;
 
-      mx-redir.CNAME = iluvatar.CNAME;
+      mx-redir.CNAME = varda.CNAME;
 
       blog.CNAME = [ "matrixcore.github.io." ];
       _github-challenge-MatrixCore-organization.TXT = [ (txt "c56620a5d1") ];
