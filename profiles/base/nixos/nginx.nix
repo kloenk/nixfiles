@@ -54,6 +54,15 @@
       locations."/public/".extraConfig = "autoindex on;";
     };
 
+  services.nginx.virtualHosts."${config.networking.hostName}.net.kloenk.de" = {
+    enableACME = true;
+    forceSSL = true;
+    locations."/public/".alias = lib.mkDefault "/persist/data/public/";
+    locations."/public/".extraConfig = "autoindex on;";
+  };
+  security.acme.certs."${config.networking.hostName}.net.kloenk.de".server =
+    "https://acme.net.kloenk.de:8443/acme/acme/directory";
+
   # Montioring
   services.telegraf.extraConfig.inputs = {
     nginx = { urls = [ "http://localhost/nginx_status" ]; };

@@ -118,6 +118,7 @@
     addresses = [
       { addressConfig.Address = "192.168.242.1/24"; }
       { addressConfig.Address = "2a01:4f8:c013:1a4b:ecba::1/80"; }
+      { addressConfig.Address = "2a01:4f8:c013:1a4b:ecba:1337::1/80"; }
     ];
     routes = [
       { routeConfig.Destination = "192.168.242.0/24"; }
