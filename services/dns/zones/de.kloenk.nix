@@ -36,7 +36,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.de.";
       adminEmail = "hostmaster@kloenk.de";
-      serial = 2020122615;
+      serial = 2020122616;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
@@ -79,6 +79,13 @@ let
       ad.subdomains._dmarc.TXT = dmarc;
 
       bitwarden = varda;
+
+      net.subdomains = {
+        varda = hostTTL 600 "192.168.242.1" "2a01:4f8:c013:1a4b:ecba::1";
+        gimli = hostTTL 600 "192.168.242.2" "2a01:4f8:c013:1a4b:ecba::2";
+        thrain = hostTTL 600 "192.168.242.101" "2a01:4f8:c013:1a4b:ecba::101";
+        frodo = hostTTL 600 "192.168.242.201" "2a01:4f8:c013:1a4b:ecba::201";
+      };
 
       bbb-wass.CNAME = [ "bbb.wass-er.com." ];
       knuddel-usee.CNAME = [ "stream.unterbachersee.de." ];

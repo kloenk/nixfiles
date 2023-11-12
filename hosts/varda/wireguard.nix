@@ -46,9 +46,21 @@
          }
       */
 
+      { # gimli
+        wireguardPeerConfig = {
+          AllowedIPs = [ "192.168.242.2/32" "2a01:4f8:c013:1a4b:ecba::2/128" ];
+          PublicKey = "vVIbHzXr99y1dm80LbSViIUmlym/yt3+Ra48IcZQ+AY=";
+          Endpoint = "gimli.kloenk.de:51820";
+        };
+      }
+
       { # thrain
         wireguardPeerConfig = {
-          AllowedIPs = [ "192.168.242.101/32" "192.168.178.0/24" ];
+          AllowedIPs = [
+            "192.168.242.101/32"
+            "192.168.178.0/24"
+            "2a01:4f8:c013:1a4b:ecba::101/128"
+          ];
           PublicKey = "RiRB/fiZ/x88f78kRQasSwWYBuBjc5DxW2OFaa67zjg=";
           PersistentKeepalive = 21;
         };
@@ -56,28 +68,32 @@
 
       { # frodo
         wireguardPeerConfig = {
-          AllowedIPs = [ "192.168.242.201/32" ];
+          AllowedIPs =
+            [ "192.168.242.201/32" "2a01:4f8:c013:1a4b:ecba::201/128" ];
           PublicKey = "SpO+SIv/XzgKCuWH3SN1qNknZ+X4HWf48SQNl6Gw+SM=";
           PersistentKeepalive = 21;
         };
       }
       { # windoof
         wireguardPeerConfig = {
-          AllowedIPs = [ "192.168.242.202/32" ];
+          AllowedIPs =
+            [ "192.168.242.202/32" "2a01:4f8:c013:1a4b:ecba::202/128" ];
           PublicKey = "aSkX5/y831rSZib/l0QhC1mmmaggNjdMNfQ0Qrz8rxA=";
           PersistentKeepalive = 21;
         };
       }
       { # p3tr1ch0rr
         wireguardPeerConfig = {
-          AllowedIPs = [ "192.168.242.203/32" ];
+          AllowedIPs =
+            [ "192.168.242.203/32" "2a01:4f8:c013:1a4b:ecba::203/128" ];
           PublicKey = "HkPEHcCRrj7hMKaqCD8XSXNwFKtij8vuShgv1vb8CTg=";
           PersistentKeepalive = 21;
         };
       }
       { # sting
         wireguardPeerConfig = {
-          AllowedIPs = [ "192.168.242.210/32" ];
+          AllowedIPs =
+            [ "192.168.242.210/32" "2a01:4f8:c013:1a4b:ecba::210/128" ];
           PublicKey = "iSYB99dCUvYhHAz5HaPSzhXYPyyntOtiucrDUBFVvBE=";
           PersistentKeepalive = 21;
         };
@@ -88,8 +104,14 @@
   systemd.network.networks."30-wg0" = {
     name = "wg0";
     linkConfig = { RequiredForOnline = "no"; };
-    addresses = [{ addressConfig.Address = "192.168.242.1/24"; }];
-    routes = [{ routeConfig.Destination = "192.168.242.0/24"; }];
+    addresses = [
+      { addressConfig.Address = "192.168.242.1/24"; }
+      { addressConfig.Address = "2a01:4f8:c013:1a4b:ecba::1/80"; }
+    ];
+    routes = [
+      { routeConfig.Destination = "192.168.242.0/24"; }
+      { routeConfig.Destination = "2a01:4f8:c013:1a4b:ecba::/80"; }
+    ];
   };
 
   networking.hosts = { };

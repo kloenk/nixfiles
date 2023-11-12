@@ -145,7 +145,7 @@
           AllowedIPs = [ "0.0.0.0/0" "::/0" ];
           PublicKey = "UoIRXpG/EHmDNDhzFPxZS18YBlj9vBQRRQZMCFhonDA=";
           PersistentKeepalive = 21;
-          Endpoint = "iluvatar.kloenk.dev:51820";
+          Endpoint = "varda.kloenk.dev:51820";
         };
       }];
     };
