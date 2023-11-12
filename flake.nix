@@ -219,6 +219,10 @@
             system = "aarch64-linux";
             overlays = (overlayCombined "aarch64-linux");
           };
+          nodeNixpkgs.varda = import nixpkgs {
+            system = "aarch64-linux";
+            overlays = (overlayCombined "aarch64-linux");
+          };
           nodeNixpkgs.gimli = import nixpkgs {
             system = "aarch64-linux";
             overlays = (overlayCombined "aarch64-linux");
@@ -273,15 +277,14 @@
         };
 
         # hetzner
-        iluvatar = { pkgs, nodes, ... }: {
+        varda = { pkgs, node, ... }: {
           deployment = {
-            targetHost = "iluvatar.kloenk.dev";
+            targetHost = "varda.kloenk.de";
             tags = [ "hetzner" "falkenstein" "remote" ];
           };
 
           imports = [
-            ./hosts/iluvatar
-            mail-server.nixosModules.mailserver
+            ./hosts/varda
             (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix"))
           ];
         };
