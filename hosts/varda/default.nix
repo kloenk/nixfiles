@@ -21,7 +21,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.initrd.systemd.enable = true;
 
-  networking.hostName = "gimli";
+  networking.hostName = "varda";
   networking.domain = "kloenk.de";
 
   nix.gc.automatic = true;
