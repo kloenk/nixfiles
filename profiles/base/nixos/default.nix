@@ -58,12 +58,12 @@
   systemd.services.telegraf.serviceConfig.AmbientCapabilities =
     [ "CAP_NET_ADMIN" ];
 
-  programs.gnupg = {
-    agent = {
-      enable = true;
-      enableSSHSupport = true;
-    };
-  };
+  # programs.gnupg = {
+  #   agent = {
+  #     enable = true;
+  #     enableSSHSupport = true;
+  #   };
+  # };
   # TODO: certificatFiles
 
   # Users
