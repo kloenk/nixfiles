@@ -58,29 +58,29 @@ let
     CAA = letsEncrypt config.security.acme.email;
 
     subdomains = rec {
-      iluvatar.CNAME = [ "kloenk.dev." ];
+      varda.CNAME = [ "kloenk.dev." ];
 
       #manwe = hostTTL 1200 "195.39.221.187" null;
       #gimli.CNAME = [ "gimli.wolfsburg.petabyte.dev." ];
-      gimli = iluvatar; # hostTTL 1200 "195.39.247.182" "2a0f:4ac0:0:1::cb2";
+      gimli = hostTTL 1200 "49.12.72.200" "2a01:4f8:c012:b874::";
 
       usee-nschl = hostTTL 1200 "5.9.118.93" "2a01:4f8:162:6343::3";
 
-      ns1 = iluvatar;
+      ns1 = gimli;
 
-      #cgit = iluvatar;
-      #cache = iluvatar;
+      #cgit = varda;
+      #cache = varda;
 
       # SourceHut
-      /* todo = iluvatar;
-         paste = iluvatar;
-         meta = iluvatar;
-         man = iluvatar;
-         lists = iluvatar;
-         hub = iluvatar;
-         hg = iluvatar;
-         dispatch = iluvatar;
-         builds = iluvatar;
+      /* todo = varda;
+         paste = varda;
+         meta = varda;
+         man = varda;
+         lists = varda;
+         hub = varda;
+         hg = varda;
+         dispatch = varda;
+         builds = varda;
       */
 
       _dmarc.TXT = dmarc;
@@ -89,12 +89,12 @@ let
       drachensegler.TXT = spfKloenk;
       drachensegler.subdomains._dmarc.TXT = dmarc;
 
-      bitwarden = iluvatar;
+      bitwarden = varda;
 
-      social = iluvatar;
+      social = varda;
 
-      grafana = iluvatar;
-      influx = iluvatar;
+      grafana = varda;
+      influx = varda;
 
       matrix = gimli // { subdomains.api = gimli; };
       mail = gimli;
@@ -107,10 +107,9 @@ let
 
       bbb = hostTTL 600 "195.39.221.27" "2001:678:bbc::27";
 
-      matrix-push.subdomains.dev = iluvatar;
-      matrix-push.CNAME = iluvatar.CNAME;
+      matrix-push.subdomains.dev = varda;
+      matrix-push.CNAME = varda.CNAME;
 
-      mx-redir.CNAME = iluvatar.CNAME;
       _github-pages-challenge-Kloenk.TXT = [ "93721bf4d3b9ab1d6af40409424d90" ];
 
       _domainkey.subdomains.mail.TXT = [

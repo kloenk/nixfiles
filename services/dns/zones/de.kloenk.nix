@@ -36,7 +36,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.de.";
       adminEmail = "hostmaster@kloenk.de";
-      serial = 2020122614;
+      serial = 2020122615;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
@@ -60,21 +60,13 @@ let
     CAA = letsEncrypt config.security.acme.email;
 
     subdomains = rec {
-      /* iluvatar = hostTTL 1200 "195.39.247.6" "2a0f:4ac0::6";
-         manwe = hostTTL 1200 "195.39.221.187" null;
-         sauron = hostTTL 1200 "195.39.221.54" "2a0f:4ac4:42:0:f199::1";
-         melkor = hostTTL 1200 "195.39.221.51" null;
-         bombadil = hostTTL 1200 "195.39.221.52" null;
-         aule = hostTTL 1200 "195.39.221.50" null;
-      */
-
-      iluvatar.CNAME = [ "kloenk.de." ];
+      varda.CNAME = [ "kloenk.de." ];
 
       gimli = hostTTL 1200 "49.12.72.200" "2a01:4f8:c012:b874::";
       mail = gimli;
       ns1 = gimli;
 
-      auth = iluvatar;
+      auth = varda;
 
       _dmarc.TXT = dmarc;
 
@@ -86,7 +78,7 @@ let
       ad.TXT = spfKloenk;
       ad.subdomains._dmarc.TXT = dmarc;
 
-      bitwarden = iluvatar;
+      bitwarden = varda;
 
       bbb-wass.CNAME = [ "bbb.wass-er.com." ];
       knuddel-usee.CNAME = [ "stream.unterbachersee.de." ];

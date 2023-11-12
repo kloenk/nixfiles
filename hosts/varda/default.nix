@@ -4,6 +4,7 @@
   imports = [
     ./disko.nix
     ./links.nix
+    ./wireguard.nix
 
     ../../profiles/bcachefs.nix
     ../../profiles/hetzner_vm.nix
