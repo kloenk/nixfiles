@@ -15,6 +15,8 @@
     ./disko.nix
     #./kde.nix
 
+    ../../profiles/bcachefs.nix
+
     ../../profiles/telegraf.nix
     # ../../profiles/syncthing.nix
     #../../common/nushell.nix
@@ -70,6 +72,14 @@
   services.telegraf.extraConfig.inputs = { sensors = { }; };
 
   services.openssh.settings.X11Forwarding = true;
+
+  boot.kernelPatches = [{
+    name = "bcachefs-lock-time";
+    patch = null;
+    extraConfig = ''
+      BCACHEFS_LOCK_TIME_STATS y
+    '';
+  }];
 
   system.stateVersion = "23.05";
 }

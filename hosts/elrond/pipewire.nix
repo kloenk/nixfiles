@@ -6,12 +6,12 @@
     mpc-cli
 
     pavucontrol
-    libjack2
-    jack2
-    qjackctl
-    jack2Full
-    jack_capture
-    carla
+    # libjack2
+    # jack2
+    # qjackctl
+    # jack2Full
+    # jack_capture
+    # carla
   ];
   services.upower.enable = true;
   hardware.pulseaudio.enable = lib.mkForce false;

@@ -1,18 +1,21 @@
 { pkgs, lib, ... }: {
   boot.initrd.supportedFilesystems = [ "vfat" "bcachefs" ];
   boot.supportedFilesystems = [ "bcachefs" "cifs" "vfat" "xfs" ];
+
   # working:
-  boot.kernelPackages = lib.mkForce (pkgs.linuxPackagesFor
-    (pkgs.linux_6_6.override {
-      argsOverride = rec {
-        src = pkgs.fetchFromGitHub {
-          owner = "koverstreet";
-          repo = "bcachefs";
-          rev = "b9bd69421f7364ca4ff11c827fd0e171a8b826ea";
-          hash = "sha256-XQtYCo4GXXf5j41RI3djtmylm9sBsrRqdpiU4M7s52I=";
-        };
-        version = "6.6.0";
-        modDirVersion = "6.6.0";
+  boot.kernelPackages = lib.mkForce pkgs.linuxKernel.packages.linux_6_6;
+  boot.kernelPatches =
+    let currentCommit = "b9bd69421f7364ca4ff11c827fd0e171a8b826ea";
+    in [{
+      name = "bcachefs-${currentCommit}";
+      patch = pkgs.fetchpatch {
+        name = "bcachefs-${currentCommit}.diff";
+        url =
+          "https://evilpiepirate.org/git/bcachefs.git/rawdiff/?id=${currentCommit}&id2=v6.6";
+        sha256 = "sha256-+Gp/1kTBgRx5a01l9xtaDbiLuOP58uZ7rx27WyYcMT4=";
       };
-    }));
+      # extra config is inherited through boot.supportedFilesystems
+    }];
+
+  services.fstrim.enable = true;
 }
