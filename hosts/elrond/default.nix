@@ -15,6 +15,7 @@
     ./disko.nix
     #./kde.nix
 
+    ../../profiles/desktop
     ../../profiles/desktop/sway
 
     ../../profiles/bcachefs.nix

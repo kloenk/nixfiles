@@ -1,11 +1,6 @@
 { config, pkgs, lib, ... }:
 
 {
-  programs.firefox = {
-    enable = true;
-    languagePacks = [ "en-GB" "de" ];
-  };
-
   users.users.kloenk.packages = with pkgs; [ obsidian ];
 
   systemd.tmpfiles.rules = let

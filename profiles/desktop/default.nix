@@ -1,5 +1,5 @@
 { config, lib, ... }:
 
 {
-  imports = [ ./applications.nix ];
+  imports = [ ./applications.nix ./alacritty.nix ./firefox.nix ];
 }

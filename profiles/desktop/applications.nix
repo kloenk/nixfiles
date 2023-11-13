@@ -19,7 +19,7 @@
     font-awesome
     meslo-lgs-nf
     inter
-    questrial-regular
+    #questrial-regular
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -110,15 +110,11 @@
         "application/pdf" = [ "org.gnome.Evince.desktop" ];
       };
     };
-    services.printing = {
-      enable = true;
-      drivers = [
-        pkgs.gutenprint
-        pkgs.cups-brother-hll2350dw
-        pkgs.cups-brother-ptouch
-      ];
-    };
-    programs.steam.enable = true;
-
   };
+
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.gutenprint ];
+  };
+  programs.steam.enable = true;
 }
