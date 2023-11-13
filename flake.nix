@@ -184,6 +184,7 @@
             }
             sops-nix.nixosModules.sops
             colmena.nixosModules.deploymentOptions
+            inputs.home-manager.nixosModules.home-manager
 
             self.nixosModules.nftables
             self.nixosModules.helix
@@ -239,7 +240,6 @@
             #home-manager.nixosModules.home-manager
             sops-nix.nixosModules.sops
             self.nixosModules.matrix-sliding-sync
-            self.nixosModules.nushell
             jlly.nixosModules.default
             fleet_bot.nixosModules.default
             p3tr.nixosModules.default
@@ -356,7 +356,6 @@
 
         wordpress = import ./modules/wordpress.nix;
         matrix-sliding-sync = import ./modules/matrix-sliding-sync;
-        nushell = import ./modules/nushell;
         helix = import ./modules/helix;
       };
 
@@ -374,7 +373,6 @@
             ./profiles/base/darwin
             #home-manager.nixosModules.home-manager
             (import (./darwin + "/${name}/darwin.nix"))
-            self.nixosModules.nushell
             sops-nix.darwinModules.sops
 
             self.darwinModules.epmd
