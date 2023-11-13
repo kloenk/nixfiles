@@ -1,7 +1,7 @@
 { lib, ... }:
 
 {
-  imports = [ ./kloenk.nix ];
+  imports = [ ./kloenk.nix ./hm.nix ];
 
   users.users.kloenk = {
     uid = lib.mkDefault 1000;

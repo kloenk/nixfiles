@@ -44,6 +44,11 @@
     inputs.nixpkgs.follows = "/nixpkgs";
   };
 
+  inputs.home-manager = {
+    url = "github:nix-community/home-manager";
+    inputs.nixpkgs.follows = "/nixpkgs";
+  };
+
   inputs.darwin = {
     type = "github";
     owner = "lnl7";
@@ -249,6 +254,8 @@
 
             vika.nixosModules.colorfulMotd
             vika.nixosModules.secureSSHClient
+
+            inputs.home-manager.nixosModules.default
           ];
           # disable home-manager manpage (breaks hydra see https://github.com/rycee/home-manager/issues/1262)
           #home-manager.users.kloenk.manual.manpages.enable = false;
@@ -318,7 +325,7 @@
 
           imports = [
             ./hosts/elrond
-            vika.nixosModules.gnome
+            # vika.nixosModules.gnome
             # vika.nixosModules.bgrtSplash
           ];
           users.users.kloenk.packages =

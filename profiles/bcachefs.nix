@@ -14,6 +14,10 @@
           "https://evilpiepirate.org/git/bcachefs.git/rawdiff/?id=${currentCommit}&id2=v6.6";
         sha256 = "sha256-+Gp/1kTBgRx5a01l9xtaDbiLuOP58uZ7rx27WyYcMT4=";
       };
+      extraConfig = ''
+        BCACHEFS_QUOTA y
+        BCACHEFS_POSIX_ACL y
+      '';
       # extra config is inherited through boot.supportedFilesystems
     }];
 
