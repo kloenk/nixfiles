@@ -44,11 +44,6 @@
     inputs.nixpkgs.follows = "/nixpkgs";
   };
 
-  inputs.flake-compat = {
-    url = "github:edolstra/flake-compat";
-    flake = false;
-  };
-
   inputs.darwin = {
     type = "github";
     owner = "lnl7";
@@ -113,9 +108,6 @@
     inputs.nixpkgs-stable.follows = "/nixpkgs";
   };
 
-  inputs.nix-minecraft.url = "github:Infinidoge/nix-minecraft";
-  inputs.nix-minecraft.inputs.nixpkgs.follows = "/nixpkgs";
-
   outputs = inputs@{ self, nixpkgs, nix, moodlepkgs, mail-server, kloenk-www
     , dns, darwin, sops-nix, vika, colmena, jlly, fleet_bot, p3tr, sysbadge
     , oxalica, disko, ... }:
@@ -128,7 +120,6 @@
         self.overlays.iso
         moodlepkgs.overlay
         kloenk-www.overlay
-        inputs.nix-minecraft.overlay
         colmena.overlay
         jlly.overlays.default
         fleet_bot.overlays.default
@@ -156,7 +147,7 @@
 
       darwinHosts = nixpkgs.lib.filterAttrs
         (name: host: if host ? darwin then host.darwin else false)
-        (import ./configuration/darwin { });
+        (import ./darwin { });
 
       # patche modules
       /* patchModule = system: {
@@ -242,7 +233,6 @@
             ./profiles/base/nixos
             #home-manager.nixosModules.home-manager
             sops-nix.nixosModules.sops
-            inputs.nix-minecraft.nixosModules.minecraft-servers
             self.nixosModules.matrix-sliding-sync
             self.nixosModules.nushell
             jlly.nixosModules.default
@@ -376,7 +366,7 @@
             { nixpkgs.overlays = (overlayCombined host.system); }
             ./profiles/base/darwin
             #home-manager.nixosModules.home-manager
-            (import (./configuration + "/darwin/${name}/darwin.nix"))
+            (import (./darwin + "/${name}/darwin.nix"))
             self.nixosModules.nushell
             sops-nix.darwinModules.sops
 
