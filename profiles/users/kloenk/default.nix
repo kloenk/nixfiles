@@ -4,6 +4,7 @@
   imports = [ ./kloenk.nix ./hm.nix ];
 
   users.users.kloenk = {
+    isNormalUser = true;
     uid = lib.mkDefault 1000;
     extraGroups = [ "wheel" "bluetooth" "libvirtd" ];
   };

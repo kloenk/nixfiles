@@ -2,7 +2,6 @@
 
 {
   users.users.kloenk = {
-    isNormalUser = true;
     shell = pkgs.zsh;
 
     openssh.authorizedKeys.keys = [

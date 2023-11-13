@@ -5,6 +5,7 @@
     #./postgres.nix
 
     #../../common/nushell.nix
+    ../../profiles/base/darwin
   ];
 
   environment.systemPackages = with pkgs;

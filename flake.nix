@@ -380,6 +380,8 @@
             self.darwinModules.epmd
             self.darwinModules.git
             self.darwinModules.helix
+
+            inputs.home-manager.darwinModules.home-manager
           ];
           specialArgs.inputs = inputs;
           specialArgs.self = self;

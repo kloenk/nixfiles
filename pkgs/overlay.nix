@@ -36,8 +36,8 @@ in {
     };
   });
 
-  helix = prev.helix.overrideAttrs
-    (oldAttrs: rec { patches = oldAttrs.patches ++ [ ./helix-etc.patch ]; });
+  # helix = prev.helix.overrideAttrs
+  #   (oldAttrs: rec { patches = oldAttrs.patches ++ [ ./helix-etc.patch ]; });
 
   pleroma = prev.pleroma.overrideAttrs (oldAttrs: rec {
     patches = [ ./pleroma-apple.patch ];
