@@ -103,7 +103,7 @@
   };
 
   inputs.bcachefs-tools = {
-    url = "gitlab:kloenk/bcachefs-tools/nix-flake?host=cyberchaos.dev";
+    url = "git+https://evilpiepirate.org/git/bcachefs-tools.git";
     inputs.nixpkgs.follows = "/nixpkgs";
   };
 
