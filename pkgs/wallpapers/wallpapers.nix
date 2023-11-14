@@ -74,18 +74,6 @@ let
 
 in {
 
-  cubes-pbb = fromUrl {
-    url =
-      "https://git.pbb.lc/petabyteboy/nixfiles/raw/branch/master/configuration/desktop/wallpapers/cubes.png";
-    sha256 = "sha256-x/2eGoFsuSq/y+LzYiKXETFjiNztR7J0RrjLbHm3MOk=";
-  };
-
-  sao-pbb = fromUrl {
-    url =
-      "https://git.pbb.lc/petabyteboy/nixfiles/raw/branch/master/configuration/desktop/wallpapers/sao.png";
-    sha256 = "sha256-+vhxAzIY+T52zZsfxGpA3cBwVSr0eEgCS2liRhRmayM=";
-  };
-
   bioshok_big_dady = fromUrl {
     url = "https://i.imgur.com/63nJZTP.jpg";
     sha256 = "sha256-2LucvG3c7qR++0YmQMCp1bzTW6Ta9ezUswOkndBmGlw=";
@@ -118,32 +106,32 @@ in {
 
   gon_kilua_hisuka = fromUrl {
     url = "https://i.imgur.com/x3h2XBF.jpg";
-    name = "gon_kilua_hisuka";
-    sha256 = "sha256-ms4im1lRdtni9bbqp/QmU3roK7GXQ/OsHdxBtFmqhKY=";
+    name = "gon_kilua_hisuka.jpg";
+    sha256 = "sha256-+s+lrqcWPfJeTcBPcEd3/lnCjMNOhcIQ3BxFDWMni+Y=";
   };
 
   gon_kilua_market = fromUrl {
     url = "https://i.imgur.com/9GOPUJy.jpg";
-    name = "gon_kilua_market";
-    sha256 = "sha256-NgSKab7i9OGmWuwUPXmlras6uRwJb2dTOI/sQOGThUQ=";
+    name = "gon_kilua_market.jpg";
+    sha256 = "sha256-k7ft+RBrs8d2qiQyq0ZZJ7pZMdfogh+QqUTlbxIpJCw=";
   };
 
   killua_flashes = fromUrl {
     url = "https://i.imgur.com/sRQOFQX.jpg";
-    name = "killua_flashes";
-    sha256 = "sha256-Pbs2e6HWTYO8dg8ibkSfeUzoaaVZLf3BQGYX7iTL4aQ=";
+    name = "killua_flashes.jpg";
+    sha256 = "sha256-vI8iS0iId+kr7goI0kvERiPXS1gF29kaxZbrwGV/7gM=";
   };
 
   spider = fromUrl {
     url = "https://images.alphacoders.com/306/306501.jpg";
-    name = "the_spider";
-    sha256 = "sha256-8vuXkNqTWbLNIQ64XVDuLWGIpiDQNB/fBsc7Q8Cdw5k=";
+    name = "the_spider.jpg";
+    sha256 = "sha256-byLxumW7gaRQT+kkZ/peeXtcfFzh1jF6IwNXalbz++c=";
   };
 
   spider_bar = fromUrl {
     url = "https://images.alphacoders.com/231/231253.jpg";
-    name = "spider_bar";
-    sha256 = "sha256-h/gT2tqy2Ywx5ahJggOP0V7WUYYbm0nbCCN2odklW3Y=";
+    name = "spider_bar.jpg";
+    sha256 = "sha256-Yqc1kP23567IE/JqQojjRVNgz+ozvWUT7XR0RvFAxRk=";
   };
 
   /* kurapika_chains = fromUrl {
@@ -155,14 +143,14 @@ in {
 
   hisuka_stars = fromUrl {
     url = "https://i.imgur.com/Tas7Ebq.png";
-    name = "hisuka_stars";
-    sha256 = "sha256-aZ1+3pZg6T2Q5nEmNwIviYsLOCDohTToHeNPMDaSCys=";
+    name = "hisuka_stars.png";
+    sha256 = "sha256-yFvv/EAdT0Azb20PndO49mT3fHvVNLeEG2lltvTc9hA=";
   };
 
   hisuka_black_cards = fromUrl {
     url = "https://i.imgur.com/lH6klTI.jpg";
-    name = "hisuka_black_cards";
-    sha256 = "sha256-kt5eDm+sU4fnFhVq9KWe5WaIqh5hRUpII/mmQo7G8Eo=";
+    name = "hisuka_black_cards.jpg";
+    sha256 = "sha256-Hqc3om/1B+9yReRXS+S1GPEHiQxxrDspJF3x85wVVK0=";
   };
 
   hisuka_gon = fromUrl {
@@ -173,21 +161,21 @@ in {
 
   hisuka_cards = fromUrl {
     url = "https://i.imgur.com/DBoNUgp.jpg";
-    name = "hisuka_cards";
-    sha256 = "sha256-lyRMtxxdJPmXzSIZYeFm1LrnAHlObnvQlMj581zIcq8=";
+    name = "hisuka_cards.jpg";
+    sha256 = "sha256-COnEXmdye0CqfygVnBABsb3b05Hw312zJtQpCx2eZcA=";
   };
 
   hunter_hisoka = fromUrl {
     url = "https://i.imgur.com/DcQc2bi.jpg";
-    name = "hunter_hisoka";
-    sha256 = "sha256-iyM/uOvML+H2iVnJHhkT/qfUgB2ZM0YE4Cg8ZnDHM5g=";
+    name = "hunter_hisoka.jpg";
+    sha256 = "sha256-PWHWIsyIWvU6Q0yNYbR2a2Aj0RBH7TdYjl++R3RLiHs=";
   };
 
   kilua_blood = fromUrl {
     url =
       "https://www3.picturepush.com/photo/a/11425511/1024/Anonymous/Hunter-x-Hunter---Killua.Zoldyck.full.837345.jpg";
-    name = "killua_blood";
-    sha256 = "sha256-C98DEVoeztkRhBTO6foKFibiTojkfzxk40AvUcSHCN4=";
+    name = "killua_blood.jpg";
+    sha256 = "sha256-PT6GKMAqJtzSSjE03qM1228JcHdO6vNU1kdBDXxhNMU=";
   };
 
   bioshock_cloud_city = fromUrl {
@@ -216,20 +204,6 @@ in {
     url =
       "https://i.pximg.net/img-original/img/2018/12/19/00/00/04/72175872_p0.jpg";
     sha256 = "sha256-KjQj9K9hU6iz6Nu9HmFz2g1taDnbit4tlo/fe4GRlNU=";
-  };
-
-  pixiv-cat = fromPixiv {
-    src = "https://www.pixiv.net/en/artworks/73205835";
-    url =
-      "https://i.pximg.net/img-master/img/2019/02/16/00/00/03/73205835_p0_master1200.jpg";
-    sha256 = "sha256-sRx5Ri+LO1jKQd+Db9VH7/NQEctMiyn9Ry5e1HE8oz4=";
-  };
-
-  pixiv-umbrella = fromPixiv {
-    src = "https://www.pixiv.net/en/artworks/73838366";
-    url =
-      "https://i.pximg.net/img-master/img/2019/03/24/00/00/01/73838366_p0_master1200.jpg";
-    sha256 = "sha256-iW1kNycqtjXifGLjKLSHlzMLXUn6118CKnR748Ku9Fs=";
   };
 
   pixiv_bioshock_anime = fromPixiv {
