@@ -1,6 +1,6 @@
 # set direnv
-$env.config = {
-  hooks: {
+$env.config = ($env | select config -i | upsert
+  hooks {
     pre_prompt: [{ ||
       if (which direnv | is-empty) {
         return
@@ -8,6 +8,5 @@ $env.config = {
 
       direnv export json | from json | default {} | load-env
     }]
-  }
-}
+  })
 

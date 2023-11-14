@@ -5,6 +5,8 @@
     #./postgres.nix
 
     #../../common/nushell.nix
+    ../../profiles/desktop/wezterm.nix
+
     ../../profiles/base/darwin
   ];
 
