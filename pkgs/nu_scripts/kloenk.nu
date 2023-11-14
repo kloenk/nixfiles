@@ -1,7 +1,6 @@
 mut nix = {}
 
-# config
-source config/direnv.nu
+# aliase
 use config/eza.nu *
 
 # commands

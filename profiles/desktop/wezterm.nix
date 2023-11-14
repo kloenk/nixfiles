@@ -45,7 +45,7 @@
           config = wezterm.config_builder()
         end
         config.font = wezterm.font("JetBrains Mono")
-        config.font_size = 11.0
+        config.font_size = 13.0
         config.color_scheme = "monokai"
         return config
       '';

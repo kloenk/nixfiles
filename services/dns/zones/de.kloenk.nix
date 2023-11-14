@@ -36,7 +36,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.de.";
       adminEmail = "hostmaster@kloenk.de";
-      serial = 2020122616;
+      serial = 2020122617;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
@@ -79,6 +79,10 @@ let
       ad.subdomains._dmarc.TXT = dmarc;
 
       bitwarden = varda;
+
+      # monitoring
+      influx = varda;
+      grafana = varda;
 
       net.subdomains = {
         varda = hostTTL 600 "192.168.242.1" "2a01:4f8:c013:1a4b:ecba::1";
