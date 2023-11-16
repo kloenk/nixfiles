@@ -36,7 +36,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.de.";
       adminEmail = "hostmaster@kloenk.de";
-      serial = 2020122617;
+      serial = 2020122618;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
@@ -79,6 +79,8 @@ let
       ad.subdomains._dmarc.TXT = dmarc;
 
       bitwarden = varda;
+
+      sc-social.CNAME = [ "starcitizen.social." ];
 
       # monitoring
       influx = varda;

@@ -4,6 +4,7 @@ keys:
   - &server_thrain age1ejyvncc2g7slp30fx72cyawg5z5030mzfq6zy8fk3tm2n72pqghsfmrvp6
   - &server_gimli age1we86kfnan67mq7eks89ndz85w299j35un400jvlrhk3ktjyhkgks69lz62
   - &server_varda age1vfrdpq9p6qm8yf4ddrzhy6mutzrzgauv6vp9gjq99t5kmcd8lp4sf9gyum
+  - &server_sc-social age1np3d3s6nj80l7dvakj7welwyl26upgmwv8ykvv23q452fm6kk9fqcfk880
   - &server_moodle age1xq2s075hy7fah8la38jpa642f2j4zvhv7qa3c4gprhcyhkx8rsastndc4q
   - &server_elrond age1tvgutz4vzmqf3xqnckt9karpd467nj6vft80al8nfvpu02ck43sqneqwht
   - &darwin_frodo age1wwptqz272d4la84kvshrw3ds2mpqffhyjhr2zm747sfc4ztdefkq6fspyz
@@ -23,6 +24,11 @@ creation_rules:
       - age:
           - *kloenk_age
           - *server_varda
+  - path_regex: secrets/sc-social[^/]*\.yaml$
+    key_groups:
+      - age:
+          - *kloenk_age
+          - *server_sc-social
   - path_regex: secrets/moodle-usee[^/]*\.yaml$
     key_groups:
       - age:
@@ -38,6 +44,7 @@ creation_rules:
           - *server_moodle
           - *server_elrond
           - *darwin_frodo
+          - *server_sc-social
   - path_regex: secrets/.+\.yaml$
     key_groups:
     - age:

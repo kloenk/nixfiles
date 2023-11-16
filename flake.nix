@@ -224,6 +224,10 @@
             system = "aarch64-linux";
             overlays = (overlayCombined "aarch64-linux");
           };
+          nodeNixpkgs.sc-social = import nixpkgs {
+            system = "aarch64-linux";
+            overlays = (overlayCombined "aarch64-linux");
+          };
           #allowApplyAll = false;
 
           specialArgs.inputs = inputs;
@@ -298,6 +302,19 @@
           ];
         };
 
+        sc-social = { pkgs, nodes, ... }: {
+          deployment = {
+            targetHost = "starcitizen.social";
+            tags = [ "hetzner" "falkenstein" "remote" "fleetyards" ];
+          };
+
+          imports = [
+            ./hosts/sc-social
+            self.nixosModules.restic-backups
+            (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix"))
+          ];
+        };
+
         # USee
         moodle-usee = { pkgs, nodes, ... }: {
           deployment.targetHost = "moodle-usee.kloenk.dev";
@@ -353,6 +370,7 @@
         nftables = import ./modules/nftables;
 
         restya-board = import ./modules/restya-board;
+        restic-backups = import ./modules/restic-backups.nix;
 
         wordpress = import ./modules/wordpress.nix;
         matrix-sliding-sync = import ./modules/matrix-sliding-sync;
