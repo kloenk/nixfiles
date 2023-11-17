@@ -19,6 +19,7 @@
     font-awesome
     meslo-lgs-nf
     inter
+    monaspace
     #questrial-regular
   ];
 
