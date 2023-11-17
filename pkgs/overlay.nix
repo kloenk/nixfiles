@@ -2,101 +2,17 @@ inputs: final: prev:
 let inherit (final) callPackage;
 in {
 
-  collectd-wireguard = callPackage ./collectd-wireguard { };
-  #jblock = callPackage ./jblock { };
-  deploy_secrets = callPackage ./deploy_secrets { };
-  pass-nix = callPackage ./pass-nix { };
   wallpapers = callPackage ./wallpapers { };
-  fabric-server = callPackage ./fabric-server { };
-  pam_nfc = callPackage ./pam_nfc { };
-
-  libnfc0 = callPackage ./libnfc { };
-
-  restya-board = callPackage ./restya-board { };
 
   nu_kloenk = callPackage ./nu_scripts { };
-
-  #emacsMacport = prev.emacsMacport.override { stdenv = final.llvmPackages_12.stdenv; };
 
   vemacs = callPackage ./vemacs { };
   vemacsMac = callPackage ./vemacs/mac.nix { };
 
   obs-tuna = final.qt6Packages.callPackage ./obs-tuna { };
 
-  # matrix-sliding-sync = final.callPackage ./matrix-sliding-sync { };
-
-  #moodle = callPackage ./moodle { };
-
-  redshift = prev.redshift.overrideAttrs (oldAttrs: rec {
-    src = final.fetchFromGitHub {
-      owner = "minus7";
-      repo = "redshift";
-      rev = "eecbfedac48f827e96ad5e151de8f41f6cd3af66";
-      sha256 = "0rs9bxxrw4wscf4a8yl776a8g880m5gcm75q06yx2cn3lw2b7v22";
-    };
-  });
-
   # helix = prev.helix.overrideAttrs
   #   (oldAttrs: rec { patches = oldAttrs.patches ++ [ ./helix-etc.patch ]; });
 
-  pleroma = prev.pleroma.overrideAttrs (oldAttrs: rec {
-    patches = [ ./pleroma-apple.patch ];
-    postBuild = ''
-      mix phx.digest --no-deps-check
-    '' + oldAttrs.postBuild or "";
-  });
-
-  spidermonkey_38 = null;
-
-  #let source = callPackage ./sourcegraph { }; in inherit (source) ;
-  inherit (callPackage ./sourcegraph { }) sourcegraph_go sourcegraph_web;
-
-  inherit (final.callPackage ./firefox { })
-    firefoxPolicies firefox-policies-wrapped;
-
-  nix-serve = prev.nix-serve.overrideAttrs (oldAttrs: rec {
-    meta = oldAttrs.meta // { platforms = final.lib.platforms.linux; };
-  });
-  jitsiexporter = callPackage ./jitsiexporter { };
-
   matrix-to = callPackage ./matrix-to { };
-
-  rustc_nightly = prev.rustc.overrideAttrs (oldAttrs: {
-    configureFlags = map (flag:
-      if flag == "--release-channel=stable" then
-        "--release-channel=nightly"
-      else
-        flag) oldAttrs.configureFlags;
-  });
-  rust-bindgen_c11 = prev.rust-bindgen.override {
-    clang = final.clang_11;
-    llvmPackages = final.llvmPackages_11;
-  };
-
-  linux_rust = let
-    linux_rust_pkg = { fetchFromGitHub, buildLinux, clang_11, llvm_11
-      , rustc_nightly, cargo, ... }@args:
-      buildLinux (args // rec {
-        version = "5.9.0-rc2";
-        modDirVersion = version;
-
-        src = fetchFromGitHub {
-          owner = "kloenk";
-          repo = "linux";
-          rev = "cc175e9a774a4b758029c1e6ca69db00b5e19fdc";
-          sha256 = "sha256-EYCVtEd2/t98d0UbmINlMoJuioRqD3ZxrSVMADm22SE=";
-        };
-        kernelPatches = [ ];
-
-        extraNativePackages = [ clang_11 llvm_11 rustc_nightly cargo ];
-
-        extraMeta.branch = "5.9";
-
-      } // (args.argsOverride or { }));
-  in callPackage linux_rust_pkg { };
-
-  emacs-doom = callPackage ./emacs { };
-
-  wordpressPlugins = callPackage ./wordpress/plugins.nix { };
-  wordpressThemes = callPackage ./wordpress/themes.nix { };
 }
