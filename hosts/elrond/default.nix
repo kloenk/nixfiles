@@ -84,5 +84,9 @@
     '';
   }];
 
+  # fileSystems."/".device = lib.mkForce "UUID=f19a5f96-9f10-453c-9de2-d351e1e858c8";
+  fileSystems."/".device =
+    lib.mkForce "/dev/disk/by-partuuid/3ef9d1a6-3036-45e3-bc76-c5f2eebd6492";
+
   system.stateVersion = "23.05";
 }
