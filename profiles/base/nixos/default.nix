@@ -29,7 +29,8 @@
     [ "recursive-nix" "kvm" "nixos-test" "big-parallel" ];
 
   i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
-  console.keyMap = lib.mkDefault "de"; # neo
+  # console.keyMap = lib.mkDefault "de"; # neo
+  console.keyMap = lib.mkDefault "us";
   console.font = "Lat2-Terminus16";
 
   systemd.tmpfiles.rules = [

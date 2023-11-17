@@ -21,7 +21,8 @@
     programs.wofi.enable = true;
     wayland.windowManager.sway = let
       cfg = config.home-manager.users.kloenk.wayland.windowManager.sway;
-      wallpaper = "~/.wallpapers/bg.jpg";
+      # wallpaper = "~/.wallpapers/bg.jpg";
+      wallpaper = "`find ${pkgs.wallpapers}/share/wallpapers/* | shuf -n 1`";
       modifier = "Mod4";
     in {
       enable = true;
@@ -44,7 +45,7 @@
         };
         gaps.inner = 10;
 
-        # output = { "*" = { bg = "${wallpaper} fill"; }; };
+        output = { "*" = { bg = "${wallpaper} fill"; }; };
 
         input = {
           "*" = { xkb_options = "compose:caps"; };

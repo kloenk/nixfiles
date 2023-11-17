@@ -6,7 +6,7 @@ let
 in {
   users.users.kloenk.packages = with pkgs; [ mako ];
   home-manager.users.kloenk = {
-    programs.mako = {
+    services.mako = {
       enable = true;
       defaultTimeout = 10000;
       borderColor = "#ffffff";
