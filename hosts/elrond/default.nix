@@ -33,6 +33,7 @@
   hardware.cpu.amd.updateMicrocode = true;
   boot.loader.grub.enable = false;
   boot.loader.systemd-boot.enable = true;
+  boot.initrd.systemd.enable = true;
   boot.loader.efi.canTouchEfiVariables = false;
   boot.supportedFilesystems = [ "bcachefs" ];
   boot.initrd.supportedFilesystems = [ "bcachefs" ];
