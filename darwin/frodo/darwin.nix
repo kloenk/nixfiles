@@ -18,6 +18,9 @@
 
   networking.hostName = "frodo";
 
+  # wezterm font size
+  k.programs.wezterm.font_size = 13.0;
+
   services.nix-daemon.enable = true;
   nix.package = pkgs.nix;
   nix.extraOptions = ''
