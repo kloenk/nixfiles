@@ -43,7 +43,7 @@
       "sysbadge.dev"
     ];
 
-    rejectRecipients = [ "wattpad@kloenk.de" ];
+    rejectRecipients = [ "wattpad@kloenk.de" "kick@kloenk.de" ];
 
     loginAccounts = {
       "kloenk@kloenk.dev" = {
