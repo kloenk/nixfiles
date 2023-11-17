@@ -34,7 +34,7 @@
           names = [ "JetBrains Mono" ];
           size = 8.0;
         };
-        terminal = "alacritty";
+        terminal = "wezterm"; # "alacritty";
         menu = "wofi --show drun";
 
         bars = [ ];
