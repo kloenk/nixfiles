@@ -57,6 +57,7 @@
     nssmdns = true;
   };
 
+  users.users.kloenk.packages = with pkgs; [ element-desktop ];
   home-manager.users.kloenk = {
     xdg.enable = true;
     gtk = {

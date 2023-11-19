@@ -60,7 +60,7 @@
 
   # virtmanager
   virtualisation.libvirtd = {
-    #enable = true;
+    enable = true;
     onShutdown = "shutdown";
   };
 
