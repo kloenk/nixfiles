@@ -17,6 +17,8 @@
         "uBlock0@raymondhill.net" = "ublock-origin";
         # "momentum@momentumdash.com" = "momentumdash";
         "{f7f203e0-9d1d-4557-891f-9865877c5b48}" = "tabby-cat-friend";
+        "{d634138d-c276-4fc8-924b-40a0ea21d284}" =
+          "1password-x-password-manager";
       };
       PasswordManagerEnabled = false;
       UserMessaging = {
