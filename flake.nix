@@ -396,6 +396,17 @@
             [ inputs.nixpkgs.legacyPackages.x86_64-linux.nil ];
         };
 
+        testing = { pkgs, nodes, ... }: {
+          deployment.targetHost = "192.168.178.206";
+          deployment.tags = [ "pony" "local" ];
+
+          imports = [
+            ./hosts/testing
+            # vika.nixosModules.gnome
+            # vika.nixosModules.bgrtSplash
+          ];
+        };
+
         ktest = { pkgs, nodes, ... }: {
           deployment.targetHost = "192.168.64.101";
           deployment.tags = [ "vm" "frodo" ];
