@@ -202,6 +202,13 @@
         // (forSomeSystems [ "x86_64-linux" "aarch64-linux" ]
           (system: { inherit (nixpkgsFor.${system}) iso; }));
 
+      apps = forAllSystems (system: {
+        update-ssh-keys = {
+          type = "app";
+          program = toString nixpkgsFor.${system}.update-ssh-host-keys;
+        };
+      });
+
       nixosConfigurations =
         let hive = inputs.colmena.lib.makeHive self.outputs.colmena;
         in hive.nodes;
