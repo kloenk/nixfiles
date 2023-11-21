@@ -15,4 +15,6 @@ in {
   #   (oldAttrs: rec { patches = oldAttrs.patches ++ [ ./helix-etc.patch ]; });
 
   matrix-to = callPackage ./matrix-to { };
+
+  update-ssh-host-keys = callPackage ./update-ssh-host-keys { };
 }
