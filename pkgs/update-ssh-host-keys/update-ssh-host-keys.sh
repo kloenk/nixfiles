@@ -9,6 +9,6 @@ for host in $(nix eval --apply 'attrs: builtins.concatStringsSep "\n" (builtins.
 	ssh_key=$(ssh-keyscan -p @port@ -t ed25519 "${host}.@baseDomain@" 2>/dev/null | sed -E 's/(\S+) (.+)/\2/g' || true)
 	if [[ -n "$ssh_key" ]]; then
 		echo "$ssh_key"
-		echo "$ssh_key" > "hosts/${host}/ssh.pub"
+		echo -n "$ssh_key" > "hosts/${host}/ssh.pub"
 	fi
 done
