@@ -16,7 +16,7 @@
       chain postrouting {
         type nat hook postrouting priority srcnat;
         ip saddr { 192.168.242.0-192.168.242.255 } oifname { "wg0" } snat to 192.168.242.1
-        oifname "enp1s0" masquerade
+        oifname "eth0" masquerade
         iifname "wg0" oifname "buw0" masquerade
       }
     }
