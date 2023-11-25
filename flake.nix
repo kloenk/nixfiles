@@ -365,6 +365,12 @@
             (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix"))
           ];
         };
+        build-vm = { pkgs, nodes, ... }: {
+          imports = [
+            ./hosts/ktest
+            (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix"))
+          ];
+        };
       };
 
       nixosModules = {
