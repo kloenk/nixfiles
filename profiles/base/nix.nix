@@ -26,6 +26,15 @@
         to.repo = "nix";
         exact = false;
       };
+      leona = {
+        from.type = "indirect";
+        from.id = "leona";
+        to.type = "gitlab";
+        to.host = "cyberchaos.dev";
+        to.owner = "leona";
+        to.repo = "nixfiles";
+        exact = false;
+      };
       nixpkgs.flake = args.inputs.nixpkgs;
     };
   };
