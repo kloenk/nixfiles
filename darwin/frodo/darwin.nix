@@ -28,6 +28,28 @@
     system-features = benchmark big-parallel recursive-nix
   '';
 
+  home-manager.users.kloenk.programs.ssh.matchBlocks = {
+    "*.studs.math.uni-wuppertal.de" = {
+      port = 22;
+      user = "fbehrens";
+    };
+    "*.studs" = {
+      hostname = "%h.math.uni-wuppertal.de";
+      port = 22;
+      user = "fbehrens";
+    };
+    "l???" = {
+      hostname = "%h.math.uni-wuppertal.de";
+      port = 22;
+      user = "fbehrens";
+    };
+    "ktest" = {
+      hostname = "192.168.64.101";
+      port = 62954;
+      forwardAgent = true;
+    };
+  };
+
   users.users.kloenk.packages = with pkgs; [
     elixir
     erlang

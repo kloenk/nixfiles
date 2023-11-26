@@ -1,6 +1,8 @@
 { lib, pkgs, config, ... }:
 
 {
+  imports = [ ./ssh.nix ];
+
   users.users.kloenk = {
     shell = pkgs.zsh;
 
