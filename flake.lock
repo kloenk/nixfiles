@@ -1044,11 +1044,11 @@
       },
       "locked": {
         "host": "cyberchaos.dev",
-        "lastModified": 1698051020,
-        "narHash": "sha256-yTOVu5Y95rexrznSWkXTXHnGmEAtTUrVFK7TlSF2iPk=",
+        "lastModified": 1701359886,
+        "narHash": "sha256-1ntthzhqlSMtclSfanU+rDQqXsj0TBbMEnYUTZw2Inc=",
         "owner": "kloenk",
         "repo": "www",
-        "rev": "0b65df92c30f62d535e8059ac767134929ae1744",
+        "rev": "07cd2150ce1a0c8ca65dd7ff231b928994a0893c",
         "type": "gitlab"
       },
       "original": {
@@ -1706,11 +1706,11 @@
     },
     "nixpkgs_5": {
       "locked": {
-        "lastModified": 1700851271,
-        "narHash": "sha256-glNV14NrwbuxJ53kWU5HM7dPKeyuZOOV+Bnwz/iI8HI=",
-        "owner": "nixos",
+        "lastModified": 1701358942,
+        "narHash": "sha256-WbDNvkhN7YDDXmcYOYKddaD3He9Aj1A8bYTwCanmIFY=",
+        "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "fdbeeb3547695bb01c638f2c95368eb59c86961c",
+        "rev": "8abf7c04993d786f5561d1c3ce35d0ebbc61ad1d",
         "type": "github"
       },
       "original": {

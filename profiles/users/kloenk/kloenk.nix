@@ -28,6 +28,7 @@
       jq
       neofetch
       onefetch
+      blahaj
       sl
       tcpdump
       binutils
