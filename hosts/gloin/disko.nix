@@ -3,7 +3,7 @@
 {
   disko.devices = {
     disk.nvme0n1 = {
-      device = lib.mkDefault "/dev/disk/by-path/pci-0000:01:00.0-nvme-1";
+      device = lib.mkDefault "/dev/disk/by-path/pci-0000:04:00.0-nvme-1";
       type = "disk";
       content = {
         type = "gpt";

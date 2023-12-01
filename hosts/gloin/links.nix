@@ -7,7 +7,7 @@ let
 in {
   systemd.network = {
     links."10-eth0" = {
-      matchConfig.MACAddress = "96:00:02:b4:f1:e6";
+      matchConfig.MACAddress = "84:a9:38:c6:b3:cd";
       linkConfig.Name = "eth0";
     };
     networks."10-eth0" = {
