@@ -235,6 +235,10 @@
             system = "aarch64-linux";
             overlays = (overlayCombined "aarch64-linux");
           };
+          nodeNixpkgs.gloin = import nixpkgs {
+            system = "x86_64-linux";
+            overlays = (overlayCombined "x86_64-linux");
+          };
           #allowApplyAll = false;
 
           specialArgs.inputs = inputs;
@@ -347,11 +351,16 @@
           deployment.targetHost = "192.168.178.247";
           deployment.tags = [ "pony" "local" ];
 
-          imports = [
-            ./hosts/elrond
-            # vika.nixosModules.gnome
-            # vika.nixosModules.bgrtSplash
-          ];
+          imports = [ ./hosts/elrond ];
+          users.users.kloenk.packages =
+            [ inputs.nixpkgs.legacyPackages.x86_64-linux.nil ];
+        };
+
+        gloin = { pkgs, nodes, ... }: {
+          deployment.targetHost = "192.168.178.";
+          deployment.tags = [ "local" ];
+
+          imports = [ ./hosts/gloin ];
           users.users.kloenk.packages =
             [ inputs.nixpkgs.legacyPackages.x86_64-linux.nil ];
         };
