@@ -414,6 +414,8 @@
         let pkgs = nixpkgsFor.${system};
         in {
           kernel = pkgs.callPackage ./dev/kernel.nix { };
+          zephyr =
+            pkgs.callPackage ./dev/zephyr.nix { python3 = pkgs.python310; };
           default = pkgs.mkShell {
             inherit (self.checks.${system}.pre-commit) shellHook;
           };
