@@ -26,6 +26,7 @@
   boot.initrd.supportedFilesystems = [ "bcachefs" ];
 
   networking.hostName = "gloin";
+  networking.wireless.iwd.enable = true;
 
   environment.systemPackages = with pkgs; [ lm_sensors virt-manager ];
 
@@ -47,6 +48,8 @@
   # smartcard
   services.pcscd.enable = true;
   services.telegraf.extraConfig.inputs = { sensors = { }; };
+
+  nix.gc.automatic = false;
 
   services.openssh.settings.X11Forwarding = true;
 
