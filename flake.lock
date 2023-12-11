@@ -1706,11 +1706,11 @@
     },
     "nixpkgs_5": {
       "locked": {
-        "lastModified": 1701358942,
-        "narHash": "sha256-WbDNvkhN7YDDXmcYOYKddaD3He9Aj1A8bYTwCanmIFY=",
-        "owner": "NixOS",
+        "lastModified": 1702195160,
+        "narHash": "sha256-9ZUtfC4EyR2V7VmdXokB5qNXoUDMN30VLb9Y5V7qUyo=",
+        "owner": "r-ryantm",
         "repo": "nixpkgs",
-        "rev": "8abf7c04993d786f5561d1c3ce35d0ebbc61ad1d",
+        "rev": "27bbec3c0c7d9b0b0e6a80afae5ececc1801b8fb",
         "type": "github"
       },
       "original": {

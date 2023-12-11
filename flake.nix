@@ -328,7 +328,7 @@
 
         # USee
         moodle-usee = { pkgs, nodes, ... }: {
-          deployment.targetHost = "moodle-usee.kloenk.dev";
+          deployment.targetHost = "moodle-usee.kloenk.de";
           deployment.tags = [ "usee" "remote" ];
 
           imports = [
@@ -426,6 +426,7 @@
           zephyr =
             pkgs.callPackage ./dev/zephyr.nix { python3 = pkgs.python310; };
           default = pkgs.mkShell {
+            nativeBuildInputs = [ pkgs.nixfmt pkgs.colmena ];
             inherit (self.checks.${system}.pre-commit) shellHook;
           };
         });
