@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 {
-  users.users.kloenk.packages = with pkgs; [ obsidian ];
+  #users.users.kloenk.packages = with pkgs; [ obsidian ];
 
   systemd.tmpfiles.rules = let
     # Copied from .config/monitors.xml
@@ -77,9 +77,6 @@
   };
   services.gnome.gnome-keyring.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    gnomeExtensions.twitchlive-panel
-    wl-clipboard
-  ];
+  environment.systemPackages = with pkgs; [ wl-clipboard ];
 
 }
