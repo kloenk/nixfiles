@@ -33,6 +33,7 @@ let
       west
       ecdsa
       anytree
+      click
     ]);
 in mkShell {
   nativeBuildInputs = [ cmake ninja dtc wget minicom zephyrPython ];

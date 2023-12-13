@@ -1,7 +1,12 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./nix.nix ./ssh.nix ./git.nix ./helix.nix ./nushell.nix ];
+  imports = [
+    ./nix.nix
+    ./ssh.nix
+    ./git.nix
+    ./helix.nix # ./nushell.nix
+  ];
 
   time.timeZone = "Europe/Berlin";
 

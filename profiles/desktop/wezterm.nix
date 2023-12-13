@@ -56,7 +56,7 @@ in {
           if wezterm.config_builder then
             config = wezterm.config_builder()
           end
-          config.font = wezterm.font("Monaspace Radon Var", { weight = 'DemiBold' })
+          config.font = wezterm.font("Monaspace Krypton Var", { weight = 'DemiBold' })
           config.font_size = ${toString cfg.font_size}
           config.color_scheme = "monokai"
           config.window_background_opacity = 0.75
