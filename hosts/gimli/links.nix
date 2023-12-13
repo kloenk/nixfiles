@@ -1,13 +1,23 @@
 { config, pkgs, lib, ... }:
 
 let
-  links = config.systemd.network.links;
-  netdevs = config.systemd.network.netdevs;
-  networks = config.systemd.network.networks;
+  v6 = "2a01:4f8:c012:b874::";
+  v4 = "168.119.57.172";
 in {
   networking.firewall.allowedUDPPorts = [
     51820 # wg0
   ];
+
+  networking.domains = {
+    enable = true;
+    baseDomains = lib.listToAttrs (map (name: {
+      name = name;
+      value = {
+        a.data = v4;
+        aaaa.data = v6;
+      };
+    }) [ "kloenk.de" "kloenk.eu" "kloenk.dev" "p3tr1ch0rr.de" "sysbadge.dev" ]);
+  };
 
   systemd.network = {
     links."10-eth0" = {
@@ -16,7 +26,7 @@ in {
     };
     networks."10-eth0" = {
       name = "eth0";
-      addresses = [{ addressConfig.Address = "2a01:4f8:c012:b874::/64"; }];
+      addresses = [{ addressConfig.Address = "${v6}/64"; }];
       routes = [{ routeConfig.Gateway = "fe80::1"; }];
       DHCP = "ipv4";
     };

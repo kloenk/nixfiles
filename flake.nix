@@ -113,9 +113,14 @@
     inputs.nixpkgs-stable.follows = "/nixpkgs";
   };
 
+  inputs.nixos-dns = {
+    url = "github:Janik-Haag/nixos-dns";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
+
   outputs = inputs@{ self, nixpkgs, nix, moodlepkgs, mail-server, kloenk-www
     , dns, darwin, sops-nix, vika, colmena, jlly, fleet_bot, p3tr, sysbadge
-    , oxalica, disko, ... }:
+    , oxalica, disko, nixos-dns, ... }:
     let
       overlayCombined = system: [
         #nix.overlays.default
@@ -269,6 +274,8 @@
 
             vika.nixosModules.colorfulMotd
             vika.nixosModules.secureSSHClient
+
+            nixos-dns.nixosModules.dns
 
             inputs.home-manager.nixosModules.default
           ];

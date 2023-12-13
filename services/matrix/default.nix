@@ -26,6 +26,8 @@
     '';
   };
 
+  networking.domains.subDomains."matrix.kloenk.eu" = { };
+
   services.nginx.virtualHosts."matrix.kloenk.eu" = {
     forceSSL = true;
     enableACME = true;
