@@ -9,6 +9,8 @@ in {
   vemacs = callPackage ./vemacs { };
   vemacsMac = callPackage ./vemacs/mac.nix { };
 
+  kloenk-emacs = callPackage ./emacs { emacs = final.emacs29-pgtk; };
+
   obs-tuna = final.qt6Packages.callPackage ./obs-tuna { };
 
   # helix = prev.helix.overrideAttrs
