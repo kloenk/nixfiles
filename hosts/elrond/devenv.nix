@@ -69,7 +69,7 @@
       jetbrains.ruby-mine
       jetbrains.webstorm
       jetbrains.idea-ultimate
-      jetbrains.datagrip
+      #jetbrains.datagrip
 
       direnv
       elixir

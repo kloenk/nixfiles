@@ -54,10 +54,10 @@
   programs.kdeconnect.enable = true;
   services.avahi = {
     enable = true;
-    nssmdns = true;
+    nssmdns4 = true;
   };
 
-  users.users.kloenk.packages = with pkgs; [ element-desktop ];
+  users.users.kloenk.packages = with pkgs; [ element-desktop fractal ];
   home-manager.users.kloenk = {
     xdg.enable = true;
     gtk = {

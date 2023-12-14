@@ -15,7 +15,10 @@
   environment.variables.NIXOS_OZONE_WL = "1";
 
   xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
+  xdg.portal.wlr.enable = true;
+  xdg.portal.extraPortals =
+    [ pkgs.xdg-desktop-portal-wlr pkgs.xdg-desktop-portal-gtk ];
+  xdg.portal.config.preferred.default = "gtk;wlr";
 
   home-manager.users.kloenk = {
     programs.wofi.enable = true;
