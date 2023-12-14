@@ -1,4 +1,3 @@
-
 ;; basic ui config
 (setq inhibit-startup-message t)
 
@@ -340,7 +339,7 @@
 (use-package org-make-toc
   :ensure t
   :after org
-  :hook org-mode)q
+  :hook org-mode)
 
 ;;; Treemacs
 (use-package treemacs
@@ -350,7 +349,7 @@
   (treemacs-resize-icons 15)
   :bind
   (:map global-map
-        ("M-0" . treemacs-select-window)))0
+        ("M-0" . treemacs-select-window)))
 
 (use-package treemacs-magit
   :ensure t
