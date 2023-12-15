@@ -1,6 +1,5 @@
 keys:
   - &kloenk_age age1p06k9fwwdhwcx6qxt5fyypkdk9wpkhk5fhyzjnykaymz32nwsakqwyfjqm
-
   - &server_thrain age1ejyvncc2g7slp30fx72cyawg5z5030mzfq6zy8fk3tm2n72pqghsfmrvp6
   - &server_gimli age1we86kfnan67mq7eks89ndz85w299j35un400jvlrhk3ktjyhkgks69lz62
   - &server_varda age1vfrdpq9p6qm8yf4ddrzhy6mutzrzgauv6vp9gjq99t5kmcd8lp4sf9gyum
@@ -16,35 +15,40 @@ creation_rules:
       - *server_thrain
   - path_regex: secrets/gimli[^/]*\.yaml$
     key_groups:
-      - age:
-          - *kloenk_age
-          - *server_gimli
+    - age:
+      - *kloenk_age
+      - *server_gimli
   - path_regex: secrets/varda[^/]*\.yaml$
     key_groups:
-      - age:
-          - *kloenk_age
-          - *server_varda
+    - age:
+      - *kloenk_age
+      - *server_varda
   - path_regex: secrets/sc-social[^/]*\.yaml$
     key_groups:
-      - age:
-          - *kloenk_age
-          - *server_sc-social
+    - age:
+      - *kloenk_age
+      - *server_sc-social
   - path_regex: secrets/moodle-usee[^/]*\.yaml$
     key_groups:
-      - age:
-          - *kloenk_age
-          - *server_moodle
+    - age:
+      - *kloenk_age
+      - *server_moodle
+  - path_regex: secrets/elrond[^/]*\.yaml$
+    key_groups:
+    - age:
+      - *kloenk_age
+      - *server_elrond
   - path_regex: secrets/shared/[^/]*\.yaml$
     key_groups:
-      - age:
-          - *kloenk_age
-          - *server_thrain
-          - *server_gimli
-          - *server_varda
-          - *server_moodle
-          - *server_elrond
-          - *darwin_frodo
-          - *server_sc-social
+    - age:
+      - *kloenk_age
+      - *server_thrain
+      - *server_gimli
+      - *server_varda
+      - *server_moodle
+      - *server_elrond
+      - *darwin_frodo
+      - *server_sc-social
   - path_regex: secrets/.+\.yaml$
     key_groups:
     - age:

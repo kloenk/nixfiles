@@ -90,6 +90,14 @@
           PersistentKeepalive = 21;
         };
       }
+      { # elrond
+        wireguardPeerConfig = {
+          AllowedIPs =
+            [ "192.168.242.204/32" "2a01:4f8:c013:1a4b:ecba::204/128" ];
+          PublicKey = "6kwWS4u3lM+iGAf1lF79lm/mmE8kOlFtk7ipqNpKd3g=";
+          PersistentKeepalive = 21;
+        };
+      }
       { # sting
         wireguardPeerConfig = {
           AllowedIPs =
