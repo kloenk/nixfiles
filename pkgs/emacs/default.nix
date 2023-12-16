@@ -1,5 +1,3 @@
-
-
 { emacsPackagesFor, emacs, runCommandNoCC }:
 
 let
@@ -18,6 +16,7 @@ let
       editorconfig
       direnv
       nix-mode
+      rustic
       protobuf-mode
       helm-nixos-options
       helm-projectile
@@ -29,11 +28,20 @@ let
       treemacs-projectile
       magit
     ]);
+  tangledConfig = runCommandNoCC "tangled-config" {
+    nativeBuildInputs = [ emacsWithPkgs ];
+  } ''
+    mkdir -p $out
+    cd $out
+    cp ${./Emacs.org} Emacs.org
+    emacs -Q --batch --eval "(require 'org)" --eval '(org-babel-tangle-file "./Emacs.org")'
+  '';
   compiledConfig = runCommandNoCC "compile-config" {
     nativeBuildInputs = [ emacsWithPkgs ];
   } ''
-    cp ${./default.el} ./kloenk.el
-    emacs -Q --batch --eval '(byte-compile-file "kloenk.el")'
-    cp kloenk.elc $out
+    mkdir -p $out
+    cp ${tangledConfig}/Emacs.el ${tangledConfig}/early-init.el .
+    emacs -Q --batch --eval '(byte-compile-file "Emacs.el")' --eval '(byte-compile-file "early-init.el")'
+    cp *.elc $out/
   '';
-in emacsWithPkgs // { passthru = { config = compiledConfig; }; }
+in emacsWithPkgs // { passthru = { inherit tangledConfig compiledConfig; }; }
