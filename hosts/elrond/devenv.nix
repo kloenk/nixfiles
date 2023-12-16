@@ -58,7 +58,7 @@
       sops
       blackbox-terminal
 
-      rustup
+      #rustup
       #gcc
       #clang
 

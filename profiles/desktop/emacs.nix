@@ -5,5 +5,5 @@
     source = "${pkgs.kloenk-emacs.passthru.compiledConfig}/Emacs.elc";
     target = ".emacs";
   };
-  users.users.kloenk.packages = [ pkgs.kloenk-emacs ];
+  users.users.kloenk.packages = [ pkgs.kloenk-emacs pkgs.rust-analyzer ];
 }
