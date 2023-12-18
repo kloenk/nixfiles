@@ -63,5 +63,11 @@
       publicKey =
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDnP3Tvyvk3hoZLOuFVokhu37tCXODGxHhVlCRtllAZW";
     };
+
+    poccase = {
+      hostNames = [ "poccase1.eventphone.de" ];
+      publicKey =
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAKZmxA9Tb8oDwRKqAe+uOgjVMiiYSLtJccbslJ+t4Yq";
+    };
   };
 }

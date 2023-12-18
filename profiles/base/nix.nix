@@ -1,4 +1,4 @@
-{ lib, ... }@args:
+{ lib, pkgs, ... }@args:
 
 {
   nix = {
@@ -38,4 +38,5 @@
       nixpkgs.flake = args.inputs.nixpkgs;
     };
   };
+  environment.systemPackages = [ pkgs.nix-output-monitor ];
 }
