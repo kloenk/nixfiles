@@ -226,6 +226,8 @@
             sops-nix.nixosModules.sops
             colmena.nixosModules.deploymentOptions
             inputs.home-manager.nixosModules.home-manager
+            self.nixosModules.kloenk
+            nixos-dns.nixosModules.dns
 
             self.nixosModules.nftables
             self.nixosModules.helix
