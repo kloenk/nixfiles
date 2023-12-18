@@ -2,11 +2,31 @@ let
   spf =
     "v=spf1 a:gimli.kloenk.de ip4:49.12.72.200/32 ip6:2a01:4f8:c012:b874::/128 -all";
   dmarc = "v=DMARC1;p=reject;pct=100;rua=mailto:postmaster@kloenk.de";
+  caa = {
+    data = [
+      {
+        flags = 0;
+        tag = "issue";
+        value = ''"letsencrypt.org"'';
+      }
+      {
+        flags = 0;
+        tag = "issuewild";
+        value = ''";"'';
+      }
+      {
+        flags = 0;
+        tag = "iodef";
+        value = ''"mailto:hostmaster@kloenk.de"'';
+      }
+    ];
+  };
 in {
   defaultTTL = 1800;
   zones = {
     "kloenk.eu" = {
       "" = {
+        inherit caa;
         ns.data = [
           "hydrogen.ns.hetzner.com"
           "oxygen.ns.hetzner.com"
@@ -18,6 +38,7 @@ in {
       "" = {
         mx.data.exchange = "gimli.kloenk.de";
         mx.data.preference = 10;
+        inherit caa;
         txt.data = [
           spf
           "google-site-verification=p5ttbvvVzpqKQNUf_kuhwBEFvTavqiUF5BxTytUbGsY"
@@ -83,6 +104,7 @@ in {
         mx.data.exchange = "gimli.kloenk.de";
         mx.data.preference = 10;
         txt.data = [ spf ];
+        inherit caa;
         ns.data = [
           "hydrogen.ns.hetzner.com"
           "oxygen.ns.hetzner.com"
