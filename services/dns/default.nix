@@ -8,8 +8,8 @@ let
     (import ./zones/eu.kloenk.nix { inherit lib inputs config; });
   dev_kloenk_zone =
     (import ./zones/dev.kloenk.nix { inherit lib inputs config; });
-  dev_sysbadge_zone = "${pkgs.kloenk-zoneFiles}/sysbadge.dev";
-  #(import ./zones/dev.sysbadge.nix { inherit lib inputs config; });
+  dev_sysbadge_zone =
+    (import ./zones/dev.sysbadge.nix { inherit lib inputs config; });
   dev_matrixcore_zone =
     (import ./zones/dev.matrixcore.nix { inherit lib inputs config; });
   de_kloenk_zone =

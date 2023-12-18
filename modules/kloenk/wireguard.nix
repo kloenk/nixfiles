@@ -9,6 +9,9 @@ in {
   options.k.wg = {
     enable = mkEnableOption "Enable basic wireguard";
     net = mkEnableOption "net domains" // { default = cfg.enable; };
+    public = mkEnableOption "Public Reachable" // {
+      default = config.k.dns.public;
+    };
 
     id = mkOption { type = types.int; };
 
@@ -54,8 +57,7 @@ in {
               AllowedIPs = [ "0.0.0.0/0" "::/0" ];
               PublicKey = "UoIRXpG/EHmDNDhzFPxZS18YBlj9vBQRRQZMCFhonDA=";
               Endpoint = "varda.kloenk.de:51820";
-              PersistentKeepalive = if config.k.dns.public then null else 21;
-            };
+            } // (mkIf (!cfg.public) { PersistentKeepalive = 21; });
           }];
         };
         networks."30-wg0" = {
