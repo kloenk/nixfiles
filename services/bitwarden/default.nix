@@ -18,6 +18,8 @@
     };
   };
 
+  networking.domains.subDomains."bitwarden.kloenk.de" = { };
+  networking.domains.subDomains."bitwarden.kloenk.dev" = { };
   services.nginx.virtualHosts."bitwarden.kloenk.de" = {
     enableACME = true;
     forceSSL = true;

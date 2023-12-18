@@ -23,6 +23,9 @@
   '';
   nftables.forwardPolicy = "accept";
 
+  k.wg.id = 1;
+  k.wg.net = true;
+
   systemd.network.netdevs."30-wg0" = {
     netdevConfig = {
       Kind = "wireguard";

@@ -14,6 +14,11 @@
     }
   '';
 
+  k.wg = {
+    enable = true;
+    id = 204;
+  };
+
   systemd.network = {
     networks."20-enp34s0" = {
       name = "enp34s0";
@@ -58,40 +63,8 @@
       ];
     };
 
-    netdevs."30-wg0" = {
-      netdevConfig = {
-        Kind = "wireguard";
-        Name = "wg0";
-      };
-      wireguardConfig = {
-        PrivateKeyFile = config.sops.secrets."wireguard/wg0".path;
-        ListenPort = 51820;
-      };
-      wireguardPeers = [{ # varda
-        wireguardPeerConfig = {
-          AllowedIPs = [ "0.0.0.0/0" "::/0" ];
-          PublicKey = "UoIRXpG/EHmDNDhzFPxZS18YBlj9vBQRRQZMCFhonDA=";
-          Endpoint = "varda.kloenk.de:51820";
-        };
-      }];
-    };
-    networks."30-wg0" = {
-      name = "wg0";
-      linkConfig.RequiredForOnline = "no";
-      addresses = [
-        { addressConfig.Address = "192.168.242.204/24"; }
-        { addressConfig.Address = "2a01:4f8:c013:1a4b:ecba::204/80"; }
-      ];
-      routes = [
-        { routeConfig.Destination = "192.168.242.0/24"; }
-        { routeConfig.Destination = "2a01:4f8:c013:1a4b:ecba::1/80"; }
-      ];
-    };
-
     networks."99-whow_cares".linkConfig.RequiredForOnline = "no";
     networks."99-whow_cares".linkConfig.Unmanaged = "yes";
     networks."99-whow_cares".name = "*";
   };
-
-  sops.secrets."wireguard/wg0".owner = "systemd-network";
 }

@@ -113,15 +113,21 @@
     inputs.nixpkgs-stable.follows = "/nixpkgs";
   };
 
+  inputs.nixos-dns = {
+    url = "github:Janik-Haag/nixos-dns";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
+
   outputs = inputs@{ self, nixpkgs, nix, moodlepkgs, mail-server, kloenk-www
     , dns, darwin, sops-nix, vika, colmena, jlly, fleet_bot, p3tr, sysbadge
-    , oxalica, disko, ... }:
+    , oxalica, disko, nixos-dns, ... }:
     let
       overlayCombined = system: [
         #nix.overlays.default
         #(final: prev: { nix = nix.packages.${system}.nix; })
         #home-manager.overlay
         self.overlays.kloenk
+        self.overlays.dns
         self.overlays.iso
         moodlepkgs.overlay
         kloenk-www.overlay
@@ -173,6 +179,41 @@
       overlays.kloenk = final: prev:
         (import ./pkgs/overlay.nix inputs final prev);
       overlays.default = self.overlays.kloenk;
+      overlays.dns = final: prev:
+        let
+          generate = nixos-dns.utils.generate final;
+          dnsConfig = {
+            inherit (self) nixosConfigurations;
+            extraConfig = import ./dns.nix;
+          };
+        in {
+          kloenk-zoneFiles = generate.zoneFiles dnsConfig;
+          kloenk-octodns-config = generate.octodnsConfig {
+            inherit dnsConfig;
+            config = {
+              providers = {
+                hetzner = {
+                  class = "octodns_hetzner.HetznerProvider";
+                  token = "env/HETZNER_DNS_TOKEN";
+                };
+              };
+            };
+            zones = {
+              "kloenk.de." =
+                nixos-dns.utils.octodns.generateZoneAttrs [ "hetzner" ];
+              "kloenk.eu." =
+                nixos-dns.utils.octodns.generateZoneAttrs [ "hetzner" ];
+              "sysbadge.dev." =
+                nixos-dns.utils.octodns.generateZoneAttrs [ "hetzner" ];
+              "p3tr1ch0rr.de." =
+                nixos-dns.utils.octodns.generateZoneAttrs [ "hetzner" ];
+            };
+          };
+          kloenk-octodns = final.octodns.withProviders (ps: [
+            final.octodns-providers.bind
+            final.octodns-providers.hetzner
+          ]);
+        };
       overlays.iso = final: prev: {
         iso = (nixpkgs.lib.nixosSystem {
           system = final.stdenv.targetPlatform.system;
@@ -206,6 +247,15 @@
         update-ssh-keys = {
           type = "app";
           program = toString nixpkgsFor.${system}.update-ssh-host-keys;
+        };
+        update-dns = {
+          type = "app";
+          program = let
+            pkgs = nixpkgsFor.${system};
+            script = pkgs.writeShellScriptBin "update-dns" ''
+              ${pkgs.kloenk-octodns}/bin/octodns-sync --config-file ${pkgs.kloenk-octodns-config} $@
+            '';
+          in "${script}/bin/update-dns";
         };
       });
 
@@ -266,9 +316,12 @@
             self.nixosModules.wordpress
             self.nixosModules.transient
             self.nixosModules.helix
+            self.nixosModules.kloenk
 
             vika.nixosModules.colorfulMotd
             vika.nixosModules.secureSSHClient
+
+            nixos-dns.nixosModules.dns
 
             inputs.home-manager.nixosModules.default
           ];
@@ -384,6 +437,7 @@
         #secrets = import ./modules/secrets;
         transient = import ./modules/transient;
         nftables = import ./modules/nftables;
+        kloenk = import ./modules/kloenk;
 
         restya-board = import ./modules/restya-board;
         restic-backups = import ./modules/restic-backups.nix;
