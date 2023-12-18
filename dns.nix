@@ -58,12 +58,25 @@ in {
     };
     "sysbadge.dev" = {
       "" = {
+        a.data = [
+          "185.199.108.153"
+          "185.199.109.153"
+          "185.199.110.153"
+          "185.199.111.153"
+        ];
+        aaaa.data = [
+          "2606:50c0:8000::153"
+          "2606:50c0:8001::153"
+          "2606:50c0:8002::153"
+          "2606:50c0:8003::153"
+        ];
         ns.data = [
           "hydrogen.ns.hetzner.com"
           "oxygen.ns.hetzner.com"
           "helium.ns.hetzner.de"
         ];
       };
+      "_github-pages-challenge-sysbadge-org".txt.data = "d6f90acfda";
     };
     "p3tr1ch0rr.de" = {
       "" = {

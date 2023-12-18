@@ -248,6 +248,15 @@
           type = "app";
           program = toString nixpkgsFor.${system}.update-ssh-host-keys;
         };
+        update-dns = {
+          type = "app";
+          program = let
+            pkgs = nixpkgsFor.${system};
+            script = pkgs.writeShellScriptBin "update-dns" ''
+              ${pkgs.kloenk-octodns}/bin/octodns-sync --config-file ${pkgs.kloenk-octodns-config} $@
+            '';
+          in "${script}/bin/update-dns";
+        };
       });
 
       nixosConfigurations =
