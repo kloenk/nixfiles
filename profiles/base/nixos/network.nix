@@ -26,6 +26,8 @@
     ];
   };
 
+  networking.domains.enable = true;
+
   nftables.enable = true;
   nftables.forwardPolicy = lib.mkDefault "drop";
 }

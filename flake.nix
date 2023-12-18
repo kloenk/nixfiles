@@ -271,6 +271,7 @@
             self.nixosModules.wordpress
             self.nixosModules.transient
             self.nixosModules.helix
+            self.nixosModules.kloenk
 
             vika.nixosModules.colorfulMotd
             vika.nixosModules.secureSSHClient
@@ -391,6 +392,7 @@
         #secrets = import ./modules/secrets;
         transient = import ./modules/transient;
         nftables = import ./modules/nftables;
+        kloenk = import ./modules/kloenk;
 
         restya-board = import ./modules/restya-board;
         restic-backups = import ./modules/restic-backups.nix;
