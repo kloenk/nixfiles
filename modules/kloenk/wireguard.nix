@@ -57,7 +57,8 @@ in {
               AllowedIPs = [ "0.0.0.0/0" "::/0" ];
               PublicKey = "UoIRXpG/EHmDNDhzFPxZS18YBlj9vBQRRQZMCFhonDA=";
               Endpoint = "varda.kloenk.de:51820";
-            } // (mkIf (!cfg.public) { PersistentKeepalive = 21; });
+              PersistentKeepalive = 21;
+            }; # // (mkIf (!cfg.public) { PersistentKeepalive = 21; });
           }];
         };
         networks."30-wg0" = {

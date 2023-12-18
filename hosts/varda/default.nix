@@ -12,6 +12,7 @@
 
     ../../services/web
     ../../services/bitwarden
+    ../../services/int-acme-ca
     ../../services/monitoring
     ../../services/monitoring/kuma.nix
 

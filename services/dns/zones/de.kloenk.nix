@@ -36,7 +36,7 @@ let
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.de.";
       adminEmail = "hostmaster@kloenk.de";
-      serial = 2020122619;
+      serial = 2020122620;
       refresh = 3600;
       expire = 604800;
       minimum = 600;
@@ -92,6 +92,8 @@ let
         thrain = hostTTL 600 "192.168.242.101" "2a01:4f8:c013:1a4b:ecba::101";
         frodo = hostTTL 600 "192.168.242.201" "2a01:4f8:c013:1a4b:ecba::201";
         elrond = hostTTL 600 "192.168.242.202" "2a01:4f8:c013:1a4b:ecba::202";
+
+        acme = hostTTL 600 null "2a01:4f8:c013:1a4b:ecba:1337::1";
       };
 
       bbb-wass.CNAME = [ "bbb.wass-er.com." ];
