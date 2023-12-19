@@ -52,12 +52,12 @@ in {
   records = {
     CAA = dns.combinators.letsEncrypt email;
 
-    NS = [ "ns2.he.net." "ns4.he.net." "ns3.he.net." "ns5.he.net." ];
+    NS = [ "ns1.kloenk.de." "ns2.kloenk.de." "ns2.leona.is." "ns3.leona.is." ];
 
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.de.";
       adminEmail = "noc.kloenk.de";
-      serial = 2023121900;
+      serial = 2023121910;
       refresh = 1800;
       expire = 3600;
       minimum = 600;

@@ -7,7 +7,7 @@ in with dns.combinators; {
 
   MX = mxKloenk;
   TXT = spfKloenk ++ [
-    (ttl 3600 (txt
+    (ttl 600 (txt
       "google-site-verification=p5ttbvvVzpqKQNUf_kuhwBEFvTavqiUF5BxTytUbGsY"))
   ];
 
@@ -36,11 +36,11 @@ in with dns.combinators; {
 
     drachensegler.MX = mxKloenk;
     drachensegler.TXT = spfKloenk;
-    drachensegler.subdomains._dmarc.TXT = dmarcKloenk;
+    "_dmarc.drachensegler".TXT = dmarcKloenk;
 
     ad.MX = mxKloenk;
     ad.TXT = spfKloenk;
-    ad.subdomains._dmarc.TXT = dmarcKloenk;
+    "_dmarc.ad".TXT = dmarcKloenk;
 
     sc-social.CNAME = [ "starcitizen.social." ];
 

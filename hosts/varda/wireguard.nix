@@ -51,7 +51,11 @@
 
       { # gimli
         wireguardPeerConfig = {
-          AllowedIPs = [ "192.168.242.2/32" "2a01:4f8:c013:1a4b:ecba::2/128" ];
+          AllowedIPs = [
+            "192.168.242.2/32"
+            "2a01:4f8:c013:1a4b:ecba::2/128"
+            "2a01:4f8:c013:1a4b:ecba:0:21:0/120"
+          ];
           PublicKey = "vVIbHzXr99y1dm80LbSViIUmlym/yt3+Ra48IcZQ+AY=";
           Endpoint = "gimli.kloenk.de:51820";
         };

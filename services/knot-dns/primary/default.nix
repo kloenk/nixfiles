@@ -23,6 +23,7 @@ in {
 
   services.knot = {
     enable = true;
+    keyFiles = [ config.sops.secrets."dns/knot_primary/keys".path ];
     settings = {
       server.listen = [
         "127.0.0.11@53"
@@ -32,10 +33,27 @@ in {
 
         "2a01:4f8:c013:1a4b:ecba::20:53@53"
       ];
-      remote = { internal_ns2 = { address = "2a01:4f8:c013:1a4b:ecba::2"; }; };
-      acl.internal = {
-        address = [ "2a01:4f8:c013:1a4b:ecba::/80" "127.0.0.0/8" ];
-        action = "transfer";
+      remote = {
+        internal_ns2 = { address = "2a01:4f8:c013:1a4b:ecba::2"; };
+        leona_ns2 = {
+          address = "2a02:247a:22e:fd00:1::1";
+          key = "kloenk_leona_secondary";
+        };
+        leona_ns3 = {
+          address = "2a01:4f8:c010:1098::1";
+          key = "kloenk_leona_secondary";
+        };
+      };
+      acl = {
+        internal = {
+          address = [ "2a01:4f8:c013:1a4b:ecba::/80" "127.0.0.0/8" ];
+          action = "transfer";
+        };
+        leona_transfer = {
+          address = [ "2a02:247a:22e:fd00:1::1" "2a01:4f8:c010:1098::1" ];
+          action = "transfer";
+          key = "kloenk_leona_secondary";
+        };
       };
       mod-rrl.default = {
         rate-limit = 200;
@@ -57,18 +75,18 @@ in {
           notify = [ "internal_ns2" ];
           acl = [ "internal" ];
           zonefile-sync = -1;
-          zonefile-load = "difference";
-          journal-content = "changes";
+          zonefile-load = "difference-no-serial";
+          journal-content = "all";
         };
         signedprimary = {
           dnssec-signing = true;
           dnssec-policy = "ecdsa256";
           semantic-checks = true;
-          notify = [ "internal_ns2" ];
-          acl = [ "internal" ];
+          notify = [ "internal_ns2" "leona_ns2" "leona_ns3" ];
+          acl = [ "internal" "leona_transfer" ];
           zonefile-sync = -1;
-          zonefile-load = "difference";
-          journal-content = "changes";
+          zonefile-load = "difference-no-serial";
+          journal-content = "all";
         };
       };
       zone = {
@@ -96,4 +114,6 @@ in {
       };
     };
   };
+
+  sops.secrets."dns/knot_primary/keys".owner = "knot";
 }
