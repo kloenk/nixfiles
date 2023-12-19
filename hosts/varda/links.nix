@@ -16,6 +16,7 @@ in {
       name = "eth0";
       addresses = [{ addressConfig.Address = "2a01:4f8:c013:1a4b::/64"; }];
       routes = [{ routeConfig.Gateway = "fe80::1"; }];
+      dns = [ "127.0.0.1" ];
       DHCP = "ipv4";
     };
   };

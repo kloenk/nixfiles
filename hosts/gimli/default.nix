@@ -11,6 +11,7 @@
 
     ../../services/matrix
     ../../services/mail
+    ../../services/kresd-dns
     ../../services/knot-dns/secondary
 
     ../../profiles/telegraf.nix
@@ -44,6 +45,8 @@
     "2a01:4f8:c013:1a4b:ecba::2"
     "2a01:4f8:c013:1a4b:ecba::21:53@53"
   ];
+
+  services.kresd.instances = 4;
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database

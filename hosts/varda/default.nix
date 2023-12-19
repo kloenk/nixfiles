@@ -14,6 +14,7 @@
     ../../services/bitwarden
     ../../services/int-acme-ca
     ../../services/knot-dns/primary
+    ../../services/kresd-dns
     ../../services/monitoring
     ../../services/monitoring/kuma.nix
 
@@ -28,6 +29,8 @@
   networking.domain = "kloenk.de";
 
   nix.gc.automatic = true;
+
+  services.kresd.instances = 2;
 
   fileSystems."/".device =
     lib.mkForce "/dev/disk/by-partuuid/1dbe61d1-5450-46de-9a31-a242aafe7da9";
