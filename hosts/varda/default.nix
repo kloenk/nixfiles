@@ -13,6 +13,7 @@
     ../../services/web
     ../../services/bitwarden
     ../../services/int-acme-ca
+    ../../services/knot-dns/primary
     ../../services/monitoring
     ../../services/monitoring/kuma.nix
 

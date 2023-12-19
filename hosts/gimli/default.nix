@@ -11,7 +11,7 @@
 
     ../../services/matrix
     ../../services/mail
-    ../../services/dns
+    ../../services/knot-dns/secondary
 
     ../../profiles/telegraf.nix
   ];

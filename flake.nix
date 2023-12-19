@@ -38,9 +38,8 @@
 
   inputs.dns = {
     type = "github";
-    owner = "kloenk";
-    #owner = "kirelagin";
-    repo = "nix-dns";
+    owner = "kirelagin";
+    repo = "dns.nix";
     inputs.nixpkgs.follows = "/nixpkgs";
   };
 
