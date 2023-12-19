@@ -1,5 +1,5 @@
 { ... }:
 
 {
-  imports = [ ./dns.nix ./wireguard.nix ];
+  imports = [ ./wireguard.nix ];
 }

@@ -7,8 +7,6 @@
     options = [ "bind" ];
   };
 
-  networking.domains.subDomains."influx.kloenk.de" = { };
-  networking.domains.subDomains."influx.kloenk.dev" = { };
   services.nginx.virtualHosts."influx.kloenk.de" = {
     locations."/".proxyPass = "http://127.0.0.1:8086/";
     enableACME = true;

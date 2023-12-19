@@ -12,10 +12,6 @@ let
     "/insta" = { return = "301 https://instagram.com/p3tr_1ch0rr"; };
   };
 in {
-  networking.domains.subDomains = {
-    "p3tr1ch0rr.de" = { };
-    "web.p3tr1ch0rr.de" = { };
-  };
   services.nginx.virtualHosts = {
     "p3tr1ch0rr.de" = {
       enableACME = true;

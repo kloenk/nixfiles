@@ -11,13 +11,10 @@ in {
     51820 # wg0
   ];
 
-  k.dns.ipv4 = v4;
-  k.dns.ipv6 = v6;
-  k.dns.public = true;
-
   k.wg = {
     enable = true;
     id = 2;
+    public = true;
   };
 
   systemd.network = {
