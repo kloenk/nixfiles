@@ -113,14 +113,9 @@
     inputs.nixpkgs-stable.follows = "/nixpkgs";
   };
 
-  inputs.nixos-dns = {
-    url = "github:Janik-Haag/nixos-dns";
-    inputs.nixpkgs.follows = "nixpkgs";
-  };
-
   outputs = inputs@{ self, nixpkgs, nix, moodlepkgs, mail-server, kloenk-www
     , dns, darwin, sops-nix, vika, colmena, jlly, fleet_bot, p3tr, sysbadge
-    , oxalica, disko, nixos-dns, ... }:
+    , oxalica, disko, ... }:
     let
       overlayCombined = system: [
         #nix.overlays.default
@@ -181,38 +176,23 @@
       overlays.default = self.overlays.kloenk;
       overlays.dns = final: prev:
         let
-          generate = nixos-dns.utils.generate final;
-          dnsConfig = {
-            inherit (self) nixosConfigurations;
-            extraConfig = import ./dns.nix;
-          };
+          dns = inputs.dns.lib.${final.stdenv.targetPlatform.system}.dns;
+          lib = final.lib;
+          common = import ./services/dns/common.nix { inherit dns lib; };
         in {
-          kloenk-zoneFiles = generate.zoneFiles dnsConfig;
-          kloenk-octodns-config = generate.octodnsConfig {
-            inherit dnsConfig;
-            config = {
-              providers = {
-                hetzner = {
-                  class = "octodns_hetzner.HetznerProvider";
-                  token = "env/HETZNER_DNS_TOKEN";
-                };
-              };
-            };
-            zones = {
-              "kloenk.de." =
-                nixos-dns.utils.octodns.generateZoneAttrs [ "hetzner" ];
-              "kloenk.eu." =
-                nixos-dns.utils.octodns.generateZoneAttrs [ "hetzner" ];
-              "sysbadge.dev." =
-                nixos-dns.utils.octodns.generateZoneAttrs [ "hetzner" ];
-              "p3tr1ch0rr.de." =
-                nixos-dns.utils.octodns.generateZoneAttrs [ "hetzner" ];
-            };
+          de_kloenk = import ./services/dns/zones/de.kloenk.nix {
+            inherit dns lib common;
           };
-          kloenk-octodns = final.octodns.withProviders (ps: [
-            final.octodns-providers.bind
-            final.octodns-providers.hetzner
-          ]);
+          eu_kloenk = import ./services/dns/zones/eu.kloenk.nix {
+            inherit dns lib common;
+          };
+
+          dev_sysbadge = import ./services/dns/zones/dev.sysbadge.nix {
+            inherit dns lib common;
+          };
+          de_p3tr1ch0rr = import ./services/dns/zones/de.p3tr1ch0rr.nix {
+            inherit dns lib common;
+          };
         };
       overlays.iso = final: prev: {
         iso = (nixpkgs.lib.nixosSystem {
@@ -227,7 +207,6 @@
             colmena.nixosModules.deploymentOptions
             inputs.home-manager.nixosModules.home-manager
             self.nixosModules.kloenk
-            nixos-dns.nixosModules.dns
 
             self.nixosModules.nftables
             self.nixosModules.helix
@@ -322,8 +301,6 @@
 
             vika.nixosModules.colorfulMotd
             vika.nixosModules.secureSSHClient
-
-            nixos-dns.nixosModules.dns
 
             inputs.home-manager.nixosModules.default
           ];

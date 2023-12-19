@@ -1,70 +1,18 @@
-{ inputs, config, lib, ... }:
+{ dns, lib, common, ... }:
 
 let
-  dns = inputs.dns.lib.${config.nixpkgs.system}.dns;
-
-  mxKloenk = with dns.combinators.mx;
-    map (dns.combinators.ttl 3600) [
-      (mx 10 "gimli.kloenk.dev.")
-      #secondary (20)
-    ];
-  dmarc = with dns.combinators;
-    [ (txt "v=DMARC1;p=reject;pct=100;rua=mailto:postmaster@kloenk.dev") ];
-  spfKloenk = with dns.combinators.spf;
-    map (dns.combinators.ttl 600) [
-      (strict [
-        "a:gimli.kloenk.de"
-        "ip4:49.12.72.200/32"
-        "ip6:2a01:4f8:c012:b874::/128"
-      ])
-    ];
-
-  hostTTL = ttl: ipv4: ipv6:
-    lib.optionalAttrs (ipv4 != null) {
-      A = [{
-        address = ipv4;
-        inherit ttl;
-      }];
-    } // lib.optionalAttrs (ipv6 != null) {
-      AAAA = [{
-        address = ipv6;
-        inherit ttl;
-      }];
-    };
-
   zone = with dns.combinators; {
-    SOA = ((ttl 600) {
-      nameServer = "ns1.kloenk.de.";
-      adminEmail = "hostmaster@kloenk.de";
-      serial = 2020122612;
-      refresh = 600;
-      expire = 604800;
-      minimum = 600;
-    });
+    inherit (common.hosts.varda) A AAAA;
+    inherit (common.records) CAA SOA NS;
 
-    NS =
-      [ "ns1.he.net." "ns2.he.net." "ns4.he.net." "ns3.he.net." "ns5.he.net." ];
+    MX = common.mail.mxKloenk;
 
-    #A = map (ttl 600) [ (a "195.39.247.6") ];
-    A = map (ttl 600) [ (a "168.119.57.172") ];
-    AAAA = map (ttl 600) [ (aaaa "2a01:4f8:c013:1a4b::") ];
-
-    #AAAA = map (ttl 600) [ (aaaa "2a0f:4ac0::6") ];
-
-    #CNAME = [ "iluvatar.kloenk.dev." ];
-
-    MX = mxKloenk;
-
-    TXT = spfKloenk ++ [ ];
-    CAA = letsEncrypt config.security.acme.email;
-
-    SRV = [ ];
+    TXT = common.mail.spfKloenk;
 
     subdomains = rec {
-      #ns1 = iluvatar;
-      www.CNAME = [ "p3tr1ch0rr.de." ];
+      www = common.hosts.varda;
 
-      _dmarc.TXT = dmarc;
+      _dmarc.TXT = common.mail.dmarcKloenk;
 
       _domainkey.subdomains.mail.TXT = [
         (txt ''

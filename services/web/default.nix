@@ -7,11 +7,6 @@ let
 in {
   imports = [ ./p3tr1ch0rr.nix ];
 
-  networking.domains.subDomains = {
-    "kloenk.dev" = { };
-    "kloenk.eu" = { };
-    "kloenk.de" = { };
-  };
   services.nginx.virtualHosts = {
     "kloenk.dev" = {
       enableACME = true;

@@ -8,9 +8,6 @@
   };
 
   networking.firewall.allowedTCPPorts = [ 8443 ];
-  networking.domains.subDomains."acme.net.kloenk.de" = {
-    a.data = lib.mkForce null;
-  };
   services.step-ca = {
     enable = true;
     address = "[2a01:4f8:c013:1a4b:ecba:1337::1]";
