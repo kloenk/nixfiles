@@ -3,16 +3,22 @@
 let
   inherit (dns.combinators) ttl a aaaa;
 
-  hostTTL = ttl: ipv4: ipv6:
-    lib.optionalAttrs (ipv4 != null) {
+  host = { ttl ? 600, v4 ? null, v6 ? null, sshfp ? null }:
+    lib.optionalAttrs (v4 != null) {
       A = [{
-        address = ipv4;
+        address = v4;
         inherit ttl;
       }];
-    } // lib.optionalAttrs (ipv6 != null) {
+    } // lib.optionalAttrs (v6 != null) {
       AAAA = [{
-        address = ipv6;
+        address = v6;
         inherit ttl;
+      }];
+    } // lib.optionalAttrs (sshfp != null) {
+      SSHFP = [{
+        algorithm = "ED25519";
+        type = "SHA-256";
+        fingerprint = sshfp;
       }];
     };
 in {
@@ -36,17 +42,48 @@ in {
 
   # Hosts
   hosts = {
-    varda = hostTTL 1200 "168.119.57.172" "2a01:4f8:c013:1a4b::";
-    gimli = hostTTL 1200 "49.12.72.200" "2a01:4f8:c012:b874::";
+    varda = host {
+      ttl = 1200;
+      v4 = "168.119.57.17";
+      v6 = "2a01:4f8:c013:1a4b::";
+      sshfp =
+        "8c0608b28e42f4dabb717a076326ed26c8cdc6309b87509736053a3fe2d6a277";
+    };
+    gimli = host {
+      ttl = 1200;
+      v4 = "49.12.72.200";
+      v6 = "2a01:4f8:c012:b874::";
+      sshfp =
+        "3609591c2d5a24edcce7ceb1cf13ee91083071fa5d8be3c8dfc2c412725c8c13";
+    };
   };
 
   # wireguard net
   net = {
-    varda = hostTTL 600 "192.168.242.1" "2a01:4f8:c013:1a4b:ecba::1";
-    gimli = hostTTL 600 "192.168.242.2" "2a01:4f8:c013:1a4b:ecba::2";
-    thrain = hostTTL 600 "192.168.242.101" "2a01:4f8:c013:1a4b:ecba::101";
-    frodo = hostTTL 600 "192.168.242.201" "2a01:4f8:c013:1a4b:ecba::201";
-    elrond = hostTTL 600 "192.168.242.202" "2a01:4f8:c013:1a4b:ecba::202";
+    varda = host {
+      v4 = "192.168.242.1";
+      v6 = "2a01:4f8:c013:1a4b:ecba::1";
+      sshfp =
+        "8c0608b28e42f4dabb717a076326ed26c8cdc6309b87509736053a3fe2d6a277";
+    };
+    gimli = host {
+      v4 = "192.168.242.2";
+      v6 = "2a01:4f8:c013:1a4b:ecba::2";
+      sshfp =
+        "3609591c2d5a24edcce7ceb1cf13ee91083071fa5d8be3c8dfc2c412725c8c13";
+    };
+    thrain = host {
+      v4 = "192.168.242.101";
+      v6 = "2a01:4f8:c013:1a4b:ecba::101";
+    };
+    frodo = host {
+      v4 = "192.168.242.201";
+      v6 = "2a01:4f8:c013:1a4b:ecba::201";
+    };
+    elrond = host {
+      v4 = "192.168.242.202";
+      v6 = "2a01:4f8:c013:1a4b:ecba::202";
+    };
   };
 
   records = {
@@ -64,5 +101,5 @@ in {
     });
   };
 
-  helpers = { inherit hostTTL; };
+  helpers = { inherit host; };
 }

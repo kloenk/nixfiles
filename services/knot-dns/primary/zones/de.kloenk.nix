@@ -2,7 +2,7 @@
 
 let inherit (common.mail) mxKloenk dmarcKloenk spfKloenk;
 in with dns.combinators; {
-  inherit (common.hosts.varda) A AAAA;
+  inherit (common.hosts.varda) A AAAA SSHFP;
   inherit (common.records) CAA SOA NS;
 
   MX = mxKloenk;
@@ -27,7 +27,7 @@ in with dns.combinators; {
     grafana = varda;
 
     net.subdomains = common.net // {
-      acme = common.helpers.hostTTL 600 null "2a01:4f8:c013:1a4b:ecba:1337::1";
+      acme = common.helpers.host { v6 = "2a01:4f8:c013:1a4b:ecba:1337::1"; };
     };
 
     _github-challenge-cli-inc.TXT = [ (ttl 1200 (txt "a5adaebc78")) ];
@@ -48,7 +48,11 @@ in with dns.combinators; {
     knuddel-usee.CNAME = [ "stream.unterbachersee.de." ];
     moodle-usee.CNAME = [ "segelschule.unterbachersee.de." ];
     bbb-usee.CNAME = [ "schulungsraum.unterbachersee.de." ];
-    pve-usee = common.helpers.hostTTL 1800 "5.9.118.73" "2a01:4f8:162:6343::2";
+    pve-usee = common.helpers.host {
+      ttl = 1800;
+      v4 = "5.9.118.73";
+      v6 = "2a01:4f8:162:6343::2";
+    };
 
     _domainkey.subdomains.mail.TXT = [
       (txt ''

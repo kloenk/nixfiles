@@ -1,7 +1,7 @@
 { dns, lib, common, ... }:
 
 with dns.combinators; {
-  inherit (common.hosts.varda) A AAAA;
+  inherit (common.hosts.varda) A AAAA SSHFP;
   inherit (common.records) CAA SOA NS;
 
   TXT =

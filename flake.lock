@@ -220,11 +220,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1635273082,
-        "narHash": "sha256-EHiDP2jEa7Ai5ZwIf5uld9RVFcV77+2SUxjQXwJsJa0=",
-        "owner": "kirelagin",
-        "repo": "dns.nix",
-        "rev": "c7b9645da9c0ddce4f9de4ef27ec01bb8108039a",
+        "lastModified": 1703798567,
+        "narHash": "sha256-EYeiPucE5zvbr9UI09sl0Voagx6zrwVJ+EEjDWXmb9M=",
+        "owner": "Kloenk",
+        "repo": "nix-dns",
+        "rev": "b16f2c11a5fcde19b3b47d9350f8e8c5dc76e95c",
         "type": "github"
       },
       "original": {
