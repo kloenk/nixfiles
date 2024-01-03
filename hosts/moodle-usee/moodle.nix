@@ -102,7 +102,7 @@
     ensureDatabases = [ "moodle" ];
     ensureUsers = [{
       name = "moodle";
-      ensurePermissions."DATABASE moodle" = "ALL PRIVILEGES";
+      ensureDBOwnership = true;
     }];
   };
 

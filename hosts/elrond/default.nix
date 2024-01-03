@@ -12,7 +12,7 @@
     ./gaming.nix
     ./desktop.nix
     ./hyprland
-    ./mpd.nix
+    #./mpd.nix
     ./disko.nix
     #./kde.nix
 

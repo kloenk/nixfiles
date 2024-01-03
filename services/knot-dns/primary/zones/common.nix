@@ -59,7 +59,7 @@ in {
   };
 
   # wireguard net
-  net = {
+  net = rec {
     varda = host {
       v4 = "192.168.242.1";
       v6 = "2a01:4f8:c013:1a4b:ecba::1";
@@ -76,6 +76,7 @@ in {
       v4 = "192.168.242.101";
       v6 = "2a01:4f8:c013:1a4b:ecba::101";
     };
+    "syncthing.thrain" = thrain;
     frodo = host {
       v4 = "192.168.242.201";
       v6 = "2a01:4f8:c013:1a4b:ecba::201";
