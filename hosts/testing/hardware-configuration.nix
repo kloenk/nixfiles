@@ -17,19 +17,31 @@
        fsType = "bcachefs";
      };
   */
+  /* boot.initrd.systemd.mounts = [{
+       what = let
+         expandPath = path: "/dev/disk/by-path/${path}";
+         mapPaths = pathes: lib.concatMapStringsSep ":" expandPath pathes;
+       in mapPaths [
+         "virtio-pci-0000:05:00.0"
+         "virtio-pci-0000:06:00.0"
+         "virtio-pci-0000:07:00.0"
+         "virtio-pci-0000:08:00.0-part1"
+       ];
+       where = "/";
+       type = "bcachefs";
+     }];
+  */
   boot.initrd.systemd.mounts = [{
-    what = let
-      expandPath = path: "/dev/disk/by-path/${path}";
-      mapPaths = pathes: lib.concatMapStringsSep ":" expandPath pathes;
-    in mapPaths [
-      "virtio-pci-0000:05:00.0"
-      "virtio-pci-0000:06:00.0"
-      "virtio-pci-0000:07:00.0"
-      "virtio-pci-0000:08:00.0-part1"
-    ];
-    where = "/";
+    what = "UUID=18e09a86-fb0c-43a1-8362-325fdcd0a103";
+    where = "/sysroot";
     type = "bcachefs";
   }];
+  fileSystems."/".device = "none";
+  /* fileSystems."/" = {
+       device = "UUID=18e09a86-fb0c-43a1-8362-325fdcd0a103";
+       fsType = "bcachefs";
+     };
+  */
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/FDAA-1703";

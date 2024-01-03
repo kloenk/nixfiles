@@ -25,8 +25,22 @@
 
   users.users.kloenk.password = "foobar";
   users.users.root.password = "foobar";
+  boot.initrd.systemd.emergencyAccess = true;
 
+  boot.initrd.systemd.network = { enable = true; };
   boot.initrd.network.enable = true;
+  boot.initrd.network.ssh.port = 62955;
+  boot.initrd.network.ssh.enable = true;
+  boot.initrd.network.ssh.hostKeys = [ "/persist/data/openssh/ed25519_key" ];
+
+  boot.kernelPatches = [{
+    name = "bcachefs-lock-time";
+    patch = null;
+    extraConfig = ''
+      BCACHEFS_LOCK_TIME_STATS y
+    '';
+  }];
 
   system.stateVersion = "23.11";
 }
+

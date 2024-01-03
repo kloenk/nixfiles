@@ -19,4 +19,8 @@ in {
       DHCP = "yes";
     };
   };
+  boot.initrd.systemd.network = {
+    links."10-eth0" = config.systemd.network.links."10-eth0";
+    networks."10-eth0" = config.systemd.network.networks."10-eth0";
+  };
 }
