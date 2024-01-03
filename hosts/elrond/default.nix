@@ -7,6 +7,7 @@
     ./devenv.nix
     ./podman.nix
 
+    ./syncthing.nix
     ./pipewire.nix
     ./gaming.nix
     ./desktop.nix

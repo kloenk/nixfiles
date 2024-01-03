@@ -1,121 +1,50 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, lib, ... }:
 
 {
   imports = [
     ./hardware-configuration.nix
     ./links.nix
-    #./dhcpd.nix
-    ./nfs.nix
-    #./timemachine.nix
-    ./samba.nix
-    ./snmp
 
-    # ./factorio.nix
+    ../../profiles/bcachefs.nix
+    ../../profiles/postgres.nix
 
-    ./initrd.nix
+    ./services/syncthing.nix
 
-    ./dns.nix
-
-    #./k3s.nix
-    #./kubernetes.nix
-
-    #../../desktop
-    #../../desktop/plasma.nix
-    #../../desktop/sway.nix
-    #../../desktop/gnome.nix
-    #../../desktop/emacs
-
-    ./bbb-backup.nix
-    ./r-dev.nix
-    ./mpd.nix
+    ../../services/kresd-dns
 
     ../../profiles/telegraf.nix
-    ../../profiles/syncthing.nix
   ];
 
-  # FIME: remove
   security.acme.defaults.server =
-    builtins.trace "remove staging environment from acme"
-    "https://acme-staging-v02.api.letsencrypt.org/directory";
+    "https://acme.net.kloenk.de:8443/acme/acme/directory";
 
   hardware.cpu.intel.updateMicrocode = true;
   boot.loader.grub.enable = false;
   boot.loader.systemd-boot.enable = true;
-  boot.supportedFilesystems = [ "zfs" ];
-  boot.initrd.supportedFilesystems = [ "zfs" ];
-  boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
-  boot.zfs.enableUnstable = lib.mkForce true;
-  boot.zfs.devNodes = "/dev/";
+  boot.initrd.systemd.enable = true;
+  boot.supportedFilesystems = [ "bcachefs" ];
+  boot.initrd.supportedFilesystems = [ "bcachefs" ];
 
-  boot.initrd.luks.devices."cryptLVM".device =
-    "/dev/disk/by-id/wwn-0x5002538e40df324b-part1";
-  boot.initrd.luks.devices."cryptLVM".allowDiscards = true;
-  boot.initrd.luks.devices."cryptIntenso".device =
-    "/dev/disk/by-id/usb-Intenso_External_USB_3.0_20150609040398-0:0-part5";
-  boot.initrd.luks.reusePassphrases = true;
-
-  users.users.kloenk.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIuyJjJNWSxO8CFBueBstfdWN4EQBkKfz+A5RsAnR2F9 kloenk@barahir"
-  ];
+  users.users.kloenk.password = "foobar";
 
   networking.useDHCP = false;
   networking.hostName = "thrain";
-  networking.domain = "kloenk.dev";
+  networking.search = [ "fritz.box" ];
   networking.hosts = {
     "192.168.178.1" = lib.singleton "fritz.box";
-    "172.16.0.1" = lib.singleton "airlink.local";
-    "192.168.178.249" = [ "durin" "durin.kloenk.dev" "durin.fritz.box" ];
-    # TODO: barahir
-    # TODO: kloenkX?
+    "192.168.178.247" = lib.singleton "elrond";
   };
 
-  # initrd ssh server
+  # allow emergency shell access without password
+  boot.initrd.systemd.emergencyAccess = true;
+
+  # initrd network
+  boot.initrd.systemd.network.enable = true;
   boot.initrd.network.enable = true;
-  boot.initrd.availableKernelModules = [ "e1000e" ];
-  boot.initrd.network.ssh = { enable = true; };
-  boot.initrd.preLVMCommands = lib.mkBefore (''
-    ip li set eno1 up
-    ip addr add 192.168.178.248/24 dev eno1 && hasNetwork=1
-    zpool import smials
-    echo > /root/.profile 'askpass() {
-       stty -echo
-       printf "Password: "
-       read PASSWORD
-       stty echo
-       printf "\\n"
-
-       printf $PASSWORD | zfs load-key -r smials/BagEnd && \
-       printf $PASSWORD | cryptsetup-askpass 
-       killall zfs
-    }
-    '
-  '');
-
-  # TODO: use bind
-  networking.nameservers = [ "1.1.1.1" "192.168.178.1" "2001:4860:4860::8888" ];
-  networking.search = [ "fritz.box" ];
-  networking.hostId = "37507120";
-
-  # delete files in /
-  kloenk.transient.enable = true;
-
-  services.printing.browsing = true;
-  services.printing.enable = true;
-  services.avahi.enable = true;
-
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [
-      "chromium"
-      "factorio-headless"
-      "chromium-unwrapped"
-      "chrome-widevine-cdm"
-    ];
-
-  environment.systemPackages = with pkgs; [ lm_sensors virt-manager nodejs ];
-
-  # docker
-  #virtualisation.docker.enable = true;
-  hardware.steam-hardware.enable = false;
+  boot.initrd.network.ssh.enable = true;
+  boot.initrd.network.ssh.port = 62955;
+  boot.initrd.network.ssh.hostKeys =
+    [ "/persist/data/openssh/initrd_25519_key" ];
 
   # virtmanager
   virtualisation.libvirtd = {
@@ -123,57 +52,26 @@
     onShutdown = "shutdown";
   };
 
+  networking.firewall.allowedUDPPorts = [ 53 ];
+  services.kresd.listenPlain = [ "[::]:53" "0.0.0.0:53" ];
+  services.kresd.instances = 4;
+
   users.users.kloenk.extraGroups = [
     "docker" # enable docker controll
     "libvirtd" # libvirtd connections
     "audio"
   ];
-  users.users.kloenk.home = "/persist/data/kloenk";
 
-  # pa stream foo
-  sound.enable = true;
-  hardware.pulseaudio = {
-    enable = true;
-    #systemWide = true;
-    package = pkgs.pulseaudio;
-    tcp.enable = true;
-    tcp.anonymousClients.allowedIpRanges = [
-      "195.39.246.0/24"
-      "2a0f:4ac0::/64"
-      "2a0f:4ac0:40::/44"
-      "2a0f:4ac0:f199::/48"
-      "192.168.178.0/24"
-      "2a0a:a541:9ac9:0::/64"
-    ];
-  };
-  networking.firewall.interfaces.br0.allowedTCPPorts = lib.singleton 4713;
+  # keep in sync with elrond to share kernel
+  boot.kernelPatches = [{
+    name = "bcachefs-lock-time";
+    patch = null;
+    extraConfig = ''
+      BCACHEFS_LOCK_TIME_STATS y
+    '';
+  }];
 
-  system.autoUpgrade.enable = false;
+  services.telegraf.extraConfig.inputs = { sensors = { }; };
 
-  #services.calibre-server.enable = true;
-  #services.calibre-server.libraryDir = "/persist/data/syncthing/data/Library";
-  #users.users.calibre-server.extraGroups = [ "syncthing" ];
-
-  # syncthing
-  networking.firewall.allowedTCPPorts = [ 8384 ];
-  services.syncthing.dataDir = "/persist/data/syncthing/data";
-  services.syncthing.configDir = "/persist/data/syncthing/config";
-  services.syncthing.guiAddress = "6.0.2.2:8384";
-
-  # fritz.box
-  services.nginx.virtualHosts."thrain.fritz.box" = {
-    locations."/public/".alias = "/persist/data/public/";
-    locations."/public/".extraConfig = "autoindex on;";
-  };
-
-  # smartcard
-  services.pcscd.enable = true;
-  services.telegraf.extraConfig.inputs = {
-    sensors = { };
-    zfs = { };
-  };
-
-  services.openssh.forwardX11 = true;
-
-  system.stateVersion = "20.09";
+  system.stateVersion = "24.05";
 }
