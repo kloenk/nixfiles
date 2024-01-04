@@ -75,6 +75,8 @@ in {
     thrain = host {
       v4 = "192.168.242.101";
       v6 = "2a01:4f8:c013:1a4b:ecba::101";
+      sshfp =
+        "5981fad283f4404fced9081a9a609282548db8382c944d2e07d47655893ca6de";
     };
     "syncthing.thrain" = thrain;
     frodo = host {
@@ -82,9 +84,17 @@ in {
       v6 = "2a01:4f8:c013:1a4b:ecba::201";
     };
     elrond = host {
-      v4 = "192.168.242.202";
-      v6 = "2a01:4f8:c013:1a4b:ecba::202";
+      v4 = "192.168.242.204";
+      v6 = "2a01:4f8:c013:1a4b:ecba::204";
+      sshfp =
+        "3b73783e48f0431d45110e0c9ff338c3a8af0817e76861a6c4e3cd7dde59cdef";
     };
+    "syncthing.elrond" = elrond;
+    gloin = host {
+      v4 = "192.168.242.205";
+      v6 = "2a01:4f8:c013:1a4b:ecba::205";
+    };
+    "syncthing.gloin" = gloin;
   };
 
   records = {

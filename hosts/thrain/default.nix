@@ -9,6 +9,7 @@
     ../../profiles/postgres.nix
 
     ./services/syncthing.nix
+    ./services/samba.nix
 
     ../../services/kresd-dns
 

@@ -57,7 +57,7 @@
     nssmdns4 = true;
   };
 
-  users.users.kloenk.packages = with pkgs; [ element-desktop fractal ];
+  users.users.kloenk.packages = with pkgs; [ fractal _1password ];
   home-manager.users.kloenk = {
     xdg.enable = true;
     gtk = {

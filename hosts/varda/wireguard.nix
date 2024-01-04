@@ -126,7 +126,10 @@
     ];
     routes = [
       { routeConfig.Destination = "192.168.242.0/24"; }
-      { routeConfig.Destination = "2a01:4f8:c013:1a4b:ecba::/80"; }
+      {
+        routeConfig.Destination = "2a01:4f8:c013:1a4b:ecba::/80";
+        routeConfig.PreferredSource = "2a01:4f8:c013:1a4b:ecba::1";
+      }
     ];
   };
 

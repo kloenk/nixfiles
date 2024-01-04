@@ -50,6 +50,7 @@
       forwardAgent = true;
     };
   };
+  home-manager.users.kloenk.services.syncthing.enable = true;
 
   users.users.kloenk.packages = with pkgs; [
     elixir
