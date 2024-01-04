@@ -7,6 +7,7 @@
 
     ../../profiles/bcachefs.nix
     ../../profiles/postgres.nix
+    ../../profiles/desktop/syncthing.nix
 
     ./services/syncthing.nix
     ./services/samba.nix

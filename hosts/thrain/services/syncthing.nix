@@ -4,7 +4,6 @@
   boot.kernel.sysctl."fs.inotify.max_user_watches" = 204800;
 
   services.syncthing = {
-    enable = true;
     openDefaultPorts = true;
     dataDir = "/persist/data/syncthing";
     configDir = "${config.services.syncthing.dataDir}";
@@ -35,27 +34,6 @@
       };
     };
   };
-
-  services.nginx.virtualHosts."syncthing.thrain.net.kloenk.de" = {
-    enableACME = true;
-    forceSSL = true;
-    kTLS = true;
-    listenAddresses = [ "192.168.242.101" "[2a01:4f8:c013:1a4b:ecba::101]" ];
-    locations."/" = {
-      recommendedProxySettings = false; # self applied because host header
-      extraConfig = ''
-        proxy_set_header Host localhost;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-        proxy_set_header X-Forwarded-Host $host;
-        proxy_set_header X-Forwarded-Server $host;
-      '';
-      proxyPass = "http://localhost:8384";
-    };
-  };
-  security.acme.certs."syncthing.thrain.net.kloenk.de".server =
-    "https://acme.net.kloenk.de:8443/acme/acme/directory";
 
   users.users.kloenk.extraGroups = [ "syncthing" ];
 }

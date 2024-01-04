@@ -5,6 +5,8 @@ let
   netdevs = config.systemd.network.netdevs;
   networks = config.systemd.network.networks;
 in {
+  k.wg.id = 205;
+
   systemd.network = {
     links."10-eth0" = {
       matchConfig.MACAddress = "84:a9:38:c6:b3:cd";
