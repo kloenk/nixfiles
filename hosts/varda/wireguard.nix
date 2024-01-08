@@ -105,6 +105,14 @@
           PersistentKeepalive = 21;
         };
       }
+      { # gloin
+        wireguardPeerConfig = {
+          AllowedIPs =
+            [ "192.168.242.205/32" "2a01:4f8:c013:1a4b:ecba::205/128" ];
+          PublicKey = "4Bwytj56G/CueL/P454SSE6Sq7wafGd/cJlFri5LxTw=";
+          PersistentKeepalive = 21;
+        };
+      }
       { # sting
         wireguardPeerConfig = {
           AllowedIPs =

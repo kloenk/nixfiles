@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  fileSystems."/var/lib/uptime-kuma" = {
+  fileSystems."/var/lib/private/uptime-kuma" = {
     device = "/persist/data/uptime-kuma";
     fsType = "none";
     options = [ "bind" ];

@@ -370,7 +370,7 @@
 
         # Pony
         thrain = { pkgs, nodes, ... }: {
-          deployment.targetHost = "192.168.178.248";
+          deployment.targetHost = "thrain.net.kloenk.de";
           deployment.tags = [ "pony" "local" ];
 
           imports = [ ./hosts/thrain ];
@@ -379,7 +379,7 @@
           nixpkgs.config.allowBroken = true;
         };
         elrond = { pkgs, nodes, ... }: {
-          deployment.targetHost = "192.168.178.247";
+          deployment.targetHost = "elrond.net.kloenk.de";
           deployment.tags = [ "pony" "local" ];
 
           imports = [ ./hosts/elrond ];
@@ -388,7 +388,7 @@
         };
 
         gloin = { pkgs, nodes, ... }: {
-          deployment.targetHost = "192.168.178.";
+          deployment.targetHost = "gloin.net.kloenk.de";
           deployment.tags = [ "local" ];
 
           imports = [ ./hosts/gloin ];
