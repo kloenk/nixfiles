@@ -9,11 +9,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1703970261,
-        "narHash": "sha256-xQACaPV0fs8xTKfl1flFQbEoWgUfJxiJBMI0DB9RbB0=",
+        "lastModified": 1704502808,
+        "narHash": "sha256-JuNuAugF5Z824DPSYJsIxf1rDWjN3aHdrRgU5XUQ43s=",
         "ref": "refs/heads/master",
-        "rev": "378ae738d5ea505c1751f23b4c56e03bb2422f33",
-        "revCount": 1234,
+        "rev": "b90031efaa4500b8ce5ffc55e9d1ed716196b814",
+        "revCount": 1244,
         "type": "git",
         "url": "https://evilpiepirate.org/git/bcachefs-tools.git"
       },
@@ -1705,11 +1705,11 @@
     },
     "nixpkgs_5": {
       "locked": {
-        "lastModified": 1704319379,
-        "narHash": "sha256-gQYF4WEztpW3RyU2TusoEa274mT2FXgpdBn6ljgoGus=",
+        "lastModified": 1704731064,
+        "narHash": "sha256-e1EYBpUXsY+qBd0TZmlqh44HRhA/4DeiWRl5rI71hA4=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "47df65bb569c3485a3390b06b636005626b89d84",
+        "rev": "521b5b3e6775023b371102e30773d41830577492",
         "type": "github"
       },
       "original": {
