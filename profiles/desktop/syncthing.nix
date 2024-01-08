@@ -17,7 +17,14 @@
       enableACME = true;
       forceSSL = true;
       kTLS = true;
-      listenAddresses = [ config.k.wg.ipv4 "[${config.k.wg.ipv6}]" ];
+      extraConfig = ''
+        allow 127.0.0.1/8;
+        allow ::1/128;
+        allow 192.168.242.0/24;
+        allow 2a01:4f8:c013:1a4b:ecba::0/80;
+        deny all;
+      '';
+      #listenAddresses = [ config.k.wg.ipv4 "[${config.k.wg.ipv6}]" ];
       locations."/" = {
         recommendedProxySettings = false; # self applied because host header
         extraConfig = ''

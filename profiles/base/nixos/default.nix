@@ -41,7 +41,7 @@
     #"L /var/lib/acme - acme - - /persist/data/acme"
     #"L+ /etc/shadow - - - - /persist/data/shadow"
   ];
-  services.resolved.dnssec = "false";
+  services.resolved.dnssec = "allow-downgrade";
   networking.domain = lib.mkDefault "kloenk.de";
 
   # Services

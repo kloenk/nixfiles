@@ -4,6 +4,7 @@
   imports = [
     ./disko.nix
     ./links.nix
+    ./syncthing.nix
 
     ../../profiles/desktop
     ../../profiles/desktop/sway
