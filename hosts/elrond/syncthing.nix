@@ -13,13 +13,17 @@
           id =
             "AHVY7YB-PIQ24ZI-FX7ZAMC-XFNBSHF-57AWZF6-S76V6G5-5UXGOJV-BWNJYAW";
         };
+        gloin = {
+          id =
+            "XOJ2TU6-WZOWWYY-GU5O7LF-LLDZWYZ-JGAIHTH-SFAWOBJ-SM4L644-TZRFQQY";
+        };
       };
 
       folders = {
         "~/Developer" = {
           label = "Developer";
           id = "projects";
-          devices = [ "thrain" "frodo" ];
+          devices = [ "thrain" "frodo" "gloin" ];
         };
       };
     };

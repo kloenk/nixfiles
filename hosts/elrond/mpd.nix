@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
-{
+let musicPath = "/var/Music";
+in {
   networking.firewall = {
     allowedTCPPorts = [
       6600 # MPD
@@ -8,10 +9,20 @@
     ];
   };
 
+  fileSystems.${musicPath} = {
+    device = "//192.168.178.248/Music";
+    fsType = "cifs";
+    options = [
+      "uid=1000"
+      "gid=1000"
+      "credentials=${config.sops.secrets."smb/Music/credentials".path}"
+    ];
+  };
+
   services.mpd = {
     enable = true;
-    musicDirectory = "/persist/Mac/Music";
-    playlistDirectory = "/persist/Mac/Music/playlists";
+    musicDirectory = musicPath;
+    playlistDirectory = musicPath + "/playlists";
     extraConfig = ''
       audio_output {
         type		"httpd"
@@ -42,4 +53,6 @@
     XDG_RUNTIME_DIR =
       "/run/user/1000"; # User-id 1000 must match above user. MPD will look inside this directory for the PipeWire socket.
   };
+
+  sops.secrets."smb/Music/credentials".owner = "root";
 }

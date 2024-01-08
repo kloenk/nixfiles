@@ -11,6 +11,7 @@
 
     ./services/syncthing.nix
     ./services/samba.nix
+    ./services/netbox-nas.nix
 
     ../../services/kresd-dns
 

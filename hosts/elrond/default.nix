@@ -12,7 +12,7 @@
     ./gaming.nix
     ./desktop.nix
     ./hyprland
-    #./mpd.nix
+    ./mpd.nix
     ./disko.nix
     #./kde.nix
 
@@ -44,7 +44,9 @@
   networking.hostName = "elrond";
   networking.domain = "kloenk.dev";
   networking.hosts = {
-    "192.168.178.248" = [ "thrain" ];
+    "192.168.178.248" = [ "thrain" "thrain.kloenk.de" "thrain.net.kloenk.de" ];
+    "192.168.178.247" = [ "elrond" "elrond.kloenk.de" "elrond.net.kloenk.de" ];
+    "192.168.178.246" = [ "gloin" "gloin.kloenk.de" ];
     "192.168.178.1" = [ "fritz.box" ];
   };
 

@@ -32,9 +32,4 @@
   };
 
   networking.firewall.allowedTCPPorts = [ 4455 ];
-
-  fileSystems."/persist/Mac" = {
-    device = "192.168.178.248:/Mac";
-    fsType = "nfs";
-  };
 }
