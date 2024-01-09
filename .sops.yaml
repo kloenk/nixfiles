@@ -51,15 +51,17 @@ creation_rules:
   - path_regex: secrets/shared/[^/]*\.yaml$
     key_groups:
     - age:
-      - *kloenk_age
-      - *server_thrain
-      - *server_gimli
-      - *server_varda
-      - *server_moodle
-      - *server_elrond
-      - *server_gloin
-      - *darwin_frodo
-      - *server_sc-social
+        - *kloenk_age
+        - *server_thrain
+        - *server_gimli
+        - *server_varda
+        - *server_moodle
+        - *server_elrond
+        - *server_gloin
+        - *darwin_frodo
+        - *server_sc-social
+      pgp:
+        - *kloenk_gpg
   - path_regex: secrets/.+\.yaml$
     key_groups:
     - age:

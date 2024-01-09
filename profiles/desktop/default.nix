@@ -9,6 +9,7 @@
     ./gammastep.nix
     ./syncthing.nix
     ./sound.nix
+    ../users/kloenk/password.nix
   ];
 
   services.nginx.virtualHosts."${config.networking.hostName}.${config.networking.domain}" =

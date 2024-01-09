@@ -22,6 +22,20 @@
 
   home-manager.users.kloenk = {
     programs.wofi.enable = true;
+    services.swayidle = let
+      lockCommand =
+        "${pkgs.swaylock-effects}/bin/swaylock --screenshots --clock --effect-blur 20x10";
+    in {
+      enable = true;
+      events = [{
+        event = "lock";
+        command = lockCommand;
+      }];
+      timeouts = [{
+        timeout = 300;
+        command = lockCommand;
+      }];
+    };
     wayland.windowManager.sway = let
       cfg = config.home-manager.users.kloenk.wayland.windowManager.sway;
       # wallpaper = "~/.wallpapers/bg.jpg";

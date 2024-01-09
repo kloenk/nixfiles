@@ -5,6 +5,7 @@
     ./disko.nix
     ./links.nix
     ./syncthing.nix
+    ./pipewire.nix
 
     ../../profiles/desktop
     ../../profiles/desktop/sway
@@ -32,8 +33,6 @@
   networking.wireless.iwd.enable = true;
 
   environment.systemPackages = with pkgs; [ lm_sensors virt-manager ];
-
-  users.users.kloenk.password = "foobar";
 
   # virtmanager
   virtualisation.libvirtd = {
