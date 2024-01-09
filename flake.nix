@@ -55,6 +55,11 @@
     inputs.nixpkgs.follows = "/nixpkgs";
   };
 
+  inputs.mac-app-util = {
+    url = "github:hraban/mac-app-util";
+    inputs.nixpkgs.follows = "/nixpkgs";
+  };
+
   inputs.sops-nix = {
     url = "github:Mic92/sops-nix";
     inputs.nixpkgs.follows = "/nixpkgs";
@@ -446,6 +451,11 @@
             self.darwinModules.helix
 
             inputs.home-manager.darwinModules.home-manager
+            inputs.mac-app-util.darwinModules.default
+            ({ pkgs, config, inputs, ... }: {
+              home-manager.users.kloenk.imports =
+                [ inputs.mac-app-util.homeManagerModules.default ];
+            })
           ];
           specialArgs.inputs = inputs;
           specialArgs.self = self;

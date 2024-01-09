@@ -11,11 +11,11 @@
     ../../profiles/base/darwin
   ];
 
-  environment.systemPackages = with pkgs;
-    [
-      #pkgs.vim
-      wezterm
-    ];
+  environment.systemPackages = with pkgs; [
+    #pkgs.vim
+    wezterm
+    kloenk-emacs
+  ];
 
   networking.hostName = "frodo";
 
@@ -88,6 +88,7 @@
     nixfmt
     darwin.iproute2mac
     pwgen
+    # kloenk-emacs-mac
   ];
 
   services.epmd.enable = true;
