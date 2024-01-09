@@ -10,6 +10,7 @@
     ../../profiles/desktop/sway
     ../../profiles/desktop/emacs.nix
 
+    ../../profiles/secunet.nix
     ../../profiles/bcachefs.nix
 
     ../../profiles/telegraf.nix
@@ -55,13 +56,14 @@
 
   services.openssh.settings.X11Forwarding = true;
 
-  boot.kernelPatches = [{
-    name = "bcachefs-lock-time";
-    patch = null;
-    extraConfig = ''
-      BCACHEFS_LOCK_TIME_STATS y
-    '';
-  }];
+  /* boot.kernelPatches = [{
+       name = "bcachefs-lock-time";
+       patch = null;
+       extraConfig = ''
+         BCACHEFS_LOCK_TIME_STATS y
+       '';
+     }];
+  */
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database

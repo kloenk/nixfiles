@@ -458,7 +458,7 @@
           zephyr =
             pkgs.callPackage ./dev/zephyr.nix { python3 = pkgs.python310; };
           default = pkgs.mkShell {
-            nativeBuildInputs = [ pkgs.nixfmt pkgs.colmena ];
+            nativeBuildInputs = [ pkgs.nixfmt pkgs.colmena pkgs.sops ];
             inherit (self.checks.${system}.pre-commit) shellHook;
           };
         });

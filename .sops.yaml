@@ -1,5 +1,6 @@
 keys:
   - &kloenk_age age1p06k9fwwdhwcx6qxt5fyypkdk9wpkhk5fhyzjnykaymz32nwsakqwyfjqm
+  - &kloenk_gpg B44ADFDFF869A66A3FDFDD8B8609A7B519E5E342
   - &server_thrain age1ejyvncc2g7slp30fx72cyawg5z5030mzfq6zy8fk3tm2n72pqghsfmrvp6
   - &server_gimli age1we86kfnan67mq7eks89ndz85w299j35un400jvlrhk3ktjyhkgks69lz62
   - &server_varda age1vfrdpq9p6qm8yf4ddrzhy6mutzrzgauv6vp9gjq99t5kmcd8lp4sf9gyum
@@ -40,10 +41,13 @@ creation_rules:
       - *kloenk_age
       - *server_elrond
   - path_regex: secrets/gloin[^/]*\.yaml$
+    shamir_threshold: 1
     key_groups:
     - age:
-      - *kloenk_age
-      - *server_gloin
+        - *kloenk_age
+        - *server_gloin
+      pgp:
+        - *kloenk_gpg
   - path_regex: secrets/shared/[^/]*\.yaml$
     key_groups:
     - age:

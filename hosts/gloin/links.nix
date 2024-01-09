@@ -33,6 +33,35 @@ in {
       routes = [{ routeConfig.Gateway = "192.168.178.1"; }];
     };
 
+    # Secunet wireguard
+    netdevs."30-secunet0" = {
+      netdevConfig = {
+        Kind = "wireguard";
+        Name = "secunet0";
+        MTUBytes = "1300";
+      };
+      wireguardConfig = {
+        PrivateKeyFile = config.sops.secrets."secunet/wireguard/secunet0".path;
+      };
+      wireguardPeers = [{
+        wireguardPeerConfig = {
+          AllowedIPs = [ "0.0.0.0/0" "::/0" ];
+          PublicKey = "ZVayNyJeOn848aus5bqYU2ujNxvnYtV3ACoerLtDpg8=";
+          Endpoint = "gateway.seven.secunet.com:51821";
+        };
+      }];
+    };
+    networks."30-secunet0" = {
+      name = "secunet0";
+      linkConfig.RequiredForOnline = "no";
+      addresses = [
+        { addressConfig.Address = "198.18.1.108/15"; }
+        { addressConfig.Address = "fd00:5ec::16c/48"; }
+      ];
+    };
+
     wait-online.anyInterface = true;
   };
+
+  sops.secrets."secunet/wireguard/secunet0".owner = "systemd-network";
 }
