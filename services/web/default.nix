@@ -81,10 +81,11 @@ in {
       '';
     };
 
-    "matrixcore.dev" = {
-      enableACME = true;
-      forceSSL = true;
-      root = "/persist/data/matrixcore.dev";
-    };
+    /* "matrixcore.dev" = {
+         enableACME = true;
+         forceSSL = true;
+         root = "/persist/data/matrixcore.dev";
+       };
+    */
   };
 }
