@@ -17,7 +17,7 @@
       outputs.influxdb_v2 = {
         urls = [ "https://influx.kloenk.de" ];
         token = "$INFLUX_TOKEN";
-        organization = "kloenk";
+        organization = "default";
         bucket = "default";
       };
       inputs = {
