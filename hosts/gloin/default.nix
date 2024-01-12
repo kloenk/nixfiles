@@ -13,6 +13,7 @@
 
     ../../profiles/secunet.nix
     ../../profiles/bcachefs.nix
+    ../../profiles/secureboot.nix
 
     ../../profiles/telegraf.nix
   ];
@@ -25,6 +26,7 @@
   hardware.cpu.intel.updateMicrocode = true;
   boot.loader.grub.enable = false;
   boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.systemd.enable = true;
   boot.supportedFilesystems = [ "bcachefs" ];
   boot.initrd.supportedFilesystems = [ "bcachefs" ];

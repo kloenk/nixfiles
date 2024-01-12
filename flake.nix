@@ -65,11 +65,17 @@
     inputs.nixpkgs.follows = "/nixpkgs";
   };
 
-  inputs.vika = {
-    type = "sourcehut";
-    owner = "~vikanezrimaya";
-    repo = "nix-flake";
+  inputs.lanzaboote = {
+    url = "github:nix-community/lanzaboote/v0.3.0";
+    inputs.nixpkgs.follows = "/nixpkgs";
   };
+
+  /* inputs.vika = {
+       type = "sourcehut";
+       owner = "~vikanezrimaya";
+       repo = "nix-flake";
+     };
+  */
 
   inputs.colmena = {
     url = "github:zhaofengli/colmena";
@@ -118,8 +124,8 @@
   };
 
   outputs = inputs@{ self, nixpkgs, nix, moodlepkgs, mail-server, kloenk-www
-    , dns, darwin, sops-nix, vika, colmena, jlly, fleet_bot, p3tr, sysbadge
-    , oxalica, disko, ... }:
+    , dns, darwin, sops-nix, colmena, jlly, fleet_bot, p3tr, sysbadge, oxalica
+    , disko, ... }:
     let
       overlayCombined = system: [
         #nix.overlays.default
@@ -215,7 +221,7 @@
             self.nixosModules.nftables
             self.nixosModules.helix
 
-            vika.nixosModules.colorfulMotd
+            # vika.nixosModules.colorfulMotd # TODO: fix
           ];
           specialArgs.inputs = inputs;
           specialArgs.self = self;
@@ -303,8 +309,9 @@
             self.nixosModules.helix
             self.nixosModules.kloenk
 
-            vika.nixosModules.colorfulMotd
-            vika.nixosModules.secureSSHClient
+            # TODO: 
+            #vika.nixosModules.colorfulMotd
+            #vika.nixosModules.secureSSHClient
 
             inputs.home-manager.nixosModules.default
           ];
