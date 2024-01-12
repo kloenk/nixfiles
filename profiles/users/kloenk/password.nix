@@ -6,6 +6,7 @@
 
   sops.secrets."passwords/kloenk" = {
     sopsFile = ../../../secrets/shared/passwords.yaml;
+    neededForUsers = true;
     owner = "root";
   };
 }

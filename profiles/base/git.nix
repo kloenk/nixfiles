@@ -25,7 +25,7 @@ in {
         name = "Finn Behrens";
       };
       alias = { ls = "status"; };
-      feature.manyFiles = true;
+      # feature.manyFiles = true;
       push.autoSetupRemote = true;
     };
   };
