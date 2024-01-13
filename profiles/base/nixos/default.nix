@@ -11,6 +11,8 @@
     ../vim.nix
     ../zsh
 
+    ./motd.nix
+
     ../../users/root
     ../../users/kloenk
   ];

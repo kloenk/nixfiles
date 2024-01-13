@@ -1,12 +1,17 @@
 { lib, ... }:
 
-{
+let params = import ../ssh-params.nix;
+in {
   services.openssh = {
     enable = true;
     ports = [ 62954 ];
-    settings.PasswordAuthentication = lib.mkDefault false;
-    settings.KbdInteractiveAuthentication = false;
-    settings.PermitRootLogin = lib.mkDefault "prohibit-password";
+    settings = {
+      PasswordAuthentication = lib.mkDefault false;
+      KbdInteractiveAuthentication = false;
+      PermitRootLogin = lib.mkDefault "prohibit-password";
+      inherit (params) Ciphers Macs KexAlgorithms;
+      HostKeyAlgorithms = lib.concatStringsSep "," params.HostKeyAlgorithms;
+    };
 
     hostKeys = [{
       path = "/persist/data/openssh/ed25519_key";
