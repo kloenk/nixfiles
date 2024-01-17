@@ -68,5 +68,31 @@
       DHCP = "no";
       addresses = config.systemd.network.networks."20-br0".addresses;
     };
+
+    netdevs."30-wg-initrd" = {
+      netdevConfig = {
+        Kind = "wireguard";
+        Name = "wg-initrd";
+      };
+      wireguardConfig = { PrivateKeyFile = "/etc/secrets/30-wg-initrd.key"; };
+      wireguardPeers = [{
+        wireguardPeerConfig = {
+          AllowedIPs = [ "2a01:4f8:c013:1a4b:ecba:1338::1/120" ];
+          PublicKey = "hEcjE8kt3vSYkoWrAr8SaMMq4OkRcRvNJ5GhM78hpW0=";
+          Endpoint = "[2a01:4f8:c013:1a4b::]:51830";
+        };
+      }];
+    };
+    networks."30-wg-initrd" = {
+      name = "wg-initrd";
+      addresses =
+        [{ addressConfig.Address = "2a01:4f8:c013:1a4b:ecba:1338::101/128"; }];
+      routes =
+        [{ routeConfig.Destination = "2a01:4f8:c013:1a4b:ecba:1338::1/120"; }];
+    };
   };
+
+  sops.secrets."wireguard/wg-initrd".owner = "systemd-network";
+  boot.initrd.secrets."/etc/secrets/30-wg-initrd.key" =
+    config.sops.secrets."wireguard/wg-initrd".path;
 }

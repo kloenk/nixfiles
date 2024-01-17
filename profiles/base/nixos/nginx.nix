@@ -2,7 +2,6 @@
 
 {
   security.acme.acceptTerms = true;
-  security.acme.defaults.email = "ca@kloenk.de";
 
   networking.firewall.allowedTCPPorts = [ 80 443 ];
   services.nginx = {
@@ -48,5 +47,16 @@
   # Montioring
   services.telegraf.extraConfig.inputs = {
     nginx = { urls = [ "http://localhost/nginx_status" ]; };
+  };
+
+  security.acme.defaults = { name, config, ... }@certAttrs: {
+    config = lib.mkMerge [
+      (lib.mkIf
+        ((builtins.match "(.{1,63}.)?net.kloenk.de" certAttrs.name) != null) {
+          server =
+            lib.mkDefault "https://acme.net.kloenk.de:8443/acme/acme/directory";
+        })
+      { email = "ca@kloenk.de"; }
+    ];
   };
 }

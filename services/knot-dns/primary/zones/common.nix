@@ -82,6 +82,10 @@ in {
     };
     "syncthing.thrain" = thrain;
     "netbox-nas.thrain" = thrain;
+    "fritz.net.thrain" = thrain;
+    "eib.net.thrain" = thrain;
+    "edgeswitch.mgmt.thrain" = thrain;
+    "initrd.thrain" = host { v6 = "2a01:4f8:c013:1a4b:ecba:1338::101"; };
     frodo = host {
       v4 = "192.168.242.201";
       v6 = "2a01:4f8:c013:1a4b:ecba::201";

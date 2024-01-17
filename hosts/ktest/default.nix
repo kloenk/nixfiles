@@ -15,6 +15,9 @@
   boot.supportedFilesystems = [ "bcachefs" "virtiofs" ];
   boot.initrd.supportedFilesystems = [ "bcachefs" ];
 
+  boot.initrd.systemd.enable = true;
+  boot.initrd.systemd.emergencyAccess = true;
+
   networking.useDHCP = false;
   networking.hostName = "ktest";
   networking.domain = "kloenk.de";

@@ -3,6 +3,7 @@
 {
   networking.firewall.allowedUDPPorts = [
     51820 # wg0
+    51830 # wg-thrain
   ];
 
   # NATING
@@ -89,14 +90,6 @@
           PersistentKeepalive = 21;
         };
       }
-      { # p3tr1ch0rr
-        wireguardPeerConfig = {
-          AllowedIPs =
-            [ "192.168.242.203/32" "2a01:4f8:c013:1a4b:ecba::203/128" ];
-          PublicKey = "HkPEHcCRrj7hMKaqCD8XSXNwFKtij8vuShgv1vb8CTg=";
-          PersistentKeepalive = 21;
-        };
-      }
       { # elrond
         wireguardPeerConfig = {
           AllowedIPs =
@@ -139,6 +132,32 @@
         routeConfig.PreferredSource = "2a01:4f8:c013:1a4b:ecba::1";
       }
     ];
+  };
+
+  systemd.network.netdevs."30-wg-thrain" = {
+    netdevConfig = {
+      Kind = "wireguard";
+      Name = "wg-thrain";
+      Description = "unlock wireguard network for thrain in initramfs";
+    };
+    wireguardConfig = {
+      ListenPort = 51830;
+      PrivateKeyFile = config.sops.secrets."wireguard/wg-thrain".path;
+    };
+    wireguardPeers = [{
+      wireguardPeerConfig = {
+        AllowedIPs = [ "2a01:4f8:c013:1a4b:ecba:1338::101/128" ];
+        PublicKey = "JVdV4kGKVEiiVVe1T07lXhpP2BnrVHYUPHWk19nN5jw=";
+      };
+    }];
+  };
+  systemd.network.networks."30-wg-thrain" = {
+    name = "wg-thrain";
+    linkConfig.RequiredForOnline = "no";
+    addresses =
+      [{ addressConfig.Address = "2a01:4f8:c013:1a4b:ecba:1338::1/120"; }];
+    routes =
+      [{ routeConfig.Destination = "2a01:4f8:c013:1a4b:ecba:1338::1/120"; }];
   };
 
   networking.hosts = { };
@@ -198,6 +217,7 @@
 
   users.users.systemd-network.extraGroups = [ "keys" ];
   sops.secrets."wireguard/wg0".owner = "systemd-network";
+  sops.secrets."wireguard/wg-thrain".owner = "systemd-network";
   sops.secrets."buw/vpn/pass".owner = "root";
   sops.secrets."buw/vpn/config".owner = "root";
 }

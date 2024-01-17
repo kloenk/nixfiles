@@ -8,10 +8,11 @@
     ../../profiles/bcachefs.nix
     ../../profiles/postgres.nix
     ../../profiles/desktop/syncthing.nix
+    ../../profiles/users/kloenk/password.nix
 
     ./services/syncthing.nix
     ./services/samba.nix
-    ./services/netbox-nas.nix
+    ./services/proxies.nix
 
     ../../services/kresd-dns
 
