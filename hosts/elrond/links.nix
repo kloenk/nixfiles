@@ -20,22 +20,27 @@
   };
 
   systemd.network = {
-    networks."20-enp34s0" = {
-      name = "enp34s0";
+    links."10-eth0" = {
+      matchConfig.MACAddress = "00:d8:61:35:91:2f";
+      linkConfig.Name = "eth0";
+    };
+    networks."10-eth0" = {
+      name = "eth0";
       DHCP = "no";
       bridge = [ "br0" ];
     };
 
-    netdevs."25-br0" = {
+    netdevs."20-br0" = {
       netdevConfig = {
         Kind = "bridge";
         Name = "br0";
       };
     };
-    networks."25-br0" = {
+    networks."20-br0" = {
       name = "br0";
       DHCP = "no";
       dns = [ "192.168.178.248" ];
+      vlan = [ "mgmt" ];
       addresses = [{ addressConfig.Address = "192.168.178.247/24"; }];
       routes = [{
         routeConfig.Gateway = "192.168.178.1";
@@ -49,6 +54,19 @@
       DHCP = "yes";
 
       linkConfig.RequiredForOnline = "no";
+    };
+
+    netdevs."30-mgmt" = {
+      netdevConfig = {
+        Kind = "vlan";
+        Name = "mgmt";
+      };
+      vlanConfig.Id = 44;
+    };
+    networks."30-mgmt" = {
+      name = "mgmt";
+      DHCP = "no";
+      addresses = [{ addressConfig.Address = "192.168.44.102/24"; }];
     };
 
     networks."20-lo" = {
