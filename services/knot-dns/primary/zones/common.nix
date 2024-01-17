@@ -118,7 +118,7 @@ in {
     SOA = ((ttl 600) {
       nameServer = "ns1.kloenk.de.";
       adminEmail = "noc.kloenk.de";
-      serial = 2023121910;
+      serial = 2024011701;
       refresh = 1800;
       expire = 3600;
       minimum = 600;

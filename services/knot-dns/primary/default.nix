@@ -95,6 +95,11 @@ in {
             (import ./zones/de.kloenk.nix { inherit dns lib common; });
           template = "signedprimary";
         };
+        "kloenk.dev" = {
+          file = dnsutil.writeZone "kloenk.dev"
+            (import ./zones/dev.kloenk.nix { inherit dns lib common; });
+          template = "signedprimary";
+        };
         "kloenk.eu" = {
           file = dnsutil.writeZone "kloenk.eu"
             (import ./zones/eu.kloenk.nix { inherit dns lib common; });
