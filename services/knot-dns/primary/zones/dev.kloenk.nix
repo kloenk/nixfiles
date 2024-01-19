@@ -16,6 +16,8 @@ in with dns.combinators; {
 
     mail = gimli;
 
+    live = varda;
+
     bitwarden = varda;
     auth = varda;
 

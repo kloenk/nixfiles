@@ -12,6 +12,7 @@
 
     ../../services/web
     ../../services/bitwarden
+    ../../services/owncast
     ../../services/int-acme-ca
     ../../services/knot-dns/primary
     ../../services/kresd-dns
