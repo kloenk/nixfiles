@@ -809,11 +809,11 @@
       },
       "locked": {
         "host": "cyberchaos.dev",
-        "lastModified": 1705066080,
-        "narHash": "sha256-5dVCywx1Qn0JxgJkJWwMO8OFepFOz3jYEtErWpYfDSg=",
+        "lastModified": 1705526649,
+        "narHash": "sha256-WBLMY1cFZhM4tTpC+wjAB69Hda/wGQaMeFihdQV9rcI=",
         "owner": "kloenk",
         "repo": "www",
-        "rev": "66b4cc80962ba873a70268b951e9d6e1bf96b4b5",
+        "rev": "96c509bda95fd97d70f22cbd1377ae0a430adfea",
         "type": "gitlab"
       },
       "original": {

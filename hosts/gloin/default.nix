@@ -47,6 +47,7 @@
     "libvirtd" # libvirtd connections
     "audio"
     "pipewire"
+    "dialout" # usb serial adapter
   ];
 
   # smartcard
