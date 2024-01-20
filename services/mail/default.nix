@@ -134,6 +134,13 @@
         aliases = [ "grafana@kloenk.de" ];
       };
 
+      "no-reply@kloenk.dev" = {
+        hashedPasswordFile = config.sops.secrets."mail/no-reply".path;
+
+        aliases = [ "no-reply@kloenk.de" ];
+        sendOnly = true;
+      };
+
       "alertmanager@kloenk.de" = {
         hashedPasswordFile =
           config.sops.secrets."mail/alert_kloenk.de.sha512".path;
@@ -233,6 +240,7 @@
     "mail/git_kloenk.de.sha512".owner = "root";
     "mail/drachensegler_drachensegler.kloenk.de.sha512".owner = "root";
     "mail/me_p3tr1ch0rr.de.bcypt".owner = "root";
+    "mail/no-reply".owner = "root";
   };
 
   # sieve mailing ordering
