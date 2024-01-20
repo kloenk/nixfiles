@@ -20,6 +20,7 @@
     ../../services/monitoring
     ../../services/monitoring/kuma.nix
     ../../services/netbox
+    ../../services/youtrack
 
     ../../profiles/telegraf.nix
   ];
@@ -44,6 +45,9 @@
 
   fileSystems."/".device =
     lib.mkForce "/dev/disk/by-partuuid/1dbe61d1-5450-46de-9a31-a242aafe7da9";
+
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [ "youtrack" ];
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
