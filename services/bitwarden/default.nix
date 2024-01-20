@@ -21,6 +21,15 @@
   services.nginx.virtualHosts."bitwarden.kloenk.de" = {
     enableACME = true;
     forceSSL = true;
+    kTLS = true;
+    # Allow large attachments
+    extraConfig = "client_max_body_size 128M;";
+    locations."/".proxyPass = "http://127.0.0.1:8222/";
+  };
+  services.nginx.virtualHosts."bitwarden.kloenk.dev" = {
+    enableACME = true;
+    forceSSL = true;
+    kTLS = true;
     # Allow large attachments
     extraConfig = "client_max_body_size 128M;";
     locations."/".proxyPass = "http://127.0.0.1:8222/";
