@@ -70,6 +70,13 @@
     inputs.nixpkgs.follows = "/nixpkgs";
   };
 
+  /* inputs.leona = {
+       url = "gitlab:leona/nixfiles?host=cyberchaos.dev";
+       inputs.nixpkgs.follows = "/nixpkgs";
+       inputs.mailserver.follows = "/mail-server";
+     };
+  */
+
   /* inputs.vika = {
        type = "sourcehut";
        owner = "~vikanezrimaya";
@@ -308,6 +315,7 @@
             self.nixosModules.transient
             self.nixosModules.helix
             self.nixosModules.kloenk
+            self.nixosModules.vouch-proxy
 
             # TODO: 
             #vika.nixosModules.colorfulMotd
@@ -437,6 +445,7 @@
         wordpress = import ./modules/wordpress.nix;
         matrix-sliding-sync = import ./modules/matrix-sliding-sync;
         helix = import ./modules/helix;
+        vouch-proxy = import ./modules/vouch-proxy;
       };
 
       darwinModules = {
