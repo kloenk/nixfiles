@@ -321,6 +321,8 @@
           environment.systemPackages = [ # pkgs.colmena
           ];
 
+          k.ports = import ./lib/ports.nix;
+
           nix.channel.enable = false;
 
           deployment = {
