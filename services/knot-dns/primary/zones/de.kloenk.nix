@@ -26,6 +26,8 @@ in with dns.combinators; {
     influx = varda;
     grafana = varda;
 
+    netbox = varda;
+
     net.subdomains = common.net // {
       acme = common.helpers.host { v6 = "2a01:4f8:c013:1a4b:ecba:1337::1"; };
     };

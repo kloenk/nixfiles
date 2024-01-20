@@ -19,6 +19,7 @@
     ../../services/kresd-dns
     ../../services/monitoring
     ../../services/monitoring/kuma.nix
+    ../../services/netbox
 
     ../../profiles/telegraf.nix
   ];
