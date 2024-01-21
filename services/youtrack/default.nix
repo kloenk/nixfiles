@@ -7,7 +7,7 @@
 
   services.youtrack = {
     enable = true;
-    port = 7012;
+    environmentalParameters.listen-port = 7012;
     virtualHost = "yt.kloenk.dev";
     package = pkgs.youtrack;
   };
