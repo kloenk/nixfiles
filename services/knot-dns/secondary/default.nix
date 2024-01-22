@@ -47,6 +47,7 @@
       };
       zone = {
         "kloenk.de".template = "secondary";
+        "kloenk.dev".template = "secondary";
         "kloenk.eu".template = "secondary";
 
         "p3tr1ch0rr.de".template = "secondary";
