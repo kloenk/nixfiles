@@ -17,6 +17,10 @@ let
       direnv
       nix-mode
       rustic
+
+      flymake-elixir
+      elixir-mode
+
       protobuf-mode
       helm-nixos-options
       helm-projectile

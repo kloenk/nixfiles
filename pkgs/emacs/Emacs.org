@@ -416,6 +416,13 @@ Taken from bedrock early init
   :custom
   (rustic-lsp-client 'eglot))
 #+end_src
+*** Elixir
+#+begin_src emacs-lisp
+  (use-package elixir-mode
+    :ensure t
+    :hook (elixir-mode . eglot-ensure)
+    (before-save . eglot-format))
+#+end_src
 * Project management
 ** Projectile
 #+begin_src emacs-lisp
