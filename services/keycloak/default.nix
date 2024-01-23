@@ -1,25 +1,6 @@
 { config, lib, pkgs, ... }:
 
-let
-  pluginRestrictClientAuth = pkgs.stdenv.mkDerivation rec {
-    pname = "keycloak-restrict-client-auth";
-    version = "23.0.0";
-
-    src = pkgs.fetchurl {
-      url =
-        "https://github.com/sventorben/keycloak-restrict-client-auth/releases/download/v${version}/keycloak-restrict-client-auth.jar";
-      sha256 = "sha256-JwY1fByu8HOhRZ1KCZCN+0Xv06XcfXycc6pBvm9OQqE=";
-    };
-
-    dontUnpack = true;
-    dontBuild = true;
-
-    installPhase = ''
-      mkdir -p $out
-      install "$src" "$out"
-    '';
-  };
-in {
+{
   fileSystems."/var/lib/private/keycloak" = {
     device = "/persist/data/keycloak";
     fsType = "none";
@@ -34,7 +15,8 @@ in {
     };
     database.passwordFile = config.sops.secrets."keycloak/db/password".path;
     initialAdminPassword = "foobar";
-    plugins = [ pluginRestrictClientAuth ];
+    plugins = with config.services.keycloak.package.plugins;
+      [ keycloak-restrict-client-auth ];
     settings = {
       http-host = "127.0.0.1";
       http-port = config.k.ports.keycloak;
