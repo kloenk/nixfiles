@@ -76,6 +76,7 @@
   }];
 
   services.telegraf.extraConfig.inputs = { sensors = { }; };
+  systemd.services.telegraf.path = with pkgs; [ lm_sensors ];
 
   system.stateVersion = "24.05";
 }
