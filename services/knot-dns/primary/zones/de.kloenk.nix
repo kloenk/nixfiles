@@ -69,5 +69,22 @@ in with dns.combinators; {
       (txt ''
         v=DKIM1; k=rsa; " "p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDEEgSIeGxjIT5+HqaHlVTt0hL1QPYcidXeJsUgOa1bzfSybD/S0n9tNZidjr+pw2lResdZlyIJ7ozjBMp8MqD0mDDaRwqmy1jTQIFjSDwIORkjRzz4T+m6o3xAcpNrsvfbiOAj02EP5+1OF+0Y6YkdNWeZ2z2/XmL6eoTAYocRuQIDAQAB'')
     ];
+
+    _dmarc.subdomains = let
+      allowDMARC = domain: {
+        name = "${domain}._report";
+        value.TXT = [ "v=DMARC1" ];
+      };
+      allowDMARCs = domains: lib.listToAttrs (map allowDMARC domains);
+    in allowDMARCs [
+      "kloenk.de"
+      "ad.kloenk.de"
+      "drachensegler.kloenk.de"
+      "drachensegler.kloenk.dev"
+      "kloenk.dev"
+      "kloenk.eu"
+      "p3tr1ch0rr.de"
+      "sysbadge.dev"
+    ];
   };
 }
