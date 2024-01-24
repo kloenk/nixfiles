@@ -6,6 +6,7 @@
   k.wg = {
     enable = true;
     id = 101;
+    mobile = false;
   };
 
   nftables.extraConfig = ''

@@ -10,6 +10,9 @@ in {
     enable = mkEnableOption "Enable basic wireguard";
     net = mkEnableOption "net domains" // { default = cfg.enable; };
     public = mkEnableOption "Public Reachable";
+    mobile = mkEnableOption "Mobile device expected to go down" // {
+      default = true;
+    };
 
     id = mkOption { type = types.int; };
 

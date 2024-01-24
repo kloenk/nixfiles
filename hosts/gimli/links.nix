@@ -15,6 +15,7 @@ in {
     enable = true;
     id = 2;
     public = true;
+    mobile = false;
   };
 
   systemd.network = {

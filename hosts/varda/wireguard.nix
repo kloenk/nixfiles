@@ -26,6 +26,7 @@
 
   k.wg.id = 1;
   k.wg.net = true;
+  k.wg.mobile = false;
 
   systemd.network.netdevs."30-wg0" = {
     netdevConfig = {
