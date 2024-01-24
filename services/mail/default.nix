@@ -137,7 +137,7 @@
       "no-reply@kloenk.dev" = {
         hashedPasswordFile = config.sops.secrets."mail/no-reply".path;
 
-        aliases = [ "no-reply@kloenk.de" ];
+        aliases = [ "no-reply@kloenk.de" "alertmanager@kloenk.de" ];
         sendOnly = true;
       };
 

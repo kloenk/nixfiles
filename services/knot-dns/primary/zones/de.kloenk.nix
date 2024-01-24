@@ -24,6 +24,7 @@ in with dns.combinators; {
 
     # monitoring
     prometheus = varda;
+    alertmanager = varda;
     grafana = varda;
 
     netbox = varda;
