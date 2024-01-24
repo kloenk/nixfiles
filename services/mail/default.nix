@@ -43,6 +43,14 @@
       "sysbadge.dev"
     ];
 
+    dmarcReporting = {
+      enable = true;
+      domain = "kloenk.de";
+      fromName = "kloenk";
+      localpart = "dmarc-noreply";
+      organizationName = "kloenk";
+    };
+
     rejectRecipients = [ "wattpad@kloenk.de" "kick@kloenk.de" ];
 
     loginAccounts = {
