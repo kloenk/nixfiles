@@ -147,6 +147,21 @@
   };
 
   services.telegraf.extraConfig = { global_tags.tenant = "usee"; };
+  services.nginx.virtualHosts."telegraf.moodle-usee.kloenk.de" = {
+    enableACME = true;
+    forceSSL = true;
+    kTLS = true;
+    locations."/metrics" = {
+      proxyPass = "http://[::1]:9273/metrics";
+      extraConfig = ''
+        allow 127.0.0.1/8;
+        allow ::/8;
+        allow 168.119.57.172;
+        allow 2a01:4f8:c013:1a4b::/112;
+        deny all;
+      '';
+    };
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

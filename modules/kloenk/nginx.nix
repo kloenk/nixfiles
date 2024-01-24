@@ -43,6 +43,7 @@ in {
       services.nginx.virtualHosts.${cfg.public.domain} = {
         enableACME = true;
         forceSSL = true;
+        kTLS = true;
         locations."/public/".alias = cfg.public.folder;
         locations."/public/".extraConfig = "autoindex on;";
       };
@@ -51,6 +52,7 @@ in {
       services.nginx.virtualHosts.${cfg.net.domain} = {
         enableACME = true;
         forceSSL = true;
+        kTLS = true;
         locations."/public/".alias = cfg.net.folder;
         locations."/public/".extraConfig = "autoindex on;";
       };

@@ -50,6 +50,7 @@ in with dns.combinators; {
     bbb-wass.CNAME = [ "bbb.wass-er.com." ];
     knuddel-usee.CNAME = [ "stream.unterbachersee.de." ];
     moodle-usee.CNAME = [ "segelschule.unterbachersee.de." ];
+    "telegraf.moodle-usee".CNAME = [ "moodle-usee.kloenk.de." ];
     bbb-usee.CNAME = [ "schulungsraum.unterbachersee.de." ];
     pve-usee = common.helpers.host {
       ttl = 1800;

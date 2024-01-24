@@ -32,6 +32,10 @@ in {
           targets = wgConfigToTargets wgMobileAttrs;
           labels.uptype = "mobile";
         }
+        {
+          targets = [ "telegraf.moodle-usee.kloenk.de" ];
+          labels.uptype = "server";
+        }
       ];
     }];
 
