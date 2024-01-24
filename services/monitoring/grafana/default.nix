@@ -23,6 +23,7 @@ in {
         user = "grafana";
         host = "/run/postgresql";
       };
+      auth.disable_login_form = true;
       "auth.generic_oauth" = {
         enabled = true;
         name = "Keycloak";
@@ -44,13 +45,12 @@ in {
 
     provision = {
       enable = true;
-      datasources.settings = {
+      datasources.settings = { apiVersion = 1; };
+      dashboards.settings = {
         apiVersion = 1;
-        datasources = [{
-          name = "Influx";
-          type = "influxdb";
-          access = "proxy";
-          url = "http://localhost:8086";
+        providers = [{
+          name = "nixfiles";
+          options.path = ./dashboards;
         }];
       };
     };

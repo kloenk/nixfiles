@@ -23,7 +23,7 @@ in with dns.combinators; {
     auth = varda;
 
     # monitoring
-    influx = varda;
+    prometheus = varda;
     grafana = varda;
 
     netbox = varda;

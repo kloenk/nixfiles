@@ -1,5 +1,5 @@
 { ... }:
 
 {
-  imports = [ ./influx.nix ./grafana.nix ];
+  imports = [ ./prometheus.nix ./grafana ];
 }

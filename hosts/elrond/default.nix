@@ -78,6 +78,7 @@
   # smartcard
   services.pcscd.enable = true;
   services.telegraf.extraConfig.inputs = { sensors = { }; };
+  systemd.services.telegraf.path = with pkgs; [ lm_sensors ];
 
   services.openssh.settings.X11Forwarding = true;
 

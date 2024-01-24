@@ -35,4 +35,7 @@
       }
     '';
   };
+
+  services.telegraf.extraConfig.inputs.prometheus.urls =
+    [ "http://localhost:8453/metrics" ];
 }

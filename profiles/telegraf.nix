@@ -5,7 +5,7 @@
     enable = true;
     extraConfig = {
       agent = {
-        interval = "10s";
+        interval = "20s";
         round_interval = true;
         metric_batch_size = 1000;
         metric_buffer_limit = 10000;
@@ -14,12 +14,6 @@
         flush_jitter = "5s";
         hostname = config.networking.hostName;
       };
-      outputs.influxdb_v2 = {
-        urls = [ "https://influx.kloenk.de" ];
-        token = "$INFLUX_TOKEN";
-        organization = "default";
-        bucket = "default";
-      };
       inputs = {
         cpu = {
           percpu = true;
@@ -27,23 +21,49 @@
           collect_cpu_time = false;
           report_active = false;
         };
-        disk.ignore_fs =
-          [ "tmpfs" "devtmpfs" "devfs" "iso9660" "overlay" "aufs" "squashfs" ];
+        disk = {
+          ignore_fs = [
+            "tmpfs"
+            "devtmpfs"
+            "devfs"
+            "iso9660"
+            "overlay"
+            "aufs"
+            "squashfs"
+          ];
+          ignore_mount_opts = [ "bind" ];
+        };
         diskio = { };
         mem = { };
-        net = { };
+        net = { ignore_protocol_stats = true; };
         processes = { };
         swap = { };
         system = { };
-        ping.urls = [ "1.1.1.1" ];
-        ping.binary = "${pkgs.iputils}/bin/ping";
+        systemd_units = { };
+      };
+      outputs = {
+        prometheus_client = {
+          listen = "[::1]:9273";
+          metric_version = 2;
+          expiration_interval = "120s";
+          export_timestamp = true;
+        };
       };
     };
-    environmentFiles = [ config.sops.secrets."telegraf/env".path ];
   };
 
-  sops.secrets."telegraf/env" = {
-    sopsFile = ../secrets/shared/monitoring.yaml;
-    owner = "root";
+  services.nginx.virtualHosts = lib.mkIf config.k.wg.net {
+    "${config.networking.hostName}.net.kloenk.de" = {
+      locations."/metrics" = {
+        proxyPass = "http://[::1]:9273/metrics";
+        extraConfig = ''
+          allow 127.0.0.1/8;
+          allow ::1/128;
+          allow 192.168.242.0/24;
+          allow 2a01:4f8:c013:1a4b:ecba::0/80;
+          deny all;
+        '';
+      };
+    };
   };
 }
