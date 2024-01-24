@@ -141,6 +141,13 @@
         sendOnly = true;
       };
 
+      # youtrack todo mail
+      "todo@kloenk.dev" = {
+        hashedPasswordFile = config.sops.secrets."mail/todo".path;
+
+        aliases = [ "todo@kloenk.de" "nixfiles@kloenk.dev" ];
+      };
+
       "alertmanager@kloenk.de" = {
         hashedPasswordFile =
           config.sops.secrets."mail/alert_kloenk.de.sha512".path;
@@ -241,6 +248,7 @@
     "mail/drachensegler_drachensegler.kloenk.de.sha512".owner = "root";
     "mail/me_p3tr1ch0rr.de.bcypt".owner = "root";
     "mail/no-reply".owner = "root";
+    "mail/todo".owner = "root";
   };
 
   # sieve mailing ordering
