@@ -40,6 +40,15 @@
   boot.supportedFilesystems = [ "bcachefs" ];
   boot.initrd.supportedFilesystems = [ "bcachefs" ];
 
+  boot.initrd.systemd.emergencyAccess = true;
+
+  boot.initrd.systemd.network.enable = true;
+  boot.initrd.network.enable = true;
+  boot.initrd.network.ssh.enable = true;
+  boot.initrd.network.ssh.port = 62955;
+  boot.initrd.network.ssh.hostKeys =
+    [ "/persist/data/openssh/initrd_ed25519_key" ];
+
   networking.useDHCP = false;
   networking.hostName = "elrond";
   networking.domain = "kloenk.dev";

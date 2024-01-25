@@ -29,14 +29,12 @@
   boot.supportedFilesystems = [ "bcachefs" ];
   boot.initrd.supportedFilesystems = [ "bcachefs" ];
 
-  users.users.kloenk.password = "foobar";
-
   networking.useDHCP = false;
   networking.hostName = "thrain";
   networking.search = [ "fritz.box" ];
   networking.hosts = {
     "192.168.178.1" = lib.singleton "fritz.box";
-    "192.168.178.247" = lib.singleton "elrond";
+    "192.168.178.247" = [ "elrond" "elrond.kloenk.de" ];
   };
 
   # allow emergency shell access without password

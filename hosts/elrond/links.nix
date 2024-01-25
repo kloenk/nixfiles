@@ -23,6 +23,7 @@
     links."10-eth0" = {
       matchConfig.MACAddress = "00:d8:61:35:91:2f";
       linkConfig.Name = "eth0";
+      linkConfig.WakeOnLan = "magic";
     };
     networks."10-eth0" = {
       name = "eth0";
@@ -84,5 +85,14 @@
     networks."99-whow_cares".linkConfig.RequiredForOnline = "no";
     networks."99-whow_cares".linkConfig.Unmanaged = "yes";
     networks."99-whow_cares".name = "*";
+  };
+
+  boot.initrd.systemd.network = {
+    links."10-eth0" = config.systemd.network.links."10-eth0";
+    networks."10-eth0" = {
+      name = "eth0";
+      DHCP = "no";
+      addresses = config.systemd.network.networks."20-br0".addresses;
+    };
   };
 }

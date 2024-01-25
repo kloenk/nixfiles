@@ -8,7 +8,7 @@
 
   boot.initrd.availableKernelModules =
     [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "bcache" ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.kernelModules = [ "r8169" "realtek" "wireguard" ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
