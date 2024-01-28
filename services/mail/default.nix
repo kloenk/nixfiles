@@ -1,6 +1,8 @@
 { config, lib, pkgs, ... }:
 
 {
+  imports = [ ./parsedmarc.nix ];
+
   fileSystems."/var/vmail" = {
     device = "/persist/data/vmail";
     options = [ "bind" ];
@@ -142,6 +144,12 @@
         aliases = [ "grafana@kloenk.de" ];
       };
 
+      "dmarc@kloenk.dev" = {
+        hashedPasswordFile = config.sops.secrets."mail/dmarc".path;
+
+        aliases = [ "dmarc@kloenk.de" ];
+      };
+
       "no-reply@kloenk.dev" = {
         hashedPasswordFile = config.sops.secrets."mail/no-reply".path;
 
@@ -257,6 +265,7 @@
     "mail/me_p3tr1ch0rr.de.bcypt".owner = "root";
     "mail/no-reply".owner = "root";
     "mail/todo".owner = "root";
+    "mail/dmarc".owner = "root";
   };
 
   # sieve mailing ordering
