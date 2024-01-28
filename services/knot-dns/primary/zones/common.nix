@@ -29,7 +29,7 @@ in {
         #secondary (20)
       ];
     dmarcKloenk = with dns.combinators;
-      [ (txt "v=DMARC1;p=reject;pct=100;rua=mailto:postmaster@kloenk.de") ];
+      [ (txt "v=DMARC1;p=reject;pct=100;rua=mailto:dmarc@kloenk.de") ];
     spfKloenk = with dns.combinators.spf;
       map (dns.combinators.ttl 600) [
         (strict [

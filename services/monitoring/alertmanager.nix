@@ -41,12 +41,28 @@ in {
         }
       ];
       receivers = [
-        { name = "warning"; }
+        {
+          name = "warning";
+          webhook_configs = [{
+            http_config.authorization.type = "Bearer";
+            http_config.authorization.credentials = "$CYBERCHAOS_CREDENTIALS";
+            send_resolved = true;
+            url =
+              "https://cyberchaos.dev/kloenk/nix/prometheus/alerts/notify.json";
+          }];
+        }
         {
           name = "critical";
           email_configs = [{
             to = "monitoring@kloenk.de";
             headers.subject = "[ALERT] " + alert_message;
+          }];
+          webhook_configs = [{
+            http_config.authorization.type = "Bearer";
+            http_config.authorization.credentials = "$CYBERCHAOS_CREDENTIALS";
+            send_resolved = true;
+            url =
+              "https://cyberchaos.dev/kloenk/nix/prometheus/alerts/notify.json";
           }];
         }
       ];
