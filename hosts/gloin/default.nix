@@ -18,11 +18,6 @@
     ../../profiles/telegraf.nix
   ];
 
-  # FIME: remove
-  security.acme.defaults.server =
-    builtins.trace "remove staging environment from acme"
-    "https://acme-staging-v02.api.letsencrypt.org/directory";
-
   hardware.cpu.intel.updateMicrocode = true;
   boot.loader.grub.enable = false;
   boot.loader.systemd-boot.enable = true;
@@ -53,6 +48,7 @@
   # smartcard
   services.pcscd.enable = true;
   services.telegraf.extraConfig.inputs = { sensors = { }; };
+  systemd.services.telegraf.path = with pkgs; [ lm_sensors ];
 
   nix.gc.automatic = false;
 

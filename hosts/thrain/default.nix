@@ -19,9 +19,6 @@
     ../../profiles/telegraf.nix
   ];
 
-  security.acme.defaults.server =
-    "https://acme.net.kloenk.de:8443/acme/acme/directory";
-
   hardware.cpu.intel.updateMicrocode = true;
   boot.loader.grub.enable = false;
   boot.loader.systemd-boot.enable = true;

@@ -39,7 +39,22 @@
       };
 
     };
+
   security.acme.certs."syncthing.${config.networking.hostName}.net.kloenk.de".server =
     "https://acme.net.kloenk.de:8443/acme/acme/directory";
-}
 
+  services.vouch-proxy = {
+    enable = true;
+    servers."syncthing.${config.networking.hostName}.net.kloenk.de" = {
+      clientId = "syncthing";
+      port = 57566;
+      environmentFiles =
+        [ config.sops.secrets."syncthing/vouch_proxy_env".path ];
+    };
+  };
+
+  sops.secrets."syncthing/vouch_proxy_env" = {
+    owner = "root";
+    sopsFile = ../../secrets/shared/syncthing.yaml;
+  };
+}

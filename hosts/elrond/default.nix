@@ -27,11 +27,6 @@
     #../../common/nushell.nix
   ];
 
-  # FIME: remove
-  security.acme.defaults.server =
-    builtins.trace "remove staging environment from acme"
-    "https://acme-staging-v02.api.letsencrypt.org/directory";
-
   hardware.cpu.amd.updateMicrocode = true;
   boot.loader.grub.enable = false;
   boot.loader.systemd-boot.enable = true;

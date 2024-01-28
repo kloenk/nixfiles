@@ -5,7 +5,7 @@
 
   fileSystems."/etc/secureboot" = {
     device = "/persist/data/secureboot";
-    fsType = "nonee";
+    fsType = "none";
     options = [ "bind" ];
   };
 
