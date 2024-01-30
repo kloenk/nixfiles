@@ -3,6 +3,7 @@
 {
   imports = [
     ./nix.nix
+    ./zsh
     ./ssh.nix
     ./git.nix
     ./helix.nix # ./nushell.nix

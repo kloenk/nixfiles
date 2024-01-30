@@ -15,6 +15,7 @@
     #pkgs.vim
     wezterm
     kloenk-emacs
+    eza
   ];
 
   networking.hostName = "frodo";
@@ -97,6 +98,11 @@
     configUrl = "https://influx.kloenk.dev/api/v2/telegrafs/08e1104547058000";
     environmentFiles = [ "/etc/telegraf.env" ];
   };
+
+  home-manager.users.kloenk.programs.zsh.initExtra =
+    (builtins.readFile ./p10k.zsh);
+  home-manager.users.kloenk.home.sessionVariables.SSH_AUTH_SOCK =
+    "/Users/kloenk/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh";
 
   security.pam.enableSudoTouchIdAuth = true;
 }

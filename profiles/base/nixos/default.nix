@@ -9,7 +9,6 @@
 
     # dont work under darwin currently
     ../vim.nix
-    ../zsh
 
     ./motd.nix
 
@@ -92,6 +91,21 @@
     usbutils
     pciutils
   ];
+
+  # zsh options that down work on darwin
+  programs.zsh = {
+    syntaxHighlighting.enable = true;
+    autosuggestions.enable = true;
+    setOptions = [ "AUTO_CD" ];
+    shellAliases = {
+      ls = "eza";
+      l = "eza -a";
+      ll = "eza -lgh";
+      la = "eza -lagh";
+      lt = "eza -T";
+      lg = "eza -lagh --git";
+    };
+  };
 
   # Deployment
   deployment.tags =

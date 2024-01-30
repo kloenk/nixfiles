@@ -30,4 +30,13 @@
     gnupg
     pinentry_mac
   ];
+
+  environment.systemPath = [
+    "/nix/var/nix/profiles/default"
+    "/run/current-system/sw/bin"
+    "/run/current-system/etc/profiles/per-user/$USER"
+  ];
+
+  # zsh options that are renamed on darwin
+  programs.zsh = { enableSyntaxHighlighting = true; };
 }
