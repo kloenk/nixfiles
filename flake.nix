@@ -130,6 +130,11 @@
     inputs.nixpkgs-stable.follows = "/nixpkgs";
   };
 
+  inputs.kloenk-cv = {
+    url = "gitlab:kloenk/cv?host=cyberchaos.dev";
+    inputs.nixpkgs.follows = "/nixpkgs";
+  };
+
   outputs = inputs@{ self, nixpkgs, nix, moodlepkgs, mail-server, kloenk-www
     , dns, darwin, sops-nix, colmena, jlly, fleet_bot, p3tr, sysbadge, oxalica
     , disko, ... }:

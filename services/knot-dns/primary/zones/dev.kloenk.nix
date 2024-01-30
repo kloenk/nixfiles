@@ -16,6 +16,8 @@ in with dns.combinators; {
 
     mail = gimli;
 
+    cv = varda;
+
     live = varda;
     yt = varda;
 

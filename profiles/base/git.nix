@@ -17,6 +17,7 @@ in {
   programs.git = {
     enable = true;
     config = {
+      branch.sort = "-committerdate";
       core.excludesFile = ignoreFile;
       color.ui = true;
       init.defaultBranch = "main";

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 let
   commonHeaders = lib.concatStringsSep "\n"
@@ -7,10 +7,13 @@ let
 in {
   imports = [ ./p3tr1ch0rr.nix ];
 
+  nixpkgs.overlays = [ inputs.kloenk-cv.overlays.default ];
+
   services.nginx.virtualHosts = {
     "kloenk.dev" = {
       enableACME = true;
       forceSSL = true;
+      kTLS = true;
       root = pkgs.kloenk-www;
       locations."/public/".alias = "/persist/data/public/";
       locations."/".extraConfig = "return 301 https://kloenk.eu;";
@@ -26,6 +29,7 @@ in {
     "kloenk.eu" = {
       enableACME = true;
       forceSSL = true;
+      kTLS = true;
       root = pkgs.kloenk-www;
       locations."= /.well-known/matrix/client" = let
         client = {
@@ -71,6 +75,7 @@ in {
     "kloenk.de" = {
       enableACME = true;
       forceSSL = true;
+      kTLS = true;
       root = pkgs.kloenk-www;
       locations."/public/".alias = "/persist/data/public/";
       locations."/".extraConfig = "return 301 https://kloenk.eu;";
@@ -79,6 +84,17 @@ in {
         add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; frame-ancestors 'none'; object-src 'none'" always;
         add_header Cache-Control $cacheable_types;
       '';
+    };
+
+    "cv.kloenk.dev" = {
+      enableACME = true;
+      forceSSL = true;
+      kTLS = true;
+      root = pkgs.runCommandNoCC "cv.kloenk.dev" { } ''
+        mkdir $out
+        cp ${pkgs.kloenk-cv}/cv.pdf $out/index.pdf
+      '';
+      locations."/".index = "index.pdf";
     };
 
     /* "matrixcore.dev" = {
