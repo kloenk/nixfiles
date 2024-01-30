@@ -10,6 +10,7 @@
     ../../profiles/hetzner_vm.nix
     ../../profiles/postgres.nix
 
+    ../../services/atuin
     ../../services/web
     ../../services/bitwarden
     ../../services/owncast

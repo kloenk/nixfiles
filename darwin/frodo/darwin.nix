@@ -3,6 +3,7 @@
 {
   imports = [
     #./postgres.nix
+    ./zsh.nix
 
     #../../common/nushell.nix
     ../../profiles/desktop/wezterm.nix
@@ -93,16 +94,7 @@
   ];
 
   services.epmd.enable = true;
-  services.telegraf = {
-    enable = false;
-    configUrl = "https://influx.kloenk.dev/api/v2/telegrafs/08e1104547058000";
-    environmentFiles = [ "/etc/telegraf.env" ];
-  };
-
-  home-manager.users.kloenk.programs.zsh.initExtra =
-    (builtins.readFile ./p10k.zsh);
-  home-manager.users.kloenk.home.sessionVariables.SSH_AUTH_SOCK =
-    "/Users/kloenk/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh";
+  services.telegraf = { enable = false; };
 
   security.pam.enableSudoTouchIdAuth = true;
 }

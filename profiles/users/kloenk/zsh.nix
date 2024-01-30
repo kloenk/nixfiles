@@ -1,6 +1,8 @@
 { lib, pkgs, ... }:
 
 {
+  imports = [ ./atuin.nix ];
+
   home-manager.users.kloenk = {
     programs.zsh = {
       enable = true;
