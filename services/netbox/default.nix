@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   fileSystems."/var/lib/netbox" = {
@@ -9,6 +9,7 @@
 
   services.netbox = {
     enable = true;
+    package = pkgs.netbox_3_7;
     secretKeyFile = config.sops.secrets."netbox/secret_key".path;
     extraConfig = ''
       REMOTE_AUTH_ENABLED = True;
