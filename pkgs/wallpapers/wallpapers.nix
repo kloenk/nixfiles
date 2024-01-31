@@ -26,7 +26,8 @@ let
       ${curl}/bin/curl --insecure -H Referer:${src} ${url} > $dir/${name}
     '';
 
-  fromUrl = { name ? builtins.baseNameOf url, url, sha256, meta ? { } }:
+  fromUrl =
+    { name ? builtins.baseNameOf url, url, sha256 ? lib.fakeHash, meta ? { } }:
     runCommand name {
       outputHash = sha256;
       outputHashAlgo = "sha256";
@@ -115,13 +116,12 @@ in {
      };
   */
 
-  /* pixiv_orange = fromPixiv {
-       src = "https://www.pixiv.net/en/artworks/68126524";
-       url =
-         "https://i.pximg.net/img-original/img/2018/07/19/22/57/08/68126524_p0.jpg";
-       sha256 = "b92c6e3a0e48508a88a34d9de58f87ce21ccbacecef0c2e9e5b317daa7cdf630";
-     };
-  */
+  pixiv_orange = fromPixiv {
+    src = "https://www.pixiv.net/en/artworks/68126524";
+    url =
+      "https://i.pximg.net/img-original/img/2018/07/19/22/57/08/68126524_p0.jpg";
+    sha256 = "sha256-iG/6LrIt28CIfh7/7nWdnxt0UXeNMErfvv4X3ShfYbw=";
+  };
 
   pixiv-72175872 = fromPixiv {
     src = "https://www.pixiv.net/en/artworks/72175872";
@@ -226,5 +226,65 @@ in {
     url =
       "https://www.reddit.com/r/Animewallpaper/comments/ftj8br/lit_fire_angle_3840x2160_4k/";
     sha256 = "sha256-Zzy3WrzYiRmmkbD1FSCV2vG0EQmYWRKrQdWcTU7AiGU=";
+  };
+
+  # Starcitizen
+  sc_downed_man = fromUrl {
+    url =
+      "https://robertsspaceindustries.com/media/4at3dc1hbnlldr/wallpaper_3840x2160/Source.jpg";
+    name = "sc_downed_man";
+    sha256 = "sha256-Ek9Q7YiFhk1ZmZGFqEywacR08bYkPyTuAkwM8TeYaWQ=";
+  };
+
+  sc_city_mist = fromUrl {
+    url =
+      "https://robertsspaceindustries.com/media/h3xwsmgo74u42r/wallpaper_3840x2160/Source.jpg";
+    name = "sc_city_mist";
+    sha256 = "sha256-yU1Y7o5HMvb8maysIzuqzN8cpurTkU8QahGxSMUWlyI=";
+  };
+
+  sc_spider_concept = fromUrl {
+    url =
+      "https://robertsspaceindustries.com/media/8uwxim0jeierqr/source/Spider-Concept-Cathcart.jpg";
+    name = "sc_spider_concept";
+    sha256 = "sha256-AAKfkqQgBnN+c2+RZfaFoqGeaVzVSc4bmmw37N6198s=";
+  };
+
+  # Horizon
+  hfw_savana = fromUrl {
+    url = "https://images.igdb.com/igdb/image/upload/t_original/sc8bia.jpg";
+    name = "hfw_savanna";
+    sha256 = "sha256-F3Ctu8jsknSTSA/BkpjMt4DuJZftJRKjrXOf0l4I1Ao=";
+  };
+
+  hfw_turtle = fromUrl {
+    url = "https://images.igdb.com/igdb/image/upload/t_original/sc8c98.jpg";
+    name = "hfw_turtle";
+    sha256 = "sha256-xIKFciJOlXNz1IfK6NaiF190AilDEsNdSkHexzREdzQ=";
+  };
+
+  hfw_flying = fromUrl {
+    url = "https://images.igdb.com/igdb/image/upload/t_original/sc8bi9.jpg";
+    name = "hfw_flying";
+    sha256 = "sha256-nRjhcmnYGovKK6EmQp9YZbYuCUrfFD33Gb0HtOyD8JU=";
+  };
+
+  hfw_tallneck_mist = fromUrl {
+    url = "https://images7.alphacoders.com/710/710881.jpg";
+    name = "hfw_tallneck_mist";
+    sha256 = "sha256-kv8HpQxowfwnKWpcZljMATZLhGoquD/dJD8m3n7E7PI=";
+  };
+
+  # To low qualy
+  /* hzd_undeground_bunker = fromUrl {
+       url = "https://cdna.artstation.com/p/assets/images/images/005/795/128/large/underground-guerrilla-bunker-ss-11-1080.jpg";
+       name = "hzd_underground_bunker";
+       sha256 = "sha256-nVYRcXKLJpIX5a1RgmOD7rmsLeMPXlA6zjvVtiCwQV0=";
+     };
+  */
+  hzd_artwork_drawn = fromUrl {
+    url = "https://i.imgur.com/8tAtF47.jpeg";
+    name = "hzd_artwork_drawn";
+    sha256 = "sha256-zKqcCwrOeodPFsMEBcXffMM8zjrMqsJHVkJh4QgcYMo=";
   };
 }
