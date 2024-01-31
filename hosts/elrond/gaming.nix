@@ -9,7 +9,7 @@
     lutris
     gamescope
 
-    discord
+    # discord
     xonotic
 
     # OBS

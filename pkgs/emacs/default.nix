@@ -46,6 +46,7 @@ let
     mkdir -p $out
     cp ${tangledConfig}/Emacs.el ${tangledConfig}/early-init.el .
     emacs -Q --batch --eval '(byte-compile-file "Emacs.el")' --eval '(byte-compile-file "early-init.el")'
+    mv Emacs.elc init.elc
     cp *.elc $out/
   '';
 in emacsWithPkgs // { passthru = { inherit tangledConfig compiledConfig; }; }

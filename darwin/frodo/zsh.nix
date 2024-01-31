@@ -2,7 +2,7 @@
 
 {
   home-manager.users.kloenk = {
-    programs.zsh.initExtra = (builtins.readFile ./p10k.zsh) + ''
+    programs.zsh.initExtra = ''
       eval "$(direnv hook zsh)"
     '';
     programs.direnv = {

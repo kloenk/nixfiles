@@ -25,6 +25,8 @@
         lg = "eza -lagh --git";
       };
       initExtra = ''
+        ${builtins.readFile ./p10k.zsh}
+
         function use {
           packages=()
           packages_fmt=()
@@ -40,7 +42,7 @@
       '';
       oh-my-zsh = {
         enable = true;
-        plugins = [ "gitfast" "git" "sudo" "ripgrep" ];
+        plugins = [ "gitfast" "sudo" "ripgrep" ];
         theme = lib.mkDefault "powerlevel10k/powerlevel10k";
         custom = builtins.toString (pkgs.stdenv.mkDerivation {
           name = "oh-my-zsh-custom-dir";
@@ -53,5 +55,6 @@
         });
       };
     };
+    programs.zoxide.enable = true;
   };
 }
