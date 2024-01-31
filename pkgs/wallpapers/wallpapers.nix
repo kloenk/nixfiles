@@ -75,9 +75,10 @@ let
 
 in {
 
-  bioshok_big_dady = fromUrl {
+  bioshock_big_dady = fromUrl {
     url = "https://i.imgur.com/63nJZTP.jpg";
-    sha256 = "sha256-2LucvG3c7qR++0YmQMCp1bzTW6Ta9ezUswOkndBmGlw=";
+    name = "bioshock_big_daddy.jpg";
+    sha256 = "sha256-2l0Ixom/+yci4c1IqNFPuCBPpdWlXE2c2Zse9jhfXic=";
   };
 
   /* kurapika_chains = fromUrl {
@@ -176,18 +177,18 @@ in {
   # https://www.reddit.com/r/lifeisstrange/comments/50wtfd/beautiful_life_is_strange_wallpapers_ive_been/
   life_is_strange_angle = fromUrl {
     url = "https://i.imgur.com/aPfdV47.png";
-    name = "life_is_strange_angle";
-    sha256 = "sha256-lyeRkNSGapFop+EAJltBWrEtxZ0GARiaAQUL15adwjI=";
+    name = "life_is_strange_angle.png";
+    sha256 = "sha256-zbjMST2KGczbxlVOyMsWG9SlWt3Ce88Xcq/qGvYBHX0=";
   };
   life_is_strange_sense_of_me = fromUrl {
     url = "https://i.imgur.com/Mkwa00q.png";
-    name = "life_is_strange_sense_of_me";
-    sha256 = "sha256-Gl/stsQItwM3C/5qCBsPMJvUtUBGzyfxvT9Ob1gWvfg=";
+    name = "life_is_strange_sense_of_me.png";
+    sha256 = "sha256-s0V6n0OvURbu5gbGKBGyrghA6Wo1PV2SmdwGiU7AD9Q=";
   };
   life_is_strange_cloe_angle = fromUrl {
     url = "https://i.imgur.com/SlohViL.png";
-    name = "life_is_strange_cloe_angle";
-    sha256 = "sha256-/1a8ezIYUsiZE9jhlULLGuuYfNNoEzspdzIZHaqZ/oI=";
+    name = "life_is_strange_cloe_angle.png";
+    sha256 = "sha256-4m8Zrywv2PMOYcVsS1m8hafR5HvU6FiqQDzWZYobnjM==";
   };
 
   life_is_strange_railway = fromRedditPost {
@@ -232,47 +233,47 @@ in {
   sc_downed_man = fromUrl {
     url =
       "https://robertsspaceindustries.com/media/4at3dc1hbnlldr/wallpaper_3840x2160/Source.jpg";
-    name = "sc_downed_man";
-    sha256 = "sha256-Ek9Q7YiFhk1ZmZGFqEywacR08bYkPyTuAkwM8TeYaWQ=";
+    name = "sc_downed_man.jpg";
+    sha256 = "sha256-U/d+hlIWNFFauOnjPX2aNALHL+lohaK+YgBqcL64qzs=";
   };
 
   sc_city_mist = fromUrl {
     url =
       "https://robertsspaceindustries.com/media/h3xwsmgo74u42r/wallpaper_3840x2160/Source.jpg";
-    name = "sc_city_mist";
-    sha256 = "sha256-yU1Y7o5HMvb8maysIzuqzN8cpurTkU8QahGxSMUWlyI=";
+    name = "sc_city_mist.jpg";
+    sha256 = "sha256-SeRs4cSmDfe9yViSNSOGaHIz88nB4qzGenFGL7rBzfE=";
   };
 
   sc_spider_concept = fromUrl {
     url =
       "https://robertsspaceindustries.com/media/8uwxim0jeierqr/source/Spider-Concept-Cathcart.jpg";
-    name = "sc_spider_concept";
-    sha256 = "sha256-AAKfkqQgBnN+c2+RZfaFoqGeaVzVSc4bmmw37N6198s=";
+    name = "sc_spider_concept.jpg";
+    sha256 = "sha256-YHWKaFEb7njFZdyxFj/Mwivtl0TLqvH2NJZ5CbkqwDg=";
   };
 
   # Horizon
   hfw_savana = fromUrl {
     url = "https://images.igdb.com/igdb/image/upload/t_original/sc8bia.jpg";
-    name = "hfw_savanna";
-    sha256 = "sha256-F3Ctu8jsknSTSA/BkpjMt4DuJZftJRKjrXOf0l4I1Ao=";
+    name = "hfw_savanna.jpg";
+    sha256 = "sha256-0qoMyYbcakyc+nGDEUvBeIitjEVZlAD6ibopgtG1X84=";
   };
 
   hfw_turtle = fromUrl {
     url = "https://images.igdb.com/igdb/image/upload/t_original/sc8c98.jpg";
-    name = "hfw_turtle";
-    sha256 = "sha256-xIKFciJOlXNz1IfK6NaiF190AilDEsNdSkHexzREdzQ=";
+    name = "hfw_turtle.jpg";
+    sha256 = "sha256-UGsbPmegCif+yW2LTFh9WAWSXv1VKncoWjUrOX26AOY=";
   };
 
   hfw_flying = fromUrl {
     url = "https://images.igdb.com/igdb/image/upload/t_original/sc8bi9.jpg";
-    name = "hfw_flying";
-    sha256 = "sha256-nRjhcmnYGovKK6EmQp9YZbYuCUrfFD33Gb0HtOyD8JU=";
+    name = "hfw_flying.jpg";
+    sha256 = "sha256-YmNODmE3xGPavp414V+iK1NC9y5FRdoM1GJvm9TZ1v8=";
   };
 
   hfw_tallneck_mist = fromUrl {
     url = "https://images7.alphacoders.com/710/710881.jpg";
-    name = "hfw_tallneck_mist";
-    sha256 = "sha256-kv8HpQxowfwnKWpcZljMATZLhGoquD/dJD8m3n7E7PI=";
+    name = "hfw_tallneck_mist.jpg";
+    sha256 = "sha256-gn3POLKjUitcLO+gHh7KejSCltmk5KPirfPM4qKYMAY=";
   };
 
   # To low qualy
@@ -284,7 +285,7 @@ in {
   */
   hzd_artwork_drawn = fromUrl {
     url = "https://i.imgur.com/8tAtF47.jpeg";
-    name = "hzd_artwork_drawn";
-    sha256 = "sha256-zKqcCwrOeodPFsMEBcXffMM8zjrMqsJHVkJh4QgcYMo=";
+    name = "hzd_artwork_drawn.jpeg";
+    sha256 = "sha256-rUE0couCbiTIZQI7mPBeo5JAtne/6Oymx+5tpQ/7kFQ=";
   };
 }
