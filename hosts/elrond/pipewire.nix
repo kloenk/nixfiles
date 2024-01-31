@@ -1,6 +1,7 @@
 { pkgs, lib, config, inputs, ... }:
 
 {
+  networking.firewall.allowedUDPPorts = [ 6002 ];
   environment.systemPackages = with pkgs;
     [
       # libjack2
@@ -41,6 +42,22 @@
             "node.name" = "effect.kloenk.rnnoise.playback";
             "node.nick" = "RNNoise playback";
             "media.class" = "Audio/Source";
+          };
+        };
+      }];
+    };
+
+  environment.etc."pipewire/pipewire.conf.d/40-thrain-mpd.conf".text =
+    builtins.toJSON {
+      "context.modules" = [{
+        name = "libpipewire-module-rtp-source";
+        args = {
+          "source.ip" = "192.168.178.248";
+          "source.port" = "6002";
+          "sess.ignore-ssrc" = true;
+          "stream.props" = {
+            "media.class" = "Audio/Source";
+            "node.name" = "kloenk.recv.rtp.thrain";
           };
         };
       }];

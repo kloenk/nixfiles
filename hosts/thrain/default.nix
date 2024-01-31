@@ -10,6 +10,7 @@
     ../../profiles/desktop/syncthing.nix
     ../../profiles/users/kloenk/password.nix
 
+    ./services/mpd.nix
     ./services/syncthing.nix
     ./services/samba.nix
     ./services/proxies.nix
