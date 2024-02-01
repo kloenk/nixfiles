@@ -134,18 +134,6 @@
      };
   */
 
-  # wireguard
-  networking.wireguard.enable = true;
-  networking.wireguard.interfaces.usee0 = {
-    ips = [ "192.168.56.2/24" ];
-    peers = [{
-      allowedIPs = [ "192.168.56.0/24" ];
-      endpoint = "manwe.kloenk.dev:51822";
-      publicKey = "CIzg7RjyEO9Df2muABFyGKDfuWBBxvy1MA2ONOhw+lo=";
-    }];
-    privateKeyFile = "/var/src/secrets/usee0.key";
-  };
-
   services.telegraf.extraConfig = { global_tags.tenant = "usee"; };
   services.nginx.virtualHosts."telegraf.moodle-usee.kloenk.de" = {
     enableACME = true;

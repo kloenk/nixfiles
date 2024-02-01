@@ -100,11 +100,31 @@
     enable = true;
     package = pkgs.postgresql_14;
     ensureDatabases = [ "moodle" ];
-    ensureUsers = [{
-      name = "moodle";
-      ensureDBOwnership = true;
-    }];
+    ensureUsers = [
+      {
+        name = "moodle";
+        ensureDBOwnership = true;
+      }
+      { name = "telegraf"; }
+    ];
   };
+
+  # telegraf monitoring
+  services.telegraf.extraConfig.inputs = {
+    postgresql.address = "host=/run/postgresql user=telegraf database=postgres";
+    postgresql_extensible = {
+      address = "host=/run/postgresql user=telegraf database=postgres";
+      query = [{
+        sqlquery =
+          "SELECT datname, state,count(datname) FROM pg_catalog.pg_stat_activity GROUP BY datname,state";
+        measurement = "pg_stat_activity";
+      }];
+
+    };
+  };
+  systemd.services.postgresql.postStart = ''
+    $PSQL -tAc 'GRANT pg_read_all_stats TO telegraf' -d postgres
+  '';
 
   # de locales
   i18n.supportedLocales = [ "de_DE.UTF-8/UTF-8" "en_US.UTF-8/UTF-8" ];
