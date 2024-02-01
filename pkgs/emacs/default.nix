@@ -20,6 +20,7 @@ let
 
       flymake-elixir
       elixir-mode
+      cmake-mode
 
       protobuf-mode
       helm-nixos-options

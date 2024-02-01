@@ -16,6 +16,8 @@
     kTLS = true;
     locations."/" = { proxyPass = "http://192.168.178.1"; };
   };
+  security.acme.certs."fritz.net.thrain.net.kloenk.de".server =
+    "https://acme.net.kloenk.de:8443/acme/acme/directory";
 
   services.nginx.virtualHosts."eib.net.thrain.net.kloenk.de" = {
     enableACME = true;
@@ -23,6 +25,8 @@
     kTLS = true;
     locations."/" = { proxyPass = "http://192.168.178.44"; };
   };
+  security.acme.certs."eib.net.thrain.net.kloenk.de".server =
+    "https://acme.net.kloenk.de:8443/acme/acme/directory";
 
   services.nginx.virtualHosts."edgeswitch.mgmt.thrain.net.kloenk.de" = {
     enableACME = true;
@@ -35,4 +39,6 @@
       '';
     };
   };
+  security.acme.certs."edgeswitch.mgmt.thrain.net.kloenk.de".server =
+    "https://acme.net.kloenk.de:8443/acme/acme/directory";
 }

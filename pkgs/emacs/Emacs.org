@@ -423,6 +423,12 @@ Taken from bedrock early init
     :hook (elixir-mode . eglot-ensure)
     (before-save . eglot-format))
 #+end_src
+*** CMakeMode
+#+begin_src emacs-lisp
+  (use-package cmake-mode
+    :ensure t
+    :mode "CMakeLists.txt")
+#+end_src
 * Project management
 ** Projectile
 #+begin_src emacs-lisp
