@@ -41,9 +41,10 @@
     # Then you can `mpr connect $(realpath /dev/pico)`.
     SUBSYSTEM=="tty", ATTRS{idVendor}=="2e8a", ATTRS{idProduct}=="0005", SYMLINK+="pico"
 
-
     #picoprobe
     SUBSYSTEM=="usb", ATTRS{idVendor}=="2e8a", MODE="0666"
+
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="33ff", MODE="0666"
 
     #after adding this execute
     # sudo udevadm control --reload-rules &&  sudo udevadm trigger 

@@ -7,6 +7,7 @@
     ../../profiles/bcachefs.nix
     ../../profiles/hetzner_vm.nix
 
+    ../../services/kresd-dns
   ];
 
   boot.loader.grub.enable = false;
@@ -48,6 +49,10 @@
   };
 
   swapDevices = [ ];
+
+  networking.firewall.allowedUDPPorts = [ 53 ];
+  services.kresd.listenPlain = [ "53" ];
+  services.kresd.instances = 6;
 
   environment.systemPackages = with pkgs; [ nodejs ];
 

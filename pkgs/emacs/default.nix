@@ -21,6 +21,7 @@ let
       flymake-elixir
       elixir-mode
       cmake-mode
+      dts-mode
 
       protobuf-mode
       helm-nixos-options

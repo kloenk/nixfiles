@@ -429,6 +429,12 @@ Taken from bedrock early init
     :ensure t
     :mode "CMakeLists.txt")
 #+end_src
+*** DTS Mode
+#+begin_src emacs-lisp
+  (use-package dts-mode
+    :ensure t
+    :mode "dts")
+#+end_src
 * Project management
 ** Projectile
 #+begin_src emacs-lisp
