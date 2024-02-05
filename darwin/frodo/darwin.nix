@@ -53,6 +53,8 @@
     };
   };
   home-manager.users.kloenk.services.syncthing.enable = true;
+  home-manager.users.kloenk.home.file.".local/share/wallpapers".source =
+    "${pkgs.wallpapers}/share/wallpapers";
 
   users.users.kloenk.packages = with pkgs; [
     elixir
