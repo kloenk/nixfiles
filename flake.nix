@@ -321,6 +321,7 @@
             self.nixosModules.helix
             self.nixosModules.kloenk
             self.nixosModules.vouch-proxy
+            self.nixosModules.backups
 
             # TODO: 
             #vika.nixosModules.colorfulMotd
@@ -451,6 +452,7 @@
         matrix-sliding-sync = import ./modules/matrix-sliding-sync;
         helix = import ./modules/helix;
         vouch-proxy = import ./modules/vouch-proxy;
+        backups = import ./modules/backups;
       };
 
       darwinModules = {

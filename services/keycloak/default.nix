@@ -42,5 +42,11 @@
     };
   };
 
+  backups.keycloak = {
+    user = "keycloak";
+    dynamicUser = true;
+    postgresDatabases = [ "keycloak" ];
+  };
+
   sops.secrets."keycloak/db/password".owner = "root";
 }

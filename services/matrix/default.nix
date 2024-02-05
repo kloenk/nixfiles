@@ -140,4 +140,10 @@
   sops.secrets."matrix/sliding-sync/env".owner = "root";
   systemd.services.matrix-synapse.serviceConfig.SupplementaryGroups =
     [ config.users.groups.keys.name ];
+
+  backups.matrix-synapse = {
+    user = "matrix-synapse";
+    paths = [ "/persist/data/matrix-synapse" ];
+    postgresDatabases = [ "matrix-synapse" ];
+  };
 }

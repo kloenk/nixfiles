@@ -18,4 +18,8 @@
     forceSSL = true;
   };
 
+  backups.youtrack = {
+    user = "youtrack";
+    paths = [ "/persist/data/youtrack/backups" ];
+  };
 }

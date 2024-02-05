@@ -36,4 +36,9 @@
     locations."/".proxyPass =
       "http://127.0.0.1:${toString config.k.ports.vaultwarden}/";
   };
+
+  backups.vaultwarden = {
+    user = "vaultwarden";
+    paths = [ "/var/lib/bitwarden_rs/backup" ];
+  };
 }

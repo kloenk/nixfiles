@@ -303,4 +303,9 @@
     "opendkim.service"
     "rspamd.service"
   ];
+
+  backups.mail = {
+    user = "virtualMail";
+    paths = [ "/persist/data/vmail" ];
+  };
 }

@@ -56,4 +56,10 @@
 
   sops.secrets."netbox/secret_key".owner = "netbox";
   sops.secrets."netbox/vouch_proxy_env".owner = "root";
+
+  backups.netbox = {
+    user = "netbox";
+    paths = [ "/persist/data/netbox" ];
+    postgresDatabases = [ "netbox" ];
+  };
 }
