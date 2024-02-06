@@ -57,4 +57,6 @@
     owner = "root";
     sopsFile = ../../secrets/shared/syncthing.yaml;
   };
+
+  deployment.tags = [ "syncthing" ];
 }

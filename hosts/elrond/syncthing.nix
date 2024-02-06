@@ -25,6 +25,11 @@
           id = "projects";
           devices = [ "thrain" "frodo" "gloin" ];
         };
+        "~/Uni" = {
+          label = "Uni";
+          id = "uni";
+          devices = [ "thrain" "frodo" ];
+        };
       };
     };
   };

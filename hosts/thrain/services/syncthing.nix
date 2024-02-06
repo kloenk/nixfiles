@@ -35,6 +35,12 @@
           path = "/persist/data/syncthing/data/projects";
           devices = [ "elrond" "frodo" "gloin" ];
         };
+        "Uni" = {
+          id = "uni";
+          label = "Uni";
+          path = "/persist/data/syncthing/data/uni";
+          devices = [ "elrond" "frodo" ];
+        };
       };
     };
   };
