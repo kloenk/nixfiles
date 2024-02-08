@@ -141,31 +141,36 @@ in {
   lost_in_space_mag = fromRedditPost {
     url =
       "https://www.reddit.com/r/WarframeRunway/comments/en4jw5/mag_as_robot_mock_poster_for_lost_in_space_watch/";
-    sha256 = "sha256-MJ4OCmiZxvzh0KOwtzjwvPGtoAsCLTy6CqiK2ff28Zw=";
+    name = "lost_in_space_mag_robot.jpeg";
+    sha256 = "sha256-D6/T4kiBUCnDzJmYhTac3gq9TDX15Geu/8BZ9qsSPQg=";
   };
 
   alita = fromRedditPost {
     url =
       "https://www.reddit.com/r/LargeImages/comments/fk9fcj/7680x4800_alita_battle_angel_rwallpapers/";
-    sha256 = "sha256-XYwlqRxJcsLJi/WL/qIseYDkJfKXYofIdC/CE0Hv12U=";
+    name = "alita_poster.jpeg";
+    sha256 = "sha256-zoEp3s00BKCqk6dgHoVm8nKKsZnj2eWs4qEThjeWCsM=";
   };
 
   clouds = fromRedditPost {
     url =
       "https://www.reddit.com/r/wallpapers/comments/g2e2rh/refulgence_2560_x_1440/";
-    sha256 = "sha256-MBCsGrSajqJfQB7V7B7zVhH2/SvX98hRq9sL0fOgCV4=";
+    name = "refulgence_clouds.png";
+    sha256 = "sha256-jmL4VTqhSk1BsSOtCJscvoxgiFPyP8snuAoWcITPdDc=";
   };
 
   argo_ship = fromRedditPost {
     url =
       "https://www.reddit.com/r/StarshipPorn/comments/frh9x4/the_argo_taking_off_from_a_remote_moon_in_the/";
-    sha256 = "sha256-lffXq7MJVmbOZj2PG1oKyuR2/4xeTh1+BikRg0yeUMc=";
+    name = "sc_argo_taking_of.jpeg";
+    sha256 = "sha256-EY1ucFt2PsCXl/Ar6+n8FWcvlw4XoW7lIx1kiuzbU7Y=";
   };
 
   city_depth = fromRedditPost {
     url =
       "https://www.reddit.com/r/wallpapers/comments/g0etum/city_depths_by_alec_tucker_3840x2160/";
-    sha256 = "sha256-DDzYvFb7ba23HJpyV4lPOBGhq3ZVkFgn6+Iyq5G3QYY=";
+    name = "steampunk_city_depths.png";
+    sha256 = "sha256-uC+RX+igJ0pyQvF9QHLTttTvag1lI054QfjFGm6ocgw=";
   };
 
   /* bioshock_skycrane = fromRedditPost {
@@ -192,25 +197,28 @@ in {
   };
 
   life_is_strange_railway = fromRedditPost {
-    name = "life_is_strange_railway";
+    name = "life_is_strange_railway.jpeg";
     url =
       "https://www.reddit.com/r/Thememyxbox/comments/7my729/can_someone_add_this_to_theme_my_xbox_unless/";
-    sha256 = "sha256-ZrriNKePp37sel7RGwFO64In9NzNjXIYOlP7MwBkJRc=";
+    sha256 = "sha256-+i+x6lxvhVi+1N3hoiEA0Eo4UCmNfYz1HI7vVAGU3Uo=";
   };
   cloudy_moments = fromRedditPost {
     url =
       "https://www.reddit.com/r/Animewallpaper/comments/f4uu8i/cloudy_moments_your_name_2560x1440/";
-    sha256 = "sha256-LtI/StsKwq2HV2VcjfQiRQGPcd099nAoak+eFTPpxT4=";
+    name = "your_name_cloudy_moments.png";
+    sha256 = "sha256-61J0jjugMta2IVoDKpzUX8WiwF1+nvhSnVzi2OcoLlo=";
   };
   one_small_step = fromRedditPost {
     url =
       "https://www.reddit.com/r/Animewallpaper/comments/g253ce/one_small_step_for_man_original_1996x1224/";
-    sha256 = "sha256-IXzGOtU21e1EMD84xjqbJtegQp6LuYYmV0p8vH6TDac=";
+    name = "one_small_step.jpeg";
+    sha256 = "sha256-4J1tvnardeVng4+CeCrPUI9H85dpjFSomhc7tUWboCs=";
   };
   falling_stone = fromRedditPost {
     url =
       "https://www.reddit.com/r/Animewallpaper/comments/ahkner/your_name_kimi_no_na_wa_7015x3879/";
-    sha256 = "sha256-pi2YmPO2NlooA3lq+UfBNP5VI9ik1uzyBKLj0UKXmFU=";
+    name = "your_name_meteors.jpeg";
+    sha256 = "sha256-XZ7QkZfhZ2ZONuLOrDfh4L2qDXGAVDEpWMCYK2THvlM=";
   };
   /* go_home = fromRedditPost {
        url =
@@ -221,12 +229,14 @@ in {
   the_remaining_4_minutes = fromRedditPost {
     url =
       "https://www.reddit.com/r/Animewallpaper/comments/fsvzsg/the_remaining_4_minutes_original_2560x1440/";
-    sha256 = "sha256-GspttvJlK2lZ/dFapic0mKeBI+MnhxUz6VZ9qpgEIvU=";
+    name = "the_remaining_4_minutes.png";
+    sha256 = "sha256-qsVTWKBrxmtaeAVPf8nQXfscd3H5+BKDzFRNxjKEbmU=";
   };
   lit_fire_angle = fromRedditPost {
     url =
       "https://www.reddit.com/r/Animewallpaper/comments/ftj8br/lit_fire_angle_3840x2160_4k/";
-    sha256 = "sha256-Zzy3WrzYiRmmkbD1FSCV2vG0EQmYWRKrQdWcTU7AiGU=";
+    name = "lit_fire_angle.jpeg";
+    sha256 = "sha256-+cAUWaIKs5MVZUMUtx4n8k61dM/4mDEiWGRLFW+g1aQ=";
   };
 
   # Starcitizen
