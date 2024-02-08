@@ -9,7 +9,8 @@ let
       If you break the law or hurt your feelings, it's your fault - I assume no responsibility for this.
     '' v;
 
-  fromPixiv = { name ? builtins.baseNameOf url, url, sha256, src, meta ? { } }:
+  fromPixiv = { name ? builtins.baseNameOf url, url, sha256 ? lib.fakeHash, src
+    , meta ? { } }:
     runCommand name {
       outputHash = sha256;
       outputHashAlgo = "sha256";
@@ -136,6 +137,22 @@ in {
     url =
       "https://i.pximg.net/img-master/img/2008/03/28/13/22/30/588905_p0_master1200.jpg";
     sha256 = "sha256-O0yGBHRniqcKG5+O599ZH7RSVTsH455RtV1Uz1t3O4Q=";
+  };
+
+  pixiv_anime_tram = fromPixiv {
+    src = "https://www.pixiv.net/en/artworks/106031896";
+    url =
+      "https://i.pximg.net/img-master/img/2023/03/08/21/28/06/106031896_p0_master1200.jpg";
+    name = "catzz_lil_lull.jpg";
+    sha256 = "sha256-+/6enwgmTY4De0aGwpr29K/ivPdhdywBvHFhzD16n+c=";
+  };
+
+  pixiv_anime_city_cat = fromPixiv {
+    src = "https://www.pixiv.net/en/artworks/113114668";
+    url =
+      "https://i.pximg.net/img-master/img/2023/11/04/00/30/00/113114668_p0_master1200.jpg";
+    name = "catzz_city_cat.jpg";
+    sha256 = "sha256-z/bX0qe+X0rOLt14V2eGY8NFx2tqlkIT4kWFhBU+vY8=";
   };
 
   lost_in_space_mag = fromRedditPost {

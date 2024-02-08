@@ -55,6 +55,8 @@
   home-manager.users.kloenk.services.syncthing.enable = true;
   home-manager.users.kloenk.home.file.".local/share/wallpapers".source =
     "${pkgs.wallpapers}/share/wallpapers";
+  home-manager.users.kloenk.home.file.".local/share/wallpapers".recursive =
+    true;
 
   users.users.kloenk.packages = with pkgs; [
     elixir
