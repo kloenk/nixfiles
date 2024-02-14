@@ -121,4 +121,9 @@ in {
   };
 
   sops.secrets."dns/knot_primary/keys".owner = "knot";
+
+  backups.knot-primay = {
+    user = "knot";
+    paths = [ "/var/lib/knot" ];
+  };
 }
