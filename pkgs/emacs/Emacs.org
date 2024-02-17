@@ -36,6 +36,11 @@ Taken from bedrock early init
 #+begin_src emacs-lisp
 (require 'bind-key)
 #+end_src
+** Paths
+#+begin_src emacs-lisp
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
+#+end_src
 
 * UI
 ** Base Ui
