@@ -4,6 +4,7 @@ let
   emacsWithPkgs = (emacsPackagesFor emacs).emacsWithPackages (epkgs:
     with epkgs; [
       vterm
+      tramp
       exec-path-from-shell
 
       monokai-pro-theme
