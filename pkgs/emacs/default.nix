@@ -33,6 +33,7 @@ let
       treemacs-magit
       treemacs-projectile
       magit
+      magit-todos
     ]);
   tangledConfig = runCommandNoCC "tangled-config" {
     nativeBuildInputs = [ emacsWithPkgs ];

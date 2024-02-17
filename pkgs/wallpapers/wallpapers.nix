@@ -1,5 +1,5 @@
 # Inspired by vika (/u/kisik21) https://gitlab.com/vikanezrimaya/nix-flake
-{ lib, stdenvNoCC, curl, jq, gnused, runCommand, fetchurl }:
+{ lib, stdenvNoCC, curl, jq, gnused, runCommand, runCommandNoCC, fetchurl }:
 
 let
   n = name: v:
@@ -72,6 +72,19 @@ let
 
       mkdir -p $dir
       ${curl}/bin/curl --insecure $imageUrl > $dir/${name}
+    '';
+
+  fromFile = { name ? builtins.baseNameOf file, file, meta ? { } }:
+    runCommandNoCC name { inherit meta; } ''
+      dir=$out/share/wallpapers/${
+        if (if meta ? nsfw then meta.nsfw else false) then
+          n name "nsfw/"
+        else
+          ""
+      }/
+
+      mkdir -p $dir
+      cp ${file} $dir/${name}
     '';
 
 in {
@@ -315,4 +328,11 @@ in {
     name = "hzd_artwork_drawn.jpeg";
     sha256 = "sha256-rUE0couCbiTIZQI7mPBeo5JAtne/6Oymx+5tpQ/7kFQ=";
   };
+
+  antonov = fromFile { file = ./images/antonov.jpg; };
+  cool-space = fromFile { file = ./images/cool-space.png; };
+  river = fromFile { file = ./images/river.png; };
+  sao = fromFile { file = ./images/sao.png; };
+  sea_clouds = fromFile { file = ./images/sea_clouds.jpg; };
+  mountain_clouds = fromFile { file = ./images/mountain_clouds.jpg; };
 }
