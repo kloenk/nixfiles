@@ -8,6 +8,7 @@ keys:
   - &server_moodle age1xq2s075hy7fah8la38jpa642f2j4zvhv7qa3c4gprhcyhkx8rsastndc4q
   - &server_elrond age1tvgutz4vzmqf3xqnckt9karpd467nj6vft80al8nfvpu02ck43sqneqwht
   - &server_gloin age1fu2j4x8zrx4m75kgsjddmdqdtcg8rjnmalhnkp0uw7gjw8vatyfslsrh6w
+  - &server_ktest age14xp569xqe7xjkhrkz4gg5gz6fc45frmml3z43an2378dc4735u3shyk7n9
   - &darwin_frodo age1wwptqz272d4la84kvshrw3ds2mpqffhyjhr2zm747sfc4ztdefkq6fspyz
 creation_rules:
   - path_regex: secrets/thrain[^/]*\.yaml$
@@ -60,6 +61,7 @@ creation_rules:
         - *server_gloin
         - *darwin_frodo
         - *server_sc-social
+        - *server_ktest
       pgp:
         - *kloenk_gpg
   - path_regex: secrets/.+\.yaml$
