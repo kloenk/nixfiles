@@ -492,6 +492,7 @@
           kernel = pkgs.callPackage ./dev/kernel.nix { };
           zephyr =
             pkgs.callPackage ./dev/zephyr.nix { python3 = pkgs.python310; };
+          smp-rs = pkgs.callPackage ./dev/smp-rs.nix { };
           default = pkgs.mkShell {
             nativeBuildInputs = [ pkgs.nixfmt pkgs.colmena pkgs.sops ];
             inherit (self.checks.${system}.pre-commit) shellHook;
