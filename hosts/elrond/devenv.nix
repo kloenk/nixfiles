@@ -66,11 +66,11 @@
       cargo-generate
       bpf-linker
 
-      jetbrains.clion
+      # jetbrains.clion
       # jetbrains.ruby-mine
       # jetbrains.webstorm
-      jetbrains.idea-ultimate
-      #jetbrains.datagrip
+      # jetbrains.idea-ultimate
+      # jetbrains.datagrip
 
       elixir
       elixir_ls
