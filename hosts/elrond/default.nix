@@ -14,6 +14,7 @@
     ./hyprland
     ./mpd.nix
     ./disko.nix
+    ./evremap.nix
     #./kde.nix
 
     ../../profiles/desktop

@@ -19,4 +19,6 @@ in {
   matrix-to = callPackage ./matrix-to { };
 
   update-ssh-host-keys = callPackage ./update-ssh-host-keys { };
+
+  evremap = callPackage ./evremap { };
 }

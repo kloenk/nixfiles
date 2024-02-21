@@ -322,6 +322,7 @@
             self.nixosModules.kloenk
             self.nixosModules.vouch-proxy
             self.nixosModules.backups
+            self.nixosModules.evremap
 
             # TODO: 
             #vika.nixosModules.colorfulMotd
@@ -453,6 +454,7 @@
         helix = import ./modules/helix;
         vouch-proxy = import ./modules/vouch-proxy;
         backups = import ./modules/backups;
+        evremap = import ./modules/evremap;
       };
 
       darwinModules = {
