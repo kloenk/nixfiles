@@ -7,5 +7,6 @@ mkShell {
     libiconv
     darwin.apple_sdk.frameworks.IOKit
     darwin.apple_sdk.frameworks.CoreBluetooth
+    darwin.apple_sdk.frameworks.AppKit
   ]) ++ lib.optional stdenv.isLinux udev;
 }
