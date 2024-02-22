@@ -6,6 +6,7 @@
     ./links.nix
     ./syncthing.nix
     ./pipewire.nix
+    ./evremap.nix
 
     ../../profiles/desktop
     ../../profiles/desktop/sway
