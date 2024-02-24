@@ -1,5 +1,5 @@
 { lib, stdenv, mkShell, rustc, cargo, rust-analyzer, nixfmt, rustfmt, pkg-config
-, udev, libiconv, darwin }:
+, udev, dbus, libiconv, darwin }:
 mkShell {
   nativeBuildInputs = [ rustc cargo rust-analyzer nixfmt rustfmt ]
     ++ lib.optional stdenv.isLinux [ pkg-config ];
@@ -8,5 +8,5 @@ mkShell {
     darwin.apple_sdk.frameworks.IOKit
     darwin.apple_sdk.frameworks.CoreBluetooth
     darwin.apple_sdk.frameworks.AppKit
-  ]) ++ lib.optional stdenv.isLinux udev;
+  ]) ++ lib.optionals stdenv.isLinux [ udev dbus ];
 }
