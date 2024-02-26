@@ -49,9 +49,28 @@
     #after adding this execute
     # sudo udevadm control --reload-rules &&  sudo udevadm trigger 
     # connect and disconnetc the USB device
+
+    # NRF
+    # 71-nrf.rules
+    ACTION!="add", SUBSYSTEM!="usb_device", GOTO="nrf_rules_end"
+
+    # Set /dev/bus/usb/*/* as read-write for all users (0666) for Nordic Semiconductor devices
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="1915", MODE="0666"
+
+    # Flag USB CDC ACM devices, handled later in 99-mm-nrf-blacklist.rules
+    # Set USB CDC ACM devnodes as read-write for all users
+    KERNEL=="ttyACM[0-9]*", SUBSYSTEM=="tty", SUBSYSTEMS=="usb", ATTRS{idVendor}=="1915", MODE="0666", ENV{NRF_CDC_ACM}="1"
+
+    LABEL="nrf_rules_end"
+    # 99-modemmmanager-acm-fix.rules
+    # Previously flagged nRF USB CDC ACM devices shall be ignored by ModemManager
+    ENV{NRF_CDC_ACM}=="1", ENV{ID_MM_CANDIDATE}="0", ENV{ID_MM_DEVICE_IGNORE}="1"
+
+    ${builtins.readFile ./99-jlink.udev}
   '';
 
   users.users.kloenk = {
+    extraGroups = [ "dialout" ];
     packages = with pkgs; [
       alacritty
       chatterino2

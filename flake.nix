@@ -8,6 +8,13 @@
     #    ref = "from-unstable";
   };
 
+  inputs.nixpkgs-nrf = {
+    type = "github";
+    owner = "nixos";
+    repo = "nixpkgs";
+    ref = "nixos-23.05";
+  };
+
   inputs.nix = {
     type = "github";
     owner = "nixos";
@@ -492,8 +499,18 @@
         let pkgs = nixpkgsFor.${system};
         in {
           kernel = pkgs.callPackage ./dev/kernel.nix { };
-          zephyr =
-            pkgs.callPackage ./dev/zephyr.nix { python3 = pkgs.python310; };
+          zephyr = let
+            nrfPkgs = import inputs.nixpkgs-nrf {
+              inherit system;
+              config = {
+                allowUnfree = true;
+                segger-jlink.acceptLicense = true;
+              };
+            };
+          in pkgs.callPackage ./dev/zephyr.nix {
+            python3 = pkgs.python310;
+            inherit (nrfPkgs) nrf-command-line-tools;
+          };
           smp-rs = pkgs.callPackage ./dev/smp-rs.nix { };
           default = pkgs.mkShell {
             nativeBuildInputs = [ pkgs.nixfmt pkgs.colmena pkgs.sops ];

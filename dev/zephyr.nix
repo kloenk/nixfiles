@@ -1,4 +1,5 @@
-{ mkShell, cmake, ninja, dtc, wget, minicom, python3 }:
+{ mkShell, cmake, ninja, dtc, wget, minicom, python3, dfu-util
+, nrf-command-line-tools }:
 
 let
   # It's not entirely clear based on the documentation which of all of these
@@ -36,5 +37,14 @@ let
       click
     ]);
 in mkShell {
-  nativeBuildInputs = [ cmake ninja dtc wget minicom zephyrPython ];
+  nativeBuildInputs = [
+    cmake
+    ninja
+    dtc
+    wget
+    minicom
+    zephyrPython
+    dfu-util
+    nrf-command-line-tools
+  ];
 }
