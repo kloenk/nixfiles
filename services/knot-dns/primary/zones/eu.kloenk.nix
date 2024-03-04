@@ -20,5 +20,6 @@ with dns.combinators; {
     net.subdomains = common.net;
 
     _github-pages-challenge-Kloenk.TXT = [ "93721bf4d3b9ab1d6af40409424d90" ];
+    _discord.TXT = [ "dh=efc22162c3e34ef503539adc6b966740e906deeb" ];
   };
 }
