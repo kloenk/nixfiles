@@ -12,6 +12,8 @@ let
       ligature
       diminish
       counsel
+      vertico
+      consult
       company
       helpful
       editorconfig
