@@ -6,10 +6,12 @@
 
 {
   imports = [ # Include the results of the hardware scan.
+    ./backup-module.nix
+
     ./hardware-configuration.nix
+    ./links.nix
 
     ./moodle.nix
-    ./restic.nix
 
     ../../profiles/telegraf.nix
   ];
@@ -71,27 +73,6 @@
 
      networking.nameservers = [ "1.1.1.1" "192.168.178.1" "2001:4860:4860::8888" ];
   */
-  systemd.network.networks."20-ens18" = {
-    name = "ens18";
-    DHCP = "no";
-    dns = [ "1.1.1.1" "2001:4860:4860::8888" ];
-    addresses = [
-      { addressConfig.Address = "5.9.118.94/32"; }
-      { addressConfig.Address = "2a01:4f8:162:6343::4/128"; }
-    ];
-    routes = [
-      {
-        routeConfig.Gateway = "5.9.118.73";
-        routeConfig.GatewayOnLink = true;
-      }
-      {
-        routeConfig.Gateway = "2a01:4f8:162:6343::2";
-        routeConfig.GatewayOnLink = true;
-      }
-      { routeConfig.Destination = "5.9.118.93"; }
-      { routeConfig.Destination = "2a01:4f8:162:6343::3"; }
-    ];
-  };
 
   # Select internationalisation properties.
   console.keyMap = lib.mkForce "de";

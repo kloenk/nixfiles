@@ -132,4 +132,10 @@
   # MARK: DISABLE httpd
   services.httpd.enable = lib.mkOverride 25 false; # No thanks, I choose life
   services.httpd.group = config.services.nginx.group;
+
+  usee.backups.moodle = {
+    user = "moodle";
+    paths = [ "/var/lib/moodle" ];
+    postgresDatabases = [ "moodle" ];
+  };
 }
