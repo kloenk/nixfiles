@@ -19,8 +19,6 @@
   # Boot
   boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
 
-  ## zfs
-  boot.zfs.enableUnstable = true; # allow linuxPackages_latest with zfs
   boot.kernelParams =
     [ "nohibernate" ]; # https://github.com/openzfs/zfs/issues/260
 
