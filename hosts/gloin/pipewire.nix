@@ -3,8 +3,8 @@
 {
   services.upower.enable = true;
 
-  environment.etc."pipewire/pipewire.conf.d/30-rnnoise.conf".text =
-    builtins.toJSON {
+  services.pipewire.extraConfig.pipewire = {
+    "30-rnnoise" = {
       "context.properties"."default.clock.rate" = 48000;
       "context.modules" = [{
         name = "libpipewire-module-filter-chain";
@@ -36,4 +36,5 @@
         };
       }];
     };
+  };
 }

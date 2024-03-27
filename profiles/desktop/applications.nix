@@ -82,7 +82,7 @@
     services.gpg-agent = {
       enable = true;
       enableSshSupport = true;
-      pinentryFlavor = "gnome3";
+      pinentryPackage = pkgs.pinentry-gnome3;
       enableExtraSocket = true;
       sshKeys = [ ];
     };

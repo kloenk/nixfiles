@@ -85,6 +85,8 @@
       cargo-generate
       bpf-linker
 
+      kicad
+
       # jetbrains.clion
       # jetbrains.ruby-mine
       # jetbrains.webstorm
