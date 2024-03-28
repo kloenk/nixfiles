@@ -41,8 +41,8 @@ in {
       "/run/user/1000"; # User-id 1000 must match above user. MPD will look inside this directory for the PipeWire socket.
   };
 
-  environment.etc."pipewire/pipewire.conf.d/40-elrond.conf".text =
-    builtins.toJSON {
+  services.pipewire.extraConfig.pipewire = {
+    "40-elrond" = {
       "context.modules" = [
         {
           name = "libpipewire-module-rtp-sink";
@@ -69,4 +69,5 @@ in {
         }
       ];
     };
+  };
 }
