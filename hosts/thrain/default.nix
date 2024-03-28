@@ -3,9 +3,9 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./disko.nix
     ./links.nix
 
-    ../../profiles/bcachefs.nix
     ../../profiles/postgres.nix
     ../../profiles/desktop/syncthing.nix
     ../../profiles/users/kloenk/password.nix
@@ -24,8 +24,8 @@
   boot.loader.grub.enable = false;
   boot.loader.systemd-boot.enable = true;
   boot.initrd.systemd.enable = true;
-  boot.supportedFilesystems = [ "bcachefs" ];
-  boot.initrd.supportedFilesystems = [ "bcachefs" ];
+  boot.supportedFilesystems = [ ];
+  boot.initrd.supportedFilesystems = [ ];
 
   networking.useDHCP = false;
   networking.hostName = "thrain";
@@ -61,15 +61,6 @@
     "libvirtd" # libvirtd connections
     "audio"
   ];
-
-  # keep in sync with elrond to share kernel
-  boot.kernelPatches = [{
-    name = "bcachefs-lock-time";
-    patch = null;
-    extraConfig = ''
-      BCACHEFS_LOCK_TIME_STATS y
-    '';
-  }];
 
   services.telegraf.extraConfig.inputs = { sensors = { }; };
   systemd.services.telegraf.path = with pkgs; [ lm_sensors ];
