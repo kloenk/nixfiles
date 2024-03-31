@@ -87,13 +87,14 @@
 
   services.openssh.settings.X11Forwarding = true;
 
-  boot.kernelPatches = [{
-    name = "bcachefs-lock-time";
-    patch = null;
-    extraConfig = ''
-      BCACHEFS_LOCK_TIME_STATS y
-    '';
-  }];
+  /* boot.kernelPatches = [{
+       name = "bcachefs-lock-time";
+       patch = null;
+       extraConfig = ''
+         BCACHEFS_LOCK_TIME_STATS y
+       '';
+     }];
+  */
 
   # fileSystems."/".device = lib.mkForce "UUID=f19a5f96-9f10-453c-9de2-d351e1e858c8";
   fileSystems."/".device =

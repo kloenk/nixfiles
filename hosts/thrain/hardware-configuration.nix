@@ -9,5 +9,7 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
+  fileSystems."/persist".neededForBoot = true;
+
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }

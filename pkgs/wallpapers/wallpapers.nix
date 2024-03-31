@@ -168,6 +168,14 @@ in {
     sha256 = "sha256-z/bX0qe+X0rOLt14V2eGY8NFx2tqlkIT4kWFhBU+vY8=";
   };
 
+  pcb_climbing = fromPixiv {
+    src = "https://www.pixiv.net/en/artworks/112423002";
+    url =
+      "https://i.pximg.net/img-master/img/2023/10/10/01/20/52/112423002_p0_master1200.jpg";
+    name = "pcb_climbing.jpg";
+    sha256 = "sha256-qJNn7kDCsMH4xjAGNdDN80AqF6ukvxwYHUdY+0d13wU=";
+  };
+
   lost_in_space_mag = fromRedditPost {
     url =
       "https://www.reddit.com/r/WarframeRunway/comments/en4jw5/mag_as_robot_mock_poster_for_lost_in_space_watch/";
@@ -328,6 +336,8 @@ in {
     name = "hzd_artwork_drawn.jpeg";
     sha256 = "sha256-rUE0couCbiTIZQI7mPBeo5JAtne/6Oymx+5tpQ/7kFQ=";
   };
+
+  dishonored_outsider = ./images/dishonored/outsider.jpeg;
 
   antonov = fromFile { file = ./images/antonov.jpg; };
   cool-space = fromFile { file = ./images/cool-space.png; };

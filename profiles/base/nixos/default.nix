@@ -53,7 +53,7 @@
     kernel = { };
     kernel_vmstat = { };
     wireguard = { };
-    systemd_units = { unittype = "service,mount,socket,target"; };
+    # systemd_units = { unittype = "service,mount,socket,target"; };
   };
   systemd.services.telegraf.serviceConfig.AmbientCapabilities =
     [ "CAP_NET_ADMIN" ];
