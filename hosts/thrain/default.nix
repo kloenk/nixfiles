@@ -16,8 +16,6 @@
     ./services/samba.nix
     ./services/proxies.nix
 
-    ../../services/kresd-dns
-
     ../../profiles/telegraf.nix
   ];
 

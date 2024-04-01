@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }: {
+{ pkgs, ... }: {
   services.resolved.enable = false;
 
   networking.firewall.interfaces.wg0.allowedTCPPorts = [ 53 ];
@@ -14,7 +14,9 @@
       view:addr('127.0.0.0/8', policy.all(policy.PASS))
       view:addr('::1/128', policy.all(policy.PASS))
       view:addr('192.168.242.0/24', policy.all(policy.PASS))
-      view:addr('192.168.64.0/24', policy.all(policy.PASS))
+      view:addr('192.168.178.0/24', policy.all(policy.PASS))
+      view:addr('192.168.44.0/24', policy.all(policy.PASS))
+      view:addr('192.168.45.0/24', policy.all(policy.PASS))
       view:addr('2a01:4f8:c013:1a4b:ecba::/80', policy.all(policy.PASS))
 
       -- drop everything that hasn't matched

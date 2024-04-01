@@ -1,5 +1,5 @@
 { ... }:
 
 {
-  imports = [ ./forward.nix ./guest.nix ./kea.nix ];
+  imports = [ ./forward.nix ./guest.nix ./kea.nix ./dns.nix ];
 }

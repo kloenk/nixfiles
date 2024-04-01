@@ -23,10 +23,16 @@
     subnet4 = [{
       pools = [{ pool = "192.168.45.50 - 192.168.45.150"; }];
       subnet = "192.168.45.0/24";
-      option-data = [{
-        name = "routers";
-        data = "192.168.45.1";
-      }];
+      option-data = [
+        {
+          name = "routers";
+          data = "192.168.45.1";
+        }
+        {
+          name = "domain-name-servers";
+          data = "192.168.45.1";
+        }
+      ];
     }];
   };
 }
