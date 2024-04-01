@@ -26,6 +26,6 @@
     ];
   };
 
-  nftables.enable = true;
-  nftables.forwardPolicy = lib.mkDefault "drop";
+  networking.nftables.enable = true;
+  networking.firewall.filterForward = true;
 }

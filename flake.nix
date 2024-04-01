@@ -237,7 +237,6 @@
             inputs.home-manager.nixosModules.home-manager
             self.nixosModules.kloenk
 
-            self.nixosModules.nftables
             self.nixosModules.helix
 
             # vika.nixosModules.colorfulMotd # TODO: fix
@@ -320,7 +319,6 @@
             p3tr.nixosModules.default
             disko.nixosModules.default
 
-            self.nixosModules.nftables
             self.nixosModules.deluge2
             #self.nixosModules.firefox
             self.nixosModules.wordpress
@@ -450,7 +448,6 @@
         #firefox = import ./modules/firefox;
         #secrets = import ./modules/secrets;
         transient = import ./modules/transient;
-        nftables = import ./modules/nftables;
         kloenk = import ./modules/kloenk;
 
         restya-board = import ./modules/restya-board;

@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     ./disko.nix
     ./links.nix
+    ./network
 
     ../../profiles/postgres.nix
     ../../profiles/desktop/syncthing.nix

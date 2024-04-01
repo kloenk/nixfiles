@@ -9,20 +9,19 @@
   # NATING
   boot.kernel.sysctl = { "net.ipv4.ip_forward" = 1; };
 
-  #chain POSTROUTING {
-  #  outerface enp1s0 SNAT to 195.39.247.6
-  #}
-  nftables.extraConfig = ''
-    table ip nat {
+  networking.nftables.tables.nat = {
+    family = "inet";
+    content = ''
       chain postrouting {
         type nat hook postrouting priority srcnat;
-        ip saddr { 192.168.242.0-192.168.242.255 } oifname { "wg0" } snat to 192.168.242.1
-        oifname "eth0" masquerade
-        iifname "wg0" oifname "buw0" masquerade
+
+        iifname "wg0" oifname { eth0, buw0 } masquerade;
       }
-    }
+    '';
+  };
+  networking.firewall.extraForwardRules = ''
+    iifname "wg0" accept;
   '';
-  nftables.forwardPolicy = "accept";
 
   k.wg.id = 1;
   k.wg.net = true;
@@ -128,6 +127,7 @@
     ];
     routes = [
       { routeConfig.Destination = "192.168.242.0/24"; }
+      { routeConfig.Destination = "192.168.178.0/24"; }
       {
         routeConfig.Destination = "2a01:4f8:c013:1a4b:ecba::/80";
         routeConfig.PreferredSource = "2a01:4f8:c013:1a4b:ecba::1";
