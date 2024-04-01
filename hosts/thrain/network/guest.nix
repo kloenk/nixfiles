@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   systemd.network = {
@@ -13,6 +13,77 @@
       name = "guest";
       DHCP = "no";
       addresses = [{ addressConfig.Address = "192.168.45.1/24"; }];
+      hierarchyTokenBucketConfig = {
+        Parent = "root";
+        Handle = 2;
+        DefaultClass = "00ff";
+        # RateToQuantum = 20;
+      };
+      hierarchyTokenBucketClassConfig = [
+        {
+          hierarchyTokenBucketClassConfig = {
+            Parent = "root";
+            ClassId = "2:1";
+            Rate = "20M";
+            Priority = 1;
+            MTUBytes = 1500;
+            OverheadBytes = 100;
+          };
+        }
+
+        # interactive
+        {
+          hierarchyTokenBucketClassConfig = {
+            Parent = "2:1";
+            ClassId = "2:10";
+            Rate = "2M";
+            CeilRate = "20M";
+          };
+        }
+
+        # privileged port
+        {
+          hierarchyTokenBucketClassConfig = {
+            Parent = "2:1";
+            ClassId = "2:11";
+            Rate = "1M";
+            CeilRate = "20M";
+          };
+        }
+
+        # default
+        {
+          hierarchyTokenBucketClassConfig = {
+            Parent = "2:1";
+            ClassId = "2:00ff";
+            Rate = "1M";
+            CeilRate = "20M";
+          };
+        }
+      ];
+      pfifoConfig = [
+        {
+          pfifoConfig = {
+            Parent = "2:10";
+            Handle = "10";
+            PacketLimit = 10000;
+          };
+        }
+        {
+          pfifoConfig = {
+            Parent = "2:11";
+            Handle = "11";
+            PacketLimit = 10000;
+          };
+        }
+        {
+          pfifoConfig = {
+            Parent = "2:00ff";
+            Handle = "00ff";
+            PacketLimit = 10000;
+          };
+        }
+      ];
     };
 
     networks."20-br0".vlan = [ "guest" ];
@@ -34,5 +105,16 @@
         }
       ];
     }];
+  };
+
+  systemd.services.tc-filter-guest = {
+    wants = [ "network-online.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = pkgs.copyPathToStore ./tc-filter-guest.sh;
+      # ExecStop = "${pkgs.iproute2}/bin/tc filter del dev guest";
+    };
+    path = with pkgs; [ bash iproute2 ];
   };
 }

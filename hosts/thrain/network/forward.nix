@@ -2,6 +2,7 @@
 
 {
   networking.firewall.extraForwardRules = ''
+    iifname "guest" meta mark 133745;
     iifname "wg0" accept;
 
     oifname "guest" accept;
