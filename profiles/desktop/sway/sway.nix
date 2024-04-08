@@ -47,6 +47,7 @@
       wrapperFeatures.gtk = true;
 
       config = {
+        workspaceAutoBackAndForth = true;
         fonts = {
           names = [ "JetBrains Mono" ];
           size = 8.0;
