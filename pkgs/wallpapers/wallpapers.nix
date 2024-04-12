@@ -346,4 +346,5 @@ in {
   sea_clouds = fromFile { file = ./images/sea_clouds.jpg; };
   mountain_clouds = fromFile { file = ./images/mountain_clouds.jpg; };
   spaceship_sun_wide = fromFile { file = ./images/2001_ship_sun_wide.png; };
+  trans-estro = fromFile { file = ./images/trans-estro.png; };
 }

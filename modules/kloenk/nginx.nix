@@ -34,7 +34,7 @@ in {
     };
     folder = mkOption {
       type = types.path;
-      default = "/persist/data/public";
+      default = "/persist/data/public/";
     };
   };
 

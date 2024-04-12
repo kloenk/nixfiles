@@ -122,5 +122,5 @@
     enable = true;
     drivers = [ pkgs.gutenprint ];
   };
-  programs.steam.enable = true;
+  # programs.steam.enable = true;
 }
