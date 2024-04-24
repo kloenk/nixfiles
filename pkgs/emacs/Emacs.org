@@ -624,4 +624,13 @@ Dsiable electri-pair-mode in org mode
   :config (magit-todos-mode 1))
 #+end_src
 
+*** Forge
+#+begin_src emacs-lisp
+  (use-package forge
+    :ensure t
+    :after magit
+    :config
+    (add-to-list 'forge-alist '("git.seven.secucloud.secunet.com" "git.seven.secucloud.secunet.com/api/v4" "git.seven.secucloud.secunet.com" forge-gitlab-repository))
+    (add-to-list 'forge-alist '("cyberchaos.dev" "cyberchaos.dev/api/v4" "cyberchaos.sev" forge-gitlab-repository)))
+#+end_src
 

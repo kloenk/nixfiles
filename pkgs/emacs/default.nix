@@ -1,4 +1,4 @@
-{ emacsPackagesFor, emacs, runCommandNoCC }:
+{ emacsPackagesFor, emacs, gitFull, runCommandNoCC }:
 
 let
   emacsWithPkgs = (emacsPackagesFor emacs).emacsWithPackages (epkgs:
@@ -37,6 +37,7 @@ let
       treemacs-projectile
       magit
       magit-todos
+      forge
     ]);
   tangledConfig = runCommandNoCC "tangled-config" {
     nativeBuildInputs = [ emacsWithPkgs ];
@@ -47,7 +48,7 @@ let
     emacs -Q --batch --eval "(require 'org)" --eval '(org-babel-tangle-file "./Emacs.org")'
   '';
   compiledConfig = runCommandNoCC "compile-config" {
-    nativeBuildInputs = [ emacsWithPkgs ];
+    nativeBuildInputs = [ emacsWithPkgs gitFull ];
   } ''
     mkdir -p $out
     cp ${tangledConfig}/Emacs.el ${tangledConfig}/early-init.el .
