@@ -7,6 +7,7 @@
     ./syncthing.nix
     ./pipewire.nix
     ./evremap.nix
+    ./kea.nix
 
     ../../profiles/desktop
     ../../profiles/desktop/sway

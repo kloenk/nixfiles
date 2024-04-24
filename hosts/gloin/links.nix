@@ -5,6 +5,8 @@ let
   netdevs = config.systemd.network.netdevs;
   networks = config.systemd.network.networks;
 in {
+  boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
+
   k.wg = {
     enable = true;
     id = 205;
@@ -17,7 +19,29 @@ in {
     };
     networks."10-eth0" = {
       name = "eth0";
+      # DHCP = "yes";
+      bridge = [ "br0" ];
+    };
+
+    netdevs."20-br0".netdevConfig = {
+      Kind = "bridge";
+      Name = "br0";
+    };
+    networks."20-br0" = {
+      name = "br0";
       DHCP = "yes";
+    };
+
+    netdevs."20-dhcp0" = {
+      netdevConfig = {
+        Kind = "veth";
+        Name = "dhcp0";
+      };
+      peerConfig.Name = "dhcp1";
+    };
+    networks."20-dhcp0" = {
+      name = "dhcp0";
+      addresses = [{ addressConfig.Address = "192.168.45.1/24"; }];
     };
 
     networks."70-wlan0" = {
