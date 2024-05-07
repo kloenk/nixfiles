@@ -37,6 +37,7 @@
   virtualisation.libvirtd = {
     enable = true;
     onShutdown = "shutdown";
+    allowedBridges = [ "br0" ];
   };
 
   users.users.kloenk.extraGroups = [

@@ -28,4 +28,7 @@
 
   networking.nftables.enable = true;
   networking.firewall.filterForward = true;
+
+  # Bind iwd to systemd-networkd
+  systemd.services.iwd.unitConfig.BindsTo = [ "systemd-networkd.service" ];
 }
