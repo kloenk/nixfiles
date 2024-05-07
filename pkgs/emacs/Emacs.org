@@ -183,11 +183,12 @@ Taken from bedrock early init
 #+end_src
 ** Variables
 #+begin_src emacs-lisp
-  (defvar kloenk/org-files-tasks "~/Documents/OrgFiles/Tasks.org")
-  (defvar kloenk/org-files-habits "~/Documents/OrgFiles/Habits.org")
-  (defvar kloenk/org-files-journal "~/Documents/OrgFiles/Journal.org")
-  (defvar kloenk/org-files-metrics "~/Documents/OrgFiles/Metrics.org")
-  (defvar kloenk/org-files-birthdays "~/Documents/OrgFiles/Birthdays.org")
+  (defvar kloenk/org-root (file-name-as-directory "~/Developer/Org"))
+  (defvar kloenk/org-files-tasks (concat kloenk/org-root "Tasks.org"))
+  (defvar kloenk/org-files-habits (concat kloenk/org-root "Habits.org"))
+  (defvar kloenk/org-files-journal (concat kloenk/org-root "Journal.org"))
+  (defvar kloenk/org-files-metrics (concat kloenk/org-root "Metrics.org"))
+  (defvar kloenk/org-files-birthdays (concat kloenk/org-root "Birthdays.org"))
 #+end_src
 ** Org
 #+begin_src emacs-lisp
@@ -202,7 +203,7 @@ Taken from bedrock early init
   (setq org-log-into-drawer t)
 
   (setq org-agenda-files
-        '(kloenk/org-files-tasks
+        (list kloenk/org-files-tasks
           kloenk/org-files-habits
           kloenk/org-files-birthdays))
 
