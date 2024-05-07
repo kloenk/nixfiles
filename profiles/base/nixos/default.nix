@@ -1,4 +1,4 @@
-{ inputs, pkgs, lib, config, ... }:
+{ pkgs, lib, config, ... }:
 
 {
   imports = [
@@ -6,6 +6,7 @@
     ./ssh.nix
     ./network.nix
     ./nginx.nix
+    ./locale.nix
 
     # dont work under darwin currently
     ../vim.nix
@@ -27,7 +28,6 @@
   nix.settings.system-features =
     [ "recursive-nix" "kvm" "nixos-test" "big-parallel" ];
 
-  i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
   # console.keyMap = lib.mkDefault "de"; # neo
   console.keyMap = lib.mkDefault "us";
   console.font = "Lat2-Terminus16";
