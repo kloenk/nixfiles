@@ -18,6 +18,7 @@ in with dns.combinators; {
     ns2 = gimli;
 
     mail = gimli;
+    rspamd = gimli;
 
     bitwarden = varda;
     auth = varda;

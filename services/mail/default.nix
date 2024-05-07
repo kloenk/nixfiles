@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [ ./dmarc-report.nix ];
+  imports = [ ./dmarc-report.nix ./rspamd.nix ];
 
   fileSystems."/var/vmail" = {
     device = "/persist/data/vmail";
