@@ -43,6 +43,7 @@ in {
       name = "dhcp0";
       addresses = [{ addressConfig.Address = "192.168.45.1/24"; }];
     };
+    networks."20-dhcp1" = { name = "dhcp1"; };
 
     networks."70-wlan0" = {
       name = "wlan0";
