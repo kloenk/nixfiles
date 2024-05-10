@@ -89,7 +89,8 @@ in {
       embedScript = pkgs.writeText "embed.ipxe" ''
         #!ipxe
         dhcp
-        chain http://192.168.45.1/nixos.ipxe gwp.server=192.168.45.1
+        set gwp_install_server_url http://192.168.45.1/config/
+        chain http://192.168.45.1/nixos.ipxe
       '';
     }}";
   };
