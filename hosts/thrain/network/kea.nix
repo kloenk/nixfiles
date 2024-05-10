@@ -13,7 +13,7 @@
     dhcp4 = {
       enable = true;
       settings = {
-        authorative = true;
+        # authorative = true;
         lease-database = {
           name = "/var/lib/kea/dhcp4.leases";
           persist = true;

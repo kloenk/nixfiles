@@ -15,7 +15,7 @@
         }
         {
           name = "domain-name-servers";
-          data = "102.168.178.248";
+          data = "192.168.178.248";
         }
         {
           name = "domain-name";

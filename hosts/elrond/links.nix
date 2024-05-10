@@ -30,6 +30,7 @@
       name = "br0";
       DHCP = "no";
       dns = [ "192.168.178.248" ];
+      domains = [ "burscheid.home.kloenk.de" ];
       vlan = [ "mgmt" ];
       addresses = [{ addressConfig.Address = "192.168.178.247/24"; }];
       routes = [{
