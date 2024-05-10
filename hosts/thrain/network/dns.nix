@@ -7,8 +7,22 @@
   services.kresd = {
     enable = true;
     package = pkgs.knot-resolver.override { extraFeatures = true; };
+    listenPlain = [
+      "[::1]:53"
+      "127.0.0.1:53"
+
+      "192.168.178.248:53"
+    ];
     extraConfig = ''
       modules.load('view')
+      modules.load('policy')
+
+      localTrees = policy.todnames(
+        {'burscheid.home.kloenk.de.',
+         '178.168.192.in-addr.arpa.'
+        })
+      policy.add(policy.suffix(policy.FLAGS({'NO_EDNS'}), localTrees))
+      policy.add(policy.suffix(policy.STUB('127.0.0.11'), localTrees))
 
       -- whitelist queries identified by subnet
       view:addr('127.0.0.0/8', policy.all(policy.PASS))

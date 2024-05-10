@@ -21,6 +21,7 @@
   services.kea.dhcp4.settings = {
     interfaces-config.interfaces = [ "guest" ];
     subnet4 = [{
+      interface = "guest";
       pools = [{ pool = "192.168.45.50 - 192.168.45.150"; }];
       subnet = "192.168.45.0/24";
       option-data = [

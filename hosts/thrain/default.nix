@@ -52,7 +52,6 @@
   };
 
   networking.firewall.allowedUDPPorts = [ 53 ];
-  services.kresd.listenPlain = [ "[::]:53" "0.0.0.0:53" ];
   services.kresd.instances = 4;
 
   users.users.kloenk.extraGroups = [

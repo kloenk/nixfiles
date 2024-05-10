@@ -59,6 +59,14 @@ in with dns.combinators; {
       v6 = "2a01:4f8:162:6343::2";
     };
 
+    "burscheid.home" = {
+      subdomains.ns1 = common.helpers.host {
+        ttl = 1800;
+        v4 = "192.168.178.248";
+      };
+      NS = [ "ns1.burscheid.home.kloenk.de." ];
+    };
+
     _domainkey.subdomains.mail.TXT = [
       (txt ''
         v=DKIM1; k=rsa; " "p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDJ5QgJzy63zC5f7qwHn3sgVrjDLaoLLX3ZnQNbmNms4+OJxNgBlb9uqTNqCEV9ScUX/2V+6IY2TqdhdWaNBif+agsym2UvNbCpvyZt5UFEJsGFoccNLR4iDkBKr8uplaW7GTBf5sUfbPQ2ens7mKvNEa5BMCXQI5oNa1Q6MKLjxwIDAQAB'')

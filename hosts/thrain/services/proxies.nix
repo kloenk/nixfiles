@@ -41,4 +41,32 @@
   };
   security.acme.certs."edgeswitch.mgmt.thrain.net.kloenk.de".server =
     "https://acme.net.kloenk.de:8443/acme/acme/directory";
+
+  services.nginx.virtualHosts."studio-switch.mgmt.thrain.net.kloenk.de" = {
+    enableACME = true;
+    forceSSL = true;
+    kTLS = true;
+    locations."/" = {
+      proxyPass = "http://192.168.44.4";
+      extraConfig = ''
+        proxy_ssl_verify off;
+      '';
+    };
+  };
+  security.acme.certs."studio-switch.mgmt.thrain.net.kloenk.de".server =
+    "https://acme.net.kloenk.de:8443/acme/acme/directory";
+
+  services.nginx.virtualHosts."dachboden-switch.mgmt.thrain.net.kloenk.de" = {
+    enableACME = true;
+    forceSSL = true;
+    kTLS = true;
+    locations."/" = {
+      proxyPass = "http://192.168.44.6";
+      extraConfig = ''
+        proxy_ssl_verify off;
+      '';
+    };
+  };
+  security.acme.certs."dachboden-switch.mgmt.thrain.net.kloenk.de".server =
+    "https://acme.net.kloenk.de:8443/acme/acme/directory";
 }
