@@ -73,6 +73,14 @@
           PersistentKeepalive = 21;
         };
       }
+      { # elros
+        wireguardPeerConfig = {
+          AllowedIPs =
+            [ "192.168.242.102/32" "2a01:4f8:c013:1a4b:ecba::102/128" ];
+          PublicKey = "HI/xAEvFIvPwnTIv7H1WF8Z5d+FBjodLqaLBdfBlfAk=";
+          PersistentKeepalive = 21;
+        };
+      }
 
       { # frodo
         wireguardPeerConfig = {

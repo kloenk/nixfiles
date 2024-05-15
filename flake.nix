@@ -73,7 +73,7 @@
   };
 
   inputs.lanzaboote = {
-    url = "github:nix-community/lanzaboote/v0.3.0";
+    url = "github:nix-community/lanzaboote/master";
     inputs.nixpkgs.follows = "/nixpkgs";
   };
 
@@ -298,6 +298,10 @@
             system = "x86_64-linux";
             overlays = (overlayCombined "x86_64-linux");
           };
+          nodeNixpkgs.elros = import nixpkgs {
+            system = "aarch64-linux";
+            overlays = (overlayCombined "aarch64-linux");
+          };
           #allowApplyAll = false;
 
           specialArgs.inputs = inputs;
@@ -411,6 +415,12 @@
 
           # ZFS kernel
           nixpkgs.config.allowBroken = true;
+        };
+        elros = { pkgs, nodes, ... }: {
+          deployment.targetHost = "elros.net.kloenk.de";
+          deployment.tags = [ "pony" "local" ];
+
+          imports = [ ./hosts/elros ];
         };
         elrond = { pkgs, nodes, ... }: {
           deployment.targetHost = "elrond.net.kloenk.de";

@@ -3,11 +3,7 @@
 {
   imports = [ inputs.lanzaboote.nixosModules.lanzaboote ];
 
-  fileSystems."/etc/secureboot" = {
-    device = "/persist/data/secureboot";
-    fsType = "none";
-    options = [ "bind" ];
-  };
+  environment.etc.secureboot.source = "/persist/data/secureboot";
 
   environment.systemPackages = [
     # For debugging and troubleshooting Secure Boot.

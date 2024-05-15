@@ -21,4 +21,6 @@ in {
   update-ssh-host-keys = callPackage ./update-ssh-host-keys { };
 
   evremap = callPackage ./evremap { };
+
+  ubootElros = callPackage ./ubootElros { };
 }

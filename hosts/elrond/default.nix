@@ -55,8 +55,8 @@
     "192.168.178.1" = [ "fritz.box" ];
   };
 
-  networking.nameservers = [ "thrain" "fritz.box" "1.1.1.1" ];
-  networking.search = [ "fritz.box" ];
+  networking.nameservers = [ "thrain" "1.1.1.1" ];
+  networking.search = [ "burscheid.home.kloenk.de" ];
 
   services.printing.browsing = true;
   services.printing.enable = true;

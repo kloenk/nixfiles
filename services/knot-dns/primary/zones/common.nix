@@ -88,6 +88,12 @@ in {
     "studio-switch.mgmt.thrain" = thrain;
     "dachboden-switch.mgmt.thrain" = thrain;
     "initrd.thrain" = host { v6 = "2a01:4f8:c013:1a4b:ecba:1338::101"; };
+    elros = host {
+      v4 = "192.168.242.102";
+      v6 = "2a01:4f8:c013:1a4b:ecba::102";
+      sshfp =
+        "5981fad283f4404fced9081a9a609282548db8382c944d2e07d47655893ca6de";
+    };
     frodo = host {
       v4 = "192.168.242.201";
       v6 = "2a01:4f8:c013:1a4b:ecba::201";

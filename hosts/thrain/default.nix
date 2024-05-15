@@ -28,7 +28,7 @@
 
   networking.useDHCP = false;
   networking.hostName = "thrain";
-  networking.search = [ "fritz.box" ];
+  networking.search = [ "burscheid.home.kloenk.de" ];
   networking.hosts = {
     "192.168.178.1" = lib.singleton "fritz.box";
     "192.168.178.247" = [ "elrond" "elrond.kloenk.de" ];
@@ -60,7 +60,13 @@
     "audio"
   ];
 
-  services.telegraf.extraConfig.inputs = { sensors = { }; };
+  services.telegraf.extraConfig.inputs = {
+    sensors = { };
+    ping = {
+      method = "native";
+      urls = [ "1.1.1.1" "kloenk.de" ];
+    };
+  };
   systemd.services.telegraf.path = with pkgs; [ lm_sensors ];
 
   system.stateVersion = "24.05";
