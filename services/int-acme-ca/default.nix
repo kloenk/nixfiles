@@ -39,7 +39,7 @@
   #systemd.services.step-ca.serviceConfig.BindPaths =
   #    "/persist/data/step-ca:/var/lib/step-ca";
   systemd.services.step-ca.serviceConfig.ReadWritePaths =
-    "/persist/data/step-ca";
+    [ "/persist/data/step-ca" ];
 
   sops.secrets = {
     "int-acme-ca/intermediate-ca-key".owner = "step-ca";

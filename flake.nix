@@ -15,11 +15,16 @@
     ref = "nixos-23.05";
   };
 
-  inputs.nix = {
-    type = "github";
-    owner = "nixos";
-    repo = "nix";
-    #inputs.nixpkgs.follows = "/nixpkgs"; # broken
+  inputs.lix = {
+    url = "https://git.lix.systems/lix-project/lix/archive/main.tar.gz";
+    flake = false;
+  };
+
+  inputs.lix-module = {
+    url =
+      "https://git.lix.systems/lix-project/nixos-module/archive/main.tar.gz";
+    inputs.nixpkgs.follows = "nixpkgs";
+    inputs.lix.follows = "lix";
   };
 
   inputs.moodlepkgs = {
@@ -142,9 +147,9 @@
     inputs.nixpkgs.follows = "/nixpkgs";
   };
 
-  outputs = inputs@{ self, nixpkgs, nix, moodlepkgs, mail-server, kloenk-www
-    , dns, darwin, sops-nix, colmena, jlly, fleet_bot, p3tr, sysbadge, oxalica
-    , disko, ... }:
+  outputs = inputs@{ self, nixpkgs, lix, lix-module, moodlepkgs, mail-server
+    , kloenk-www, dns, darwin, sops-nix, colmena, jlly, fleet_bot, p3tr
+    , sysbadge, oxalica, disko, ... }:
     let
       overlayCombined = system: [
         #nix.overlays.default
@@ -162,6 +167,7 @@
         sysbadge.overlays.sysbadge
         oxalica.overlays.default
         inputs.bcachefs-tools.overlays.default
+        lix-module.overlays.default
         (final: prev: { bcachefs-tools = final.bcachefs; })
       ];
 
@@ -333,6 +339,7 @@
             self.nixosModules.backups
             self.nixosModules.evremap
 
+            #lix-module.nixosModules.default
             # TODO: 
             #vika.nixosModules.colorfulMotd
             #vika.nixosModules.secureSSHClient
@@ -344,10 +351,12 @@
 
           environment.systemPackages = [ # pkgs.colmena
           ];
+          #home-manager.home.enableNixpkgsReleaseCheck = false;
 
           k.ports = import ./lib/ports.nix;
 
           nix.channel.enable = false;
+          documentation.nixos.enable = false;
 
           deployment = {
             buildOnTarget = true;
