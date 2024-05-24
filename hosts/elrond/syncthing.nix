@@ -15,7 +15,7 @@
         };
         gloin = {
           id =
-            "XOJ2TU6-WZOWWYY-GU5O7LF-LLDZWYZ-JGAIHTH-SFAWOBJ-SM4L644-TZRFQQY";
+            "Z2CIYQ5-5CPAXKW-UPRYJ2W-C26HN75-2PMWOLP-7NA43FY-GBCUAU5-SNT6JA6";
         };
       };
 

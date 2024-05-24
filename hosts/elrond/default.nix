@@ -21,8 +21,6 @@
     ../../profiles/desktop/sway
     ../../profiles/desktop/emacs.nix
 
-    ../../profiles/bcachefs.nix
-
     ../../profiles/telegraf.nix
     # ../../profiles/syncthing.nix
     #../../common/nushell.nix
@@ -33,8 +31,8 @@
   boot.loader.systemd-boot.enable = true;
   boot.initrd.systemd.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.supportedFilesystems = [ "bcachefs" ];
-  boot.initrd.supportedFilesystems = [ "bcachefs" ];
+  boot.supportedFilesystems = [ "btrfs" "xfs" ];
+  boot.initrd.supportedFilesystems = [ "btrfs" ];
 
   boot.initrd.systemd.emergencyAccess = true;
 
@@ -64,9 +62,6 @@
 
   environment.systemPackages = with pkgs; [ lm_sensors virt-manager nodejs ];
 
-  users.users.kloenk.password = "foobar";
-  #users.users.kloenk.shell = lib.mkOverride 50 config.programs.nushell.wrapper; # FIME: not a shell package
-
   # virtmanager
   virtualisation.libvirtd = {
     enable = true;
@@ -87,18 +82,5 @@
 
   services.openssh.settings.X11Forwarding = true;
 
-  /* boot.kernelPatches = [{
-       name = "bcachefs-lock-time";
-       patch = null;
-       extraConfig = ''
-         BCACHEFS_LOCK_TIME_STATS y
-       '';
-     }];
-  */
-
-  # fileSystems."/".device = lib.mkForce "UUID=f19a5f96-9f10-453c-9de2-d351e1e858c8";
-  fileSystems."/".device =
-    lib.mkForce "/dev/disk/by-partuuid/3ef9d1a6-3036-45e3-bc76-c5f2eebd6492";
-
-  system.stateVersion = "23.05";
+  system.stateVersion = "24.11";
 }

@@ -14,8 +14,8 @@
     ../../profiles/desktop/emacs.nix
 
     ../../profiles/secunet.nix
-    ../../profiles/bcachefs.nix
-    ../../profiles/secureboot.nix
+    #../../profiles/bcachefs.nix
+    #../../profiles/secureboot.nix
 
     ../../profiles/telegraf.nix
   ];
@@ -25,8 +25,8 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.systemd.enable = true;
-  boot.supportedFilesystems = [ "bcachefs" ];
-  boot.initrd.supportedFilesystems = [ "bcachefs" ];
+  boot.supportedFilesystems = [ "btrfs" "xfs" ];
+  boot.initrd.supportedFilesystems = [ "btrfs" "xfs" ];
 
   networking.hostName = "gloin";
   networking.wireless.iwd.enable = true;
@@ -91,5 +91,5 @@
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.11";
 }

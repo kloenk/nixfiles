@@ -8,11 +8,12 @@
 
   users.users.kloenk.packages = with pkgs; [ wdisplays waypipe ];
 
-  environment.variables.SDL_VIDEODRIVER = "wayland";
-  environment.variables.QT_QPA_PLATFORM = "wayland";
-  environment.variables.QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-  environment.variables._JAVA_AWT_WM_NONREPARENTING = "1";
-  environment.variables.NIXOS_OZONE_WL = "1";
+  /* environment.variables.SDL_VIDEODRIVER = "wayland";
+     environment.variables.QT_QPA_PLATFORM = "wayland";
+     environment.variables.QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+     environment.variables._JAVA_AWT_WM_NONREPARENTING = "1";
+     environment.variables.NIXOS_OZONE_WL = "1";
+  */
 
   xdg.portal.enable = true;
   xdg.portal.wlr.enable = true;

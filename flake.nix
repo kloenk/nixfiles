@@ -501,11 +501,12 @@
             self.darwinModules.helix
 
             inputs.home-manager.darwinModules.home-manager
-            inputs.mac-app-util.darwinModules.default
-            ({ pkgs, config, inputs, ... }: {
-              home-manager.users.kloenk.imports =
-                [ inputs.mac-app-util.homeManagerModules.default ];
-            })
+            #inputs.mac-app-util.darwinModules.default
+            ({ pkgs, config, inputs, ... }:
+              {
+                # home-manager.users.kloenk.imports =
+                #   [ inputs.mac-app-util.homeManagerModules.default ];
+              })
           ];
           specialArgs.inputs = inputs;
           specialArgs.self = self;

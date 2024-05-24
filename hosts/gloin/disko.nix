@@ -18,19 +18,43 @@
               mountpoint = "/boot";
             };
           };
-          root = {
+          luks = {
             name = "root";
-            end = "-16G";
-            content = {
-              type = "filesystem";
-              format = "bcachefs";
-              mountpoint = "/";
-            };
-          };
-          swap = {
-            name = "swap";
             size = "100%";
-            content = { type = "swap"; };
+            content = {
+              type = "luks";
+              name = "crypted";
+              settings.allowDiscards = true;
+              content = {
+                type = "btrfs";
+                extraArgs = [ "-f" ];
+                subvolumes = {
+                  "/rootfs" = {
+                    mountpoint = "/";
+                    mountOptions = [ "compress=zstd" ];
+                  };
+                  "/home" = {
+                    mountpoint = "/home";
+                    mountOptions = [ "compress=zstd" ];
+                  };
+                  "/home/kloenk" = { };
+                  "/nix" = {
+                    mountpoint = "/nix";
+                    mountOptions = [ "compress=zstd" "noatime" ];
+                  };
+                  "/persist" = {
+                    mountpoint = "/persist";
+                    mountOptions = [ "compress=zstd" "noatime" ];
+                  };
+                  "/swap" = {
+                    mountpoint = "/.swapvol";
+                    swap.swapfile.size = "16G";
+                  };
+                };
+
+                mountpoint = "/.partition-root";
+              };
+            };
           };
         };
       };

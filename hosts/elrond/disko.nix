@@ -16,21 +16,45 @@
               type = "filesystem";
               format = "vfat";
               mountpoint = "/boot";
+              mountOptions = [ "defaults" ];
             };
           };
-          root = {
-            name = "root";
-            end = "-64G";
-            content = {
-              type = "filesystem";
-              format = "bcachefs";
-              mountpoint = "/";
-            };
-          };
-          swap = {
-            name = "swap";
+          luks = {
             size = "100%";
-            content = { type = "swap"; };
+            content = {
+              type = "luks";
+              name = "crypted";
+              settings = { allowDiscards = true; };
+              content = {
+                type = "btrfs";
+                extraArgs = [ "-f" ];
+                subvolumes = {
+                  "/rootfs" = {
+                    mountpoint = "/";
+                    mountOptions = [ "compress=zstd" ];
+                  };
+                  "/home" = {
+                    mountpoint = "/home";
+                    mountOptions = [ "compress=zstd" ];
+                  };
+                  "/home/kloenk" = { };
+                  "/nix" = {
+                    mountpoint = "/nix";
+                    mountOptions = [ "compress=zstd" "noatime" ];
+                  };
+                  "/persist" = {
+                    mountpoint = "/persist";
+                    mountOptions = [ "compress=zstd" "noatime" ];
+                  };
+                  "/swap" = {
+                    mountpoint = "/.swapvol";
+                    swap.swapfile.size = "64G";
+                  };
+                };
+
+                mountpoint = "/.partition-root";
+              };
+            };
           };
         };
       };
