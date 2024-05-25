@@ -19,7 +19,6 @@
 
     ../../profiles/desktop
     ../../profiles/desktop/sway
-    ../../profiles/desktop/emacs.nix
 
     ../../profiles/telegraf.nix
     # ../../profiles/syncthing.nix

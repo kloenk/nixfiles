@@ -50,40 +50,43 @@ Taken from bedrock early init
 * UI
 ** Base Ui
 #+begin_src emacs-lisp
-(setq inhibit-startup-message t)
+  (setq inhibit-startup-message t)
 
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
-(tooltip-mode -1)
-(set-fringe-mode 10)
+  (if (fboundp 'scroll-bar-mode)
+      (scroll-bar-mode -1))
 
-(menu-bar-mode -1)
+  (tool-bar-mode -1)
+  (tooltip-mode -1)
+  (if (fboundp 'set-fringe-mode)
+      (set-fringe-mode 10))
 
-(column-number-mode)
-(global-display-line-numbers-mode t)
+  (menu-bar-mode -1)
 
-(setq tab-width 2)
-(setq-default indent-tabs-mode nil)
-(setq inhibit-splash-screen t)
-(setq initial-scratch-message nil)
+  (column-number-mode)
+  (global-display-line-numbers-mode t)
 
-(delete-selection-mode)
+  (setq tab-width 2)
+  (setq-default indent-tabs-mode nil)
+  (setq inhibit-splash-screen t)
+  (setq initial-scratch-message nil)
 
-(let ((backup-dir (concat user-emacs-directory "backups")))
-  (make-directory backup-dir t)
-  (setq backup-directory-alist (list (cons "." backup-dir)))
-  (setq message-auto-save-directory backup-dir))
+  (delete-selection-mode)
 
-;;; Display and create symbol pairs
-(show-paren-mode t)
-(electric-pair-mode t)
+  (let ((backup-dir (concat user-emacs-directory "backups")))
+    (make-directory backup-dir t)
+    (setq backup-directory-alist (list (cons "." backup-dir)))
+    (setq message-auto-save-directory backup-dir))
+
+  ;;; Display and create symbol pairs
+  (show-paren-mode t)
+  (electric-pair-mode t)
 
 
-(dolist (mode '(org-mode-hook
-		term-mode-hook
-		shell-mode-hook
-		eshell-mode-hook))
-  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+  (dolist (mode '(org-mode-hook
+                  term-mode-hook
+                  shell-mode-hook
+                  eshell-mode-hook))
+    (add-hook mode (lambda () (display-line-numbers-mode 0))))
 #+end_src
 
 ** Theme

@@ -1,7 +1,7 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
-  environment.variables.EDITOR = "vim";
+  environment.variables.EDITOR = lib.mkDefault "vim";
   programs.vim = {
     defaultEditor = true;
     package = (pkgs.vim_configurable.override { }).customize {

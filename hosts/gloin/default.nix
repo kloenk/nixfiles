@@ -11,7 +11,6 @@
 
     ../../profiles/desktop
     ../../profiles/desktop/sway
-    ../../profiles/desktop/emacs.nix
 
     ../../profiles/secunet.nix
     #../../profiles/bcachefs.nix
