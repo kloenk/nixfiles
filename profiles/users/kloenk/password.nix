@@ -1,12 +1,6 @@
-{ config, ... }:
+{ ... }:
 
 {
-  users.users.kloenk.hashedPasswordFile =
-    config.sops.secrets."passwords/kloenk".path;
-
-  sops.secrets."passwords/kloenk" = {
-    sopsFile = ../../../secrets/shared/passwords.yaml;
-    neededForUsers = true;
-    owner = "root";
-  };
+  users.users.kloenk.initialHashedPassword =
+    "$2b$05$By25WW6TpQMDRSGlNh23ne/Vw9Ov61riF3VFev0E/4DzCtLsuTy3u";
 }

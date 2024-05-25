@@ -67,6 +67,7 @@
   # TODO: certificatFiles
 
   # Users
+  systemd.sysusers.enable = true;
   users.mutableUsers = false;
   security.sudo.wheelNeedsPassword = false;
   hardware.enableRedistributableFirmware = true;
