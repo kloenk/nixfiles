@@ -24,6 +24,8 @@ in with dns.combinators; {
     bitwarden = varda;
     auth = varda;
 
+    inventree = varda;
+
     net.subdomains = common.net;
 
     _dmarc.TXT = dmarcKloenk;

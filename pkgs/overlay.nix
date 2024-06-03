@@ -22,5 +22,11 @@ in {
 
   evremap = callPackage ./evremap { };
 
+  inventree = callPackage ./inventree {
+    python3 = final.python3.override {
+      packageOverrides = callPackage ./inventree/py-overrides.nix { };
+    };
+  };
+
   ubootElros = callPackage ./ubootElros { };
 }

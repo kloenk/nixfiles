@@ -20,6 +20,7 @@
     ../../services/kresd-dns
     ../../services/monitoring
     ../../services/monitoring/kuma.nix
+    ../../services/inventree
     ../../services/netbox
     ../../services/youtrack
 

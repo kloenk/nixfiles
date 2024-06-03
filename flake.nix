@@ -183,7 +183,7 @@
       nixpkgsFor = forAllSystems (system:
         import nixpkgs {
           inherit system;
-          overlays = (overlayCombined system);
+          overlays = [ self.overlays.tests ] ++ (overlayCombined system);
         });
 
       darwinHosts = nixpkgs.lib.filterAttrs
@@ -249,6 +249,7 @@
           specialArgs.self = self;
         }).config.system.build.isoImage;
       };
+      overlays.tests = (import ./tests self);
 
       legacyPackages = forAllSystems (system: nixpkgsFor.${system});
 
@@ -336,6 +337,7 @@
             self.nixosModules.vouch-proxy
             self.nixosModules.backups
             self.nixosModules.evremap
+            self.nixosModules.inventree
 
             #lix-module.nixosModules.default
             # TODO: 
@@ -476,6 +478,7 @@
         vouch-proxy = import ./modules/vouch-proxy;
         backups = import ./modules/backups;
         evremap = import ./modules/evremap;
+        inventree = import ./modules/inventree.nix;
       };
 
       darwinModules = {
