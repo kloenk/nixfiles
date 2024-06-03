@@ -24,7 +24,9 @@ in with dns.combinators; {
     bitwarden = varda;
     auth = varda;
 
+
     netbox = vaire;
+    inventree = vaire;
 
     net.subdomains = common.net;
 

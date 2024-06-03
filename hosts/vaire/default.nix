@@ -9,6 +9,7 @@
     ../../profiles/postgres.nix
 
     ../../services/netbox
+    ../../services/inventree
 
     ../../profiles/telegraf.nix
   ];
