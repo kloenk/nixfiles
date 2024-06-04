@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 let
-  hostname = "192.168.45.1";
+  hostname = "10.1.0.1";
 
   ipxeConfig = {
     client-classes = [
@@ -66,10 +66,10 @@ in {
         renew-timer = 1000;
         valid-lifetime = 4000;
 
-        interfaces-config.interfaces = [ "dhcp0" ];
+        interfaces-config.interfaces = [ "br-gwp" ];
         subnet4 = [{
-          pools = [{ pool = "192.168.45.50 - 192.168.45.150"; }];
-          subnet = "192.168.45.0/24";
+          pools = [{ pool = "10.1.0.50 - 10.1.0.150"; }];
+          subnet = "10.1.0.0/24";
         }];
       };
     };
@@ -77,20 +77,20 @@ in {
 
   services.nginx.virtualHosts."192.168.45.1" = {
     default = true;
-    listenAddresses = [ "192.168.45.1" ];
+    listenAddresses = [ "10.1.0.1" ];
     root = "/persist/data/secunet/public/";
     locations."/" = { extraConfig = "autoindex on;"; };
   };
 
   services.atftpd = {
     enable = true;
-    extraOptions = [ "--bind-address 192.168.45.1" ];
+    extraOptions = [ "--bind-address 10.1.0.1" ];
     root = "${pkgs.ipxe.override {
       embedScript = pkgs.writeText "embed.ipxe" ''
         #!ipxe
         dhcp
-        set gwp_install_server_url http://192.168.45.1/config/
-        chain http://192.168.45.1/nixos.ipxe
+        set gwp_install_server_url http://10.1.0.1/config/
+        chain http://10.1.0.1/nixos.ipxe
       '';
     }}";
   };

@@ -32,18 +32,55 @@ in {
       DHCP = "yes";
     };
 
-    netdevs."20-dhcp0" = {
+    links."10-eth1" = {
+      matchConfig.MACAddress = "98:fd:b4:9a:bd:7e";
+      linkConfig.Name = "eth1";
+    };
+    networks."10-eth1" = {
+      name = "eth1";
+      bridge = [ "br1" ];
+      linkConfig.RequiredForOnline = false;
+    };
+
+    netdevs."20-br1".netdevConfig = {
+      Kind = "bridge";
+      Name = "br1";
+    };
+    networks."20-br1" = {
+      name = "br1";
+      DHCP = "ipv6";
+      vlan = [ "gwp0" ];
+      dns = [ "192.168.178.248" ];
+      addresses = [{ addressConfig.Address = "192.168.178.245/24"; }];
+      routes = [{
+        routeConfig = {
+          Gateway = "192.168.178.1";
+          Metric = 1024;
+        };
+      }];
+    };
+
+    netdevs."30-gwp0" = {
       netdevConfig = {
-        Kind = "veth";
-        Name = "dhcp0";
+        Kind = "vlan";
+        Name = "gwp0";
       };
-      peerConfig.Name = "dhcp1";
+      vlanConfig.Id = 1003;
     };
-    networks."20-dhcp0" = {
-      name = "dhcp0";
-      addresses = [{ addressConfig.Address = "192.168.45.1/24"; }];
+    networks."30-gwp0" = {
+      name = "gwp0";
+      DHCP = "no";
+      bridge = [ "br-gwp" ];
     };
-    networks."20-dhcp1" = { name = "dhcp1"; };
+
+    netdevs."30-br-gwp".netdevConfig = {
+      Kind = "bridge";
+      Name = "br-gwp";
+    };
+    networks."30-br-gwp" = {
+      name = "br-gwp";
+      addresses = [{ addressConfig.Address = "10.1.0.1/24"; }];
+    };
 
     networks."70-wlan0" = {
       name = "wlan0";
@@ -55,7 +92,12 @@ in {
       dns = [ "192.168.178.248" ];
       DHCP = "ipv6";
       addresses = [{ addressConfig.Address = "192.168.178.246/24"; }];
-      routes = [{ routeConfig.Gateway = "192.168.178.1"; }];
+      routes = [{
+        routeConfig = {
+          Gateway = "192.168.178.1";
+          Metric = 2048;
+        };
+      }];
     };
 
     # Secunet wireguard

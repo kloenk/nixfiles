@@ -244,8 +244,6 @@
             self.nixosModules.kloenk
 
             self.nixosModules.helix
-
-            # vika.nixosModules.colorfulMotd # TODO: fix
           ];
           specialArgs.inputs = inputs;
           specialArgs.self = self;
