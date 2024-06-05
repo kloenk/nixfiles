@@ -176,6 +176,22 @@ in {
     sha256 = "sha256-qJNn7kDCsMH4xjAGNdDN80AqF6ukvxwYHUdY+0d13wU=";
   };
 
+  pcb_girls_assembly = fromPixiv {
+    src = "https://www.pixiv.net/en/artworks/91199411";
+    url =
+      "https://i.pximg.net/img-master/img/2021/07/12/20/23/41/91199411_p0_master1200.jpg";
+    name = "pcb_girls_assembly.jpg";
+    sha256 = "sha256-kC1gg+LXHVHRcYw4rcNFga1Y0cpjkGM+1TsnaiihpF4=";
+  };
+
+  girls_exploding_cap = fromPixiv {
+    src = "https://www.pixiv.net/en/artworks/107214767";
+    url =
+      "https://i.pximg.net/img-master/img/2023/04/16/02/31/21/107214767_p0_master1200.jpg";
+    name = "girls_exploding_cap.jpg";
+    sha256 = "sha256-yQW39dQCH3MaIm55bjeShhvOXA5wXjrpuLvYnXDBMoo=";
+  };
+
   lost_in_space_mag = fromRedditPost {
     url =
       "https://www.reddit.com/r/WarframeRunway/comments/en4jw5/mag_as_robot_mock_poster_for_lost_in_space_watch/";
