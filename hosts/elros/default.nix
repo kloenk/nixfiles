@@ -28,5 +28,7 @@
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [ "arm-trusted-firmware-rk3588" "rkbin" ];
 
+  fileSystems."/persist".neededForBoot = true;
+
   system.stateVersion = "24.05";
 }

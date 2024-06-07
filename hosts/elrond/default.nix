@@ -11,7 +11,7 @@
     ./pipewire.nix
     ./gaming.nix
     ./desktop.nix
-    ./hyprland
+    # ./hyprland
     ./mpd.nix
     ./disko.nix
     ./evremap.nix
@@ -80,6 +80,8 @@
   systemd.services.telegraf.path = with pkgs; [ lm_sensors ];
 
   services.openssh.settings.X11Forwarding = true;
+
+  fileSystems."/persist".neededForBoot = true;
 
   system.stateVersion = "24.11";
 }

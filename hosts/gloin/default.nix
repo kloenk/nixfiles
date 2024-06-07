@@ -27,6 +27,9 @@
   boot.supportedFilesystems = [ "btrfs" "xfs" ];
   boot.initrd.supportedFilesystems = [ "btrfs" "xfs" ];
 
+  # FIXME: remove
+  boot.initrd.systemd.emergencyAccess = true;
+
   networking.hostName = "gloin";
   networking.wireless.iwd.enable = true;
 
@@ -85,6 +88,9 @@
     # sudo udevadm control --reload-rules &&  sudo udevadm trigger 
     # connect and disconnetc the USB device
   '';
+
+  # secrets on there
+  fileSystems."/persist".neededForBoot = true;
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database

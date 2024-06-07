@@ -68,8 +68,14 @@ in {
 
         interfaces-config.interfaces = [ "br-gwp" ];
         subnet4 = [{
+          id = 1;
           pools = [{ pool = "10.1.0.50 - 10.1.0.150"; }];
           subnet = "10.1.0.0/24";
+
+          option-data = [{
+            name = "ntp-servers";
+            data = "178.215.228.24";
+          }];
         }];
       };
     };

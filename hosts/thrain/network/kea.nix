@@ -23,14 +23,15 @@
         renew-timer = 1000;
         valid-lifetime = 4000;
 
-        dhcp-ddns = {
-          enable-updates = true;
-          qualifying-suffix = "burscheid.home.kloenk.de.";
-          server-ip = "127.0.0.11";
-          server-port = 53001;
-          ncr-protocol = "UDP";
-          ncr-format = "JSON";
-        };
+        /* dhcp-ddns = {
+             enable-updates = true;
+             qualifying-suffix = "burscheid.home.kloenk.de.";
+             server-ip = "127.0.0.11";
+             server-port = 53001;
+             ncr-protocol = "UDP";
+             ncr-format = "JSON";
+           };
+        */
         ddns-replace-client-name = "when-not-present";
         ddns-override-client-update = true;
         ddns-override-no-update = true;

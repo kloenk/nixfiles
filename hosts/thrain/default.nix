@@ -60,6 +60,8 @@
     "audio"
   ];
 
+  fileSystems."/persist".neededForBoot = true;
+
   services.telegraf.extraConfig.inputs = {
     sensors = { };
     ping = {
