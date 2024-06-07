@@ -18,8 +18,6 @@
   networking.useDHCP = false;
   networking.hostName = "elros";
 
-  fileSystems."/persist".neededForBoot = true;
-
   users.users.kloenk.password = "foobar";
 
   # u-boot
