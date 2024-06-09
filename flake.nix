@@ -290,6 +290,10 @@
             system = "aarch64-linux";
             overlays = (overlayCombined "aarch64-linux");
           };
+          nodeNixpkgs.vaire = import nixpkgs {
+            system = "aarch64-linux";
+            overlays = (overlayCombined "aarch64-linux");
+          };
           nodeNixpkgs.gimli = import nixpkgs {
             system = "aarch64-linux";
             overlays = (overlayCombined "aarch64-linux");
@@ -373,6 +377,17 @@
 
           imports = [
             ./hosts/varda
+            (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix"))
+          ];
+        };
+        vaire = { pkgs, node, ... }: {
+          deployment = {
+            targetHost = "vaire.kloenk.de";
+            tags = [ "hetzner" "falkenstein" "remote" ];
+          };
+
+          imports = [
+            ./hosts/vaire
             (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix"))
           ];
         };

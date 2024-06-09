@@ -61,6 +61,13 @@
           Endpoint = "gimli.kloenk.de:51820";
         };
       }
+      { # vaire
+        wireguardPeerConfig = {
+          AllowedIPs = [ "192.168.242.3/32" "2a01:4f8:c013:1a4b:ecba::3/128" ];
+          PublicKey = "vGv9DvJ+6hTwFV0Jq5vaw2i32LXl8k87S58zra276RA=";
+          Endpoint = "vaire.kloenk.de:51820";
+        };
+      }
 
       { # thrain
         wireguardPeerConfig = {

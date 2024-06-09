@@ -49,6 +49,13 @@ in {
       sshfp =
         "8c0608b28e42f4dabb717a076326ed26c8cdc6309b87509736053a3fe2d6a277";
     };
+    vaire = host {
+      ttl = 1200;
+      v4 = "116.202.21.21";
+      v6 = "2a01:4f8:c012:3d74::";
+      sshfp =
+        "9dcd7a95de40be433f012f69074feb548b079374f4dd6fe707f79b664cc2be4b";
+    };
     gimli = host {
       ttl = 1200;
       v4 = "49.12.72.200";

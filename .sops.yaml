@@ -5,6 +5,7 @@ keys:
   - &server_elros age1qcf0vrljqh34skeqpx4jh4x4e9400acn3rf5tqdy2697603ncfyqasa5df
   - &server_gimli age1we86kfnan67mq7eks89ndz85w299j35un400jvlrhk3ktjyhkgks69lz62
   - &server_varda age1vfrdpq9p6qm8yf4ddrzhy6mutzrzgauv6vp9gjq99t5kmcd8lp4sf9gyum
+  - &server_vaire age13kssfhekukyqay3rzv4ssdaj40hu4zhal9e2vrxemfkyu37pjfts37hsme
   - &server_sc-social age1np3d3s6nj80l7dvakj7welwyl26upgmwv8ykvv23q452fm6kk9fqcfk880
   - &server_moodle age1xq2s075hy7fah8la38jpa642f2j4zvhv7qa3c4gprhcyhkx8rsastndc4q
   - &server_elrond age1tvgutz4vzmqf3xqnckt9karpd467nj6vft80al8nfvpu02ck43sqneqwht
@@ -34,6 +35,11 @@ creation_rules:
     - age:
       - *kloenk_age
       - *server_varda
+  - path_regex: secrets/vaire[^/]*\.yaml$
+    key_groups:
+    - age:
+      - *kloenk_age
+      - *server_vaire
   - path_regex: secrets/sc-social[^/]*\.yaml$
     key_groups:
     - age:
@@ -65,6 +71,7 @@ creation_rules:
         - *server_elros
         - *server_gimli
         - *server_varda
+        - *server_vaire
         - *server_moodle
         - *server_elrond
         - *server_gloin
