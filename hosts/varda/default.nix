@@ -20,7 +20,7 @@
     ../../services/kresd-dns
     ../../services/monitoring
     ../../services/monitoring/kuma.nix
-    ../../services/netbox
+    ../../services/netbox-old
     ../../services/youtrack
 
     ../../profiles/telegraf.nix

@@ -74,6 +74,12 @@ in {
         "8c0608b28e42f4dabb717a076326ed26c8cdc6309b87509736053a3fe2d6a277";
     };
     "dns.varda" = host { v6 = "2a01:4f8:c013:1a4b:ecba:0:20:53"; };
+    vaire = host {
+      v4 = "192.168.242.3";
+      v6 = "2a01:4f8:c013:1a4b:ecba::3";
+      sshfp =
+        "9dcd7a95de40be433f012f69074feb548b079374f4dd6fe707f79b664cc2be4b";
+    };
     gimli = host {
       v4 = "192.168.242.2";
       v6 = "2a01:4f8:c013:1a4b:ecba::2";

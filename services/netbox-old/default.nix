@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   fileSystems."/var/lib/netbox" = {
@@ -9,7 +9,7 @@
 
   services.netbox = {
     enable = true;
-    package = pkgs.netbox;
+    package = pkgs.netbox_3_7;
     secretKeyFile = config.sops.secrets."netbox/secret_key".path;
     keycloakClientSecret = config.sops.secrets."netbox/keycloak_secret".path;
     settings = {
@@ -35,7 +35,7 @@
     }];
   };
 
-  services.nginx.virtualHosts."netbox.kloenk.dev" = {
+  services.nginx.virtualHosts."netbox.kloenk.de" = {
     enableACME = true;
     forceSSL = true;
     kTLS = true;

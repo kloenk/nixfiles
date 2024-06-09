@@ -5,7 +5,12 @@
     ./disko.nix
     ./links.nix
 
-    ../../profiles/users/kloenk/password.nix
+    ../../profiles/hetzner_vm.nix
+    ../../profiles/postgres.nix
+
+    ../../services/netbox
+
+    ../../profiles/telegraf.nix
   ];
 
   boot.loader.grub.enable = false;
