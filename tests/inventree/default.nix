@@ -4,9 +4,7 @@ nixosTest {
   name = "inventree";
   nodes = {
     server = {
-      imports = [
-        self.nixosModules.inventree
-      ];
+      imports = [ self.nixosModules.inventree ];
       services.inventree = {
         enable = true;
         hostName = "server";
@@ -19,6 +17,5 @@ nixosTest {
     };
   };
 
-  testScript = ''
-  '';
+  testScript = "";
 }

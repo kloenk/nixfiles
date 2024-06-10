@@ -38,26 +38,22 @@ in {
           ListenPort = 51820;
         };
         wireguardPeers = [{ # varda
-          wireguardPeerConfig = {
-            AllowedIPs = [ "0.0.0.0/0" "::/0" ];
-            PublicKey = "UoIRXpG/EHmDNDhzFPxZS18YBlj9vBQRRQZMCFhonDA=";
-            Endpoint = "varda.kloenk.de:51820";
-            PersistentKeepalive = 21;
-          }; # // (mkIf (!cfg.public) { PersistentKeepalive = 21; });
+          AllowedIPs = [ "0.0.0.0/0" "::/0" ];
+          PublicKey = "UoIRXpG/EHmDNDhzFPxZS18YBlj9vBQRRQZMCFhonDA=";
+          Endpoint = "varda.kloenk.de:51820";
+          PersistentKeepalive = 21;
         }];
       };
       networks."30-wg0" = {
         name = "wg0";
         linkConfig.RequiredForOnline = "no";
-        addresses = [
-          { addressConfig.Address = "${cfg.ipv4}/24"; }
-          { addressConfig.Address = "${cfg.ipv6}/80"; }
-        ];
+        addresses =
+          [ { Address = "${cfg.ipv4}/24"; } { Address = "${cfg.ipv6}/80"; } ];
         routes = [
-          { routeConfig.Destination = "192.168.242.0/24"; }
+          { Destination = "192.168.242.0/24"; }
           {
-            routeConfig.Destination = "2a01:4f8:c013:1a4b:ecba::1/80";
-            routeConfig.PreferredSource = cfg.ipv6;
+            Destination = "2a01:4f8:c013:1a4b:ecba::1/80";
+            PreferredSource = cfg.ipv6;
           }
         ];
       };

@@ -81,11 +81,35 @@ in {
     };
   };
 
-  services.nginx.virtualHosts."192.168.45.1" = {
+  services.nginx.virtualHosts."10.1.0.1" = {
     default = true;
     listenAddresses = [ "10.1.0.1" ];
     root = "/persist/data/secunet/public/";
     locations."/" = { extraConfig = "autoindex on;"; };
+    locations."/upload".proxyPass = "http://localhost:12872/";
+  };
+
+  systemd.services.gwp-installer-upload-server = {
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      PrivateDevices = true;
+      ProtectClock = true;
+      ProtectKernelLogs = true;
+      ProtectControlGroups = true;
+      ProtectKernelModules = true;
+      ProtectHostname = true;
+      LockPersonality = true;
+      ProtectHome = true;
+      PrivateUsers = true;
+      ProtectKernelTunables = true;
+      RestrictAddressFamilies = [ "AF_PACKET" "AF_INET" "AF_INET6" ];
+      RuntimeDirectory = "uploads";
+
+      User = "gwp-installer-upload-server";
+      Group = "gwp-installer-upload-server";
+      DynamicUser = true;
+      ExecStart = "${pkgs.python3}/bin/python3 ${./gwp-server.py}";
+    };
   };
 
   services.atftpd = {

@@ -51,12 +51,10 @@ in {
       DHCP = "ipv6";
       vlan = [ "gwp0" ];
       dns = [ "192.168.178.248" ];
-      addresses = [{ addressConfig.Address = "192.168.178.245/24"; }];
+      addresses = [{ Address = "192.168.178.245/24"; }];
       routes = [{
-        routeConfig = {
-          Gateway = "192.168.178.1";
-          Metric = 1024;
-        };
+        Gateway = "192.168.178.1";
+        Metric = 1024;
       }];
     };
 
@@ -79,7 +77,7 @@ in {
     };
     networks."30-br-gwp" = {
       name = "br-gwp";
-      addresses = [{ addressConfig.Address = "10.1.0.1/24"; }];
+      addresses = [{ Address = "10.1.0.1/24"; }];
     };
 
     networks."70-wlan0" = {
@@ -91,12 +89,10 @@ in {
       matchConfig.SSID = [ "'The Prancing Pony'" "TT-WLAN" ];
       dns = [ "192.168.178.248" ];
       DHCP = "ipv6";
-      addresses = [{ addressConfig.Address = "192.168.178.246/24"; }];
+      addresses = [{ Address = "192.168.178.246/24"; }];
       routes = [{
-        routeConfig = {
-          Gateway = "192.168.178.1";
-          Metric = 2048;
-        };
+        Gateway = "192.168.178.1";
+        Metric = 2048;
       }];
     };
 
@@ -111,20 +107,16 @@ in {
         PrivateKeyFile = config.sops.secrets."secunet/wireguard/secunet0".path;
       };
       wireguardPeers = [{
-        wireguardPeerConfig = {
-          AllowedIPs = [ "0.0.0.0/0" "::/0" ];
-          PublicKey = "ZVayNyJeOn848aus5bqYU2ujNxvnYtV3ACoerLtDpg8=";
-          Endpoint = "gateway.seven.secunet.com:51821";
-        };
+        AllowedIPs = [ "0.0.0.0/0" "::/0" ];
+        PublicKey = "ZVayNyJeOn848aus5bqYU2ujNxvnYtV3ACoerLtDpg8=";
+        Endpoint = "gateway.seven.secunet.com:51821";
       }];
     };
     networks."30-secunet0" = {
       name = "secunet0";
       linkConfig.RequiredForOnline = "no";
-      addresses = [
-        { addressConfig.Address = "198.18.1.108/15"; }
-        { addressConfig.Address = "fd00:5ec::16c/48"; }
-      ];
+      addresses =
+        [ { Address = "198.18.1.108/15"; } { Address = "fd00:5ec::16c/48"; } ];
     };
 
     wait-online.anyInterface = true;

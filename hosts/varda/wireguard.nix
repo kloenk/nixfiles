@@ -39,113 +39,92 @@
     };
     wireguardPeers = [
       /* {
-           wireguardPeerConfig = {
              AllowedIPs = [
                "192.168.42.102/32"
                #"195.39.246.10" # ???
              ];
              PublicKey = "";
              PersistentKeepalive = 21;
-           };
          }
       */
 
       { # gimli
-        wireguardPeerConfig = {
-          AllowedIPs = [
-            "192.168.242.2/32"
-            "2a01:4f8:c013:1a4b:ecba::2/128"
-            "2a01:4f8:c013:1a4b:ecba:0:21:0/120"
-          ];
-          PublicKey = "vVIbHzXr99y1dm80LbSViIUmlym/yt3+Ra48IcZQ+AY=";
-          Endpoint = "gimli.kloenk.de:51820";
-        };
+        AllowedIPs = [
+          "192.168.242.2/32"
+          "2a01:4f8:c013:1a4b:ecba::2/128"
+          "2a01:4f8:c013:1a4b:ecba:0:21:0/120"
+        ];
+        PublicKey = "vVIbHzXr99y1dm80LbSViIUmlym/yt3+Ra48IcZQ+AY=";
+        Endpoint = "gimli.kloenk.de:51820";
       }
       { # vaire
-        wireguardPeerConfig = {
-          AllowedIPs = [ "192.168.242.3/32" "2a01:4f8:c013:1a4b:ecba::3/128" ];
-          PublicKey = "vGv9DvJ+6hTwFV0Jq5vaw2i32LXl8k87S58zra276RA=";
-          Endpoint = "vaire.kloenk.de:51820";
-        };
+        AllowedIPs = [ "192.168.242.3/32" "2a01:4f8:c013:1a4b:ecba::3/128" ];
+        PublicKey = "vGv9DvJ+6hTwFV0Jq5vaw2i32LXl8k87S58zra276RA=";
+        Endpoint = "vaire.kloenk.de:51820";
       }
 
       { # thrain
-        wireguardPeerConfig = {
-          AllowedIPs = [
-            "192.168.242.101/32"
-            "192.168.178.0/24"
-            "2a01:4f8:c013:1a4b:ecba::101/128"
-          ];
-          PublicKey = "RiRB/fiZ/x88f78kRQasSwWYBuBjc5DxW2OFaa67zjg=";
-          PersistentKeepalive = 21;
-        };
+        AllowedIPs = [
+          "192.168.242.101/32"
+          "192.168.178.0/24"
+          "2a01:4f8:c013:1a4b:ecba::101/128"
+        ];
+        PublicKey = "RiRB/fiZ/x88f78kRQasSwWYBuBjc5DxW2OFaa67zjg=";
+        PersistentKeepalive = 21;
       }
       { # elros
-        wireguardPeerConfig = {
-          AllowedIPs =
-            [ "192.168.242.102/32" "2a01:4f8:c013:1a4b:ecba::102/128" ];
-          PublicKey = "HI/xAEvFIvPwnTIv7H1WF8Z5d+FBjodLqaLBdfBlfAk=";
-          PersistentKeepalive = 21;
-        };
+        AllowedIPs =
+          [ "192.168.242.102/32" "2a01:4f8:c013:1a4b:ecba::102/128" ];
+        PublicKey = "HI/xAEvFIvPwnTIv7H1WF8Z5d+FBjodLqaLBdfBlfAk=";
+        PersistentKeepalive = 21;
       }
 
       { # frodo
-        wireguardPeerConfig = {
-          AllowedIPs =
-            [ "192.168.242.201/32" "2a01:4f8:c013:1a4b:ecba::201/128" ];
-          PublicKey = "SpO+SIv/XzgKCuWH3SN1qNknZ+X4HWf48SQNl6Gw+SM=";
-          PersistentKeepalive = 21;
-        };
+        AllowedIPs =
+          [ "192.168.242.201/32" "2a01:4f8:c013:1a4b:ecba::201/128" ];
+        PublicKey = "SpO+SIv/XzgKCuWH3SN1qNknZ+X4HWf48SQNl6Gw+SM=";
+        PersistentKeepalive = 21;
       }
       { # windoof
-        wireguardPeerConfig = {
-          AllowedIPs =
-            [ "192.168.242.202/32" "2a01:4f8:c013:1a4b:ecba::202/128" ];
-          PublicKey = "aSkX5/y831rSZib/l0QhC1mmmaggNjdMNfQ0Qrz8rxA=";
-          PersistentKeepalive = 21;
-        };
+        AllowedIPs =
+          [ "192.168.242.202/32" "2a01:4f8:c013:1a4b:ecba::202/128" ];
+        PublicKey = "aSkX5/y831rSZib/l0QhC1mmmaggNjdMNfQ0Qrz8rxA=";
+        PersistentKeepalive = 21;
       }
       { # elrond
-        wireguardPeerConfig = {
-          AllowedIPs =
-            [ "192.168.242.204/32" "2a01:4f8:c013:1a4b:ecba::204/128" ];
-          PublicKey = "6kwWS4u3lM+iGAf1lF79lm/mmE8kOlFtk7ipqNpKd3g=";
-          PersistentKeepalive = 21;
-        };
+        AllowedIPs =
+          [ "192.168.242.204/32" "2a01:4f8:c013:1a4b:ecba::204/128" ];
+        PublicKey = "6kwWS4u3lM+iGAf1lF79lm/mmE8kOlFtk7ipqNpKd3g=";
+        PersistentKeepalive = 21;
       }
       { # gloin
-        wireguardPeerConfig = {
-          AllowedIPs =
-            [ "192.168.242.205/32" "2a01:4f8:c013:1a4b:ecba::205/128" ];
-          PublicKey = "4Bwytj56G/CueL/P454SSE6Sq7wafGd/cJlFri5LxTw=";
-          PersistentKeepalive = 21;
-        };
+        AllowedIPs =
+          [ "192.168.242.205/32" "2a01:4f8:c013:1a4b:ecba::205/128" ];
+        PublicKey = "4Bwytj56G/CueL/P454SSE6Sq7wafGd/cJlFri5LxTw=";
+        PersistentKeepalive = 21;
       }
       { # sting
-        wireguardPeerConfig = {
-          AllowedIPs =
-            [ "192.168.242.210/32" "2a01:4f8:c013:1a4b:ecba::210/128" ];
-          PublicKey = "iSYB99dCUvYhHAz5HaPSzhXYPyyntOtiucrDUBFVvBE=";
-          PersistentKeepalive = 21;
-        };
+        AllowedIPs =
+          [ "192.168.242.210/32" "2a01:4f8:c013:1a4b:ecba::210/128" ];
+        PublicKey = "iSYB99dCUvYhHAz5HaPSzhXYPyyntOtiucrDUBFVvBE=";
+        PersistentKeepalive = 21;
       }
-
     ];
   };
   systemd.network.networks."30-wg0" = {
     name = "wg0";
     linkConfig = { RequiredForOnline = "no"; };
     addresses = [
-      { addressConfig.Address = "192.168.242.1/24"; }
-      { addressConfig.Address = "2a01:4f8:c013:1a4b:ecba::1/80"; }
-      { addressConfig.Address = "2a01:4f8:c013:1a4b:ecba:1337::1/80"; }
+      { Address = "192.168.242.1/24"; }
+      { Address = "2a01:4f8:c013:1a4b:ecba::1/80"; }
+      { Address = "2a01:4f8:c013:1a4b:ecba:1337::1/80"; }
     ];
     routes = [
-      { routeConfig.Destination = "192.168.242.0/24"; }
-      { routeConfig.Destination = "192.168.178.0/24"; }
+      { Destination = "192.168.242.0/24"; }
+      { Destination = "192.168.178.0/24"; }
       {
-        routeConfig.Destination = "2a01:4f8:c013:1a4b:ecba::/80";
-        routeConfig.PreferredSource = "2a01:4f8:c013:1a4b:ecba::1";
+        Destination = "2a01:4f8:c013:1a4b:ecba::/80";
+        PreferredSource = "2a01:4f8:c013:1a4b:ecba::1";
       }
     ];
   };
@@ -161,19 +140,15 @@
       PrivateKeyFile = config.sops.secrets."wireguard/wg-thrain".path;
     };
     wireguardPeers = [{
-      wireguardPeerConfig = {
-        AllowedIPs = [ "2a01:4f8:c013:1a4b:ecba:1338::101/128" ];
-        PublicKey = "JVdV4kGKVEiiVVe1T07lXhpP2BnrVHYUPHWk19nN5jw=";
-      };
+      AllowedIPs = [ "2a01:4f8:c013:1a4b:ecba:1338::101/128" ];
+      PublicKey = "JVdV4kGKVEiiVVe1T07lXhpP2BnrVHYUPHWk19nN5jw=";
     }];
   };
   systemd.network.networks."30-wg-thrain" = {
     name = "wg-thrain";
     linkConfig.RequiredForOnline = "no";
-    addresses =
-      [{ addressConfig.Address = "2a01:4f8:c013:1a4b:ecba:1338::1/120"; }];
-    routes =
-      [{ routeConfig.Destination = "2a01:4f8:c013:1a4b:ecba:1338::1/120"; }];
+    addresses = [{ Address = "2a01:4f8:c013:1a4b:ecba:1338::1/120"; }];
+    routes = [{ Destination = "2a01:4f8:c013:1a4b:ecba:1338::1/120"; }];
   };
 
   networking.hosts = { };

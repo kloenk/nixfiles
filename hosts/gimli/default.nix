@@ -35,7 +35,7 @@
     prefixLength = 8;
   }];
   systemd.network.networks."30-wg0".addresses =
-    [{ addressConfig.Address = "2a01:4f8:c013:1a4b:ecba::21:53/128"; }];
+    [{ Address = "2a01:4f8:c013:1a4b:ecba::21:53/128"; }];
   services.knot.settings.server.listen = [
     "127.0.0.11@53"
 

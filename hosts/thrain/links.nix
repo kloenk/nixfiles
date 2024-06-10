@@ -31,8 +31,8 @@
       name = "br0";
       DHCP = "ipv6";
       vlan = [ "mgmt" ];
-      addresses = [{ addressConfig.Address = "192.168.178.248/24"; }];
-      routes = [{ routeConfig.Gateway = "192.168.178.1"; }];
+      addresses = [{ Address = "192.168.178.248/24"; }];
+      routes = [{ Gateway = "192.168.178.1"; }];
     };
 
     # mgmt - vlan
@@ -46,7 +46,7 @@
     networks."30-mgmt" = {
       name = "mgmt";
       DHCP = "no";
-      addresses = [{ addressConfig.Address = "192.168.44.5/24"; }];
+      addresses = [{ Address = "192.168.44.5/24"; }];
     };
   };
 
@@ -66,19 +66,15 @@
       };
       wireguardConfig = { PrivateKeyFile = "/etc/secrets/30-wg-initrd.key"; };
       wireguardPeers = [{
-        wireguardPeerConfig = {
-          AllowedIPs = [ "2a01:4f8:c013:1a4b:ecba:1338::1/120" ];
-          PublicKey = "hEcjE8kt3vSYkoWrAr8SaMMq4OkRcRvNJ5GhM78hpW0=";
-          Endpoint = "[2a01:4f8:c013:1a4b::]:51830";
-        };
+        AllowedIPs = [ "2a01:4f8:c013:1a4b:ecba:1338::1/120" ];
+        PublicKey = "hEcjE8kt3vSYkoWrAr8SaMMq4OkRcRvNJ5GhM78hpW0=";
+        Endpoint = "[2a01:4f8:c013:1a4b::]:51830";
       }];
     };
     networks."30-wg-initrd" = {
       name = "wg-initrd";
-      addresses =
-        [{ addressConfig.Address = "2a01:4f8:c013:1a4b:ecba:1338::101/128"; }];
-      routes =
-        [{ routeConfig.Destination = "2a01:4f8:c013:1a4b:ecba:1338::1/120"; }];
+      addresses = [{ Address = "2a01:4f8:c013:1a4b:ecba:1338::101/128"; }];
+      routes = [{ Destination = "2a01:4f8:c013:1a4b:ecba:1338::1/120"; }];
     };
   };
 

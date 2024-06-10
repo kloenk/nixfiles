@@ -32,11 +32,11 @@
       dns = [ "192.168.178.248" ];
       domains = [ "burscheid.home.kloenk.de" ];
       vlan = [ "mgmt" ];
-      addresses = [{ addressConfig.Address = "192.168.178.247/24"; }];
+      addresses = [{ Address = "192.168.178.247/24"; }];
       routes = [{
-        routeConfig.Gateway = "192.168.178.1";
+        Gateway = "192.168.178.1";
       }
-      #  { routeConfig.Gateway = "fd00::ca0e:14ff:fe07:a2fa"; }
+      #  { Gateway = "fd00::ca0e:14ff:fe07:a2fa"; }
         ];
     };
 
@@ -57,18 +57,18 @@
     networks."30-mgmt" = {
       name = "mgmt";
       DHCP = "no";
-      addresses = [{ addressConfig.Address = "192.168.44.102/24"; }];
+      addresses = [{ Address = "192.168.44.102/24"; }];
     };
 
     networks."20-lo" = {
       name = "lo";
       DHCP = "no";
       addresses = [
-        #{ addressConfig.Address = "195.39.246.53/32"; }
-        #{ addressConfig.Address = "2a0f:4ac0:f199::3/128"; }
-        { addressConfig.Address = "127.0.0.1/32"; }
-        { addressConfig.Address = "127.0.0.53/32"; }
-        { addressConfig.Address = "::1/128"; }
+        #{ Address = "195.39.246.53/32"; }
+        #{ Address = "2a0f:4ac0:f199::3/128"; }
+        { Address = "127.0.0.1/32"; }
+        { Address = "127.0.0.53/32"; }
+        { Address = "::1/128"; }
       ];
     };
 

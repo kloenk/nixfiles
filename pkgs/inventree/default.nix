@@ -9,38 +9,38 @@ let
     hash = "sha256-Nm385UHOCtSGlaAG35X67pjFctDO5cB6cU3A2Cgqask=";
   };
 
-  
-  /*frontend = mkYarnPackage {
-    inherit version;
-    src = "${src}/src/frontend";
-    
-    packageJSON = ./package.json;
-    yarnLock = ./yarn.lock;
-    yarnNix = ./yarn.nix;
+  /* frontend = mkYarnPackage {
+       inherit version;
+       src = "${src}/src/frontend";
 
-    configurePhase = ''
-      #ln -s $node_modules node_modules
-      cp -r $node_modules node_modules
-    '';
+       packageJSON = ./package.json;
+       yarnLock = ./yarn.lock;
+       yarnNix = ./yarn.nix;
 
-    buildPhase = ''
-      ls node_modules
-      echo running tsc
-      #./node_modules/.bin/tsc
-      echo running vite
-      ./node_modules/.bin/vite build --outDir $out
-    '';
+       configurePhase = ''
+         #ln -s $node_modules node_modules
+         cp -r $node_modules node_modules
+       '';
 
-    doDist = false;
-  };*/
+       buildPhase = ''
+         ls node_modules
+         echo running tsc
+         #./node_modules/.bin/tsc
+         echo running vite
+         ./node_modules/.bin/vite build --outDir $out
+       '';
+
+       doDist = false;
+     };
+  */
   frontend = fetchzip {
     name = "inventree-frontend";
-    url = "https://github.com/inventree/InvenTree/releases/download/${version}/frontend-build.zip";
+    url =
+      "https://github.com/inventree/InvenTree/releases/download/${version}/frontend-build.zip";
     hash = "sha256-Ln6VhCwFw5LLA/80iREx4yq0ONaclgG8tC1GoT71u0g=";
-    stripRoot=false;
+    stripRoot = false;
   };
 
-  
 in python3.pkgs.buildPythonApplication rec {
   pname = "InvenTree";
   inherit version src;
@@ -172,7 +172,7 @@ in python3.pkgs.buildPythonApplication rec {
     cp -r . $out/opt/inventree
 
     echo "Installing frontend"
-    
+
     mkdir -p $out/opt/inventree/src/backend/InvenTree/web/static/web
     cp -r ${frontend}/* $out/opt/inventree/src/backend/InvenTree/web/static/web/
   '';

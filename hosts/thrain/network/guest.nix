@@ -12,7 +12,7 @@
     networks."40-guest" = {
       name = "guest";
       DHCP = "no";
-      addresses = [{ addressConfig.Address = "192.168.45.1/24"; }];
+      addresses = [{ Address = "192.168.45.1/24"; }];
     };
 
     networks."20-br0".vlan = [ "guest" ];

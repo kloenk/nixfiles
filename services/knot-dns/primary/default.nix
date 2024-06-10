@@ -19,7 +19,7 @@ in {
     prefixLength = 8;
   }];
   systemd.network.networks."30-wg0".addresses =
-    [{ addressConfig.Address = "2a01:4f8:c013:1a4b:ecba::20:53/128"; }];
+    [{ Address = "2a01:4f8:c013:1a4b:ecba::20:53/128"; }];
 
   services.knot = {
     enable = true;

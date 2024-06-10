@@ -11,7 +11,7 @@ let
     else if isList item then
       imap0 (index: item: recurse (prefix + "[${toString index}]") item) item
     else
-      builtins.trace "Failed to build image ${toString prefix}" [ ];
+      [ ];
   attrs = pkgs.callPackage ./wallpapers.nix { };
   list = lib.flatten (recurse "" attrs);
 in pkgs.symlinkJoin {
