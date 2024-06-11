@@ -38,6 +38,9 @@ let
       magit
       magit-todos
       forge
+
+      perspective
+      persp-projectile
     ]);
   tangledConfig = runCommandNoCC "tangled-config" {
     nativeBuildInputs = [ emacsWithPkgs ];

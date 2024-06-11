@@ -12,10 +12,10 @@
     ./gaming.nix
     ./desktop.nix
     # ./hyprland
-    ./mpd.nix
+    # ./mpd.nix
     ./disko.nix
     ./evremap.nix
-    #./kde.nix
+    # ./kde.nix
 
     ../../profiles/desktop
     ../../profiles/desktop/sway

@@ -577,6 +577,18 @@ Dsiable electri-pair-mode in org mode
     :mode "dts")
 #+end_src
 * Project management
+** Perspective
+#+begin_src emacs-lisp
+  (use-package perspective
+    :bind
+    (("C-x C-b" . persp-list-buffers)         ; or use a nicer switcher, see below
+     ("C-x b" . persp-switch-to-buffer*)
+     ("C-x k" . persp-kill-buffer*))
+    :custom
+    (persp-mode-prefix-key (kbd "C-c M-p"))  ; pick your own prefix key here
+    :init
+    (persp-mode))
+#+end_src
 ** Projectile
 #+begin_src emacs-lisp
 (use-package projectile
@@ -592,6 +604,11 @@ Dsiable electri-pair-mode in org mode
   :after (helm projectile)
   :init
   (helm-projectile-on))
+#+end_src
+*** Perspective
+#+begin_src emacs-lisp
+  (use-package persp-projectile
+    :after (projectile projectile))
 #+end_src
 ** Treemacs
 #+begin_src emacs-lisp
@@ -637,4 +654,3 @@ Dsiable electri-pair-mode in org mode
     (add-to-list 'forge-alist '("git.seven.secucloud.secunet.com" "git.seven.secucloud.secunet.com/api/v4" "git.seven.secucloud.secunet.com" forge-gitlab-repository))
     (add-to-list 'forge-alist '("cyberchaos.dev" "cyberchaos.dev/api/v4" "cyberchaos.sev" forge-gitlab-repository)))
 #+end_src
-
