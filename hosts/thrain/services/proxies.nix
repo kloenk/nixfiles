@@ -10,6 +10,20 @@
   security.acme.certs."netbox-nas.thrain.net.kloenk.de".server =
     "https://acme.net.kloenk.de:8443/acme/acme/directory";
 
+  services.nginx.virtualHosts."nas.net.thrain.net.kloenk.de" = {
+    enableACME = true;
+    forceSSL = true;
+    kTLS = true;
+    locations."/" = {
+      proxyPass = "https://192.168.178.144:5001/";
+      extraConfig = ''
+        proxy_ssl_verify off;
+      '';
+    };
+  };
+  security.acme.certs."nas.net.thrain.net.kloenk.de".server =
+    "https://acme.net.kloenk.de:8443/acme/acme/directory";
+
   services.nginx.virtualHosts."fritz.net.thrain.net.kloenk.de" = {
     enableACME = true;
     forceSSL = true;

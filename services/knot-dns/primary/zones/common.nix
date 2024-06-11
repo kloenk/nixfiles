@@ -95,6 +95,7 @@ in {
     };
     "syncthing.thrain" = thrain;
     "netbox-nas.thrain" = thrain;
+    "nas.net.thrain" = thrain;
     "fritz.net.thrain" = thrain;
     "eib.net.thrain" = thrain;
     "edgeswitch.mgmt.thrain" = thrain;

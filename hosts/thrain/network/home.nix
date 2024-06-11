@@ -23,6 +23,17 @@
           data = "burscheid.home.kloenk.de.";
         }
       ];
+
+      reservations = [
+        {
+          hw-address = "90:09:D0:0A:12:E7";
+          ip-address = "192.168.178.144";
+        }
+        {
+          hw-address = "00:E0:4B:2C:F5:FA";
+          ip-address = "192.168.178.44";
+        }
+      ];
     }];
   };
 }
