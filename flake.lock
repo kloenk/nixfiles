@@ -899,11 +899,11 @@
     "lix": {
       "flake": false,
       "locked": {
-        "lastModified": 1717248817,
-        "narHash": "sha256-UUNp4l/NUPxyoTxv7jQWYdfCBL58x4ES5hl49DQcNQ0=",
-        "rev": "9a6392c979863d4df8b0a366d62cd44eb7510de8",
+        "lastModified": 1717868221,
+        "narHash": "sha256-mVDn+bFkmYkJw5n+/NRikf7L+XWSLjkVzx0XFJSYvUw=",
+        "rev": "b62f47ac67a9015d3498a0ae2671b840c74bfe15",
         "type": "tarball",
-        "url": "https://git.lix.systems/api/v1/repos/kloenk/lix/archive/9a6392c979863d4df8b0a366d62cd44eb7510de8.tar.gz"
+        "url": "https://git.lix.systems/api/v1/repos/kloenk/lix/archive/b62f47ac67a9015d3498a0ae2671b840c74bfe15.tar.gz"
       },
       "original": {
         "type": "tarball",
@@ -1312,11 +1312,11 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1717605739,
-        "narHash": "sha256-E88+uC5BY1rK2aoHkNh8d0PRP8xIK+vvZ7XM5eG9Xp4=",
-        "owner": "nixos",
+        "lastModified": 1717915150,
+        "narHash": "sha256-ULBi75AfHwCcP/YiDAsrYF48Xg1BXdwAu47ppC9C3iM=",
+        "owner": "r-ryantm",
         "repo": "nixpkgs",
-        "rev": "437e3a21de2d2e1e4c3f556edf968d212f454c7f",
+        "rev": "3e5f08c914928c61dee14a0c8af2dd3a0764cb59",
         "type": "github"
       },
       "original": {
