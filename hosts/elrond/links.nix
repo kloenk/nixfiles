@@ -31,7 +31,7 @@
       DHCP = "no";
       dns = [ "192.168.178.248" ];
       domains = [ "burscheid.home.kloenk.de" ];
-      vlan = [ "mgmt" ];
+      vlan = [ "mgmt" "gwp" ];
       addresses = [{ Address = "192.168.178.247/24"; }];
       routes = [{
         Gateway = "192.168.178.1";
@@ -58,6 +58,19 @@
       name = "mgmt";
       DHCP = "no";
       addresses = [{ Address = "192.168.44.102/24"; }];
+    };
+
+    netdevs."30-gpw" = {
+      netdevConfig = {
+        Kind = "vlan";
+        Name = "gwp";
+      };
+      vlanConfig.Id = 1003;
+    };
+    networks."30-gwp" = {
+      name = "gwp";
+      DHCP = "no";
+      addresses = [{ Address = "10.1.0.2/24"; }];
     };
 
     networks."20-lo" = {

@@ -50,9 +50,10 @@
   sops.secrets."netbox/secret_key".owner = "netbox";
   sops.secrets."netbox/keycloak_secret".owner = "netbox";
 
-  backups.netbox = {
-    user = "netbox";
-    paths = [ "/persist/data/netbox" ];
-    postgresDatabases = [ "netbox" ];
-  };
+  /* backups.netbox = {
+       user = "netbox";
+       paths = [ "/persist/data/netbox" ];
+       postgresDatabases = [ "netbox" ];
+     };
+  */
 }

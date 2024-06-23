@@ -28,9 +28,9 @@ let
     '';
 
   fromUrl =
-    { name ? builtins.baseNameOf url, url, sha256 ? lib.fakeHash, meta ? { } }:
+    { name ? builtins.baseNameOf url, url, hash ? lib.fakeHash, meta ? { } }:
     runCommand name {
-      outputHash = sha256;
+      outputHash = hash;
       outputHashAlgo = "sha256";
       outputHashMode = "recursive";
     } ''
@@ -92,7 +92,7 @@ in {
   bioshock_big_dady = fromUrl {
     url = "https://i.imgur.com/63nJZTP.jpg";
     name = "bioshock_big_daddy.jpg";
-    sha256 = "sha256-2l0Ixom/+yci4c1IqNFPuCBPpdWlXE2c2Zse9jhfXic=";
+    hash = "sha256-2l0Ixom/+yci4c1IqNFPuCBPpdWlXE2c2Zse9jhfXic=";
   };
 
   /* kurapika_chains = fromUrl {
@@ -105,7 +105,7 @@ in {
   hisuka_stars = fromUrl {
     url = "https://i.imgur.com/Tas7Ebq.png";
     name = "hisuka_stars.png";
-    sha256 = "sha256-yFvv/EAdT0Azb20PndO49mT3fHvVNLeEG2lltvTc9hA=";
+    hash = "sha256-yFvv/EAdT0Azb20PndO49mT3fHvVNLeEG2lltvTc9hA=";
   };
 
   /* hisuka_black_cards = fromUrl {
@@ -168,28 +168,61 @@ in {
     sha256 = "sha256-z/bX0qe+X0rOLt14V2eGY8NFx2tqlkIT4kWFhBU+vY8=";
   };
 
-  pcb_climbing = fromPixiv {
-    src = "https://www.pixiv.net/en/artworks/112423002";
+  pcb_climbing = fromUrl {
     url =
-      "https://i.pximg.net/img-master/img/2023/10/10/01/20/52/112423002_p0_master1200.jpg";
-    name = "pcb_climbing.jpg";
-    sha256 = "sha256-qJNn7kDCsMH4xjAGNdDN80AqF6ukvxwYHUdY+0d13wU=";
+      "https://cdn.donmai.us/original/c7/c0/__original_drawn_by_shapoco__c7c0ff1ec0329c5e25342b49132144c0.png";
+    name = "pcb_climbing.png";
+    hash = "sha256-310NI8INTmYNbivGqLHN/siWPsiFz48xadGkzo6fAq0=";
   };
 
-  pcb_girls_assembly = fromPixiv {
-    src = "https://www.pixiv.net/en/artworks/91199411";
+  pcb_girls_assembly = fromUrl {
     url =
-      "https://i.pximg.net/img-master/img/2021/07/12/20/23/41/91199411_p0_master1200.jpg";
-    name = "pcb_girls_assembly.jpg";
-    sha256 = "sha256-kC1gg+LXHVHRcYw4rcNFga1Y0cpjkGM+1TsnaiihpF4=";
+      "https://cdn.donmai.us/original/42/59/__original_drawn_by_shapoco__4259bbf8cc3f2fe52caab6ca6a5591d2.png";
+    name = "pcb_girls_assembly.png";
+    hash = "sha256-T2h/XIj1QWXMKD6R3ca745UrlSzDWfWA2wacHDO16gw=";
   };
 
-  girls_exploding_cap = fromPixiv {
-    src = "https://www.pixiv.net/en/artworks/107214767";
+  girls_expoloding_cap = fromUrl {
     url =
-      "https://i.pximg.net/img-master/img/2023/04/16/02/31/21/107214767_p0_master1200.jpg";
-    name = "girls_exploding_cap.jpg";
-    sha256 = "sha256-yQW39dQCH3MaIm55bjeShhvOXA5wXjrpuLvYnXDBMoo=";
+      "https://cdn.donmai.us/original/a0/1d/__original_drawn_by_shapoco__a01d471746a446a27ff0ccbd1f8176aa.png";
+    name = "girls_exploding_cap.png";
+    hash = "sha256-KjbTWAEo32Y2FYSbvJdWv4XivbPStWHhQVadaN7d4Xs=";
+  };
+  /* girls_exploding_cap = fromPixiv {
+       src = "https://www.pixiv.net/en/artworks/107214767";
+       url =
+         "https://i.pximg.net/img-master/img/2023/04/16/02/31/21/107214767_p0_master1200.jpg";
+       name = "girls_exploding_cap.jpg";
+       sha256 = "sha256-yQW39dQCH3MaIm55bjeShhvOXA5wXjrpuLvYnXDBMoo=";
+     };
+  */
+
+  girls_falling = fromUrl {
+    url =
+      "https://cdn.donmai.us/original/39/01/__original_drawn_by_shapoco__3901a6df15b65b92aa4b99acc7729213.png";
+    name = "girls_falling.png";
+    hash = "sha256-zC7pVi3ETHzRgWDhx0gVWJcJdcSRLmSKT+9f68dCMjA=";
+  };
+
+  dip_chip_dead = fromUrl {
+    url =
+      "https://cdn.donmai.us/original/ee/44/__original_drawn_by_shapoco__ee44a2c04c0ef1cf4cd5a8dcf296fbb1.jpg";
+    name = "dip_chip_dead.jpg";
+    hash = "sha256-SOfjX3HBELDp4ahCwBygj+M3g42eDGaJnaxb4ur1gkM=";
+  };
+
+  girls_dip_chair = fromUrl {
+    url =
+      "https://cdn.donmai.us/original/18/f2/__original_drawn_by_shapoco__18f28b24c4dfda9190f2dfbc19c26e78.png";
+    name = "girls_dip_chair.png";
+    hash = "sha256-emhJPylfwk0NpNvVBUSgLuClLvyLEfuCtv8ahkOWau8=";
+  };
+
+  girl_chasing_plane = fromUrl {
+    url =
+      "https://cdn.donmai.us/original/e9/59/__original_drawn_by_shapoco__e9592d7986f946a0830fe40c1c2efa91.png";
+    name = "girl_chasing_plane.png";
+    hash = "sha256-JO7kN7RoTxZ2yQOERr7RvhNxbjL8C0uv6G6MzpwvdwE=";
   };
 
   lost_in_space_mag = fromRedditPost {
@@ -237,17 +270,17 @@ in {
   life_is_strange_angle = fromUrl {
     url = "https://i.imgur.com/aPfdV47.png";
     name = "life_is_strange_angle.png";
-    sha256 = "sha256-zbjMST2KGczbxlVOyMsWG9SlWt3Ce88Xcq/qGvYBHX0=";
+    hash = "sha256-zbjMST2KGczbxlVOyMsWG9SlWt3Ce88Xcq/qGvYBHX0=";
   };
   life_is_strange_sense_of_me = fromUrl {
     url = "https://i.imgur.com/Mkwa00q.png";
     name = "life_is_strange_sense_of_me.png";
-    sha256 = "sha256-s0V6n0OvURbu5gbGKBGyrghA6Wo1PV2SmdwGiU7AD9Q=";
+    hash = "sha256-s0V6n0OvURbu5gbGKBGyrghA6Wo1PV2SmdwGiU7AD9Q=";
   };
   life_is_strange_cloe_angle = fromUrl {
     url = "https://i.imgur.com/SlohViL.png";
     name = "life_is_strange_cloe_angle.png";
-    sha256 = "sha256-4m8Zrywv2PMOYcVsS1m8hafR5HvU6FiqQDzWZYobnjM==";
+    hash = "sha256-4m8Zrywv2PMOYcVsS1m8hafR5HvU6FiqQDzWZYobnjM==";
   };
 
   life_is_strange_railway = fromRedditPost {
@@ -298,46 +331,46 @@ in {
     url =
       "https://robertsspaceindustries.com/media/4at3dc1hbnlldr/wallpaper_3840x2160/Source.jpg";
     name = "sc_downed_man.jpg";
-    sha256 = "sha256-U/d+hlIWNFFauOnjPX2aNALHL+lohaK+YgBqcL64qzs=";
+    hash = "sha256-U/d+hlIWNFFauOnjPX2aNALHL+lohaK+YgBqcL64qzs=";
   };
 
   sc_city_mist = fromUrl {
     url =
       "https://robertsspaceindustries.com/media/h3xwsmgo74u42r/wallpaper_3840x2160/Source.jpg";
     name = "sc_city_mist.jpg";
-    sha256 = "sha256-SeRs4cSmDfe9yViSNSOGaHIz88nB4qzGenFGL7rBzfE=";
+    hash = "sha256-SeRs4cSmDfe9yViSNSOGaHIz88nB4qzGenFGL7rBzfE=";
   };
 
   sc_spider_concept = fromUrl {
     url =
       "https://robertsspaceindustries.com/media/8uwxim0jeierqr/source/Spider-Concept-Cathcart.jpg";
     name = "sc_spider_concept.jpg";
-    sha256 = "sha256-YHWKaFEb7njFZdyxFj/Mwivtl0TLqvH2NJZ5CbkqwDg=";
+    hash = "sha256-YHWKaFEb7njFZdyxFj/Mwivtl0TLqvH2NJZ5CbkqwDg=";
   };
 
   # Horizon
   hfw_savana = fromUrl {
     url = "https://images.igdb.com/igdb/image/upload/t_original/sc8bia.jpg";
     name = "hfw_savanna.jpg";
-    sha256 = "sha256-0qoMyYbcakyc+nGDEUvBeIitjEVZlAD6ibopgtG1X84=";
+    hash = "sha256-0qoMyYbcakyc+nGDEUvBeIitjEVZlAD6ibopgtG1X84=";
   };
 
   hfw_turtle = fromUrl {
     url = "https://images.igdb.com/igdb/image/upload/t_original/sc8c98.jpg";
     name = "hfw_turtle.jpg";
-    sha256 = "sha256-UGsbPmegCif+yW2LTFh9WAWSXv1VKncoWjUrOX26AOY=";
+    hash = "sha256-UGsbPmegCif+yW2LTFh9WAWSXv1VKncoWjUrOX26AOY=";
   };
 
   hfw_flying = fromUrl {
     url = "https://images.igdb.com/igdb/image/upload/t_original/sc8bi9.jpg";
     name = "hfw_flying.jpg";
-    sha256 = "sha256-YmNODmE3xGPavp414V+iK1NC9y5FRdoM1GJvm9TZ1v8=";
+    hash = "sha256-YmNODmE3xGPavp414V+iK1NC9y5FRdoM1GJvm9TZ1v8=";
   };
 
   hfw_tallneck_mist = fromUrl {
     url = "https://images7.alphacoders.com/710/710881.jpg";
     name = "hfw_tallneck_mist.jpg";
-    sha256 = "sha256-gn3POLKjUitcLO+gHh7KejSCltmk5KPirfPM4qKYMAY=";
+    hash = "sha256-gn3POLKjUitcLO+gHh7KejSCltmk5KPirfPM4qKYMAY=";
   };
 
   # To low qualy
@@ -350,7 +383,7 @@ in {
   hzd_artwork_drawn = fromUrl {
     url = "https://i.imgur.com/8tAtF47.jpeg";
     name = "hzd_artwork_drawn.jpeg";
-    sha256 = "sha256-rUE0couCbiTIZQI7mPBeo5JAtne/6Oymx+5tpQ/7kFQ=";
+    hash = "sha256-rUE0couCbiTIZQI7mPBeo5JAtne/6Oymx+5tpQ/7kFQ=";
   };
 
   dishonored_outsider = ./images/dishonored/outsider.jpeg;
