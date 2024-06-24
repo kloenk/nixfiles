@@ -4,6 +4,7 @@
   imports = [
     #./postgres.nix
     ./zsh.nix
+    ./aerospace.nix
 
     #../../common/nushell.nix
     ../../profiles/desktop/wezterm.nix
