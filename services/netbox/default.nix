@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ lib, config, pkgs, ... }:
 
 {
   fileSystems."/var/lib/netbox" = {
@@ -23,7 +23,7 @@
       SOCIAL_AUTH_KEYCLOAK_ACCESS_TOKEN_URL =
         "https://auth.kloenk.dev/realms/kloenk/protocol/openid-connect/token";
     };
-    port = config.k.ports.netbox;
+    port = lib.getPort "netbox";
   };
 
   services.postgresql = {
@@ -40,7 +40,7 @@
     forceSSL = true;
     kTLS = true;
     locations."/" = {
-      proxyPass = "http://[::1]:${toString config.k.ports.netbox}";
+      proxyPass = "http://[::1]:${toString (lib.getPort "netbox")}";
       proxyWebsockets = true;
     };
     locations."/static/".root = "/var/lib/netbox";

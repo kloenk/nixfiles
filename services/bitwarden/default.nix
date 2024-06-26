@@ -13,7 +13,7 @@
     config = {
       domain = "https://bitwarden.kloenk.de";
       signupsAllowed = false;
-      rocketPort = config.k.ports.vaultwarden;
+      rocketPort = lib.getPort "vaultwarden";
       rocketLog = "critical";
     };
   };
@@ -25,7 +25,7 @@
     # Allow large attachments
     extraConfig = "client_max_body_size 128M;";
     locations."/".proxyPass =
-      "http://127.0.0.1:${toString config.k.ports.vaultwarden}/";
+      "http://127.0.0.1:${toString (lib.getPort "vaultwarden")}/";
   };
   services.nginx.virtualHosts."bitwarden.kloenk.dev" = {
     enableACME = true;
@@ -34,7 +34,7 @@
     # Allow large attachments
     extraConfig = "client_max_body_size 128M;";
     locations."/".proxyPass =
-      "http://127.0.0.1:${toString config.k.ports.vaultwarden}/";
+      "http://127.0.0.1:${toString (lib.getPort "vaultwarden")}/";
   };
 
   backups.vaultwarden = {

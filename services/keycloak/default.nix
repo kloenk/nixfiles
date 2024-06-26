@@ -19,7 +19,7 @@
       [ keycloak-restrict-client-auth ];
     settings = {
       http-host = "127.0.0.1";
-      http-port = config.k.ports.keycloak;
+      http-port = lib.getPort "keycloak";
       hostname = "auth.kloenk.dev";
       proxy = "edge";
     };
@@ -30,7 +30,7 @@
     forceSSL = true;
     kTLS = true;
     locations."/" = {
-      proxyPass = "http://localhost:${toString config.k.ports.keycloak}";
+      proxyPass = "http://localhost:${toString (lib.getPort "keycloak")}";
       extraConfig = ''
         proxy_buffer_size          128k;
         proxy_buffers              4 256k;

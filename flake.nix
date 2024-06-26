@@ -151,6 +151,8 @@
     , kloenk-www, dns, darwin, sops-nix, colmena, jlly, fleet_bot, p3tr
     , sysbadge, oxalica, disko, ... }:
     let
+      lib = nixpkgs.lib.extend (import ./lib);
+
       overlayCombined = system: [
         #nix.overlays.default
         #(final: prev: { nix = nix.packages.${system}.nix; })
@@ -169,6 +171,7 @@
         inputs.bcachefs-tools.overlays.default
         lix-module.overlays.default
         (final: prev: { bcachefs-tools = final.bcachefs; })
+        (_final: _prev: { inherit lib; })
       ];
 
       systems =
@@ -251,6 +254,8 @@
       };
       overlays.tests = (import ./tests self);
 
+      inherit lib;
+
       legacyPackages = forAllSystems (system: nixpkgsFor.${system});
 
       packages = (forAllSystems (system: { }))
@@ -315,6 +320,7 @@
 
           specialArgs.inputs = inputs;
           specialArgs.self = self;
+          specialArgs.lib = lib;
         };
 
         defaults = { pkgs, ... }: {
@@ -356,8 +362,6 @@
           environment.systemPackages = [ # pkgs.colmena
           ];
           #home-manager.home.enableNixpkgsReleaseCheck = false;
-
-          k.ports = import ./lib/ports.nix;
 
           nix.channel.enable = false;
           documentation.nixos.enable = false;
