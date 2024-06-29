@@ -49,14 +49,5 @@
     nginx = { urls = [ "http://localhost/nginx_status" ]; };
   };
 
-  security.acme.defaults = { name, config, ... }@certAttrs: {
-    config = lib.mkMerge [
-      (lib.mkIf
-        ((builtins.match "(.{1,63}.)?net.kloenk.de" certAttrs.name) != null) {
-          server =
-            lib.mkDefault "https://acme.net.kloenk.de:8443/acme/acme/directory";
-        })
-      { email = "ca@kloenk.de"; }
-    ];
-  };
+  security.acme.defaults = { email = "ca@kloenk.de"; };
 }

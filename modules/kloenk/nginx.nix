@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, config, options, ... }:
 
 let
   inherit (lib) mkOption mkEnableOption mkIf types;
@@ -56,8 +56,17 @@ in {
         locations."/public/".alias = cfg.net.folder;
         locations."/public/".extraConfig = "autoindex on;";
       };
-      security.acme.certs.${cfg.net.domain}.server =
-        "https://acme.net.kloenk.de:8443/acme/acme/directory";
+      security.acme.certs = let
+        hosts = config.services.nginx.virtualHosts;
+        filterdHosts = lib.filterAttrs
+          (name: _value: (builtins.match ".*\\.net\\.kloenk\\.de" name) != null)
+          hosts;
+        filteredHostNames = builtins.attrNames filterdHosts;
+      in builtins.listToAttrs (map (name: {
+        name = name;
+        value.server =
+          lib.mkDefault "https://acme.net.kloenk.de:8443/acme/acme/directory";
+      }) filteredHostNames);
     })
   ];
 }

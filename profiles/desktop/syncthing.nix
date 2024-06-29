@@ -40,9 +40,6 @@
 
     };
 
-  security.acme.certs."syncthing.${config.networking.hostName}.net.kloenk.de".server =
-    "https://acme.net.kloenk.de:8443/acme/acme/directory";
-
   services.vouch-proxy = {
     enable = true;
     servers."syncthing.${config.networking.hostName}.net.kloenk.de" = {
