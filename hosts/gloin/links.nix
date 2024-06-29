@@ -51,7 +51,10 @@ in {
       DHCP = "ipv6";
       vlan = [ "gwp0" ];
       dns = [ "192.168.178.248" ];
-      addresses = [{ Address = "192.168.178.245/24"; }];
+      addresses = [{
+        Address = "192.168.178.245/24";
+        RouteMetric = 1024;
+      }];
       routes = [{
         Gateway = "192.168.178.1";
         Metric = 1024;
@@ -89,7 +92,10 @@ in {
       matchConfig.SSID = [ "'The Prancing Pony'" "TT-WLAN" ];
       dns = [ "192.168.178.248" ];
       DHCP = "ipv6";
-      addresses = [{ Address = "192.168.178.246/24"; }];
+      addresses = [{
+        Address = "192.168.178.246/24";
+        RouteMetric = 2048;
+      }];
       routes = [{
         Gateway = "192.168.178.1";
         Metric = 2048;
