@@ -136,6 +136,12 @@
     inputs.nixpkgs.follows = "/nixpkgs";
   };
 
+  inputs.nix-topology = {
+    url = "github:oddlama/nix-topology";
+    inputs.nixpkgs.follows = "/nixpkgs";
+    inputs.pre-commit-hooks.follows = "/pre-commit";
+  };
+
   inputs.pre-commit = {
     url = "github:cachix/pre-commit-hooks.nix";
     inputs.nixpkgs.follows = "/nixpkgs";
@@ -149,7 +155,7 @@
 
   outputs = inputs@{ self, nixpkgs, lix, lix-module, moodlepkgs, mail-server
     , kloenk-www, dns, darwin, sops-nix, colmena, jlly, fleet_bot, p3tr
-    , sysbadge, oxalica, disko, ... }:
+    , sysbadge, oxalica, disko, nix-topology, ... }:
     let
       lib = nixpkgs.lib.extend (import ./lib);
 
@@ -349,6 +355,8 @@
             self.nixosModules.evremap
             self.nixosModules.inventree
 
+            nix-topology.nixosModules.default
+
             #lix-module.nixosModules.default
             # TODO: 
             #vika.nixosModules.colorfulMotd
@@ -446,7 +454,7 @@
         };
         elros = { pkgs, nodes, ... }: {
           deployment.targetHost = "elros.net.kloenk.de";
-          deployment.tags = [ "pony" "local" ];
+          deployment.tags = [ "local" ];
 
           imports = [ ./hosts/elros ];
         };
@@ -552,6 +560,28 @@
           default = pkgs.mkShell {
             nativeBuildInputs = [ pkgs.nixfmt pkgs.colmena pkgs.sops ];
             inherit (self.checks.${system}.pre-commit) shellHook;
+          };
+        });
+
+      topology = forAllSystems (system:
+        let
+          pkgs = import nixpkgs {
+            inherit system;
+            overlays = [ nix-topology.overlays.default self.overlays.tests ]
+              ++ (overlayCombined system);
+          };
+          inherit (pkgs) lib;
+          tagFilteredHosts = tag:
+            builtins.listToAttrs (builtins.filter
+              (c: builtins.any (t: t == tag) c.value.config.deployment.tags)
+              (lib.attrsToList self.nixosConfigurations));
+        in {
+          burscheid = import nix-topology {
+            inherit pkgs;
+            modules = [
+              { nixosConfigurations = tagFilteredHosts "pony"; }
+              ./topology/burscheid.nix
+            ];
           };
         });
 
