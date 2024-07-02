@@ -9,10 +9,7 @@
     ./base/nixos
   ];
 
-  system.extraDependencies = [
-    self.nixosConfigurations.elrond.config.system.build.toplevel
-    self.nixosConfigurations.elrond.config.system.build.diskoScript
-  ];
+  system.extraDependencies = [ ];
 
   boot.initrd.supportedFilesystems = lib.mkForce [ "vfat" ];
   boot.initrd.kernelModules = [ "sr_mod" ];
