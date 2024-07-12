@@ -9,7 +9,10 @@
     ./base/nixos
   ];
 
-  system.extraDependencies = [ ];
+  system.extraDependencies = [
+    self.nixosConfigurations.strider.config.system.build.toplevel
+    self.nixosConfigurations.strider.config.system.build.diskoScript
+  ];
 
   boot.initrd.supportedFilesystems = lib.mkForce [ "vfat" ];
   boot.initrd.kernelModules = [ "sr_mod" ];

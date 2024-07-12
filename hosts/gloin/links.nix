@@ -14,7 +14,7 @@ in {
 
   systemd.network = {
     links."10-eth0" = {
-      matchConfig.MACAddress = "84:a9:38:c6:b3:cd";
+      matchConfig = { Path = [ "pci-0000:00:1f.6" ]; };
       linkConfig.Name = "eth0";
     };
     networks."10-eth0" = {
@@ -33,7 +33,9 @@ in {
     };
 
     links."10-eth1" = {
-      matchConfig.MACAddress = "98:fd:b4:9a:bd:7e";
+      matchConfig = {
+        Property = [ "ID_BUS=usb" "ID_SERIAL_SHORT=00154000F" ];
+      };
       linkConfig.Name = "eth1";
     };
     networks."10-eth1" = {

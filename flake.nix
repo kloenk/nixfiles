@@ -288,11 +288,15 @@
             system = "x86_64-linux";
             overlays = (overlayCombined "x86_64-linux");
           };
+          nodeNixpkgs.varda = import nixpkgs {
+            system = "aarch64-linux";
+            overlays = (overlayCombined "aarch64-linux");
+          };
           nodeNixpkgs.ktest = import nixpkgs {
             system = "aarch64-linux";
             overlays = (overlayCombined "aarch64-linux");
           };
-          nodeNixpkgs.varda = import nixpkgs {
+          nodeNixpkgs.strider = import nixpkgs {
             system = "aarch64-linux";
             overlays = (overlayCombined "aarch64-linux");
           };
@@ -466,6 +470,16 @@
           imports = [ ./hosts/gloin ];
           users.users.kloenk.packages =
             [ inputs.nixpkgs.legacyPackages.x86_64-linux.nil ];
+        };
+
+        strider = { pkgs, nodes, ... }: {
+          deployment.targetHost = "192.168.64.102";
+          deployment.tags = [ "vm" "frodo" ];
+
+          imports = [
+            ./hosts/strider
+            (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix"))
+          ];
         };
 
         ktest = { pkgs, nodes, ... }: {
