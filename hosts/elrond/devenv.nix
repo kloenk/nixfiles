@@ -85,7 +85,7 @@
       cargo-generate
       bpf-linker
 
-      kicad
+      # kicad
 
       # jetbrains.clion
       # jetbrains.ruby-mine

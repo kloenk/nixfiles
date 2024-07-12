@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
 
   programs.sway.enable = true;
   programs.light.enable = true;
