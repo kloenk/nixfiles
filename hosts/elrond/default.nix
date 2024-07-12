@@ -17,6 +17,7 @@
     ./evremap.nix
     # ./kde.nix
 
+    ../../profiles/lemurs.nix
     ../../profiles/desktop
     ../../profiles/desktop/sway
 
