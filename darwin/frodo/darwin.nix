@@ -73,7 +73,7 @@
     direnv
     nushell
     uutils-coreutils
-    youtube-dl
+    yt-dlp
 
     wireguard-tools
     wireguard-go
