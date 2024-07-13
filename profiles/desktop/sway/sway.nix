@@ -23,19 +23,47 @@
 
   home-manager.users.kloenk = {
     programs.wofi.enable = true;
+    programs.swaylock = {
+      enable = true;
+      package = pkgs.swaylock-effects;
+      settings = {
+        screenshots = true;
+        clock = true;
+        effect-blur = "20x10";
+      };
+    };
     services.swayidle = let
       lockCommand =
-        "${pkgs.swaylock-effects}/bin/swaylock --screenshots --clock --effect-blur 20x10";
+        "${pkgs.systemd}/bin/systemctl --user start swaylock.service";
+      #"${pkgs.swaylock-effects}/bin/swaylock -f --screenshots --clock --effect-blur 20x10";
     in {
       enable = true;
-      events = [{
-        event = "lock";
-        command = lockCommand;
-      }];
-      timeouts = [{
-        timeout = 300;
-        command = lockCommand;
-      }];
+      events = [
+        {
+          event = "lock";
+          command = lockCommand;
+        }
+        {
+          event = "unlock";
+          command =
+            "${pkgs.systemd}/bin/systemctl --user stop swaylock.service";
+        }
+        {
+          event = "before-sleep";
+          command = lockCommand;
+        }
+      ];
+      timeouts = [
+        {
+          timeout = 300;
+          command = lockCommand;
+        }
+        {
+          timeout = 600;
+          command = ''${pkgs.sway}/bin/swaymsg "output * power off"'';
+          resumeCommand = ''${pkgs.sway}/bin/swaymsg "output * power on"'';
+        }
+      ];
     };
     wayland.windowManager.sway = let
       cfg = config.home-manager.users.kloenk.wayland.windowManager.sway;
@@ -46,6 +74,10 @@
       enable = true;
       package = pkgs.sway;
       wrapperFeatures.gtk = true;
+      systemd = {
+        enable = true;
+        xdgAutostart = true;
+      };
 
       config = {
         workspaceAutoBackAndForth = true;
@@ -53,8 +85,8 @@
           names = [ "JetBrains Mono" ];
           size = 8.0;
         };
-        terminal = "wezterm"; # "alacritty";
-        menu = "wofi --show drun";
+        terminal = "${pkgs.wezterm}/bin/wezterm"; # "alacritty";
+        menu = "${pkgs.wofi}/bin/wofi --show drun";
 
         bars = [ ];
 
