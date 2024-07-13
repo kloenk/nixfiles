@@ -29,6 +29,9 @@
 
   # FIXME: remove
   boot.initrd.systemd.emergencyAccess = true;
+  k.security.pam_u2f.keys.kloenk = [
+    "lYZ5OH//iKv6MBMDqNpTaZwDOigUD2nl9C6n0R2m8UZ41dDbr1wVpr5pFLk4YFBQ6QJ30RS1JpxoAPbTlzs7hg==,WVUDkBzWtopP/vcIDMFk8ZoZr09Hkaoo+Pj+KYiuesoNOmpVyuRXjttpeE8RcpdrUAGrexnPXJKLFFKeN1nxlg==,es256,+presence"
+  ];
 
   networking.hostName = "gloin";
   networking.wireless.iwd.enable = true;

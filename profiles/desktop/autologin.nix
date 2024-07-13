@@ -17,9 +17,7 @@ in {
     programs.zsh.initExtra = ''
       if [ -z "''${WAYLAND_DISPLAY}" ] && [[ "''${TTY}" == "/dev/${tty}" ]]; then
         systemctl --user import-environment PATH
-        systemctl --user start sway.service
-        sleep 1s
-        loginctl lock-session
+        systemctl --user start sway.service swaylock.service
       fi
     '';
   };

@@ -16,7 +16,10 @@ in {
         };
       };
       swaylock = {
-        Unit = { Requisite = [ "sway-session.target" ]; };
+        Unit = {
+          Requisite = [ "sway.service" ];
+          After = [ "sway.service" "sway-session.target" ];
+        };
         Service = {
           ExecStart = [ "${hm-user.programs.swaylock.package}/bin/swaylock" ];
           KillSignal = "SIGUSR1";
