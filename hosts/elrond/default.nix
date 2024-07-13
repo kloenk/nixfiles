@@ -15,6 +15,7 @@
     # ./mpd.nix
     ./disko.nix
     ./evremap.nix
+    ./secureboot.nix
     # ./kde.nix
 
     ../../profiles/desktop

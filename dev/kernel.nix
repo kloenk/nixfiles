@@ -20,7 +20,7 @@
 pkgs.mkShell {
   buildInputs = with pkgs;
     [
-      (rust-bin.stable."1.73.0".default.override {
+      (rust-bin.stable."1.78.0".default.override {
         extensions = [ "rust-src" ];
       })
       rust-bindgen
@@ -31,7 +31,6 @@ pkgs.mkShell {
 
       pkg-config
       ncurses
-      libelf
 
       llvmPackages.clang
       llvmPackages.lld
@@ -40,9 +39,4 @@ pkgs.mkShell {
     ] ++ pkgs.lib.optional pkgs.stdenv.isDarwin pkgs.libiconv
     ++ pkgs.lib.optionals pkgs.stdenv.isLinux
     (pkgs.linux.buildInputs ++ pkgs.linux.nativeBuildInputs);
-
-  shellHook = ''
-    alias ls=exa
-    alias find=fd
-  '';
 }

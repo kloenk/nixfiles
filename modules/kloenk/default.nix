@@ -1,5 +1,5 @@
 { ... }:
 
 {
-  imports = [ ./wireguard.nix ./nginx.nix ./emacs.nix ];
+  imports = [ ./wireguard.nix ./nginx.nix ./emacs.nix ./secureboot.nix ];
 }
