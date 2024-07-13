@@ -15,6 +15,7 @@ in {
     security.pam = {
       u2f = {
         enable = true;
+        settings.origin = "pam://kloenk.dev";
         settings.authfile = builtins.toFile "pamu2fcfg" (lib.concatLines
           (lib.mapAttrsToList
             (name: keys: "${name}:${lib.concatStringsSep ":" keys}") cfg.keys));
@@ -23,7 +24,7 @@ in {
 
     services.udev.extraRules = ''
       # Lock when yubikey is removed
-      ACTION=="remove", ENV{ID_BUS}=="usb", ENV{ID_USB_VENDOR_ID}=="1050", TAG=="seat", RUN+="${pkgs.systemd}/bin/loginctl lock-sessions"
+      ACTION=="remove", SUBSYSTEM=="hidraw", ENV{ID_SECURITY_TOKEN}=="1", RUN+="${pkgs.systemd}/bin/loginctl lock-sessions"
     '';
   };
 }
