@@ -81,6 +81,10 @@
 
       config = {
         workspaceAutoBackAndForth = true;
+        startup = [{
+          command = "${pkgs.systemd}/bin/loginctl lock-session";
+          always = false;
+        }];
         fonts = {
           names = [ "JetBrains Mono" ];
           size = 8.0;

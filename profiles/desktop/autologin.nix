@@ -1,5 +1,3 @@
-
-
 { lib, config, pkgs, ... }:
 
 let tty = "tty1";
@@ -17,8 +15,17 @@ in {
     programs.zsh.initExtra = ''
       if [ -z "''${WAYLAND_DISPLAY}" ] && [[ "''${TTY}" == "/dev/${tty}" ]]; then
         systemctl --user import-environment PATH
-        systemctl --user start sway.service swaylock.service
+        systemctl --user start sway.service
+        #sleep 1s
+        #loginctl lock-session
+        #systemctl --user start sway.service --wait
       fi
     '';
+
+    wayland.windowManager.sway.config.startup = [{
+      command =
+        "${config.home-manager.users.kloenk.programs.swaylock.package}/bin/swaylock -C /dev/null -f -i ${pkgs.wallpapers}/share/wallpapers/girls_dip_chair.png";
+      always = false;
+    }];
   };
 }

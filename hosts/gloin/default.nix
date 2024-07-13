@@ -8,9 +8,13 @@
     ./pipewire.nix
     ./evremap.nix
     ./kea.nix
+    ./secureboot.nix
 
     ../../profiles/desktop
     ../../profiles/desktop/sway
+    ../../profiles/desktop/plymouth.nix
+    ../../profiles/desktop/autologin.nix
+    ../../profiles/desktop/pam_u2f.nix
 
     ../../profiles/secunet.nix
     #../../profiles/bcachefs.nix
@@ -30,7 +34,7 @@
   # FIXME: remove
   boot.initrd.systemd.emergencyAccess = true;
   k.security.pam_u2f.keys.kloenk = [
-    "lYZ5OH//iKv6MBMDqNpTaZwDOigUD2nl9C6n0R2m8UZ41dDbr1wVpr5pFLk4YFBQ6QJ30RS1JpxoAPbTlzs7hg==,WVUDkBzWtopP/vcIDMFk8ZoZr09Hkaoo+Pj+KYiuesoNOmpVyuRXjttpeE8RcpdrUAGrexnPXJKLFFKeN1nxlg==,es256,+presence"
+    "00ARgrKMoRvH9KYp1NYqcB0ESBgTpvjBoJGCpUNuD5eRLBUMy7ly4/ml21c0pM0JJ2MHSL1HVrcBYasRNhf1ow==,W78vHP7PIvR3WfwQfH4M4Ivp1TRh0QRi2scvTYLfQnSScAReDIMZt6T1VrWsPyDWOFp0tI4fuuhwmkZISppxPQ==,es256,+presence"
   ];
 
   networking.hostName = "gloin";
