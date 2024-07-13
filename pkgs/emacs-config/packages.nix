@@ -14,6 +14,8 @@ with e; [
   dashboard
 
   company
+  # company-box
+  # nerd-icons
 
   ivy
   ivy-rich

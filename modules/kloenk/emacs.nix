@@ -10,24 +10,23 @@ in {
       default = true;
     };
     gui = mkEnableOption "pgtk";
+    macports = mkEnableOption "macports" // {
+      default = cfg.gui && pkgs.stdenv.isDarwin;
+    };
 
     package = mkOption { type = types.package; };
   };
 
   config = mkIf cfg.enable {
     k.emacs.package = if cfg.gui then
-      pkgs.kloenk-emacs.override { emacs = pkgs.emacs29-pgtk; }
+      if cfg.macports then
+        pkgs.emacs-config.override { emacs = pkgs.emacs-macport; }
+      else
+        pkgs.emacs-config.override { emacs = pkgs.emacs29-pgtk; }
     else
-      pkgs.kloenk-emacs.override { emacs = pkgs.emacs29-nox; };
+      pkgs.emacs-config.override { emacs = pkgs.emacs-nox; };
 
     home-manager.users.kloenk = {
-      home.file = {
-        ".emacs.d/init.el".source =
-          "${cfg.package.passthru.compiledConfig}/init.elc";
-        ".emacs.d/early-init.el".source =
-          "${cfg.package.passthru.compiledConfig}/early-init.elc";
-      };
-
       programs.emacs = {
         enable = true;
         package = cfg.package;

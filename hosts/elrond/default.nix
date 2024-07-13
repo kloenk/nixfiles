@@ -19,6 +19,7 @@
 
     ../../profiles/desktop
     ../../profiles/desktop/sway
+    ../../profiles/desktop/plymouth.nix
 
     ../../profiles/telegraf.nix
     # ../../profiles/syncthing.nix
