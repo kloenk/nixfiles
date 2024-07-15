@@ -5,7 +5,7 @@
     ./disko.nix
     ./links.nix
 
-    ./secureboot
+    ./secureboot.nix
   ];
 
   boot.loader.grub.enable = false;
