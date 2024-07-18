@@ -10,6 +10,7 @@
 
     ../../services/netbox
     ../../services/inventree
+    ../../services/kitchenowl
 
     ../../profiles/telegraf.nix
   ];

@@ -12,6 +12,9 @@ in {
   kloenk-emacs = callPackage ./emacs { emacs = final.emacs29-pgtk; };
   emacs-config = callPackage ./emacs-config { emacs = final.emacs29-pgtk; };
 
+  inherit (callPackage ./kitchenowl { python3 = final.python312; })
+    kitchenowl-backend kitchenowl-desktop kitchenowl-web;
+
   obs-tuna = final.qt6Packages.callPackage ./obs-tuna { };
 
   # helix = prev.helix.overrideAttrs

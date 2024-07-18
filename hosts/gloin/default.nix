@@ -96,7 +96,7 @@
     # connect and disconnetc the USB device
   '';
 
-  services.syncthing.settings.folders."uni".enable = false;
+  #services.syncthing.settings.folders."uni".enable = false;
 
   # secrets on there
   fileSystems."/persist".neededForBoot = true;

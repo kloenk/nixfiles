@@ -352,6 +352,7 @@
             self.nixosModules.backups
             self.nixosModules.evremap
             self.nixosModules.inventree
+            self.nixosModules.kitchenowl
 
             #lix-module.nixosModules.default
             # TODO: 
@@ -512,6 +513,7 @@
         backups = import ./modules/backups;
         evremap = import ./modules/evremap;
         inventree = import ./modules/inventree.nix;
+        kitchenowl = import ./modules/kitchenowl;
       };
 
       darwinModules = {
