@@ -8,7 +8,7 @@
     ./network
 
     ../../profiles/postgres.nix
-    ../../profiles/desktop/syncthing.nix
+    ../../profiles/syncthing.nix
     ../../profiles/users/kloenk/password.nix
 
     ./services/mpd.nix

@@ -7,7 +7,6 @@
     ./devenv.nix
     ./podman.nix
 
-    ./syncthing.nix
     ./pipewire.nix
     ./gaming.nix
     ./desktop.nix
@@ -18,6 +17,8 @@
     ./secureboot.nix
     # ./kde.nix
 
+    ../../profiles/syncthing.nix
+
     ../../profiles/desktop
     ../../profiles/desktop/sway
     ../../profiles/desktop/plymouth.nix
@@ -25,7 +26,6 @@
     ../../profiles/desktop/pam_u2f.nix
 
     ../../profiles/telegraf.nix
-    # ../../profiles/syncthing.nix
     #../../common/nushell.nix
   ];
 

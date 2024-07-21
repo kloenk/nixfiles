@@ -7,7 +7,6 @@
     ./wezterm.nix
     ./firefox.nix
     ./gammastep.nix
-    ./syncthing.nix
     ./sound.nix
     ../users/kloenk/password.nix
   ];
@@ -17,5 +16,4 @@
       enableACME = lib.mkForce false;
       forceSSL = lib.mkForce false;
     };
-
 }

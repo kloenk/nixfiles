@@ -4,7 +4,6 @@
   imports = [
     ./disko.nix
     ./links.nix
-    ./syncthing.nix
     ./pipewire.nix
     ./evremap.nix
     ./kea.nix
@@ -17,6 +16,7 @@
     ../../profiles/desktop/pam_u2f.nix
 
     ../../profiles/secunet.nix
+    ../../profiles/syncthing.nix
     #../../profiles/bcachefs.nix
     #../../profiles/secureboot.nix
 
@@ -95,6 +95,8 @@
     # sudo udevadm control --reload-rules &&  sudo udevadm trigger 
     # connect and disconnetc the USB device
   '';
+
+  services.syncthing.settings.folders."uni".enable = false;
 
   # secrets on there
   fileSystems."/persist".neededForBoot = true;
