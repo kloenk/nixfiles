@@ -16,7 +16,6 @@
   environment.systemPackages = with pkgs; [
     #pkgs.vim
     wezterm
-    kloenk-emacs
     eza
   ];
 
@@ -24,13 +23,20 @@
 
   # wezterm font size
   k.programs.wezterm.font_size = 13.0;
+  k.emacs.gui = true;
 
   services.nix-daemon.enable = true;
-  nix.package = pkgs.nix;
-  nix.extraOptions = ''
-    extra-platforms = x86_64-darwin aarch64-darwin
-    system-features = benchmark big-parallel recursive-nix
-  '';
+  nix = {
+    package = pkgs.nix;
+    extraOptions = ''
+      extra-platforms = x86_64-darwin aarch64-darwin
+      system-features = benchmark big-parallel recursive-nix
+    '';
+    linux-builder = {
+      enable = true;
+      maxJobs = 4;
+    };
+  };
 
   home-manager.users.kloenk.programs.ssh.matchBlocks = {
     "*.studs.math.uni-wuppertal.de" = {

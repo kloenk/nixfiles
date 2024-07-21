@@ -518,6 +518,7 @@
         epmd = import ./modules/darwin/epmd;
         git = import ./modules/darwin/git.nix;
         helix = import ./modules/helix/darwin.nix;
+        emacs = import ./modules/kloenk/emacs.nix;
       };
 
       darwinConfigurations = (nixpkgs.lib.mapAttrs (name: host:
@@ -533,6 +534,7 @@
             self.darwinModules.epmd
             self.darwinModules.git
             self.darwinModules.helix
+            self.darwinModules.emacs
 
             inputs.home-manager.darwinModules.home-manager
             #inputs.mac-app-util.darwinModules.default
