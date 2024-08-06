@@ -38,7 +38,7 @@
   boot.initrd.supportedFilesystems = [ "btrfs" ];
 
   boot.initrd.systemd.emergencyAccess = true;
-  systemd.sysusers.enable = true;
+  # systemd.sysusers.enable = true;
 
   boot.initrd.systemd.network.enable = true;
   boot.initrd.network.enable = true;

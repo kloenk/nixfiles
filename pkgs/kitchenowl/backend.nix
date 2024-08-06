@@ -128,6 +128,7 @@ let
 in python3Packages.buildPythonApplication rec {
   pname = "kitchenowl-backend";
   inherit version src;
+  patches = [ ./no-basicauth.diff ];
   postPatch = ''
     cd backend
     rm entrypoint.sh Dockerfile
@@ -173,7 +174,7 @@ in python3Packages.buildPythonApplication rec {
     flake8
     flask
     flask-apscheduler
-    flask-basicauth
+    #flask-basicauth
     flask-bcrypt
     flask-jwt-extended
     flask-migrate

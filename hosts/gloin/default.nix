@@ -30,6 +30,7 @@
   boot.initrd.systemd.enable = true;
   boot.supportedFilesystems = [ "btrfs" "xfs" ];
   boot.initrd.supportedFilesystems = [ "btrfs" "xfs" ];
+  boot.loader.systemd-boot.bootCounting.enable = true;
 
   # FIXME: remove
   boot.initrd.systemd.emergencyAccess = true;

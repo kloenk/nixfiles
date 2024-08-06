@@ -165,6 +165,8 @@ in python3.pkgs.buildPythonApplication rec {
     zopfli
     whitenoise
     psycopg2
+    setuptools
+    distutils-extra
   ];
 
   installPhase = ''
