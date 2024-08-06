@@ -11,6 +11,7 @@
     ../../services/netbox
     ../../services/inventree
     ../../services/kitchenowl
+    ../../services/hedgedoc
 
     ../../profiles/telegraf.nix
   ];
