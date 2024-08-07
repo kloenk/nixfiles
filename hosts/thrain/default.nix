@@ -6,6 +6,7 @@
     ./disko.nix
     ./links.nix
     ./network
+    ./secureboot.nix
 
     ../../profiles/postgres.nix
     ../../profiles/syncthing.nix
