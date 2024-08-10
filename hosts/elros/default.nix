@@ -5,11 +5,12 @@
     ./disko.nix
     ./links.nix
 
-    ./ppp.nix
-    ./iperf3.nix
+    ./network
+
     ./secureboot.nix
 
     ../../profiles/users/kloenk/password.nix
+    ../../profiles/postgres.nix
   ];
 
   boot.loader.grub.enable = false;

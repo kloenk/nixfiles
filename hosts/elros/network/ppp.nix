@@ -17,6 +17,7 @@
     networks."20-dtag-wan" = {
       name = "dtag-wan";
       DHCP = "no";
+      linkConfig.RequiredForOnline = "carrier";
     };
   };
 
