@@ -52,10 +52,11 @@
   networking.hostName = "elrond";
   networking.domain = "kloenk.dev";
   networking.hosts = {
-    "192.168.178.248" = [ "thrain" "thrain.kloenk.de" "thrain.net.kloenk.de" ];
-    "192.168.178.247" = [ "elrond" "elrond.kloenk.de" "elrond.net.kloenk.de" ];
-    "192.168.178.245" = [ "gloin" "gloin.kloenk.de" ];
-    "192.168.178.1" = [ "fritz.box" ];
+    #"192.168.178.248" = [ "thrain" "thrain.kloenk.de" "thrain.net.kloenk.de" ];
+    #"192.168.178.247" = [ "elrond" "elrond.kloenk.de" "elrond.net.kloenk.de" ];
+    #"192.168.178.245" = [ "gloin" "gloin.kloenk.de" ];
+    #"192.168.178.1" = [ "fritz.box" ];
+    "10.84.16.1" = [ "elros" "elros.kloenk.de" ];
   };
 
   networking.nameservers = [ "thrain" "1.1.1.1" ];

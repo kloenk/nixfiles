@@ -5,7 +5,11 @@
     ./disko.nix
     ./links.nix
 
-    ./secureboot
+    ./ppp.nix
+    ./iperf3.nix
+    ./secureboot.nix
+
+    ../../profiles/users/kloenk/password.nix
   ];
 
   boot.loader.grub.enable = false;
@@ -17,8 +21,6 @@
 
   networking.useDHCP = false;
   networking.hostName = "elros";
-
-  users.users.kloenk.password = "foobar";
 
   # u-boot
   system.build.uboot = pkgs.ubootElros;

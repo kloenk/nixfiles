@@ -28,16 +28,15 @@
     };
     networks."20-br0" = {
       name = "br0";
-      DHCP = "no";
-      dns = [ "192.168.178.248" ];
-      domains = [ "burscheid.home.kloenk.de" ];
+      DHCP = "yes";
+      dns = [ "10.84.16.1" ];
+      domains = [ "isengard.home.kloenk.de" "net.kloenk.de" "kloenk.de" ];
       vlan = [ "mgmt" "gwp" ];
-      addresses = [{ Address = "192.168.178.247/24"; }];
-      routes = [{
-        Gateway = "192.168.178.1";
-      }
+      addresses = [{ Address = "10.84.19.1/20"; }];
+      routes = [{ Gateway = "10.84.16.1"; }];
+
       #  { Gateway = "fd00::ca0e:14ff:fe07:a2fa"; }
-        ];
+      #  ];
     };
 
     networks."25-tun" = {

@@ -4,7 +4,6 @@
   k.wg = {
     enable = true;
     id = 102;
-    mobile = true; # TODO: Mobile for now as sleeping in a box
   };
 
   systemd.network = {
@@ -19,7 +18,14 @@
 
     networks."10-eth1" = {
       name = "eth1";
-      DHCP = "yes";
+      DHCP = "no";
+      addresses = [{ Address = "192.168.100.2/24"; }];
+    };
+
+    networks."10-eth2" = {
+      name = "eth2";
+      DHCP = "no";
+      addresses = [{ Address = "10.84.16.1/22"; }];
     };
   };
 }
