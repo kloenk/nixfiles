@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  imports = [ ./eth2.nix ];
+  imports = [ ./net.nix ];
 
   fileSystems."/var/lib/private/kea" = {
     device = "/persist/data/kea";
@@ -12,6 +12,8 @@
   networking.firewall.interfaces =
     let allowDhcp = { allowedUDPPorts = [ 69 ]; };
     in { eth2 = allowDhcp; };
+
+  services.radvd.enable = true;
 
   services.kea = {
     dhcp4 = {

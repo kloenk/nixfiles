@@ -1,6 +1,17 @@
 { ... }:
 
 {
+  services.radvd.config = ''
+    interface eth2 {
+      AdvSendAdvert on;
+      prefix ffff:ffff:ffff:ffff::/64 {
+        Base6Interface dtag-ppp;
+      };
+      RDNSS fe80::1 { };
+      DNSSL isengard.home.kloenk.de { };
+    };
+  '';
+
   services.kea.dhcp4.settings = {
     interfaces-config.interfaces = [ "eth2" ];
     subnet4 = [{

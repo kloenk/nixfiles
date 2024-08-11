@@ -19,6 +19,11 @@
       DHCP = "no";
       linkConfig.RequiredForOnline = "carrier";
     };
+
+    networks."20-dtag-ppp" = {
+      name = "dtag-ppp";
+      DHCP = "ipv6";
+    };
   };
 
   services.pppd = {
