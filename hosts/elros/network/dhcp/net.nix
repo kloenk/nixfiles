@@ -4,9 +4,7 @@
   services.radvd.config = ''
     interface eth2 {
       AdvSendAdvert on;
-      prefix ffff:ffff:ffff:ffff::/64 {
-        Base6Interface dtag-ppp;
-      };
+      prefix ::/64 { };
       RDNSS fe80::1 { };
       DNSSL isengard.home.kloenk.de { };
     };

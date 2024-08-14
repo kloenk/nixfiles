@@ -502,7 +502,7 @@ cmake-mode
 *** Device Trees
 #+begin_src emacs-lisp
   (use-package dts-mode
-    :mode ("dts" "dtsi"))
+    :mode ("dts" "dtsi" "overlay"))
 #+end_src
 #+begin_src nix
 dts-mode

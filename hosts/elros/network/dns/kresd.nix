@@ -15,6 +15,7 @@
     listenPlain = [
       "[::1]:53"
       "127.0.0.1:53"
+      "[fe80::1%eth2]:53"
 
       "10.84.16.1:53"
     ];
@@ -32,6 +33,7 @@
       -- whitelist queries identified by subnet
       view:addr('127.0.0.0/8', policy.all(policy.PASS))
       view:addr('::1/128', policy.all(policy.PASS))
+      view:addr('fe80::/8', policy.all(policy.PASS))
       view:addr('192.168.242.0/24', policy.all(policy.PASS))
       view:addr('10.84.16.0/20', policy.all(policy.PASS))
 
