@@ -13,6 +13,7 @@ in {
   emacs-config = callPackage ./emacs-config { emacs = final.emacs29-pgtk; };
 
   partlint = callPackage ./partlint { };
+  homebox = callPackage ./homebox { };
 
   inherit (callPackage ./kitchenowl { python3 = final.python312; })
     kitchenowl-backend kitchenowl-desktop kitchenowl-web;

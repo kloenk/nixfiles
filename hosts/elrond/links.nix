@@ -29,7 +29,7 @@
     networks."20-br0" = {
       name = "br0";
       DHCP = "ipv6";
-      dns = [ "10.84.16.1" ];
+      dns = [ "10.84.16.1" "fe80::1" ];
       domains = [ "isengard.home.kloenk.de" "net.kloenk.de" "kloenk.de" ];
       vlan = [ "mgmt" "gwp" ];
       addresses = [{ Address = "10.84.19.1/20"; }];

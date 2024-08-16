@@ -9,7 +9,7 @@
 
   services.vaultwarden = {
     enable = true;
-    backupDir = "/var/lib/bitwarden_rs/backup";
+    backupDir = "/persist/backup/bitwarden";
     config = {
       domain = "https://bitwarden.kloenk.de";
       signupsAllowed = false;

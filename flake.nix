@@ -353,6 +353,7 @@
             self.nixosModules.evremap
             self.nixosModules.inventree
             self.nixosModules.kitchenowl
+            self.nixosModules.homebox
 
             #lix-module.nixosModules.default
             # TODO: 
@@ -514,6 +515,7 @@
         evremap = import ./modules/evremap;
         inventree = import ./modules/inventree.nix;
         kitchenowl = import ./modules/kitchenowl;
+        homebox = import ./modules/homebox;
       };
 
       darwinModules = {
