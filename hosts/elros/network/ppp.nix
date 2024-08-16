@@ -48,6 +48,10 @@
   };
 
   networking.firewall.interfaces.dtag-ppp.allowedUDPPorts = [ 546 ];
+  networking.firewall.extraForwardRules = ''
+    iifname dtag-ppp tcp flags syn tcp option maxseg size set rt mtu
+    oifname dtag-ppp tcp flags syn tcp option maxseg size set rt mtu
+  '';
 
   services.pppd = {
     enable = true;

@@ -19,6 +19,7 @@
     iifname "wg0" accept;
 
     oifname "dtag-ppp" accept;
+    oifname "lan" meta nfproto ipv6 accept;
   '';
   networking.nftables.tables = {
     nat = {
@@ -29,7 +30,7 @@
           type nat hook postrouting priority srcnat;
 
           iifname "wg0" masquerade;
-          iifname "lan" masquerade;
+          iifname "lan" meta nfproto ipv4 masquerade;
         }
       '';
     };
