@@ -17,14 +17,37 @@
     networks."20-dtag-wan" = {
       name = "dtag-wan";
       DHCP = "no";
-      linkConfig.RequiredForOnline = "carrier";
+      linkConfig = {
+        RequiredForOnline = "degraded";
+        RequiredFamilyForOnline = "ipv6";
+      };
     };
 
     networks."20-dtag-ppp" = {
-      name = "dtag-ppp";
-      DHCP = "ipv6";
+      matchConfig = {
+        Name = "dtag-ppp";
+        Type = "ppp";
+      };
+      networkConfig = {
+        LinkLocalAddressing = "ipv6";
+        DHCP = "ipv6";
+      };
+      dhcpV6Config = {
+        PrefixDelegationHint = "::/56";
+        WithoutRA = "solicit";
+        UseHostname = "no";
+        UseDNS = "no";
+        UseNTP = "no";
+      };
+      dhcpPrefixDelegationConfig = {
+        UplinkInterface = ":self";
+        SubnetId = "0";
+        Announce = "no";
+      };
     };
   };
+
+  networking.firewall.interfaces.dtag-ppp.allowedUDPPorts = [ 546 ];
 
   services.pppd = {
     enable = true;

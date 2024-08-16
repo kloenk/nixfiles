@@ -6,7 +6,7 @@
       allowedTCPPorts = [ 53 ];
       allowedUDPPorts = [ 53 ];
     };
-  in { eth2 = allowDns; };
+  in { lan = allowDns; };
 
   services.kresd = {
     enable = true;
@@ -15,7 +15,7 @@
     listenPlain = [
       "[::1]:53"
       "127.0.0.1:53"
-      "[fe80::1%eth2]:53"
+      "[fe80::1%lan]:53"
 
       "10.84.16.1:53"
     ];

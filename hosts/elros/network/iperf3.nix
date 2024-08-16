@@ -1,7 +1,7 @@
 { config, ... }:
 
 {
-  networking.firewall.interfaces.eth2 =
+  networking.firewall.interfaces.lan =
     let inherit (config.services.iperf3) port;
     in {
       allowedTCPPorts = [ port ];

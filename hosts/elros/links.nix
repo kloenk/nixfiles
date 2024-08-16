@@ -25,8 +25,7 @@
     networks."10-eth2" = {
       name = "eth2";
       DHCP = "no";
-      addresses =
-        [ { Address = "10.84.16.1/22"; } { Address = "fe80::1/64"; } ];
+      bridge = [ "lan" ];
     };
   };
 }

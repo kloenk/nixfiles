@@ -3,9 +3,10 @@
 {
   imports = [
     ./ppp.nix
+    ./lan.nix
 
-    ./dhcp
     ./dns
+    ./kea.nix
     ./iperf3.nix
   ];
 
@@ -28,7 +29,7 @@
           type nat hook postrouting priority srcnat;
 
           iifname "wg0" masquerade;
-          iifname "eth2" masquerade;
+          iifname "lan" masquerade;
         }
       '';
     };
