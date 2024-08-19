@@ -331,6 +331,7 @@
           disabledModules = [
             "services/games/minecraft-server.nix"
             "services/web-apps/wordpress.nix"
+            "services/web-apps/homebox.nix"
           ];
           imports = [
             ./profiles/base/nixos

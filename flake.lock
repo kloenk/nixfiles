@@ -1272,11 +1272,11 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1723643929,
-        "narHash": "sha256-s8DfTu1KP2lvGN8AEu+HVz7A7PQF6n+NzoqfMzcJvHU=",
+        "lastModified": 1723999572,
+        "narHash": "sha256-RSuekBk0xjp4iYLsKnEujcDr+vIRRB57/nwjJarIEnE=",
         "owner": "kloenk",
         "repo": "nixpkgs",
-        "rev": "e78938b609583740ff64df278478311d7dc404a9",
+        "rev": "eaf92a00b510d8e751e429999cf7edc1f34d8189",
         "type": "github"
       },
       "original": {

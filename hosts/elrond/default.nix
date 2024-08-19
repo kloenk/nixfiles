@@ -88,6 +88,8 @@
 
   services.openssh.settings.X11Forwarding = true;
 
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
   fileSystems."/persist".neededForBoot = true;
 
   system.stateVersion = "24.11";

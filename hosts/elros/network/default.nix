@@ -4,6 +4,8 @@
   imports = [
     ./ppp.nix
     ./lan.nix
+    ./iot.nix
+    ./mgmt.nix
 
     ./dns
     ./kea.nix
@@ -20,6 +22,7 @@
 
     oifname "dtag-ppp" accept;
     oifname "lan" meta nfproto ipv6 accept;
+    iifname "lan" oifname "iot" accept;
   '';
   networking.nftables.tables = {
     nat = {
@@ -30,7 +33,8 @@
           type nat hook postrouting priority srcnat;
 
           iifname "wg0" masquerade;
-          iifname "lan" meta nfproto ipv4 masquerade;
+          iifname "lan" oifname "dtag-ppp" meta nfproto ipv4 masquerade;
+          iifname "iot" oifname "dtag-ppp" meta nfproto ipv4 masquerade;
         }
       '';
     };

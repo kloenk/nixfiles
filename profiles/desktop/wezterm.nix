@@ -58,6 +58,7 @@ in {
           end
           config.font = wezterm.font("Monaspace Krypton Var", { weight = 'DemiBold' })
           config.font_size = ${toString cfg.font_size}
+          config.front_end = "WebGpu"
           config.color_scheme = "monokai"
           config.window_background_opacity = 0.75
           return config

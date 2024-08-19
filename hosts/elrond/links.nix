@@ -32,7 +32,7 @@
       dns = [ "10.84.16.1" "fe80::1" ];
       domains = [ "isengard.home.kloenk.de" "net.kloenk.de" "kloenk.de" ];
       vlan = [ "mgmt" "gwp" ];
-      addresses = [{ Address = "10.84.19.1/20"; }];
+      addresses = [{ Address = "10.84.19.1/22"; }];
       routes = [ { Gateway = "10.84.16.1"; } { Gateway = "fe80::1"; } ];
 
       #  { Gateway = "fd00::ca0e:14ff:fe07:a2fa"; }
