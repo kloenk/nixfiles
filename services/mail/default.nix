@@ -188,6 +188,7 @@
           "con42@kloenk.dev"
           "cccv@kloenk.de"
           "bahn@ad.kloenk.de"
+          "jlcpcb@kloenk.de"
         ];
 
         catchAll = [ "kloenk.dev" "kloenk.de" "ad.kloenk.de" ];

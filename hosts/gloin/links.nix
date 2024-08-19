@@ -14,12 +14,14 @@ in {
 
   systemd.network = {
     links."10-eth0" = {
-      matchConfig = { Path = [ "pci-0000:00:1f.6" ]; };
+      matchConfig = {
+        Path = [ "pci-0000:00:1f.6" ];
+        Type = "ether";
+      };
       linkConfig.Name = "eth0";
     };
     networks."10-eth0" = {
       name = "eth0";
-      # DHCP = "yes";
       bridge = [ "br0" ];
     };
 
@@ -29,18 +31,22 @@ in {
     };
     networks."20-br0" = {
       name = "br0";
-      DHCP = "yes";
+      DHCP = "ipv4";
+      dhcpV4Config = { RouteMetric = 1024; };
+      ipv6AcceptRAConfig = { RouteMetric = 1024; };
     };
 
     links."10-eth1" = {
       matchConfig = {
         Property = [ "ID_BUS=usb" "ID_SERIAL_SHORT=00154000F" ];
+        Type = "ether";
       };
       linkConfig.Name = "eth1";
     };
     networks."10-eth1" = {
       name = "eth1";
       bridge = [ "br1" ];
+      vlan = [ "mgmt" ];
       linkConfig.RequiredForOnline = false;
     };
 
@@ -50,39 +56,36 @@ in {
     };
     networks."20-br1" = {
       name = "br1";
-      DHCP = "ipv6";
       vlan = [ "gwp0" ];
-      dns = [ "192.168.178.248" ];
+      dns = [ "10.84.16.1" "fe80::1" ];
+      domains = [ "isengard.home.kloenk.de" "net.kloenk.de" "kloenk.de" ];
       addresses = [{
-        Address = "192.168.178.245/24";
-        RouteMetric = 1024;
+        Address = "10.84.19.2/22";
+        RouteMetric = 512;
       }];
-      routes = [{
-        Gateway = "192.168.178.1";
-        Metric = 1024;
-      }];
+      routes = [
+        {
+          Gateway = "10.84.16.1";
+          Metric = 512;
+        }
+        {
+          Gateway = "fe80::1";
+          Metric = 512;
+        }
+      ];
     };
 
-    netdevs."30-gwp0" = {
+    netdevs."30-mgmt" = {
       netdevConfig = {
         Kind = "vlan";
-        Name = "gwp0";
+        Name = "mgmt";
       };
-      vlanConfig.Id = 1003;
+      vlanConfig.Id = 44;
     };
-    networks."30-gwp0" = {
-      name = "gwp0";
+    networks."30-mgmt" = {
+      name = "mgmt";
       DHCP = "no";
-      bridge = [ "br-gwp" ];
-    };
-
-    netdevs."30-br-gwp".netdevConfig = {
-      Kind = "bridge";
-      Name = "br-gwp";
-    };
-    networks."30-br-gwp" = {
-      name = "br-gwp";
-      addresses = [{ Address = "10.1.0.1/24"; }];
+      addresses = [{ Address = "192.168.44.103/24"; }];
     };
 
     networks."70-wlan0" = {
@@ -128,6 +131,11 @@ in {
     };
 
     wait-online.anyInterface = true;
+  };
+
+  boot.initrd.systemd.network = {
+    links."10-eth0" = config.systemd.network.links."10-eth0";
+    links."10-eth1" = config.systemd.network.links."10-eth1";
   };
 
   sops.secrets."secunet/wireguard/secunet0".owner = "systemd-network";

@@ -4,6 +4,7 @@
   imports = [
     ./disko.nix
     ./links.nix
+    ./links-gwp.nix
     ./pipewire.nix
     ./evremap.nix
     ./kea.nix
