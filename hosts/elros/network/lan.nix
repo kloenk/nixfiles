@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   systemd.network = {
@@ -55,7 +55,22 @@
         }
       ];
 
+      reservations = [{
+        hw-address = "e4:8d:8c:c7:49:00";
+        next-server = "10.84.16.1";
+        boot-file-name = "/public/initramfs.bin";
+      }];
+
       ddns-qualifying-suffix = "isengard.home.kloenk.de";
+
     }];
+  };
+
+  services.atftpd = {
+    enable = true;
+    root = "${pkgs.linkFarm "tftp" [{
+      name = "public";
+      path = "/persist/data/public/tftp";
+    }]}";
   };
 }

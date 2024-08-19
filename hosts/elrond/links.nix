@@ -18,6 +18,7 @@
       name = "eth0";
       DHCP = "no";
       bridge = [ "br0" ];
+      vlan = [ "mgmt" "gwp" ];
     };
 
     netdevs."20-br0" = {
@@ -31,7 +32,6 @@
       DHCP = "ipv6";
       dns = [ "10.84.16.1" "fe80::1" ];
       domains = [ "isengard.home.kloenk.de" "net.kloenk.de" "kloenk.de" ];
-      vlan = [ "mgmt" "gwp" ];
       addresses = [{ Address = "10.84.19.1/22"; }];
       routes = [ { Gateway = "10.84.16.1"; } { Gateway = "fe80::1"; } ];
 
@@ -51,12 +51,11 @@
         Kind = "vlan";
         Name = "mgmt";
       };
-      vlanConfig.Id = 44;
+      vlanConfig.Id = 51;
     };
     networks."30-mgmt" = {
       name = "mgmt";
-      DHCP = "no";
-      addresses = [{ Address = "192.168.44.102/24"; }];
+      DHCP = "ipv6";
     };
 
     netdevs."30-gpw" = {

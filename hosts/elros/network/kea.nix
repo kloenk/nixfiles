@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   fileSystems."/var/lib/private/kea" = {
@@ -23,6 +23,9 @@
         rebind-timer = 2000;
         renew-timer = 1000;
         valid-lifetime = 4000;
+
+        hooks-libraries =
+          [{ library = "${pkgs.kea}/lib/kea/hooks/libdhcp_bootp.so"; }];
 
         ddns-replace-client-name = "when-not-present";
         ddns-override-client-update = true;

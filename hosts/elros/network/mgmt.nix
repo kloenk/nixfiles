@@ -35,6 +35,16 @@
     };
   };
 
+  services.kea.dhcp4.settings = {
+    interfaces-config.interfaces = [ "mgmt" ];
+    subnet4 = [{
+      id = 51;
+      interface = "mgmt";
+      pools = [{ pool = "10.51.0.100 - 10.51.0.199"; }];
+      subnet = "10.51.0.0/24";
+    }];
+  };
+
   networking.firewall.extraForwardRules = ''
     iifname "mgmt" reject;
     oifname "mgmt" reject;
