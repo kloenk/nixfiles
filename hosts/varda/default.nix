@@ -24,6 +24,7 @@
     ../../services/youtrack
 
     ../../profiles/telegraf.nix
+    ../../profiles/users/kloenk/password.nix
   ];
 
   boot.loader.grub.enable = false;
@@ -43,9 +44,6 @@
     "[2a01:4f8:c013:1a4b:ecba::1]:53"
     "192.168.242.1:53"
   ];
-
-  fileSystems."/".device =
-    lib.mkForce "/dev/disk/by-partuuid/1dbe61d1-5450-46de-9a31-a242aafe7da9";
 
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [ "youtrack" ];
