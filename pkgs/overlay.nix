@@ -1,6 +1,7 @@
 inputs: final: prev:
 let inherit (final) callPackage;
 in {
+  alterpcb-tlineslim = callPackage ./alterpcb-tlinesim { };
 
   wallpapers = callPackage ./wallpapers { };
 
