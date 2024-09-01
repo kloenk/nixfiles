@@ -66,7 +66,7 @@ in {
         renew-timer = 1000;
         valid-lifetime = 4000;
 
-        interfaces-config.interfaces = [ "br-gwp" ];
+        interfaces-config.interfaces = [ "gwp-br0" ];
         subnet4 = [{
           id = 1;
           pools = [{ pool = "10.1.0.50 - 10.1.0.150"; }];

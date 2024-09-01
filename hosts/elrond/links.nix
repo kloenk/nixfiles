@@ -55,7 +55,10 @@
     };
     networks."30-mgmt" = {
       name = "mgmt";
-      DHCP = "ipv6";
+      DHCP = "ipv4";
+      networkConfig = { IPv6AcceptRA = "yes"; };
+      dhcpV4Config = { RouteMetric = 4096; };
+      ipv6AcceptRAConfig = { RouteMetric = 4096; };
     };
 
     netdevs."30-gpw" = {
