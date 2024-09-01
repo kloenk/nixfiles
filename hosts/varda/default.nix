@@ -45,6 +45,8 @@
     "192.168.242.1:53"
   ];
 
+  fileSystems."/persist".neededForBoot = true;
+
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [ "youtrack" ];
 
