@@ -147,6 +147,11 @@
     inputs.nixpkgs.follows = "/nixpkgs";
   };
 
+  inputs.rfl-nix-dev = {
+    url = "gitlab:kloenk/rfl-nix-slides?host=cyberchaos.dev";
+    inputs.nixpkgs.follows = "/nixpkgs";
+  };
+
   outputs = inputs@{ self, nixpkgs, lix, lix-module, moodlepkgs, mail-server
     , kloenk-www, dns, darwin, sops-nix, colmena, jlly, fleet_bot, p3tr
     , sysbadge, oxalica, disko, ... }:

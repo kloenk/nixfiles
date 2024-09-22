@@ -7,7 +7,8 @@ let
 in {
   imports = [ ./p3tr1ch0rr.nix ];
 
-  nixpkgs.overlays = [ inputs.kloenk-cv.overlays.default ];
+  nixpkgs.overlays =
+    [ inputs.kloenk-cv.overlays.default inputs.rfl-nix-dev.overlays.default ];
 
   services.nginx.virtualHosts = {
     "kloenk.dev" = {
@@ -93,6 +94,17 @@ in {
       root = pkgs.runCommandNoCC "cv.kloenk.dev" { } ''
         mkdir $out
         cp ${pkgs.kloenk-cv}/cv.pdf $out/index.pdf
+      '';
+      locations."/".index = "index.pdf";
+    };
+
+    "rfl-nix-dev.kloenk.dev" = {
+      enableACME = true;
+      forceSSL = true;
+      kTLS = true;
+      root = pkgs.runCommandNoCC "rfl-nix-dev.kloenk.dev" { } ''
+        mkdir $out
+        cp ${pkgs.rfl-nix-dev}/rfl-dev-nix.pdf $out/index.pdf
       '';
       locations."/".index = "index.pdf";
     };

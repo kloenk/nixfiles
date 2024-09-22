@@ -17,6 +17,7 @@ in with dns.combinators; {
     mail = gimli;
 
     cv = varda;
+    rfl-nix-dev = varda;
 
     live = varda;
     yt = varda;

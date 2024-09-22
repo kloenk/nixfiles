@@ -549,6 +549,24 @@
       }
     },
     "flake-utils_8": {
+      "inputs": {
+        "systems": "systems_5"
+      },
+      "locked": {
+        "lastModified": 1710146030,
+        "narHash": "sha256-SZ5L6eA7HJ/nmkzGG7/ISclqe6oZdOZTNoesiInkXPQ=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "b1d9ab70662946ef0850d488da1c9019f3a9752a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_9": {
       "locked": {
         "lastModified": 1667395993,
         "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
@@ -844,11 +862,11 @@
     "lix": {
       "flake": false,
       "locked": {
-        "lastModified": 1725228396,
-        "narHash": "sha256-QBXwqyPuHUKBiuyzHBxqH/MpjPY9DQiY2M81P2t6b/0=",
-        "rev": "02eb07cfd539c34c080cb1baf042e5e780c1fcc2",
+        "lastModified": 1726121662,
+        "narHash": "sha256-SEAWoCiTJUkhWiCx8jj+eWeJhrVk6/NMZIHlILjaYJk=",
+        "rev": "b2fc007811a5afc473bf116fe8d38688b3699e25",
         "type": "tarball",
-        "url": "https://git.lix.systems/api/v1/repos/lix-project/lix/archive/02eb07cfd539c34c080cb1baf042e5e780c1fcc2.tar.gz?rev=02eb07cfd539c34c080cb1baf042e5e780c1fcc2"
+        "url": "https://git.lix.systems/api/v1/repos/lix-project/lix/archive/b2fc007811a5afc473bf116fe8d38688b3699e25.tar.gz?rev=b2fc007811a5afc473bf116fe8d38688b3699e25"
       },
       "original": {
         "type": "tarball",
@@ -867,11 +885,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1723511483,
-        "narHash": "sha256-rT/OkVXKkns2YvyF1nFvl+8Gc3sld1c1sXPtGkbqaDY=",
-        "rev": "cecf70b77539c1a593f60ec9d0305b5e537ab6a9",
+        "lastModified": 1725836728,
+        "narHash": "sha256-dCbHCwqrzcHlEsRilMX+KM3IfRV46ieGqDyAD3GgCSs=",
+        "rev": "353b25f0b6da5ede15206d416345a2ec4195b5c8",
         "type": "tarball",
-        "url": "https://git.lix.systems/api/v1/repos/lix-project/nixos-module/archive/cecf70b77539c1a593f60ec9d0305b5e537ab6a9.tar.gz?rev=cecf70b77539c1a593f60ec9d0305b5e537ab6a9"
+        "url": "https://git.lix.systems/api/v1/repos/lix-project/nixos-module/archive/353b25f0b6da5ede15206d416345a2ec4195b5c8.tar.gz?rev=353b25f0b6da5ede15206d416345a2ec4195b5c8"
       },
       "original": {
         "type": "tarball",
@@ -1272,11 +1290,11 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1725300273,
-        "narHash": "sha256-xGOPWTSwh2C9SWify3nEvkY6XmCi+Jwirc5fEyEiZ5Y=",
+        "lastModified": 1726325589,
+        "narHash": "sha256-aF+gQYE5H9aClkiUwYvJWUQrzmD1hONbaYii+0xCjfQ=",
         "owner": "kloenk",
         "repo": "nixpkgs",
-        "rev": "55e7c6155a91eb6b3a9f400cbc830c7271da5983",
+        "rev": "6ed7e7b2661eb43e5ca8ddcb679d1752e05304d6",
         "type": "github"
       },
       "original": {
@@ -1527,7 +1545,7 @@
           "devenv",
           "flake-compat"
         ],
-        "flake-utils": "flake-utils_8",
+        "flake-utils": "flake-utils_9",
         "gitignore": "gitignore_5",
         "nixpkgs": [
           "sysbadge",
@@ -1548,6 +1566,29 @@
         "owner": "cachix",
         "repo": "pre-commit-hooks.nix",
         "type": "github"
+      }
+    },
+    "rfl-nix-dev": {
+      "inputs": {
+        "flake-utils": "flake-utils_8",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "host": "cyberchaos.dev",
+        "lastModified": 1725720175,
+        "narHash": "sha256-XwKNE9YcP4N7z+R8SOZgS8GmpamfqOudscZlLqoTY8A=",
+        "owner": "kloenk",
+        "repo": "rfl-nix-slides",
+        "rev": "e52045eaae3d281196233df58f739f6eabd183fd",
+        "type": "gitlab"
+      },
+      "original": {
+        "host": "cyberchaos.dev",
+        "owner": "kloenk",
+        "repo": "rfl-nix-slides",
+        "type": "gitlab"
       }
     },
     "root": {
@@ -1573,6 +1614,7 @@
         "oxalica": "oxalica",
         "p3tr": "p3tr",
         "pre-commit": "pre-commit",
+        "rfl-nix-dev": "rfl-nix-dev",
         "sops-nix": "sops-nix",
         "sysbadge": "sysbadge"
       }
@@ -1707,6 +1749,21 @@
       }
     },
     "systems_4": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_5": {
       "locked": {
         "lastModified": 1681028828,
         "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
