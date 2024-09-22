@@ -80,12 +80,14 @@ in {
         Kind = "vlan";
         Name = "mgmt";
       };
-      vlanConfig.Id = 44;
+      vlanConfig.Id = 51;
     };
     networks."30-mgmt" = {
       name = "mgmt";
-      DHCP = "no";
-      addresses = [{ Address = "192.168.44.103/24"; }];
+      DHCP = "ipv4";
+      networkConfig = { IPv6AcceptRA = "yes"; };
+      dhcpV4Config = { RouteMetric = 4096; };
+      ipv6AcceptRAConfig = { RouteMetric = 4096; };
     };
 
     networks."70-wlan0" = {

@@ -14,7 +14,7 @@
     networks."30-gwp-desk-1" = {
       matchConfig = {
         Type = "vlan";
-        Name = "gwp-desk.1.vlan";
+        Name = "gwp-desk.1";
       };
       DHCP = "no";
     };
