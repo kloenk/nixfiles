@@ -83,6 +83,7 @@
     iptables
     bash-completion
     whois
+    kmon
 
     rclone
     wireguard-tools

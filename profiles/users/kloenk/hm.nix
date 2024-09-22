@@ -48,5 +48,27 @@
         "cyberchaos.dev" = { port = 62954; };
       };
     };
+
+    accounts.email.accounts."finn@kloenk.dev" = {
+      address = "finn@kloenk.dev";
+      primary = true;
+      aliases = [
+        "finn.behrens@kloenk.de"
+        "behrens.finn@kloenk.de"
+        "info@kloenk.de"
+        "me@kloenk.de"
+        "finn@kloenk.de"
+        "applications@kloenk.de"
+        "applications@kloenk.dev"
+
+        "finn.behrens@kloenk.dev"
+        "behrens.finn@kloenk.dev"
+        "info@kloenk.dev"
+        "me@kloenk.dev"
+
+        "info@sysbadge.dev"
+      ];
+      smtp = { host = "gimli.kloenk.de"; };
+    };
   };
 }

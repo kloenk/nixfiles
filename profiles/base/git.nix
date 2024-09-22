@@ -22,12 +22,17 @@ in {
       color.ui = true;
       init.defaultBranch = "main";
       user = {
-        email = "me@kloenk.de";
-        name = "Finn Behrens";
+        email = "me@kloenk.dev";
+        name = "Fiona Behrens";
       };
       alias = { ls = "status"; };
       # feature.manyFiles = true;
       push.autoSetupRemote = true;
+
+      sendemail = {
+        smtpServer = "gimli.kloenk.de";
+        smtpUser = "finn@kloenk.dev";
+      };
     };
   };
 }

@@ -12,7 +12,7 @@
   time.timeZone = "Europe/Berlin";
   security.pki.certificateFiles = [ ../../lib/kloenk-int-ca.crt ];
 
-  environment.systemPackages = with pkgs; [ eza fd ripgrep htop ];
+  environment.systemPackages = with pkgs; [ eza fd ripgrep htop cyme ];
 
   sops.defaultSopsFile = ../../secrets + "/${config.networking.hostName}.yaml";
 }

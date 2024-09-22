@@ -45,8 +45,8 @@
     }];
   };
 
-  networking.firewall.extraForwardRules = ''
-    iifname "mgmt" reject;
-    oifname "mgmt" reject;
-  '';
+  #networking.firewall.extraForwardRules = ''
+  #  iifname "mgmt" reject;
+  #  oifname "mgmt" reject;
+  #'';
 }

@@ -33,7 +33,7 @@
       system-features = benchmark big-parallel recursive-nix
     '';
     linux-builder = {
-      enable = true;
+      #enable = true;
       maxJobs = 4;
     };
   };
@@ -52,11 +52,6 @@
       hostname = "%h.math.uni-wuppertal.de";
       port = 22;
       user = "fbehrens";
-    };
-    "ktest" = {
-      hostname = "192.168.64.101";
-      port = 62954;
-      forwardAgent = true;
     };
   };
   home-manager.users.kloenk.services.syncthing.enable = true;
