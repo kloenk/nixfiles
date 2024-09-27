@@ -21,6 +21,18 @@ in {
 
   obs-tuna = final.qt6Packages.callPackage ./obs-tuna { };
 
+  kernel_rootfs = import (final.path + "/nixos/lib/make-disk-image.nix") {
+    config = (import (final.path + "/nixos/lib/eval-config.nix") {
+      inherit (final) system;
+      modules = [{ imports = [ ./kernel_rootfs.nix ]; }];
+    }).config;
+    pkgs = final;
+    inherit (final) lib;
+    diskSize = 4096;
+    partitionTableType = "none";
+    format = "qcow2";
+  };
+
   # helix = prev.helix.overrideAttrs
   #   (oldAttrs: rec { patches = oldAttrs.patches ++ [ ./helix-etc.patch ]; });
 

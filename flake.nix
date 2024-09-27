@@ -562,6 +562,9 @@
         let pkgs = nixpkgsFor.${system};
         in {
           kernel = pkgs.callPackage ./dev/kernel.nix { };
+          kernel_nightly = self.devShells.${system}.kernel.override {
+            rustAttrs = pkgs.rust-bin.nightly.latest;
+          };
           zephyr = let
             nrfPkgs = import inputs.nixpkgs-nrf {
               inherit system;

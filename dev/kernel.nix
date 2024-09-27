@@ -1,4 +1,4 @@
-{ mkShell, linux, pkg-config, ncurses, rust-bin, rust-version ? "1.78.0"
+{ mkShell, linux, pkg-config, ncurses, rust-bin, rust-version ? "1.81.0"
 , rustAttrs ? rust-bin.stable.${rust-version}, rust-bindgen }:
 
 mkShell {
@@ -10,7 +10,9 @@ mkShell {
     pkg-config
     ncurses
 
-    (rustAttrs.default.override { extensions = [ "rust-src" ]; })
+    (rustAttrs.default.override {
+      extensions = [ "rust-src" "rust-analyzer" ];
+    })
     rust-bindgen
   ];
 
