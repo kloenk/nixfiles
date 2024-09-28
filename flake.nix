@@ -131,11 +131,6 @@
     inputs.nixpkgs.follows = "/nixpkgs";
   };
 
-  inputs.bcachefs-tools = {
-    url = "git+https://evilpiepirate.org/git/bcachefs-tools.git";
-    inputs.nixpkgs.follows = "/nixpkgs";
-  };
-
   inputs.pre-commit = {
     url = "github:cachix/pre-commit-hooks.nix";
     inputs.nixpkgs.follows = "/nixpkgs";
@@ -173,7 +168,6 @@
         p3tr.overlays.default
         sysbadge.overlays.sysbadge
         oxalica.overlays.default
-        inputs.bcachefs-tools.overlays.default
         lix-module.overlays.default
         (final: prev: { bcachefs-tools = final.bcachefs; })
         (_final: _prev: { inherit lib; })
@@ -337,6 +331,7 @@
             "services/games/minecraft-server.nix"
             "services/web-apps/wordpress.nix"
             "services/web-apps/homebox.nix"
+            "services/web-apps/moodle.nix"
           ];
           imports = [
             ./profiles/base/nixos
@@ -360,6 +355,7 @@
             self.nixosModules.inventree
             self.nixosModules.kitchenowl
             self.nixosModules.homebox
+            ./modules/moodle.nix
 
             #lix-module.nixosModules.default
             # TODO: 

@@ -48,5 +48,7 @@ in {
     };
   };
 
+  moodle = callPackage ./moodle { };
+
   ubootElros = callPackage ./ubootElros { };
 }
