@@ -169,7 +169,6 @@
         sysbadge.overlays.sysbadge
         oxalica.overlays.default
         lix-module.overlays.default
-        (final: prev: { bcachefs-tools = final.bcachefs; })
         (_final: _prev: { inherit lib; })
       ];
 
