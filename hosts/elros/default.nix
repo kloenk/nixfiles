@@ -23,6 +23,8 @@
   networking.useDHCP = false;
   networking.hostName = "elros";
 
+  users.users.yuka.extraGroups = [ "wheel" ];
+
   # u-boot
   system.build.uboot = pkgs.ubootElros;
   system.extraDependencies = [ config.system.build.uboot ];

@@ -10,7 +10,7 @@
   services.keycloak = {
     enable = true;
     package = pkgs.keycloak.override {
-      extraFeatures = [ "account3" ];
+      extraFeatures = [ "account:v3" ];
       disabledFeatures = [ "kerberos" ];
     };
     database.passwordFile = config.sops.secrets."keycloak/db/password".path;
@@ -21,7 +21,8 @@
       http-host = "127.0.0.1";
       http-port = lib.getPort "keycloak";
       hostname = "auth.kloenk.dev";
-      proxy = "edge";
+      proxy-headers = "xforwarded";
+      http-enabled = true;
     };
   };
 

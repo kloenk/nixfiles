@@ -1,4 +1,4 @@
-{ config, pkgs, utils, ... }:
+{ config, pkgs, ... }:
 
 {
   systemd.network = {
@@ -78,7 +78,7 @@
   environment.etc."ppp/peers/dtag".enable = false;
 
   systemd.services."pppd-dtag".serviceConfig = let
-    preStart = utils.systemdUtils.lib.makeJobScript "pppd-dtag-pre-start" ''
+    preStart = pkgs.writeShellScript "pppd-dtag-pre-start" ''
       mkdir -p /etc/ppp/peers
 
       # Created files only readable by root

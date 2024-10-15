@@ -15,6 +15,7 @@
 
     ../../users/root
     ../../users/kloenk
+    ../../users/yuka
   ];
 
   # Boot
