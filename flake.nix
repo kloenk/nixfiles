@@ -318,6 +318,11 @@
             system = "aarch64-linux";
             overlays = (overlayCombined "aarch64-linux");
           };
+          nodeNixpkgs.fingolfin = import nixpkgs {
+            system = "aarch64-linux";
+            overlays = (overlayCombined "aarch64-linux");
+          };
+
           #allowApplyAll = false;
 
           specialArgs.inputs = inputs;
@@ -437,6 +442,16 @@
 
           imports = [
             ./hosts/moodle-usee
+            (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix"))
+          ];
+        };
+
+        fingolfin = { pkgs, nodes, ... }: {
+          deployment.targetHost = "fingolfin.kloenk.dev";
+          deployment.tags = [ "usee" "remote" "hetzner" ];
+
+          imports = [
+            ./hosts/fingolfin
             (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix"))
           ];
         };

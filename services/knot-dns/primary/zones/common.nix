@@ -63,6 +63,13 @@ in {
       sshfp =
         "3609591c2d5a24edcce7ceb1cf13ee91083071fa5d8be3c8dfc2c412725c8c13";
     };
+    fingolfin = host {
+      ttl = 1200;
+      v4 = "78.46.218.174";
+      v6 = "2a01:4f8:1c1b:d442::1";
+      sshfp =
+        "2b50cde1c7ac2b8492b1fb2d0c189c6058100c152e924d76abab7803814dd8ab";
+    };
   };
 
   # wireguard net
