@@ -78,7 +78,7 @@
 
   environment.systemPackages = with pkgs; [
     alacritty.terminfo
-    rxvt_unicode.terminfo
+    #rxvt_unicode.terminfo
     restic
     tmux
     iptables

@@ -30,6 +30,9 @@
     lm_sensors
     wl-clipboard
     xdg-utils
+
+    #bluetooth
+    overskride
   ];
 
   boot.extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
@@ -41,7 +44,10 @@
   services.fwupd.enable = true;
 
   environment.variables.MOZ_USE_XINPUT2 = "1"; # for firefox
+
   hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
+
   virtualisation.spiceUSBRedirection.enable = true;
   virtualisation.podman = {
     enable = true;

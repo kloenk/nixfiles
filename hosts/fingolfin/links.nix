@@ -6,8 +6,8 @@
   ];
 
   k.wg = {
-    #enable = true;
-    #id = ;
+    enable = true;
+    id = 4;
     public = true;
     mobile = false;
   };
@@ -46,6 +46,8 @@
       addresses = [{ Address = "192.168.178.223/24"; }];
       routes = [{ Destination = "192.168.178.0/24"; }];
     };
+
+    networks."30-wg0" = { routes = [{ Destination = "37.120.162.160"; }]; };
   };
 
   sops.secrets."wireguard/wgfritz".owner = "systemd-network";

@@ -93,6 +93,12 @@ in {
       sshfp =
         "3609591c2d5a24edcce7ceb1cf13ee91083071fa5d8be3c8dfc2c412725c8c13";
     };
+    fingolfin = host {
+      v4 = "192.168.242.4";
+      v6 = "2a01:4f8:c013:1a4b:ecba::4";
+      sshfp =
+        "2b50cde1c7ac2b8492b1fb2d0c189c6058100c152e924d76abab7803814dd8ab";
+    };
     "dns.gimli" = host { v6 = "2a01:4f8:c013:1a4b:ecba:0:21:53"; };
     thrain = host {
       v4 = "192.168.242.101";

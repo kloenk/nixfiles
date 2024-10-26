@@ -37,6 +37,14 @@
           hw-address = "2a:70:69:30:dd:33";
           ip-address = "192.168.178.115";
         }
+        { # fm-funk
+          hw-address = "b8:27:eb:a1:c3:ea";
+          ip-address = "192.168.178.177";
+        }
+        { # pi-star mini
+          hw-address = "b8:27:eb:c1:f0:9a";
+          ip-address = "192.168.178.176";
+        }
       ];
     }];
   };

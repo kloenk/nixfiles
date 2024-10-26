@@ -62,6 +62,11 @@
         PublicKey = "vGv9DvJ+6hTwFV0Jq5vaw2i32LXl8k87S58zra276RA=";
         Endpoint = "vaire.kloenk.de:51820";
       }
+      { # fingolfin
+        AllowedIPs = [ "192.168.242.4/32" "2a01:4f8:c013:1a4b:ecba::4/128" ];
+        PublicKey = "GdiRay3/MTYASK7n14JjaGxEROx6no/R6Zb8lTo91nM=";
+        Endpoint = "fingolfin.kloenk.dev:51820";
+      }
 
       { # thrain
         AllowedIPs = [

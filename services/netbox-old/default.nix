@@ -9,7 +9,7 @@
 
   services.netbox = {
     enable = true;
-    package = pkgs.netbox_3_7;
+    package = pkgs.netbox;
     secretKeyFile = config.sops.secrets."netbox/secret_key".path;
     keycloakClientSecret = config.sops.secrets."netbox/keycloak_secret".path;
     settings = {
