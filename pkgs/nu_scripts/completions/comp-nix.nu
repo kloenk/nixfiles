@@ -28,18 +28,6 @@ module "nix extern" {
     )
   }
   
-  def "nu-complete-parse nix normal" [data: list<string>] {
-    $data | each { |d| {value: $d} }
-  }
-  
-  def "nu-complete-parse nix attrs" [data: list<string>] {
-    $data | each { |d| {value: $d} }
-  }
-  
-  def "nu-complete-parse nix filenames" [data: list<string>] {
-    $data | each { |d| {value: $d} }
-  }
-  
   # build a derivation or fetch a store path
   export extern "nix build" [
     --dry-run    #Show what this command would do without doing it.

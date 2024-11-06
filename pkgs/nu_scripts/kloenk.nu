@@ -5,6 +5,7 @@ overlay use kloenk/flag
 
 # completions
 source completions/comp-nix.nu
+source completions/comp-colmena.nu
 
 #mut nix = {}
 
