@@ -17,6 +17,9 @@
         plugin add ${pkgs.nushellPlugins.query}/bin/nu_plugin_query;
 
         plugin use query;
+
+        # Load kloenk nu config package
+        source ${pkgs.nu_kloenk}/share/nu_scripts/kloenk.nu
       '';
     };
 
