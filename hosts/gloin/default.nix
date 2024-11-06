@@ -42,7 +42,7 @@
   networking.hostName = "gloin";
   networking.wireless.iwd.enable = true;
 
-  environment.systemPackages = with pkgs; [ lm_sensors virt-manager ];
+  environment.systemPackages = with pkgs; [ lm_sensors virt-manager mosh ];
 
   # virtmanager
   virtualisation.libvirtd = {
@@ -97,6 +97,8 @@
     # sudo udevadm control --reload-rules &&  sudo udevadm trigger 
     # connect and disconnetc the USB device
   '';
+
+  services.dbus.packages = [ "/tmp/cfg/kloenk" ];
 
   #services.syncthing.settings.folders."uni".enable = false;
 

@@ -65,7 +65,7 @@
 
   users.users.kloenk.packages = with pkgs; [
     fractal
-    _1password
+    _1password-cli
     _1password-gui
   ];
   home-manager.users.kloenk = {
@@ -73,10 +73,10 @@
     gtk = {
       enable = true;
       iconTheme.name = "Adwaita";
-      iconTheme.package = pkgs.gnome.adwaita-icon-theme;
+      iconTheme.package = pkgs.adwaita-icon-theme;
       theme = {
         name = "Adwaita";
-        package = pkgs.gnome.gnome-themes-extra;
+        package = pkgs.gnome-themes-extra;
       };
       gtk3.extraConfig = {
         gtk-application-prefer-dark-theme = true;

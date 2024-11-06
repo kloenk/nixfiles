@@ -3,7 +3,7 @@
 {
   environment.variables.EDITOR = lib.mkDefault "vim";
   programs.vim = {
-    defaultEditor = true;
+    # defaultEditor = true;
     package = (pkgs.vim_configurable.override { }).customize {
       name = "vim";
       # Install plugins for example for syntax highlighting of nix files

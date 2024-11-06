@@ -49,6 +49,26 @@
       };
     };
 
+    programs.hyfetch = {
+      enable = true;
+      settings = {
+        args = null;
+        backend = "neofetch";
+        color_align = {
+          custom_colors = [ ];
+          fore_back = null;
+          mode = "horizontal";
+        };
+        distro = null;
+        light_dark = "dark";
+        lightness = 0.65;
+        mode = "rgb";
+        preset = "transgender";
+        pride_month_disable = false;
+        pride_month_shown = [ ];
+      };
+    };
+
     accounts.email.accounts."finn@kloenk.dev" = {
       address = "finn@kloenk.dev";
       primary = true;
