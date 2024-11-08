@@ -9,10 +9,7 @@
     ./base/nixos
   ];
 
-  system.extraDependencies = [
-    self.nixosConfigurations.strider.config.system.build.toplevel
-    self.nixosConfigurations.strider.config.system.build.diskoScript
-  ];
+  system.extraDependencies = [ ];
 
   boot.initrd.supportedFilesystems = lib.mkForce [ "vfat" ];
   boot.initrd.kernelModules = [ "sr_mod" ];
@@ -22,6 +19,8 @@
 
   #boot.initrd.systemd.enable = true;
   #boot.initrd.systemd.emergencyAccess = true;
+
+  home-manager.users.kloenk.programs.atuin.enable = lib.mkForce false;
 
   networking.wireless.iwd.enable = true;
   networking.wireless.enable = lib.mkForce false;

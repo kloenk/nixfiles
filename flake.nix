@@ -231,24 +231,27 @@
           };
         };
       overlays.iso = final: prev: {
-        iso = (nixpkgs.lib.nixosSystem {
-          system = final.stdenv.targetPlatform.system;
-          modules = [
-            (import ./profiles/iso.nix)
-            {
-              nixpkgs.overlays =
-                (overlayCombined final.stdenv.targetPlatform.system);
-            }
-            sops-nix.nixosModules.sops
-            colmena.nixosModules.deploymentOptions
-            inputs.home-manager.nixosModules.home-manager
-            self.nixosModules.kloenk
+        iso = let
+          c = (nixpkgs.lib.nixosSystem {
+            system = final.stdenv.targetPlatform.system;
+            modules = [
+              (import ./profiles/iso.nix)
+              {
+                nixpkgs.overlays =
+                  (overlayCombined final.stdenv.targetPlatform.system);
+              }
+              sops-nix.nixosModules.sops
+              colmena.nixosModules.deploymentOptions
+              inputs.home-manager.nixosModules.home-manager
+              self.nixosModules.vouch-proxy
+              self.nixosModules.kloenk
 
-            self.nixosModules.helix
-          ];
-          specialArgs.inputs = inputs;
-          specialArgs.self = self;
-        }).config.system.build.isoImage;
+              self.nixosModules.helix
+            ];
+            specialArgs.inputs = inputs;
+            specialArgs.self = self;
+          });
+        in c // c.config.system.build.isoImage;
       };
       overlays.tests = (import ./tests self);
 
