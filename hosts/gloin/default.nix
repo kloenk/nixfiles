@@ -100,6 +100,18 @@
 
   services.dbus.packages = [ "/tmp/cfg/kloenk" ];
 
+  home-manager.users.kloenk.wayland.windowManager.sway.config.output = {
+    "Xiaomi Corporation Mi Monitor 0000000000000" = {
+      mode = "3440x1440@144.000Hz";
+      position = "1920 0";
+      adaptive_sync = "on";
+    };
+    "eDP-1" = {
+      mode = "1920x1080@60.001Hz";
+      position = "0 650";
+    };
+  };
+
   #services.syncthing.settings.folders."uni".enable = false;
 
   # secrets on there
