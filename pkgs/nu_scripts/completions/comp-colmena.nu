@@ -48,6 +48,7 @@ module "colmena extern" {
     --build-on-target # Build the system profiles on the target nodes
     --force-replace-unknown-profiles # Ignore all targeted nodes deployment.replaceUnknownProfiles setting
     --evaluator: string@"nu-complete colmena apply --evaluator" # The evaluator to use (experimental)
+    --experimental-flake-eval # Use experimental flake evaluator
     --on: string@"nu-complete colmena on" # Node selector
     --config(-f): string # Path to a Hive expression, a flake.nix, or a Nix Flake URI
     --help(-h) # Print help
@@ -64,6 +65,8 @@ module "colmena extern" {
     --no-keys # Do not upload keys
     --nix-option # Passes an arbitrary option to Nix commands
     --node: string # Override the node name to use
+    --evaluator: string@"nu-complete colmena apply --evaluator" # The evaluator to use (experimental)
+    --experimental-flake-eval # Use experimental flake evaluator
     --config(-f): string # Path to a Hive expression, a flake.nix, or a Nix Flake URI
     --help(-h) # Print help
     --color: string@"nu-complete colmena color" # When to colorize the output 
@@ -86,6 +89,7 @@ module "colmena extern" {
     --build-on-target # Build the system profiles on the target nodes
     --force-replace-unknown-profiles # Ignore all targeted nodes deployment.replaceUnknownProfiles setting
     --evaluator: string@"nu-complete colmena apply --evaluator" # The evaluator to use (experimental)
+    --experimental-flake-eval # Use experimental flake evaluator
     --on: string@"nu-complete colmena on" # Node selector
     --config(-f): string # Path to a Hive expression, a flake.nix, or a Nix Flake URI
     --help(-h) # Print help

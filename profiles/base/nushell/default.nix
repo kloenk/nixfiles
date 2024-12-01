@@ -1,13 +1,13 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   home-manager.users.kloenk = {
     # Needed for nu_scripts background_task
     services.pueue = {
-      enable = true;
+      enable = pkgs.stdenv.isLinux;
       settings = { shared = { use_unix_socket = true; }; };
     };
-    home.packages = [ pkgs.pueue ];
+    home.packages = lib.optional pkgs.stdenv.isLinux pkgs.pueue;
 
     programs.nushell = {
       enable = true;

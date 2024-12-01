@@ -203,8 +203,10 @@
           system = host.system;
           modules = [
             {
-              nixpkgs.overlays = [ self.overlays.default ]
-                ++ (with inputs; [ colmena.overlays.default ]);
+              nixpkgs.overlays = [ self.overlays.default ] ++ (with inputs; [
+                colmena.overlays.default
+                lix-module.overlays.default
+              ]);
             }
             ./profiles/base/darwin
             #home-manager.nixosModules.home-manager
