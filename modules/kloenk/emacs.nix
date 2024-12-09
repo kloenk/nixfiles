@@ -19,17 +19,28 @@ in {
 
   config = mkIf cfg.enable {
     k.emacs.package = if cfg.gui then
-      if cfg.macports then
-        pkgs.emacs-config.override { emacs = pkgs.emacs-macport; }
-      else
-        pkgs.emacs-config.override { emacs = pkgs.emacs29-pgtk; }
+      if cfg.macports then pkgs.emacs-macport else pkgs.emacs29-pgtk
     else
-      pkgs.emacs-config.override { emacs = pkgs.emacs-nox; };
+      pkgs.emacs-nox;
+
+    /* if cfg.gui then
+         if cfg.macports then
+           pkgs.emacs-config.override { emacs = pkgs.emacs-macport; }
+         else
+           pkgs.emacs-config.override { emacs = pkgs.emacs29-pgtk; }
+       else
+         pkgs.emacs-config.override { emacs = pkgs.emacs-nox; };
+    */
 
     home-manager.users.kloenk = {
       programs.emacs = {
         enable = true;
         package = cfg.package;
+        extraPackages = let
+          configFor = (pkgs.emacs-config.override {
+            emacs = cfg.package;
+          }).passthru.configFor;
+        in epkgs: [ (configFor epkgs) ];
       };
     };
 

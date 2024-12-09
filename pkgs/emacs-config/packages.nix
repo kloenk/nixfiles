@@ -24,6 +24,8 @@ with e; [
 
   helpful
 
+  treesit-grammars.with-all-grammars
+
   org-bullets
   org-make-toc
 
@@ -34,6 +36,8 @@ with e; [
   cmake-mode
 
   dts-mode
+
+  nushell-ts-mode
 
   direnv
 

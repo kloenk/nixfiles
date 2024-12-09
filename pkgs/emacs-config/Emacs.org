@@ -246,6 +246,10 @@ company
 #+BEGIN_SRC nix
   helpful
 #+END_SRC
+** Treesit
+#+begin_src nix
+treesit-grammars.with-all-grammars
+#+end_src
 * Org Mode
 ** Font Helper
 #+BEGIN_SRC emacs-lisp
@@ -506,6 +510,21 @@ cmake-mode
 #+end_src
 #+begin_src nix
 dts-mode
+#+end_src
+*** NuShell
+#+begin_src emacs-lisp
+  (use-package nushell-ts-mode
+    :config
+    ; (require 'nushell-ts-babel) ; TODO: package and only then use
+    (defun hfj/nushell/mode-hook ()
+      ; (corfu-mode 1)
+      ; (highlight-parentheses-mode 1)
+      (electric-pair-local-mode 1)
+      (electric-indent-local-mode 1))
+    (add-hook 'nushell-ts-mode-hook 'hfj/nushell/mode-hook))
+#+end_src
+#+begin_src nix
+  nushell-ts-mode
 #+end_src
 ** Organisaztion
 *** Direnv

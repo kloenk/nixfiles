@@ -22,5 +22,6 @@ in emacsWithPkgs // {
   passthru = {
     inherit tangledConfig;
     config = config (emacsPackagesFor emacs);
+    configFor = config;
   };
 }
