@@ -8,11 +8,12 @@ let
 
 in flutter.buildFlutterApplication ({
   pname = "kitchenowl-${targetFlutterPlatform}";
-  inherit version src targetFlutterPlatform;
+  inherit version targetFlutterPlatform;
+  src = src + "/kitchenowl";
 
-  postPatch = ''
-    cd kitchenowl
-  '';
+  #postPatch = ''
+  #  # cd kitchenowl
+  #'';
 
   pubspecLock = lib.importJSON ./pubspec.lock.json;
 } // lib.optionalAttrs (targetFlutterPlatform == "linux") {

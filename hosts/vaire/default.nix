@@ -9,7 +9,6 @@
     ../../profiles/postgres.nix
 
     ../../services/netbox
-    ../../services/inventree
     ../../services/homebox
     ../../services/kitchenowl
     ../../services/hedgedoc
