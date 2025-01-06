@@ -26,8 +26,7 @@ in with dns.combinators; {
     auth = varda;
 
     netbox = vaire;
-    inventree = vaire;
-    armory = vaire;
+    assets = vaire;
     md = vaire;
 
     net.subdomains = common.net;

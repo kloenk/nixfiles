@@ -9,9 +9,8 @@
     ../../profiles/postgres.nix
 
     ../../services/netbox
-    ../../services/inventree
-    ../../services/homebox
-    ../../services/kitchenowl
+    #../../services/kitchenowl
+    ../../services/snipe-it
     ../../services/hedgedoc
 
     ../../profiles/telegraf.nix
@@ -29,3 +28,4 @@
 
   system.stateVersion = "24.11";
 }
+
