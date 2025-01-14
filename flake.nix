@@ -141,7 +141,7 @@
                   nixpkgs.overlays = [
                     self.overlays.default
                     inputs.colmena.overlay
-                    inputs.lix-module.overlay
+                    inputs.lix-module.overlays.default
                   ];
                 }
                 inputs.sops-nix.nixosModules.sops
@@ -255,6 +255,7 @@
 
         devShells = {
           kernel = pkgs.callPackage ./dev/kernel.nix { };
+          kernel-helios = pkgs.pkgsCross.armv7l-hf-multiplatform.callPackage ./dev/kernel.nix { };
           kernel_nightly = self.devShells.${system}.kernel.override {
             rustAttrs = pkgs.rust-bin.nightly.latest;
           };
