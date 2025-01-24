@@ -53,15 +53,13 @@
   fonts = {
     packages = with pkgs; [
       dejavu_fonts
-      (nerdfonts.override {
-        fonts = [
-          "CascadiaCode"
-          "DejaVuSansMono"
-          "SourceCodePro"
-          "Ubuntu"
-          "UbuntuMono"
-        ];
-      })
+
+      nerd-fonts.ubuntu
+      nerd-fonts.ubuntu-mono
+      nerd-fonts.open-dyslexic
+      nerd-fonts.monaspace
+      nerd-fonts.dejavu-sans-mono
+
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-emoji

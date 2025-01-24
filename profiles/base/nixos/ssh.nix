@@ -8,7 +8,7 @@ in {
     settings = {
       PasswordAuthentication = lib.mkDefault false;
       KbdInteractiveAuthentication = false;
-      PermitRootLogin = lib.mkDefault "prohibit-password";
+      PermitRootLogin = lib.mkOverride 1100 "prohibit-password";
       inherit (params) Ciphers Macs KexAlgorithms;
       HostKeyAlgorithms = lib.concatStringsSep "," params.HostKeyAlgorithms;
     };

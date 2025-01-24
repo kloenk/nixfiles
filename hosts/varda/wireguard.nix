@@ -87,7 +87,7 @@
       { # frodo
         AllowedIPs =
           [ "192.168.242.201/32" "2a01:4f8:c013:1a4b:ecba::201/128" ];
-        PublicKey = "SpO+SIv/XzgKCuWH3SN1qNknZ+X4HWf48SQNl6Gw+SM=";
+        PublicKey = "Onhxxt/h0JXB+6ES4y82AdtYKg/USbs7wn7iGlkgQCc=";
         PersistentKeepalive = 21;
       }
       { # windoof

@@ -27,6 +27,21 @@
   networking.useDHCP = true;
   services.getty.autologinUser = lib.mkForce "kloenk";
 
+  /* boot.kernelPackages = lib.mkForce (pkgs.linuxPackagesFor (pkgs.linux_testing.override {
+       argsOverride = rec {
+         src = pkgs.fetchFromGitLab {
+           owner = "kloenk";
+           repo = "linux";
+           rev = "kloenk/rust/leds-v2";
+           domain = "cyberchaos.dev";
+           hash = "sha256-UPzrn1oyYrsfuUcXl1rnnBsVY+SsTuiztMwWu9OnthU=";
+         };
+         version = "6.13.0-rc6";
+         modDirVersion = "6.13.0-rc6";
+       };
+     }));
+  */
+
   /* boot.initrd.systemd.services.mkdir-rw-store = {
        description = "Store Overlay Mutable Directories";
        wantedBy = [ "sysroot-nix-store.mount" ];
