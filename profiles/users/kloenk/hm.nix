@@ -69,14 +69,18 @@
       };
     };
 
-    accounts.email.accounts."finn@kloenk.dev" = {
-      address = "finn@kloenk.dev";
+    accounts.email.accounts."me@kloenk.dev" = {
+      #address = "finn@kloenk.dev";
+      address = "me@kloenk.dev";
+      realName = "Fiona Behrens";
+      userName = "finn@kloenk.dev";
       primary = true;
       aliases = [
         "finn.behrens@kloenk.de"
         "behrens.finn@kloenk.de"
         "info@kloenk.de"
         "me@kloenk.de"
+        "finn@kloenk.dev"
         "finn@kloenk.de"
         "applications@kloenk.de"
         "applications@kloenk.dev"
@@ -84,10 +88,36 @@
         "finn.behrens@kloenk.dev"
         "behrens.finn@kloenk.dev"
         "info@kloenk.dev"
-        "me@kloenk.dev"
 
         "info@sysbadge.dev"
       ];
+
+      mbsync = {
+        enable = true;
+        create = "maildir";
+        groups."inbox" = {
+          channels = {
+            "inbox" = {
+              patterns = [ "INBOX" "Drafts" "Sent" "Trash" ];
+              extraConfig = { Create = "Near"; };
+            };
+            "rust-for-linux" = {
+              farPattern = "linux-rust";
+              nearPattern = "rust-for-linux";
+              extraConfig = { Create = "Near"; };
+            };
+          };
+        };
+      };
+
+      mu = { enable = true; };
+
+      msmtp = { enable = true; };
+
+      imap = {
+        host = "gimli.kloenk.de";
+        tls.enable = true;
+      };
       smtp = { host = "gimli.kloenk.de"; };
     };
   };

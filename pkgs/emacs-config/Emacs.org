@@ -586,6 +586,150 @@ Using evil-nerd-commenter also works without evil
 #+begin_src nix
 evil-nerd-commenter
 #+end_src
+* Mail
+** Helper macros
+#+begin_src emacs-lisp
+  (defun kloenk/mu4e--vger-get-archive-url (msg id)
+    "Return a lore link for the given list on lore.kernel.org and the given message"
+    (let*
+        ((base-url (concat "https://lore.kernel.org/" id "/"))
+         (msg-id (mu4e-message-field msg :message-id)))
+      (concat base-url msg-id)))
+
+  (defmacro kloenk/mu4e-define-vger-list (id &rest args)
+    "Define a mailing list at vger.kernel.org"
+        (let*
+            ((list-id (if (plist-get args :list-id) (plist-get args :list-id) (concat id ".vger.kernel.org")))
+    	   (archive-id (if (plist-get args :archive) (plist-get args :archive) id)))
+  	`'(:list-id ,list-id
+  		    :name ,(if (plist-get args :name) (plist-get args :name) id)
+  		    :archive (lambda (msg)
+  			       (kloenk/mu4e--vger-get-archive-url msg ,archive-id)))))
+
+#+end_src
+
+** mu4e
+#+begin_src emacs-lisp
+  (use-package mu4e
+    :defer t
+    :commands (mu4e mu4e-compose-new)
+    :config
+    <<mu4e-config>>
+    <<mu4e-mailinglists>>
+    <<mu4e-contexts>>
+    <<mu4e-shortcuts>>
+  )
+#+end_src
+
+Set mu4e as default
+#+begin_src emacs-lisp
+  (when (package-installed-p 'mu4e)
+    (setq mail-user-agent 'mu4e-user-agent)
+    (set-variable 'read-mail-command 'mu4e))
+#+end_src
+
+*** Generic config
+:PROPERTIES:
+:header-args:emacs-lisp+: :tangle no :noweb-ref mu4e-config
+:END:
+
+**** Username/email
+#+begin_src emacs-lisp
+  (setq user-full-name "Fiona Behrens")
+  (setq user-mail-address "me@kloenk.dev")
+#+end_src
+
+**** Maildir
+#+begin_src emacs-lisp
+  ;; Directory with the mail
+  (setq mu4e-maildir "~/Maildir")
+#+end_src
+**** mbsync
+#+begin_src emacs-lisp
+  (setq mu4e-get-mail-command (concat (executable-find "mbsync") " -a"))
+
+  ;; Update ever 10 minutes
+  (setq mu4e-update-interval (* 10 60))
+
+  ;; mbsync otherwise bugs out
+  (setq mu4e-change-filenames-when-moving t)
+#+end_src
+*** Mailing lists
+:PROPERTIES:
+:header-args:emacs-lisp+: :tangle no :noweb-ref mu4e-mailinglists
+:END:
+**** vger.kernel.org
+#+begin_src emacs-lisp
+  (add-to-list 'mu4e-user-mailing-lists (kloenk/mu4e-define-vger-list "lkml" :name "LKML"))
+  (add-to-list 'mu4e-user-mailing-lists (kloenk/mu4e-define-vger-list "rust-for-linux" :name "RfL"))
+#+end_src
+*** Contexts
+:PROPERTIES:
+:header-args:emacs-lisp+: :tangle no :noweb-ref mu4e-contexts
+:END:
+**** me@kloenk.dev
+#+begin_src emacs-lisp
+  (add-to-list 'mu4e-contexts
+  	     (make-mu4e-context
+  	      :name "kloenk"
+  	      :enter-func
+    	   (lambda () (mu4e-message "Enter me@kloenk.dev context"))
+  	      :leave-func
+  	      (lambda () (mu4e-message "Leave me@kloenk.dev context"))
+  	      :match-func
+  	      (lambda (msg)
+  		(when msg
+  		  (mu4e-message-contact-field-matches msg :to "me@kloenk.dev")))
+  	      :vars '((user-mail-address . "me@kloenk.dev")
+  		      (user-full-name . "Fiona Behrens")
+  		      (mu4e-drafts-folder . "/me@kloenk.dev/Drafts")
+  		      (mu4e-sent-folder . "/me@kloenk.dev/Sent")
+  		      (mu4e-trash-folder . "/me@kloenk.dev/Trash"))))
+#+end_src
+
+**** Policies
+#+begin_src emacs-lisp
+  (setq mu4e-context-policy 'pick-first)
+  (setq mu4e-compose-context-policy 'ask-if-none)
+#+end_src
+*** Maildir Shortcuts
+#+begin_src emacs-lisp :tangle no :noweb-ref mu4e-shortcuts
+  (setq mu4e-maildir-shortcuts
+        '(
+  	("/me@kloenk.dev/Inbox" . ?I)
+  	("/me@kloenk.dev/Sent" . ?S)
+  	("/me@kloenk.dev/Drafts" . ?d)
+  	("/me@kloenk.dev/rust-for-linux" . ?r)))
+#+end_src
+** msmtp
+Helper functions to use msmtp
+#+begin_src emacs-lisp :tangle no
+  ;; chose from account before sending
+  ;; this is a custom function that works for me.
+  ;; well I stole it somewhere long ago.
+  ;; I suggest using it to make matters easy
+  ;; of course adjust the email adresses and account descriptions
+  (defun kloenk/mu4e-set-msmtp-account ()
+    (if (message-mail-p)
+        (save-excursion
+  	(let*
+  	    ((from (save-restriction
+  		     (message-narrow-to-headers)
+  		     (message-fetch-field "from"))))
+  	  (setq message-sendmail-extra-arguments (list '"-a" from))))))
+
+#+end_src
+
+#+begin_src emacs-lisp
+  (setq message-kill-buffer-on-exit t)
+  (setq send-mail-function 'message-send-mail-with-sendmail
+        message-send-mail-function 'message-send-mail-with-sendmail)
+
+  ;; use msmtp
+  (setq sendmail-program (executable-find "msmtp"))
+  (setq message-sendmail-envelope-from 'header)
+#+end_src
+
 * Nix end
 End of Nix Configuration
 #+BEGIN_SRC nix
