@@ -29,16 +29,17 @@ in buildGoModule {
 
   env.NUXT_TELEMETRY_DISABLED = 1;
 
-  preBuild = ''
-    pushd ../frontend
+  preBuild = # sh shell=bash
+    ''
+      pushd ../frontend
 
-    pnpm build
+      pnpm build
 
-    popd
+      popd
 
-    mkdir -p ./app/api/static/public
-    cp -r ../frontend/.output/public/* ./app/api/static/public
-  '';
+      mkdir -p ./app/api/static/public
+      cp -r ../frontend/.output/public/* ./app/api/static/public
+    '';
 
   nativeBuildInputs = [ pnpm pnpm.configHook nodejs ];
 

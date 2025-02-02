@@ -558,6 +558,17 @@ direnv
 projectile
 counsel-projectile
 #+end_src
+*** Poly
+**** poly-nix
+#+begin_src emacs-lisp
+  (use-package poly-nix
+    :config
+    )
+#+end_src
+
+#+begin_src nix
+poly-nix
+#+end_src
 *** Magit
 #+begin_src emacs-lisp
   (use-package magit

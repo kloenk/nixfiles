@@ -13,6 +13,9 @@ in {
   kloenk-emacs = callPackage ./emacs { emacs = final.emacs29-pgtk; };
   emacs-config = callPackage ./emacs-config { emacs = final.emacs29-pgtk; };
 
+  emacsPackages = prev.emacsPackages
+    // (prev.emacsPackages.callPackage ./emacsPackages { });
+
   partlint = callPackage ./partlint { };
   homebox = callPackage ./homebox { };
 

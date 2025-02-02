@@ -9,12 +9,14 @@ let
       emacs -Q --batch --eval "(require 'org)" --eval '(org-babel-tangle-file "./Emacs.org")'
       ls
     '';
+  ownEmacsPackages = epkgs: epkgs.callPackage ../emacsPackages { };
   config = epkgs:
     epkgs.trivialBuild {
-      pname = "default";
+      pname = "kloenk-config";
       src = tangledConfig;
       version = "0.1.0";
-      packageRequires = import ./packages.nix epkgs;
+      packageRequires =
+        import ./packages.nix (epkgs // (ownEmacsPackages epkgs));
     };
   emacsWithPkgs = (emacsPackagesFor emacs).emacsWithPackages
     (epkgs: [ (config epkgs) gitFull ]);

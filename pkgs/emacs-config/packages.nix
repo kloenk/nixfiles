@@ -44,6 +44,8 @@ with e; [
   projectile
   counsel-projectile
 
+  poly-nix
+
   magit
   forge
 
