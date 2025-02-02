@@ -32,10 +32,11 @@
       extra-platforms = x86_64-darwin aarch64-darwin
       system-features = benchmark big-parallel recursive-nix
     '';
-    linux-builder = {
-      #enable = true;
-      maxJobs = 4;
-    };
+    /* linux-builder = {
+         #enable = true;
+         maxJobs = 4;
+       };
+    */
   };
 
   home-manager.users.kloenk.programs.ssh.matchBlocks = {
@@ -85,6 +86,8 @@
     sbcl
     sops
 
+    git # xcode-select fails because of DEVELOPER_DOR
+
     dfu-util
     ffmpeg
 
@@ -102,5 +105,9 @@
   services.epmd.enable = true;
   services.telegraf = { enable = false; };
 
+  ids.gids.nixbld = 30000;
+
   security.pam.enableSudoTouchIdAuth = true;
+
+  system.stateVersion = 6;
 }

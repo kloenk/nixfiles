@@ -98,7 +98,7 @@
         groups."inbox" = {
           channels = {
             "inbox" = {
-              patterns = [ "INBOX" "Drafts" "Sent" "Trash" ];
+              patterns = [ "INBOX" "Drafts" "Sent" "Trash" "Junk" ];
               extraConfig = { Create = "Near"; };
             };
             "rust-for-linux" = {

@@ -37,6 +37,9 @@
     "/run/current-system/etc/profiles/per-user/$USER"
   ];
 
+  programs.git.config.credential.helper = "credential";
+  environment.variables.GIT_CONFIG_SYSTEM = "/etc/gitconfig";
+
   # zsh options that are renamed on darwin
   programs.zsh = { enableSyntaxHighlighting = true; };
 }

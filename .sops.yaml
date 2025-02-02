@@ -13,7 +13,7 @@ keys:
   - &server_ktest age14xp569xqe7xjkhrkz4gg5gz6fc45frmml3z43an2378dc4735u3shyk7n9
   - &server_strider age1uc3uylajglal6ql32r8yjpwhu7zlhep04ka7udds405c92eg3fssadyyuk
   - &server_fingolfin age1s920f262j8tmky0r2vgc2w2mnxyn2mla7vtjhu7nnk3q2w8tvysq9wxu0q
-  - &darwin_frodo age1wwptqz272d4la84kvshrw3ds2mpqffhyjhr2zm747sfc4ztdefkq6fspyz
+  - &darwin_frodo age1k2uq8d4pal0mlh4c0vc694p0esz8q2q6tnxgzjrguv3gh2ca9s3qukgl62
 creation_rules:
   - path_regex: secrets/thrain[^/]*\.yaml$
     key_groups:
