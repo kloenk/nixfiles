@@ -15,7 +15,6 @@
     ./disko.nix
     ./evremap.nix
     ./secureboot.nix
-    ./kernel-mail.nix
     # ./kde.nix
 
     ../../profiles/syncthing.nix
@@ -26,6 +25,7 @@
     ../../profiles/desktop/plymouth.nix
     ../../profiles/desktop/autologin.nix
     ../../profiles/desktop/pam_u2f.nix
+    ../../profiles/desktop/mail.nix
 
     ../../profiles/telegraf.nix
     #../../common/nushell.nix

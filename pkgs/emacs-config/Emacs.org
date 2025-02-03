@@ -97,7 +97,7 @@ exec-path-from-shell
 
 * UI Configuration
 ** Theme
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :nixpkg monokai-pro-theme
   (use-package monokai-pro-theme
     :init (load-theme 'monokai-pro t))
 #+END_SRC
@@ -598,38 +598,19 @@ Using evil-nerd-commenter also works without evil
 evil-nerd-commenter
 #+end_src
 * Mail
-** Helper macros
-#+begin_src emacs-lisp
-  (defun kloenk/mu4e--vger-get-archive-url (msg id)
-    "Return a lore link for the given list on lore.kernel.org and the given message"
-    (let*
-        ((base-url (concat "https://lore.kernel.org/" id "/"))
-         (msg-id (mu4e-message-field msg :message-id)))
-      (concat base-url msg-id)))
-
-  (defmacro kloenk/mu4e-define-vger-list (id &rest args)
-    "Define a mailing list at vger.kernel.org"
-        (let*
-            ((list-id (if (plist-get args :list-id) (plist-get args :list-id) (concat id ".vger.kernel.org")))
-    	   (archive-id (if (plist-get args :archive) (plist-get args :archive) id)))
-  	`'(:list-id ,list-id
-  		    :name ,(if (plist-get args :name) (plist-get args :name) id)
-  		    :archive (lambda (msg)
-  			       (kloenk/mu4e--vger-get-archive-url msg ,archive-id)))))
-
-#+end_src
-
 ** mu4e
 #+begin_src emacs-lisp
+  (use-package kloenk-mu4e-values)
   (use-package mu4e
     :defer t
+    :after (kloenk-mu4e-values)
     :commands (mu4e mu4e-compose-new)
     :config
     <<mu4e-config>>
-    <<mu4e-mailinglists>>
+    (setq mu4e-user-mailing-lists kloenk-mail/nix-mailing-lists)
     <<mu4e-contexts>>
-    <<mu4e-shortcuts>>
-  )
+    (kloenk-mail/nix-setup-mu4e-context)
+    (kloenk-mail/nix-setup-mu4e-shortcuts))
 #+end_src
 
 Set mu4e as default
@@ -665,52 +646,14 @@ Set mu4e as default
   ;; mbsync otherwise bugs out
   (setq mu4e-change-filenames-when-moving t)
 #+end_src
-*** Mailing lists
-:PROPERTIES:
-:header-args:emacs-lisp+: :tangle no :noweb-ref mu4e-mailinglists
-:END:
-**** vger.kernel.org
-#+begin_src emacs-lisp
-  (add-to-list 'mu4e-user-mailing-lists (kloenk/mu4e-define-vger-list "lkml" :name "LKML"))
-  (add-to-list 'mu4e-user-mailing-lists (kloenk/mu4e-define-vger-list "rust-for-linux" :name "RfL"))
-#+end_src
 *** Contexts
 :PROPERTIES:
 :header-args:emacs-lisp+: :tangle no :noweb-ref mu4e-contexts
 :END:
-**** me@kloenk.dev
-#+begin_src emacs-lisp
-  (add-to-list 'mu4e-contexts
-  	     (make-mu4e-context
-  	      :name "kloenk"
-  	      :enter-func
-    	   (lambda () (mu4e-message "Enter me@kloenk.dev context"))
-  	      :leave-func
-  	      (lambda () (mu4e-message "Leave me@kloenk.dev context"))
-  	      :match-func
-  	      (lambda (msg)
-  		(when msg
-  		  (mu4e-message-contact-field-matches msg :to "me@kloenk.dev")))
-  	      :vars '((user-mail-address . "me@kloenk.dev")
-  		      (user-full-name . "Fiona Behrens")
-  		      (mu4e-drafts-folder . "/me@kloenk.dev/Drafts")
-  		      (mu4e-sent-folder . "/me@kloenk.dev/Sent")
-  		      (mu4e-trash-folder . "/me@kloenk.dev/Trash"))))
-#+end_src
-
 **** Policies
 #+begin_src emacs-lisp
   (setq mu4e-context-policy 'pick-first)
   (setq mu4e-compose-context-policy 'ask-if-none)
-#+end_src
-*** Maildir Shortcuts
-#+begin_src emacs-lisp :tangle no :noweb-ref mu4e-shortcuts
-  (setq mu4e-maildir-shortcuts
-        '(
-  	("/me@kloenk.dev/Inbox" . ?I)
-  	("/me@kloenk.dev/Sent" . ?S)
-  	("/me@kloenk.dev/Drafts" . ?d)
-  	("/me@kloenk.dev/rust-for-linux" . ?r)))
 #+end_src
 ** msmtp
 Helper functions to use msmtp

@@ -36,15 +36,6 @@ in {
     else
       pkgs.emacs-nox;
 
-    /* if cfg.gui then
-         if cfg.macports then
-           pkgs.emacs-config.override { emacs = pkgs.emacs-macport; }
-         else
-           pkgs.emacs-config.override { emacs = pkgs.emacs29-pgtk; }
-       else
-         pkgs.emacs-config.override { emacs = pkgs.emacs-nox; };
-    */
-
     home-manager.users.kloenk = {
       programs.emacs = {
         enable = true;

@@ -69,7 +69,7 @@
       };
     };
 
-    accounts.email.accounts."me@kloenk.dev" = {
+    accounts.email.accounts."kloenk" = {
       #address = "finn@kloenk.dev";
       address = "me@kloenk.dev";
       realName = "Fiona Behrens";
