@@ -241,12 +241,7 @@
               sysbadge.overlays.sysbadge
               oxalica.overlays.default
               lix-module.overlays.default
-            ]) ++ [
-              (final: _prev: {
-                nix-eval-jobs = final.writeShellScriptBin "nix-eval-jobs"
-                  "echo nix-eval-jobs is broken; exit 1";
-              })
-            ];
+            ]);
         };
       in {
         legacyPackages = pkgs;
@@ -255,7 +250,9 @@
 
         devShells = {
           kernel = pkgs.callPackage ./dev/kernel.nix { };
-          kernel-helios = pkgs.pkgsCross.armv7l-hf-multiplatform.callPackage ./dev/kernel.nix { };
+          kernel-helios =
+            pkgs.pkgsCross.armv7l-hf-multiplatform.callPackage ./dev/kernel.nix
+            { };
           kernel_nightly = self.devShells.${system}.kernel.override {
             rustAttrs = pkgs.rust-bin.nightly.latest;
           };

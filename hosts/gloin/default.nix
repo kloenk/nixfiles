@@ -15,6 +15,7 @@
     ../../profiles/desktop/plymouth.nix
     ../../profiles/desktop/autologin.nix
     ../../profiles/desktop/pam_u2f.nix
+    ../../profiles/desktop/mail.nix
 
     ../../profiles/secunet.nix
     ../../profiles/syncthing.nix

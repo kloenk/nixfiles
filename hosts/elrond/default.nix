@@ -59,6 +59,7 @@
     #"192.168.178.1" = [ "fritz.box" ];
     "10.84.16.1" = [ "elros" "elros.kloenk.de" ];
     "fe80::1%br0" = [ "elros" "elros.kloenk.de" ];
+    "10.84.19.2" = [ "gloin" "gloin.kloenk.de" ];
   };
 
   networking.nameservers = [ "thrain" "1.1.1.1" ];

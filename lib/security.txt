@@ -1,0 +1,8 @@
+Contact: mailto:security@kloenk.dev
+Contact: matrix:u/kloenk:kloenk.ey?action=chat
+Expires: 2026-02-03T23:00:00.000Z
+Encryption: https://kloenk.eu/pub.asc
+Preferred-Languages: en, de
+Canonical: https://kloenk.dev/.well-known/security.txt
+Canonical: https://kloenk.eu/.well-known/security.txt
+

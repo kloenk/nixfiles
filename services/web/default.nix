@@ -18,8 +18,7 @@ in {
       root = pkgs.kloenk-www;
       locations."/public/".alias = "/persist/data/public/";
       locations."/".extraConfig = "return 301 https://kloenk.eu;";
-      locations."/baz".return =
-        "301 https://www.amazon.de/hz/wishlist/ls/3BJ09JA3JNCN?ref_=wl_share";
+      locations."/.well-known/security.txt".alias = ../../lib/security.txt.asc;
 
       extraConfig = ''
         ${commonHeaders}
@@ -65,6 +64,7 @@ in {
 
         };
       locations."/public/".alias = "/persist/data/public/";
+      locations."/.well-known/security.txt".alias = ../../lib/security.txt.asc;
 
       extraConfig = ''
         ${commonHeaders}
@@ -80,6 +80,7 @@ in {
       root = pkgs.kloenk-www;
       locations."/public/".alias = "/persist/data/public/";
       locations."/".extraConfig = "return 301 https://kloenk.eu;";
+      locations."/.well-known/security.txt".alias = ../../lib/security.txt.asc;
       extraConfig = ''
         ${commonHeaders}
         add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; frame-ancestors 'none'; object-src 'none'" always;
@@ -96,6 +97,7 @@ in {
         cp ${pkgs.kloenk-cv}/cv.pdf $out/index.pdf
       '';
       locations."/".index = "index.pdf";
+      locations."/.well-known/security.txt".alias = ../../lib/security.txt.asc;
     };
 
     "rfl-nix-dev.kloenk.dev" = {
@@ -107,6 +109,7 @@ in {
         cp ${pkgs.rfl-nix-dev}/rfl-dev-nix.pdf $out/index.pdf
       '';
       locations."/".index = "index.pdf";
+      locations."/.well-known/security.txt".alias = ../../lib/security.txt.asc;
     };
 
     /* "matrixcore.dev" = {
