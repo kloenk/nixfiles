@@ -191,6 +191,7 @@
         git = import ./modules/darwin/git.nix;
         helix = import ./modules/helix/darwin.nix;
         emacs = import ./modules/kloenk/emacs.nix;
+        mail = import ./modules/kloenk/mail.nix;
       };
 
       darwinConfigurations = let
@@ -217,6 +218,7 @@
             self.darwinModules.git
             self.darwinModules.helix
             self.darwinModules.emacs
+            self.darwinModules.mail
 
             inputs.home-manager.darwinModules.home-manager
             #inputs.mac-app-util.darwinModules.default

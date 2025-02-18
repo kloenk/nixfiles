@@ -104,7 +104,11 @@
 
         input = {
           "*" = { xkb_options = "compose:caps"; };
-          "type:touchpad" = { tap = "enabled"; };
+          "type:touchpad" = {
+            tap = "enabled";
+            dwt = "disabled";
+            natural_scroll = "enabled";
+          };
         };
 
         keybindings = {

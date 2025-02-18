@@ -65,6 +65,7 @@
 
   users.users.kloenk.packages = with pkgs; [
     fractal
+    telegram-desktop
     _1password-cli
     _1password-gui
   ];

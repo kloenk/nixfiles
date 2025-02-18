@@ -9,6 +9,7 @@
     #../../common/nushell.nix
     ../../profiles/desktop/wezterm.nix
     ../../profiles/desktop/emacs.nix
+    ../../profiles/desktop/mail.nix
 
     ../../profiles/base/darwin
   ];

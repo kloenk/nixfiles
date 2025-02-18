@@ -6,14 +6,14 @@
       passwordCommand = if pkgs.stdenv.isLinux then
         "${pkgs.libsecret}/bin/secret-tool lookup email me@kloenk.dev host gimli.kloenk.de | base64 -d"
       else
-        throw "TODO";
+        "security find-generic-password -a mail-finn@kloenk.dev -s gimli.kloenk.de -D mail -w";
     };
 
     programs.msmtp = { enable = true; };
 
     programs.mbsync = { enable = true; };
     services.mbsync = {
-      enable = true;
+      enable = pkgs.stdenv.isLinux;
       postExec = "${pkgs.mu}/bin/mu index";
     };
 
