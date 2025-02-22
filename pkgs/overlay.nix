@@ -36,6 +36,17 @@ in {
     format = "qcow2";
   };
 
+  b4 = prev.b4.overrideAttrs (oldAttrs: {
+    version = "cover-strategy-notes";
+    src = final.fetchFromGitLab {
+      owner = "kloenk";
+      repo = "b4";
+      rev = "cover-strategy-notes";
+      domain = "cyberchaos.dev";
+      hash = "sha256-pTtW+3RYMj7Bt6pSXxVK8qxwaPpmY9QBr1TZ1Vi95zo=";
+    };
+  });
+
   # helix = prev.helix.overrideAttrs
   #   (oldAttrs: rec { patches = oldAttrs.patches ++ [ ./helix-etc.patch ]; });
 
