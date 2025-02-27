@@ -6,11 +6,11 @@ rustPlatform.buildRustPackage {
   src = fetchFromGitHub {
     owner = "wez";
     repo = "evremap";
-    rev = "d0e8eb231fdeaf9c6457b36c1f04164150a82ad0";
-    hash = "sha256-FRUJ2n6+/7xLHVFTC+iSaigwhy386jXccukoMiRD+bw=";
+    rev = "cc618e8b973f5c6f66682d1477b3b868a768c545";
+    hash = "sha256-aAAnlGlSFPOK3h8UuAOlFyrKTEuzbyh613IiPE7xWaA=";
   };
 
-  cargoHash = "sha256-B/mbKg5sviYc2Yk1C8OrkMQbls+CGcq0mQfNkSlIMTM=";
+  cargoHash = "sha256-RsoK++j6NWQKjrF13bpNS0nJP17sPCiO6jjY4+HucS0=";
 
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [ libevdev ];
