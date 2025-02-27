@@ -1,9 +1,9 @@
 {
-    "version": "0.5.2",
+    "version": "0.6.10",
     "src": {
 	"owner": "TomBursch",
 	"repo": "Kitchenowl",
-	"rev": "v0.5.2",
-	"hash": "sha256-Lqbwq7sLO177PPcpGAuAcXlZDmj+gKiXJ2aSif7+IH8="
+	"rev": "v0.6.10",
+	"hash": "sha256-Fc6sjmf6V54Fg0TfkGo2khlXm2Rrk3TCGMsEyY42bCg="
     }
 }

@@ -30,7 +30,8 @@ in flutter.buildFlutterApplication ({
   };
 
   postInstall = ''
-    FAV=$out/app/data/flutter_assets/assets/icon/icon.png
+    #FAV=$out/app/data/flutter_assets/assets/icon/icon.png
+    FAV=assets/icon/icon.png
     ICO=$out/share/icons
 
     install -D $FAV $ICO/kitchenowl.png
