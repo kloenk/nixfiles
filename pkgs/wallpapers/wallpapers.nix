@@ -188,6 +188,35 @@ in {
     name = "girls_exploding_cap.png";
     hash = "sha256-KjbTWAEo32Y2FYSbvJdWv4XivbPStWHhQVadaN7d4Xs=";
   };
+
+  shapoco_battery = fromUrl {
+    url =
+      "https://cdn.donmai.us/original/e3/8c/__original_drawn_by_shapoco__e38cd7e0ff3ab2515cae17c4254f1c98.jpg";
+    name = "shapoco_battery.jpg";
+    hash = "sha256-P/je9Vj9VpyEGibyqVPEdaMleUKvTNUUvAHnT1NC8SY=";
+  };
+  shapoco_ram_store = fromUrl {
+    url =
+      "https://cdn.donmai.us/original/39/12/__original_and_2_more_drawn_by_shapoco__3912612df20265f3394fee98ead87487.jpg";
+    name = "shapoco_ram_store.jpg";
+    hash = "sha256-NHxfHUSqtQpeSN8bkhTpdYfHHBGSq/BcOA/LJZCgMx8=";
+  };
+
+  water_core_city = fromPixiv {
+    src = "https://www.pixiv.net/en/artworks/91140651";
+    url =
+      "https://i.pximg.net/img-master/img/2021/07/10/12/55/25/91140651_p0_master1200.jpg";
+    name = "water_core_city.jpg";
+    sha256 = "sha256-qVlV6eX6j5SNJ1K/YzZwbfnOPON0zfmyExPe3km97fU=";
+  };
+
+  mount_cap = fromPixiv {
+    src = "https://www.pixiv.net/en/artworks/91219701";
+    url =
+      "https://i.pximg.net/img-master/img/2021/07/13/19/40/41/91219701_p0_master1200.jpg";
+    name = "mount_cap.jpg";
+    sha256 = "sha256-zAU7Cw2mxKk4YCsR0PuaJCF695Sad28rgwz61gPms2c=";
+  };
   /* girls_exploding_cap = fromPixiv {
        src = "https://www.pixiv.net/en/artworks/107214767";
        url =
