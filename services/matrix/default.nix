@@ -31,7 +31,8 @@
     enableACME = true;
     locations = {
       "/_matrix" = { proxyPass = "http://127.0.0.1:8008"; };
-      "/.well-known/security.txt".alias = ../../lib/security.txt.asc;
+      locations."/.well-known/security.txt".tryFiles =
+        "${../../lib/security.txt.asc} =404";
       /* "/".root = pkgs.element-web.override {
            conf.default_server_config = {
              "m.homeserver" = {

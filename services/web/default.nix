@@ -18,7 +18,9 @@ in {
       root = pkgs.kloenk-www;
       locations."/public/".alias = "/persist/data/public/";
       locations."/".extraConfig = "return 301 https://kloenk.eu;";
-      locations."/.well-known/security.txt".alias = ../../lib/security.txt.asc;
+      #locations."/.well-known/security.txt".alias = ../../lib/security.txt.asc;
+      locations."/.well-known/security.txt".tryFiles =
+        "${../../lib/security.txt.asc} =404";
 
       extraConfig = ''
         ${commonHeaders}
@@ -64,7 +66,8 @@ in {
 
         };
       locations."/public/".alias = "/persist/data/public/";
-      locations."/.well-known/security.txt".alias = ../../lib/security.txt.asc;
+      locations."/.well-known/security.txt".tryFiles =
+        "${../../lib/security.txt.asc} =404";
 
       extraConfig = ''
         ${commonHeaders}
@@ -80,7 +83,8 @@ in {
       root = pkgs.kloenk-www;
       locations."/public/".alias = "/persist/data/public/";
       locations."/".extraConfig = "return 301 https://kloenk.eu;";
-      locations."/.well-known/security.txt".alias = ../../lib/security.txt.asc;
+      locations."/.well-known/security.txt".tryFiles =
+        "${../../lib/security.txt.asc} =404";
       extraConfig = ''
         ${commonHeaders}
         add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; frame-ancestors 'none'; object-src 'none'" always;
@@ -97,7 +101,8 @@ in {
         cp ${pkgs.kloenk-cv}/cv.pdf $out/index.pdf
       '';
       locations."/".index = "index.pdf";
-      locations."/.well-known/security.txt".alias = ../../lib/security.txt.asc;
+      locations."/.well-known/security.txt".tryFiles =
+        "${../../lib/security.txt.asc} =404";
     };
 
     "rfl-nix-dev.kloenk.dev" = {
@@ -109,7 +114,8 @@ in {
         cp ${pkgs.rfl-nix-dev}/rfl-dev-nix.pdf $out/index.pdf
       '';
       locations."/".index = "index.pdf";
-      locations."/.well-known/security.txt".alias = ../../lib/security.txt.asc;
+      locations."/.well-known/security.txt".tryFiles =
+        "${../../lib/security.txt.asc} =404";
     };
 
     /* "matrixcore.dev" = {

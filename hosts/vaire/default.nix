@@ -9,7 +9,7 @@
     ../../profiles/postgres.nix
 
     ../../services/netbox
-    #../../services/kitchenowl
+    ../../services/kitchenowl
     ../../services/snipe-it
     ../../services/hedgedoc
 

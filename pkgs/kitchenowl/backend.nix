@@ -142,9 +142,13 @@ in python3Packages.buildPythonApplication rec {
   format = "other";
 
   propagatedBuildInputs = with python3Packages; [
+    aiohappyeyeballs
+    aiohttp
+    aiosignal
     alembic
     amqp
     annotated-types
+    anyio
     apispec
     appdirs
     apscheduler
@@ -166,11 +170,13 @@ in python3Packages.buildPythonApplication rec {
     click-plugins
     click-repl
     contourpy
+    coverage
     cryptography
     cycler
     dbscan1d
     defusedxml
     extruct
+    filelock
     flake8
     flask
     flask-apscheduler
@@ -180,13 +186,21 @@ in python3Packages.buildPythonApplication rec {
     flask-migrate
     flask-socketio
     flask-sqlalchemy
+    flexcache
+    flexparser
     fonttools
+    frozenlist
+    fsspec
     future
     gevent
     greenlet
     h11
     html-text
     html5lib
+    httpcore
+    httpx
+    huggingface-hub
+    importlib-metadata
     idna
     ingredient-parser-nlp
     iniconfig
@@ -194,11 +208,16 @@ in python3Packages.buildPythonApplication rec {
     itsdangerous
     jinja2
     joblib
+    # jitter
+    jsonschema
+    jsonschema-spec
     jstyleson
     kiwisolver
     kombu
     lark
+    litellm
     lxml
+    lxml-html-clean
     mako
     markupsafe
     marshmallow
@@ -206,19 +225,23 @@ in python3Packages.buildPythonApplication rec {
     mccabe
     mf2py
     mlextend
+    multidict
     mypy-extensions
     nltk
     numpy
     oic
+    openai
     packaging
     pandas
     pathspec
     pillow
+    pint
     platformdirs
     pluggy
     prometheus-client
     prometheus-flask-exporter
     prompt-toolkit
+    propcache
     psycopg2
     py
     pycodestyle
@@ -240,11 +263,14 @@ in python3Packages.buildPythonApplication rec {
     python-socketio
     pytz
     pytz-deprecation-shim
+    pyyaml
     rdflib
     #rdflib-jsonld
     recipe-scrapers
+    referencing
     regex
     requests
+    rpds-py
     scikit-learn
     scipy
     setuptools-scm
@@ -254,6 +280,8 @@ in python3Packages.buildPythonApplication rec {
     sqlalchemy
     sqlite-icu
     threadpoolctl
+    tiktoken
+    tokenizers
     toml
     tomli
     tqdm
@@ -274,6 +302,8 @@ in python3Packages.buildPythonApplication rec {
     webencodings
     werkzeug
     wsproto
+    yarl
+    zipp
     zope-event
     zope-interface
   ];
