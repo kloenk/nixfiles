@@ -6,6 +6,7 @@
     ./links.nix
 
     ./network
+    ./strongswan.nix
 
     ./secureboot.nix
 
@@ -30,6 +31,9 @@
   system.extraDependencies = [ config.system.build.uboot ];
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [ "arm-trusted-firmware-rk3588" "rkbin" ];
+
+  # FIXME: do a proper fix
+  systemd.network.wait-online.anyInterface = true;
 
   fileSystems."/persist".neededForBoot = true;
 

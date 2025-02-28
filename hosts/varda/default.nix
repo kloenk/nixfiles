@@ -5,6 +5,7 @@
     ./disko.nix
     ./links.nix
     ./wireguard.nix
+    ./strongswan.nix
 
     ../../profiles/bcachefs.nix
     ../../profiles/hetzner_vm.nix

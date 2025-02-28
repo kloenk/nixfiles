@@ -6,6 +6,7 @@
     ./links.nix
     ./devenv.nix
     ./podman.nix
+    ./strongswan.nix
 
     ./pipewire.nix
     ./gaming.nix
