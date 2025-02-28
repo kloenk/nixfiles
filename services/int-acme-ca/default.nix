@@ -16,13 +16,26 @@
       config.sops.secrets."int-acme-ca/intermediate-ca-passphrase".path;
     settings = {
       dnsNames = [ "acme.net.kloenk.de" ];
-      root = ../../lib/kloenk-int-ca.crt;
-      crt = ../../lib/kloenk-int-acme.crt;
-      key = config.sops.secrets."int-acme-ca/intermediate-ca-key".path;
+      root = [ ../../lib/kloenk-ca.cert.pem ../../lib/kloenk-int-ca.crt ];
+      crt = ../../lib/kloenk-acme.cert.pem;
+      key = config.sops.secrets."int-acme-ca/kloenk-acme.key.pem".path;
       db = {
         type = "badger";
         dataSource = "/var/lib/step-ca/db";
       };
+      crl = {
+        enabled = true;
+        generateOnRevoke = true;
+      };
+      /* currently broken
+         policy = {
+           x509 = {
+             allow = {
+               dns = [ "*.net.kloenk.dev" ]
+             }
+           }
+         }
+      */
       authority = {
         provisioners = [{
           type = "ACME";
@@ -42,7 +55,7 @@
     [ "/persist/data/step-ca" ];
 
   sops.secrets = {
-    "int-acme-ca/intermediate-ca-key".owner = "step-ca";
+    "int-acme-ca/kloenk-acme.key.pem".owner = "step-ca";
     "int-acme-ca/intermediate-ca-passphrase".owner = "step-ca";
   };
 }
