@@ -35,5 +35,7 @@
      };
   */
 
+  systemd.network.config.routeTables = { strongswan = 220; };
+
   sops.secrets = { "vpn/key.pem".owner = "root"; };
 }

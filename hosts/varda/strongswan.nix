@@ -6,7 +6,7 @@
   services.strongswan-swanctl = {
     swanctl = {
       connections = {
-        elrond = {
+        vpn = {
           version = 2;
           local.default = {
             auth = "pubkey";
@@ -15,14 +15,21 @@
           };
           remote.default = {
             auth = "pubkey";
-            #id = "*.net.kloenk.dev";
-            #certs = [ "${../../lib/vpn/elrond.cert.pem}" ];
+            ca_id = "vpn.kloenk.dev";
           };
-          children.default = {
-            local_ts = [ "10.85.0.0/24" ];
-            remote_ts = [ "10.85.0.0/24" ];
-            #remote_ts = [ "10.85.0.2/32" "10.85.0.3/32" ];
-            start_action = "trap";
+          children = {
+            default = {
+              local_ts = [ "10.85.0.0/24" "10.84.16.0/22" ];
+              remote_ts = [ "10.85.0.0/24" ];
+
+              hw_offload = "auto";
+            };
+            isengard = {
+              local_ts = [ "10.85.0.0/24" ];
+              remote_ts = [ "10.85.0.0/24" "10.84.16.0/22" ];
+
+              hw_offload = "auto";
+            };
           };
         };
       };

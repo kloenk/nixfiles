@@ -33,6 +33,8 @@
           type nat hook postrouting priority srcnat;
 
           iifname "wg0" masquerade;
+          #ct mark 0x50C95E9 oifname "lan" meta nfproto ipv4 masquerade;
+          #ct mark 0x50C95E9 oifname "iot" meta nfproto ipv4 masquerade;
           iifname "lan" oifname "dtag-ppp" meta nfproto ipv4 masquerade;
           iifname "iot" oifname "dtag-ppp" meta nfproto ipv4 masquerade;
         }
