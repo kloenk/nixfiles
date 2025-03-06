@@ -2,7 +2,7 @@
 
 {
   systemd.network = {
-    networks."10-eth1".vlan = [ "gwp-desk.1" ];
+    networks."10-lan1".vlan = [ "gwp-desk.1" ];
 
     netdevs."30-gwp-desk-1" = {
       netdevConfig = {

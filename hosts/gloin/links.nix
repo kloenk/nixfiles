@@ -13,15 +13,15 @@ in {
   };
 
   systemd.network = {
-    links."10-eth0" = {
+    links."10-lan0" = {
       matchConfig = {
         Path = [ "pci-0000:00:1f.6" ];
         Type = "ether";
       };
-      linkConfig.Name = "eth0";
+      linkConfig.Name = "lan0";
     };
-    networks."10-eth0" = {
-      name = "eth0";
+    networks."10-lan0" = {
+      name = "lan0";
       bridge = [ "br0" ];
     };
 
@@ -36,15 +36,15 @@ in {
       ipv6AcceptRAConfig = { RouteMetric = 1024; };
     };
 
-    links."10-eth1" = {
+    links."10-lan1" = {
       matchConfig = {
         Property = [ "ID_BUS=usb" "ID_SERIAL_SHORT=00154000F" ];
         Type = "ether";
       };
-      linkConfig.Name = "eth1";
+      linkConfig.Name = "lan1";
     };
-    networks."10-eth1" = {
-      name = "eth1";
+    networks."10-lan1" = {
+      name = "lan1";
       bridge = [ "br1" ];
       vlan = [ "mgmt" ];
       linkConfig.RequiredForOnline = false;
@@ -136,8 +136,8 @@ in {
   };
 
   boot.initrd.systemd.network = {
-    links."10-eth0" = config.systemd.network.links."10-eth0";
-    links."10-eth1" = config.systemd.network.links."10-eth1";
+    links."10-lan0" = config.systemd.network.links."10-lan0";
+    links."10-lan1" = config.systemd.network.links."10-lan1";
   };
 
   sops.secrets."secunet/wireguard/secunet0".owner = "systemd-network";
