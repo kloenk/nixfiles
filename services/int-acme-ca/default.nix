@@ -1,4 +1,4 @@
-{ lib, config, self, ... }:
+{ lib, config, ... }:
 
 {
   fileSystems."/var/lib/private/step-ca" = {

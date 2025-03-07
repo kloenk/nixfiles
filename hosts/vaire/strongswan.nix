@@ -3,13 +3,13 @@
 {
   k.strongswan = {
     enable = true;
-    cert = ../../lib/vpn/elros.cert.pem;
-    sopsKey = "vpn/key.pem";
+    acme.enable = true;
     babel = {
       enable = true;
+      public = true;
       id = {
-        v4 = 50;
-        v6 = "d34d";
+        v4 = 3;
+        v6 = "C8F1";
       };
     };
   };

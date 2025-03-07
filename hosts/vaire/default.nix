@@ -4,6 +4,7 @@
   imports = [
     ./disko.nix
     ./links.nix
+    ./strongswan.nix
 
     ../../profiles/hetzner_vm.nix
     ../../profiles/postgres.nix
@@ -12,6 +13,7 @@
     ../../services/kitchenowl
     ../../services/snipe-it
     ../../services/hedgedoc
+    ../../services/vpn-acme-ca
 
     ../../profiles/telegraf.nix
   ];

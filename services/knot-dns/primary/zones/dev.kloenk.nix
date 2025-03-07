@@ -28,6 +28,7 @@ in with dns.combinators; {
     netbox = vaire;
     assets = vaire;
     md = vaire;
+    vpn = vaire;
 
     net.subdomains = common.net;
 

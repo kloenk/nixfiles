@@ -62,6 +62,12 @@ in {
     };
   };
 
+  strongswanTPM = prev.strongswan.overrideAttrs (oldAttrs: {
+    buildInputs = oldAttrs.buildInputs ++ [ final.tpm2-tss ];
+    configureFlags = oldAttrs.configureFlags
+      ++ [ "--enable-tpm" "--enable-tss-tss2" ];
+  });
+
   moodle = callPackage ./moodle { };
 
   ubootElros = callPackage ./ubootElros { };

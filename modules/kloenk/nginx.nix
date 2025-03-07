@@ -47,6 +47,13 @@ in {
         locations."/public/".alias = cfg.public.folder;
         locations."/public/".extraConfig = "autoindex on;";
       };
+      services.nginx.virtualHosts."${config.networking.hostName}.kloenk.dev" = {
+        enableACME = true;
+        forceSSL = true;
+        kTLS = true;
+        locations."/public/".alias = cfg.net.folder;
+        locations."/public/".extraConfig = "autoindex on;";
+      };
     })
     (mkIf cfg.net.enable {
       services.nginx.virtualHosts.${cfg.net.domain} = {

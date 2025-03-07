@@ -1,45 +1,36 @@
 { config, pkgs, ... }:
+let certDirectory = config.security.acme.certs.vpn.directory;
+in {
+  #imports = [ ../../profiles/strongswan.nix ];
 
-{
-  imports = [ ../../profiles/strongswan.nix ];
-
-  services.strongswan-swanctl = {
-    swanctl = {
-      connections = {
-        vpn = {
-          version = 2;
-          local.default = {
-            auth = "pubkey";
-            certs = [ "${../../lib/vpn/varda.cert.pem}" ];
-            id = "varda.net.kloenk.dev";
-          };
-          remote.default = {
-            auth = "pubkey";
-            ca_id = "vpn.kloenk.dev";
-          };
-          children = {
-            default = {
-              local_ts = [ "10.85.0.0/24" "10.84.16.0/22" ];
-              remote_ts = [ "10.85.0.0/24" ];
-
-              hw_offload = "auto";
-            };
-            isengard = {
-              local_ts = [ "10.85.0.0/24" ];
-              remote_ts = [ "10.85.0.0/24" "10.84.16.0/22" ];
-
-              hw_offload = "auto";
-            };
-          };
-        };
+  k.strongswan = {
+    enable = true;
+    acme.enable = true;
+    babel = {
+      enable = true;
+      public = true;
+      id = {
+        v4 = 1;
+        v6 = "5662";
       };
+      bird.extraConfig = ''
+        function net_buw() {
+          if net.type = NET_IP4 then return net ~ [ 132.195.0.0/21+, 132.195.0.0/16+ ];
+          return false;
+        }
+        protocol direct direct_buw {
+          interface "buw0";
+          interface "lo";
+          # has no v6
+          ipv4 {
+            table babel4;
+            import filter {
+              if net_buw() then accept;
+              reject;
+            };
+          };
+        }
+      '';
     };
   };
-
-  #systemd.services.strongswan-swanctl.reloadIfChanged = true;
-
-  networking.interfaces.lo.ipv4.addresses = [{
-    address = "10.85.0.1";
-    prefixLength = 32;
-  }];
 }
