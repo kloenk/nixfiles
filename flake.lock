@@ -591,11 +591,11 @@
       },
       "locked": {
         "host": "cyberchaos.dev",
-        "lastModified": 1737122695,
-        "narHash": "sha256-3NODsqVenAKRglQjaStNbr7T6ElNE+bPOqHWIZQNHO8=",
+        "lastModified": 1741515693,
+        "narHash": "sha256-r7M7O+MsJsfFj5IJyt1ZRaZl/2Q/B28Z70wlrtrPZKc=",
         "owner": "kloenk",
         "repo": "www",
-        "rev": "9ce67ae01e705a28f61984085cc54d4e8e9ca428",
+        "rev": "8893fe0ce8130bfccfefc1b95c3ce10196c52800",
         "type": "gitlab"
       },
       "original": {
@@ -737,11 +737,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1739909100,
-        "narHash": "sha256-K1t4Ea/scCGFk/oVQeM+ourLQQkqWPOx0naxI10MP8E=",
+        "lastModified": 1741361493,
+        "narHash": "sha256-7wX1T48lsVta1gVHQ8+j1i/+UVZ00j4zKGnC4Kb3TFs=",
         "owner": "kloenk",
         "repo": "moodlepkgs",
-        "rev": "bdbd8901355076e3e429d478e08a4bcb50bcb9dc",
+        "rev": "98425098b416e98c9e22a61721cf97631ca554a6",
         "type": "github"
       },
       "original": {
