@@ -56,6 +56,9 @@ in {
         "L+ /etc/swanctl/x509ca/ca.cert.pem - - - - ${
           ../../../lib/kloenk-ca.cert.pem
         }"
+        "L+ /etc/swanctl/x509ca/vpn.cert.pem - - - - ${
+          ../../../lib/kloenk-vpn.cert.pem
+        }"
         #"L+ /etc/swanctl/x509ca/vpn.cert.pem - - - - ${../../../lib/kloenk-vpn.cert.pem}"
       ];
 

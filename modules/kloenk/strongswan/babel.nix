@@ -85,10 +85,10 @@ in {
           };
           remote.${name} = {
             auth = "pubkey";
-            ca_id = "vpn.kloenk.dev";
+            #ca_id = "vpn.kloenk.dev";
             id = remote.id;
           };
-          children.default = lib.mkMerge [
+          children."babel-${name}" = lib.mkMerge [
             {
               local_ts = [ "${cfg.babel.id.v6-tunnel-ip}/128" ];
               remote_ts = [ "${remote.babel.id.v6-tunnel-ip}/128" ];
@@ -124,22 +124,28 @@ in {
           };
         };
       }) babelHosts;
-      networks = lib.mapAttrs' (name: remote: {
+      networks = lib.listToAttrs ((lib.mapAttrsToList (name: remote: {
         name = "55-gre-${name}";
         value = {
           name = "gre-${name}";
           networkConfig = {
             IPv4Forwarding = true;
             IPv6Forwarding = true;
+            LinkLocalAddressing = "ipv6";
           };
           linkConfig.RequiredForOnline = "no";
           addresses = [
-            {
-              Address = "${cfg.babel.id.v6-tunnel-ip}/128";
-            }
+            #{
+            #  Address = "${cfg.babel.id.v6-tunnel-ip}/128";
+            #}
             #{ Address = "${cfg.babel.id.v6-private-ip}/48"; }
-            { Address = "${cfg.babel.id.v6-tunnel-ip}/64"; }
-            { Address = "${cfg.babel.id.v4-private-ip}/32"; }
+            { Address = "${cfg.babel.id.v6-private-ip}/64"; }
+            {
+              Address = "${cfg.babel.id.v4-private-ip}/32";
+            }
+
+            # Link local
+            { Address = "fe80::${cfg.babel.id.v6}/64"; }
           ];
           routes = [{
             Destination = "${remote.babel.id.v6-tunnel-ip}/128";
@@ -147,11 +153,11 @@ in {
           }
           #{
           #  Destination = "${remote.babel.id.v6-tunnel-ip}/64";
-          #  Table = "babel";
+          #Table = "babel";
           #}
           #{
           #  Destination = "${remote.babel.id.v4-private-ip}/32";
-          #  Table = "babel";
+          #Table = "babel";
           #}
             ];
           routingPolicyRules = [{
@@ -159,8 +165,56 @@ in {
             Table = "babel";
             Priority = 440;
           }];
+
         };
-      }) babelHosts;
+      }) babelHosts) ++ [{
+        name = "40-lo";
+        value = {
+          addresses = [{ Address = "${cfg.babel.id.v6-tunnel-ip}/128"; }];
+        };
+      }]);
+      /* lib.mapAttrs' (name: remote: {
+           name = "55-gre-${name}";
+           value = {
+             name = "gre-${name}";
+             networkConfig = {
+               IPv4Forwarding = true;
+               IPv6Forwarding = true;
+               LinkLocalAddressing = "ipv6";
+             };
+             linkConfig.RequiredForOnline = "no";
+             addresses = [
+               #{
+               #  Address = "${cfg.babel.id.v6-tunnel-ip}/128";
+               #}
+               #{ Address = "${cfg.babel.id.v6-private-ip}/48"; }
+               { Address = "${cfg.babel.id.v6-private-ip}/64"; }
+               { Address = "${cfg.babel.id.v4-private-ip}/32"; }
+
+               # Link local
+               { Address = "fe80::${cfg.babel.id.v6}/64"; }
+             ];
+             routes = [{
+               Destination = "${remote.babel.id.v6-tunnel-ip}/128";
+               Type = "unreachable";
+             }
+             #{
+             #  Destination = "${remote.babel.id.v6-tunnel-ip}/64";
+               #Table = "babel";
+             #}
+             #{
+             #  Destination = "${remote.babel.id.v4-private-ip}/32";
+               #Table = "babel";
+             #}
+               ];
+             routingPolicyRules = [{
+               Family = "both";
+               Table = "babel";
+               Priority = 440;
+             }];
+           };
+         }) babelHosts;
+      */
     };
 
     k.strongswan.babel.bird.babel.interfaces = lib.mapAttrs' (name: remote: {

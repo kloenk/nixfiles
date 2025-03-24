@@ -74,7 +74,7 @@
       addresses = [{ Address = "10.1.0.2/24"; }];
     };
 
-    networks."05-lo" = {
+    networks."40-lo" = {
       name = "lo";
       DHCP = "no";
       addresses = [

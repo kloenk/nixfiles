@@ -16,11 +16,15 @@
         type nat hook postrouting priority srcnat;
 
         iifname "wg0" oifname { eth0, buw0 } masquerade;
+        ip version 4 iifname "gre-*" oifname { "wg0", "buw0", "eth0" } masquerade;
+        ip6 version 6 ip6 saddr != ${config.k.strongswan.babel.id.v6-tunnel-ip} iifname "gre-*" oifname "eth0" masquerade
       }
     '';
   };
   networking.firewall.extraForwardRules = ''
     iifname "wg0" accept;
+    iifname "gre-*" oifname "wg0" accept;
+    iifname "gre-*" oifname "eth0" accept;
   '';
 
   k.wg.id = 1;

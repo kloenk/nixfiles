@@ -104,6 +104,7 @@ in {
             import all;
             export filter {
               if net_default() then reject;
+              krt_prefsrc = ${cfg.babel.id.v6-private-ip};
               accept;
             };
           };
@@ -116,6 +117,7 @@ in {
             import all;
             export filter {
               if net_default() then reject;
+              krt_prefsrc = ${cfg.babel.id.v4-private-ip};
               accept;
             };
           };

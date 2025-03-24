@@ -68,7 +68,7 @@ in {
       ++ [ "--enable-tpm" "--enable-tss-tss2" ];
   });
 
-  moodle = callPackage ./moodle { };
+  #moodle = callPackage ./moodle { };
 
   ubootElros = callPackage ./ubootElros { };
 }

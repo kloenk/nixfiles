@@ -634,11 +634,11 @@
     "lix": {
       "flake": false,
       "locked": {
-        "lastModified": 1740647693,
-        "narHash": "sha256-pYxhtDAOmlbP4XqgjIvbpi7CFtX8USH6DlRybS2Jxu4=",
-        "rev": "03ade5e6d75cb7705900cf696505b836fc831be0",
+        "lastModified": 1742801532,
+        "narHash": "sha256-NPt+zkap/KnOYi9OdfnYMQcRx7kvTF1Zevl6pR0JroY=",
+        "rev": "f0fd789f68a6b91d5052c582bd9fbc75cfcb5e54",
         "type": "tarball",
-        "url": "https://git.lix.systems/api/v1/repos/lix-project/lix/archive/03ade5e6d75cb7705900cf696505b836fc831be0.tar.gz?rev=03ade5e6d75cb7705900cf696505b836fc831be0"
+        "url": "https://git.lix.systems/api/v1/repos/lix-project/lix/archive/f0fd789f68a6b91d5052c582bd9fbc75cfcb5e54.tar.gz?rev=f0fd789f68a6b91d5052c582bd9fbc75cfcb5e54"
       },
       "original": {
         "type": "tarball",
@@ -657,11 +657,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1738176840,
-        "narHash": "sha256-NG3IRvRs3u3btVCN861FqHvgOwqcNT/Oy6PBG86F5/E=",
-        "rev": "621aae0f3cceaffa6d73a4fb0f89c08d338d729e",
+        "lastModified": 1742709496,
+        "narHash": "sha256-6rWA8QlVe3HTCVHyI/gJ5IULyvHkT9d8fMpYC0Kyeh8=",
+        "rev": "d8e4fee796342636f345e358f33583c8b2fa496e",
         "type": "tarball",
-        "url": "https://git.lix.systems/api/v1/repos/lix-project/nixos-module/archive/621aae0f3cceaffa6d73a4fb0f89c08d338d729e.tar.gz?rev=621aae0f3cceaffa6d73a4fb0f89c08d338d729e"
+        "url": "https://git.lix.systems/api/v1/repos/lix-project/nixos-module/archive/d8e4fee796342636f345e358f33583c8b2fa496e.tar.gz?rev=d8e4fee796342636f345e358f33583c8b2fa496e"
       },
       "original": {
         "type": "tarball",
@@ -905,11 +905,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1740664321,
-        "narHash": "sha256-6OG086rURqXCQrqfYDZTTxBN9KIOLWO1bpjbeJT6fX8=",
+        "lastModified": 1742814284,
+        "narHash": "sha256-+j9At62EfwTH5Zq6ZXA4de/nPQnOC5WouJ1OrkaxPsM=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "54ddb7705c5f13620e60f401fff22bf7225f2a7e",
+        "rev": "1b082c3d03f3c1d0ed55701aeb530b3f409fce91",
         "type": "github"
       },
       "original": {
