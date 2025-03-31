@@ -1,5 +1,6 @@
 # Inspired by vika (/u/kisik21) https://gitlab.com/vikanezrimaya/nix-flake
-{ lib, stdenvNoCC, curl, jq, gnused, runCommand, runCommandNoCC, fetchurl }:
+{ lib, stdenvNoCC, curl, jq, gnused, runCommand, runCommandNoCC, fetchurl
+, nixos-artwork }:
 
 let
   n = name: v:
@@ -87,6 +88,15 @@ let
       cp ${file} $dir/${name}
     '';
 
+  fromNixosArtwork = { attr, name ? "nixos-${attr}.png", meta ? { } }:
+    runCommandNoCC name { inherit meta; } ''
+      dir=$out/share/wallpapers/${
+        if (meta.nsfw or false) then n name "nsfw/" else ""
+      }/
+
+      mkdir -p $dir
+      ln -s ${nixos-artwork.wallpapers.${attr}.src} $dir/${name}
+    '';
 in {
 
   bioshock_big_dady = fromUrl {
@@ -427,4 +437,10 @@ in {
 
   trans-estro = fromFile { file = ./images/trans-estro.png; };
   nixos-enby = fromFile { file = ./images/nixos-enby.png; };
+
+  nixos-binary-black = fromNixosArtwork { attr = "binary-black"; };
+  nixos-gear = fromNixosArtwork { attr = "gear"; };
+  nixos-catppuccin-macchiato =
+    fromNixosArtwork { attr = "catppuccin-macchiato"; };
+  nixos-catppuccin-mocha = fromNixosArtwork { attr = "catppuccin-mocha"; };
 }

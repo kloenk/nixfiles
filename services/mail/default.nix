@@ -293,7 +293,7 @@
         vsz_limit = 1024MB
       }
     '';
-    modules = [ pkgs.dovecot_pigeonhole ];
+    #modules = [ pkgs.dovecot_pigeonhole ];
     protocols = [ "sieve" ];
   };
 
@@ -310,4 +310,9 @@
     user = "virtualMail";
     paths = [ "/persist/data/vmail" ];
   };
+
+  environment.systemPackages = with pkgs;
+    [
+      dovecot_pigeonhole # Sieve
+    ];
 }
