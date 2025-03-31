@@ -57,7 +57,7 @@ in {
     k.strongswan.babel = {
       id.v4-private-ip = "10.84.32.${toString cfg.babel.id.v4}";
       id.v6-tunnel-ip = "fd4c:1796:6b05:${cfg.babel.id.v6}::";
-      id.v6-private-ip = "fd4c:1796:6b06:${cfg.babel.id.v6}::";
+      id.v6-private-ip = "fd4c:1796:6b06:${cfg.babel.id.v6}::1";
     };
 
     networking.firewall.extraForwardRules = ''

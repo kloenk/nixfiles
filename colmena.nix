@@ -13,6 +13,11 @@ let
   ]);
 
   lib = nixpkgs.lib.extend (import ./lib);
+
+  aarchNixpkgs = import nixpkgs {
+    system = "aarch64-linux";
+    overlays = hostOverlays;
+  };
 in {
   meta = {
     nixpkgs = import nixpkgs {
@@ -47,14 +52,13 @@ in {
       system = "x86_64-linux";
       overlays = hostOverlays;
     };
-    nodeNixpkgs.elros = import nixpkgs {
-      system = "aarch64-linux";
-      overlays = hostOverlays;
-    };
+    nodeNixpkgs.elros = aarchNixpkgs;
     nodeNixpkgs.fingolfin = import nixpkgs {
       system = "aarch64-linux";
       overlays = hostOverlays;
     };
+    # vm on frodo
+    nodeNixpkgs.maura = aarchNixpkgs;
 
     #allowApplyAll = false;
 
@@ -209,22 +213,25 @@ in {
       [ inputs.nixpkgs.legacyPackages.x86_64-linux.nil ];
   };
 
-  strider = { pkgs, nodes, ... }: {
-    deployment.targetHost = "192.168.64.102";
+  /* ??
+     strider = { pkgs, nodes, ... }: {
+       deployment.targetHost = "192.168.64.102";
+       deployment.tags = [ "vm" "frodo" ];
+
+       imports = [
+         ./hosts/strider
+         (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix"))
+       ];
+     };
+  */
+
+  # router vm on frodo
+  maura = { pkgs, nodes, ... }: {
+    deployment.targetHost = "maura.net.kloenk.dev";
     deployment.tags = [ "vm" "frodo" ];
 
     imports = [
-      ./hosts/strider
-      (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix"))
-    ];
-  };
-
-  ktest = { pkgs, nodes, ... }: {
-    deployment.targetHost = "192.168.64.101";
-    deployment.tags = [ "vm" "frodo" ];
-
-    imports = [
-      ./hosts/ktest
+      ./hosts/maura
       (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix"))
     ];
   };

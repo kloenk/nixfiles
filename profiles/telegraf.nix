@@ -59,8 +59,12 @@
         extraConfig = ''
           allow 127.0.0.1/8;
           allow ::1/128;
+
           allow 192.168.242.0/24;
           allow 2a01:4f8:c013:1a4b:ecba::0/80;
+
+          allow 10.84.32.0/22;
+          allow fd4c:1796:6b06::/48;
           deny all;
         '';
       };

@@ -3,7 +3,6 @@
 {
   imports = [
     #./go-neb.nix
-    # ./sliding-sync.nix
     ./heisenbridge.nix
   ];
 
@@ -33,15 +32,6 @@
       "/_matrix" = { proxyPass = "http://127.0.0.1:8008"; };
       "/.well-known/security.txt".tryFiles =
         "${../../lib/security.txt.asc} =404";
-      /* "/".root = pkgs.element-web.override {
-           conf.default_server_config = {
-             "m.homeserver" = {
-               base_url = "https://matrix.kloenk.dev";
-               server_name = "kloenk.dev";
-             };
-           };
-         };
-      */
     };
   };
 
@@ -76,21 +66,7 @@
         type = "http";
         tls = false;
         x_forwarded = true;
-      }
-      # {
-      #   bind_addresses = [ "192.168.242.1" ];
-      #   port = 8008;
-      #   resources = [{
-      #     names = [ "client" ];
-      #     compress = true;
-      #   }
-      #   #{ names = [ "federation" ]; compress = false; } # should not be needed, AS should only use client
-      #     ];
-      #   type = "http";
-      #   tls = false;
-      #   x_forwarded = false;
-      # }
-        ];
+      }];
 
       database_type = "psycopg2";
       database_args = { database = "matrix-synapse"; };
