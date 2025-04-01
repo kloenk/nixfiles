@@ -1,14 +1,17 @@
 { config, lib, pkgs, self, ... }:
 
 let
-  wgHostsAttrs = lib.filterAttrs
-    (n: v: v.config.k.wg.net && v.config.services.telegraf.enable)
+  vpnHostsAttrs = lib.filterAttrs (n: v:
+    v.config.k.vpn.monitoring.enable && v.config.services.telegraf.enable)
     self.nixosConfigurations;
-  wgServerAttrs = lib.filterAttrs (n: v: !v.config.k.wg.mobile) wgHostsAttrs;
-  wgMobileAttrs = lib.filterAttrs (n: v: v.config.k.wg.mobile) wgHostsAttrs;
+  vpnServerAttrs =
+    lib.filterAttrs (n: v: !v.config.k.vpn.monitoring.mobile) vpnHostsAttrs;
+  vpnMobileAttrs =
+    lib.filterAttrs (n: v: v.config.k.vpn.monitoring.mobile) vpnHostsAttrs;
   wgConfigToTargets = cfgs:
     lib.attrValues
-    (lib.mapAttrs (n: v: "${v.config.networking.hostName}.net.kloenk.de") cfgs);
+    (lib.mapAttrs (n: v: "${v.config.networking.hostName}.net.kloenk.dev")
+      cfgs);
 in {
   services.prometheus = {
     enable = true;
@@ -25,11 +28,11 @@ in {
       scheme = "https";
       static_configs = [
         {
-          targets = wgConfigToTargets wgServerAttrs;
+          targets = wgConfigToTargets vpnServerAttrs;
           labels.uptype = "server";
         }
         {
-          targets = wgConfigToTargets wgMobileAttrs;
+          targets = wgConfigToTargets vpnMobileAttrs;
           labels.uptype = "mobile";
         }
       ];

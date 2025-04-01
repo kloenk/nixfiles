@@ -34,16 +34,19 @@
     address = "127.0.0.11";
     prefixLength = 8;
   }];
-  systemd.network.networks."30-wg0".addresses =
-    [{ Address = "2a01:4f8:c013:1a4b:ecba::21:53/128"; }];
+  networking.interfaces.lo.ipv6.addresses = [{
+    address = "fd4c:1796:6b06:11b8::53";
+    prefixLength = 128;
+  }];
   services.knot.settings.server.listen = [
     "127.0.0.11@53"
 
     "49.12.72.200@53"
-    "2a01:4f8:c012:b874::@53"
+    "2a01:4f8:c012:b874::1@53"
 
-    "2a01:4f8:c013:1a4b:ecba::2"
-    "2a01:4f8:c013:1a4b:ecba::21:53@53"
+    "10.84.32.2@53"
+    "fd4c:1796:6b06:11b8::1@53"
+    "fd4c:1796:6b06:11b8::53@53"
   ];
 
   services.kresd.instances = 4;

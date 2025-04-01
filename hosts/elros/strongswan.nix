@@ -20,5 +20,4 @@
       { Address = "2a01:4f8:c013:1a4b:ecba::102/128"; }
     ];
   };
-  systemd.network.netdevs."30-wg0".enable = false;
 }

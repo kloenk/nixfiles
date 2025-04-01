@@ -7,15 +7,19 @@
     options = [ "bind" ];
   };
 
+  systemd.network.networks."40-lo" = {
+    addresses = [{ Address = "fd4c:1796:6b06:5662::443/128"; }];
+  };
+
   networking.firewall.allowedTCPPorts = [ 8443 ];
   services.step-ca = {
     enable = true;
-    address = "[2a01:4f8:c013:1a4b:ecba:1337::1]";
+    address = "[fd4c:1796:6b06:5662::443]";
     port = 8443;
     intermediatePasswordFile =
       config.sops.secrets."int-acme-ca/intermediate-ca-passphrase".path;
     settings = {
-      dnsNames = [ "acme.net.kloenk.de" ];
+      dnsNames = [ "acme.net.kloenk.dev" ];
       root = [ ../../lib/kloenk-ca.cert.pem ../../lib/kloenk-int-ca.crt ];
       crt = ../../lib/kloenk-acme.cert.pem;
       key = config.sops.secrets."int-acme-ca/kloenk-acme.key.pem".path;

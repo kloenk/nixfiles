@@ -1,10 +1,6 @@
-{ config, pkgs, lib, ... }:
+{ ... }:
 
-let
-  links = config.systemd.network.links;
-  netdevs = config.systemd.network.netdevs;
-  networks = config.systemd.network.networks;
-in {
+{
   k.wg.public = true;
 
   systemd.network = {
@@ -14,7 +10,10 @@ in {
     };
     networks."10-eth0" = {
       name = "eth0";
-      addresses = [{ Address = "2a01:4f8:c013:1a4b::/64"; }];
+      addresses = [
+        { Address = "2a01:4f8:c013:1a4b::1/64"; }
+        { Address = "2a01:4f8:c013:1a4b::/64"; } # TODO: remove
+      ];
       routes = [{ Gateway = "fe80::1"; }];
       dns = [ "127.0.0.1" ];
       DHCP = "ipv4";

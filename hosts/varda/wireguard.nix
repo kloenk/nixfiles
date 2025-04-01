@@ -4,6 +4,7 @@
   networking.firewall.allowedUDPPorts = [
     51820 # wg0
     51830 # wg-thrain
+    51821 # wg-windows
   ];
 
   # NATING
@@ -25,6 +26,9 @@
     iifname "wg0" accept;
     iifname "gre-*" oifname "wg0" accept;
     iifname "gre-*" oifname "eth0" accept;
+
+    iifname "gre-*" oifname "wg-win" accept;
+    iifname "wg-win" oifname "gre-*" accept;
   '';
 
   k.wg.id = 1;
@@ -52,26 +56,6 @@
          }
       */
 
-      { # gimli
-        AllowedIPs = [
-          "192.168.242.2/32"
-          "2a01:4f8:c013:1a4b:ecba::2/128"
-          "2a01:4f8:c013:1a4b:ecba:0:21:0/120"
-        ];
-        PublicKey = "vVIbHzXr99y1dm80LbSViIUmlym/yt3+Ra48IcZQ+AY=";
-        Endpoint = "gimli.kloenk.de:51820";
-      }
-      { # vaire
-        AllowedIPs = [ "192.168.242.3/32" "2a01:4f8:c013:1a4b:ecba::3/128" ];
-        PublicKey = "vGv9DvJ+6hTwFV0Jq5vaw2i32LXl8k87S58zra276RA=";
-        Endpoint = "vaire.kloenk.de:51820";
-      }
-      { # fingolfin
-        AllowedIPs = [ "192.168.242.4/32" "2a01:4f8:c013:1a4b:ecba::4/128" ];
-        PublicKey = "GdiRay3/MTYASK7n14JjaGxEROx6no/R6Zb8lTo91nM=";
-        Endpoint = "fingolfin.kloenk.dev:51820";
-      }
-
       { # thrain
         AllowedIPs = [
           "192.168.242.101/32"
@@ -79,12 +63,6 @@
           "2a01:4f8:c013:1a4b:ecba::101/128"
         ];
         PublicKey = "RiRB/fiZ/x88f78kRQasSwWYBuBjc5DxW2OFaa67zjg=";
-        PersistentKeepalive = 21;
-      }
-      { # elros
-        AllowedIPs =
-          [ "192.168.242.102/32" "2a01:4f8:c013:1a4b:ecba::102/128" ];
-        PublicKey = "HI/xAEvFIvPwnTIv7H1WF8Z5d+FBjodLqaLBdfBlfAk=";
         PersistentKeepalive = 21;
       }
 
@@ -100,22 +78,10 @@
         PublicKey = "aSkX5/y831rSZib/l0QhC1mmmaggNjdMNfQ0Qrz8rxA=";
         PersistentKeepalive = 21;
       }
-      { # elrond
-        AllowedIPs =
-          [ "192.168.242.204/32" "2a01:4f8:c013:1a4b:ecba::204/128" ];
-        PublicKey = "6kwWS4u3lM+iGAf1lF79lm/mmE8kOlFtk7ipqNpKd3g=";
-        PersistentKeepalive = 21;
-      }
       { # gloin
         AllowedIPs =
           [ "192.168.242.205/32" "2a01:4f8:c013:1a4b:ecba::205/128" ];
         PublicKey = "4Bwytj56G/CueL/P454SSE6Sq7wafGd/cJlFri5LxTw=";
-        PersistentKeepalive = 21;
-      }
-      { # sting
-        AllowedIPs =
-          [ "192.168.242.210/32" "2a01:4f8:c013:1a4b:ecba::210/128" ];
-        PublicKey = "iSYB99dCUvYhHAz5HaPSzhXYPyyntOtiucrDUBFVvBE=";
         PersistentKeepalive = 21;
       }
     ];
@@ -159,6 +125,29 @@
     addresses = [{ Address = "2a01:4f8:c013:1a4b:ecba:1338::1/120"; }];
     routes = [{ Destination = "2a01:4f8:c013:1a4b:ecba:1338::1/120"; }];
   };
+
+  /* systemd.network.netdevs."30-wg-win" = {
+       netdevConfig = {
+         Kind = "wireguard";
+         Name = "wg-win";
+         Description = "Wireguard for windows domain controller traffic";
+       };
+       wireguardConfig = {
+         ListenPort = 51821;
+         PrivateKeyFile = config.sops.secrets."wireguard/wg-win".path;
+       };
+       wireguardPeers = [
+         { # amdir
+           AllowedIPs = [ "10.84.32.119/32" "fd4c:1796:6b06:bedd::1/128" ];
+           PublicKey = "";
+         }
+         { # frodo-win11
+           AllowedIPs = [ "10.84.32.120/32" "fd4c:1796:6b06:bedd::2/128" ];
+           PublicKey = "";
+         }
+       ];
+     };
+  */
 
   networking.hosts = { };
 

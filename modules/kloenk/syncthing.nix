@@ -62,7 +62,7 @@ in {
     };
 
     nginx = mkEnableOption "Expose in the internal wg network" // {
-      default = config.k.wg.net;
+      default = config.k.vpn.net.enable;
     };
   };
 

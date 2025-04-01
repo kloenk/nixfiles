@@ -47,6 +47,8 @@ in {
 
   config = lib.mkMerge [
     (mkIf cfg.enable {
+      k.vpn.enable = true;
+
       environment.systemPackages = [ cfg.package ];
 
       networking.firewall.allowedUDPPorts =
@@ -101,5 +103,9 @@ in {
       #k.strongswan.acme.cert = "${acmeCertRoot}/fullchain.pem";
       k.strongswan.acme.cert = "${cfg.acme.id}.pem";
     }))
+    (mkIf (!cfg.acme.enable) {
+      services.telegraf.extraConfig.inputs.x509_cert.sources =
+        [ "file://${cfg.cert}" ];
+    })
   ];
 }

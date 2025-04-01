@@ -14,12 +14,16 @@ in {
   networking.firewall.allowedTCPPorts = [ 53 ];
   networking.firewall.allowedUDPPorts = [ 53 ];
 
-  networking.interfaces.lo.ipv4.addresses = [{
-    address = "127.0.0.11";
-    prefixLength = 8;
-  }];
-  systemd.network.networks."30-wg0".addresses =
-    [{ Address = "2a01:4f8:c013:1a4b:ecba::20:53/128"; }];
+  networking.interfaces.lo = {
+    ipv4.addresses = [{
+      address = "127.0.0.11";
+      prefixLength = 8;
+    }];
+    ipv6.addresses = [{
+      address = "fd4c:1796:6b06:5662::53";
+      prefixLength = 128;
+    }];
+  };
 
   services.knot = {
     enable = true;
@@ -29,12 +33,12 @@ in {
         "127.0.0.11@53"
 
         "168.119.57.172@53"
-        "2a01:4f8:c013:1a4b::@53"
+        "2a01:4f8:c013:1a4b::1@53"
 
-        "2a01:4f8:c013:1a4b:ecba::20:53@53"
+        "fd4c:1796:6b06:5662::53@53"
       ];
       remote = {
-        internal_ns2 = { address = "2a01:4f8:c013:1a4b:ecba::2"; };
+        internal_ns2 = { address = "fd4c:1796:6b06:11b8::53"; };
         leona_ns2 = {
           address = "2a02:247a:22e:fd00:1::1";
           key = "kloenk_leona_secondary";
@@ -46,7 +50,7 @@ in {
       };
       acl = {
         internal = {
-          address = [ "2a01:4f8:c013:1a4b:ecba::/80" "127.0.0.0/8" ];
+          address = [ "fd4c:1796:6b06::/48" "10.84.32.0/22" "127.0.0.0/8" ];
           action = "transfer";
         };
         leona_transfer = {

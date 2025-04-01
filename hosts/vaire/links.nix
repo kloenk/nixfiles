@@ -19,7 +19,7 @@
     };
     networks."10-eth0" = {
       name = "eth0";
-      addresses = [{ Address = "2a01:4f8:c012:3d74::/64"; }];
+      addresses = [{ Address = "2a01:4f8:c012:3d74::1/64"; }];
       routes = [{ Gateway = "fe80::1"; }];
       DHCP = "ipv4";
     };

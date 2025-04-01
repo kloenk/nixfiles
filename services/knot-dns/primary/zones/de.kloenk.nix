@@ -31,9 +31,7 @@ in with dns.combinators; {
     netbox = varda;
     kitchenowl = vaire;
 
-    net.subdomains = common.net // {
-      acme = common.helpers.host { v6 = "2a01:4f8:c013:1a4b:ecba:1337::1"; };
-    };
+    net.subdomains = common.net;
 
     _github-challenge-cli-inc.TXT = [ (ttl 1200 (txt "a5adaebc78")) ];
 

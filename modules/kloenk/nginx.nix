@@ -8,7 +8,7 @@ in {
   options.k.nginx = {
     public = {
       enable = mkEnableOption "enable public file serving" // {
-        default = config.k.wg.public;
+        default = !config.k.vpn.monitoring.mobile;
       };
       domain = mkOption {
         type = types.str;
@@ -21,11 +21,11 @@ in {
     };
     net = {
       enable = mkEnableOption "enable net file serving" // {
-        default = config.k.wg.net;
+        default = config.k.vpn.net.enable;
       };
       domain = mkOption {
         type = types.str;
-        default = "${config.networking.hostName}.net.kloenk.de";
+        default = "${config.networking.hostName}.net.kloenk.dev";
       };
       folder = mkOption {
         type = types.path;
@@ -65,14 +65,14 @@ in {
       };
       security.acme.certs = let
         hosts = config.services.nginx.virtualHosts;
-        filterdHosts = lib.filterAttrs
-          (name: _value: (builtins.match ".*\\.net\\.kloenk\\.de" name) != null)
+        filterdHosts = lib.filterAttrs (name: _value:
+          (builtins.match ".*\\.net\\.kloenk\\.(dev|de|eu)" name) != null)
           hosts;
         filteredHostNames = builtins.attrNames filterdHosts;
       in builtins.listToAttrs (map (name: {
         name = name;
         value.server =
-          lib.mkDefault "https://acme.net.kloenk.de:8443/acme/acme/directory";
+          lib.mkDefault "https://acme.net.kloenk.dev:8443/acme/acme/directory";
       }) filteredHostNames);
     })
   ];

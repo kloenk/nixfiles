@@ -35,7 +35,7 @@ in {
         (strict [
           "a:gimli.kloenk.de"
           "ip4:49.12.72.200/32"
-          "ip6:2a01:4f8:c012:b874::/128"
+          "ip6:2a01:4f8:c012:b874::1/128"
         ])
       ];
   };
@@ -45,21 +45,21 @@ in {
     varda = host {
       ttl = 1200;
       v4 = "168.119.57.172";
-      v6 = "2a01:4f8:c013:1a4b::";
+      v6 = "2a01:4f8:c013:1a4b::1";
       sshfp =
         "8c0608b28e42f4dabb717a076326ed26c8cdc6309b87509736053a3fe2d6a277";
     };
     vaire = host {
       ttl = 1200;
       v4 = "116.202.21.21";
-      v6 = "2a01:4f8:c012:3d74::";
+      v6 = "2a01:4f8:c012:3d74::1";
       sshfp =
         "9dcd7a95de40be433f012f69074feb548b079374f4dd6fe707f79b664cc2be4b";
     };
     gimli = host {
       ttl = 1200;
       v4 = "49.12.72.200";
-      v6 = "2a01:4f8:c012:b874::";
+      v6 = "2a01:4f8:c012:b874::1";
       sshfp =
         "3609591c2d5a24edcce7ceb1cf13ee91083071fa5d8be3c8dfc2c412725c8c13";
     };
@@ -81,7 +81,7 @@ in {
         "8c0608b28e42f4dabb717a076326ed26c8cdc6309b87509736053a3fe2d6a277";
     };
     # TODO: update to new address schema
-    "dns.varda" = host { v6 = "2a01:4f8:c013:1a4b:ecba:0:20:53"; };
+    "dns.varda" = host { v6 = "fd4c:1796:6b06:5662::53"; };
     gimli = host {
       v4 = "192.168.242.2";
       v6 = "fd4c:1796:6b06:11b8::1";
@@ -89,7 +89,7 @@ in {
         "3609591c2d5a24edcce7ceb1cf13ee91083071fa5d8be3c8dfc2c412725c8c13";
     };
     # TODO: update to new address schmea
-    "dns.gimli" = host { v6 = "2a01:4f8:c013:1a4b:ecba:0:21:53"; };
+    "dns.gimli" = host { v6 = "fd4c:1796:6b06:11b8::53"; };
     vaire = host {
       v4 = "10.84.32.3";
       v6 = "fd4c:1796:6b06:c8f1::1";
@@ -98,15 +98,15 @@ in {
     };
 
     fingolfin = host {
-      v4 = "192.168.242.4";
-      v6 = "2a01:4f8:c013:1a4b:ecba::4";
+      v4 = "10.84.32.4";
+      v6 = "fd4c:1796:6b06:61f5::1";
       sshfp =
         "2b50cde1c7ac2b8492b1fb2d0c189c6058100c152e924d76abab7803814dd8ab";
     };
 
     thrain = host {
-      v4 = "192.168.242.101";
-      v6 = "2a01:4f8:c013:1a4b:ecba::101";
+      v4 = "10.84.32.101";
+      v6 = "fd4c:1796:6b06:a4d1::1";
       sshfp =
         "5981fad283f4404fced9081a9a609282548db8382c944d2e07d47655893ca6de";
     };

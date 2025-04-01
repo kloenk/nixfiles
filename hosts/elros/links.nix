@@ -1,11 +1,6 @@
 { ... }:
 
 {
-  k.wg = {
-    enable = true;
-    id = 102;
-  };
-
   systemd.network = {
     links."10-eth1" = {
       matchConfig.Path = "platform-a41000000.pcie-pci-0004:41:00.0";

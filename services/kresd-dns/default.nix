@@ -14,7 +14,9 @@
       view:addr('127.0.0.0/8', policy.all(policy.PASS))
       view:addr('::1/128', policy.all(policy.PASS))
       view:addr('192.168.242.0/24', policy.all(policy.PASS))
+      view:addr('10.84.32.0/22', policy.all(policy.PASS))
       view:addr('192.168.64.0/24', policy.all(policy.PASS))
+      view:addr('fd4c:1796:6b06::/48', policy.all(policy.PASS))
       view:addr('2a01:4f8:c013:1a4b:ecba::/80', policy.all(policy.PASS))
 
       -- drop everything that hasn't matched

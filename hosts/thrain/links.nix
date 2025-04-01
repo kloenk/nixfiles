@@ -1,12 +1,19 @@
-{ config, pkgs, lib, ... }:
+{ config, ... }:
 
 {
   boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
 
-  k.wg = {
+  k.strongswan = {
     enable = true;
-    id = 101;
-    mobile = false;
+    cert = ../../lib/vpn/thrain.cert.pem;
+    sopsKey = "vpn/key.pem";
+    babel = {
+      enable = true;
+      id = {
+        v4 = 101;
+        v6 = "a4d1";
+      };
+    };
   };
 
   systemd.network = {
@@ -68,7 +75,7 @@
       wireguardPeers = [{
         AllowedIPs = [ "2a01:4f8:c013:1a4b:ecba:1338::1/120" ];
         PublicKey = "hEcjE8kt3vSYkoWrAr8SaMMq4OkRcRvNJ5GhM78hpW0=";
-        Endpoint = "[2a01:4f8:c013:1a4b::]:51830";
+        Endpoint = "[2a01:4f8:c013:1a4b::1]:51830";
       }];
     };
     networks."30-wg-initrd" = {

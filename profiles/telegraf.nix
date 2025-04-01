@@ -52,19 +52,20 @@
     };
   };
 
-  services.nginx.virtualHosts = lib.mkIf config.k.wg.net {
-    "${config.networking.hostName}.net.kloenk.de" = {
+  services.nginx.virtualHosts = lib.mkIf config.k.vpn.net.enable {
+    "${config.networking.hostName}.net.kloenk.dev" = {
       locations."/metrics" = {
         proxyPass = "http://[::1]:9273/metrics";
         extraConfig = ''
           allow 127.0.0.1/8;
           allow ::1/128;
 
-          allow 192.168.242.0/24;
-          allow 2a01:4f8:c013:1a4b:ecba::0/80;
-
           allow 10.84.32.0/22;
           allow fd4c:1796:6b06::/48;
+
+          ${lib.concatStringsSep "\n" (map (range: "allow ${range};")
+            config.k.vpn.monitoring.extraAllowRanges)}
+
           deny all;
         '';
       };
