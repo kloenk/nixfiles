@@ -5,14 +5,27 @@
     51820 # wg0
   ];
 
-  k.wg = {
+  k.strongswan = {
     enable = true;
-    id = 3;
-    public = true;
-    mobile = false;
+    acme.enable = true;
+    babel = {
+      enable = true;
+      public = true;
+      id = {
+        v4 = 3;
+        v6 = "C8F1";
+      };
+    };
   };
 
   systemd.network = {
+    networks."40-lo" = {
+      addresses = [
+        { Address = "192.168.242.3/32"; }
+        { Address = "2a01:4f8:c013:1a4b:ecba::3/128"; }
+      ];
+    };
+
     links."10-eth0" = {
       matchConfig.MACAddress = "96:00:03:65:50:02";
       linkConfig.Name = "eth0";

@@ -10,6 +10,7 @@
     ./pam_u2f.nix
     ./syncthing.nix
     ./mail.nix
+    ./monitoring.nix
     ./vpn.nix
   ];
 }

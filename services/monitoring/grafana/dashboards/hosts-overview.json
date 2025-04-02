@@ -24,8 +24,8 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
+  "id": 20,
   "links": [],
-  "liveNow": false,
   "panels": [
     {
       "datasource": {
@@ -68,6 +68,7 @@
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "last"
@@ -75,11 +76,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.2.3",
+      "pluginVersion": "11.5.2",
       "targets": [
         {
           "datasource": {
@@ -153,6 +155,7 @@
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "last"
@@ -160,11 +163,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.2.3",
+      "pluginVersion": "11.5.2",
       "targets": [
         {
           "datasource": {
@@ -224,6 +228,7 @@
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "last"
@@ -231,11 +236,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.2.3",
+      "pluginVersion": "11.5.2",
       "targets": [
         {
           "datasource": {
@@ -293,6 +299,7 @@
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "last"
@@ -300,11 +307,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.2.3",
+      "pluginVersion": "11.5.2",
       "targets": [
         {
           "datasource": {
@@ -379,7 +387,7 @@
         "sizing": "auto",
         "text": {}
       },
-      "pluginVersion": "10.2.3",
+      "pluginVersion": "11.5.2",
       "targets": [
         {
           "datasource": {
@@ -454,7 +462,7 @@
         "sizing": "auto",
         "text": {}
       },
-      "pluginVersion": "10.2.3",
+      "pluginVersion": "11.5.2",
       "targets": [
         {
           "datasource": {
@@ -521,7 +529,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "10.2.3",
+      "pluginVersion": "11.5.2",
       "targets": [
         {
           "datasource": {
@@ -671,7 +679,7 @@
         "sizing": "auto",
         "text": {}
       },
-      "pluginVersion": "10.2.3",
+      "pluginVersion": "11.5.2",
       "targets": [
         {
           "datasource": {
@@ -738,7 +746,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "10.2.3",
+      "pluginVersion": "11.5.2",
       "targets": [
         {
           "datasource": {
@@ -849,6 +857,368 @@
             "mode": "thresholds"
           },
           "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "color-text"
+            },
+            "inspect": false
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Valid for"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "red",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 0
+                    },
+                    {
+                      "color": "orange",
+                      "value": 604800
+                    },
+                    {
+                      "color": "green",
+                      "value": 2419200
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Verification"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "valid": {
+                        "color": "green",
+                        "index": 0,
+                        "text": "Ok"
+                      }
+                    },
+                    "type": "value"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*",
+                      "result": {
+                        "color": "red",
+                        "index": 1
+                      }
+                    },
+                    "type": "regex"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Source"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "https://acme.net.kloenk.dev:8443/acme/acme/directory": {
+                        "color": "semi-dark-blue",
+                        "index": 2,
+                        "text": "kloenk - acme"
+                      },
+                      "https://vpn.kloenk.dev/acme/acme/directory": {
+                        "color": "purple",
+                        "index": 1,
+                        "text": "kloenk - vpn"
+                      },
+                      "manual": {
+                        "color": "light-orange",
+                        "index": 3
+                      }
+                    },
+                    "type": "value"
+                  },
+                  {
+                    "options": {
+                      "pattern": "https://acme-.*.api.letsencrypt.org/directory",
+                      "result": {
+                        "color": "light-blue",
+                        "index": 0,
+                        "text": "Let's Encrypt"
+                      }
+                    },
+                    "type": "regex"
+                  }
+                ]
+              },
+              {
+                "id": "custom.width",
+                "value": 152
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Common Name"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 269
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Type"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 83
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Algorithm"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 140
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Type"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "acme": {
+                        "color": "blue",
+                        "index": 1,
+                        "text": "ACME"
+                      },
+                      "vpn": {
+                        "color": "purple",
+                        "index": 0,
+                        "text": "VPN"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 25
+      },
+      "id": 17,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "x509_cert_expiry{organization!=\"Let's Encrypt\", type=\"leaf\"} < 2419200",
+          "format": "table",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": false,
+          "legendFormat": "",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Expiring SSL Certs",
+      "transformations": [
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "Time": {
+                "aggregations": []
+              },
+              "Value": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "cert_category": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "cert_source": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "common_name": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "organization": {
+                "aggregations": [
+                  "lastNotNull"
+                ]
+              },
+              "organizational_unit": {
+                "aggregations": [
+                  "lastNotNull"
+                ]
+              },
+              "public_key_algorithm": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "signature_algorithm": {
+                "aggregations": [
+                  "lastNotNull"
+                ]
+              },
+              "source": {
+                "aggregations": [
+                  "lastNotNull"
+                ]
+              },
+              "type": {
+                "aggregations": [
+                  "lastNotNull"
+                ]
+              },
+              "verification": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              }
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {
+              "Value (lastNotNull)": 5,
+              "cert_category (lastNotNull)": 1,
+              "cert_source (lastNotNull)": 2,
+              "common_name": 0,
+              "public_key_algorithm (lastNotNull)": 3,
+              "verification (lastNotNull)": 4
+            },
+            "renameByName": {
+              "Value (last)": "Valid for",
+              "Value (lastNotNull)": "Valid for",
+              "cert_category (lastNotNull)": "Type",
+              "cert_source (lastNotNull)": "Source",
+              "common_name": "Common Name",
+              "organization (lastNotNull)": "Organization",
+              "organizational_unit (lastNotNull)": "Organization Unit",
+              "public_key_algorithm (lastNotNull)": "Algorithm",
+              "type (lastNotNull)": "Type",
+              "verification (lastNotNull)": "Verification"
+            }
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "field": "Valid for"
+              }
+            ]
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
             "align": "left",
             "cellOptions": {
               "type": "auto"
@@ -888,7 +1258,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "10.2.3",
+      "pluginVersion": "11.5.2",
       "targets": [
         {
           "datasource": {
@@ -970,8 +1340,9 @@
       "type": "table"
     }
   ],
+  "preload": false,
   "refresh": "",
-  "schemaVersion": 39,
+  "schemaVersion": 40,
   "tags": [],
   "templating": {
     "list": []

@@ -5,11 +5,17 @@
     51820 # wg0
   ];
 
-  k.wg = {
+  k.strongswan = {
     enable = true;
-    id = 4;
-    public = true;
-    mobile = false;
+    acme.enable = true;
+    babel = {
+      enable = true;
+      public = true;
+      id = {
+        v4 = 4;
+        v6 = "61f5";
+      };
+    };
   };
 
   systemd.network = {
@@ -24,56 +30,12 @@
       DHCP = "ipv4";
     };
 
-    /* netdevs."30-wgfritz" = {
-         netdevConfig = {
-           Kind = "wireguard";
-           Name = "wgfritz";
-         };
-         wireguardConfig = {
-           PrivateKeyFile = config.sops.secrets."wireguard/wgfritz".path;
-         };
-         wireguardPeers = [{
-           AllowedIPs = [ "192.168.178.0/24" ];
-           PublicKey = "NUQU5DEFXoyoMRnhhpp7BNdtX2UlEltPlCxrLSAuXV4=";
-           PresharedKeyFile = config.sops.secrets."wireguard/wgfritz-psk".path;
-           Endpoint = "bvrwkpidtnrnj753.myfritz.net:58675";
-           PersistentKeepalive = 21;
-         }];
-       };
-       networks."30-wgfritz" = {
-         name = "wgfritz";
-         linkConfig.RequiredForOnline = "no";
-         addresses = [{ Address = "192.168.178.223/24"; }];
-         routes = [{ Destination = "192.168.178.0/24"; }];
-       };
-    */
-
-    #networks."30-wg0" = { routes = [{ Destination = "37.120.162.160"; }]; };
-
-    # wg workarounds
-    netdevs."30-wg0".enable = false;
     networks."55-gre-varda".routes = [{ Destination = "37.120.162.160"; }];
     networks."40-lo" = {
       addresses = [
         { Address = "192.168.242.4/32"; }
         { Address = "2a01:4f8:c013:1a4b:ecba::4/128"; }
       ];
-    };
-  };
-
-  #sops.secrets."wireguard/wgfritz".owner = "systemd-network";
-  #sops.secrets."wireguard/wgfritz-psk".owner = "systemd-network";
-
-  k.strongswan = {
-    enable = true;
-    acme.enable = true;
-    babel = {
-      enable = true;
-      public = true;
-      id = {
-        v4 = 4;
-        v6 = "61f5";
-      };
     };
   };
 }

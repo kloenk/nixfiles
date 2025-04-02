@@ -11,13 +11,6 @@ in {
     51820 # wg0
   ];
 
-  k.wg = {
-    enable = true;
-    id = 2;
-    public = true;
-    mobile = false;
-  };
-
   systemd.network = {
     links."10-eth0" = {
       matchConfig.MACAddress = "96:00:02:ae:9b:77";
@@ -50,5 +43,4 @@ in {
       { Address = "2a01:4f8:c013:1a4b:ecba::2/128"; }
     ];
   };
-  systemd.network.netdevs."30-wg0".enable = false;
 }

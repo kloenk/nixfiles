@@ -51,6 +51,15 @@ in {
 
       environment.systemPackages = [ cfg.package ];
 
+      k.monitoring.x509_certs.vpn.certs = if cfg.acme.enable then
+        [
+          "file://${
+            config.security.acme.certs."vpn-${cfg.acme.id}".directory
+          }/fullchain.pem"
+        ]
+      else
+        [ "file://${cfg.cert}" ];
+
       networking.firewall.allowedUDPPorts =
         lib.optionals cfg.openFirewall [ 500 4500 ];
 
@@ -103,9 +112,5 @@ in {
       #k.strongswan.acme.cert = "${acmeCertRoot}/fullchain.pem";
       k.strongswan.acme.cert = "${cfg.acme.id}.pem";
     }))
-    (mkIf (!cfg.acme.enable) {
-      services.telegraf.extraConfig.inputs.x509_cert.sources =
-        [ "file://${cfg.cert}" ];
-    })
   ];
 }

@@ -1,6 +1,7 @@
 { lib, pkgs, config, self, ... }:
 
 {
+  k.monitoring.enable = true;
   services.telegraf = {
     enable = true;
     extraConfig = {

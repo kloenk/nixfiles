@@ -213,6 +213,33 @@ in {
             };
           }
 
+          {
+            alert = "VPNCertExpiryWarning";
+            expr = ''(x509_cert_expiry{type="leaf"} / 60 / 60 / 24 / 7) < 5'';
+            for = "5m";
+            labels = { severity = "warning"; };
+            annotations = {
+              summary =
+                "WARN - VPN Cert {{ $labels.common_name }} is near it's end of life";
+              description = ''
+                The VPN cert {{ $labels.common_name }} with SANs {{ $labels.san }} is expiring in {{ $value }} weeks.
+              '';
+            };
+          }
+          {
+            alert = "VPNCertExpiryCritical";
+            expr = ''(x509_cert_expiry{type="leaf"} / 60 / 60 ) < 7'';
+            for = "5m";
+            labels = { severity = "critical"; };
+            annotations = {
+              summary =
+                "WARN - VPN Cert {{ $labels.common_name }} is end of life now";
+              description = ''
+                The VPN cert {{ $labels.common_name }} with SANs {{ $labels.san }} is expiring in {{ $value }} hours.
+              '';
+            };
+          }
+
         ];
       }];
     }];

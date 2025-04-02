@@ -1,0 +1,708 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 18,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 8,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "count(x509_cert_expiry{common_name=~\"$ssl_name\", host=~\"$host\", cert_category=~\"$cert_category\", cert_source=~\"$cert_source\", organization!=\"Let's Encrypt\"} > 2419200)",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Certs valid",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 8,
+        "x": 8,
+        "y": 0
+      },
+      "id": 3,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "count(x509_cert_expiry{common_name=~\"$ssl_name\", host=~\"$host\", cert_category=~\"$cert_category\", cert_source=~\"$cert_source\", organization!=\"Let's Encrypt\"} < 2419200 > 604800)",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Certs expiring",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 8,
+        "x": 16,
+        "y": 0
+      },
+      "id": 4,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "count(x509_cert_expiry{common_name=~\"$ssl_name\", host=~\"$host\", cert_category=~\"$cert_category\", cert_source=~\"$cert_source\", organization!=\"Let's Encrypt\"} < 604800)",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Certs expired",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "color-text"
+            },
+            "inspect": false
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Valid for"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "red",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 0
+                    },
+                    {
+                      "color": "orange",
+                      "value": 604800
+                    },
+                    {
+                      "color": "green",
+                      "value": 2419200
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Verification"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "valid": {
+                        "color": "green",
+                        "index": 0,
+                        "text": "Ok"
+                      }
+                    },
+                    "type": "value"
+                  },
+                  {
+                    "options": {
+                      "pattern": ".*",
+                      "result": {
+                        "color": "red",
+                        "index": 1
+                      }
+                    },
+                    "type": "regex"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Source"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "https://acme.net.kloenk.dev:8443/acme/acme/directory": {
+                        "color": "semi-dark-blue",
+                        "index": 2,
+                        "text": "kloenk - acme"
+                      },
+                      "https://vpn.kloenk.dev/acme/acme/directory": {
+                        "color": "purple",
+                        "index": 1,
+                        "text": "kloenk - vpn"
+                      },
+                      "manual": {
+                        "color": "light-orange",
+                        "index": 3
+                      }
+                    },
+                    "type": "value"
+                  },
+                  {
+                    "options": {
+                      "pattern": "https://acme-.*.api.letsencrypt.org/directory",
+                      "result": {
+                        "color": "light-blue",
+                        "index": 0,
+                        "text": "Let's Encrypt"
+                      }
+                    },
+                    "type": "regex"
+                  }
+                ]
+              },
+              {
+                "id": "custom.width",
+                "value": 152
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Common Name"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 269
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Type"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 83
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Algorithm"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 140
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Type"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "acme": {
+                        "color": "blue",
+                        "index": 1,
+                        "text": "ACME"
+                      },
+                      "vpn": {
+                        "color": "purple",
+                        "index": 0,
+                        "text": "VPN"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 5
+      },
+      "id": 1,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "x509_cert_expiry{common_name=~\"$ssl_name\", host=~\"$host\", cert_category=~\"$cert_category\", cert_source=~\"$cert_source\", organization!=\"Let's Encrypt\", type=\"leaf\"}",
+          "format": "table",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": false,
+          "legendFormat": "",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Panel Title",
+      "transformations": [
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "Time": {
+                "aggregations": []
+              },
+              "Value": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "cert_category": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "cert_source": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "common_name": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "organization": {
+                "aggregations": [
+                  "lastNotNull"
+                ]
+              },
+              "organizational_unit": {
+                "aggregations": [
+                  "lastNotNull"
+                ]
+              },
+              "public_key_algorithm": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "signature_algorithm": {
+                "aggregations": [
+                  "lastNotNull"
+                ]
+              },
+              "source": {
+                "aggregations": [
+                  "lastNotNull"
+                ]
+              },
+              "type": {
+                "aggregations": [
+                  "lastNotNull"
+                ]
+              },
+              "verification": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              }
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {
+              "Value (lastNotNull)": 5,
+              "cert_category (lastNotNull)": 1,
+              "cert_source (lastNotNull)": 2,
+              "common_name": 0,
+              "public_key_algorithm (lastNotNull)": 3,
+              "verification (lastNotNull)": 4
+            },
+            "renameByName": {
+              "Value (last)": "Valid for",
+              "Value (lastNotNull)": "Valid for",
+              "cert_category (lastNotNull)": "Type",
+              "cert_source (lastNotNull)": "Source",
+              "common_name": "Common Name",
+              "organization (lastNotNull)": "Organization",
+              "organizational_unit (lastNotNull)": "Organization Unit",
+              "public_key_algorithm (lastNotNull)": "Algorithm",
+              "type (lastNotNull)": "Type",
+              "verification (lastNotNull)": "Verification"
+            }
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "field": "Valid for"
+              }
+            ]
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "preload": false,
+  "refresh": "",
+  "schemaVersion": 40,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "definition": "label_values(x509_cert_expiry,host)",
+        "description": "",
+        "includeAll": true,
+        "label": "Host",
+        "multi": true,
+        "name": "host",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(x509_cert_expiry,host)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
+      },
+      {
+        "current": {
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
+        "definition": "label_values(x509_cert_expiry{host=~\"$host\", organization!=\"Let's Encrypt\"},common_name)",
+        "includeAll": true,
+        "label": "SSL Certificate",
+        "multi": true,
+        "name": "ssl_name",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(x509_cert_expiry{host=~\"$host\", organization!=\"Let's Encrypt\"},common_name)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
+      },
+      {
+        "current": {
+          "text": [
+            "acme",
+            "vpn"
+          ],
+          "value": [
+            "acme",
+            "vpn"
+          ]
+        },
+        "definition": "label_values(x509_cert_expiry{host=~\"$host\", common_name=~\"$ssl_name\"},cert_category)",
+        "includeAll": false,
+        "label": "Cert Category",
+        "multi": true,
+        "name": "cert_category",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(x509_cert_expiry{host=~\"$host\", common_name=~\"$ssl_name\"},cert_category)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
+      },
+      {
+        "current": {
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
+        "definition": "label_values(x509_cert_expiry{host=~\"$host\", common_name=~\"$ssl_name\", cert_category=~\"$cert_category\"},cert_source)",
+        "includeAll": true,
+        "label": "Source",
+        "multi": true,
+        "name": "cert_source",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(x509_cert_expiry{host=~\"$host\", common_name=~\"$ssl_name\", cert_category=~\"$cert_category\"},cert_source)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "SSL Monitoring (x509_cert)",
+  "uid": "cehmwtn2ahwcge",
+  "version": 6,
+  "weekStart": ""
+}

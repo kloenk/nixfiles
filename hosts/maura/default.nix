@@ -6,6 +6,7 @@
     ./links.nix
 
     ../../profiles/telegraf.nix
+    ../../profiles/users/kloenk/password.nix
   ];
 
   boot.loader.grub.enable = false;

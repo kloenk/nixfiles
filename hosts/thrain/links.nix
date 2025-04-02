@@ -15,6 +15,7 @@
       };
     };
   };
+  k.nginx.public.enable = false;
 
   systemd.network = {
     # eth0 - physical interface

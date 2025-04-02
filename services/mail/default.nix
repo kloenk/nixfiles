@@ -292,10 +292,57 @@
       service imap {
         vsz_limit = 1024MB
       }
+
+      service stats {
+        inet_listener http {
+          port = 9900
+        }
+      }
+
+      metric auth_success {
+        filter = (event=auth_request_finished AND success=yes)
+      }
+
+      metric auth_failures {
+        filter = (event=auth_request_finished AND success=no)
+      }
     '';
-    #modules = [ pkgs.dovecot_pigeonhole ];
+    #Modules = [ pkgs.dovecot_pigeonhole ];
     protocols = [ "sieve" ];
   };
+
+  /* metric imap_command {
+        filter = event=imap_command_finished
+        group_by cmd_name {
+        }
+        group_by tagged_reply_state {
+        }
+      }
+
+      metric smtp_command {
+        filter = event=smtp_server_command_finished
+        group_by cmd_name {
+        }
+        group_by status_code {
+        }
+        group_by duration {
+          method exponential {
+            min_magnitude = 1
+            max_magnitude = 5
+          }
+        }
+      }
+
+      metric mail_delivery {
+        filter = event=mail_delivery_finished
+        group_by duration {
+          method exponential {
+            min_magnitude = 1
+            max_magnitude = 5
+          }
+        }
+      }
+  */
 
   # itsbroken
   systemd.services.dovecot2.after = lib.mkForce [ "network.target" ];
@@ -315,4 +362,14 @@
     [
       dovecot_pigeonhole # Sieve
     ];
+
+  services.telegraf.extraConfig.inputs = {
+    /* TODO: manage permissions
+       postfix = {
+         queue_directory = config.services.postfix.config.queue_directory;
+                };
+    */
+    # dovecot
+    # http.urls = [ "http://localhost:9900/metrics" ];
+  };
 }

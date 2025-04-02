@@ -22,6 +22,9 @@
   networking.useDHCP = false;
   networking.hostName = "fingolfin";
 
+  k.monitoring.x509_certs.acme.extraCerts =
+    [ "https://event.unterbachersee.de" ];
+
   users.users.holger = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
