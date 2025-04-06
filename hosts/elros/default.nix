@@ -12,6 +12,8 @@
 
     ../../profiles/users/kloenk/password.nix
     ../../profiles/postgres.nix
+
+    ../../profiles/telegraf.nix
   ];
 
   boot.loader.grub.enable = false;

@@ -103,6 +103,8 @@ in {
         reloadServices = [ "strongswan-swanctl.service" ];
         domain = cfg.acme.id;
       };
+      systemd.services."acme-vpn-${cfg.acme.id}".before =
+        [ "strongswan-swanctl.service" ];
 
       systemd.tmpfiles.rules = [
         "L+ /etc/swanctl/private/${cfg.acme.id}.pem - - - - ${acmeCertRoot}/key.pem"

@@ -12,7 +12,7 @@ in with dns.combinators; {
   ];
 
   subdomains = rec {
-    inherit (common.hosts) varda vaire gimli fingolfin;
+    inherit (common.hosts) varda vaire gimli fingolfin amdir;
 
     ns1 = varda;
     ns2 = gimli;

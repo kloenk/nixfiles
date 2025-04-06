@@ -8,7 +8,7 @@ with dns.combinators; {
     [ "google-site-verification=Zi_9C2hSucoEJhLD78ijxMaybtjscN0D3t5TNpoeg6Y" ];
 
   subdomains = rec {
-    inherit (common.hosts) varda vaire gimli fingolfin;
+    inherit (common.hosts) varda vaire gimli fingolfin amdir;
 
     ns1 = gimli;
 

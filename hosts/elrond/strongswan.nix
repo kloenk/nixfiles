@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
 {
+  k.vpn.monitoring.mobile = true;
   k.strongswan = {
     enable = true;
     package = pkgs.strongswanTPM;
