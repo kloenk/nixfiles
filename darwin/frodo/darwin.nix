@@ -78,8 +78,8 @@
     uutils-coreutils
     yt-dlp
 
-    wireguard-tools
-    wireguard-go
+    #wireguard-tools
+    #wireguard-go
 
     # emacs language servers
     elixir_ls
