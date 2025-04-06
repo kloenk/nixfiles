@@ -18,6 +18,10 @@ let
     system = "aarch64-linux";
     overlays = hostOverlays;
   };
+  x86Nixpkgs = import nixpkgs {
+    system = "x86_64-linux";
+    overlays = hostOverlays;
+  };
 in {
   meta = {
     nixpkgs = import nixpkgs {
@@ -59,6 +63,7 @@ in {
     };
     # vm on frodo
     nodeNixpkgs.maura = aarchNixpkgs;
+    nodeNixpkgs.amdir = x86Nixpkgs;
 
     #allowApplyAll = false;
 
@@ -232,6 +237,16 @@ in {
 
     imports = [
       ./hosts/maura
+      (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix"))
+    ];
+  };
+
+  amdir = { pkgs, nodes, ... }: {
+    deployment.targetHost = "amdir.net.kloenk.dev";
+    deployment.tags = [ "vm" "vienna" ];
+
+    imports = [
+      ./hosts/amdir
       (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix"))
     ];
   };
