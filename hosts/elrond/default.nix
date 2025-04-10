@@ -40,6 +40,8 @@
   boot.supportedFilesystems = [ "btrfs" "xfs" ];
   boot.initrd.supportedFilesystems = [ "btrfs" ];
 
+  boot.kernelParams = [ "amd_iommu=on" ];
+
   boot.initrd.systemd.emergencyAccess = true;
   # systemd.sysusers.enable = true;
 

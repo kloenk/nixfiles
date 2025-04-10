@@ -7,9 +7,23 @@ let
 in {
   boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
 
-  k.wg = {
+  k.vpn.monitoring.mobile = true;
+  k.strongswan = {
     enable = true;
-    id = 205;
+    package = pkgs.strongswanTPM;
+    cert = ../../lib/vpn/gloin.cert.pem;
+    babel = {
+      enable = true;
+      id = {
+        v4 = 151;
+        v6 = "280b";
+      };
+    };
+  };
+  services.strongswan-swanctl.swanctl = {
+    connections.babel-elros.remote_addrs = [ "10.84.16.1" "fe80::1%br1" ];
+    connections.babel-elrond.remote_addrs = [ "10.84.19.1" ];
+    secrets.token.ak_ecc.handle = "0x81010004";
   };
 
   systemd.network = {

@@ -21,8 +21,8 @@
   # Boot
   boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
 
-  boot.kernelParams =
-    [ "nohibernate" ]; # https://github.com/openzfs/zfs/issues/260
+  #boot.kernelParams =
+  #  [ "nohibernate" ]; # https://github.com/openzfs/zfs/issues/260
 
   # System
   system.autoUpgrade.flake = "kloenk";

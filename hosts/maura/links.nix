@@ -56,8 +56,8 @@
     connections.babel-elrond.remote_addrs = [ "10.84.19.1" ];
   };
 
-  Networking.firewall.extraForwardRules = ''
-    oifname "br-vpn" accept;
-    iifname "br-vpn" oifname "gre-*" accept;
+  networking.firewall.extraForwardRules = ''
+    oifname "eth0" accept;
+    iifname "eth0" oifname "gre-*" accept;
   '';
 }

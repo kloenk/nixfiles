@@ -14,7 +14,10 @@
         { Address = "2a01:4f8:c013:1a4b::1/64"; }
         { Address = "2a01:4f8:c013:1a4b::/64"; } # TODO: remove
       ];
-      routes = [{ Gateway = "fe80::1"; }];
+      routes = [{
+        Gateway = "fe80::1";
+        Source = "2a01:4f8:c013:1a4b::1";
+      }];
       dns = [ "127.0.0.1" ];
       DHCP = "ipv4";
     };

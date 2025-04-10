@@ -3,12 +3,12 @@
 {
   systemd.network = {
     links."30-wan" = {
-      matchConfig.MACAddress = builtins.abort "add mac address";
+      matchConfig.MACAddress = "0a:18:2a:03:25:84";
       linkConfig.Name = "wan";
     };
     networks."30-wan" = {
       name = "wan";
-      DHCP = "no";
+      DHCP = "ipv4";
       addresses = [{ Address = "2a02:8388:8c0:c600::1:28/64"; }];
       routes = [{ Gateway = "fe80::6a02:b8ff:fe9a:ab24"; }];
     };

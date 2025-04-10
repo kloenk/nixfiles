@@ -141,8 +141,8 @@ in {
     "syncthing.elrond" = elrond;
 
     gloin = host {
-      v4 = "192.168.242.205";
-      v6 = "2a01:4f8:c013:1a4b:ecba::205";
+      v4 = "10.84.32.151";
+      v6 = "fd4c:1796:6b06:280b::1";
       sshfp =
         "1e1bbba5b6bab9f204e2a27409a370b636b0915c439b250a09d8333f35603834";
     };
