@@ -36,10 +36,14 @@
       view:addr('fe80::/8', policy.all(policy.PASS))
       view:addr('192.168.242.0/24', policy.all(policy.PASS))
       view:addr('10.84.16.0/20', policy.all(policy.PASS))
+      view:addr('10.84.20.0/24', policy.all(policy.PASS))
+      view:addr('10.84.21.0/24', policy.all(policy.PASS))
+      view:addr('10.84.22.0/24', policy.all(policy.PASS))
 
-      -- drop everything that hasn't matched
-      view:addr('0.0.0.0/0', policy.all(policy.DROP))
-      view:addr('::/0', policy.all(policy.DROP))
+      -- disable drop, we are behind firewall
+      -- -- drop everything that hasn't matched
+      -- view:addr('0.0.0.0/0', policy.all(policy.DROP))
+      -- view:addr('::/0', policy.all(policy.DROP))
       cache.size = 150*MB
 
       modules.load('http')

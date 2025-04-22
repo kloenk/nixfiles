@@ -56,11 +56,11 @@ in {
 
   evremap = callPackage ./evremap { };
 
-  inventree = callPackage ./inventree {
-    python3 = final.python3.override {
-      packageOverrides = callPackage ./inventree/py-overrides.nix { };
-    };
-  };
+  #inventree = callPackage ./inventree {
+  #  python3 = final.python3.override {
+  #    packageOverrides = callPackage ./inventree/py-overrides.nix { };
+  #  };
+  #};
 
   strongswanTPM = prev.strongswan.overrideAttrs (oldAttrs: {
     buildInputs = oldAttrs.buildInputs ++ [ final.tpm2-tss ];

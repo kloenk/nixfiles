@@ -47,26 +47,36 @@
     settings = {
       server_name = "kloenk.eu";
       public_baseurl = "https://matrix.kloenk.eu:443/";
+      enable_metrics = true;
 
       enable_registration = false;
 
-      listeners = [{
-        bind_addresses = [ "127.0.0.1" ];
-        port = 8008;
-        resources = [
-          {
-            names = [ "client" ];
-            compress = true;
-          }
-          {
-            names = [ "federation" ];
-            compress = false;
-          }
-        ];
-        type = "http";
-        tls = false;
-        x_forwarded = true;
-      }];
+      listeners = [
+        {
+          bind_addresses = [ "127.0.0.1" ];
+          port = 8008;
+          resources = [
+            {
+              names = [ "client" ];
+              compress = true;
+            }
+            {
+              names = [ "federation" ];
+              compress = false;
+            }
+          ];
+          type = "http";
+          tls = false;
+          x_forwarded = true;
+        }
+        {
+          port = 8009;
+          type = "metrics";
+          bind_addresses = [ "127.0.0.1" "::1" ];
+          resources = [{ names = [ "metrics" ]; }];
+          tls = false;
+        }
+      ];
 
       database_type = "psycopg2";
       database_args = { database = "matrix-synapse"; };
@@ -95,6 +105,11 @@
       ];
     };
   };
+
+  services.telegraf.extraConfig.inputs.prometheus = [{
+    urls = [ "http://localhost:8009/_synapse/metrics" ];
+    tags.index = "1";
+  }];
 
   sops.secrets."matrix/config".owner = "matrix-synapse";
 

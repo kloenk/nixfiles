@@ -16,13 +16,55 @@
     };
     networks."10-eth0" = {
       name = "eth0";
+      bond = [ "bond0" ];
+      #bridge = [ "br-win" ];
+      #DHCP = "ipv4";
+      #networkConfig.IPv6AcceptRA = "yes";
+      #dhcpV4Config.RouteMetric = 8192;
+      #ipv6AcceptRAConfig.RouteMetric = 8192;
+      #vlan = [ "mgmt" "gwp" "lan" ];
+    };
+
+    links."10-blink0" = {
+      matchConfig.MACAddress = "00:02:c9:53:cd:0a";
+      linkConfig = {
+        Name = "blink0";
+        Description = "Blinky cable 0";
+      };
+    };
+    networks."10-blink0" = {
+      name = "blink0";
       DHCP = "no";
-      bridge = [ "br0" ];
-      vlan = [ "mgmt" "gwp" ];
+      networkConfig = {
+        Description = "Blinky cable 0";
+        PrimarySlave = true;
+      };
+      bond = [ "bond0" ];
+    };
+
+    netdevs."20-bond0" = {
+      netdevConfig = {
+        Description = "Bond over physical interfaces";
+        Kind = "bond";
+        Name = "bond0";
+      };
+      bondConfig = { Mode = "active-backup"; };
+    };
+    networks."20-bond0" = {
+      name = "bond0";
+      DHCP = "ipv4";
+      networkConfig = {
+        Description = "Direct interface, connected to win-ad vlan";
+        IPv6AcceptRA = "yes";
+      };
+      dhcpV4Config.RouteMetric = 8192;
+      ipv6AcceptRAConfig.RouteMetric = 8192;
+      vlan = [ "mgmt" "gwp" "lan" ];
     };
 
     netdevs."20-br0" = {
       netdevConfig = {
+        Description = "default uplink interface";
         Kind = "bridge";
         Name = "br0";
       };
@@ -30,13 +72,11 @@
     networks."20-br0" = {
       name = "br0";
       DHCP = "ipv6";
+      networkConfig.Description = "default uplink interface";
       dns = [ "10.84.16.1" "fe80::1" ];
       domains = [ "isengard.home.kloenk.de" "net.kloenk.de" "kloenk.de" ];
       addresses = [{ Address = "10.84.19.1/22"; }];
       routes = [ { Gateway = "10.84.16.1"; } { Gateway = "fe80::1"; } ];
-
-      #  { Gateway = "fd00::ca0e:14ff:fe07:a2fa"; }
-      #  ];
     };
 
     networks."25-tun" = {
@@ -46,8 +86,24 @@
       linkConfig.RequiredForOnline = "no";
     };
 
+    netdevs."20-lan" = {
+      netdevConfig = {
+        Description = "Default lan (vlan 1)";
+        Kind = "vlan";
+        Name = "lan";
+      };
+      vlanConfig.Id = 1;
+    };
+    networks."25-lan" = {
+      name = "lan";
+      DHCP = "no";
+      networkConfig.Description = "Default lan (vlan 1)";
+      bridge = [ "br0" ];
+    };
+
     netdevs."30-mgmt" = {
       netdevConfig = {
+        Description = "Management vlan";
         Kind = "vlan";
         Name = "mgmt";
       };
@@ -56,7 +112,10 @@
     networks."30-mgmt" = {
       name = "mgmt";
       DHCP = "ipv4";
-      networkConfig = { IPv6AcceptRA = "yes"; };
+      networkConfig = {
+        Description = "Management vlan";
+        IPv6AcceptRA = "yes";
+      };
       dhcpV4Config = { RouteMetric = 4096; };
       ipv6AcceptRAConfig = { RouteMetric = 4096; };
     };

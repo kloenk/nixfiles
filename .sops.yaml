@@ -14,6 +14,7 @@ keys:
   - &server_strider age1uc3uylajglal6ql32r8yjpwhu7zlhep04ka7udds405c92eg3fssadyyuk
   - &server_fingolfin age1s920f262j8tmky0r2vgc2w2mnxyn2mla7vtjhu7nnk3q2w8tvysq9wxu0q
   - &server_maura age100fsyzp2va57j2kjk76k6dd4axyqdl53r6ws5nlepv9mcjkm2ynshep7st
+  - &server_amdir age1dp0fu8m03m5x7nq8ayc7hqf9qpq4qr7zdkpatqelt6z5gtz8vymqfh6lgn
   - &darwin_frodo age1k2uq8d4pal0mlh4c0vc694p0esz8q2q6tnxgzjrguv3gh2ca9s3qukgl62
 creation_rules:
   - path_regex: secrets/thrain[^/]*\.yaml$
@@ -81,6 +82,13 @@ creation_rules:
         - *server_maura
       pgp:
         - *kloenk_gpg
+  - path_regex: secrets/amdir[^/]*\.yaml$
+    key_groups:
+    - age:
+        - *kloenk_age
+        - *server_amdir
+      pgp:
+        - *kloenk_gpg
   - path_regex: secrets/shared/[^/]*\.yaml$
     key_groups:
     - age:
@@ -99,6 +107,7 @@ creation_rules:
         - *server_strider
         - *server_fingolfin
         - *server_maura
+        - *server_amdir
       pgp:
         - *kloenk_gpg
   - path_regex: secrets/.+\.yaml$

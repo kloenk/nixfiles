@@ -21,6 +21,7 @@
         RequiredForOnline = "degraded";
         RequiredFamilyForOnline = "ipv6";
       };
+      networkConfig = { KeepConfiguration = true; };
     };
 
     networks."20-dtag-ppp" = {
