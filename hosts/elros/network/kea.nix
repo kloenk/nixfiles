@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   fileSystems."/var/lib/private/kea" = {
@@ -11,14 +11,24 @@
     let allowDhcp = { allowedUDPPorts = [ 69 ]; };
     in { lan = allowDhcp; };
 
+  services.postgresql = {
+    enable = true;
+    ensureDatabases = [ "kea" ];
+    ensureUsers = [{
+      name = "kea";
+      ensureDBOwnership = true;
+    }];
+  };
+
   services.kea = {
     dhcp4 = {
       enable = true;
       settings = {
         lease-database = {
-          name = "/var/lib/kea/dhcp4.leases";
-          persist = true;
-          type = "memfile";
+          type = "postgresql";
+          name = "kea";
+          host = "/run/postgresql";
+          user = "kea";
         };
         rebind-timer = 2000;
         renew-timer = 1000;
@@ -69,5 +79,13 @@
         };
       };
     };
+  };
+
+  systemd.services.kea-dhcp4-server = {
+    path = [ config.services.postgresql.package ];
+    preStart = ''
+      ${pkgs.kea}/bin/kea-admin db-init pgsql -h /run/postgresql -u kea -n kea || true
+      ${pkgs.kea}/bin/kea-admin db-upgrade pgsql -h /run/postgresql -u kea -n kea || true
+    '';
   };
 }

@@ -56,6 +56,8 @@
           data = "yuyu.isengard.home.kloenk.de";
         }
       ];
+
+      ddns-qualifying-suffix = "yuyu.isengard.home.kloenk.de";
     }];
   };
 
