@@ -22,6 +22,8 @@
   networking.useDHCP = false;
   networking.hostName = "fingolfin";
 
+  time.timeZone = "Europe/Berlin";
+
   k.monitoring.x509_certs.acme.extraCerts =
     [ "https://event.unterbachersee.de" ];
 

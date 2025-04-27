@@ -11,6 +11,8 @@
     ../users/kloenk/password.nix
   ];
 
+  #time.timeZone = "Europe/Berlin";
+
   services.nginx.virtualHosts."${config.networking.hostName}.${config.networking.domain}" =
     {
       enableACME = lib.mkForce false;

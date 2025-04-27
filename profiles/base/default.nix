@@ -3,7 +3,7 @@
 {
   imports = [ ./nix.nix ./zsh ./ssh.nix ./git.nix ./helix.nix ./nushell ];
 
-  time.timeZone = "Europe/Berlin";
+  #time.timeZone = "Europe/Berlin";
   security.pki.certificateFiles =
     [ ../../lib/kloenk-ca.cert.pem ../../lib/kloenk-int-ca.crt ];
 

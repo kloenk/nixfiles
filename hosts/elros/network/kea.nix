@@ -25,17 +25,33 @@
       enable = true;
       settings = {
         lease-database = {
+          #type = "memfile";
+          #name = "/var/lib/kea/leases";
+          persist = true;
           type = "postgresql";
           name = "kea";
           host = "/run/postgresql";
           user = "kea";
         };
+
+        host-reservation-identifiers = [ "hw-address" ];
+        hosts-database = {
+          type = "postgresql";
+          name = "kea";
+          user = "kea";
+          host = "/run/postgresql";
+        };
+
+        #dhcp4o6-port = 6767;
+
         rebind-timer = 2000;
         renew-timer = 1000;
         valid-lifetime = 4000;
 
-        hooks-libraries =
-          [{ library = "${pkgs.kea}/lib/kea/hooks/libdhcp_bootp.so"; }];
+        hooks-libraries = [
+          { library = "${pkgs.kea}/lib/kea/hooks/libdhcp_bootp.so"; }
+          { library = "${pkgs.kea}/lib/kea/hooks/libdhcp_pgsql_cb.so"; }
+        ];
 
         ddns-replace-client-name = "when-not-present";
         ddns-override-client-update = true;
