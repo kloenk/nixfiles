@@ -5,7 +5,6 @@
     ./disko.nix
     ./links.nix
 
-    ../../profiles/bcachefs.nix
     ../../profiles/hetzner_vm.nix
     ../../profiles/postgres.nix
 
@@ -25,9 +24,6 @@
   networking.domain = "kloenk.de";
 
   nix.gc.automatic = true;
-
-  fileSystems."/".device =
-    lib.mkForce "/dev/disk/by-partuuid/b9c887ad-75f8-4d6f-8cf6-4ee63c07a203";
 
   # knot host specific settings
   networking.interfaces.lo.ipv4.addresses = [{
@@ -50,6 +46,8 @@
   ];
 
   services.kresd.instances = 4;
+
+  fileSystems."/persist".neededForBoot = true;
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
