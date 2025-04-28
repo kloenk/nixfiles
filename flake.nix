@@ -83,6 +83,12 @@
       inputs.nixpkgs.follows = "/nixpkgs";
     };
 
+    niri-flake = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "/nixpkgs";
+      inputs.nixpkgs-stable.follows = "/nixpkgs";
+    };
+
     colmena = {
       url = "github:zhaofengli/colmena";
       inputs.nixpkgs.follows = "/nixpkgs";
@@ -243,6 +249,7 @@
               sysbadge.overlays.sysbadge
               oxalica.overlays.default
               lix-module.overlays.default
+              niri-flake.overlays.niri
             ]);
         };
       in {

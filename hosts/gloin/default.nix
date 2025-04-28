@@ -12,6 +12,7 @@
 
     ../../profiles/desktop
     ../../profiles/desktop/sway
+    ../../profiles/desktop/niri
     ../../profiles/desktop/plymouth.nix
     ../../profiles/desktop/autologin.nix
     ../../profiles/desktop/pam_u2f.nix

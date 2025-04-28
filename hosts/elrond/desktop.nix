@@ -77,15 +77,42 @@
 
   environment.systemPackages = with pkgs; [ wl-clipboard ];
 
-  home-manager.users.kloenk.wayland.windowManager.sway.config.output = {
-    "Xiaomi Corporation Mi Monitor Unknown" = {
-      mode = "3440x1440@144.000Hz";
-      position = "1920 10";
-      adaptive_sync = "on";
+  home-manager.users.kloenk = {
+    programs.niri.settings.outputs = {
+      "Xiaomi Corporation Mi Monitor Unknown" = {
+        #mode = "3440x1440@144.000";
+        mode = {
+          width = 1440;
+          height = 1440;
+          refresh = 144.0;
+        };
+        position = {
+          x = 1920;
+          y = 10;
+        };
+        variable-refresh-rate = "on-demand";
+      };
+      "Lenovo Group Limited LEN T2224dA V5W53674" = {
+        mode = {
+          width = 1920;
+          height = 1080;
+        };
+        position = {
+          x = 0;
+          y = 0;
+        };
+      };
     };
-    "Lenovo Group Limited LEN T2224dA V5W53674" = {
-      mode = "1920x1080@59.934Hz";
-      position = "0 0";
+    wayland.windowManager.sway.config.output = {
+      "Xiaomi Corporation Mi Monitor Unknown" = {
+        mode = "3440x1440@144.000Hz";
+        position = "1920 10";
+        adaptive_sync = "on";
+      };
+      "Lenovo Group Limited LEN T2224dA V5W53674" = {
+        mode = "1920x1080@59.934Hz";
+        position = "0 0";
+      };
     };
   };
 }

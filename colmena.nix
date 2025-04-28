@@ -10,6 +10,7 @@ let
     oxalica.overlays.default
     lix-module.overlays.default
     kloenk-www.overlays.default
+
   ]);
 
   lib = nixpkgs.lib.extend (import ./lib);
@@ -79,33 +80,25 @@ in {
       "services/web-apps/homebox.nix"
       "services/web-apps/moodle.nix"
     ];
-    imports = [
-      ./profiles/base/nixos
-      #home-manager.nixosModules.home-manager
-      inputs.sops-nix.nixosModules.sops
-      inputs.disko.nixosModules.default
-
-      self.nixosModules.deluge2
-      #self.nixosModules.firefox
-      self.nixosModules.wordpress
-      self.nixosModules.transient
-      self.nixosModules.helix
-      self.nixosModules.kloenk
-      self.nixosModules.vouch-proxy
-      self.nixosModules.backups
-      self.nixosModules.evremap
-      self.nixosModules.inventree
-      self.nixosModules.kitchenowl
-      self.nixosModules.homebox
-      ./modules/moodle.nix
-
-      #lix-module.nixosModules.default
-      # TODO: 
-      #vika.nixosModules.colorfulMotd
-      #vika.nixosModules.secureSSHClient
-
-      inputs.home-manager.nixosModules.default
-    ];
+    imports = [ ./profiles/base/nixos ./modules/moodle.nix ] ++ (with inputs; [
+      home-manager.nixosModules.default
+      sops-nix.nixosModules.sops
+      disko.nixosModules.default
+      niri-flake.nixosModules.niri
+    ]) ++ (with self.nixosModules; [
+      deluge2
+      #firefox
+      wordpress
+      transient
+      helix
+      kloenk
+      vouch-proxy
+      backups
+      evremap
+      inventree
+      kitchenowl
+      homebox
+    ]);
     # disable home-manager manpage (breaks hydra see https://github.com/rycee/home-manager/issues/1262)
     #home-manager.users.kloenk.manual.manpages.enable = false;
 
@@ -115,6 +108,8 @@ in {
 
     nix.channel.enable = false;
     documentation.nixos.enable = false;
+
+    niri-flake.cache.enable = false;
 
     deployment = {
       buildOnTarget = true;
