@@ -16,7 +16,7 @@
       ];
       routes = [{
         Gateway = "fe80::1";
-        Source = "2a01:4f8:c013:1a4b::1";
+        PreferredSource = "2a01:4f8:c013:1a4b::1";
       }];
       dns = [ "127.0.0.1" ];
       DHCP = "ipv4";

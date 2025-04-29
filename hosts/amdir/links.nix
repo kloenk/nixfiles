@@ -9,12 +9,16 @@
     networks."30-wan" = {
       name = "wan";
       DHCP = "no";
+      networkConfig = { IPv6AcceptRA = false; };
       addresses = [
         { Address = "2a02:8388:8c0:c600::1:28/64"; }
         { Address = "192.168.0.28/24"; }
       ];
       routes = [
-        { Gateway = "fe80::6a02:b8ff:fe9a:ab24"; }
+        {
+          Gateway = "fe80::6a02:b8ff:fe9a:ab24";
+          PreferredSource = "2a02:8388:8c0:c600::1:28";
+        }
         { Gateway = "192.168.0.1"; }
         {
           Destination = "192.168.0.27";
@@ -64,7 +68,9 @@
           type nat hook postrouting priority srcnat;
 
           ip version 4 iifname "gre-*" oifname "wan" masquerade;
-          ip6 version 6 ip6 saddr != ${config.k.strongswan.babel.id.v6-tunnel-ip} iifname "gre-*" oifname "wan" masquerade;
+          #ip6 version 6 ip6 saddr != ${config.k.strongswan.babel.id.v6-tunnel-ip} iifname "gre-*" oifname "wan" masquerade;
+          ip6 version 6 ip6 daddr 2a02:8388:8c0:c600::1:27 iifname "gre-*" oifname "wan" masquerade;
+          ip6 version 6 ip6 daddr 2a02:8388:8c0:c600:68e0:e8fe:ff51:8ca5 iifname "gre-*" oifname "wan" masquerade;
         }
       '';
     };
