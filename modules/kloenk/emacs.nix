@@ -31,10 +31,10 @@ in {
   };
 
   config = mkIf cfg.enable {
-    k.emacs.package = if cfg.gui then
+    k.emacs.package = lib.mkDefault (if cfg.gui then
       if cfg.macports then pkgs.emacs-macport else pkgs.emacs-pgtk
     else
-      pkgs.emacs-nox;
+      pkgs.emacs-nox);
 
     home-manager.users.kloenk = {
       programs.emacs = {

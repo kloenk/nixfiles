@@ -13,6 +13,7 @@
 
   boot.initrd.supportedFilesystems = lib.mkForce [ "vfat" ];
   boot.initrd.kernelModules = [ "sr_mod" ];
+  boot.kernelParams = [ "console=ttyS0,115200" ];
   boot.supportedFilesystems = lib.mkForce [ "cifs" "vfat" "xfs" ];
   # boot.loader.grub.enable = true;
   # boot.loader.systemd-boot.enable = true;

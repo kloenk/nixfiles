@@ -69,6 +69,7 @@ in {
   });
 
   #moodle = callPackage ./moodle { };
+  part-db = callPackage ./part-db { };
 
   ubootElros = callPackage ./ubootElros { };
 }

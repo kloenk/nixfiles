@@ -18,7 +18,8 @@
 
         iifname "wg0" oifname { eth0, buw0 } masquerade;
         ip version 4 iifname "gre-*" oifname { "wg0", "buw0", "eth0" } masquerade;
-        ip6 version 6 ip6 saddr != ${config.k.strongswan.babel.id.v6-tunnel-ip} iifname "gre-*" oifname "eth0" masquerade
+        #ip6 version 6 ip6 saddr != ${config.k.strongswan.babel.id.v6-tunnel-ip} iifname "gre-*" oifname "eth0" masquerade;
+        ip6 version 6 ip6 saddr != ${config.k.strongswan.babel.id.v6-tunnel-ip} iifname "gre-*" oifname "eth0" snat ip6 to 2a01:4f8:c013:1a4b::1;
       }
     '';
   };

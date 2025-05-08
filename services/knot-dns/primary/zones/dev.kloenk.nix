@@ -29,6 +29,7 @@ in with dns.combinators; {
     assets = vaire;
     md = vaire;
     vpn = vaire;
+    parts = vaire;
 
     net.subdomains = common.net // {
       acme = common.helpers.host { v6 = "fd4c:1796:6b06:5662::443"; };

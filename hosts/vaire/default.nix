@@ -13,6 +13,7 @@
     ../../services/snipe-it
     ../../services/hedgedoc
     ../../services/vpn-acme-ca
+    ../../services/part-db
 
     ../../profiles/telegraf.nix
   ];
