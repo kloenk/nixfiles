@@ -1,6 +1,8 @@
 { lib, stdenvNoCC, fetchFromGitHub, php, fetchYarnDeps, nodejs, yarnConfigHook
 , yarnBuildHook, yarnInstallHook, envLocalPath ? "/var/lib/part-db/env.local"
-, cachePath ? "/var/cache/part-db/", logPath ? "/var/log/part-db/", }:
+, cachePath ? "/var/cache/part-db/", logPath ? "/var/log/part-db/"
+, uploadsPath ? "/var/lib/part-db/uploads", mediaPath ? "/var/lib/part-db/media"
+}:
 let
   phpExt =
     php.withExtensions ({ all, enabled }: enabled ++ (with all; [ xsl ]));
@@ -56,6 +58,9 @@ in stdenvNoCC.mkDerivation (finalAttrs:
 
       rm -rf $out/var/{cache,log}
       ln -s ${envLocalPath} $out/.env.local
+      rm -rf $out/uploads $out/public/media
+      ln -sf ${uploadsPath} $out/uploads
+      ln -sf ${mediaPath} $out/public/media
       ln -s ${logPath} $out/var/log
       ln -s ${cachePath} $out/var/cache
     '';

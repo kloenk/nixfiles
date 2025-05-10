@@ -12,7 +12,6 @@ let
     text = ''
       export INVENTREE_CONFIG_FILE=${configFile}
       export INVENTREE_SECRET_KEY_FILE=${cfg.secretKeyFile}
-      export INVENTREE_STATIC_I18_ROOT=${cfg.dataDir}/i18n
       export PYTHONPATH=${pkg.pythonPath}
 
       exec -a "$0" ${pkgs.python3Packages.invoke}/bin/invoke -r ${cfg.package}/opt/inventree "$@"
@@ -85,6 +84,10 @@ in {
             type = types.path;
             default = "${cfg.dataDir}/backups";
             description = "Backup directory";
+          };
+          oidc_private_key_file = mkOption {
+            type = types.path;
+            default = "${cfg.dataDir}/oidc.key";
           };
         };
       });
@@ -197,7 +200,6 @@ in {
       wantedBy = [ "inventree.target" ];
       partOf = [ "inventree.target" ];
       before = [
-        "inventree-migrate.service"
         "inventree-static.service"
         "inventree-gunicorn.service"
         "inventree-qcluster.service"
@@ -220,29 +222,29 @@ in {
       '';
     };
 
-    systemd.services.inventree-migrate = {
-      description = "InvenTree database migration";
-      wantedBy = [ "inventree.target" ];
-      partOf = [ "inventree.target" ];
-      before = [ "inventree-gunicorn.service" "inventree-qcluster.service" ];
-      environment = {
-        INVENTREE_CONFIG_FILE = configFile;
-        INVENTREE_SECRET_KEY_FILE = cfg.secretKeyFile;
-        INVENTREE_STATIC_I18_ROOT = "${cfg.dataDir}/i18n";
-
-        PYTHONPATH = pkg.pythonPath;
-      };
-      serviceConfig = {
-        User = "inventree";
-        Group = "inventree";
-        StateDirectory = "inventree";
-        #RuntimeDirectory = "inventree";
-        PrivateTmp = true;
-        ExecStart = ''
-          ${inventree-invoke}/bin/inventree-invoke migrate
-        '';
-      };
-    };
+    #systemd.services.inventree-migrate = {
+    #  description = "InvenTree database migration";
+    #  wantedBy = [ "inventree.target" ];
+    #  partOf = [ "inventree.target" ];
+    #  before = [ "inventree-gunicorn.service" "inventree-qcluster.service" ];
+    #  environment = {
+    #    INVENTREE_CONFIG_FILE = configFile;
+    #    INVENTREE_SECRET_KEY_FILE = cfg.secretKeyFile;
+    #    INVENTREE_STATIC_I18_ROOT = "${cfg.dataDir}/i18n";
+    #
+    #    PYTHONPATH = pkg.pythonPath;
+    #  };
+    #  serviceConfig = {
+    #    User = "inventree";
+    #    Group = "inventree";
+    #    StateDirectory = "inventree";
+    #    #RuntimeDirectory = "inventree";
+    #    PrivateTmp = true;
+    #    ExecStart = ''
+    #      ${inventree-invoke}/bin/inventree-invoke migrate
+    #    '';
+    #  };
+    #};
 
     systemd.services.inventree-static = {
       description = "InvenTree static migration";
@@ -252,7 +254,9 @@ in {
       environment = {
         INVENTREE_CONFIG_FILE = configFile;
         INVENTREE_SECRET_KEY_FILE = cfg.secretKeyFile;
-        INVENTREE_STATIC_I18_ROOT = "${cfg.dataDir}/i18n";
+        INVENTREE_AUTO_UPDATE = "1";
+        INVENTREE_PLUGINS_ENABLED = "1";
+        INVENTREE_PLUGIN_NOINSTALL = "1";
 
         PYTHONPATH = pkg.pythonPath;
       };
@@ -263,7 +267,7 @@ in {
         #RuntimeDirectory = "inventree";
         PrivateTmp = true;
         ExecStart = ''
-          ${inventree-invoke}/bin/inventree-invoke static
+          ${pkg}/opt/inventree/src/backend/InvenTree/manage.py collectstatic  --no-input
         '';
       };
     };
@@ -271,14 +275,14 @@ in {
     systemd.services.inventree-gunicorn = {
       description = "InvenTree Gunicorn server";
       requiredBy = [ "inventree.target" ];
-      after = [ "inventree-migrate.service" ];
-      requires = [ "inventree-migrate.service" ];
       partOf = [ "inventree.target" ];
       #wantedBy = [ "inventree.target" ];
       environment = {
         INVENTREE_CONFIG_FILE = configFile;
         INVENTREE_SECRET_KEY_FILE = cfg.secretKeyFile;
-        INVENTREE_STATIC_I18_ROOT = "${cfg.dataDir}/i18n";
+        INVENTREE_AUTO_UPDATE = "1";
+        INVENTREE_PLUGINS_ENABLED = "1";
+        INVENTREE_PLUGIN_NOINSTALL = "1";
 
         PYTHONPATH = pkg.pythonPath;
       };
@@ -304,14 +308,14 @@ in {
     systemd.services.inventree-qcluster = {
       description = "InvenTree qcluster server";
       requiredBy = [ "inventree.target" ];
-      after = [ "inventree-migrate.service" ];
-      requires = [ "inventree-migrate.service" ];
       wantedBy = [ "inventree.target" ];
       partOf = [ "inventree.target" ];
       environment = {
         INVENTREE_CONFIG_FILE = configFile;
         INVENTREE_SECRET_KEY_FILE = cfg.secretKeyFile;
-        INVENTREE_STATIC_I18_ROOT = "${cfg.dataDir}/i18n";
+        INVENTREE_AUTO_UPDATE = "1";
+        INVENTREE_PLUGINS_ENABLED = "0";
+        INVENTREE_PLUGIN_NOINSTALL = "1";
 
         PYTHONPATH = pkg.pythonPath;
       };

@@ -14,6 +14,7 @@
     ../../services/hedgedoc
     ../../services/vpn-acme-ca
     ../../services/part-db
+    ../../services/inventree
 
     ../../profiles/telegraf.nix
   ];

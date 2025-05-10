@@ -15,6 +15,8 @@
       INSTANCE_NAME = "Kloenk's parts";
       DEFAULT_URI = "https://parts.kloenk.dev/";
       CHECK_FOR_UPDATES = "0";
+      ALLOW_ATTACHMENT_DOWNLOADS = "1";
+      ATTACHMENT_DOWNLOAD_BY_DEFAULT = "1";
       EDA_KICAD_CATEGORY_DEPTH = "2";
       SAML_ENABLED = "1";
       SAML_SP_ENTITY_ID = "https://parts.kloenk.dev/sp";
@@ -57,4 +59,10 @@
     "f";
 
   sops.secrets."part-db/env".owner = "root";
+
+  backups.part-db = {
+    user = "part-db";
+    paths = [ "/persist/data/part-db" ];
+    postgresDatabases = [ "part-db" ];
+  };
 }

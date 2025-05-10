@@ -1,173 +1,133 @@
-{ python3, fetchFromGitHub, mkYarnPackage, fetchzip }:
+{ stdenvNoCC, python3, fetchFromGitHub, mkYarnPackage, fetchYarnDeps
+, yarnConfigHook, yarnBuildHook, yarnInstallHook, nodejs, fetchzip, fetchpatch,
+}:
 let
-  version = "0.15.3";
+  version = "unstable-2025-05-09";
 
   src = fetchFromGitHub {
     owner = "inventree";
     repo = "InvenTree";
-    rev = version;
-    hash = "sha256-Nm385UHOCtSGlaAG35X67pjFctDO5cB6cU3A2Cgqask=";
+    rev = "e0acfaa762da0dd7b2822b567202210ca8b7dbd3";
+    hash = "sha256-K+cqErDUmgPO7625P3jp7+7BOYEfyJ1nElae6RlJvvI=";
   };
 
-  /* frontend = mkYarnPackage {
-       inherit version;
-       src = "${src}/src/frontend";
-
-       packageJSON = ./package.json;
-       yarnLock = ./yarn.lock;
-       yarnNix = ./yarn.nix;
-
-       configurePhase = ''
-         #ln -s $node_modules node_modules
-         cp -r $node_modules node_modules
-       '';
-
-       buildPhase = ''
-         ls node_modules
-         echo running tsc
-         #./node_modules/.bin/tsc
-         echo running vite
-         ./node_modules/.bin/vite build --outDir $out
-       '';
-
-       doDist = false;
-     };
-  */
-  frontend = fetchzip {
+  frontend = stdenvNoCC.mkDerivation {
     name = "inventree-frontend";
-    url =
-      "https://github.com/inventree/InvenTree/releases/download/${version}/frontend-build.zip";
-    hash = "sha256-Ln6VhCwFw5LLA/80iREx4yq0ONaclgG8tC1GoT71u0g=";
-    stripRoot = false;
+    inherit version src;
+
+    yarnOfflineCache = fetchYarnDeps {
+      yarnLock = "${src}/src/frontend/yarn.lock";
+      hash = "sha256-KpWuYCrkGN+4UnwV1STEbTL0FWcLZ7Wq8a8ST55OpGM=";
+    };
+
+    nativeBuildInputs = [ yarnConfigHook nodejs ];
+
+    patchPhase = ''
+      runHook prePatch
+      cd src/frontend
+      runHook postPatch
+    '';
+
+    buildPhase = ''
+      echo "Running lingui"
+      ./node_modules/.bin/lingui compile --typescript
+      echo building lib
+      ./node_modules/.bin/tsc --p ./tsconfig.lib.json
+      ./node_modules/.bin/vite --config vite.lib.config.ts build
+      echo "Running tsc"
+      ./node_modules/.bin/tsc
+      echo "Running vite"
+      ./node_modules/.bin/vite build --emptyOutDir --outDir $out
+    '';
   };
 
 in python3.pkgs.buildPythonApplication rec {
   pname = "InvenTree";
   inherit version src;
 
-  patches = [ ./i18n_dir.diff ];
-
   format = "other";
 
-  propagatedBuildInputs = with python3.pkgs; [
-    asgiref
-    async-timeout
-    attrs
-    babel
-    bleach
-    brotli
-    certifi
-    cffi
-    charset-normalizer
+  dependencies = with python3.pkgs; [
     coreapi
-    coreschema
     cryptography
-    cssselect2
-    defusedxml
-    diff-match-patch
+    distutils
     dj-rest-auth
-    django
+    django_4
     django-allauth
-    django-allauth-2fa
+    django-allauth.optional-dependencies.openid
+    django-allauth.optional-dependencies.mfa
+    django-allauth.optional-dependencies.socialaccount
     django-cleanup
     django-cors-headers
-    django-crispy-forms
-    django-crispy-bootstrap4
     django-dbbackup
     django-error-report-2
     django-filter
     django-flags
     django-formtools
     django-ical
-    django-import-export
     django-js-asset
     django-maintenance-mode
     django-markdownify
     django-money
     django-mptt
+    django-redis
+    django-oauth-toolkit
     django-otp
-    django-picklefield
     django-q-sentry
     django-q2
-    django-recurrence
     django-redis
     django-sesame
     django-sql-utils
-    django-sslserver
+    django-structlog
     django-stdimage
     django-taggit
     django-user-sessions
     django-weasyprint
-    django-xforwardedfor-middleware
-    django-slowtests
     djangorestframework
     djangorestframework-simplejwt
+    djangorestframework-simplejwt.optional-dependencies.crypto
+    django-xforwardedfor-middleware
     drf-spectacular
     dulwich
-    et-xmlfile
     feedparser
-    fonttools
     gunicorn
-    html5lib
-    icalendar
-    idna
-    importlib-metadata
-    inflection
-    itypes
-    jinja2
-    jsonschema
-    jsonschema-specifications
-    markdown
-    markuppy
-    markupsafe
-    oauthlib
-    odfpy
-    openpyxl
-    packaging
     pdf2image
     pillow
     pint
-    py-moneyed
-    pycparser
-    pydyf
-    pyjwt
-    pyphen
-    pypng
+    pip-licenses
+    pypdf
     python-barcode
-    python-dateutil
+    python-barcode.optional-dependencies.images
     python-dotenv
-    python-fsutil
-    python3-openid
-    pytz
     pyyaml
     qrcode
+    qrcode.optional-dependencies.pil
     rapidfuzz
-    redis
-    referencing
-    regex
-    requests
-    requests-oauthlib
-    rpds-py
     sentry-sdk
-    sgmllib3k
-    six
-    sqlparse
     tablib
-    tinycss2
-    typing-extensions
-    uritemplate
-    urllib3
+    tablib.optional-dependencies.xls
+    tablib.optional-dependencies.xlsx
+    tablib.optional-dependencies.yaml
     weasyprint
-    webencodings
-    xlrd
-    xlwt
-    zipp
-    zopfli
     whitenoise
+
     psycopg2
-    setuptools
-    distutils-extra
+    fido2
   ];
+
+  nativeCheckInputs = with python3.pkgs; [ django-slowtests ];
+
+  #env.INVENTREE_DB_ENGINE = "sqlite3";
+  #env.INVENTREE_DB_NAME = "inventree.sqlite3";
+  #env.INVENTREE_BACKUP_DIR = "test_inventree_backup";
+  #env.INVENTREE_MEDIA_ROOT = "test_inventree_media";
+  #env.INVENTREE_STATIC_ROOT = "test_inventree_static";
+  #env.INVENTREE_SITE_URL = "http://127.0.0.1:12345";
+  #
+  #checkPhase = ''
+  #  python ./src/backend/InvenTree/manage.py check
+  #  python ./src/backend/InvenTree/manage.py test
+  #'';
 
   installPhase = ''
     mkdir -p $out/opt/inventree
@@ -177,10 +137,11 @@ in python3.pkgs.buildPythonApplication rec {
 
     mkdir -p $out/opt/inventree/src/backend/InvenTree/web/static/web
     cp -r ${frontend}/* $out/opt/inventree/src/backend/InvenTree/web/static/web/
+    cp -r ${frontend}/.* $out/opt/inventree/src/backend/InvenTree/web/static/web/
   '';
 
   passthru = {
-    pythonPath = python3.pkgs.makePythonPath propagatedBuildInputs;
+    pythonPath = python3.pkgs.makePythonPath dependencies;
     gunicorn = python3.pkgs.gunicorn;
     inherit frontend;
   };

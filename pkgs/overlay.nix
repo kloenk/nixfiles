@@ -56,12 +56,6 @@ in {
 
   evremap = callPackage ./evremap { };
 
-  #inventree = callPackage ./inventree {
-  #  python3 = final.python3.override {
-  #    packageOverrides = callPackage ./inventree/py-overrides.nix { };
-  #  };
-  #};
-
   strongswanTPM = prev.strongswan.overrideAttrs (oldAttrs: {
     buildInputs = oldAttrs.buildInputs ++ [ final.tpm2-tss ];
     configureFlags = oldAttrs.configureFlags
@@ -72,4 +66,32 @@ in {
   part-db = callPackage ./part-db { };
 
   ubootElros = callPackage ./ubootElros { };
+
+  pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
+    (py-final: py-prev: {
+      django-dbbackup = py-final.callPackage ./python/django-dbbackup { };
+      django-error-report-2 =
+        py-final.callPackage ./python/django-error-report-2 { };
+      django-flags = py-final.callPackage ./python/django-flags { };
+      django-ical = py-final.callPackage ./python/django-ical { };
+      django-markdownify = py-final.callPackage ./python/django-markdownify { };
+      django-money = py-final.callPackage ./python/django-money { };
+      django-q-sentry = py-final.callPackage ./python/django-q-sentry { };
+      django-recurrence = py-final.callPackage ./python/django-recurrence { };
+      django-slowtests = py-final.callPackage ./python/django-slowtests { };
+      django-structlog = py-final.callPackage ./python/django-structlog { };
+      django-stdimage = py-final.callPackage ./python/django-stdimage { };
+      django-user-sessions =
+        py-final.callPackage ./python/django-user-sessions { };
+      django-weasyprint = py-final.callPackage ./python/django-weasyprint { };
+      django-xforwardedfor-middleware =
+        py-final.callPackage ./python/django-xforwardedfor-middleware { };
+      pip-licenses = py-final.callPackage ./python/pip-licenses { };
+      py-moneyed = py-final.callPackage ./python/py-moneyed { };
+      pytest-pycodestyle = py-final.callPackage ./python/pytest-codestyle { };
+      sentry-sdk = py-final.callPackage ./python/sentry-sdk { };
+    })
+  ];
+
+  inventree = final.callPackage ./inventree { };
 }

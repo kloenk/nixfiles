@@ -1,0 +1,36 @@
+{
+  lib,
+  buildPythonPackage,
+  fetchFromGitHub,
+  setuptools,
+  wheel,
+}:
+
+buildPythonPackage rec {
+  pname = "pytest-pycodestyle";
+  version = "2.4.1";
+  pyproject = true;
+
+  src = fetchFromGitHub {
+    owner = "henry0312";
+    repo = "pytest-pycodestyle";
+    rev = "v${version}";
+    hash = "sha256-kvjkpDPNhaXjMLQbrJFusRINgsyeBwkxcWm9rxkuj/Q=";
+  };
+
+  build-system = [
+    setuptools
+    wheel
+  ];
+
+  pythonImportsCheck = [
+    "pytest_pycodestyle"
+  ];
+
+  meta = {
+    description = "Pytest plugin to run pycodestyle";
+    homepage = "https://github.com/henry0312/pytest-pycodestyle";
+    license = lib.licenses.mit;
+    maintainers = with lib.maintainers; [ ];
+  };
+}
