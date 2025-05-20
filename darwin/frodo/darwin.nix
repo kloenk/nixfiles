@@ -25,6 +25,7 @@
   # wezterm font size
   k.programs.wezterm.font_size = 13.0;
   k.emacs.gui = true;
+  k.emacs.package = pkgs.emacs;
 
   services.nix-daemon.enable = true;
   nix = {
