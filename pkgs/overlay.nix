@@ -94,4 +94,8 @@ in {
   ];
 
   inventree = final.callPackage ./inventree { };
+
+  openocd-stm32h7rx = prev.openocd.overrideAttrs (oldAttrs: {
+    patches = (oldAttrs.patches or [ ]) ++ [ ./openocd-stm32h7rx.diff ];
+  });
 }
