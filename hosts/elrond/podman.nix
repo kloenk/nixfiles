@@ -14,5 +14,7 @@
     };
   };
 
+  users.users.kloenk.extraGroups = [ "podman" ];
+
   virtualisation.oci-containers.backend = "podman";
 }

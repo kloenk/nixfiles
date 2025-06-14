@@ -16,6 +16,7 @@
     ./disko.nix
     ./evremap.nix
     ./secureboot.nix
+    ./niri.nix
     # ./kde.nix
 
     ../../profiles/syncthing.nix

@@ -75,6 +75,14 @@
     ENV{NRF_CDC_ACM}=="1", ENV{ID_MM_CANDIDATE}="0", ENV{ID_MM_DEVICE_IGNORE}="1"
 
     ${builtins.readFile ./99-jlink.udev}
+
+    # st
+    ACTION!="add", SUBSYSTEM!="usb_device", GOTO="stm_rules_end"
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="0483", MODE="0666"
+
+    KERNEL=="ttyACM[0-9]*", SUBSYSTEM=="tty", SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", MODE="0666", ENV{STM32_CDC_ACM}="1"
+    LABEL="stm_rules_end"
+    ENV{STM32_CDC_ACM}=="1", ENV{ID_MM_CANDIDATE}="0", ENV{ID_MM_DEVICE_IGNORE}="1"
   '';
 
   users.users.kloenk = {

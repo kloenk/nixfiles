@@ -1,7 +1,8 @@
 { ... }:
 
 {
-  imports = [ ./binds.nix ./input.nix ./screenshots.nix ];
+  imports =
+    [ ./binds.nix ./input.nix ./screenshots.nix ./workspaces.nix ./quirks.nix ];
 
   programs.niri.enable = true;
   home-manager.users.kloenk = {
