@@ -39,4 +39,10 @@ in {
   sops.secrets."inventree/secret_key".owner = "inventree";
   sops.secrets."inventree/keycloak_secret".owner = "inventree";
   sops.secrets."inventree/email_password".owner = "inventree";
+
+  backups.inventree = {
+    user = "inventree";
+    paths = [ "/var/lib/inventree" ];
+    postgresDatabases = [ "inventree" ];
+  };
 }

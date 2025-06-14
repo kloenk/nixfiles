@@ -18,6 +18,10 @@ let
         type = with types; listOf str;
         default = [ ];
       };
+      btrfsSubvolumes = mkOption {
+        type = with types; attrsOf str;
+        default = { };
+      };
       postgresDatabases = mkOption {
         type = with types; listOf str;
         default = [ ];
@@ -78,13 +82,27 @@ in {
         '') backup.postgresDatabases + (if backup.paths != [ ] then ''
           restic backup ${concatStringsSep " " backup.paths}
         '' else
-          "") + ''
+          "") + (lib.optionalString (backup.btrfsSubvolumes != { }) ''
+            restic backup btrfs
+          '') + ''
             restic check
           '';
 
         restartIfChanged = false;
 
-        serviceConfig = {
+        serviceConfig = let
+          pre-start-btrfs = pkgs.writeShellScript "pre-start-btrfs" (''
+            mkdir -p btrfs
+          '' + lib.concatStringsSep "\n" (lib.mapAttrsToList
+            (volume: snapshot: ''
+              ${pkgs.btrfs-progs}/bin/btrfs subvolume snapshot -r ${volume} ${snapshot}
+            '') backup.btrfsSubvolumes));
+          post-stop-btrfs = pkgs.writeShellScript "post-stop-btrfs"
+            "btrfs subvolume delete ${
+              (lib.concatMapStringsSep " " (snapshot: "btrfs/${snapshot}")
+                (lib.attrValues backup.btrfsSubvolumes))
+            }";
+        in {
           EnvironmentFile = "${config.sops.secrets."restic/aws-env".path}";
           LoadCredential =
             [ "password-file:${config.sops.secrets."restic/password".path}" ];
@@ -93,6 +111,8 @@ in {
           DynamicUser = backup.dynamicUser;
           PrivateTmp = true;
           CacheDirectory = "restic-backups-${name}";
+          PreStartExec = [ "!${pre-start-btrfs}" ];
+          PostStopExec = [ "!${post-stop-btrfs}" ];
         };
       }) backups;
 

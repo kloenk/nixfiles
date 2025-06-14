@@ -41,6 +41,7 @@
                   mountpoint = "/persist";
                   mountOptions = [ "compress=zstd" "noatime" ];
                 };
+                "/persist/data/netbox" = { };
                 "/swap" = {
                   mountpoint = "/.swapvol";
                   swap.swapfile.size = "2G";

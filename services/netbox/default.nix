@@ -52,7 +52,8 @@
 
   backups.netbox = {
     user = "netbox";
-    paths = [ "/persist/data/netbox" ];
+    #paths = [ "/persist/data/netbox" ];
+    btrfsSubvolumes = { "/persist/data/netbox" = "netbox"; };
     postgresDatabases = [ "netbox" ];
   };
 }
