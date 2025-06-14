@@ -7,11 +7,11 @@ in {
   nix = {
     settings = {
       substituters = [
-        "http://seven-cache01.syseleven.seven.secunet.com"
+        "http://cache.factory.secunet.com/factory-1"
         # "http://seven-cache02.syseleven.seven.secunet.com"
       ];
       trusted-public-keys =
-        [ "seven-1:M1znlh60ChXxeuOXaxFVLTrmeJS+UpYVfmI5fmX2Itc=" ];
+        [ "factory-1:Ai12PqfDkRmLzju4eE5/ucuDGXw4J31d3aTrz4TZKrk=" ];
     };
     extraOptions = ''
       keep-outputs = true
@@ -42,12 +42,14 @@ in {
   programs.ssh = {
     extraConfig = ''
       Host secunet-aarch64-1
-        HostName fd00:5ec:0:8008::3
+        #HostName fd00:5ec:0:8008::3
+        HostName nixbuilder-arm-01.factory.secunet.com
         User nixbuild
         IdentitiesOnly yes
         IdentityFile ${config.sops.secrets."secunet/nix/ed25519".path}
       Host secunet-x86_64-1
-        HostName fd00:5ec:0:8008::6
+        #HostName fd00:5ec:0:8008::6
+        HostName nixbuilder-amd-01.factory.secunet.com
         User nixbuild
         IdentitiesOnly yes
         IdentityFile ${config.sops.secrets."secunet/nix/ed25519".path}

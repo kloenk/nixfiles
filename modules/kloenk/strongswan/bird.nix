@@ -56,12 +56,8 @@ in {
         ${cfg.babel.bird.earlyExtraConfig}
 
         include "${
-          pkgs.substituteAll {
-            name = "bird-${config.networking.hostName}.conf";
-
+          pkgs.replaceVars ./bird.conf {
             primaryIP4 = cfg.babel.id.v4-private-ip;
-
-            src = ./bird.conf;
           }
         }";
 
