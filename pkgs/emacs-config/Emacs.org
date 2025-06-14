@@ -94,7 +94,13 @@ Disable some UI elements and similar
 #+BEGIN_SRC nix
 exec-path-from-shell
 #+END_SRC
-
+** VTerm
+#+begin_src emacs-lisp
+  (use-package vterm)
+#+end_src
+#+begin_src nix
+vterm
+#+end_src
 * UI Configuration
 ** Theme
 #+BEGIN_SRC emacs-lisp :nixpkg monokai-pro-theme
@@ -560,13 +566,13 @@ counsel-projectile
 #+end_src
 *** Poly
 **** poly-nix
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
   (use-package poly-nix
     :config
     )
 #+end_src
 
-#+begin_src nix
+#+begin_src nix :tangle no
 poly-nix
 #+end_src
 *** Magit

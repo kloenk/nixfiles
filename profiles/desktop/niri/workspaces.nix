@@ -14,7 +14,7 @@
         {
           matches = [{
             at-startup = true;
-            app-id = "firefox";
+            app-id = "^firefox$";
           }];
           open-on-workspace = "firefox";
         }
@@ -22,7 +22,7 @@
           matches = [
             {
               at-startup = true;
-              app-id = "emacs";
+              app-id = "^emacs$";
             }
             {
               at-startup = true;
@@ -35,12 +35,12 @@
         {
           matches = [
             {
-              at-startup = true;
-              app-id = "org.gnome.Fractal";
+              #at-startup = true;
+              app-id = "^org.gnome.Fractal$";
             }
             {
-              at-startup = true;
-              app-id = "org.telegram.desktop";
+              #at-startup = true;
+              app-id = "^org.telegram.desktop$";
             }
           ];
           open-on-workspace = "chat";

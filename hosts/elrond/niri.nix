@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, config, ... }:
 
 let
   main = "DP-2";
@@ -13,6 +13,17 @@ in {
 
         "01-chat".open-on-output = side-left;
       };
+    };
+
+    xdg.autostart = {
+      enable = true;
+      readOnly = true;
+      entries = [
+        "${pkgs.fractal}/share/applications/org.gnome.Fractal.desktop"
+        "${pkgs.telegram-desktop}/share/applications/org.telegram.desktop.desktop"
+        "${pkgs.firefox}/share/applications/firefox.desktop"
+        "${config.home-manager.users.kloenk.programs.emacs.finalPackage}/share/applications/emacsclient.desktop"
+      ];
     };
   };
 }

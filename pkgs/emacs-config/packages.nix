@@ -5,6 +5,8 @@ with e; [
 
   exec-path-from-shell
 
+  vterm
+
   monokai-pro-theme
 
   rainbow-delimiters
@@ -43,8 +45,6 @@ with e; [
 
   projectile
   counsel-projectile
-
-  poly-nix
 
   magit
   forge
