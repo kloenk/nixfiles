@@ -15,7 +15,8 @@ in {
       enableACME = true;
       forceSSL = true;
       kTLS = true;
-      root = pkgs.kloenk-www;
+      #root = pkgs.kloenk-www;
+      root = inputs.kloenk-www.packages.${config.nixpkgs.system}.kloenk-www;
       locations."/public/".alias = "/persist/data/public/";
       locations."/".extraConfig = "return 301 https://kloenk.eu;";
       #locations."/.well-known/security.txt".alias = ../../lib/security.txt.asc;
@@ -32,7 +33,8 @@ in {
       enableACME = true;
       forceSSL = true;
       kTLS = true;
-      root = pkgs.kloenk-www;
+      #root = pkgs.kloenk-www;
+      root = inputs.kloenk-www.packages.${config.nixpkgs.system}.kloenk-www;
       locations."= /.well-known/matrix/client" = let
         client = {
           "m.homeserver" = { base_url = "https://matrix.kloenk.eu"; };
@@ -80,7 +82,8 @@ in {
       enableACME = true;
       forceSSL = true;
       kTLS = true;
-      root = pkgs.kloenk-www;
+      #root = pkgs.kloenk-www;
+      root = inputs.kloenk-www.packages.${config.nixpkgs.system}.kloenk-www;
       locations."/public/".alias = "/persist/data/public/";
       locations."/".extraConfig = "return 301 https://kloenk.eu;";
       locations."/.well-known/security.txt".tryFiles =

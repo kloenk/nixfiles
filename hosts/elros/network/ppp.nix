@@ -20,6 +20,7 @@
       linkConfig = {
         RequiredForOnline = "degraded";
         RequiredFamilyForOnline = "ipv6";
+        MTUBytes = toString 1508;
       };
       networkConfig = { KeepConfiguration = true; };
     };
@@ -67,12 +68,12 @@
         noipdefault
         lcp-echo-interval 20
         lcp-echo-failure 3
-        mtu 1492
+        mtu 1500
         hide-password
         defaultroute
         +ipv6
-        debug
       '';
+      #         debug
     };
   };
 
