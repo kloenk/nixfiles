@@ -8,6 +8,7 @@
     ./pipewire.nix
     ./evremap.nix
     ./kea.nix
+    ./niri.nix
     ./secureboot.nix
 
     ../../profiles/desktop

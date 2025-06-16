@@ -15,6 +15,8 @@
           open-floating = true;
         }
       ];
+
+      environment.ELECTRON_OZON_PLATFORM_HINT = "auto";
     };
   };
 }
