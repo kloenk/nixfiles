@@ -20,11 +20,12 @@
     # ./kde.nix
 
     ../../profiles/syncthing.nix
+    ../../profiles/mosh.nix
 
     ../../profiles/desktop
     ../../profiles/desktop/sway
     ../../profiles/desktop/niri
-    ../../profiles/desktop/ios.nix
+    #    ../../profiles/desktop/ios.nix
     ../../profiles/desktop/plymouth.nix
     ../../profiles/desktop/autologin.nix
     ../../profiles/desktop/pam_u2f.nix

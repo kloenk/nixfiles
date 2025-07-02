@@ -21,6 +21,7 @@
 
     ../../profiles/secunet.nix
     ../../profiles/syncthing.nix
+    ../../profiles/mosh.nix
     #../../profiles/bcachefs.nix
     #../../profiles/secureboot.nix
 

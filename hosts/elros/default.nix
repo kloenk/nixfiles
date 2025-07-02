@@ -11,6 +11,7 @@
     ./secureboot.nix
 
     ../../profiles/users/kloenk/password.nix
+    ../../profiles/mosh.nix
     ../../profiles/postgres.nix
 
     ../../profiles/telegraf.nix

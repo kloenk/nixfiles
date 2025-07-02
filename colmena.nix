@@ -65,6 +65,7 @@ in {
     # vm on frodo
     nodeNixpkgs.maura = aarchNixpkgs;
     nodeNixpkgs.amdir = x86Nixpkgs;
+    nodeNixpkgs.trahald = x86Nixpkgs;
 
     #allowApplyAll = false;
 
@@ -244,5 +245,12 @@ in {
       ./hosts/amdir
       (import (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix"))
     ];
+  };
+
+  trahald = { pkgs, nodes, ... }: {
+    deployment.targetHost = "trahald.net.kloenk.dev";
+    deployment.tags = [ "usb" ];
+
+    imports = [ ./hosts/trahald ];
   };
 }
