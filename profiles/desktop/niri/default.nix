@@ -1,13 +1,21 @@
 { ... }:
 
 {
-  imports =
-    [ ./binds.nix ./input.nix ./screenshots.nix ./workspaces.nix ./quirks.nix ];
+  imports = [
+    ./binds.nix
+    ./input.nix
+    ./screenshots.nix
+    ./workspaces.nix
+    ./quirks.nix
+    ./wpaperd.nix
+  ];
 
   programs.niri.enable = true;
   home-manager.users.kloenk = {
     programs.niri = {
       settings = {
+        prefer-no-csd = true;
+
         hotkey-overlay.skip-at-startup = true;
         layout = {
           gaps = 15;
