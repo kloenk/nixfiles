@@ -1,0 +1,143 @@
+* {
+    border: none;
+    font-size: 14px;
+    font-family: "JetBrainsMono Nerd Font,JetBrainsMono NF" ;
+    min-height: 25px;
+}
+
+window#waybar {
+  background: transparent;
+  margin: 5px;
+ }
+
+#custom-logo {
+  padding: 0 10px;
+}
+
+.modules-right {
+  padding-left: 5px;
+  border-radius: 15px 0 0 15px;
+  margin-top: 2px;
+  background: #000000;
+}
+
+.modules-center {
+  padding: 0 15px;
+  margin-top: 2px;
+  border-radius: 15px 15px 15px 15px;
+  background: #000000;
+}
+
+.modules-left {
+  border-radius: 0 15px 15px 0;
+  margin-top: 2px;
+  background: #000000;
+}
+
+#battery,
+#custom-clipboard,
+#custom-colorpicker,
+#custom-powerDraw,
+#bluetooth,
+#pulseaudio,
+#network,
+#disk,
+#memory,
+#backlight,
+#cpu,
+#temperature,
+#custom-weather,
+#idle_inhibitor,
+#jack,
+#tray,
+#window,
+#workspaces,
+#language,
+#clock {
+  padding: 0 5px;
+}
+#wireplumber {
+  padding-top: 3px;
+}
+
+#temperature.critical,
+#wireplumber.muted {
+  color: #FF0000;
+  padding-top: 0;
+}
+
+#network {
+    font-family: Material Icons;
+}
+
+#network button:hover {
+    font-family: Jetbrains Mono;;
+}
+
+#clock{
+  color: #5fd1fa;
+}
+
+#battery.charging {
+    color: #ffffff;
+    background-color: #26A65B;
+}
+
+#battery.warning:not(.charging) {
+    background-color: #ffbe61;
+    color: black;
+}
+
+#battery.critical:not(.charging) {
+    background-color: #f53c3c;
+    color: #ffffff;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+
+#bluetooth {
+    font-family: Material Icons;
+}
+
+#bluetooth button:hover {
+    font-family: Jetbrains Mono;
+}
+
+/*#workspaces button {
+    font-size: 12px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#workspaces button#niri-workspace-chat {
+    background-image: url('@CHAT_ICON@');
+}
+
+#workspaces button#niri-workspace-terminal {
+    background-image: url('@TERMINAL_ICON@');
+}
+
+#workspaces button#niri-workspace-browser {
+    background-image: url('@FIREFOX_ICON@');
+}
+
+#workspaces button#niri-workspace-develop {
+    background-image: url('@CODE_ICON@');
+}*/
+
+/*#language {
+    padding: 15px;
+}*/
+

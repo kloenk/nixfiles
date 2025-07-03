@@ -8,7 +8,7 @@
         focus-follows-mouse.enable = true;
         keyboard = {
           xkb = {
-            layout = "us";
+            layout = "us,de";
             options = "compose:caps";
           };
         };

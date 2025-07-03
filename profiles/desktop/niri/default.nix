@@ -8,6 +8,7 @@
     ./workspaces.nix
     ./quirks.nix
     ./wpaperd.nix
+    ./waybar
   ];
 
   programs.niri.enable = true;

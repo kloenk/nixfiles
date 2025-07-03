@@ -23,7 +23,7 @@
     ../../profiles/mosh.nix
 
     ../../profiles/desktop
-    ../../profiles/desktop/sway
+    #../../profiles/desktop/sway
     ../../profiles/desktop/niri
     #    ../../profiles/desktop/ios.nix
     ../../profiles/desktop/plymouth.nix

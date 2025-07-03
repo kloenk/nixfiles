@@ -12,7 +12,7 @@
     ./secureboot.nix
 
     ../../profiles/desktop
-    ../../profiles/desktop/sway
+    #../../profiles/desktop/sway
     ../../profiles/desktop/niri
     ../../profiles/desktop/plymouth.nix
     ../../profiles/desktop/autologin.nix
