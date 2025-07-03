@@ -23,7 +23,7 @@ module "nix extern" {
 
     return ($res.stdout
       | split row "\n" | split column -n 2 "\t"
-      | filter { |d| $d.column1 != "normal" and $d.column1 != "attrs" and $d.column1 != "filenames" and $d.column1 != "" }
+      | where { |d| $d.column1 != "normal" and $d.column1 != "attrs" and $d.column1 != "filenames" and $d.column1 != "" }
       | each { |d| { value: ($d | get column1), description: ($d | get column2 )}}
     )
   }

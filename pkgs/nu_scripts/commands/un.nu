@@ -10,7 +10,7 @@ module kloenk/un {
 
     let comp = ($res.stdout
       | split row "\n" | split column -n 2 "\t"
-      | filter { |d| $d.column1 != "normal" and $d.column1 != "attrs" and $d.column1 != "filenames" and $d.column1 != "" }
+      | where { |d| $d.column1 != "normal" and $d.column1 != "attrs" and $d.column1 != "filenames" and $d.column1 != "" }
       | each { |d|
         mut value = ($d | get column1)
 	if not ($value | str contains "#") {
@@ -30,7 +30,7 @@ module kloenk/un {
 
       return ($res.stdout
         | split row "\n" | split column -n 2 "\t"
-        | filter { |d| $d.column1 != "normal" and $d.column1 != "attrs" and $d.column1 != "filenames" and $d.column1 != "" }
+        | where { |d| $d.column1 != "normal" and $d.column1 != "attrs" and $d.column1 != "filenames" and $d.column1 != "" }
         | each { |d| { value: ($d | get column1 | str substring (($DEFAULT_FLAKE | str length) + 1)..), description: ($d | get column2 )}}
 	| append $comp
       )
