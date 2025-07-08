@@ -66,17 +66,28 @@ in {
         renew-timer = 1000;
         valid-lifetime = 4000;
 
-        interfaces-config.interfaces = [ "gwp-br0" ];
-        subnet4 = [{
-          id = 1;
-          pools = [{ pool = "10.1.0.50 - 10.1.0.150"; }];
-          subnet = "10.1.0.0/24";
+        interfaces-config.interfaces = [ "gwp-br0" "gwp-oob" ];
+        subnet4 = [
+          {
+            id = 1;
+            pools = [{ pool = "10.1.0.50 - 10.1.0.150"; }];
+            interface = "gwp-br0";
+            subnet = "10.1.0.0/24";
 
-          option-data = [{
-            name = "ntp-servers";
-            data = "178.215.228.24";
-          }];
-        }];
+            option-data = [{
+              name = "ntp-servers";
+              data = "178.215.228.24";
+            }];
+          }
+          {
+            id = 50;
+            pools = [{ pool = "10.1.50.50 - 10.1.50.150"; }];
+            interface = "gwp-oob";
+            subnet = "10.1.50.0/24";
+
+            option-data = [ ];
+          }
+        ];
       };
     };
   };
