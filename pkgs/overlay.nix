@@ -7,11 +7,7 @@ in {
 
   nu_kloenk = callPackage ./nu_scripts { };
 
-  vemacs = callPackage ./vemacs { };
-  vemacsMac = callPackage ./vemacs/mac.nix { };
-
-  kloenk-emacs = callPackage ./emacs { emacs = final.emacs29-pgtk; };
-  emacs-config = callPackage ./emacs-config { emacs = final.emacs29-pgtk; };
+  emacs-config = callPackage ./emacs-config { emacs = final.emacs-pgtk; };
 
   emacsPackages = prev.emacsPackages
     // (prev.emacsPackages.callPackage ./emacsPackages { });
@@ -55,12 +51,6 @@ in {
   update-ssh-host-keys = callPackage ./update-ssh-host-keys { };
 
   evremap = callPackage ./evremap { };
-
-  strongswanTPM = prev.strongswan.overrideAttrs (oldAttrs: {
-    buildInputs = oldAttrs.buildInputs ++ [ final.tpm2-tss ];
-    configureFlags = oldAttrs.configureFlags
-      ++ [ "--enable-tpm" "--enable-tss-tss2" ];
-  });
 
   #moodle = callPackage ./moodle { };
   part-db = callPackage ./part-db { };
