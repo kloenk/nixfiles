@@ -58,6 +58,8 @@
     # sudo udevadm control --reload-rules &&  sudo udevadm trigger 
     # connect and disconnetc the USB device
 
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="1a86", MODE="0666"
+
     # NRF
     # 71-nrf.rules
     ACTION!="add", SUBSYSTEM!="usb_device", GOTO="nrf_rules_end"

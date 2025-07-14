@@ -94,6 +94,11 @@
           "Mod+Shift+8".action.move-column-to-workspace = 8;
           "Mod+Shift+9".action.move-column-to-workspace = 9;
 
+          # screencast
+          "Mod+Shift+C".action.set-dynamic-cast-window = [ ];
+          "Mod+Ctrl+C".action.set-dynamic-cast-monitor = [ ];
+          "Mod+Shift+Ctrl+C".action.clear-dynamic-cast-target = [ ];
+
           # column editing stuffs
           "Mod+BracketLeft".action.consume-or-expel-window-left = [ ];
           "Mod+BracketRight".action.consume-or-expel-window-right = [ ];

@@ -45,6 +45,27 @@
           ];
           open-on-workspace = "chat";
         }
+
+        # casting
+        {
+          matches = [{ is-window-cast-target = true; }];
+          border = {
+            inactive.gradient = {
+              from = "#64de50";
+              to = "#ff9a56";
+              in' = "oklch shorter hue";
+              relative-to = "window";
+              angle = 135;
+            };
+            active.gradient = {
+              from = "#64de50";
+              to = "#5bcefa";
+              in' = "oklch shorter hue";
+              relative-to = "window";
+              angle = 135;
+            };
+          };
+        }
       ];
     };
   };

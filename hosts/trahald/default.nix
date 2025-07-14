@@ -9,6 +9,8 @@
 
     ../../profiles/users/kloenk/password.nix
     ../../profiles/mosh.nix
+    ../../profiles/desktop
+    ../../profiles/desktop/niri
 
     ../../profiles/telegraf.nix
   ];
@@ -19,6 +21,7 @@
 
   boot.initrd.systemd.enable = true;
   boot.initrd.systemd.emergencyAccess = true;
+  boot.initrd.availableKernelModules = { usb_storage = true; };
 
   networking.useDHCP = false;
   networking.hostName = "trahald";
