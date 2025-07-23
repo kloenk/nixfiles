@@ -133,7 +133,7 @@
     };
   };
   systemd.services.postgresql.postStart = ''
-    $PSQL -tAc 'GRANT pg_read_all_stats TO telegraf' -d postgres
+    psql -tAc 'GRANT pg_read_all_stats TO telegraf' -d postgres
   '';
 
   # de locales
