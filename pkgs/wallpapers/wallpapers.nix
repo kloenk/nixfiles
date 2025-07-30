@@ -428,7 +428,7 @@ in {
   dishonored_outsider = ./images/dishonored/outsider.jpeg;
 
   antonov = fromFile { file = ./images/antonov.jpg; };
-  cool-space = fromFile { file = ./images/cool-space.png; };
+  cool-space = fromFile { file = ./images/cool-space.jpg; };
   river = fromFile { file = ./images/river.png; };
   sao = fromFile { file = ./images/sao.png; };
   sea_clouds = fromFile { file = ./images/sea_clouds.jpg; };
