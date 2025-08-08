@@ -8,7 +8,7 @@ module "west external" {
       return [ ]
     }
 
-    return ($res.stdout | split row "\n" | split column -n 2 "\t" | each { |d| {value: $d.column1, description: ($d | get -i column2) }})
+    return ($res.stdout | split row "\n" | split column -n 2 "\t" | each { |d| {value: $d.column1, description: ($d | get -o column2) }})
   }
   
   def "nu-complete west shields" [context: string] {
@@ -18,7 +18,7 @@ module "west external" {
       return [ ]
     }
 
-    return ($res.stdout | split row "\n" | split column -n 2 "\t" | each { |d| {value: $d.column1, description: ($d | get -i column2) }})
+    return ($res.stdout | split row "\n" | split column -n 2 "\t" | each { |d| {value: $d.column1, description: ($d | get -o column2) }})
   }
 
   def "nu-complete west build --target" [context: string] {
@@ -32,7 +32,7 @@ module "west external" {
     }
     let res = ($res.stdout | split row "\n")
     let res = ($res | last (($res | length) - 2))
-    return ($res | split column -n 2 ":" | each { |d| { value: $d.column1, description: ($d | get -i column2) }})
+    return ($res | split column -n 2 ":" | each { |d| { value: $d.column1, description: ($d | get -o column2) }})
   }
 
   def "nu-complete west build --pristine" [] {

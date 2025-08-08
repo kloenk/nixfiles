@@ -56,6 +56,7 @@ e: with e; [
 #+BEGIN_SRC emacs-lisp
   (use-package no-littering)
   (setq auto-save-file-name-transforms `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
+  (setq make-backup-files nil)
 #+END_SRC
 
 * Basic
@@ -492,9 +493,18 @@ treesit-grammars.with-all-grammars
 #+begin_src nix
 nix-mode
 #+end_src
-*** Rust
+***  Rust
 #+begin_src emacs-lisp
+  (use-package rust-mode
+    :defer t
+    :init
+    (setq rust-mode-treesitter-derive t))
+
   (use-package rustic
+    :defer t
+    :after (rust-mode)
+    :config
+    (setq rustic-format-on-save t)
     :custom
     (rustic-lsp-client 'eglot))
 #+end_src

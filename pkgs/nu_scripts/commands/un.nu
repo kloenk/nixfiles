@@ -108,7 +108,7 @@ module kloenk/un {
     package_list: list
     depth: int
   ] {
-    let prev_list = ($env | get -i kloenk.nix.shell.packages)
+    let prev_list = ($env | get -o kloenk.nix.shell.packages)
     let new_list = ($prev_list | append $package_list)
 
     let execute = $"set-env kloenk {nix: {shell: {depth: ($depth), packages: ($new_list)}}}"
@@ -117,7 +117,7 @@ module kloenk/un {
   }
   
   def get_current_depth [] {
-    if ($env | get -i kloenk.nix.shell.depth | is-empty) {
+    if ($env | get -o kloenk.nix.shell.depth | is-empty) {
       return 0
     } else {
       return $env.kloenk.nix.shell.depth
