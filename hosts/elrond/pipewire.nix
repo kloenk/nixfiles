@@ -46,19 +46,36 @@
         };
       }];
     };
-    "40-thrain-mpd" = {
+    # airplay
+    "40-raop" = {
       "context.modules" = [{
-        name = "libpipewire-module-rtp-source";
+        name = "libpipewire-module-raop-discover";
         args = {
-          "source.ip" = "192.168.178.248";
-          "source.port" = "6002";
-          "sess.ignore-ssrc" = true;
-          "stream.props" = {
-            "media.class" = "Audio/Source";
-            "node.name" = "kloenk.recv.rtp.thrain";
-          };
+          "stream.rules" = [{
+            matches = [{ "raop.ip" = "~.*"; }];
+            actions = {
+              create-stream = {
+                stream.props = { "media.class" = "Audio/Sink"; };
+              };
+            };
+          }];
         };
       }];
     };
+    /* "40-thrain-mpd" = {
+         "context.modules" = [{
+           name = "libpipewire-module-rtp-source";
+           args = {
+             "source.ip" = "192.168.178.248";
+             "source.port" = "6002";
+             "sess.ignore-ssrc" = true;
+             "stream.props" = {
+               "media.class" = "Audio/Source";
+               "node.name" = "kloenk.recv.rtp.thrain";
+             };
+           };
+         }];
+       };
+    */
   };
 }
