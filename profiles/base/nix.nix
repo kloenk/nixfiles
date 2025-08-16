@@ -38,5 +38,4 @@
       nixpkgs.flake = args.inputs.nixpkgs;
     };
   };
-  environment.systemPackages = [ pkgs.nix-output-monitor ];
 }

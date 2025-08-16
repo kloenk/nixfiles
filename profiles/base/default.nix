@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./nix.nix ./zsh ./ssh.nix ./git.nix ./helix.nix ./nushell ];
+  imports = [ ./nix.nix ./zsh ./ssh.nix ./git.nix ./nushell ];
 
   #time.timeZone = "Europe/Berlin";
   security.pki.certificateFiles =

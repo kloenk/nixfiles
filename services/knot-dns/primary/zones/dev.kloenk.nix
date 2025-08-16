@@ -25,6 +25,9 @@ in with dns.combinators; {
     bitwarden = varda;
     auth = varda;
 
+    gts = varda;
+    "pleroma.gts" = varda;
+
     netbox = vaire;
     assets = vaire;
     md = vaire;

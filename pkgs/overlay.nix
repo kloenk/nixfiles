@@ -43,6 +43,8 @@ in {
     };
   });
 
+  pleroma-fe = final.callPackage ./pleroma-fe { };
+
   # helix = prev.helix.overrideAttrs
   #   (oldAttrs: rec { patches = oldAttrs.patches ++ [ ./helix-etc.patch ]; });
 

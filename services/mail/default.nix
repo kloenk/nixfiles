@@ -48,8 +48,7 @@
     dmarcReporting = {
       enable = true;
       domain = "kloenk.de";
-      fromName = "kloenk";
-      localpart = "dmarc-noreply";
+      #localpart = "dmarc-noreply";
       organizationName = "kloenk";
     };
 
@@ -345,10 +344,10 @@
   */
 
   # itsbroken
-  systemd.services.dovecot2.after = lib.mkForce [ "network.target" ];
+  systemd.services.dovecot.after = lib.mkForce [ "network.target" ];
   systemd.services.postfix.after = lib.mkForce [
     "network.target"
-    "dovecot2.service"
+    "dovecot.service"
     "opendkim.service"
     "rspamd.service"
   ];
@@ -372,4 +371,6 @@
     # dovecot
     # http.urls = [ "http://localhost:9900/metrics" ];
   };
+
+  mailserver.stateVersion = 3;
 }

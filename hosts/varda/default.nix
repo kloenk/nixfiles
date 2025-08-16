@@ -22,6 +22,7 @@
     ../../services/monitoring
     ../../services/monitoring/kuma.nix
     ../../services/netbox-old
+    ../../services/gts
     ../../services/youtrack
 
     ../../profiles/telegraf.nix
