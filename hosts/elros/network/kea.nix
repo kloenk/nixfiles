@@ -50,7 +50,7 @@
 
         hooks-libraries = [
           { library = "${pkgs.kea}/lib/kea/hooks/libdhcp_bootp.so"; }
-          { library = "${pkgs.kea}/lib/kea/hooks/libdhcp_pgsql_cb.so"; }
+          { library = "${pkgs.kea}/lib/kea/hooks/libdhcp_pgsql.so"; }
         ];
 
         ddns-replace-client-name = "when-not-present";

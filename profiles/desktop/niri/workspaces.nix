@@ -11,13 +11,14 @@
         "01-chat" = { name = "chat"; };
       };
       window-rules = [
-        {
-          matches = [{
-            at-startup = true;
-            app-id = "^firefox$";
-          }];
-          open-on-workspace = "firefox";
-        }
+        /* {
+             matches = [{
+               at-startup = true;
+               app-id = "^firefox$";
+             }];
+             open-on-workspace = "firefox";
+           }
+        */
         {
           matches = [
             {

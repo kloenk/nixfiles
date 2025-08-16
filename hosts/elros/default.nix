@@ -7,6 +7,7 @@
 
     ./network
     ./strongswan.nix
+    ./homeassist.nix
 
     ./secureboot.nix
 
@@ -28,6 +29,12 @@
   networking.hostName = "elros";
 
   users.users.yuka.extraGroups = [ "wheel" ];
+  users.users.kloenk.extraGroups = [ "libvirtd" ];
+
+  virtualisation.libvirtd = {
+    enable = true;
+    onShutdown = "shutdown";
+  };
 
   # u-boot
   system.build.uboot = pkgs.ubootElros;

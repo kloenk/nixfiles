@@ -69,6 +69,7 @@
         lcp-echo-interval 20
         lcp-echo-failure 3
         mtu 1500
+        mru 1500
         hide-password
         defaultroute
         +ipv6

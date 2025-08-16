@@ -131,6 +131,7 @@ in {
       sshfp =
         "5981fad283f4404fced9081a9a609282548db8382c944d2e07d47655893ca6de";
     };
+    "home.elros" = elros;
 
     elrond = host {
       v4 = "10.84.32.150";

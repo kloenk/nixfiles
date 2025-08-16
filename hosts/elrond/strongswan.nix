@@ -16,7 +16,10 @@
   };
 
   services.strongswan-swanctl.swanctl = {
-    connections.babel-elros.remote_addrs = [ "fe80::1%br0" "10.84.16.1" ];
+    connections.babel-elros.remote_addrs = [
+      # "fe80::1%br0"
+      "10.84.16.1"
+    ];
     secrets.token.ak_ecc.handle = "0x81010004";
   };
 
@@ -28,4 +31,3 @@
   };
   systemd.network.netdevs."30-wg0".enable = false;
 }
-

@@ -38,7 +38,7 @@
       id = 1;
       interface = "lan";
       pools = [{ pool = "10.84.16.20 - 10.84.17.220"; }];
-      subnet = "10.84.16.0/20";
+      subnet = "10.84.16.0/22";
 
       option-data = [
         {
