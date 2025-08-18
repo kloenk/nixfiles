@@ -112,11 +112,12 @@ in {
      };
   */
 
-  hisuka_stars = fromUrl {
-    url = "https://i.imgur.com/Tas7Ebq.png";
-    name = "hisuka_stars.png";
-    hash = "sha256-yFvv/EAdT0Azb20PndO49mT3fHvVNLeEG2lltvTc9hA=";
-  };
+  /* hisuka_stars = fromUrl {
+       url = "https://i.imgur.com/Tas7Ebq.png";
+       name = "hisuka_stars.png";
+       hash = "sha256-yFvv/EAdT0Azb20PndO49mT3fHvVNLeEG2lltvTc9hA=";
+     };
+  */
 
   /* hisuka_black_cards = fromUrl {
        url = "https://i.imgur.com/lH6klTI.jpg";
@@ -205,28 +206,31 @@ in {
     name = "shapoco_battery.jpg";
     hash = "sha256-P/je9Vj9VpyEGibyqVPEdaMleUKvTNUUvAHnT1NC8SY=";
   };
-  shapoco_ram_store = fromUrl {
-    url =
-      "https://cdn.donmai.us/original/39/12/__original_and_2_more_drawn_by_shapoco__3912612df20265f3394fee98ead87487.jpg";
-    name = "shapoco_ram_store.jpg";
-    hash = "sha256-NHxfHUSqtQpeSN8bkhTpdYfHHBGSq/BcOA/LJZCgMx8=";
-  };
+  # to low res :(
+  /* shapoco_ram_store = fromUrl {
+       url =
+         "https://cdn.donmai.us/original/39/12/__original_and_2_more_drawn_by_shapoco__3912612df20265f3394fee98ead87487.jpg";
+       name = "shapoco_ram_store.jpg";
+       hash = "sha256-NHxfHUSqtQpeSN8bkhTpdYfHHBGSq/BcOA/LJZCgMx8=";
+     };
 
-  water_core_city = fromPixiv {
-    src = "https://www.pixiv.net/en/artworks/91140651";
-    url =
-      "https://i.pximg.net/img-master/img/2021/07/10/12/55/25/91140651_p0_master1200.jpg";
-    name = "water_core_city.jpg";
-    sha256 = "sha256-qVlV6eX6j5SNJ1K/YzZwbfnOPON0zfmyExPe3km97fU=";
-  };
+     water_core_city = fromPixiv {
+       src = "https://www.pixiv.net/en/artworks/91140651";
+       url =
+         "https://i.pximg.net/img-master/img/2021/07/10/12/55/25/91140651_p0_master1200.jpg";
+       name = "water_core_city.jpg";
+       sha256 = "sha256-qVlV6eX6j5SNJ1K/YzZwbfnOPON0zfmyExPe3km97fU=";
+     };
+  */
 
-  mount_cap = fromPixiv {
-    src = "https://www.pixiv.net/en/artworks/91219701";
-    url =
-      "https://i.pximg.net/img-master/img/2021/07/13/19/40/41/91219701_p0_master1200.jpg";
-    name = "mount_cap.jpg";
-    sha256 = "sha256-zAU7Cw2mxKk4YCsR0PuaJCF695Sad28rgwz61gPms2c=";
-  };
+  /* mount_cap = fromPixiv {
+       src = "https://www.pixiv.net/en/artworks/91219701";
+       url =
+         "https://i.pximg.net/img-master/img/2021/07/13/19/40/41/91219701_p0_master1200.jpg";
+       name = "mount_cap.jpg";
+       sha256 = "sha256-zAU7Cw2mxKk4YCsR0PuaJCF695Sad28rgwz61gPms2c=";
+     };
+  */
   /* girls_exploding_cap = fromPixiv {
        src = "https://www.pixiv.net/en/artworks/107214767";
        url =
@@ -257,19 +261,21 @@ in {
     hash = "sha256-emhJPylfwk0NpNvVBUSgLuClLvyLEfuCtv8ahkOWau8=";
   };
 
-  girl_chasing_plane = fromUrl {
-    url =
-      "https://cdn.donmai.us/original/e9/59/__original_drawn_by_shapoco__e9592d7986f946a0830fe40c1c2efa91.png";
-    name = "girl_chasing_plane.png";
-    hash = "sha256-JO7kN7RoTxZ2yQOERr7RvhNxbjL8C0uv6G6MzpwvdwE=";
-  };
+  /* girl_chasing_plane = fromUrl {
+       url =
+         "https://cdn.donmai.us/original/e9/59/__original_drawn_by_shapoco__e9592d7986f946a0830fe40c1c2efa91.png";
+       name = "girl_chasing_plane.png";
+       hash = "sha256-JO7kN7RoTxZ2yQOERr7RvhNxbjL8C0uv6G6MzpwvdwE=";
+     };
+  */
 
-  lost_in_space_mag = fromRedditPost {
-    url =
-      "https://www.reddit.com/r/WarframeRunway/comments/en4jw5/mag_as_robot_mock_poster_for_lost_in_space_watch/";
-    name = "lost_in_space_mag_robot.jpeg";
-    sha256 = "sha256-D6/T4kiBUCnDzJmYhTac3gq9TDX15Geu/8BZ9qsSPQg=";
-  };
+  /* lost_in_space_mag = fromRedditPost {
+       url =
+         "https://www.reddit.com/r/WarframeRunway/comments/en4jw5/mag_as_robot_mock_poster_for_lost_in_space_watch/";
+       name = "lost_in_space_mag_robot.jpeg";
+       sha256 = "sha256-D6/T4kiBUCnDzJmYhTac3gq9TDX15Geu/8BZ9qsSPQg=";
+     };
+  */
 
   alita = fromRedditPost {
     url =
@@ -285,19 +291,20 @@ in {
     sha256 = "sha256-jmL4VTqhSk1BsSOtCJscvoxgiFPyP8snuAoWcITPdDc=";
   };
 
-  argo_ship = fromRedditPost {
-    url =
-      "https://www.reddit.com/r/StarshipPorn/comments/frh9x4/the_argo_taking_off_from_a_remote_moon_in_the/";
-    name = "sc_argo_taking_of.jpeg";
-    sha256 = "sha256-EY1ucFt2PsCXl/Ar6+n8FWcvlw4XoW7lIx1kiuzbU7Y=";
-  };
+  /* argo_ship = fromRedditPost {
+       url =
+         "https://www.reddit.com/r/StarshipPorn/comments/frh9x4/the_argo_taking_off_from_a_remote_moon_in_the/";
+       name = "sc_argo_taking_of.jpeg";
+       sha256 = "sha256-EY1ucFt2PsCXl/Ar6+n8FWcvlw4XoW7lIx1kiuzbU7Y=";
+     };
 
-  city_depth = fromRedditPost {
-    url =
-      "https://www.reddit.com/r/wallpapers/comments/g0etum/city_depths_by_alec_tucker_3840x2160/";
-    name = "steampunk_city_depths.png";
-    sha256 = "sha256-uC+RX+igJ0pyQvF9QHLTttTvag1lI054QfjFGm6ocgw=";
-  };
+     city_depth = fromRedditPost {
+       url =
+         "https://www.reddit.com/r/wallpapers/comments/g0etum/city_depths_by_alec_tucker_3840x2160/";
+       name = "steampunk_city_depths.png";
+       sha256 = "sha256-uC+RX+igJ0pyQvF9QHLTttTvag1lI054QfjFGm6ocgw=";
+     };
+  */
 
   /* bioshock_skycrane = fromRedditPost {
        url = "https://www.reddit.com/r/gaming/comments/87hknr/some_bioshock_wallpapers/";
@@ -366,19 +373,20 @@ in {
   };
 
   # Starcitizen
-  sc_downed_man = fromUrl {
-    url =
-      "https://robertsspaceindustries.com/media/4at3dc1hbnlldr/wallpaper_3840x2160/Source.jpg";
-    name = "sc_downed_man.jpg";
-    hash = "sha256-U/d+hlIWNFFauOnjPX2aNALHL+lohaK+YgBqcL64qzs=";
-  };
+  /* sc_downed_man = fromUrl {
+       url =
+         "https://robertsspaceindustries.com/media/4at3dc1hbnlldr/wallpaper_3840x2160/Source.jpg";
+       name = "sc_downed_man.jpg";
+       hash = "sha256-U/d+hlIWNFFauOnjPX2aNALHL+lohaK+YgBqcL64qzs=";
+     };
 
-  sc_city_mist = fromUrl {
-    url =
-      "https://robertsspaceindustries.com/media/h3xwsmgo74u42r/wallpaper_3840x2160/Source.jpg";
-    name = "sc_city_mist.jpg";
-    hash = "sha256-SeRs4cSmDfe9yViSNSOGaHIz88nB4qzGenFGL7rBzfE=";
-  };
+     sc_city_mist = fromUrl {
+       url =
+         "https://robertsspaceindustries.com/media/h3xwsmgo74u42r/wallpaper_3840x2160/Source.jpg";
+       name = "sc_city_mist.jpg";
+       hash = "sha256-SeRs4cSmDfe9yViSNSOGaHIz88nB4qzGenFGL7rBzfE=";
+     };
+  */
 
   sc_spider_concept = fromUrl {
     url =
@@ -423,6 +431,20 @@ in {
     url = "https://i.imgur.com/8tAtF47.jpeg";
     name = "hzd_artwork_drawn.jpeg";
     hash = "sha256-rUE0couCbiTIZQI7mPBeo5JAtne/6Oymx+5tpQ/7kFQ=";
+  };
+
+  seerlight_city = fromUrl {
+    url =
+      "https://cdn.donmai.us/original/4a/58/__original_drawn_by_seerlight__4a580e17123690e3bcb3d8f115803f28.jpg";
+    name = "seerlight_city.jpg";
+    hash = "sha256-fsy7slb5dwwEUbTPwn4+eZg0e81w5Af87aGBwh6hYao=";
+  };
+
+  shanchi_post_office = fromUrl {
+    url =
+      "https://cdn.donmai.us/original/ec/b1/__original_drawn_by_shanchi__ecb1e9862c7a65ab9214900c8072bce8.jpg";
+    name = "shanchi_post_office.jpg";
+    hash = "sha256-J6GUtTtPzhbn1bqv8nmJnQRcCgugJ2+dmth9e64AdBM=";
   };
 
   dishonored_outsider = ./images/dishonored/outsider.jpeg;
