@@ -13,5 +13,23 @@
     };
     jack.enable = true;
     pulse.enable = true;
+    extraConfig.pipewire = {
+      # airplay
+      "40-raop" = {
+        "context.modules" = [{
+          name = "libpipewire-module-raop-discover";
+          args = {
+            "stream.rules" = [{
+              matches = [{ "raop.ip" = "~.*"; }];
+              actions = {
+                create-stream = {
+                  stream.props = { "media.class" = "Audio/Sink"; };
+                };
+              };
+            }];
+          };
+        }];
+      };
+    };
   };
 }
