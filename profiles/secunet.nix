@@ -64,6 +64,12 @@ in {
     };
   };
 
+  programs.git = {
+    config = {
+      gitlab.git.seven.secucloud.secunet."com/api/v4".user = "fiona.behrens";
+    };
+  };
+
   sops.secrets."secunet/nix/ed25519" = {
     sopsFile = ../secrets/shared/secunet.yaml;
     owner = "root";

@@ -594,11 +594,12 @@ poly-nix
 #+end_src
 **** Forge
 #+begin_src emacs-lisp
-    (use-package forge
-      :after magit
-      :config
-       (add-to-list 'forge-alist '("git.seven.secucloud.secunet.com" "git.seven.secucloud.secunet.com/api/v4" "git.seven.secucloud.secunet.com" forge-gitlab-repository))
-       (add-to-list 'forge-alist '("cyberchaos.dev" "cyberchaos.dev/api/v4" "cyberchaos.sev" forge-gitlab-repository)))
+      (use-package forge
+        :after magit
+        :config
+         (add-to-list 'forge-alist '("git.seven.secucloud.secunet.com" "git.seven.secucloud.secunet.com/api/v4" "git.seven.secucloud.secunet.com" forge-gitlab-repository))
+         (add-to-list 'forge-alist '("cyberchaos.dev" "cyberchaos.dev/api/v4" "cyberchaos.dev" forge-gitlab-repository))
+         (setq auth-sources '("~/.authinfo.gpg" "~/.authinfo")))
 #+end_src
 #+begin_src nix
   magit

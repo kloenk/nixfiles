@@ -33,6 +33,9 @@ in {
         smtpServer = "gimli.kloenk.de";
         smtpUser = "finn@kloenk.dev";
       };
+
+      github.user = "kloenk";
+      gitlab.cyberchaos."dev/api/v4".user = "kloenk";
     };
   };
 }
