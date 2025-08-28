@@ -1,7 +1,7 @@
 { pkgs, config, ... }:
 
 let
-  ext = "DP-3";
+  ext = "DP-2";
   builtin = "eDP-1";
 in {
   home-manager.users.kloenk = {

@@ -8,6 +8,7 @@
     ./workspaces.nix
     ./quirks.nix
     ./wpaperd.nix
+    ./notifications.nix
     ./waybar
   ];
 
