@@ -56,11 +56,17 @@ in {
     '';
     knownHosts = {
       # aarch64-01
-      "fd00:5ec:0:8008::3".publicKey =
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH9NXi+pEIjOcsgh6uIcLxyGAP1pnp87E0T8dBj8wahG";
+      "fd00:5ec:0:8008::3" = {
+        publicKey =
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH9NXi+pEIjOcsgh6uIcLxyGAP1pnp87E0T8dBj8wahG";
+        hostNames = [ "nixbuilder-arm-01.factory.secunet.com" ];
+      };
       # x86-64-01
-      "fd00:5ec:0:8008::6".publicKey =
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFZM4vpq5mrih7vS8leIZB1wJok4yVRqVJ30L1euVA45";
+      "fd00:5ec:0:8008::6" = {
+        publicKey =
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFZM4vpq5mrih7vS8leIZB1wJok4yVRqVJ30L1euVA45";
+        hostNames = [ "nixbuilder-amd-01.factory.secunet.com" ];
+      };
     };
   };
 

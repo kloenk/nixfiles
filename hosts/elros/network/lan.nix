@@ -23,7 +23,7 @@
       };
       addresses =
         [ { Address = "10.84.16.1/22"; } { Address = "fe80::1/64"; } ];
-      ipv6SendRAConfig = { };
+      ipv6SendRAConfig = { RouterPreference = "high"; };
       dhcpPrefixDelegationConfig = {
         UplinkInterface = "dtag-ppp";
         SubnetId = "0x01";

@@ -7,7 +7,7 @@
 
     ./network
     ./strongswan.nix
-    ./homeassist.nix
+    #./homeassist.nix
 
     ./secureboot.nix
 

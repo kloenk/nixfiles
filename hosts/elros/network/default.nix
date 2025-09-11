@@ -11,6 +11,7 @@
 
     ./dns
     ./kea.nix
+    ./ntp.nix
     ./iperf3.nix
   ];
 

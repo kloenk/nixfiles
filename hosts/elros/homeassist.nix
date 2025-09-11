@@ -5,7 +5,7 @@
     enableACME = true;
     forceSSL = true;
     kTLS = true;
-    locations = {
+    locations."/" = {
       recommendedProxySettings = true;
       proxyWebSockets = true;
       proxyPass = "http://10.84.19.4:8123";
