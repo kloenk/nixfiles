@@ -90,4 +90,18 @@ in {
   openocd-stm32h7rx = prev.openocd.overrideAttrs (oldAttrs: {
     patches = (oldAttrs.patches or [ ]) ++ [ ./openocd-stm32h7rx.diff ];
   });
+
+  openocd-wch = prev.openocd.overrideAttrs (oldAttrs: {
+    src = final.fetchFromGitHub {
+      owner = "jnk0le";
+      repo = "openocd-wch";
+      rev = "62850cbf873937e6d602154397788bccabc85052";
+      hash = "sha256-3g2XTHHKz/E4nhYJqlvZoWatfJ6AZPeLHmeZZ2s0qpY=";
+    };
+
+    nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [ final.autoreconfHook ];
+
+    configureFlags = oldAttrs.configureFlags
+      ++ [ "--enable-wlinke" "--disable-ch347" ];
+  });
 }
