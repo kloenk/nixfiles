@@ -129,6 +129,13 @@
       url = "gitlab:kloenk/rfl-nix-slides?host=cyberchaos.dev";
       inputs.nixpkgs.follows = "/nixpkgs";
     };
+
+    nixos-apple-silicon = {
+      type = "github";
+      owner = "yuyuyureka";
+      repo = "nixos-apple-silicon";
+      ref = "minimize-patches";
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, pre-commit, flake-utils, ... }:
@@ -250,6 +257,7 @@
               oxalica.overlays.default
               lix-module.overlays.default
               niri-flake.overlays.niri
+              nixos-apple-silicon.overlays.default
             ]);
         };
       in {

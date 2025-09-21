@@ -14,7 +14,12 @@
       plugins = with pkgs.moodlePackages; [ # bigbluebuttonbn
         tiles
         sharing_cart
-        scheduler
+        (scheduler.overrideAttrs (oldAttrs: {
+          postInstall = (oldAttrs.postInstall or "") + ''
+            substituteInPlace $out/classes/task/send_reminders.php \
+              --replace-fail "cron_setup_user" "\core\cron::setup_user"
+          '';
+        }))
         lightboxgallery
       ];
     };
