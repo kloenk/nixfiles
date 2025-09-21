@@ -72,7 +72,7 @@ in {
     cyberchaos = {
       hostNames = [ "cyberchaos.dev" ];
       publicKey =
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB994/Dz2G4vKDYeC1PQ445OKaaJLWdM6I+PBvHRDLa5";
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGvZ0qVkJJcRYEh0oyWsWIZtr3ST4jxFhT3IP5KNKleW";
     };
 
     fleetyards_staging = {
@@ -84,12 +84,6 @@ in {
       hostNames = [ "fleetyards.net" ];
       publicKey =
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDnP3Tvyvk3hoZLOuFVokhu37tCXODGxHhVlCRtllAZW";
-    };
-
-    poccase = {
-      hostNames = [ "poccase1.eventphone.de" ];
-      publicKey =
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAKZmxA9Tb8oDwRKqAe+uOgjVMiiYSLtJccbslJ+t4Yq";
     };
 
     # well known hosts
