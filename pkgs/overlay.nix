@@ -15,6 +15,8 @@ in {
   partlint = callPackage ./partlint { };
   homebox = callPackage ./homebox { };
 
+  sddm-celeste = callPackage ./sddm-celeste { };
+
   inherit (callPackage ./kitchenowl { python3 = final.python312; })
     kitchenowl-backend kitchenowl-desktop kitchenowl-web;
 

@@ -1,17 +1,17 @@
 { nixpkgs, self, ... }@inputs:
 let
-  hostOverlays = [
-    self.overlays.kloenk
-    (_final: prev: { lib = prev.lib.extend (import ./lib); })
-  ] ++ (with inputs; [
+  hostOverlays = (with inputs; [
     moodlepkgs.overlay
     colmena.overlay
     sysbadge.overlays.default
     oxalica.overlays.default
     lix-module.overlays.default
     kloenk-www.overlays.default
-
-  ]);
+    niri-flake.overlays.niri
+  ]) ++ [
+    self.overlays.kloenk
+    (_final: prev: { lib = prev.lib.extend (import ./lib); })
+  ];
 
   lib = nixpkgs.lib.extend (import ./lib);
 

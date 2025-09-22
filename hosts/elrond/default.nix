@@ -25,9 +25,10 @@
     ../../profiles/desktop
     #../../profiles/desktop/sway
     ../../profiles/desktop/niri
+    ../../profiles/desktop/sddm.nix
     #    ../../profiles/desktop/ios.nix
     ../../profiles/desktop/plymouth.nix
-    ../../profiles/desktop/autologin.nix
+    # ../../profiles/desktop/autologin.nix
     ../../profiles/desktop/pam_u2f.nix
     ../../profiles/desktop/mail.nix
 
@@ -94,6 +95,8 @@
   services.pcscd.enable = true;
   services.telegraf.extraConfig.inputs = { sensors = { }; };
   systemd.services.telegraf.path = with pkgs; [ lm_sensors ];
+
+  security.polkit.debug = true;
 
   services.openssh.settings.X11Forwarding = true;
 

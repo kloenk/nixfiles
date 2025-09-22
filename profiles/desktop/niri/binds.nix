@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   users.users.kloenk.packages = with pkgs; [ fuzzel wezterm ];
@@ -10,12 +10,12 @@
         binds = {
           "Mod+Return" = {
             repeat = false;
-            action.spawn = [ "wezterm" ];
+            action.spawn = [ "${lib.getExe pkgs.wezterm}" ];
           };
 
           "Mod+D" = {
             repeat = false;
-            action.spawn = [ "fuzzel" ];
+            action.spawn = [ "${lib.getExe pkgs.fuzzel}" ];
           };
 
           "Mod+Shift+E".action.quit = [ ];
@@ -113,19 +113,42 @@
           "Mod+W".action.toggle-column-tabbed-display = [ ];
 
           # media keys
-          "XF86AudioRaiseVolume".action.spawn =
-            [ "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+" ];
-          "XF86AudioLowerVolume".action.spawn =
-            [ "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-" ];
-          "XF86AudioMute".action.spawn =
-            [ "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle" ];
-          "XF86AudioMicMute".action.spawn =
-            [ "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle" ];
-          "XF86AudioRaiseVolume".allow-when-locked = true;
-          "XF86AudioLowerVolume".allow-when-locked = true;
-          "XF86AudioMute".allow-when-locked = true;
-          "XF86AudioMicMute".allow-when-locked = true;
-
+          "XF86AudioRaiseVolume" = {
+            action.spawn = [
+              (lib.getExe' pkgs.wireplumber "wpctl")
+              "set-volume"
+              "@DEFAULT_AUDIO_SINK@"
+              "0.1+"
+            ];
+            allow-when-locked = true;
+          };
+          "XF86AudioLowerVolume" = {
+            action.spawn = [
+              (lib.getExe' pkgs.wireplumber "wpctl")
+              "set-volume"
+              "@DEFAULT_AUDIO_SINK@"
+              "0.1-"
+            ];
+            allow-when-locked = true;
+          };
+          "XF86AudioMute" = {
+            action.spawn = [
+              (lib.getExe' pkgs.wireplumber "wpctl")
+              "set-mute"
+              "@DEFAULT_AUDIO_SINK@"
+              "toggle"
+            ];
+            allow-when-locked = true;
+          };
+          "XF86AudioMicMute" = {
+            action.spawn = [
+              (lib.getExe' pkgs.wireplumber "wpctl")
+              "set-mute"
+              "@DEFAULT_AUDIO_SOURCE@"
+              "toggle"
+            ];
+            allow-when-locked = true;
+          };
         };
       };
     };
