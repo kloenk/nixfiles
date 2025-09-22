@@ -62,6 +62,10 @@ in {
       system = "aarch64-linux";
       overlays = hostOverlays;
     };
+    nodeNixpkgs.underhill = import nixpkgs {
+      system = "aarch64-linux";
+      overlays = hostOverlays;
+    };
     # vm on frodo
     nodeNixpkgs.maura = aarchNixpkgs;
     nodeNixpkgs.amdir = x86Nixpkgs;
@@ -252,5 +256,16 @@ in {
     deployment.tags = [ "usb" ];
 
     imports = [ ./hosts/trahald ];
+  };
+
+  underhill = { pkgs, nodes, ... }: {
+    deployment.targetHost = "underhill.net.kloenk.dev";
+    deployment.tags = [ "asahi" "local" ];
+
+    imports = [
+      ./hosts/underhill
+
+      inputs.nixos-apple-silicon.nixosModules.default
+    ];
   };
 }
