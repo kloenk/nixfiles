@@ -16,27 +16,28 @@
 
   programs.niri = {
     enable = true;
-    package = pkgs.niri-stable.overrideAttrs (oldAttrs: {
-      postInstall = let
-        niri-session-systemd = pkgs.writeShellScript "niri-session" ''
-          if systemctl --user -q is-active niri.service; then
-            echo 'A niri session is already running.'
-            exit 1
-          fi
+    /* package = pkgs.niri-stable.overrideAttrs (oldAttrs: {
+         postInstall = let
+           niri-session-systemd = pkgs.writeShellScript "niri-session" ''
+             if systemctl --user -q is-active niri.service; then
+               echo 'A niri session is already running.'
+               exit 1
+             fi
 
-          # Start niri and wait for it to terminate.
-          systemctl --user --wait start niri.service
+             # Start niri and wait for it to terminate.
+             systemctl --user --wait start niri.service
 
-          # Force stop of graphical-session.target.
-          systemctl --user start --job-mode=replace-irreversibly niri-shutdown.target
+             # Force stop of graphical-session.target.
+             systemctl --user start --job-mode=replace-irreversibly niri-shutdown.target
 
-          # Unset environment that we've set.
-          systemctl --user unset-environment WAYLAND_DISPLAY DISPLAY XDG_SESSION_TYPE XDG_CURRENT_DESKTOP NIRI_SOCKET
-        '';
-      in oldAttrs.postInstall + ''
-        cp ${niri-session-systemd} $out/bin/niri-session
-      '';
-    });
+             # Unset environment that we've set.
+             systemctl --user unset-environment WAYLAND_DISPLAY DISPLAY XDG_SESSION_TYPE XDG_CURRENT_DESKTOP NIRI_SOCKET
+           '';
+         in oldAttrs.postInstall + ''
+           cp ${niri-session-systemd} $out/bin/niri-session
+         '';
+       });
+    */
   };
   home-manager.users.kloenk = {
     programs.niri = {

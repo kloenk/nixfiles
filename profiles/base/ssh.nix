@@ -70,7 +70,7 @@ in {
     };
 
     cyberchaos = {
-      hostNames = [ "cyberchaos.dev" ];
+      hostNames = [ "[cyberchaos.dev]:62954" ];
       publicKey =
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGvZ0qVkJJcRYEh0oyWsWIZtr3ST4jxFhT3IP5KNKleW";
     };
