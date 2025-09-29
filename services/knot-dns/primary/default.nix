@@ -40,7 +40,7 @@ in {
       remote = {
         internal_ns2 = { address = "fd4c:1796:6b06:11b8::53"; };
         leona_ns2 = {
-          address = "2a02:247a:22e:fd00:1::1";
+          address = "2a02:2479:56:500::1";
           key = "kloenk_leona_secondary";
         };
         leona_ns3 = {
@@ -54,7 +54,7 @@ in {
           action = "transfer";
         };
         leona_transfer = {
-          address = [ "2a02:247a:22e:fd00:1::1" "2a01:4f8:c010:1098::1" ];
+          address = [ "2a02:2479:56:500::1" "2a01:4f8:c010:1098::1" ];
           action = "transfer";
           key = "kloenk_leona_secondary";
         };
