@@ -103,5 +103,11 @@ in {
       publicKey =
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMZvRd4EtM7R+IHVMWmDkVU3VLQTSwQDSAvW0t2Tkj60";
     };
+    "git.factory.secunet.com" = {
+      extraHostNames =
+        [ "git.seven.secucloud.secunet.com" "git.factory.secunet.com" ];
+      publicKey =
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICJy42gNaTTLKF+KYnxf+roSUkTDFKtNnrJ3Kx1v0JY/";
+    };
   };
 }

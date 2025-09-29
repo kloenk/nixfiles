@@ -12,18 +12,16 @@
     ./secureboot.nix
 
     ../../profiles/desktop
-    #../../profiles/desktop/sway
     ../../profiles/desktop/niri
-    ../../profiles/desktop/plymouth.nix
-    ../../profiles/desktop/autologin.nix
+    ../../profiles/desktop/sddm.nix
     ../../profiles/desktop/pam_u2f.nix
     ../../profiles/desktop/mail.nix
+
+    ../../profiles/desktop/plymouth.nix
 
     ../../profiles/secunet.nix
     ../../profiles/syncthing.nix
     ../../profiles/mosh.nix
-    #../../profiles/bcachefs.nix
-    #../../profiles/secureboot.nix
 
     ../../profiles/telegraf.nix
   ];
