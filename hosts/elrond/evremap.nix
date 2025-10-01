@@ -2,7 +2,7 @@
 
 {
   programs.evremap = {
-    enable = true;
+    enable = false;
     devices."Das Keyboard" = {
       device_name = "Metadot - Das Keyboard DK5QS";
       remap = [

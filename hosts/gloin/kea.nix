@@ -3,10 +3,16 @@
 let
   hostname = "10.1.0.1";
 
-  gwpHostReservations = [{
-    name = "edge-ng-0001";
-    mac = "00:01:05:95:45:90";
-  }];
+  gwpHostReservations = [
+    {
+      name = "se10";
+      mac = "e8:80:88:f9:96:b2";
+    }
+    {
+      name = "edge-ng-0001";
+      mac = "00:01:05:95:45:90";
+    }
+  ];
 
   makeIp = i: "10.1.0.${toString (100 + i)}";
 

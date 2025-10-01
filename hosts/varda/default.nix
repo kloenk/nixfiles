@@ -52,6 +52,18 @@
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [ "youtrack" ];
 
+  services.sniproxy-rs = {
+    enable = false;
+    routes."elros.kloenk.dev" = {
+      domains = [ "elros.kloenk.de" ];
+      backend = {
+        address = "[fd4c:1796:6b06:59a1::1]:8843";
+        nat46_prefix = "fd4c:1796:6b06:59a1::1:0:0";
+      };
+      http_redirect = false;
+    };
+  };
+
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you

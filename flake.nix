@@ -193,6 +193,7 @@
         vouch-proxy = import ./modules/vouch-proxy;
         backups = import ./modules/backups;
         evremap = import ./modules/evremap;
+        sniproxy-rs = import ./modules/sniproxy-rs;
         inventree = import ./modules/inventree.nix;
         kitchenowl = import ./modules/kitchenowl;
         homebox = import ./modules/homebox;
@@ -273,6 +274,7 @@
           kernel_nightly = self.devShells.${system}.kernel.override {
             rustAttrs = pkgs.rust-bin.nightly.latest;
           };
+          uboot = pkgs.callPackage ./dev/uboot.nix { };
           nixfiles = pkgs.mkShell {
             nativeBuildInputs = with pkgs; [
               self.formatter.${system}

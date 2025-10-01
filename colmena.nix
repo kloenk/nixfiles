@@ -100,6 +100,7 @@ in {
       vouch-proxy
       backups
       evremap
+      sniproxy-rs
       inventree
       kitchenowl
       homebox
