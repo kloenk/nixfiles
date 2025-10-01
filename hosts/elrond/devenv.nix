@@ -114,6 +114,19 @@
       elixir
       elixir_ls
       #nil
+
+      kdePackages.qtdeclarative
     ];
+  };
+
+  k.emacs = {
+    #extraPackageLiterals = [ "qml-ts-mode" ];
+    extraPackageLiterals = [ "qml-mode" ];
+    extraConfig = ''
+      (use-package qml-mode
+        :mode "\\.qml$"
+        :config
+        (add-to-list 'eglot-server-programs '(qml-mode . ("qmlls"))))
+    '';
   };
 }

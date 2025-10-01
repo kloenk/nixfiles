@@ -7,8 +7,8 @@
       enable = true;
       wayland.enable = true;
       package = pkgs.kdePackages.sddm;
-      #theme = "celeste-sddm";
-      theme = "sddm-astronaut-theme";
+      theme = "celeste-sddm";
+      #theme = "sddm-astronaut-theme";
       #extraPackages = with pkgs; [ sddm-celeste ];
       extraPackages = with pkgs; [ sddm-astronaut ];
     };

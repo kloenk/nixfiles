@@ -6,7 +6,7 @@
   users.users.kloenk = {
     isNormalUser = true;
     uid = lib.mkDefault 1000;
-    description = "User account for kloenk";
+    description = "Fiona Behrens";
     extraGroups = [ "wheel" "bluetooth" "libvirtd" ];
   };
 
